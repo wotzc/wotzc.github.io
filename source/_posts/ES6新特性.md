@@ -6,7 +6,7 @@ tags: [JavaScript,前端,JavaWeb]
 
 ECMAScript 6.0（以下简称ES6，ECMAScript 是一种由Ecma 国际(前身为欧洲计算机制造商协会,英文名称是European Computer Manufacturers Association)通过ECMA-262 标准化的脚本程序设计语言是JavaScript 语言的下一代标准，已经在2015 年6 月正式发布了，并且从ECMAScript 6 开始，开始采用年号来做版本。即ECMAScript 2015，就是ECMAScript6。它的目标，是使得JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。每年一个新版本。
 
-## 1.let和var的作用域
+## let和var的作用域
 
 - var 声明的变量往往会越域,let 声明的变量有严格局部作用域
 
@@ -37,7 +37,7 @@ ECMAScript 6.0（以下简称ES6，ECMAScript 是一种由Ecma 国际(前身为�
   a = 3; //Uncaught TypeError: Assignment to constant variable.
   ```
 
-## 2.解构表达式
+## 解构表达式
 
 1. **数组解构**
 
@@ -59,7 +59,7 @@ ECMAScript 6.0（以下简称ES6，ECMAScript 是一种由Ecma 国际(前身为�
    const { name:abc, age, language } = person;
    ```
 
-## 3.字符串扩展
+## 字符串扩展
 
 1. **几个新的API**
 
@@ -120,7 +120,7 @@ let sss = `O(∩_∩)O 哈哈~，${fun()}`;
 console.log
 ```
 
-## 4.函数优化
+## 函数优化
 
 1. **函数参数默认值**
 
@@ -281,7 +281,7 @@ console.log
    console.log(person2) //{age: 15, name: "Amy"}
    ```
 
-## 5.map 和reduce
+## map 和reduce
 
 map()：接收一个函数，将原数组中的所有元素用这个函数处理后放入新数组返回。
 
@@ -314,7 +314,7 @@ console.log(arr.reduce((a,b)=>a+b,1));//20
 console.log(arr.reduce((a,b)=>a*b,0));//-0
 ```
 
-## 6.Promise
+## Promise
 
 在JavaScript 的世界中，所有代码都是单线程执行的。由于这个“缺陷”，导致JavaScript 的所有网络操作，浏览器事件，都必须是异步执行。异步执行可以用回调函数实现。一旦有一连串的ajax 请求a,b,c,d... 后面的请求依赖前面的请求结果，就需要层层嵌套。这种缩进和层层嵌套的方式，非常容易造成上下文代码混乱，我们不得不非常小心翼翼处理内层函数与外层函数的数据，一旦内层函数使用了上层函数的变量，这种混乱程度就会加剧......总之，这种`层叠上下文`的层层嵌套式，着实增加了神经的紧张程度。
 
@@ -352,7 +352,7 @@ console.log("出现异常了：" + error);
 
 通过比较，我们知道了Promise 的扁平化设计理念，也领略了这种`上层设计`带来的好处。我们的项目中会使用到这种异步处理的方式；
 
-## 7.模块化
+## 模块化
 
 模块化就是把代码进行拆分，方便重复利用。类似java 中的导包：要使用一个包，必须先导包。而JS 中没有包的概念，换来的是模块。
 模块功能主要由两个命令构成：`export`和`import`。

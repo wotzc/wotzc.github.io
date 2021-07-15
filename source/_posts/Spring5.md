@@ -8,7 +8,7 @@ tags:
 categories: JavaWeb
 ---
 
-## 一、Spring5框架概述
+## Spring5框架概述
 
 Spring 框架是一个Java平台，它为开发Java应用程序提供全面的基础架构支持。Spring负责基础架构，因此您可以专注于应用程序的开发。
 
@@ -28,14 +28,14 @@ Aop编程支持
 方便进行事务操作
 降低API开发难度
 
-## 二、IOC
+## IOC
 
-### 1.什么是IOC
+### 什么是IOC
 
 （1）控制反转，把对象创建和对象之间的调用过程，交给Spring进行管理
 （2）使用IOC目的：为了耦合度降低
 
-### 2.IOC底层原理
+### IOC底层原理
 
 讲解IOC底层原理
 
@@ -61,7 +61,7 @@ org.springframework.beans和org.springframework.context是Spring框架中IoC容�
 
 总之，BeanFactory提供了配置框架和基本方法，ApplicationContext添加更多的企业特定的功能。ApplicationContext是BeanFactory的一个子接口
 
-### 3. IOC(BeanFactory)接口
+### IOC(BeanFactory)接口
 
 IOC思想基于IOC容器完成，IOC容器底层就是对象工厂
 
@@ -72,16 +72,16 @@ IOC思想基于IOC容器完成，IOC容器底层就是对象工厂
 尽量使用ApplicationContext除非你有更好的理由不用它。
 因为ApplicationContext包括了BeanFactory的所有功能，通常也优于BeanFactory,除非一些少数的场景，例如：在受资源约束的嵌入式设备上运行一个嵌入式应用，它的内存消耗可能至关重要，并且可能会产生字节。然而，对于大多数典型的企业级应用和系统来说，ApplicationContext才是你想使用的。Spring大量使用了BeanPostProcessor扩展点（以便使用代理等）。如果你仅仅只使用简单的BeanFactory，很多的支持功能将不会有效，例如：事务和AOP，但至少不会有额外的步骤。这可能会比较迷惑，毕竟配置又没有错。
 
-### 4.IOC操作Bean管理(基于xml方式)
+### IOC操作Bean管理(基于xml方式)
 
-#### 1、什么是Bean管理
+#### 什么是Bean管理
 
 Bean管理指的是两个操作
 
 1. Spring创建对象
 2. Spring注入属性
 
-#### 2、Bean管理操作有两种方式
+#### Bean管理操作有两种方式
 
 1. 基于xml配置文件方式实现
 2. 基于注解方式实现
@@ -181,7 +181,7 @@ public class Orders {
 
 ![p名称方式引入属性](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring5/springp2.png)
 
-#### 3、FactoryBean
+#### FactoryBean
 
  Spring有两种类型bean，一种普通bean，另外一种工厂bean（FactoryBean）
 
@@ -215,7 +215,7 @@ public class MyBean implements FactoryBean<Course> {
 <bean id="myBean" class="com.atguigu.spring5.factorybean.MyBean"> </bean>
 ```
 
-#### 4、bean作用域
+#### bean作用域
 
 在Spring里面，设置创建bean实例是单实例还是多实例
 
@@ -233,7 +233,7 @@ public class MyBean implements FactoryBean<Course> {
 设置scope值是singleton时候，加载spring配置文件时候就会创建单实例对象
 设置scope值是prototype时候，不是在加载spring配置文件时候创建 对象，在调用getBean方法时候创建多实例对象
 
-#### 5、Bean生命周期
+#### Bean生命周期
 
 1、生命周期
 （1）从对象创建到对象销毁的过程
@@ -309,7 +309,7 @@ public class MyBeanPost implements BeanPostProcessor {
 <bean id="myBeanPost" class="com.atguigu.spring5.bean.MyBeanPost"></bean>
 ```
 
-#### 5.xml自动装配
+#### xml自动装配
 
 1、什么是自动装配
 （1）根据指定装配规则（属性名称或者属性类型），Spring自动将匹配的属性值进行注入
@@ -340,7 +340,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
 
 
-#### 6.引入外部属性文件
+#### 引入外部属性文件
 
 1、直接配置数据库信息
 
@@ -391,9 +391,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
  </bean>
 ```
 
-### 5.IOC操作Bean管理 (基于注解方式)
+### IOC操作Bean管理 (基于注解方式)
 
-#### 1、什么是注解
+#### 什么是注解
 
 注解，可以看作是对 一个 类/方法 的一个扩展的模版，每个 类/方法 按照注解类中的规则，来为 类/方法 注解不同的参数，在用到的地方可以得到不同的 类/方法 中注解的各种参数与值
 
@@ -407,7 +407,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 - **减少配置：**运行时动态处理，得到注解信息，实现代替配置文件的功能；
 - **减少重复工作：**比如第三方框架xUtils，通过注解@ViewInject减少对findViewById的调用，类似的还有（JUnit、ActiveAndroid等）；
 
-#### 2、Spring针对Bean管理中创建对象提供注解
+#### Spring针对Bean管理中创建对象提供注解
 
 （1）@Component
 （2）@Service
@@ -416,7 +416,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 * 上面四个注解功能是一样的，都可以用来创建bean实例
 
-#### 3、基于注解方式实现对象创建
+#### 基于注解方式实现对象创建
 
 第一步 引入依赖
 
@@ -436,7 +436,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring5/component.png)
 
-#### 4、基于注解方式实现属性注入
+#### 基于注解方式实现属性注入
 
 （1）@Autowired：根据属性类型进行自动装配
 第一步 把service 和dao 对象创建，在service 和dao 类添加创建对象注解
@@ -448,13 +448,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring5/annomation.png)
 
-## 三、AOP
+## AOP
 
-### 1.什么是AOP
+### 什么是AOP
 
 面向切面编程（方面），利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。通俗描述：不通过修改源代码方式，在主干功能里面添加新功能.
 
-#### 1、AOP底层使用动态代理
+#### AOP底层使用动态代理
 
 第一种 有接口情况，使用JDK动态代理
 创建接口实现类代理对象，增强类的方法
@@ -467,9 +467,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 Spring框架一般都是基于AspectJ实现AOP操作，详情请自行查阅
 
-## 四、JdbcTemplate
+## JdbcTemplate
 
-### 1、什么是JdbcTemplate
+### 什么是JdbcTemplate
 
 Spring框架对JDBC进行封装，使用JdbcTemplate方便实现对数据库操作
 
@@ -500,7 +500,7 @@ Spring框架对JDBC进行封装，使用JdbcTemplate方便实现对数据库操�
 </bean>
 ```
 
-### 2.JdbcTemplate操作数据库（添加） 
+### JdbcTemplate操作数据库（添加） 
 
 （1）在dao进行数据库添加操作
 （2）调用JdbcTemplate对象里面update方法实现添加操作
@@ -528,7 +528,7 @@ public void add(Book book) {
 }
 ```
 
-### 3.JdbcTemplate操作数据库（查询返回对象）
+### JdbcTemplate操作数据库（查询返回对象）
 
 ```
 queryForObject(String sql, RowMapper<T> rowMapper,Object... orgs)
@@ -551,7 +551,7 @@ public Book findBookInfo(String id) {
 }
 ```
 
-### 4.JdbcTemplate操作数据库（查询返回集合） 
+### JdbcTemplate操作数据库（查询返回集合） 
 
 调用JdbcTemplate方法实现查询返回集合
 
@@ -575,7 +575,7 @@ query(String sql, RowMapper<T> rowMapper, Object... orgs)
 }
 ```
 
-### 5.JdbcTemplate操作数据库 （批量操作）
+### JdbcTemplate操作数据库 （批量操作）
 
 ```
 batchUpdate(String sql, List<Object[]> batchArgs)
@@ -586,13 +586,13 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 -  第一个参数：sql语句
 -  第二个参数：List集合，添加多条记录数据
 
-## 五、事务操作
+## 事务操作
 
-### 1.什么事务？
+### 什么事务？
 
 事务是数据库操作最基本单元，逻辑上一组操作，要么都成功，如果有一个失败所有操作都失败
 
-### 2、事务四个特性（ACID）
+### 事务四个特性（ACID）
 
 原子性（atomicity）。一个事务是一个不可分割的工作单位，事务中包括的操作要么都做，要么都不做。
 
@@ -602,7 +602,7 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 
 持久性（durability）。持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。
 
-### 3、事务操作（Spring事务管理介绍） 
+### 事务操作（Spring事务管理介绍） 
 
 1、事务添加到JavaEE三层结构里面Service层（业务逻辑层）
 2、在Spring进行事务管理操作
@@ -614,9 +614,9 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 5、Spring事务管理API
 （1）提供一个接口，代表事务管理器，这个接口针对不同的框架提供不同的实现类
 
-### 4.事务操作（注解声明式事务管理）
+### 事务操作（注解声明式事务管理）
 
-#### 1、在spring配置文件配置事务管理器
+#### 在spring配置文件配置事务管理器
 
 ```
 <!--创建事务管理器-->
@@ -626,7 +626,7 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 </bean>
 ```
 
-#### 2、在spring配置文件，开启事务注解
+#### 在spring配置文件，开启事务注解
 
 （1）在spring配置文件引入名称空间 tx
 
@@ -720,7 +720,7 @@ public class UserService {
 
 （1）设置出现哪些异常不进行事务回滚
 
-### 5.事务操作（  XML声明式事务管理） 
+### 事务操作（  XML声明式事务管理） 
 
 1、在spring配置文件中进行配置
 第一步 配置事务管理器
@@ -753,7 +753,7 @@ public class UserService {
 </aop:config>
 ```
 
-### 6.事务操作（完全注解声明式管理）
+### 事务操作（完全注解声明式管理）
 
 1、创建配置类，使用配置类替代xml配置文件
 
@@ -793,24 +793,24 @@ public DataSourceTransactionManager getDataSourceTransactionManager(DataSource d
 }
 ```
 
-## 六、Spring5 框架新功能 
+## Spring5 框架新功能 
 
-#### 1、整个Spring5框架的代码基于Java8，运行时兼容JDK9，许多不建议使用的类和方法在代码库中删除
+#### 整个Spring5框架的代码基于Java8，运行时兼容JDK9，许多不建议使用的类和方法在代码库中删除
 
-#### 2、Spring 5.0框架自带了通用的日志封装
+#### Spring 5.0框架自带了通用的日志封装
 
 （1）Spring5已经移除Log4jConfigListener，官方建议使用Log4j2 
 
 （2）Spring5框架整合Log4j2
 
-#### 3、Spring5框架核心容器支持@Nullable注解
+#### Spring5框架核心容器支持@Nullable注解
 
 （1）@Nullable注解可以使用在方法上面，属性上面，参数上面，表示方法返回可以为空，属性值可以为空，参数值可以为空
 （2）注解用在方法上面，方法返回值可以为空
 
 （3）注解使用在方法参数里面，方法参数可以为空
 
-#### 4、Spring5核心容器支持函数式风格GenericApplicationContext
+#### Spring5核心容器支持函数式风格GenericApplicationContext
 
 ```
 //函数式风格创建对象，交给spring进行管理 
@@ -827,7 +827,7 @@ public void testGenericApplicationContext() {
 }
 ```
 
-#### 5、Spring5支持整合JUnit5
+#### Spring5支持整合JUnit5
 
 ```
 @SpringJUnitConfig(locations = "classpath:bean1.xml")
