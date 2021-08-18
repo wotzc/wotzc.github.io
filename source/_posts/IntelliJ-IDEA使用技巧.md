@@ -1,9 +1,10 @@
 ---
-title: IntelliJ IDEA使用技巧
+title: IntelliJ-IDEA使用技巧
 date: 2021-08-16 09:38:46
-tags:[IDEA,技巧]
+tags:
+- IDEA
+- 开发工具
 categories: IDEA
-
 ---
 
 #  IDEA查看一个类所有的方法
