@@ -1,10 +1,10 @@
 ---
-title: IntelliJ-IDEA使用技巧
+title: IntelliJ-IDEA使用技巧一
 date: 2021-08-16 09:38:46
 tags:
 - IDEA
 - 开发工具
-categories: IDEA
+categories: IDEA使用技巧
 ---
 
 #  IDEA查看一个类所有的方法
@@ -53,6 +53,10 @@ settings -> Editor -> General -> Code Completion
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/codecompletion.png)
 
+- IntelliJ IDEA 的代码提示和补充功能有一个特性：区分大小写。如上图标注所示，默认就是 First letter 区分大小写的。
+- 区分大小写的情况是这样的：比如我们在 Java 代码文件中输入 stringBuffer，IntelliJ IDEA 默认是不会帮我们提示或是代码补充的，但是如果我们输入StringBuffer 就可以进行代码提示和补充。
+- 如果想不区分大小写的话，改为 None 选项即可。
+
 -----------
 
 #  tab 多行显示
@@ -60,6 +64,10 @@ settings -> Editor -> General -> Code Completion
 Window -> Editor Tabs -> Configure Editor Tabs...，取消勾选 Show Tabs In Single Row选项。
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/editortabs.png)
+
+效果如下：
+
+![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/canclesinglerow.png)
 
 ------------
 
@@ -85,6 +93,10 @@ ${USER}会读取当前电脑的用户名
 ```
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/fileHeader.png)
+
+新建一个文件效果如下:
+
+![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/newfile.png)
 
 ---------
 
@@ -200,6 +212,16 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 效果如下：
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/fori1.png)
+
+-------------------
+
+## 变量抽取
+
+ ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/extractVariable1.png)
+
+![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/extractVariable2.png)
+
+
 
 ## 代码抽取
 
