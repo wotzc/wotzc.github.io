@@ -9,17 +9,17 @@ categories: IDEA使用技巧
 
 #  Debug常用断点调试快捷键
 
-| 图标                                                         | 快捷键            | 作用                                                         |
-| ------------------------------------------------------------ | ----------------- | ------------------------------------------------------------ |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png) | **F8**            | **Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。** |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png) | **F7**            | **Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。** |
+|                             图标                             |      快捷键       | 作用                                                         |
+| :----------------------------------------------------------: | :---------------: | ------------------------------------------------------------ |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png) |      **F8**       | **Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。** |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png) |      **F7**       | **Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。** |
 | ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/forceStepInto.png) | **Alt+Shift+F7**  | **Force Step Into：强制步入，能进入任何方法，查看底层源码的时候可以用这个进入官方类库的方法。** |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png) | **Shift+F8**      | **Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。** |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png) | **Alt+F9**        | **Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。** |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png) | **Ctrl+F2**       | **Stop ‘xxx’：停止运行**                                     |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png) |   **Shift+F8**    | **Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。** |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png) |    **Alt+F9**     | **Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。** |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png) |    **Ctrl+F2**    | **Stop ‘xxx’：停止运行**                                     |
 | ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png) | **Ctrl+Shift+F8** | **View Breakpoints：查看所有断点**                           |
 | ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/mutebreakpoints.png) |                   | **Mute Breakpoints：选择这个后，所有断点变为灰色，断点失效，按F9则可以直接运行完程序。** |
-| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png) | **F9**            | **Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。** |
+| ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png) |      **F9**       | **Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。** |
 | ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/dropframe.png) |                   | **Drop Frame：断点回退，断点会回退到我们打断点的位置。**     |
 
 ---------------
