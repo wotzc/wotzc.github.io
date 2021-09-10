@@ -13,7 +13,7 @@ MVVM将所有前端代码彻底分成两部分，视图的处理通过绑定实�
 
 我们从一个完整的例子开始认识 avalon ：
 
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,7 +67,7 @@ $skipArray 是一个字符串数组，只能放当前对象的直接属性名，
 
 另外，avalon不允许在VM定义之后，再追加新属性与方法，比如下面的方式是错误的：
 
-```
+```js
 var vm = avalon.define({
     $id:   "test", 
     test1: "点击测试按钮没反应 绑定失败";
@@ -81,7 +81,7 @@ vm.one = function() {
 
 **我们再看看如何更新VM中的属性(重点)：**
 
-```
+```js
 <script>
 var model : avalon.define({
      $id:  "update", 
@@ -135,25 +135,28 @@ var model : avalon.define({
            }
        }, 3000)
    </script>
-   <div ms-controller="update">
-       <div>{{aaa}}</div>
-       <div>{{bbb}}</div>
-       <div>{{ccc}}</div>
-       <div>{{time | date("yyyy - MM - dd mm:ss")}}</div>
-       <ul ms-each="simpleArray">
-           <li>{{el}}</li>
-       </ul>
-       <div>  <select ms-each="objectArray">
-               <option ms-value="el.value">{{el.name}}</option>
-           </select>
-       </div>
-       <ol ms-with="object">
-           <li>{{$key}}                {{$val}}</li>
-       </ol>
-   </div>
 ```
 
------
+```html
+ <div ms-controller="update">
+   <div>{{aaa}}</div>
+   <div>{{bbb}}</div>
+   <div>{{ccc}}</div>
+   <div>{{time | date("yyyy - MM - dd mm:ss")}}</div>
+   <ul ms-each="simpleArray">
+       <li>{{el}}</li>
+   </ul>
+   <div>  <select ms-each="objectArray">
+           <option ms-value="el.value">{{el.name}}</option>
+       </select>
+   </div>
+   <ol ms-with="object">
+       <li>{{$key}}                {{$val}}</li>
+   </ol>
+</div>
+```
+
+----------
 
 ## 绑定
 
@@ -231,7 +234,7 @@ avalon的指令是一个非常重要的东西,它用来引入一些新的HTML语
 
 这是ms-skip负责。只要元素定义了这个属性，无论它的值是什么，它都不会扫描其他属性及它的子孙节点了。
 
-```
+```html
 <div ms-controller="test" ms-skip>
     <p
         ms-repeat-num="cd" 
@@ -755,7 +758,7 @@ avalon.define({
 
 我们再来一个文本域与下拉框的联动例子，它只用到ms-duplex，不过两个控件都是绑定同一个属性。
 
-```
+```html
 avalon.define({
     $id: "fruit",
     options: ["苹果", "香蕉", "桃子", "雪梨", "葡萄",
@@ -945,7 +948,7 @@ vm.array = [{arr: [111,222, 333]},{arr: [111,222, 333]},{arr: [111,222, 333]}]
 
 由于 循环生成的变量前面不带@, 因此就找不到其对应的属性,需要特别处理一下
 
-```
+```html
 <div ms-controller="test">
 <div ms-for="(key,el) in @styles">
         <label>{{ key }}::{{ el }}</label>
@@ -1349,7 +1352,7 @@ avalon内置验证规则有
 
 比如说我们有一个变态的需求,一个字段可以不填，但如果要填的话一定要是合法的数字,并且大于零. 这就需要自定义规则了.
 
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -2187,7 +2190,7 @@ avalon.filters.truncate = function (str, length, truncation) {
 
 avalon内置了一个强大的自定义事件系统，它在绑定在每一个VM上。每一个VM都拥有$watch, $unwatch, $fire这三个方法，及一个$events对象。$events是用于储存各种回调。先从单个VM说起，如果一个VM拥有aaa这个属性，如果我们在VM通过$watch对它监控，那么当aaa改变值时，它对应的回调就会被触发！
 
-```
+```js
 var vmodel = avalon.define({
      $id: "test", 
      aaa: 111
@@ -2207,7 +2210,7 @@ var vmodel = avalon.define({
 
 有时，我们还绑定了一些与属性名无关的事件回调，想触发它，那只能使用$fire方法了。$fire方法第一个参数为属性名（自定义事件名），其他参数随意。
 
-```
+```js
 var vmodel = avalon.define({
      $id: "test", 
      aaa: 111
@@ -2222,7 +2225,7 @@ var vmodel = avalon.define({
 
 **更高级的玩法**，有时我们想在任何属性变化时都触发某一个回调，这时我们就需要$watch一个特殊的属性了——“$all”。不同的是，$watch回调的参数多了一个属性名，排在最前面。
 
-```
+```js
 var vmodel = avalon.define({
      $id: "test",
      aaa: 111,
@@ -2244,7 +2247,7 @@ var vmodel = avalon.define({
 
 不过最强大的用法是实现模块间的通信（因为在实际项目中，一个页面可能非常大，有多少人分块制作，每个人自己写自己的VM，这时就需要通过某种机制来进行数据与方法的联动了），这是使用$fire方法达成的。只要在$fire的自定义事件名前添加"up!", "down!", "all!"前缀,它就能实现angular相似的$emit,$broadcast功能。
 
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>

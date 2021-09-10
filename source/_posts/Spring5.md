@@ -41,13 +41,13 @@ Aop编程支持
 
 第一步 xml配置文件，配置创建的对象
 
-```
+```xml
 <bean od="dao" classs="com.wotzc.UserDao"></bean>
 ```
 
 第二步 有service类和dao类，创建工厂类
 
-```
+```java
 class UserFactory {
 	public static UserDao getDao() {
 		String classValue = class属性值; // xml解析
@@ -88,7 +88,7 @@ Bean管理指的是两个操作
 
 **基于xml方式创建对象**
 
-```
+```xml
 <!-- 配置User对象创建 -->
 <bean id="user" class="com.atguigu.spring5.User"></bean>
 ```
@@ -108,7 +108,7 @@ Bean管理指的是两个操作
 
 （1）创建类，定义属性和对应的set方法
 
-```
+```java
 /** 
  * 演示使用set方法进行注入属性 
  */
@@ -128,7 +128,7 @@ Bean管理指的是两个操作
 
 （2）在spring配置文件配置对象创建，配置属性注入
 
-```
+```xml
 <!--2 set方法注入属性-->
 <bean id="book" class="com.atguigu.spring5.Book">
 	<!--使用property完成属性注入
@@ -144,7 +144,7 @@ Bean管理指的是两个操作
 
 （1）创建类，定义属性，创建属性对应有参数构造方法
 
-```
+```java
 /**
  *   使用有参数构造注入
  */
@@ -161,7 +161,7 @@ public class Orders {
 
 （2）在spring配置文件中进行配置
 
-```
+```xml
 <!--3 有参数构造注入属性-->
 <bean id="orders" class="com.atguigu.spring5.Orders">
 	<constructor-arg name="oname" value="电脑"></constructor-arg>
@@ -190,7 +190,7 @@ public class Orders {
   	第一步 创建类，让这个类作为工厂bean，实现接口 FactoryBean
   	第二步 实现接口里面的方法，在实现的方法中定义返回的bean类型
 
-```
+```java
 public class MyBean implements FactoryBean<Course> {
     @Override
     public Course getObject() throws Exception {
@@ -211,7 +211,7 @@ public class MyBean implements FactoryBean<Course> {
 }
 ```
 
-```
+```xml
 <bean id="myBean" class="com.atguigu.spring5.factorybean.MyBean"> </bean>
 ```
 
@@ -245,7 +245,7 @@ public class MyBean implements FactoryBean<Course> {
 （5）当容器关闭时候，调用bean的销毁的方法（需要进行配置销毁的方法）
 3、演示bean生命周期
 
-```
+```java
 public class Orders {
         //无参数构造
         public Orders() {
@@ -269,7 +269,7 @@ public class Orders {
 }
 ```
 
-```
+```xml
 <bean id="orders" class="com.atguigu.spring5.bean.Orders" init-method="initMethod" destroy-method="destroyMethod"> 
 	<property name="oname" value="手机"></property>
 </bean>
@@ -288,7 +288,7 @@ public class Orders {
 
 （1）创建类，实现接口BeanPostProcessor，创建后置处理器
 
-```
+```java
 public class MyBeanPost implements BeanPostProcessor {
         @Override
         public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -304,7 +304,7 @@ public class MyBeanPost implements BeanPostProcessor {
 }
 ```
 
-```
+```xml
 <!--配置后置处理器-->
 <bean id="myBeanPost" class="com.atguigu.spring5.bean.MyBeanPost"></bean>
 ```
@@ -320,7 +320,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
 <!--实现自动装配 bean标签属性autowire，配置自动装配 autowire属性常用两个值： byName根据属性名称注入 ，注入值bean的id值和类属性名称一样 byType根据属性类型注入 -->
 
-```
+```xml
 <bean id="emp" class="com.atguigu.spring5.autowire.Emp" autowire="byName">
 	<!--<property name="dept" ref="dept"></property>-->
 </bean>
@@ -331,7 +331,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
 <!--实现自动装配 bean标签属性autowire，配置自动装配 autowire属性常用两个值： byName根据属性名称注入 ，注入值bean的id值和类属性名称一样 byType根据属性类型注入 -->
 
-```
+```xml
 <bean id="emp" class="com.atguigu.spring5.autowire.Emp" autowire="byType">
 	<!--<property name="dept" ref="dept"></property>-->
 </bean>
@@ -344,7 +344,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
 1、直接配置数据库信息
 
-```
+```xml
 <!--直接配置连接池-->
 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property> 
@@ -364,7 +364,7 @@ public class MyBeanPost implements BeanPostProcessor {
 
 引入context名称空间
 
-```
+```xml
 xmlns:context="http://www.springframework.org/schema/context"
 ```
 
@@ -376,13 +376,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 <!--引入外部属性文件-->
 
-```
+```xml
  <context:property-placeholder location="classpath:jdbc.properties"/>
 ```
 
 <!--配置连接池-->
 
-```
+```xml
  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 	 <property name="driverClassName" value="${prop.driverClass}"></property>
 	 <property name="url" value="${prop.url}"></property>
@@ -477,7 +477,7 @@ Spring框架对JDBC进行封装，使用JdbcTemplate方便实现对数据库操�
 
 （2）在spring配置文件配置数据库连接池
 
-```
+```xml
 <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 	<property name="url" value="jdbc:mysql:///user_db" />
     <property name="username" value="root" />
@@ -488,7 +488,7 @@ Spring框架对JDBC进行封装，使用JdbcTemplate方便实现对数据库操�
 
 （3）配置JdbcTemplate对象，注入DataSource
 
-```
+```xml
 <!-- JdbcTemplate对象 --> 
 
 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -505,7 +505,7 @@ Spring框架对JDBC进行封装，使用JdbcTemplate方便实现对数据库操�
 （1）在dao进行数据库添加操作
 （2）调用JdbcTemplate对象里面update方法实现添加操作
 
-```
+```java
 update(String sql,Object... args)
 ```
 
@@ -513,7 +513,7 @@ update(String sql,Object... args)
 第一个参数：sql语句
 第二个参数：可变参数，设置sql语句值 @Repository
 
-```
+```java
 //注入JdbcTemplate
 @Autowired private JdbcTemplate jdbcTemplate;
 //添加的方法
@@ -530,7 +530,7 @@ public void add(Book book) {
 
 ### JdbcTemplate操作数据库（查询返回对象）
 
-```
+```java
 queryForObject(String sql, RowMapper<T> rowMapper,Object... orgs)
 ```
 
@@ -540,7 +540,7 @@ queryForObject(String sql, RowMapper<T> rowMapper,Object... orgs)
 - 第二个参数：RowMapper是接口，针对返回不同类型数据，使用这个接口里面实现类完成数据封装
 - 第三个参数：sql语句值
 
-```
+```java
 //查询返回对象 
 @Override
 public Book findBookInfo(String id) { 
@@ -555,7 +555,7 @@ public Book findBookInfo(String id) {
 
 调用JdbcTemplate方法实现查询返回集合
 
-```
+```java
 query(String sql, RowMapper<T> rowMapper, Object... orgs)
 ```
 
@@ -565,7 +565,7 @@ query(String sql, RowMapper<T> rowMapper, Object... orgs)
 - 第二个参数：RowMapper是接口，针对返回不同类型数据，使用这个接口里面实现类完成数据封装
 - 第三个参数：sql语句值
 
-```
+```java
 //查询返回集合
 @Override public List<Book> findAllBook() {
     String sql = "select * from t_book"; 
@@ -577,7 +577,7 @@ query(String sql, RowMapper<T> rowMapper, Object... orgs)
 
 ### JdbcTemplate操作数据库 （批量操作）
 
-```
+```java
 batchUpdate(String sql, List<Object[]> batchArgs)
 ```
 
@@ -618,7 +618,7 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 
 #### 在spring配置文件配置事务管理器
 
-```
+```xml
 <!--创建事务管理器-->
 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <!--注入数据源-->
@@ -630,7 +630,7 @@ batchUpdate(String sql, List<Object[]> batchArgs)
 
 （1）在spring配置文件引入名称空间 tx
 
-```
+```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -640,7 +640,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 （2）开启事务注解
 
-```
+```xml
 <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 ```
 
@@ -649,7 +649,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 （2）如果把这个注解添加类上面，这个类里面所有的方法都添加事务
 （3）如果把这个注解添加方法上面，为这个方法添加事务
 
-```
+```java
 @Service
 @Transactional 
 public class UserService {
@@ -727,7 +727,7 @@ public class UserService {
 第二步 配置通知
 第三步 配置切入点和切面
 
-```
+```xml
 <!--1 创建事务管理器-->
 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <!--注入数据源-->
@@ -757,7 +757,7 @@ public class UserService {
 
 1、创建配置类，使用配置类替代xml配置文件
 
-```
+```java
 @Configuration //配置类
 @ComponentScan(basePackages = "com.atguigu") //组件扫描
 @EnableTransactionManagement //开启事务
@@ -812,7 +812,7 @@ public DataSourceTransactionManager getDataSourceTransactionManager(DataSource d
 
 #### Spring5核心容器支持函数式风格GenericApplicationContext
 
-```
+```java
 //函数式风格创建对象，交给spring进行管理 
 @Test
 public void testGenericApplicationContext() { 
@@ -829,7 +829,7 @@ public void testGenericApplicationContext() {
 
 #### Spring5支持整合JUnit5
 
-```
+```java
 @SpringJUnitConfig(locations = "classpath:bean1.xml")
     public class JTest5 {
     @Autowired

@@ -96,7 +96,7 @@ Maven 是 Apache 软件基金会组织维护的一款自动化构建工具 ，�
 
 ​	使用如下三个向量在 Maven 的仓库中唯一的确定一个 Maven 工程。
 
-```
+```xml
 <groupId>com.atguigu.maven</groupId>
 
 <artifactId>Hello</artifactId>
@@ -126,12 +126,14 @@ Maven 是 Apache 软件基金会组织维护的一款自动化构建工具 ，�
 
 ​	答案非常简单，就是使用 dependency 标签指定被依赖 jar 包的坐标就可以了。
 
-	<dependency>
-			<groupId>com.atguigu.maven</groupId>
-			<artifactId>Hello</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-	</dependency>
+```xaml
+<dependency>
+		<groupId>com.atguigu.maven</groupId>
+		<artifactId>Hello</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<scope>compile</scope>
+</dependency>
+```
 
 ##### 依赖的范围
 
@@ -145,7 +147,7 @@ Maven 是 Apache 软件基金会组织维护的一款自动化构建工具 ，�
 
 ##### 依赖的排除
 
-```
+```xml
 <executions>  
 	<execution>  
 		<groupId> </groupId> 
@@ -158,7 +160,7 @@ Maven 是 Apache 软件基金会组织维护的一款自动化构建工具 ，�
 
 [1] 统一声明版本号
 
-```
+```xml
 <properties> 
 	<atguigu.spring.version>4.1.1.RELEASE</atguigu.spring.version>
 </properties>
@@ -168,7 +170,7 @@ Maven 是 Apache 软件基金会组织维护的一款自动化构建工具 ，�
 
  [2]引用前面声明的版本号
 
-```
+```xml
 <dependencies>
   	<dependency>
 		<groupId>org.springframework</groupId> 
@@ -307,7 +309,7 @@ Maven继承的特性则能够帮助抽取各模块之前相同依赖和插件配
 
 在总的聚合工程中使用 modules/module 标签组合，指定模块工程的相对路径即可 
 
-```
+```xml
 <modules> 
 	<module>../Hello</module> 
 	<module>../HelloFriend</module> 

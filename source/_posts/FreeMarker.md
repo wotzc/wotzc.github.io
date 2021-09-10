@@ -31,7 +31,7 @@ FreeMarker 是一款 *模板引擎*： 即一种基于模板和要改变的数�
 
 `output`
 
-```
+```html
 <html>
 <head>
   <title>Welcome!</title>
@@ -48,7 +48,7 @@ FreeMarker 是一款 *模板引擎*： 即一种基于模板和要改变的数�
 
 `template`
 
-```
+```html
 <html>
 <head>
   <title>Welcome!</title>
@@ -167,7 +167,7 @@ Note:
 
 `Template`
 
-```
+```html
 <html>
 <head>
   <title>Welcome!</title>
@@ -188,7 +188,7 @@ Note:
 
 if-else if-else示例
 
-```
+```html
 <#if animals.python.price < animals.elephant.price>
   Pythons are cheaper than elephants today.
 <#elseif animals.elephant.price < animals.python.price>
@@ -202,8 +202,9 @@ if-else if-else示例
 
 当需要列表显示内容时，list指令是必须的。
 
-```
-TEMPLATE
+`TEMPLATE`
+
+```html
 <p>We have these animals:
 <table border=1>
   <#list animals as animal>
@@ -214,8 +215,9 @@ TEMPLATE
 
 那么输出结果将会是这样的：
 
-```
-OUTPUT
+`OUTPUT`
+
+```html
 <p>We have these animals:
 <table border=1>
     <tr><td>mouse<td>50 Euros
@@ -232,8 +234,9 @@ OUTPUT
 
 假设要在一些页面中显示版权声明的信息。那么可以创建一个文件来单独包含这些版权声明， 之后在需要它的地方插入即可。比方说，我们可以将版权信息单独存放在页面文件 `copyright_footer.html` 中：
 
-```
-TEMPLATE
+`TEMPLATE`
+
+```html
 <hr>
 <i>
 Copyright (c) 2000 <a href="http://www.acmee.com">Acmee Inc</a>,
@@ -244,8 +247,9 @@ All Rights Reserved.
 
 当需要用到这个文件时，可以使用 `include` 指令来插入：
 
-```
-TEMPLATE
+`TEMPLATE`
+
+```html
 <html>
 <head>
   <title>Test page</title>
@@ -260,8 +264,9 @@ TEMPLATE
 
 此时，输出的内容为：
 
-```
-OUTPUT
+`OUTPUT`
+
+```html
 <html>
 <head>
   <title>Test page</title>
@@ -312,13 +317,13 @@ All Rights Reserved.
 
 不论在哪里引用变量，都可以指定一个默认值来避免变量丢失这种情况， 通过在变量名后面跟着一个 `!`(叹号，译者注)和默认值。 就像下面的这个例子，当 `user` 不存在于数据模型时, 模板将会将 `user` 的值表示为字符串 `"visitor"`。(当 `user` 存在时， 模板就会表现出 `${user}` 的值)：
 
-```
+```html
 <h1>Welcome ${user!"visitor"}!</h1>
 ```
 
 也可以在变量名后面通过放置 `??` 来询问一个变量是否存在。将它和 `if` 指令合并， 那么如果 `user` 变量不存在的话将会忽略整个问候的代码段：
 
-```
+```html
 <#if user??><h1>Welcome ${user}!</h1></#if>
 ```
 
@@ -403,18 +408,20 @@ All Rights Reserved.
 
 在 `\x` 之后的 `*Code*` 是1-4位的16进制码。下面这个示例中都是在字符串中放置版权符号： `"\xA9 1999-2001"`， `"\x0A9 1999-2001"`， `"\x00A9 1999-2001"`。 如果紧跟16进制码后一位的字符也能解释成16进制码时， 就必须把4位补全，否则FreeMarker就会误解你的意图。
 
-原生字符串是一种特殊的字符串。在原生字符串中， 反斜杠和 `${` 没有特殊含义， 它们被视为普通的字符。为了表明字符串是原生字符串， 在开始的引号或单引号之前放置字母`r`，例如：
+原生字符串是一种特殊的字符串。在原生字符串中， 反斜杠和 `${` 没有特殊含义， 它们被视为普通的字符。为了表明字符串是原生字符串， 在开始的引号或单引号之前放置字母`r`，例如：\
+
+`TEMPLATE`
 
 ```
-TEMPLATE
 ${r"${foo}"}
 ${r"C:\foo\bar"}
 ```
 
 将会输出：
 
-```
-OUTPUT
+`OUTPUT`
+
+```bash
 ${foo}
 C:\foo\bar
 ```

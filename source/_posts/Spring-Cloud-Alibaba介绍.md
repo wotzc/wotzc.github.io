@@ -69,7 +69,7 @@ Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案。�
 
 如果需要使用已发布的版本，在 `dependencyManagement` 中添加如下配置。
 
-```
+```xml
 	<dependencyManagement>
         <dependencies>
             <dependency>

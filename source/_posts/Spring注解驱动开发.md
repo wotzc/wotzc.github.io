@@ -30,7 +30,7 @@ includeFilters：指定某些定义Filter满足条件的组件 FilterType有5种
 
 excludeFilters：过滤器，和includeFilters作用刚好相反，用来对扫描的类进行排除的，被排除的类不会被注册到容器中
 
-```
+```java
 @ComponentScan(value="com.wotzc",useDefaultFilters=true,
     includeFilters={
         @Filter(type=FilterType.ANNOTATION,classes={Controller.class}),
@@ -46,7 +46,7 @@ public class MainScanConfig {
 @Scope注解是springIoc容器中的一个作用域，在 Spring IoC 容器中具有以下几种作用域：基本作用域**singleton（单例）默认值**、**prototype(多例)**，Web 作用域（reqeust、session、globalsession），自定义作用域
 
 ```
-@Scope("prototype")//多实例，IOC容器启动创建的时候，并不会创建对象放在容器在容器当中，当你需要的时候，需要从容器当中取该对象的时候，就会创建。*@Scope("singleton")//单实例 IOC容器启动的时候就会调用方法创建对象，以后每次获取都是从容器当中拿同一个对象（map当中）。
+@Scope("prototype")//多实例，IOC容器启动创建的时候，并不会创建对象放在容器在容器当中，当你需要的时候，需要从容器当中取该对象的时候，就会创建。@Scope("singleton")//单实例 IOC容器启动的时候就会调用方法创建对象，以后每次获取都是从容器当中拿同一个对象（map当中）。
 @Scope("request")//同一个请求创建一个实例
 @Scope("session")//同一个session创建一个实例
 ```
@@ -55,7 +55,7 @@ public class MainScanConfig {
 
 Spring IoC （ApplicationContext） 容器一般都会在启动的时候实例化所有单实例 bean 。如果我们想要 Spring 在启动的时候延迟加载 bean，即在调用某个 bean 的时候再去初始化，那么就可以使用 @Lazy 注解。
 
-```
+```java
 @Lazy
 @Bean
 public Person person() {
@@ -188,7 +188,7 @@ public class BeanConfig {
 
 @Bean 基本构成：
 
-```
+```java
 
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -240,7 +240,7 @@ Autowire.BY_TYPE
 
 语法如下：
 
-```
+```java
 @Import({ 类名.class , 类名.class... })
 public class TestDemo {
 
@@ -255,7 +255,7 @@ public class TestDemo {
 
 创建Myclass类并实现ImportSelector接口
 
-```
+```java
 public class Myclass implements ImportSelector {
 
     @Override
@@ -273,7 +273,7 @@ public class Myclass implements ImportSelector {
 - 2、参数： AnnotationMetadata表示当前被@Import注解给标注的所有注解信息
 ```
 
-```
+```java
 public class Myclass implements ImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
@@ -288,7 +288,7 @@ public class Myclass implements ImportSelector {
 
 第一步：创建Myclass2类并实现ImportBeanDefinitionRegistrar接口
 
-```
+```java
 public class Myclass2 implements ImportBeanDefinitionRegistrar {
 //该实现方法默认为空
     @Override
@@ -314,7 +314,7 @@ public class Myclass2 implements ImportBeanDefinitionRegistrar {
 
 在某些情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在<bean>中提供大量的配置信息。配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个org.springframework.bean.factory.FactoryBean的工厂类接口，用户可以通过实现该接口定制实例化Bean的逻辑。FactoryBean接口对于Spring框架来说占用重要的地位。
 
-```
+```java
 public interface FactoryBean<T> {
 
     //返回的对象实例
@@ -330,7 +330,7 @@ public interface FactoryBean<T> {
 
 在bean创建完成并且属性赋值完成，来执行初始化方法
 
-```
+```java
 
 @PostConstruct
 public void someMethod(){
@@ -346,7 +346,7 @@ public void someMethod(){
 
 - BeanPostProcessor也称为Bean后置处理器，它是Spring中定义的接口，在Spring容器的创建过程中（具体为Bean初始化前后）会回调BeanPostProcessor中定义的两个方法。BeanPostProcessor的源码如下
 
-```
+```java
 public interface BeanPostProcessor {
     Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException;
 
@@ -367,7 +367,7 @@ public interface BeanPostProcessor {
 
 1. 基本数值
 
-   ```
+   ```java
    @Value("normal")
    private String normal; // 注入普通字符串
    ```
@@ -376,7 +376,7 @@ public interface BeanPostProcessor {
 
 2. 可以写SpEL：#{}
 
-   ```
+   ```java
    @Value("#{20-2}")
    private Integer age; 
    ```
@@ -394,7 +394,7 @@ savePath : /Users/a/Desktop/test998/
 libraryPath : /opt/local/share/OpenCV/java/libopencv_java347.dylib
 ```
 
-```dart
+```java
 @Service
 public class TesseractOrcServiceImpl implements TesseractOrcService {
 
@@ -415,7 +415,7 @@ public class TesseractOrcServiceImpl implements TesseractOrcService {
 
 即使你不为 age 属性传递任何参数，下面的示例也会成功运行，
 
-```
+```java
 package com.tutorialspoint;
 import org.springframework.beans.factory.annotation.Autowired;
 public class Student {
@@ -491,7 +491,7 @@ JSR是Java Specification Requests的缩写，意思是Java 规范提案。是指
 
  2) 写在配置类上，只有是指定的环境的时候，整个配置类里面的所有配置才能开始生效
 
-```
+```java
 	@Value("${db.user}")
 	private String user;
 	
@@ -531,7 +531,7 @@ JSR是Java Specification Requests的缩写，意思是Java 规范提案。是指
 
 切换运行环境的方式：
 
-```
+```java
 
 public class IOCTestProfile {
 	//1. 使用命令行动态参数：在虚拟机参数位置加载 -Dspring.profiles.active=test
@@ -629,7 +629,7 @@ ret-type-pattern,name-pattern, parameters-pattern是必选项；
 
 用@Before标识的方法为前置方法，在目标方法的执行之前执行，即在连接点之前进行执行。
 
-```
+```java
 @Before(value = "pointcut1()")
 public void before(JoinPoint joinPoint) {
     //输出连接点的信息
@@ -649,7 +649,7 @@ public void before(JoinPoint joinPoint) {
 
 异常通知方法只在连接点方法出现异常后才会执行，否则不执行。在异常通知方法中可以获取连接点方法出现的异常。在切面类中异常通知方法
 
-```
+```java
 @AfterThrowing(value = "pointcut1()", throwing = "e")
 public void afterThrowing(JoinPoint joinPoint, Exception e) {
     //发生异常之后输出异常信息
@@ -661,7 +661,7 @@ public void afterThrowing(JoinPoint joinPoint, Exception e) {
 
 环绕通知方法可以包含上面四种通知方法，环绕通知的功能最全面。环绕通知需要携带 ProceedingJoinPoint 类型的参数，且环绕通知必须有返回值, 返回值即为目标方法的返回值。在切面类中创建环绕通知方法，示例如下：
 
-```
+```java
 @Around("execution(public int lzj.com.spring.aop.ArithmeticCalculator.*(int, int))")
     public Object aroundMethod(ProceedingJoinPoint pdj){
         /*result为连接点的放回结果*/
@@ -739,7 +739,7 @@ ImportBeanDefinitionRegistrar的registerBeanDefinitions方法，给容器注册X
 @Transactional 注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。
 系统设计：将标签放置在需要进行事务管理的方法上，而不是放在所有接口实现类上：只读的接口就不需要事务管理，由于配置了@Transactional就需要AOP拦截及事务的处理，可能影响系统性能。
 
-```
+```java
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
@@ -801,7 +801,7 @@ public @interface Transactional {
 
 **isolation属性**：事务的隔离级别，I也在org.springframework.transaction.annotation.Isolation枚举类中
 
-```
+```java
 
 public enum Isolation {
  
@@ -857,7 +857,7 @@ BeanFactoryPostProcessor是beanFactory的后置处理器，在BeanFactory标准�
 
 BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor
 
-```
+```java
 public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor {
 
 	/**
@@ -894,7 +894,7 @@ postProcessBeanDefinitionRegistry()；在所有bean定义信息将要被加载�
 
 ApplicationListener：监听容器中发布的事件。事件驱动模型开发
 
-```
+```java
 public interface ApplicationListener<E extends ApplicationEvent>
 ```
 

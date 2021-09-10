@@ -40,7 +40,7 @@ YAML 是 "YAML Ain't Markup Language"（YAML 不是一种标记语言）的递�
 
 ●字面量：单个的、不可再分的值。date、boolean、string、number、null
 
-```
+```yaml
 k: v
 ```
 
@@ -66,7 +66,7 @@ k:
  - v3
 ```
 
-```
+```java
 @Data
 public class Person {
   
@@ -89,7 +89,7 @@ public class Pet {
 }
 ```
 
-```
+```yaml
 # yaml表示以上对象
 person:
   userName: zhangsan
@@ -124,7 +124,7 @@ person:
 
 自定义的类和配置文件绑定一般没有提示。
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-configuration-processor</artifactId>
@@ -219,7 +219,7 @@ The auto-configuration adds the following features on top of Spring’s defaults
 
 改变默认的静态资源路径
 
-```
+```yaml
 spring:
   mvc:
     static-path-pattern: /res/**
@@ -232,7 +232,7 @@ spring:
 
 默认无前缀
 
-```
+```yaml
 spring:
   mvc:
     static-path-pattern: /res/**
@@ -274,7 +274,7 @@ favicon.ico 放在静态资源目录下即可。
 
 #### @PathVariable
 
-```
+```java
 @GetMapping("/car/{id}/owner/{username}")
 public Map<String,Object> getCar(@PathVariable("id") Integer id,
                                  @PathVariable("username") String name,

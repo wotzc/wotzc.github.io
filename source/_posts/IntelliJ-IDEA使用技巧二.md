@@ -90,7 +90,7 @@ for(String s:list){
 }
 又如：**list.fori** 或 **list.forr**
 
-```
+```java
 List<String> list = new ArrayList<String>();
 ```
 
@@ -98,7 +98,7 @@ List<String> list = new ArrayList<String>();
 
 又如：**list.fori** 或 **list.forr**
 
-```
+```java
 for(String s:list){
 }
 ```

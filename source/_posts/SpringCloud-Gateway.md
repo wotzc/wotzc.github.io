@@ -145,7 +145,7 @@ spring:
 
 ### Between Route Predicate Factory
 
-The following example configures a between route predicate:`Between``datetime1``datetime2``ZonedDateTime``datetime1``datetime2``datetime2``datetime1`
+The following example configures a between route predicate:`Between` `datetime1` `datetime2` `ZonedDateTime` `datetime1` `datetime2` `datetime2` `datetime1`
 
 Example 3. application.yml
 

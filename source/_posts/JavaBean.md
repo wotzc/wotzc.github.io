@@ -35,7 +35,7 @@ categories: Java
 
 JavaBean代码示例
 
-```
+```java
  1 package com.wotzc.javaBean;
  2 
  3 public class StudentsBean implements java.io.Serializable{

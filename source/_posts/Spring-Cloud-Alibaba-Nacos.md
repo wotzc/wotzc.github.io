@@ -68,7 +68,7 @@ Nacos 依赖 [Java](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_j
 
 启动命令(standalone代表着单机模式运行，非集群模式):
 
-```
+```sh
 sh startup.sh -m standalone
 ```
 
@@ -93,7 +93,7 @@ startup.cmd -m standalone
 
 如果要在您的项目中使用 Nacos 来实现服务注册/发现，使用 group ID 为 `com.alibaba.cloud` 和 artifact ID 为 `spring-cloud-starter-alibaba-nacos-discovery` 的 starter。
 
-```
+```xml
 <dependency>
     <groupId>com.alibaba.cloud</groupId>
     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
