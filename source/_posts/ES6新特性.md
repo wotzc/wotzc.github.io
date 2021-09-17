@@ -136,17 +136,17 @@ console.log(double(3)) // console.log: 6
 
 箭头函数有几个使用注意点。
 
-（1）箭头函数没有自己的**<span style="color:#cc0000">this</span>**对象，对于普通函数来说，内部的**<span style="color:#cc0000">this</span>**指向函数运行时所在的对象，但是这一点对箭头函数不成立。它没有自己的**<span style="color:#cc0000">this</span>**对象，内部的**<span style="color:#cc0000">this</span>**就是定义时上层作用域中的**<span style="color:#cc0000">this</span>**。
+（1）箭头函数没有自己的<span style="color:#cc0000">this</span>对象，对于普通函数来说，内部的<span style="color:#cc0000">**this**</span>指向函数运行时所在的对象，但是这一点对箭头函数不成立。它没有自己的<span style="color:#cc0000">this</span>对象，内部的<span style="color:#cc0000">this</span>就是定义时上层作用域中的<span style="color:#cc0000">this</span>。
 
-（2）不可以当作构造函数，也就是说，不可以对箭头函数使用**<span style="color:#cc0000">new</span>**命令，否则会抛出一个错误。
+（2）不可以当作构造函数，也就是说，不可以对箭头函数使用<span style="color:#cc0000">new</span>命令，否则会抛出一个错误。
 
-（3）不可以使用**<span style="color:#cc0000">arguments</span>**对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+（3）不可以使用<span style="color:#cc0000">arguments</span>对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
 
-（4）不可以使用**<span style="color:#cc0000">yield</span>**命令，因此箭头函数不能用作 Generator 函数。
+（4）不可以使用<span style="color:#cc0000">yield</span>命令，因此箭头函数不能用作 Generator 函数。
 
 **不适用场合**
 
-由于箭头函数使得**<span style="color:#cc0000">this</span>**从“动态”变成“静态”，下面两个场合不应该使用箭头函数。
+由于箭头函数使得<span style="color:#cc0000">this</span>从“动态”变成“静态”，下面两个场合不应该使用箭头函数。
 
 第一个场合是定义对象的方法，且该方法内部包括`this`。
 
@@ -176,7 +176,7 @@ button.addEventListener('click', () => {
 
 ## rest 参数 
 
-ES6 引入 rest 参数（形式为**<span style="color:#cc00ff">...变量名</span>**），用于获取函数的多余参数，这样就不需要使用**<span style="color:#cc00ff">arguments</span>**对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+ES6 引入 rest 参数（形式为<span style="color:#cc00ff">...变量名</span>），用于获取函数的多余参数，这样就不需要使用<span style="color:#cc00ff">arguments</span>对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
 
 ```js
 /** * 作用与 arguments 类似 */ 
