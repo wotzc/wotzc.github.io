@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="批量更改文件名称对我而言这个功能最好用的是批量更改时替换功能，在截了一堆图需要改名字的时候就可以派上用场。   聚焦Spotlight“聚焦”可以帮助您快速找到 Mac 上的 App、文稿和其他文件。借助 Siri 建议，您还可以获取最新新闻、体育赛事比分、天气状况等信息。“聚焦”甚至可以为您进行计算和转换。 搜索内容 在 Mac 上，点按菜单栏中的“聚焦”图标 （如果显示），或者按下 Comma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Macbook使用技巧">
+<meta property="og:url" content="http://example.com/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="Cai">
+<meta property="og:description" content="批量更改文件名称对我而言这个功能最好用的是批量更改时替换功能，在截了一堆图需要改名字的时候就可以派上用场。   聚焦Spotlight“聚焦”可以帮助您快速找到 Mac 上的 App、文稿和其他文件。借助 Siri 建议，您还可以获取最新新闻、体育赛事比分、天气状况等信息。“聚焦”甚至可以为您进行计算和转换。 搜索内容 在 Mac 上，点按菜单栏中的“聚焦”图标 （如果显示），或者按下 Comma">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename1.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename2.png">
+<meta property="og:image" content="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png">
+<meta property="og:image" content="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png">
+<meta property="og:image" content="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/5026e0adf32c51825c1daf163ec73501.png">
+<meta property="og:image" content="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/6136d2d5c08bb8b6ebf10fc3c3248f48.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/emoji.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/split.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/softopentype.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/top.png">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/optioncloaseall.png">
+<meta property="article:published_time" content="2021-10-19T08:34:26.000Z">
+<meta property="article:modified_time" content="2021-10-19T12:13:06.436Z">
+<meta property="article:author" content="wotzc">
+<meta property="article:tag" content="Macbook">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename1.png">
+
+
+<link rel="canonical" href="http://example.com/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Macbook使用技巧 | Cai</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+  
+  <a target="_blank" rel="noopener" href="https://github.com/wotzc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cai</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0"><span class="nav-number">1.</span> <span class="nav-text">批量更改文件名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E7%84%A6Spotlight"><span class="nav-number">2.</span> <span class="nav-text">聚焦Spotlight</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%86%85%E5%AE%B9"><span class="nav-number">2.1.</span> <span class="nav-text">搜索内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E2%80%9C%E8%81%9A%E7%84%A6%E2%80%9D%E4%B8%AD%E8%BF%9B%E8%A1%8C%E8%AE%A1%E7%AE%97%E5%92%8C%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">在“聚焦”中进行计算和转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%B7%BB%E5%8A%A0emoji%E8%A1%A8%E6%83%85"><span class="nav-number">3.</span> <span class="nav-text">快速添加emoji表情</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E9%94%81%E5%B1%8F"><span class="nav-number">4.</span> <span class="nav-text">快速锁屏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%91%E5%90%8E%E5%88%A0%E9%99%A4"><span class="nav-number">5.</span> <span class="nav-text">向后删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">切换应用程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A6%E6%8E%A7%E6%9D%BF%E6%89%8B%E5%8A%BF"><span class="nav-number">7.</span> <span class="nav-text">触控板手势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">设置文件默认打开方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%B8%A6%E6%88%AA%E5%B1%8F"><span class="nav-number">9.</span> <span class="nav-text">自带截屏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Command%EF%BC%88%E6%88%96-Cmd%EF%BC%89%E2%8C%98%E9%94%AE"><span class="nav-number">10.</span> <span class="nav-text">Command（或 Cmd）⌘键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Option%EF%BC%88%E6%88%96-Alt%EF%BC%89%E2%8C%A5%E9%94%AE"><span class="nav-number">11.</span> <span class="nav-text">Option（或 Alt）⌥键</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wotzc"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wotzc</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Macbook使用技巧
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-19 16:34:26 / 修改时间：20:13:06" itemprop="dateCreated datePublished" datetime="2021-10-19T16:34:26+08:00">2021-10-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="批量更改文件名称"><a href="#批量更改文件名称" class="headerlink" title="批量更改文件名称"></a>批量更改文件名称</h1><p>对我而言这个功能最好用的是批量更改时替换功能，在截了一堆图需要改名字的时候就可以派上用场。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename2.png"></p>
+<h1 id="聚焦Spotlight"><a href="#聚焦Spotlight" class="headerlink" title="聚焦Spotlight"></a>聚焦<strong>Spotlight</strong></h1><p>“聚焦”可以帮助您快速找到 Mac 上的 App、文稿和其他文件。借助 Siri 建议，您还可以获取最新新闻、体育赛事比分、天气状况等信息。“聚焦”甚至可以为您进行计算和转换。</p>
+<h2 id="搜索内容"><a href="#搜索内容" class="headerlink" title="搜索内容"></a>搜索内容</h2><ol>
+<li><p>在 Mac 上，点按<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/aside/glos33eb8abd/11.0/mac/11.0">菜单栏</a>中的“聚焦”图标 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="img" style="zoom:25%;" />（如果显示），或者按下 Command-空格键或按下键盘上功能键行中的 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="聚焦键" style="zoom:25%;" />（如果可用）。</p>
+<p>您可以将“聚焦”窗口拖到桌面上的任意位置。</p>
+<p><strong>【提示】</strong>如果“聚焦”图标未显示在菜单栏中，请<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/mchlp1119/11.0/mac/11.0">使用“程序坞与菜单栏”偏好设置</a>进行添加。</p>
+</li>
+<li><p>在搜索栏中，键入要查找的内容，键入时结果会随之出现。</p>
+<p>“聚焦”首先列出最常点选，点按一个最常点选以进行预览或打开。“聚焦”还会建议搜索的各种变体；您可以在“聚焦”或网上查看这些结果。</p>
+<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/5026e0adf32c51825c1daf163ec73501.png" alt="“聚焦”窗口顶部显示了搜索栏中的搜索文本，下方是结果。"></p>
+</li>
+<li><p>在结果中，执行以下任一项操作：</p>
+<ul>
+<li><em>显示预览：</em>按下 Tab 键。根据结果中所选的项目类型，您可以与之交互。例如，选择 App 以查看最近打开文件的列表，然后点按以打开文件。或者点按“播放”按钮来聆听歌曲。</li>
+</ul>
+</li>
+</ol>
+<h2 id="在“聚焦”中进行计算和转换"><a href="#在“聚焦”中进行计算和转换" class="headerlink" title="在“聚焦”中进行计算和转换"></a>在“聚焦”中进行计算和转换</h2><p>您可以在“聚焦”搜索栏中输入数学表达式、金额、温度或单位，搜索栏中会立即显示转换或计算结果。</p>
+<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/6136d2d5c08bb8b6ebf10fc3c3248f48.png" alt="“聚焦”窗口，显示搜索栏中从码到米的转换。左侧是搜索结果列表。右侧预览中显示更多转换。"></p>
+<ul>
+<li><em>计算：</em>输入数学表达式，如 956*23.94 或 2020/15。</li>
+<li><em>货币转换：</em>输入金额，如 100 美元、100 日元或“300 克朗转换成欧元”。</li>
+<li><em>温度转换：</em>输入温度，如 98.8F、32C 或“340K 转换成华氏度”。</li>
+<li><em>单位转换：</em>输入度量单位，例如 25 磅、54 码、23 英石或“32 英尺转换成米”。</li>
+</ul>
+<p><strong>【提示】</strong>按下 Tab 键以在预览区域中显示更多转换。</p>
+<h1 id="快速添加emoji表情"><a href="#快速添加emoji表情" class="headerlink" title="快速添加emoji表情"></a>快速添加emoji表情</h1><p>按住键盘Control+Command+空格键，此时你的输入栏中，就会跳出所有表情了。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/emoji.png"></p>
+<p>​                </p>
+<h1 id="快速锁屏"><a href="#快速锁屏" class="headerlink" title="快速锁屏"></a>快速锁屏</h1><p>只需按住control+command+Q，此时你的MacBook就会马上锁屏</p>
+<hr>
+<h1 id="向后删除"><a href="#向后删除" class="headerlink" title="向后删除"></a>向后删除</h1><p>文本编辑时按 Fn + Delete 键可向后删除内容</p>
+<hr>
+<h1 id="切换应用程序"><a href="#切换应用程序" class="headerlink" title="切换应用程序"></a>切换应用程序</h1><p>按住command键再按tab键，可从左往右切换已打开的应用程序；command+shift+tab，可从右往左切换</p>
+<hr>
+<h1 id="触控板手势"><a href="#触控板手势" class="headerlink" title="触控板手势"></a>触控板手势</h1><p>Mac触控板强大无比，掌握触控板使用技能，对提高学习工作效率大有帮助，打开Mac系统偏好设置中的触控板，选择相应手势，右边会有动画教程。</p>
+<p>还有一个比较特殊的手势，三指拖动，需在系统偏好设置下的辅助功能中设置。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/split.png"></p>
+<hr>
+<h1 id="设置文件默认打开方式"><a href="#设置文件默认打开方式" class="headerlink" title="设置文件默认打开方式"></a>设置文件默认打开方式</h1><p>不同格式的文件有不同的默认打开方式，比如视频文件会默认用QuickTime Player打开，如果你想更改系统默认的打开方式，按照如下步骤设置即可，</p>
+<p>单击你想要改变默认打开方式的文件，右键单击选择显示简介，或者按快捷键Command+i 显示简介；</p>
+<p>在打开方式的下拉菜单中选择你需要的默认打开方式，点击全部更改，在弹出的窗口中选择继续即可。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/softopentype.png" style="zoom: 50%;" />
+
+<hr>
+<h1 id="自带截屏"><a href="#自带截屏" class="headerlink" title="自带截屏"></a>自带截屏</h1><ul>
+<li><p>cmd+shift+3：对整个屏幕进行截图；</p>
+</li>
+<li><p>cmd+shift+4：对自行选择的区域进行截图；</p>
+</li>
+<li><p>cmd+shift+4+space（空格键）：对选定的某个应用程序界面窗口进行截图。</p>
+</li>
+</ul>
+<hr>
+<h1 id="Command（或-Cmd）⌘键"><a href="#Command（或-Cmd）⌘键" class="headerlink" title="Command（或 Cmd）⌘键"></a>Command（或 Cmd）⌘键</h1><p>以下是常用的12个快捷键：</p>
+<ul>
+<li>Command + X: 剪切</li>
+<li>Command + C: 拷贝</li>
+<li>Command + V: 原格式粘贴</li>
+<li>Command + Shift +Option +V: 合并格式粘贴</li>
+<li>Command + Z: 撤销上一个操作（Shift + Command + Z: 反向执行撤销命令）</li>
+<li>Command + W: 关闭但不退出应用</li>
+<li>Command + Q: 退出应用</li>
+<li>Command + Option + Esc: 强制退出应用</li>
+<li>Command + Tab: 切换应用</li>
+<li>Command + 空格: “聚焦”查找</li>
+<li>Command + Shift + 5（MacOS Mojave系统）: 截屏或录屏（其他MacOS: Command + Shift +3: 捕捉整个屏幕；Command + Shift +4: 自选截屏区域）</li>
+<li>Command + Control + 空格: 添加emoji</li>
+</ul>
+<p>Command键除了上面 提到的常用组合快捷键外，还有很多其他功能，这里介绍四个关于Command的隐藏功能</p>
+<ul>
+<li>按住Command，可以选择并移动菜单栏图标</li>
+</ul>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/top.png"></p>
+<ul>
+<li>在“聚焦”中搜索文件，按住Command就可以显示文件路径，按住Command打开文件可以打开所在的文件夹</li>
+</ul>
+<h1 id="Option（或-Alt）⌥键"><a href="#Option（或-Alt）⌥键" class="headerlink" title="Option（或 Alt）⌥键"></a>Option（或 Alt）⌥键</h1><ul>
+<li><p>按住Option，可以同时关闭同个程序的多个窗口</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/optioncloaseall.png" style="zoom:67%;" />
+</li>
+<li><p>按住Option，单击右侧翻页条任何位置，就可以快速跳到指定位置</p>
+</li>
+<li><p>『移动文件』CMD+C 复制文件，在目标目录 CMD+Option+V，就把原文件移动过来了，相当于剪切粘贴。</p>
+</li>
+<li><p>按住Option+拖到文件，可快速复制一份原文件</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Macbook/" rel="tag"># Macbook</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/27/SpringBoot%E9%A1%B9%E7%9B%AE%E6%8A%A5%E7%AB%AF%E5%8F%A3%E5%86%B2%E7%AA%81%E7%9A%84%E9%94%99%E8%AF%AF/" rel="prev" title="SpringBoot项目报端口冲突的错误">
+                  <i class="fa fa-chevron-left"></i> SpringBoot项目报端口冲突的错误
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wotzc</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
