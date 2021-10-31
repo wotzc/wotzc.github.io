@@ -207,47 +207,47 @@ IDEA 提供了很多现成的 Templates。但你也可以根据自己的需要�
 
 # IDEA常用快捷键Mac版
 
-| **作用**                                             | **快捷键**                       |
-| :--------------------------------------------------- | :------------------------------- |
-| **返回上次编辑位置（Last Edit Location)**            | **Ctrl+Shift+Backspace**         |
-| **Back返回上次光标所在位置**                         | **Ctrl+Alt+向左箭头**            |
-| **Forward前进到下次光标所在位置**                    | **Ctrl+Alt+向右箭头**            |
-| **搜索类Class**                                      | **Ctrl+N**                       |
-| **搜索文件File**                                     | **Ctrl+Shift+N**                 |
-| **搜索符号Symbol**                                   | **Ctrl+Alt+Shift+N**             |
-| **全局搜索**                                         | **Ctrl+Shift+F**                 |
-| **当前文件搜索**                                     | **Ctrl+F**                       |
-| **执行（run)**                                       | **Shift+F10**                    |
-| **提示补全、导包、万能快捷键**                       | **Alt+Enter**                    |
-| **单行注释**                                         | **Ctrl+/**                       |
-| **多行注释**                                         | **Ctrl+Shift+/**                 |
-| **向下复制一行(Duplicate Entire Lines）**            | **Ctrl+D**                       |
-| **删除一行或选中行**                                 | **Ctrl+Y**                       |
-| **向下移动行（move statement down）**                | **Ctrl+Shift+向下箭头**          |
-| **向上移动行（move statement up）**                  | **Ctrl+Shift+向上箭头**          |
-| **向下开始新的一行**                                 | **Shift+Enter**                  |
-| **向上开始新的一行 (Start New Line before current)** | **Ctrl+Alt+Enter**               |
-| **查看继承关系(type hierarchy)**                     | **Ctrl+H**                       |
-| **格式化代码(reformat code)**                        | **Ctrl+Alt+L**                   |
-| **提示方法参数类型(Parameter Info)**                 | **Ctrl+P**                       |
-| **反撤销**                                           | **Ctrl+Shift+Z**                 |
-| **选中数行，整体往后移动**                           | **Tab**                          |
-| **选中数行，整体往前移动**                           | **Shift+Tab**                    |
-| **查看类的结构：类的方法与变量**                     | **Alt+7**                        |
-| **大写转小写/ 小写转大写(toggle case)**              | **Ctrl+Shift+U**                 |
-| **生成构造 器/get/set/toString**                     | **Alt+Insert**                   |
-| **收起所有的方法(collapse all)**                     | **Ctrl+Shift+减号**              |
-| **打开所有方法(expand all)**                         | **Ctrl+Shift+加号**              |
-| **打开代码所在硬盘文件夹(show in explorer)**         | **Ctrl+Shift+X（需要自己设置）** |
-| **生成 try-catch 等(surround with)**                 | **Ctrl+Alt+T**                   |
-| **查看方法的多层重写结构(method hierarchy)**         | **Ctrl+Shift+H**                 |
-| **抽取方法(Extract Method)**                         | **Ctrl+Alt+M**                   |
-| **打开 最近 修改的文件(Recently Files)**             | **Ctrl+E**                       |
-| **关闭当前打开的代码栏(close)**                      | **Ctrl+F4**                      |
-| **关闭其他所有代码栏(close others)**                 | **Ctrl+Shift+O（需要自己设置）** |
-| **快速搜索类中的错误(next highlighted error)**       | **F2**                           |
-| **选择要粘贴的内容(Show in Explorer)**               | **Ctrl+Shift+V**                 |
-| **查找方法在哪里被调用(Call Hierarchy)**             | **Ctrl+Alt+H**                   |
+| **作用**                                             | **快捷键**                          |
+| :--------------------------------------------------- | :---------------------------------- |
+| **返回上次编辑位置（Last Edit Location)**            | **command+Shift+Delete**            |
+| **Back返回上次光标所在位置**                         | **Command+[**                       |
+| **Forward前进到下次光标所在位置**                    | **Command+]**                       |
+| **搜索类Class**                                      | **Command+O**                       |
+| **搜索文件File**                                     | **Command+shift+O**                 |
+| **搜索符号Symbol**                                   | **Command+option+O**                |
+| **全局搜索**                                         | **Command+option+F**                |
+| **当前文件搜索**                                     | **Command+F**                       |
+| **执行（run)**                                       | **option+R**                        |
+| **提示补全、导包、万能快捷键**                       | **option+Enter**                    |
+| **单行注释**                                         | **Command+/**                       |
+| **多行注释**                                         | **Command+Option+/**                |
+| **向下复制一行(Duplicate Entire Lines）**            | **Command+D**                       |
+| **删除一行或选中行**                                 | **Ctrl+Y**                          |
+| **向下移动行（move statement down）**                | **Command+option+向下箭头**         |
+| **向上移动行（move statement up）**                  | **command+option+向上箭头**         |
+| **向下开始新的一行**                                 | **Shift+Enter**                     |
+| **向上开始新的一行 (Start New Line before current)** | **Command+option+Enter**            |
+| **查看继承关系(type hierarchy)**                     | **Ctrl+H**                          |
+| **格式化代码(reformat code)**                        | **Command+option+L**                |
+| **提示方法参数类型(Parameter Info)**                 | **Command+P**                       |
+| **反撤销**                                           | **Command+Shift+Z**                 |
+| **选中数行，整体往后移动**                           | **Tab**                             |
+| **选中数行，整体往前移动**                           | **Shift+Tab**                       |
+| **查看类的结构：类的方法与变量**                     | **command+7**                       |
+| **大写转小写/ 小写转大写(toggle case)**              | **Command+Shift+U**                 |
+| **生成构造 器/get/set/toString**                     | **Command+N**                       |
+| **收起所有的方法(collapse all)**                     | **Command+Shift+减号**              |
+| **打开所有方法(expand all)**                         | **Command+Shift+加号**              |
+| **打开代码所在硬盘文件夹(show in explorer)**         | **Command+Shift+X（需要自己设置）** |
+| **生成 try-catch 等(surround with)**                 | **Command+option+T**                |
+| **查看方法的多层重写结构(method hierarchy)**         | **Command+Shift+H**                 |
+| **抽取方法(Extract Method)**                         | **Command+option+M**                |
+| **打开 最近 修改的文件(Recently Files)**             | **Ctrl+E**                          |
+| **关闭当前打开的代码栏(close)**                      | **Command+W**                       |
+| **关闭其他所有代码栏(close others)**                 | **Ctrl+Shift+O（需要自己设置）**    |
+| **快速搜索类中的错误(next highlighted error)**       | **F2**                              |
+| **选择要粘贴的内容(Show in Explorer)**               | **Ctrl+Shift+V**                    |
+| **查找方法在哪里被调用(Call Hierarchy)**             | **Ctrl+Alt+H**                      |
 
 -----------------
 
