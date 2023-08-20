@@ -86,13 +86,13 @@ SLF4J + Logback 成为了实际开发中的最佳选择。
 </dependency>
 ```
 
-引入这个单一依赖项就足够了，因为它将间接引入*`logback-core`*和*`slf4j-api`*这两个依赖项。
+引入这个单一依赖项就足够了，因为它将间接引入`logback-core`和`slf4j-api`这两个依赖项。
 
 **如果没有定义自定义配置，Logback 会自行提供简单的自动配置。**默认情况下，这可确保日志语句以 `DEBUG` 级别打印到控制台。
 
 因此，您现在可以获得*`Logger`*实例并开始使用默认的基本配置写入日志消息。
 
-首先，您可以使用*`slf4j LoggerFactory`*类创建*`Logger`*：
+首先，您可以使用`slf4j LoggerFactory`类创建`Logger`：
 
 ```java
 private final static Logger LOGGER = LoggerFactory.getLogger(LogbackTestApplication.class);
@@ -116,7 +116,7 @@ LOGGER.info("LogbackTestApplication running...");
 
 这里值得注意的是，`Logback` 将按照这个确切的顺序搜索这些文件。
 
-展望未来，本教程中的示例将依赖于基于 `XML` 的 *`logback.xml`*文件。
+展望未来，本教程中的示例将依赖于基于 `XML` 的 `logback.xml`文件。
 
 让我们看看默认配置的基本配置是什么样的：
 
@@ -145,7 +145,7 @@ Logback 配置文件的基本结构如下:
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/logback/23144709_brxi.webp)
 
-如上，根节点为<span style="color: green;font-weight:bold"><configuration></span>元素，包含零个或多个<span style="color: green;font-weight:bold"><appender></span>元素，然后是零个或多个<span style="color: green;font-weight:bold"><logger></span>元素，然后是**最多一个**<span style="color: green;font-weight:bold"><root></span>**元素**。
+如上，根节点为<span style="color: green;font-weight:bold">\<configuration></span>元素，包含零个或多个<span style="color: green;font-weight:bold">\<appender></span>元素，然后是零个或多个<span style="color: green;font-weight:bold">\<logger></span>元素，然后是**最多一个**<span style="color: green;font-weight:bold">\<root></span>**元素**。
 
 `logger`、`root` 作为日志的记录器，把它关联到应用的对应的 `context` 上后，主要用于存放日志对象，也可以定义日志类型、级别。
 
@@ -153,7 +153,7 @@ Logback 配置文件的基本结构如下:
 
 ### 根节点\<configuration>
 
-根节点 \<configuration> 常用的属性包含`scan`、`scanPeriod`、`debug`三个属性。
+根节点 <span style="color: green;font-weight:bold">\<configuration></span> 常用的属性包含`scan`、`scanPeriod`、`debug`三个属性。
 
 1. `scan`：当此属性设置为 `true` 时，如果配置文件发生改变，会自动重新加载配置文件，默认值为 `true`.
 2. `scanPeriod`：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当 scan 为 true 时，此属性生效。默认的时间间隔为 1 分钟.
@@ -171,7 +171,7 @@ Logback 配置文件的基本结构如下:
 
 #### 自定义变量
 
-<span style="color: green;font-weight:bold"><configuration> </span>下，可以通过<span style="color: green;font-weight:bold"> <property> </span> 来定义一个变量，属性 **name** 是变量的名称，属性 **value** 是变量的值。
+在<span style="color: green;font-weight:bold">\<configuration> </span>中，可以通过<span style="color: green;font-weight:bold">\<property> </span> 来定义一个变量，属性 **name** 是变量的名称，属性 **value** 是变量的值。
 
 ```xml
 <configuration>
@@ -199,12 +199,12 @@ Logback 配置文件的基本结构如下:
 
 #### 使用配置文件中的属性
 
-```
+```xml
 <!-- 读取spring.application.name中的属性来生成日志文件名 -->
 <springProperty scope="context" name="logName" source="spring.application.name" defaultValue="localhost.log"/>
 ```
 
-<span style="color: green;font-weight:bold"><springProperty> </span>标签允许我们从`Spring`中显示属性，`Environment` 以便在`Logback`中使用。如果你想将 `application.properties`在回读配置中访问文件中的值，这将非常有用。
+<span style="color: green;font-weight:bold">\<springProperty> </span>标签允许我们从`Spring`中显示属性，`Environment` 以便在`Logback`中使用。如果你想将读取`application.properties`文件中的值，这将非常有用。
 
 ```xml
 <!-- 读取spring.application.name中的属性来生成日志文件名 -->
@@ -213,7 +213,7 @@ Logback 配置文件的基本结构如下:
 
 ### 日志输出器 \<appender>
 
-<span style="color: green;font-weight:bold"><appender></span> (日志输出器)，用于将日志按照**一定的格式**输出到控制台、文件、数据库等地方，**logger(日志记录器)** 需要使用 **appender(日志输出器)** 将记录器中的日志输出。
+<span style="color: green;font-weight:bold">\<appender></span> (日志输出器)，用于将日志按照**一定的格式**输出到控制台、文件、数据库等地方，**logger(日志记录器)** 需要使用 **appender(日志输出器)** 将记录器中的日志输出。
 
 **appender** 有两个**必填属性**
 
@@ -222,9 +222,9 @@ Logback 配置文件的基本结构如下:
   - ch.qos.logback.core.ConsoleAppender ：将日志输出到控制台的 `appender`
   - ch.qos.logback.core.rolling.RollingFileAppender ：将日志输出到文件，并按照条件切换输出到新建文件(滚动输出，自动切割)
 
-<span style="color: green;font-weight:bold"><encoder></span> 负责将事件(日志)转换为字节数组，并将该字节数组写出为 `OutputStream`。
+<span style="color: green;font-weight:bold">\<encoder></span> 负责将事件(日志)转换为字节数组，并将该字节数组写出为 `OutputStream`。
 
-<span style="color: green;font-weight:bold"><encoder></span> 是<span style="color: green;font-weight:bold"><appender></span> 的子节点，在 <span style="color: green;font-weight:bold"><encoder></span> 节点中，最重要的是配置 <span style="color: green;font-weight:bold"><pattern></span>，它是用来定义日志输出格式。
+<span style="color: green;font-weight:bold">\<encoder></span> 是<span style="color: green;font-weight:bold">\<appender></span> 的子节点，在 <span style="color: green;font-weight:bold">\<encoder></span> 节点中，最重要的是配置 <span style="color: green;font-weight:bold">\<pattern></span>，它是用来定义日志输出格式。
 
 ```xml
 <appender name="" class="">
@@ -237,7 +237,7 @@ Logback 配置文件的基本结构如下:
 
 #### \<pattern>
 
- <span style="color: green;font-weight:bold"><pattern></span>用于定义日志的输出格式，通过 `Logback` 中的**转换说明符(Conversion specifier)**（其实就是一些预定义变量），可以方便的组合出我们想要的日志格式
+ <span style="color: green;font-weight:bold">\<pattern></span>用于定义日志的输出格式，通过 `Logback` 中的转换说明符(Conversion specifier)（其实就是一些预定义变量），可以方便的组合出我们想要的日志格式
 
 在这里我只列举出常用的**转换说明符(Conversion specifier)**，更多请参考[官方文档](https://link.juejin.cn?target=http%3A%2F%2Flogback.qos.ch%2Fmanual%2Flayouts.html)
 
@@ -335,7 +335,7 @@ Logback 配置文件的基本结构如下:
 
 #### 设置字符集 \<charset>
 
-<charset> 是 <encoder> 的子节点，用于设置输出字符集
+<span style="color: green;font-weight:bold">\<charset></span> 是 <span style="color: green;font-weight:bold">\<encoder></span> 的子节点，用于设置输出字符集
 
 ```xml
 <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -350,7 +350,7 @@ Logback 配置文件的基本结构如下:
 
 `ch.qos.logback.core.ConsoleAppender` 是 `Logback` 自带的 `appender`，用于将日志输出到控制台。
 
-对应控制台，只需要重点配置 <span style="color: red; font-weight: bold"><encoder></span>节点
+对应控制台，只需要重点配置 <span style="color: red; font-weight: bold">\<encoder></span>节点
 
 ```xml
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
@@ -426,7 +426,7 @@ Logback 配置文件的基本结构如下:
 
 可以指定多个 `%d` 转换符，但只有其中一个可以是主要的，即用于推断滚动周期。
 
-多个 `%d转换符允许您以不同于滚动周期的文件夹结构来组织存档文件。 例如，下面显示的文件名模式按年和月组织日志文件夹，但每天午夜滚动更新日志文件。
+多个 `%d`转换符允许您以不同于滚动周期的文件夹结构来组织存档文件。 例如，下面显示的文件名模式按年和月组织日志文件夹，但每天午夜滚动更新日志文件。
 
 ```xml
 /var/log/%d{yyyy/MM, aux}/myapplication.%d{yyyy-MM-dd}.log
@@ -441,7 +441,7 @@ Logback 配置文件的基本结构如下:
 
 `fileNamePattern`有双重用途。首先，logback通过研究模式 计算请求的滚动周期。其次，它计算每个存档文件的名称。请注意，两种不同的模式可以指定相同的周期。模式yyyy-MM和 yyyy@MM都指定每月滚动，尽管生成的存档文件将带有不同的名称。
 
-通过设置<span style="color:red;font-weight:bold"><file></span>属性，您可以分离活动日志文件的位置和归档日志文件的位置。日志输出将定位到文件属性指定的文件中 。由此可见，活动日志文件的名称不会随时间而改变。但是，如果您选择忽略file属性，则将根据fileNamePattern的值在每个周期重新计算活动文件名称。通过保留<span style="color:red;font-weight:bold"><file></span>属性未设置，您可以避免在滚动期间存在引用日志文件的外部文件句柄时发生的 文件重命名错误。
+通过设置<span style="color:red;font-weight:bold">\<file></span>属性，您可以分离活动日志文件的位置和归档日志文件的位置。日志输出将定位到文件属性指定的文件中 。由此可见，活动日志文件的名称不会随时间而改变。但是，如果您选择忽略file属性，则将根据fileNamePattern的值在每个周期重新计算活动文件名称。通过保留<span style="color:red;font-weight:bold">\<file></span>属性未设置，您可以避免在滚动期间存在引用日志文件的外部文件句柄时发生的 文件重命名错误。
 
 由于各种技术原因，滚动不是时钟驱动的，而是取决于日志记录事件的到达。例如，在 2002 年 3 月 8 日，假设 fileNamePattern设置为yyyy-MM-dd （每日滚动），则午夜后第一个事件的到达将触发滚动。如果在午夜后 23 分 47 秒期间没有记录事件，则滚动实际上将发生在 3 月 9 日上午 00:23'47，而不是上午 0:00。因此，根据事件的到达率，可能会以一定的延迟触发滚动。然而，无论延迟如何，滚动算法都已知是正确的，从某种意义上说，在特定时间段内生成的所有日志记录事件都将输出到界定该时间段的正确文件中。
 
@@ -477,9 +477,9 @@ Logback 配置文件的基本结构如下:
 </configuration>
 ```
 
-%i 是一个滚动周期内的归档序列号，从0开始
+<span style="color:red;font-weight:bold">%i</span> 是一个滚动周期内的归档序列号，从0开始
 
-注意：maxHistory 是表了 n 个滚动周期的日志文件，而不是 n 个的日志文件，在设置了 maxFileSize 后，一个滚动周期内可能有多个日志文件
+注意：`maxHistory` 是表了 `n` 个滚动周期的日志文件，而不是 `n` 个的日志文件，在设置了 maxFileSize 后，一个滚动周期内可能有多个日志文件。
 
 -------------
 
@@ -491,11 +491,11 @@ Logback 配置文件的基本结构如下:
 </logger>
 ```
 
-<span style="color:red;font-weight:bold"><logger></span> 有三个属性
+<span style="color:red;font-weight:bold">\<logger></span> 有三个属性
 
 - **name** : 包名或类名。即，将该记录器作用于哪个类或包下。必填
 - **level** : 该记录器的级别，低于该级别的日志消息不记录。可选级别从小到大为 **TRACE、DEBUG、INFO、WARN、ERROR、ALL、OFF**(不区分大小写)。选填，不填则默认从父记录器继承**level**
-- **additivity** : 是否追加父 Logger 的输出源(appender),默认为true，选填。如果只想输出到自己的输出源(appender)，需要设置为 false，参考例2
+- **additivity** : 是否追加父 Logger 的输出源(appender),默认为true，选填。如果只想输出到自己的输出源(appender)，需要设置为 false
 
 `logger` 还可以包含 0 或多个 `<appender-ref>` 元素, 将记录的日志使用 `appender` 进行输出
 
@@ -567,9 +567,9 @@ Logback 配置文件的基本结构如下:
 </root>
 ```
 
-该<span style="color:red;font-weight: bold"><root></span>元素配置根记录器。它支持单一属性，即`level`属性。它不允许任何其他属性，因为可加性标志不适用于根记录器。此外，由于根记录器已被命名为“ROOT”，因此它也不允许使用名称属性。`level` 属性的值可以是不区分大小写的字符串 `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`、`ALL` 或 `OFF` 之一。请注意，根记录器的级别不能设置为 `INHERITED` 或 `NULL`。
+该<span style="color:red;font-weight: bold">\<root></span>元素配置根记录器。它支持单一属性，即`level`属性。它不允许任何其他属性，因为可加性标志不适用于根记录器。此外，由于根记录器已被命名为“ROOT”，因此它也不允许使用名称属性。`level` 属性的值可以是不区分大小写的字符串 `TRACE`、`DEBUG`、`INFO`、`WARN`、`ERROR`、`ALL` 或 `OFF` 之一。请注意，根记录器的级别不能设置为 `INHERITED` 或 `NULL`。
 
-与元素<span style="color:red;font-weight: bold"><logger></span>类似，<span style="color:red;font-weight: bold"><root></span>元素可以包含零个或多个 <span style="color:red;font-weight: bold"><appender-ref></span>元素；这样引用的每个日志记录器都会添加到根记录器中。请注意，与 `log4j` 不同，`logback-classic`在配置根记录器时 不会关闭或删除任何先前引用的日志记录器。
+与元素<span style="color:red;font-weight: bold">\<logger></span>类似，<span style="color:red;font-weight: bold">\<root></span>元素可以包含零个或多个 <span style="color:red;font-weight: bold">\<appender-ref></span>元素；这样引用的每个日志记录器都会添加到根记录器中。请注意，与 `log4j` 不同，`logback-classic`在配置根记录器时 不会关闭或删除任何先前引用的日志记录器。
 
 ------
 
@@ -578,27 +578,27 @@ Logback 配置文件的基本结构如下:
 `Filter`：过滤器，过滤满足条件或者不满足条件的日志
 允许组合使用，可配置多个过滤器有很多，只介绍两种常用的`LevelFilter`、`ThresholdFilter`
 
-| 名称            | 值说明     | 说明                     | 备注 |
-| --------------- | ---------- | ------------------------ | ---- |
-| LevelFilter     | 级别过滤器 | `精确`匹配指定的日志级别 |      |
-| ThresholdFilter | 阈值过滤   | 匹配`等于或高于`指定级别 |      |
+| 名称            | 值说明     | 说明                   | 备注 |
+| --------------- | ---------- | ---------------------- | ---- |
+| LevelFilter     | 级别过滤器 | 精确匹配指定的日志级别 |      |
+| ThresholdFilter | 阈值过滤   | 匹配等于或高于指定级别 |      |
 
 使用示例如下:
 
 ```xml
 <filter class="ch.qos.logback.classic.filter.LevelFilter">
-  <!-- 级别 -->
-	<level>INFO</level>
-	<!-- 匹配时的操作：接收（记录） -->
-  <onMatch>ACCEPT</onMatch>
-  <!-- 不匹配时的操作：拒绝（不记录） -->
-  <onMismatch>DENY</onMismatch>
+    <!-- 级别 -->
+    <level>INFO</level>
+    <!-- 匹配时的操作：接收（记录） -->
+    <onMatch>ACCEPT</onMatch>
+    <!-- 不匹配时的操作：拒绝（不记录） -->
+    <onMismatch>DENY</onMismatch>
 </filter>
     
 <!-- deny all events with a level below INFO, that is TRACE and DEBUG -->
 <!-- 拒绝所有级别低于 INFO 的, 也就是 TRACE 和 DEBUG -->
 <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-	<level>INFO</level>
+    <level>INFO</level>
 </filter>
 ```
 
