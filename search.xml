@@ -32,6 +32,117 @@
       </tags>
   </entry>
   <entry>
+    <title>IntelliJ-IDEA使用技巧之Debug</title>
+    <url>/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/</url>
+    <content><![CDATA[<h1 id="Debug常用断点调试快捷键"><a href="#Debug常用断点调试快捷键" class="headerlink" title="Debug常用断点调试快捷键"></a>Debug常用断点调试快捷键</h1><table>
+<thead>
+<tr>
+<th align="center">图标</th>
+<th align="center">快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png"></td>
+<td align="center"><strong>F8</strong></td>
+<td><strong>Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png"></td>
+<td align="center"><strong>F7</strong></td>
+<td><strong>Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/forceStepInto.png"></td>
+<td align="center"><strong>Alt+Shift+F7</strong></td>
+<td><strong>Force Step Into：强制步入，能进入任何方法，查看底层源码的时候可以用这个进入官方类库的方法。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png"></td>
+<td align="center"><strong>Shift+F8</strong></td>
+<td><strong>Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png"></td>
+<td align="center"><strong>Alt+F9</strong></td>
+<td><strong>Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></td>
+<td align="center"><strong>Ctrl+F2</strong></td>
+<td><strong>Stop ‘xxx’：停止运行</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></td>
+<td align="center"><strong>Ctrl+Shift+F8</strong></td>
+<td><strong>View Breakpoints：查看所有断点</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/mutebreakpoints.png"></td>
+<td align="center"></td>
+<td><strong>Mute Breakpoints：选择这个后，所有断点变为灰色，断点失效，按F9则可以直接运行完程序。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></td>
+<td align="center"><strong>F9</strong></td>
+<td><strong>Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。</strong></td>
+</tr>
+<tr>
+<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/dropframe.png"></td>
+<td align="center"></td>
+<td><strong>Drop Frame：断点回退，断点会回退到我们打断点的位置。</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h1><p>在我们打断点的地方鼠标右击，然后在condition输入框里面输入条件</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/conditionbreakpoint1.png"></p>
+<hr>
+<h1 id="求值表达式Evaluate-Expression"><a href="#求值表达式Evaluate-Expression" class="headerlink" title="求值表达式Evaluate Expression"></a>求值表达式Evaluate Expression</h1><p>在断点调试过程中，我们想查看某些变量或某些对象的属性值，我们可以通过快捷键<strong>Alt+F8</strong>打开<strong>表达式求值</strong></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression2.png"></p>
+<hr>
+<h1 id="setValue"><a href="#setValue" class="headerlink" title="setValue"></a>setValue</h1><p>Intellij IDEA在debug模式下可以改变变量的值，下面这段代码为例，比如我们想看看i=12时会输出什么</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue1.png"></p>
+<p>此时<strong>i==5</strong>，我们把<strong>i</strong>设置成12</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue2.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue3.png"></p>
+<p>按快捷键<strong>F8</strong>看看i是否会进入<strong>if条件</strong>里面</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue4.png"></p>
+<hr>
+<hr>
+<h1 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h1><p><strong>Java Exception Breakpoints可以使当程序遇见被选择的异常时，自动停在相应异常的位置处。</strong></p>
+<p>如下面这段代码</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint1.png"></p>
+<p>加上条件断点，使用快捷键<strong>Ctrl+Shift+F8</strong>或者点击图标<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint2.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint3.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint4.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint5.png"></p>
+<p>再使用Debug模式来运行程序，当程序出现异常，会之间停留在我们出现异常的代码处</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint6.png"></p>
+<hr>
+<h1 id="避免操作资源"><a href="#避免操作资源" class="headerlink" title="避免操作资源"></a>避免操作资源</h1><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource1.png"></p>
+<p>如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不行后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></p>
+<p>。但是点击这个按钮之后后续的操作还会执行，如下图所示</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource2.png"></p>
+<hr>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource3.png"></p>
+<p>Debug调试界面，选择正在运行的Stack，鼠标右键选择Force Return，如下图所示</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource4.png"></p>
+<p>上面的操作完成之后，代码会跑到<strong>Thread.java</strong>类中的<strong>exit（）</strong>方法里。再点击<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></p>
+<p>程序就运行结束。我们就会看到后续的操作并没有执行</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource5.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource6.png"></p>
+]]></content>
+      <categories>
+        <category>IDEA使用技巧</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+        <tag>开发工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IntelliJ-IDEA使用技巧一</title>
     <url>/2021/08/16/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<h1 id="IDEA查看一个类所有的方法"><a href="#IDEA查看一个类所有的方法" class="headerlink" title="IDEA查看一个类所有的方法"></a>IDEA查看一个类所有的方法</h1><h2 id="快捷键Ctrl-F12"><a href="#快捷键Ctrl-F12" class="headerlink" title="快捷键Ctrl+F12"></a>快捷键Ctrl+F12</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/ctrlf12.png"></p>
@@ -142,117 +253,6 @@
 <p>折叠所有代码，**<code>ctrl+shift+&#39;-&#39;</code>**，mac对应的快捷键是<code>command+shift+&#39;-&#39;</code></p>
 <p>展开所有代码，**<code>ctrl+shift+&#39;+&#39;</code>**，mac对应的快捷键是<code>command+shift+&#39;+&#39;</code></p>
 <p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/folding.png"></p>
-]]></content>
-      <categories>
-        <category>IDEA使用技巧</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-        <tag>开发工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IntelliJ-IDEA使用技巧之Debug</title>
-    <url>/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/</url>
-    <content><![CDATA[<h1 id="Debug常用断点调试快捷键"><a href="#Debug常用断点调试快捷键" class="headerlink" title="Debug常用断点调试快捷键"></a>Debug常用断点调试快捷键</h1><table>
-<thead>
-<tr>
-<th align="center">图标</th>
-<th align="center">快捷键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png"></td>
-<td align="center"><strong>F8</strong></td>
-<td><strong>Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png"></td>
-<td align="center"><strong>F7</strong></td>
-<td><strong>Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/forceStepInto.png"></td>
-<td align="center"><strong>Alt+Shift+F7</strong></td>
-<td><strong>Force Step Into：强制步入，能进入任何方法，查看底层源码的时候可以用这个进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png"></td>
-<td align="center"><strong>Shift+F8</strong></td>
-<td><strong>Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png"></td>
-<td align="center"><strong>Alt+F9</strong></td>
-<td><strong>Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></td>
-<td align="center"><strong>Ctrl+F2</strong></td>
-<td><strong>Stop ‘xxx’：停止运行</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></td>
-<td align="center"><strong>Ctrl+Shift+F8</strong></td>
-<td><strong>View Breakpoints：查看所有断点</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/mutebreakpoints.png"></td>
-<td align="center"></td>
-<td><strong>Mute Breakpoints：选择这个后，所有断点变为灰色，断点失效，按F9则可以直接运行完程序。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></td>
-<td align="center"><strong>F9</strong></td>
-<td><strong>Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/dropframe.png"></td>
-<td align="center"></td>
-<td><strong>Drop Frame：断点回退，断点会回退到我们打断点的位置。</strong></td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h1><p>在我们打断点的地方鼠标右击，然后在condition输入框里面输入条件</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/conditionbreakpoint1.png"></p>
-<hr>
-<h1 id="求值表达式Evaluate-Expression"><a href="#求值表达式Evaluate-Expression" class="headerlink" title="求值表达式Evaluate Expression"></a>求值表达式Evaluate Expression</h1><p>在断点调试过程中，我们想查看某些变量或某些对象的属性值，我们可以通过快捷键<strong>Alt+F8</strong>打开<strong>表达式求值</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression2.png"></p>
-<hr>
-<h1 id="setValue"><a href="#setValue" class="headerlink" title="setValue"></a>setValue</h1><p>Intellij IDEA在debug模式下可以改变变量的值，下面这段代码为例，比如我们想看看i=12时会输出什么</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue1.png"></p>
-<p>此时<strong>i==5</strong>，我们把<strong>i</strong>设置成12</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue3.png"></p>
-<p>按快捷键<strong>F8</strong>看看i是否会进入<strong>if条件</strong>里面</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue4.png"></p>
-<hr>
-<hr>
-<h1 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h1><p><strong>Java Exception Breakpoints可以使当程序遇见被选择的异常时，自动停在相应异常的位置处。</strong></p>
-<p>如下面这段代码</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint1.png"></p>
-<p>加上条件断点，使用快捷键<strong>Ctrl+Shift+F8</strong>或者点击图标<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint3.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint4.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint5.png"></p>
-<p>再使用Debug模式来运行程序，当程序出现异常，会之间停留在我们出现异常的代码处</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint6.png"></p>
-<hr>
-<h1 id="避免操作资源"><a href="#避免操作资源" class="headerlink" title="避免操作资源"></a>避免操作资源</h1><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource1.png"></p>
-<p>如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不行后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></p>
-<p>。但是点击这个按钮之后后续的操作还会执行，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource2.png"></p>
-<hr>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource3.png"></p>
-<p>Debug调试界面，选择正在运行的Stack，鼠标右键选择Force Return，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource4.png"></p>
-<p>上面的操作完成之后，代码会跑到<strong>Thread.java</strong>类中的<strong>exit（）</strong>方法里。再点击<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></p>
-<p>程序就运行结束。我们就会看到后续的操作并没有执行</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource5.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource6.png"></p>
 ]]></content>
       <categories>
         <category>IDEA使用技巧</category>
@@ -933,7 +933,7 @@
 <h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。</p>
 <p>然后在本地的任意目录下，打开git bash：</p>
 <blockquote>
-<p>​    git clone <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:wotzc/wotzc.github.io.git    </p>
+<p>​    git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#x6d;</a>:wotzc/wotzc.github.io.git    </p>
 </blockquote>
 <p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。</p>
 <p>接下来在克隆到本地的<code>wotzc.github.io</code>中，把除了.git 文件夹外的所有文件都删掉，把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
