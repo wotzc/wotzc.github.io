@@ -226,7 +226,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -239,7 +239,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -271,6 +271,549 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/19/Java%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9FLogback-SLf4J/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/19/Java%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9FLogback-SLf4J/" class="post-title-link" itemprop="url">Java日志系统Logback+SLf4J</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-19 09:54:54" itemprop="dateCreated datePublished" datetime="2023-08-19T09:54:54+08:00">2023-08-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2023-08-20 00:39:20" itemprop="dateModified" datetime="2023-08-20T00:39:20+08:00">2023-08-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Java中常用日志框架"><a href="#Java中常用日志框架" class="headerlink" title="Java中常用日志框架"></a>Java中常用日志框架</h1><h2 id="日志框架的演化"><a href="#日志框架的演化" class="headerlink" title="日志框架的演化"></a>日志框架的演化</h2><blockquote>
+<ul>
+<li>1996 年初，欧洲安全电子市场 (EU SEMPER) 项目组决定编写它自己的程序跟踪 API(Tracing API)。经过不断的完善，这个 API 终于成为一个十分受欢迎的 Java 日志软件包，即 Log4j。后来 Log4j 成为 Apache 基金会项目中的一员。</li>
+<li>Log4j 发布后近乎成了 Java 社区的日志标准。据说 Apache 基金会还曾经建议 sun 引入 Log4j 到 java 的标准库中，但 Sun 拒绝了。</li>
+<li>2002年 Java1.4 发布，Sun 推出了自己的日志库 JUL(Java Util Logging),其实现基本模仿了 Log4j 的实现。在 JUL 出来以前，log4j 就已经成为一项成熟的技术，使得 log4j 在选择上占据了一定的优势。</li>
+<li>2005年，Apache 推出了 JCL(Jakarta Commons Logging)，JCL只是定义了一套日志接口(其内部也提供一个Simple Log的简单实现)，支持运行时动态加载日志组件的实现，也就是说，在你应用代码里，只需调用 Commons Logging 的接口，底层实现可以是log4j，也可以是Java Util Logging。</li>
+<li>2006年，Ceki Gülcü (Log4j最初由他编写) 开发了 SLF4J(The Simple Logging Facade for Java) 作为 JCL(Jakarta Commons Logging) 的更可靠替代方案。之后又开发了 Logback 框架 (Slf4j 的实现)，并回瑞典创建了 QOS 公司，QOS 官网上是这样描述 Logback 的：The Generic，Reliable Fast&amp;Flexible Logging Framework(一个通用，可靠，快速且灵活的日志框架)。</li>
+<li>之后，Java 日志领域被划分为两大阵营：Commons Logging 阵营和 SLF4J 阵营。 Commons Logging 在 Apache 大树的笼罩下，有很大的用户基数。但有证据表明，形式正在发生变化。2013 年底有人分析了 GitHub 上30000个项目，统计出了最流行的100个 Libraries，可以看出 slf4j 的发展趋势更好</li>
+<li>2012-07 Apache 重写了 log4j 1.x，成立了新的项目 Log4j2。Log4j2 具有 Logback 的所有特性。</li>
+</ul>
+</blockquote>
+<p>现在，SLF4J + Logback 是 Spring Boot 的默认日志框架。</p>
+<h2 id="日志框架的分类"><a href="#日志框架的分类" class="headerlink" title="日志框架的分类"></a>日志框架的分类</h2><p>日志框架分为<strong>日志门面框架</strong>和<strong>日志实现框架</strong>，那什么是<strong>日志门面框架</strong>和<strong>日志实现框架</strong>呢</p>
+<ul>
+<li><strong>日志门面框架</strong>指的是：无具体实现的抽象门面框架，如：Commons Logging、SLF4J</li>
+<li><strong>日志实现框架</strong>：具体实现的框架，如：Log4j，Log4j2，Logback，Jul(java.util.logging)</li>
+</ul>
+<h3 id="日志门面框架"><a href="#日志门面框架" class="headerlink" title="日志门面框架"></a>日志门面框架</h3><p>日志门面:是门面模式的一个典型的应用,门面模式，也称外观模式。日志门面框架就使一套提供了日志相关功能的接口而无具体实现的框架，其调用具体的实现框架来进行日志记录。也就是说日志门面天然的兼容日志实现框架。</p>
+<p>在java 生态中国日志门面框架主要有两个 Commons Logging 和 SLF4J</p>
+<h4 id="Commons-Logging"><a href="#Commons-Logging" class="headerlink" title="Commons Logging"></a><strong>Commons Logging</strong></h4><p>common-logging 是 apache 提供的一个通用的日志接口， 在 common-logging 中，有一个 Simple logger 的简单实现，但是它功能很弱，所以使用 common-logging，通常都是配合着 log4j 来使用。</p>
+<h4 id="SLF4J"><a href="#SLF4J" class="headerlink" title="SLF4J"></a>SLF4J</h4><p>SLF4J(Simple Logging Facade for Java），是一套包装 Logging 框架的界面程式，以外观模式实现。可以在软件部署的时候决定要使用的 Logging 框架，目前主要支援的有Java Logging API、Log4j及logback等框架。以MIT 授权方式发布。SLF4J 的作者就是 Log4j和Logback 的作者 Ceki Gülcü。</p>
+<h3 id="日志实现框架"><a href="#日志实现框架" class="headerlink" title="日志实现框架"></a>日志实现框架</h3><h4 id="Log4j"><a href="#Log4j" class="headerlink" title="Log4j"></a>Log4j</h4><p>最早的日志实现框架，早期由 Ceki Gülcü 开发，现在则是Apache软件基金会的一个项目。</p>
+<h4 id="JUL-Java-Util-Logging"><a href="#JUL-Java-Util-Logging" class="headerlink" title="JUL(Java Util Logging)"></a>JUL(Java Util Logging)</h4><p>Java 1.4 以来的官方日志实现,主要参考自 Log4j</p>
+<h4 id="Logback"><a href="#Logback" class="headerlink" title="Logback"></a>Logback</h4><p>Log4j 的早期作者 Ceki Gülcü 开发的新一代日志框架</p>
+<h4 id="Log4j2"><a href="#Log4j2" class="headerlink" title="Log4j2"></a>Log4j2</h4><p>Apache Log4j2 是 Apache Log4j 的升级产品,并且不兼容 Log4j，主要参考自 Logback</p>
+<h2 id="框架选择"><a href="#框架选择" class="headerlink" title="框架选择"></a>框架选择</h2><ul>
+<li><strong>成本考虑</strong>：Logback 的所有文档是全面免费提供，Apache Log4J 只提供部分免费文档,其余部分需要付费购买。</li>
+<li><strong>资源开销</strong>：Commons Logging 相比较与 SLF4J 开销更高.</li>
+<li><strong>性能</strong>：Logback 相比 Log4j、Log4j2 拥有更好的性能。Logback声称：某些关键操作，比如判定是否记录一条日志语句的操作，其性能得到了显著的提高。这个操作在Logback中需要3纳秒，而在Log4J中则需要30纳秒。LogBack创建记录器（logger）的速度也更快：13毫秒，而在Log4J中需要23毫秒。更重要的是，它获取已存在的记录器只需94纳秒，而Log4J需要2234纳秒，时间减少到了1/23。跟JUL相比的性能提高也是显著的。</li>
+</ul>
+<p>SLF4J + Logback 成为了实际开发中的最佳选择。</p>
+<hr>
+<h1 id="SpringBoot项目中配置SLF4J-Logback"><a href="#SpringBoot项目中配置SLF4J-Logback" class="headerlink" title="SpringBoot项目中配置SLF4J+Logback"></a>SpringBoot项目中配置SLF4J+Logback</h1><h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><p>要开始使用 <code>Logback</code>，首先需要将<code>logback-classic</code>依赖项添加到类路径中。让我们用 <code>Maven</code> 来做到这一点：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>引入这个单一依赖项就足够了，因为它将间接引入*<code>logback-core</code><em>和</em><code>slf4j-api</code>*这两个依赖项。</p>
+<p><strong>如果没有定义自定义配置，Logback 会自行提供简单的自动配置。</strong>默认情况下，这可确保日志语句以 <code>DEBUG</code> 级别打印到控制台。</p>
+<p>因此，您现在可以获得*<code>Logger</code>*实例并开始使用默认的基本配置写入日志消息。</p>
+<p>首先，您可以使用*<code>slf4j LoggerFactory</code><em>类创建</em><code>Logger</code>*：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Logger LOGGER = LoggerFactory.getLogger(LogbackTestApplication.class);</span><br></pre></td></tr></table></figure>
+
+<p>接下来，您可以简单地使用你想要的日志级别并打印日志：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOGGER.info(<span class="string">&quot;LogbackTestApplication running...&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Logback配置文件"><a href="#Logback配置文件" class="headerlink" title="Logback配置文件"></a>Logback配置文件</h2><p><strong>要为 Logback 创建配置，您可以使用 XML 以及 Groovy</strong>。只要您遵守命名约定，系统就会自动选择并使用配置。</p>
+<p>您可以选择三个有效的标准文件名：</p>
+<ul>
+<li><em>logback-test.xml</em></li>
+<li><em>logback.groovy</em></li>
+<li><em>logback.xml</em></li>
+</ul>
+<p>这里值得注意的是，<code>Logback</code> 将按照这个确切的顺序搜索这些文件。</p>
+<p>展望未来，本教程中的示例将依赖于基于 <code>XML</code> 的 *<code>logback.xml</code>*文件。</p>
+<p>让我们看看默认配置的基本配置是什么样的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d&#123;HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;debug&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此配置定义了一个<code>ConsoleAppender</code>。控制台上的日志消息将使用<code>&lt;pattern&gt;</code>中配置的样式显示在打印控制台。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2023-08-19 15:57:13.086  INFO 72780 --- [           main] c.g.logbacktest.LogbackTestApplication   : LogbackTestApplication running...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Logback-配置文件结构"><a href="#Logback-配置文件结构" class="headerlink" title="Logback 配置文件结构"></a>Logback 配置文件结构</h2><p>Logback 配置文件的基本结构如下:</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/logback/23144709_brxi.webp"></p>
+<p>如上，根节点为<span style="color: green;font-weight:bold"><configuration></span>元素，包含零个或多个<span style="color: green;font-weight:bold"><appender></span>元素，然后是零个或多个<span style="color: green;font-weight:bold"><logger></span>元素，然后是<strong>最多一个</strong><span style="color: green;font-weight:bold"><root></span><strong>元素</strong>。</p>
+<p><code>logger</code>、<code>root</code> 作为日志的记录器，把它关联到应用的对应的 <code>context</code> 上后，主要用于存放日志对象，也可以定义日志类型、级别。</p>
+<p><code>appender</code> 主要用于指定日志输出的目的地，目的地可以是控制台、文件、远程套接字服务器、 <code>MySQL</code>、<code>PostreSQL</code>、 <code>Oracle</code> 和其他数据库、 <code>JMS</code> 和远程 <code>UNIX Syslog</code> 守护进程等。</p>
+<h3 id="根节点-lt-configuration-gt"><a href="#根节点-lt-configuration-gt" class="headerlink" title="根节点&lt;configuration&gt;"></a>根节点&lt;configuration&gt;</h3><p>根节点 &lt;configuration&gt; 常用的属性包含<code>scan</code>、<code>scanPeriod</code>、<code>debug</code>三个属性。</p>
+<ol>
+<li><code>scan</code>：当此属性设置为 <code>true</code> 时，如果配置文件发生改变，会自动重新加载配置文件，默认值为 <code>true</code>.</li>
+<li><code>scanPeriod</code>：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当 scan 为 true 时，此属性生效。默认的时间间隔为 1 分钟.</li>
+<li><code>debug</code>：当此属性设置为 <code>true</code> 时，将打印出 logback 内部日志信息，实时查看 logback 运行状态。默认值为 false.</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;60 second&quot;</span> <span class="attr">debug</span>=<span class="string">&quot;false&quot;</span>&gt;</span>  </span><br><span class="line">      <span class="comment">&lt;!-- 其他配置省略--&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意 <code>scanPeriod</code> 值的写法，<code>数值英文空格时间单位</code> 。 如果未指定时间单位，则默认时间单位为毫秒</p>
+<h3 id="变量-lt-property-gt"><a href="#变量-lt-property-gt" class="headerlink" title="变量 &lt;property&gt;"></a>变量 &lt;property&gt;</h3><h4 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h4><p><span style="color: green;font-weight:bold"><configuration> </span>下，可以通过<span style="color: green;font-weight:bold"> <property> </span> 来定义一个变量，属性 <strong>name</strong> 是变量的名称，属性 <strong>value</strong> 是变量的值。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;LOG_PATTERN&quot;</span> <span class="attr">value</span>=<span class="string">&quot;%date %level [%thread] %logger&#123;10&#125; [%file : %line] %msg%n&quot;</span> /&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用自定义变量"><a href="#使用自定义变量" class="headerlink" title="使用自定义变量"></a>使用自定义变量</h4><p>通过 ${变量名} 来引用变量</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;LOG_PATTERN&quot;</span> <span class="attr">value</span>=<span class="string">&quot;%date %level [%thread] %logger&#123;10&#125; [%file : %line] %msg%n&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;LOG_PATTERN&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用配置文件中的属性"><a href="#使用配置文件中的属性" class="headerlink" title="使用配置文件中的属性"></a>使用配置文件中的属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 读取spring.application.name中的属性来生成日志文件名 --&gt;</span><br><span class="line">&lt;springProperty scope&#x3D;&quot;context&quot; name&#x3D;&quot;logName&quot; source&#x3D;&quot;spring.application.name&quot; defaultValue&#x3D;&quot;localhost.log&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><span style="color: green;font-weight:bold"><springProperty> </span>标签允许我们从<code>Spring</code>中显示属性，<code>Environment</code> 以便在<code>Logback</code>中使用。如果你想将 <code>application.properties</code>在回读配置中访问文件中的值，这将非常有用。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 读取spring.application.name中的属性来生成日志文件名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">springProperty</span> <span class="attr">scope</span>=<span class="string">&quot;context&quot;</span> <span class="attr">name</span>=<span class="string">&quot;logName&quot;</span> <span class="attr">source</span>=<span class="string">&quot;spring.application.name&quot;</span> <span class="attr">defaultValue</span>=<span class="string">&quot;localhost.log&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="日志输出器-lt-appender-gt"><a href="#日志输出器-lt-appender-gt" class="headerlink" title="日志输出器 &lt;appender&gt;"></a>日志输出器 &lt;appender&gt;</h3><p><span style="color: green;font-weight:bold"><appender></span> (日志输出器)，用于将日志按照<strong>一定的格式</strong>输出到控制台、文件、数据库等地方，<strong>logger(日志记录器)</strong> 需要使用 <strong>appender(日志输出器)</strong> 将记录器中的日志输出。</p>
+<p><strong>appender</strong> 有两个<strong>必填属性</strong></p>
+<ul>
+<li><strong>name</strong> ：<code>appender</code> 的名称，任意填写，不要重名就行</li>
+<li><strong>calss</strong>：某个具体的 <code>appender</code> 的完全类名，它是 <code>appender</code> 的具体实现，<code>Logback</code> 自带常用的几个 <code>appender</code>。<ul>
+<li>ch.qos.logback.core.ConsoleAppender ：将日志输出到控制台的 <code>appender</code></li>
+<li>ch.qos.logback.core.rolling.RollingFileAppender ：将日志输出到文件，并按照条件切换输出到新建文件(滚动输出，自动切割)</li>
+</ul>
+</li>
+</ul>
+<p><span style="color: green;font-weight:bold"><encoder></span> 负责将事件(日志)转换为字节数组，并将该字节数组写出为 <code>OutputStream</code>。</p>
+<p><span style="color: green;font-weight:bold"><encoder></span> 是<span style="color: green;font-weight:bold"><appender></span> 的子节点，在 <span style="color: green;font-weight:bold"><encoder></span> 节点中，最重要的是配置 <span style="color: green;font-weight:bold"><pattern></span>，它是用来定义日志输出格式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">pattern</span>&gt;</span><span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">charset</span>&gt;</span><span class="tag">&lt;/<span class="name">charset</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="lt-pattern-gt"><a href="#lt-pattern-gt" class="headerlink" title="&lt;pattern&gt;"></a>&lt;pattern&gt;</h4><p> <span style="color: green;font-weight:bold"><pattern></span>用于定义日志的输出格式，通过 <code>Logback</code> 中的**转换说明符(Conversion specifier)**（其实就是一些预定义变量），可以方便的组合出我们想要的日志格式</p>
+<p>在这里我只列举出常用的**转换说明符(Conversion specifier)**，更多请参考<a href="https://link.juejin.cn/?target=http://logback.qos.ch/manual/layouts.html">官方文档</a></p>
+<h5 id="日期、时间"><a href="#日期、时间" class="headerlink" title="日期、时间"></a>日期、时间</h5><p>假设系统时间是 2006-10-20 14:06:49,812</p>
+<table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%d</td>
+<td>2006-10-20 14:06:49,812</td>
+</tr>
+<tr>
+<td>%date</td>
+<td>2006-10-20 14:06:49,812</td>
+</tr>
+<tr>
+<td>%date{ISO8601}</td>
+<td>2006-10-20 14:06:49,812</td>
+</tr>
+<tr>
+<td>%date{HH:mm:ss.SSS}</td>
+<td>14:06:49.812</td>
+</tr>
+<tr>
+<td>%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Shanghai}</td>
+<td>2006-10-20 14:06:49,812</td>
+</tr>
+</tbody></table>
+<h5 id="日志记录器"><a href="#日志记录器" class="headerlink" title="日志记录器"></a>日志记录器</h5><p>输出日志记录事件源处的记录器名称，下表提供了缩写算法的实际应用示例。</p>
+<table>
+<thead>
+<tr>
+<th>转换说明符</th>
+<th>记录器名称</th>
+<th>输出结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%logger</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>mainPackage.sub.sample.Bar</td>
+</tr>
+<tr>
+<td>%logger{0}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>Bar</td>
+</tr>
+<tr>
+<td>%logger{5}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>m.s.s.Bar</td>
+</tr>
+<tr>
+<td>%logger{10}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>m.s.s.Bar</td>
+</tr>
+<tr>
+<td>%logger{15}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>m.s.sample.Bar</td>
+</tr>
+<tr>
+<td>%logger{16}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>m.sub.sample.Bar</td>
+</tr>
+<tr>
+<td>%logger{26}</td>
+<td>mainPackage.sub.sample.Bar</td>
+<td>mainPackage.sub.sample.Bar</td>
+</tr>
+</tbody></table>
+<h5 id="类名、方法名、行号"><a href="#类名、方法名、行号" class="headerlink" title="类名、方法名、行号"></a>类名、方法名、行号</h5><table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%C、%class</td>
+<td>输出log的类的完整类名,获取类名的效率一般,只建议在需要时使用</td>
+</tr>
+<tr>
+<td>%M 、%method</td>
+<td>输出log的方法</td>
+</tr>
+<tr>
+<td>%L 、%line</td>
+<td>输出log的行号。获取行号的效率一般，只建议在需要时使用</td>
+</tr>
+</tbody></table>
+<h5 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h5><table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%t 、%thread</td>
+<td>输出日志的线程</td>
+</tr>
+</tbody></table>
+<h5 id="消息请求级别"><a href="#消息请求级别" class="headerlink" title="消息请求级别"></a>消息请求级别</h5><table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%p、%le、 %level</td>
+<td>消息请求级别</td>
+</tr>
+</tbody></table>
+<h5 id="日志信息"><a href="#日志信息" class="headerlink" title="日志信息"></a>日志信息</h5><table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%m 、%msg 、%message</td>
+<td>日志信息</td>
+</tr>
+</tbody></table>
+<h5 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h5><table>
+<thead>
+<tr>
+<th>Conversion Pattern</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%n</td>
+<td>换行</td>
+</tr>
+</tbody></table>
+<p>组合示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date&#123;yyyy-MM-dd HH:mm:ss.SSS, Asia/Shanghai&#125; %red(%-5level) --- [%thread] %cyan(%class.%method/%line) : %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h5><p>对于控制台的输出，Logback 支持填充颜色，支持的颜色如下</p>
+<ul>
+<li>%black()</li>
+<li>%red()</li>
+<li>%green()</li>
+<li>%yellow()</li>
+<li>%blue()</li>
+<li>%magenta()</li>
+<li>%cyan()</li>
+<li>%white()</li>
+<li>%gray()</li>
+<li>%boldRed()</li>
+<li>%boldGreen()</li>
+<li>%boldYellow()</li>
+<li>%boldBlue()</li>
+<li>%boldMagenta()</li>
+<li>%boldCyan()</li>
+<li>%boldWhite()</li>
+<li>%highlight()</li>
+</ul>
+<p>使用方法是用颜色的代码把消息包起来，比如想将日志级别设置成红色 <code>%red(%-5level)</code></p>
+<h4 id="设置字符集-lt-charset-gt"><a href="#设置字符集-lt-charset-gt" class="headerlink" title="设置字符集 &lt;charset&gt;"></a>设置字符集 &lt;charset&gt;</h4><p><charset> 是 <encoder> 的子节点，用于设置输出字符集</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date&#123;yyyy-MM-dd HH:mm:ss.SSS, Asia/Shanghai&#125; %red(%-5level) --- [%thread] %cyan(%class.%method/%line) : %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">charset</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ConsoleAppender"><a href="#ConsoleAppender" class="headerlink" title="ConsoleAppender"></a>ConsoleAppender</h4><p><code>ch.qos.logback.core.ConsoleAppender</code> 是 <code>Logback</code> 自带的 <code>appender</code>，用于将日志输出到控制台。</p>
+<p>对应控制台，只需要重点配置 <span style="color: red; font-weight: bold"><encoder></span>节点</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;60 seconds&quot;</span> <span class="attr">debug</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date %red(%-5level) --- [%thread] %cyan(%class.%method/%line) : %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">charset</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RollingFileAppender"><a href="#RollingFileAppender" class="headerlink" title="RollingFileAppender"></a>RollingFileAppender</h4><p><code>ch.qos.logback.core.rolling.RollingFileAppender</code> 是 <code>Logback</code> 自带的 <code>Appender</code>，用于将日志输出到文件，并按照条件切换输出到新建文件(滚动输出，自动切割)</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file</td>
+<td>String</td>
+<td>文件名，如果文件不存在，则创建。注意文件路径</td>
+</tr>
+<tr>
+<td>append</td>
+<td>boolean</td>
+<td>true 在文件末尾追加，false 覆盖，默认 true</td>
+</tr>
+<tr>
+<td>encoder</td>
+<td>Encoder</td>
+<td>编码器，设置日志输出格式和编码</td>
+</tr>
+<tr>
+<td>rollingPolicy</td>
+<td>RollingPolicy</td>
+<td>滚动策略，描述该如何滚动</td>
+</tr>
+<tr>
+<td>triggeringPolicy</td>
+<td>TriggeringPolicy</td>
+<td>触发策略，什么条件下触发滚动</td>
+</tr>
+</tbody></table>
+<p>要使用 <code>RollingFileAppender RollingPolicy</code> (滚动策略)和 <code>TriggeringPolicy</code>(触发策略)必不可少。但是，如果 <code>RollingPolicy</code> 实现了 <code>TriggeringPolicy</code> 接口，则仅需要指定 <code>RollingPolicy</code>。</p>
+<p><code>rollingPolicy</code>(滚动策略) 里面有一个属性叫 <code>fileNamePattern</code>，它和 <code>file</code> 属性一样都表示日志文件名。</p>
+<h4 id="滚动策略-——-RollingPolicy"><a href="#滚动策略-——-RollingPolicy" class="headerlink" title="滚动策略 —— RollingPolicy"></a>滚动策略 —— RollingPolicy</h4><p><code>RollingPolicy</code> 负责日志文件的移动和重命名的过程。<br> <code>Logback</code> 提供了多种 <code>RollingPolicy</code> 的实现</p>
+<ul>
+<li><code>TimeBasedRollingPolicy</code> ：按时间滚动，比如按天或按月</li>
+<li><code>SizeAndTimeBasedRollingPolicy</code> ：按时间和大小滚动，比如说在按天滚动的基础上设置大小，防止某天的日志文件过大！</li>
+</ul>
+<h4 id="TimeBasedRollingPolicy"><a href="#TimeBasedRollingPolicy" class="headerlink" title="TimeBasedRollingPolicy"></a>TimeBasedRollingPolicy</h4><p><code>TimeBasedRollingPolicy</code>可能是最受欢迎的滚动政策。它定义了基于时间的展期策略，例如按天或按月。 </p>
+<p><code>ch.qos.logback.core.rolling.TimeBasedRollingPolicy</code> 滚动策略同时也实现了 <code>TriggeringPolicy</code>(触发策略)</p>
+<p>因此配置好 <code>TimeBasedRollingPolicy</code> 后，就不需要配置 <code>TriggeringPolicy</code>。</p>
+<p><code>TimeBasedRollingPolicy</code>的配置包含一个必选的<code>fileNamePattern</code>属性和几个可选属性。</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fileNamePattern</td>
+<td>String</td>
+<td>fileNamePattern 是最为复杂也最为重要的属性，同时也是必填项，将在下文中详细介绍</td>
+</tr>
+<tr>
+<td>maxHistory</td>
+<td>Int</td>
+<td>可选的 maxHistory 属性控制要保留的归档文件的最大数量，异步删除旧文件。 例如，如果您指定每月滚动，并将 maxHistory 设置为 6，则将保留近 6 个月的存档文件，并删除超过 6 个月的文件。 请注意，当旧的存档日志文件被删除时，为日志文件存档而创建的任何文件夹都将根据需要删除。<br/><br/>将 maxHistory 设置为0会禁用存档删除。 默认情况下，maxHistory 设置为0，即默认情况下不删除存档。</td>
+</tr>
+<tr>
+<td>totalSizeCap</td>
+<td>Int</td>
+<td>可选的totalSizeCap属性控制所有归档文件的总大小，在 maxHistory 限制的基础上，进一步限制 所有存档文件的总大小。当超过总大小上限时，最旧的存档将被异步删除。totalSizeCap 依赖于 maxHistory ，如果没有 maxHistory ，单独设置 totalSizeCap 是不生效的。<br/><br/>TotalSizeCap 属性可以通过在数值后分别添加 KB、MB 和 GB 来指定为字节、千字节、兆字节或千兆字节的单位。 例如，5000000、5000KB、5MB 和 2GB 都是有效值，前三个是等效的。 没有后缀的数值以字节为单位。<br/><br/>默认情况下，totalSizeCap 设置为零，这意味着没有总大小上限。</td>
+</tr>
+<tr>
+<td>cleanHistoryOnStart</td>
+<td>boolean</td>
+<td>如果设置为 true，则存档文件将在appender启动时删除。 默认情况下，此属性设置为 false。<br/><br/>存档删除通常在滚动期间执行。 但是，某些应用程序的生存时间可能不够长，无法触发滚动。 因此，对于此类短暂的应用程序，存档删除可能永远没有机会执行。 通过将 cleanHistoryOnStart 设置为 true，存档删除将在appender启动时执行。</td>
+</tr>
+</tbody></table>
+<h4 id="fileNamePattern-属性"><a href="#fileNamePattern-属性" class="headerlink" title="fileNamePattern 属性"></a>fileNamePattern 属性</h4><p><code>fileNamePattern</code> 的值包含文件名以及支持绝对和相对路径和日期转换符——<code>%d</code>。</p>
+<p><code>% d</code>转换符可以包含由 <code>java.text.SimpleDateFormat</code>类指定的日期和时间模式。如果省略日期和时间模式，则 采用默认模式<code>yyyy-MM-dd</code> 。滚动周期是根据<code>fileNamePattern</code>的值推断出来的。</p>
+<p><code>%d</code> 表示系统当前的时间，默认格式为 %d{yyyy-MM-dd}，通过 <code>%d</code>{日期格式} 来自定义。</p>
+<p><code>fileNamePattern</code> 属性内或日期和时间模式内任意位置的 正斜杠“/”或反斜杠“\”字符将被解释为目录分隔符。</p>
+<p><strong>时区</strong></p>
+<p>%d 默认采用主机时区，也可以自定义%d{yyyy-MM-dd,UTC+8}</p>
+<p><strong>多个%d</strong></p>
+<p>可以指定多个 <code>%d</code> 转换符，但只有其中一个可以是主要的，即用于推断滚动周期。</p>
+<p>多个 `%d转换符允许您以不同于滚动周期的文件夹结构来组织存档文件。 例如，下面显示的文件名模式按年和月组织日志文件夹，但每天午夜滚动更新日志文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/%d&#123;yyyy/MM, aux&#125;/myapplication.%d&#123;yyyy-MM-dd&#125;.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>自动文件压缩</strong><br><code>TimeBasedRollingPolicy</code>支持自动文件压缩。如果<code>fileNamePattern</code>选项的值 以<span style="color: green; font-weight: bold">.gz</span>或.<span style="color: green; font-weight: bold">zip</span>结尾，则启用此功能。</p>
+<table>
+<thead>
+<tr>
+<th>fileNamePattern</th>
+<th><strong>Rollover schedule</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/wombat/foo.%d.gz</code></td>
+<td>每日滚动（午夜），自动对存档文件进行 <code>GZIP</code> 压缩。</td>
+<td>如果没有设置<span style="color:red;font-weight:bold"><file></span>，2009 年 11 月 23 日期间，日志将输出到文件 <code>/wombat/foo.2009-11-23</code>。但是，在午夜该文件将被压缩为 <code>/wombat/foo.2009-11-23.gz</code>。11 月 24 日，日志记录输出将定向到 <code>/wombat/folder/foo.2009-11-24</code>，以此类推。<br> 如果设置<span style="color:red;font-weight:bold"><file></span>为<code>/wombat/foo.txt</code>，2009 年 11 月 23 日期间，日志输出将转到文件<code>/wombat/foo.txt</code>。午夜该文件将被压缩并重命名为 <code>/wombat/foo.2009-11-23.gz</code>。并将创建一个新的 <code>/wombat/foo.tx</code>t文件，并将11月24日期间的日志记录到该文件。在11月24日午夜，<code>/wombat/foo.txt</code>将被压缩并重命名为<code>/wombat/foo.2009-11-24.gz</code>。</td>
+</tr>
+</tbody></table>
+<p><code>fileNamePattern</code>有双重用途。首先，logback通过研究模式 计算请求的滚动周期。其次，它计算每个存档文件的名称。请注意，两种不同的模式可以指定相同的周期。模式yyyy-MM和 yyyy@MM都指定每月滚动，尽管生成的存档文件将带有不同的名称。</p>
+<p>通过设置<span style="color:red;font-weight:bold"><file></span>属性，您可以分离活动日志文件的位置和归档日志文件的位置。日志输出将定位到文件属性指定的文件中 。由此可见，活动日志文件的名称不会随时间而改变。但是，如果您选择忽略file属性，则将根据fileNamePattern的值在每个周期重新计算活动文件名称。通过保留<span style="color:red;font-weight:bold"><file></span>属性未设置，您可以避免在滚动期间存在引用日志文件的外部文件句柄时发生的 文件重命名错误。</p>
+<p>由于各种技术原因，滚动不是时钟驱动的，而是取决于日志记录事件的到达。例如，在 2002 年 3 月 8 日，假设 fileNamePattern设置为yyyy-MM-dd （每日滚动），则午夜后第一个事件的到达将触发滚动。如果在午夜后 23 分 47 秒期间没有记录事件，则滚动实际上将发生在 3 月 9 日上午 00:23’47，而不是上午 0:00。因此，根据事件的到达率，可能会以一定的延迟触发滚动。然而，无论延迟如何，滚动算法都已知是正确的，从某种意义上说，在特定时间段内生成的所有日志记录事件都将输出到界定该时间段的正确文件中。</p>
+<h4 id="SizeAndTimeBasedRollingPolicy"><a href="#SizeAndTimeBasedRollingPolicy" class="headerlink" title="SizeAndTimeBasedRollingPolicy"></a>SizeAndTimeBasedRollingPolicy</h4><p>有时您可能希望基本上按日期归档文件，但同时限制每个日志文件的大小，特别是日志文件处理工具对大小有着明确的限制。为了满足这一要求，<code>logback</code> 附带了 <code>SizeAndTimeBasedRollingPolicy</code>.</p>
+<p>请注意，<code>TimeBasedRollingPolicy</code>已经允许限制归档日志文件的组合大小。如果您只想限制日志归档的组合大小，那么 <code>TimeBasedRollingPolicy</code>上面描述的和设置<code>totalSizeCap</code>属性应该足够了。</p>
+<p><code>maxFileSize</code> 属性表示单个归档日志文件的大小，单位有 <code>KB</code>、<code>MB</code>、<code>GB</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;SizeAndTimeFile&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span>&gt;</span>logs/app1/app1.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>logs/app1/backup/app1_%d_%i.zip<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--单个日志文件最大10MB--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>10MB<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--删除n个滚动周期之前的日志文件(最多保留前n个滚动周期的历史记录)件--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>60<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!--在 maxHistory 限制的基础上，进一步限制所有存档文件的总大小--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">totalSizeCap</span>&gt;</span>1GB<span class="tag">&lt;/<span class="name">totalSizeCap</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date %-5level --- [%thread] %class.%method/%line : %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;SizeAndTimeFile&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>%i 是一个滚动周期内的归档序列号，从0开始</p>
+<p>注意：maxHistory 是表了 n 个滚动周期的日志文件，而不是 n 个的日志文件，在设置了 maxFileSize 后，一个滚动周期内可能有多个日志文件</p>
+<hr>
+<h3 id="日志记录器-lt-logger-gt"><a href="#日志记录器-lt-logger-gt" class="headerlink" title="日志记录器 &lt;logger&gt;"></a>日志记录器 &lt;logger&gt;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">level</span>=<span class="string">&quot;&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><span style="color:red;font-weight:bold"><logger></span> 有三个属性</p>
+<ul>
+<li><strong>name</strong> : 包名或类名。即，将该记录器作用于哪个类或包下。必填</li>
+<li><strong>level</strong> : 该记录器的级别，低于该级别的日志消息不记录。可选级别从小到大为 <strong>TRACE、DEBUG、INFO、WARN、ERROR、ALL、OFF</strong>(不区分大小写)。选填，不填则默认从父记录器继承<strong>level</strong></li>
+<li><strong>additivity</strong> : 是否追加父 Logger 的输出源(appender),默认为true，选填。如果只想输出到自己的输出源(appender)，需要设置为 false，参考例2</li>
+</ul>
+<p><code>logger</code> 还可以包含 0 或多个 <code>&lt;appender-ref&gt;</code> 元素, 将记录的日志使用 <code>appender</code> 进行输出</p>
+<h4 id="level-的继承"><a href="#level-的继承" class="headerlink" title="level 的继承"></a>level 的继承</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;30 seconds&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date %level [%thread] %logger&#123;10&#125; [%file : %line] %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;com.wqlm.boot.user.controller.UserController&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;com.wqlm.boot.user.controller&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，<code>&quot;com.wqlm.boot.user.controller.UserController&quot;</code>的 <code>logger</code> 没有定义 <code>level</code>，因此它会继承父 logger 的 level。</p>
+<p>那它的父 logger 是谁呢？ 其实就是下面的 <code>&quot;com.wqlm.boot.user.controller&quot;</code>的 <code>logger</code>!</p>
+<blockquote>
+<p><span style="color:red">Logback 是根据包或类的层次结构来确定 logger 的父子关系的</span></p>
+</blockquote>
+<p><code>&quot;com.wqlm.boot.user.controller&quot;</code>的 <code>logger</code> 也没有定义 <code>level</code>，因此它也会继承它的父 <code>logger</code> 的 <code>level</code>。但是，在该 xml 中，已经没有比它层次还“浅”的 <code>logger</code> 了，因此，它的父 <code>logger</code> 为 <strong>root</strong>。也就是说它会继承 <strong>root</strong> <code>logger</code> 的 <code>level</code>，也就是 <code>info</code>。</p>
+<h4 id="additivity-的追加策略"><a href="#additivity-的追加策略" class="headerlink" title="additivity 的追加策略"></a>additivity 的追加策略</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;30 seconds&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;STDOUT&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%date %level [%thread] %logger&#123;10&#125; [%file : %line] %msg%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;com.wqlm.boot.user.controller.UserController&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">&quot;com.wqlm.boot.user.controller&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;STDOUT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，<code>&quot;com.wqlm.boot.user.controller.UserController&quot;</code>的 <code>logger</code> 没有设置 <code>additivity</code>，因此 <code>additivity</code> 采用默认值 <code>true</code>，即，追加它父 <code>logger</code> 中的 <strong>appender</strong> 到自己的 <code>logger</code> 中。</p>
+<p>在看它的父 <code>logger</code> —— <code>&quot;com.wqlm.boot.user.controller&quot;</code> <code>logger</code>， <code>additivity</code> 也采用默认值，因此，它也会追加它父 <code>logger</code> 中的 <strong>appender</strong> 到自己的 <code>logger</code> 中。<br> 在该 <code>xml</code> 中 <code>&quot;com.wqlm.boot.user.controller&quot;</code> <code>logger</code> 的父 <code>logger</code> 为 <code>root logger</code>！，因此，它会追加 名为 STDOUT 的 <code>appender</code> 到自己的 <code>logger</code> 中</p>
+<p>刚才是从上层往下层走，直到找到显示标注 <code>appender=&quot;false&quot;</code> 的 <code>logger</code> 或 <code>root logger</code> 才停止追加。<br> 现在要从下层往上层走，把层层追加的 <code>appender</code> 往上传，直到遇到显示标注  <code>appender=&quot;false&quot;</code> 的 <code>logger</code> 才停止</p>
+<p>因此，<code>&quot;com.wqlm.boot.user.controller.UserController&quot;</code>的 <code>logger</code> 中，也有一个名为 STDOUT 的 <code>appender</code>，这个 <code>appender</code> 是从它的父 <code>logger</code> 中来的</p>
+<p>所以，一般情况下，只需要给 <code>root logger</code> 添加 <code>appender</code> 即可！！！其他 <code>logger</code> 都会直接或间接获取到 <code>root logger</code> 的 <code>appender</code>。</p>
+<h3 id="根记录器-lt-root-gt"><a href="#根记录器-lt-root-gt" class="headerlink" title="根记录器 &lt;root&gt;"></a>根记录器 &lt;root&gt;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>该<span style="color:red;font-weight: bold"><root></span>元素配置根记录器。它支持单一属性，即<code>level</code>属性。它不允许任何其他属性，因为可加性标志不适用于根记录器。此外，由于根记录器已被命名为“ROOT”，因此它也不允许使用名称属性。<code>level</code> 属性的值可以是不区分大小写的字符串 <code>TRACE</code>、<code>DEBUG</code>、<code>INFO</code>、<code>WARN</code>、<code>ERROR</code>、<code>ALL</code> 或 <code>OFF</code> 之一。请注意，根记录器的级别不能设置为 <code>INHERITED</code> 或 <code>NULL</code>。</p>
+<p>与元素<span style="color:red;font-weight: bold"><logger></span>类似，<span style="color:red;font-weight: bold"><root></span>元素可以包含零个或多个 <span style="color:red;font-weight: bold"><appender-ref></span>元素；这样引用的每个日志记录器都会添加到根记录器中。请注意，与 <code>log4j</code> 不同，<code>logback-classic</code>在配置根记录器时 不会关闭或删除任何先前引用的日志记录器。</p>
+<hr>
+<h4 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h4><p><code>Filter</code>：过滤器，过滤满足条件或者不满足条件的日志<br>允许组合使用，可配置多个过滤器有很多，只介绍两种常用的<code>LevelFilter</code>、<code>ThresholdFilter</code></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值说明</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LevelFilter</td>
+<td>级别过滤器</td>
+<td><code>精确</code>匹配指定的日志级别</td>
+<td></td>
+</tr>
+<tr>
+<td>ThresholdFilter</td>
+<td>阈值过滤</td>
+<td>匹配<code>等于或高于</code>指定级别</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>使用示例如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.filter.LevelFilter&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 级别 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 匹配时的操作：接收（记录） --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 不匹配时的操作：拒绝（不记录） --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!-- deny all events with a level below INFO, that is TRACE and DEBUG --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 拒绝所有级别低于 INFO 的, 也就是 TRACE 和 DEBUG --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>LevelFilter属性如下:</p>
+<p><code>onMatch</code>、<code>onMismatch</code>的取值类型有三种:</p>
+<ul>
+<li><code>DENY</code>：拒绝，不再执行后续的过滤器</li>
+<li><code>NEUTRAL</code>：中性，继续执行后面的过滤器</li>
+<li><code>ACCEPT</code>：接受，记录日志，不再执行后续过滤器</li>
+</ul>
+<hr>
+<h3 id="日志有效级别"><a href="#日志有效级别" class="headerlink" title="日志有效级别"></a>日志有效级别</h3><p>记录器可以被分配级别。在类中定义 <code>ch.qos.logback.classic.Level</code>了可能的级别集（<strong>TRACE</strong>、<strong>DEBUG</strong>、<strong>INFO</strong>、<strong>WARN</strong> 和 <strong>ERROR</strong>）。</p>
+<p>如果给定的记录器没有分配级别，那么它会从其最接近的祖先那里继承一个已分配级别的级别。</p>
+<p>为了确保所有记录器最终都能继承级别，根记录器始终具有指定的级别。默认情况下，该级别为 <strong>DEBUG</strong>。</p>
+<p>根据定义，打印方法决定日志记录请求的级别。例如，如果<code>L</code>是一个记录器实例，则该语句<code>L.info(&quot;..&quot;)</code>是 <strong>INFO</strong> 级别的日志记录语句。</p>
+<p>如果日志请求的级别高于或等于其记录器的有效级别，则称该日志请求已<em>启用。</em>否则，该请求被称为被<em>禁用</em>。</p>
+<blockquote>
+<p><em>基本选择规则：</em></p>
+<p><em>如果<code>p &gt;= q</code>，则启用 向有效级别q的记录器发出级别p的日志打印请求。</em></p>
+</blockquote>
+<p>这条规则是 <code>logback</code> 的核心。它假设级别按如下顺序排序： <code>TRACE &lt; DEBUG &lt; INFO &lt;  WARN &lt; ERROR</code>。</p>
+<p>以更形象的方式，以下是选择规则的工作原理。在下表中，垂直标头显示日志记录请求的级别，由<code>p</code>指定，而水平标头显示记录器的有效级别，由<code>q</code>指定。行（级别请求）和列（有效级别）的交集是由基本选择规则产生的布尔值。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/logback/effectivelevel.png"></p>
+<p>例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ch.qos.logback.classic.Level;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line"><span class="comment">// get a logger instance named &quot;com.foo&quot;. Let us further assume that the</span></span><br><span class="line"><span class="comment">// logger is of type  ch.qos.logback.classic.Logger so that we can</span></span><br><span class="line"><span class="comment">// set its level</span></span><br><span class="line">ch.qos.logback.classic.Logger logger = </span><br><span class="line">        (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(<span class="string">&quot;com.foo&quot;</span>);</span><br><span class="line"><span class="comment">//set its Level to INFO. The setLevel() method requires a logback logger</span></span><br><span class="line">logger.setLevel(Level. INFO);</span><br><span class="line"></span><br><span class="line">Logger barlogger = LoggerFactory.getLogger(<span class="string">&quot;com.foo.Bar&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// This request is enabled, because WARN &gt;= INFO</span></span><br><span class="line">logger.warn(<span class="string">&quot;Low fuel level.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// This request is disabled, because DEBUG &lt; INFO. </span></span><br><span class="line">logger.debug(<span class="string">&quot;Starting search for nearest gas station.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// The logger instance barlogger, named &quot;com.foo.Bar&quot;, </span></span><br><span class="line"><span class="comment">// will inherit its level from the logger named </span></span><br><span class="line"><span class="comment">// &quot;com.foo&quot; Thus, the following request is enabled </span></span><br><span class="line"><span class="comment">// because INFO &gt;= INFO. </span></span><br><span class="line">barlogger.info(<span class="string">&quot;Located nearest gas station.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// This request is disabled, because DEBUG &lt; INFO. </span></span><br><span class="line">barlogger.debug(<span class="string">&quot;Exiting gas station search&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -7459,161 +8002,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">Macbook使用技巧</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-19 16:34:26 / 修改时间：20:13:06" itemprop="dateCreated datePublished" datetime="2021-10-19T16:34:26+08:00">2021-10-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="批量更改文件名称"><a href="#批量更改文件名称" class="headerlink" title="批量更改文件名称"></a>批量更改文件名称</h1><p>对我而言这个功能最好用的是批量更改时替换功能，在截了一堆图需要改名字的时候就可以派上用场。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename2.png"></p>
-<h1 id="聚焦Spotlight"><a href="#聚焦Spotlight" class="headerlink" title="聚焦Spotlight"></a>聚焦<strong>Spotlight</strong></h1><p>“聚焦”可以帮助您快速找到 Mac 上的 App、文稿和其他文件。借助 Siri 建议，您还可以获取最新新闻、体育赛事比分、天气状况等信息。“聚焦”甚至可以为您进行计算和转换。</p>
-<h2 id="搜索内容"><a href="#搜索内容" class="headerlink" title="搜索内容"></a>搜索内容</h2><ol>
-<li><p>在 Mac 上，点按<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/aside/glos33eb8abd/11.0/mac/11.0">菜单栏</a>中的“聚焦”图标 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="img" style="zoom:25%;" />（如果显示），或者按下 Command-空格键或按下键盘上功能键行中的 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="聚焦键" style="zoom:25%;" />（如果可用）。</p>
-<p>您可以将“聚焦”窗口拖到桌面上的任意位置。</p>
-<p><strong>【提示】</strong>如果“聚焦”图标未显示在菜单栏中，请<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/mchlp1119/11.0/mac/11.0">使用“程序坞与菜单栏”偏好设置</a>进行添加。</p>
-</li>
-<li><p>在搜索栏中，键入要查找的内容，键入时结果会随之出现。</p>
-<p>“聚焦”首先列出最常点选，点按一个最常点选以进行预览或打开。“聚焦”还会建议搜索的各种变体；您可以在“聚焦”或网上查看这些结果。</p>
-<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/5026e0adf32c51825c1daf163ec73501.png" alt="“聚焦”窗口顶部显示了搜索栏中的搜索文本，下方是结果。"></p>
-</li>
-<li><p>在结果中，执行以下任一项操作：</p>
-<ul>
-<li><em>显示预览：</em>按下 Tab 键。根据结果中所选的项目类型，您可以与之交互。例如，选择 App 以查看最近打开文件的列表，然后点按以打开文件。或者点按“播放”按钮来聆听歌曲。</li>
-</ul>
-</li>
-</ol>
-<h2 id="在“聚焦”中进行计算和转换"><a href="#在“聚焦”中进行计算和转换" class="headerlink" title="在“聚焦”中进行计算和转换"></a>在“聚焦”中进行计算和转换</h2><p>您可以在“聚焦”搜索栏中输入数学表达式、金额、温度或单位，搜索栏中会立即显示转换或计算结果。</p>
-<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/6136d2d5c08bb8b6ebf10fc3c3248f48.png" alt="“聚焦”窗口，显示搜索栏中从码到米的转换。左侧是搜索结果列表。右侧预览中显示更多转换。"></p>
-<ul>
-<li><em>计算：</em>输入数学表达式，如 956*23.94 或 2020/15。</li>
-<li><em>货币转换：</em>输入金额，如 100 美元、100 日元或“300 克朗转换成欧元”。</li>
-<li><em>温度转换：</em>输入温度，如 98.8F、32C 或“340K 转换成华氏度”。</li>
-<li><em>单位转换：</em>输入度量单位，例如 25 磅、54 码、23 英石或“32 英尺转换成米”。</li>
-</ul>
-<p><strong>【提示】</strong>按下 Tab 键以在预览区域中显示更多转换。</p>
-<h1 id="快速添加emoji表情"><a href="#快速添加emoji表情" class="headerlink" title="快速添加emoji表情"></a>快速添加emoji表情</h1><p>按住键盘Control+Command+空格键，此时你的输入栏中，就会跳出所有表情了。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/emoji.png"></p>
-<p>​                </p>
-<h1 id="快速锁屏"><a href="#快速锁屏" class="headerlink" title="快速锁屏"></a>快速锁屏</h1><p>只需按住control+command+Q，此时你的MacBook就会马上锁屏</p>
-<hr>
-<h1 id="向后删除"><a href="#向后删除" class="headerlink" title="向后删除"></a>向后删除</h1><p>文本编辑时按 Fn + Delete 键可向后删除内容</p>
-<hr>
-<h1 id="切换应用程序"><a href="#切换应用程序" class="headerlink" title="切换应用程序"></a>切换应用程序</h1><p>按住command键再按tab键，可从左往右切换已打开的应用程序；command+shift+tab，可从右往左切换</p>
-<hr>
-<h1 id="触控板手势"><a href="#触控板手势" class="headerlink" title="触控板手势"></a>触控板手势</h1><p>Mac触控板强大无比，掌握触控板使用技能，对提高学习工作效率大有帮助，打开Mac系统偏好设置中的触控板，选择相应手势，右边会有动画教程。</p>
-<p>还有一个比较特殊的手势，三指拖动，需在系统偏好设置下的辅助功能中设置。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/split.png"></p>
-<hr>
-<h1 id="设置文件默认打开方式"><a href="#设置文件默认打开方式" class="headerlink" title="设置文件默认打开方式"></a>设置文件默认打开方式</h1><p>不同格式的文件有不同的默认打开方式，比如视频文件会默认用QuickTime Player打开，如果你想更改系统默认的打开方式，按照如下步骤设置即可，</p>
-<p>单击你想要改变默认打开方式的文件，右键单击选择显示简介，或者按快捷键Command+i 显示简介；</p>
-<p>在打开方式的下拉菜单中选择你需要的默认打开方式，点击全部更改，在弹出的窗口中选择继续即可。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/softopentype.png" style="zoom: 50%;" />
-
-<hr>
-<h1 id="自带截屏"><a href="#自带截屏" class="headerlink" title="自带截屏"></a>自带截屏</h1><ul>
-<li><p>cmd+shift+3：对整个屏幕进行截图；</p>
-</li>
-<li><p>cmd+shift+4：对自行选择的区域进行截图；</p>
-</li>
-<li><p>cmd+shift+4+space（空格键）：对选定的某个应用程序界面窗口进行截图。</p>
-</li>
-</ul>
-<hr>
-<h1 id="Command（或-Cmd）⌘键"><a href="#Command（或-Cmd）⌘键" class="headerlink" title="Command（或 Cmd）⌘键"></a>Command（或 Cmd）⌘键</h1><p>以下是常用的12个快捷键：</p>
-<ul>
-<li>Command + X: 剪切</li>
-<li>Command + C: 拷贝</li>
-<li>Command + V: 原格式粘贴</li>
-<li>Command + Shift +Option +V: 合并格式粘贴</li>
-<li>Command + Z: 撤销上一个操作（Shift + Command + Z: 反向执行撤销命令）</li>
-<li>Command + W: 关闭但不退出应用</li>
-<li>Command + Q: 退出应用</li>
-<li>Command + Option + Esc: 强制退出应用</li>
-<li>Command + Tab: 切换应用</li>
-<li>Command + 空格: “聚焦”查找</li>
-<li>Command + Shift + 5（MacOS Mojave系统）: 截屏或录屏（其他MacOS: Command + Shift +3: 捕捉整个屏幕；Command + Shift +4: 自选截屏区域）</li>
-<li>Command + Control + 空格: 添加emoji</li>
-</ul>
-<p>Command键除了上面 提到的常用组合快捷键外，还有很多其他功能，这里介绍四个关于Command的隐藏功能</p>
-<ul>
-<li>按住Command，可以选择并移动菜单栏图标</li>
-</ul>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/top.png"></p>
-<ul>
-<li>在“聚焦”中搜索文件，按住Command就可以显示文件路径，按住Command打开文件可以打开所在的文件夹</li>
-</ul>
-<h1 id="Option（或-Alt）⌥键"><a href="#Option（或-Alt）⌥键" class="headerlink" title="Option（或 Alt）⌥键"></a>Option（或 Alt）⌥键</h1><ul>
-<li><p>按住Option，可以同时关闭同个程序的多个窗口</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/optioncloaseall.png" style="zoom:67%;" />
-</li>
-<li><p>按住Option，单击右侧翻页条任何位置，就可以快速跳到指定位置</p>
-</li>
-<li><p>『移动文件』CMD+C 复制文件，在目标目录 CMD+Option+V，就把原文件移动过来了，相当于剪切粘贴。</p>
-</li>
-<li><p>按住Option+拖到文件，可快速复制一份原文件</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -7658,7 +8046,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
