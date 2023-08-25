@@ -170,7 +170,7 @@ max    26.0
 
 数据集：
 
-本教程使用**[成人人口普查收入](https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download)**数据集，存储为 `csv 文件`。如下所示:
+本教程使用[成人人口普查收入](https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download)数据集，存储为 `csv 文件`。如下所示:
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_dataset.png)
 
@@ -371,7 +371,7 @@ Out:
 (5,)
 ```
 
-`DataFrame.shape`是 `Series`、`DataFram` 的一个属性。`DataFrame`包含行数和列数：*(nrows, ncolumns)*。pandas `Series` 是一维的，仅返回行数。
+`DataFrame.shape`是 `Series`、`DataFram` 的一个属性。`DataFrame`包含行数和列数：(nrows, ncolumns)。pandas `Series` 是一维的，仅返回行数。
 
 假如对年龄和性别感兴趣：
 
@@ -782,7 +782,7 @@ market                     ...
 
 # 如何计算汇总统计数据
 
-数据集：本教程使用**[成人人口普查收入](https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download)**数据集。
+数据集：本教程使用[成人人口普查收入](https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download)数据集。
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/06_aggregate.png" style="zoom:50%;" />
 
@@ -1107,7 +1107,7 @@ Out:
 [5115 rows x 3 columns]
 ```
 
-> DataFrame 上的 pandas.melt() 方法将数据表从宽格式转换为长格式。 列标题成为新创建的列中的变量名称。
+> `DataFrame` 上的 `pandas.melt()` 方法将数据表从宽格式转换为长格式。 列标题成为新创建的列中的变量名称。
 >
 > 换句话说，也就是将多列合并成一列。
 
