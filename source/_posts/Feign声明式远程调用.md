@@ -48,7 +48,7 @@ SpringCloudFeign在NetflixFeign的基础上扩展了对SpringMVC注解的支持�
 
 ### 新建CouponFeignService接口
 
-<code style="color:#b30049;background-color:#fdf5f5">@FeignClient("gulimall-coupon")</code>注解告诉SpringCloud这是一个远程客户端，要调用远程的<code style="color:#b30049;background-color:#fdf5f5">gulimall-coupon</code>服务
+<code style="color:red;background-color:#282828">@FeignClient("gulimall-coupon")</code>注解告诉SpringCloud这是一个远程客户端，要调用远程的<code style="color:red;background-color:#282828">gulimall-coupon</code>服务
 
 声明接口的每一个方法都是调用那个远程服务的那个请求
 
