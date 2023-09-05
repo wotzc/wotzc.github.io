@@ -2,10 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,15 +14,12 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="Spring Bean命名策略概述当我们有多个相同类型的实现时，命名Spring bean非常有用。这是因为如果我们的 bean 没有唯一的名称，Spring 将不明确注入 bean。 通过控制 bean 的命名，我们可以告诉 Spring 我们要将哪个 bean 注入目标对象。 在本文中，我们将讨论 Spring bean 命名策略，并探讨如何为单一类型的 bean 赋予多个名称。 默认 Bea">
+    <meta name="description" content="Spring Bean命名策略概述当我们有多个相同类型的实现时，命名Spring bean非常有用。这是因为如果我们的 bean 没有唯一的名称，Spring 将不明确注入 bean。 通过控制 bean 的命名，我们可以告诉 Spring 我们要将哪个 bean 注入目标对象。 在本文中，我们将讨论 Spring bean 命名策略，并探讨如何为单一类型的 bean 赋予多个名称。 默认 Bea">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring核心基础">
 <meta property="og:url" content="http://example.com/2021/10/22/Spring-%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/index.html">
@@ -34,7 +29,7 @@
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/beannamestrategy.png">
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/beanfactoryand%20context.png">
 <meta property="article:published_time" content="2021-10-22T02:52:05.000Z">
-<meta property="article:modified_time" content="2021-10-23T05:55:22.477Z">
+<meta property="article:modified_time" content="2023-09-05T01:25:31.298Z">
 <meta property="article:author" content="wotzc">
 <meta property="article:tag" content="JavaWeb">
 <meta property="article:tag" content="Spring">
@@ -46,18 +41,14 @@
 <link rel="canonical" href="http://example.com/2021/10/22/Spring-%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>Spring核心基础 | Cai</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/22/Spring-%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/","path":"2021/10/22/Spring-核心基础/","title":"Spring核心基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring核心基础 | Cai</title>
   
+
+
 
 
 
@@ -65,52 +56,18 @@
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
-  
-  <a target="_blank" rel="noopener" href="https://github.com/wotzc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -121,14 +78,13 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Cai</h1>
+      <p class="site-title">Cai</p>
       <i class="logo-line"></i>
     </a>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
@@ -136,74 +92,16 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
 
-    </div>
-  </div>
-
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -218,68 +116,51 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Bean%E5%91%BD%E5%90%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">Spring Bean命名策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4-Bean-%E5%91%BD%E5%90%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.</span> <span class="nav-text">默认 Bean 命名策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BA%A7%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.1.</span> <span class="nav-text">类级注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%BA%A7%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.2.</span> <span class="nav-text">方法级注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean-%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">Bean 的自定义命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BA%A7%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">类级注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%BA%A7%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法级注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-ApplicationContext"><span class="nav-number">2.</span> <span class="nav-text">Spring ApplicationContext</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">ApplicationContext接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E9%85%8D%E7%BD%AEBean"><span class="nav-number">2.2.</span> <span class="nav-text">在容器中配置Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-Java-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于 Java 的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于注解的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.3.</span> <span class="nav-text">基于 XML 的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">ApplicationContext 的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AnnotationConfigApplicationContext"><span class="nav-number">2.3.1.</span> <span class="nav-text">AnnotationConfigApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnnotationConfigWebApplicationContext"><span class="nav-number">2.3.2.</span> <span class="nav-text">AnnotationConfigWebApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XmlWebApplicationContext"><span class="nav-number">2.3.3.</span> <span class="nav-text">XmlWebApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileSystemXMLApplicationContext"><span class="nav-number">2.3.4.</span> <span class="nav-text">FileSystemXMLApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassPathXmlApplicationContext"><span class="nav-number">2.3.5.</span> <span class="nav-text">ClassPathXmlApplicationContext</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BeanFactory-%E5%92%8C-ApplicationContext-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">BeanFactory 和 ApplicationContext 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ComponentScan"><span class="nav-number">4.</span> <span class="nav-text">@ComponentScan</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ComponentScan%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">@ ComponentScan过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ANNOTATION"><span class="nav-number">4.2.</span> <span class="nav-text">FilterType.ANNOTATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ASSIGNABLE-TYPE"><span class="nav-number">4.3.</span> <span class="nav-text">FilterType.ASSIGNABLE_TYPE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-REGEX"><span class="nav-number">4.4.</span> <span class="nav-text">FilterType.REGEX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ASPECTJ"><span class="nav-number">4.5.</span> <span class="nav-text">FilterType.ASPECTJ</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Qualifier"><span class="nav-number">5.</span> <span class="nav-text">@Qualifier</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Autowire-%E6%B6%88%E9%99%A4%E6%AD%A7%E4%B9%89%E7%9A%84%E9%9C%80%E8%A6%81"><span class="nav-number">5.1.</span> <span class="nav-text">Autowire 消除歧义的需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qualifier%E6%B3%A8%E8%A7%A3"><span class="nav-number">5.2.</span> <span class="nav-text">@ Qualifier注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qualifier-VS-Primary"><span class="nav-number">5.3.</span> <span class="nav-text">@Qualifier VS @Primary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%86%E8%A7%A3-Spring-%E4%B8%AD%E7%9A%84-getBean"><span class="nav-number">6.</span> <span class="nav-text">理解 Spring 中的 getBean()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Beans-%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.1.</span> <span class="nav-text">Spring Beans 设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getBean-API"><span class="nav-number">6.2.</span> <span class="nav-text">getBean() API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.1.</span> <span class="nav-text">按名称检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.2.</span> <span class="nav-text">按名称和类型检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.3.</span> <span class="nav-text">按类型检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%8C%89%E5%90%8D%E7%A7%B0%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.4.</span> <span class="nav-text">使用构造函数参数按名称检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%8C%89%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.5.</span> <span class="nav-text">使用构造函数参数按类型检索 Bean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">6.3.</span> <span class="nav-text">使用注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RequestParam"><span class="nav-number">7.</span> <span class="nav-text">@RequestParam</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-number">7.1.</span> <span class="nav-text">一个简单的映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%90%8D%E7%A7%B0"><span class="nav-number">7.2.</span> <span class="nav-text">指定请求参数名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">可选的请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">7.4.</span> <span class="nav-text">请求参数的默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E6%89%80%E6%9C%89%E5%8F%82%E6%95%B0"><span class="nav-number">7.5.</span> <span class="nav-text">映射所有参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%A4%9A%E5%80%BC%E5%8F%82%E6%95%B0"><span class="nav-number">7.6.</span> <span class="nav-text">映射多值参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Component-vs-Repository-%E5%92%8C-Service-%E5%9C%A8-Spring-%E4%B8%AD%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">@Component vs @Repository 和 @Service 在 Spring 中区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">有什么不同？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">8.1.1.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repository"><span class="nav-number">8.1.2.</span> <span class="nav-text">@Repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">8.1.3.</span> <span class="nav-text">@Service</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-%E4%B8%AD%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="nav-number">9.</span> <span class="nav-text">Spring 中基于 XML 的注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0"><span class="nav-number">9.1.</span> <span class="nav-text">依赖注入——概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.1.</span> <span class="nav-text">使用属性注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.2.</span> <span class="nav-text">使用构造函数注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82"><span class="nav-number">9.2.3.</span> <span class="nav-text">使用静态工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">9.2.4.</span> <span class="nav-text">使用工厂方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE%E7%9A%84bean%EF%BC%9A"><span class="nav-number">9.3.</span> <span class="nav-text">访问配置的bean：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%A6%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84-Spring-Value"><span class="nav-number">10.</span> <span class="nav-text">使用带有默认值的 Spring @Value</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">10.1.</span> <span class="nav-text">字符串默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">10.2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-SpEL-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%A4%BA%E4%BE%8B"><span class="nav-number">10.3.</span> <span class="nav-text">使用 SpEL 的高级示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Value-%E2%80%9C-%E2%80%9D-%E5%92%8C-Value-%E2%80%9C-%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.4.</span> <span class="nav-text">@Value(“${}”)**和@Value(“#{}”)**的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autowired-vs-Resource-vs-Inject-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">11.</span> <span class="nav-text">@Autowired vs @Resource vs @Inject 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%A7%A3%E9%87%8A"><span class="nav-number">11.1.</span> <span class="nav-text">具体解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autowired"><span class="nav-number">12.</span> <span class="nav-text">@Autowired</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8-Autowired-%E6%B3%A8%E8%A7%A3"><span class="nav-number">12.1.</span> <span class="nav-text">启用*@Autowired*注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Autowired"><span class="nav-number">12.2.</span> <span class="nav-text">使用@Autowired</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E7%94%A8%E5%9C%A8%E5%B1%9E%E6%80%A7%E4%B8%8A"><span class="nav-number">12.2.1.</span> <span class="nav-text">@Autowired用在属性上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E5%9C%A8-Setter-%E4%B8%8A"><span class="nav-number">12.2.2.</span> <span class="nav-text">@Autowired在 Setter 上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8A"><span class="nav-number">12.2.3.</span> <span class="nav-text">@Autowired在构造函数上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autowired-%E5%8F%AF%E9%80%89%E6%B3%A8%E5%85%A5"><span class="nav-number">12.3.</span> <span class="nav-text">@Autowired 可选注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropertySource%E6%B3%A8%E8%A7%A3"><span class="nav-number">13.</span> <span class="nav-text">@PropertySource注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.</span> <span class="nav-text">通过注解注册一个配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7%E4%BD%8D%E7%BD%AE"><span class="nav-number">13.2.</span> <span class="nav-text">定义多个属性位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E6%B3%A8%E5%85%A5%E5%B1%9E%E6%80%A7"><span class="nav-number">13.3.</span> <span class="nav-text">使用&#x2F;注入属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">13.4.</span> <span class="nav-text">Spring Boot 的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#application-properties%EF%BC%9A%E9%BB%98%E8%AE%A4%E5%B1%9E%E6%80%A7%E6%96%87%E4%BB%B6"><span class="nav-number">13.4.1.</span> <span class="nav-text">application.properties：默认属性文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E4%BA%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E5%B1%9E%E6%80%A7%E6%96%87%E4%BB%B6"><span class="nav-number">13.4.2.</span> <span class="nav-text">特定于环境的属性文件</span></a></li></ol></li></ol></li></ol></div>
-        </section>
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Bean%E5%91%BD%E5%90%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">Spring Bean命名策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4-Bean-%E5%91%BD%E5%90%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.</span> <span class="nav-text">默认 Bean 命名策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BA%A7%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.1.</span> <span class="nav-text">类级注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%BA%A7%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.2.2.</span> <span class="nav-text">方法级注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean-%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">Bean 的自定义命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%BA%A7%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">类级注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%BA%A7%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法级注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-ApplicationContext"><span class="nav-number">2.</span> <span class="nav-text">Spring ApplicationContext</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">ApplicationContext接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E9%85%8D%E7%BD%AEBean"><span class="nav-number">2.2.</span> <span class="nav-text">在容器中配置Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-Java-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于 Java 的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于注解的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.3.</span> <span class="nav-text">基于 XML 的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">ApplicationContext 的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AnnotationConfigApplicationContext"><span class="nav-number">2.3.1.</span> <span class="nav-text">AnnotationConfigApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnnotationConfigWebApplicationContext"><span class="nav-number">2.3.2.</span> <span class="nav-text">AnnotationConfigWebApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XmlWebApplicationContext"><span class="nav-number">2.3.3.</span> <span class="nav-text">XmlWebApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileSystemXMLApplicationContext"><span class="nav-number">2.3.4.</span> <span class="nav-text">FileSystemXMLApplicationContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassPathXmlApplicationContext"><span class="nav-number">2.3.5.</span> <span class="nav-text">ClassPathXmlApplicationContext</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BeanFactory-%E5%92%8C-ApplicationContext-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">BeanFactory 和 ApplicationContext 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ComponentScan"><span class="nav-number">4.</span> <span class="nav-text">@ComponentScan</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ComponentScan%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">@ ComponentScan过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ANNOTATION"><span class="nav-number">4.2.</span> <span class="nav-text">FilterType.ANNOTATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ASSIGNABLE-TYPE"><span class="nav-number">4.3.</span> <span class="nav-text">FilterType.ASSIGNABLE_TYPE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-REGEX"><span class="nav-number">4.4.</span> <span class="nav-text">FilterType.REGEX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FilterType-ASPECTJ"><span class="nav-number">4.5.</span> <span class="nav-text">FilterType.ASPECTJ</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Qualifier"><span class="nav-number">5.</span> <span class="nav-text">@Qualifier</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Autowire-%E6%B6%88%E9%99%A4%E6%AD%A7%E4%B9%89%E7%9A%84%E9%9C%80%E8%A6%81"><span class="nav-number">5.1.</span> <span class="nav-text">Autowire 消除歧义的需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qualifier%E6%B3%A8%E8%A7%A3"><span class="nav-number">5.2.</span> <span class="nav-text">@ Qualifier注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qualifier-VS-Primary"><span class="nav-number">5.3.</span> <span class="nav-text">@Qualifier VS @Primary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%86%E8%A7%A3-Spring-%E4%B8%AD%E7%9A%84-getBean"><span class="nav-number">6.</span> <span class="nav-text">理解 Spring 中的 getBean()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Beans-%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.1.</span> <span class="nav-text">Spring Beans 设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getBean-API"><span class="nav-number">6.2.</span> <span class="nav-text">getBean() API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.1.</span> <span class="nav-text">按名称检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.2.</span> <span class="nav-text">按名称和类型检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.3.</span> <span class="nav-text">按类型检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%8C%89%E5%90%8D%E7%A7%B0%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.4.</span> <span class="nav-text">使用构造函数参数按名称检索 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%8C%89%E7%B1%BB%E5%9E%8B%E6%A3%80%E7%B4%A2-Bean"><span class="nav-number">6.2.5.</span> <span class="nav-text">使用构造函数参数按类型检索 Bean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">6.3.</span> <span class="nav-text">使用注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RequestParam"><span class="nav-number">7.</span> <span class="nav-text">@RequestParam</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-number">7.1.</span> <span class="nav-text">一个简单的映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%90%8D%E7%A7%B0"><span class="nav-number">7.2.</span> <span class="nav-text">指定请求参数名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E7%9A%84%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">可选的请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">7.4.</span> <span class="nav-text">请求参数的默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E6%89%80%E6%9C%89%E5%8F%82%E6%95%B0"><span class="nav-number">7.5.</span> <span class="nav-text">映射所有参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%A4%9A%E5%80%BC%E5%8F%82%E6%95%B0"><span class="nav-number">7.6.</span> <span class="nav-text">映射多值参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Component-vs-Repository-%E5%92%8C-Service-%E5%9C%A8-Spring-%E4%B8%AD%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">@Component vs @Repository 和 @Service 在 Spring 中区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">有什么不同？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">8.1.1.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repository"><span class="nav-number">8.1.2.</span> <span class="nav-text">@Repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">8.1.3.</span> <span class="nav-text">@Service</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-%E4%B8%AD%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="nav-number">9.</span> <span class="nav-text">Spring 中基于 XML 的注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%A6%82%E8%BF%B0"><span class="nav-number">9.1.</span> <span class="nav-text">依赖注入——概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.1.</span> <span class="nav-text">使用属性注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%B3%A8%E5%85%A5"><span class="nav-number">9.2.2.</span> <span class="nav-text">使用构造函数注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82"><span class="nav-number">9.2.3.</span> <span class="nav-text">使用静态工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-number">9.2.4.</span> <span class="nav-text">使用工厂方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE%E7%9A%84bean%EF%BC%9A"><span class="nav-number">9.3.</span> <span class="nav-text">访问配置的bean：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%A6%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84-Spring-Value"><span class="nav-number">10.</span> <span class="nav-text">使用带有默认值的 Spring @Value</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">10.1.</span> <span class="nav-text">字符串默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">10.2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-SpEL-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%A4%BA%E4%BE%8B"><span class="nav-number">10.3.</span> <span class="nav-text">使用 SpEL 的高级示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Value-%E2%80%9C-%E2%80%9D-%E5%92%8C-Value-%E2%80%9C-%E2%80%9D-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.4.</span> <span class="nav-text">@Value(“${}”)和@Value(“#{}”)的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autowired-vs-Resource-vs-Inject-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">11.</span> <span class="nav-text">@Autowired vs @Resource vs @Inject 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%A7%A3%E9%87%8A"><span class="nav-number">11.1.</span> <span class="nav-text">具体解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autowired"><span class="nav-number">12.</span> <span class="nav-text">@Autowired</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8-Autowired%E6%B3%A8%E8%A7%A3"><span class="nav-number">12.1.</span> <span class="nav-text">启用@Autowired注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Autowired"><span class="nav-number">12.2.</span> <span class="nav-text">使用@Autowired</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E7%94%A8%E5%9C%A8%E5%B1%9E%E6%80%A7%E4%B8%8A"><span class="nav-number">12.2.1.</span> <span class="nav-text">@Autowired用在属性上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E5%9C%A8-Setter-%E4%B8%8A"><span class="nav-number">12.2.2.</span> <span class="nav-text">@Autowired在 Setter 上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8A"><span class="nav-number">12.2.3.</span> <span class="nav-text">@Autowired在构造函数上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autowired-%E5%8F%AF%E9%80%89%E6%B3%A8%E5%85%A5"><span class="nav-number">12.3.</span> <span class="nav-text">@Autowired 可选注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropertySource%E6%B3%A8%E8%A7%A3"><span class="nav-number">13.</span> <span class="nav-text">@PropertySource注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">13.1.</span> <span class="nav-text">通过注解注册一个配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7%E4%BD%8D%E7%BD%AE"><span class="nav-number">13.2.</span> <span class="nav-text">定义多个属性位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-%E6%B3%A8%E5%85%A5%E5%B1%9E%E6%80%A7"><span class="nav-number">13.3.</span> <span class="nav-text">使用&#x2F;注入属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">13.4.</span> <span class="nav-text">Spring Boot 的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#application-properties%EF%BC%9A%E9%BB%98%E8%AE%A4%E5%B1%9E%E6%80%A7%E6%96%87%E4%BB%B6"><span class="nav-number">13.4.1.</span> <span class="nav-text">application.properties：默认属性文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E4%BA%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E5%B1%9E%E6%80%A7%E6%96%87%E4%BB%B6"><span class="nav-number">13.4.2.</span> <span class="nav-text">特定于环境的属性文件</span></a></li></ol></li></ol></li></ol></div>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="wotzc"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">wotzc</p>
   <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">38</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">17</span>
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">62</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -294,11 +175,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="wotzc">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spring核心基础 | Cai">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -315,13 +201,13 @@
 
       <time title="创建时间：2021-10-22 10:52:05" itemprop="dateCreated datePublished" datetime="2021-10-22T10:52:05+08:00">2021-10-22</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-23 13:55:22" itemprop="dateModified" datetime="2021-10-23T13:55:22+08:00">2021-10-23</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 09:25:31" itemprop="dateModified" datetime="2023-09-05T09:25:31+08:00">2023-09-05</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -341,111 +227,109 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="Spring-Bean命名策略"><a href="#Spring-Bean命名策略" class="headerlink" title="Spring Bean命名策略"></a>Spring Bean命名策略</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当我们有多个相同类型的实现时，命名Spring bean非常有用。这是因为如果我们的 bean 没有唯一的名称，Spring 将不明确注入 bean。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="Spring-Bean命名策略"><a href="#Spring-Bean命名策略" class="headerlink" title="Spring Bean命名策略"></a>Spring Bean命名策略</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当我们有多个相同类型的实现时，命名<code style="color:#b30049;background-color:#fdf5f5">Spring bean</code>非常有用。这是因为如果我们的 bean 没有唯一的名称，Spring 将不明确注入 bean。</p>
 <p>通过控制 bean 的命名，我们可以告诉 Spring 我们要将哪个 bean 注入目标对象。</p>
 <p>在本文中，我们将讨论 Spring bean 命名策略，并探讨如何为单一类型的 bean 赋予多个名称。</p>
 <h2 id="默认-Bean-命名策略"><a href="#默认-Bean-命名策略" class="headerlink" title="默认 Bean 命名策略"></a>默认 Bean 命名策略</h2><p>Spring为创建 bean提供了多个注解。我们可以在不同级别使用这些注解。例如，我们可以在 bean 类上放置一些注解，而在创建 bean 的方法上放置其他注解。</p>
 <p>首先，让我们看看 Spring 的默认命名策略。当我们只指定注解而没有任何值时，Spring 如何命名我们的 bean？</p>
-<h3 id="类级注解"><a href="#类级注解" class="headerlink" title="类级注解"></a>类级注解</h3><p>让我们从在类级别使用的注解的默认命名策略开始。为了给 bean 命名，<strong>Spring 使用类名并将第一个字母转换为小写</strong>。</p>
+<h3 id="类级注解"><a href="#类级注解" class="headerlink" title="类级注解"></a>类级注解</h3><p>让我们从在类级别使用的注解的默认命名策略开始。为了给 bean 命名，<span style="color:#b30049;font-weight: bold">Spring 使用类名并将第一个字母转换为小写</span>。</p>
 <p>我们来看一个例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggingService</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在这里，Spring 为<em>LoggingService</em>类创建了一个 bean，并使用名称“ <em>loggingService</em> ”注册它。</p>
-<p>这个相同的默认命名策略适用于用于创建 Spring bean 的所有类级注解，例如<span style="color:blue">**@Component**</span>、<span style="color:blue">**@Service**</span>和<span style="color:blue">**@Controller**</span>。</p>
-<h3 id="方法级注解"><a href="#方法级注解" class="headerlink" title="方法级注解"></a>方法级注解</h3><p>Spring 提供了诸如@Bean和@Qualifier 之类的注解，用于在方法上创建 bean 。</p>
-<p>让我们看一个例子来理解*@Bean*注解的默认命名策略：</p>
+<p>在这里，Spring 为<code style="color:#b30049;background-color:#fdf5f5">LoggingService</code>类创建了一个 bean，并使用名称<code style="color:#b30049;background-color:#fdf5f5">loggingService</code>注册它。</p>
+<p>这个相同的默认命名策略适用于用于创建 Spring bean 的所有类级注解，例如<span style="color:blue;font-weight:bold">@Component</span>、<span style="color:blue;font-weight:bold">@Service</span>和<span style="color:blue;font-weight:bold">@Controller</span>。</p>
+<h3 id="方法级注解"><a href="#方法级注解" class="headerlink" title="方法级注解"></a>方法级注解</h3><p>Spring 提供了诸如<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>和<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>之类的注解，用于在方法上创建 bean 。</p>
+<p>让我们看一个例子来理解<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>注解的默认命名策略：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuditConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AuditService <span class="title">audit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">new</span> AuditService();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在这个配置类中，Spring在名称“ <em>audit</em> ”下注册了一个<em>AuditService</em>类型的 bean，<strong>因为当我们在方法上使用@Bean注解时，Spring 使用方法名称作为 bean 名称。</strong></p>
-<p>我们也可以在方法上使用*@Qualifier*注解。</p>
+<p>在这个配置类中，Spring在名称“ <em>audit</em> ”下注册了一个<code style="color:#b30049;background-color:#fdf5f5">AuditService</code>类型的 bean，<strong>因为当我们在方法上使用@Bean注解时，Spring 使用方法名称作为 bean 名称。</strong></p>
+<p>我们也可以在方法上使用<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>注解。</p>
 <h2 id="Bean-的自定义命名"><a href="#Bean-的自定义命名" class="headerlink" title="Bean 的自定义命名"></a>Bean 的自定义命名</h2><p>当我们需要在同一个 Spring 上下文中创建多个相同类型的 bean 时，我们可以为 bean 指定自定义名称并使用这些名称引用它们。</p>
 <p>那么，让我们看看如何为我们的 Spring bean 指定一个自定义名称：</p>
 <h3 id="类级注解-1"><a href="#类级注解-1" class="headerlink" title="类级注解"></a>类级注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;myBean&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCustomComponent</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这一次，Spring 将创建名为“ <em>myBean</em> ”的<em>MyCustomComponent</em>类型的 bean 。</p>
 <p>由于我们明确地为 bean 指定名称，Spring 将使用此名称，然后可以使用该名称来引用或访问 bean。</p>
-<p>与*@Component(“myBean”)<em>类似，我们可以使用</em>@Service(“myService”)<em>、</em>@Controller(“myController”)<em>和</em>@Bean(“myCustomBean”)*等其他注解指定名称，然后Spring </p>
-<p>会注册具有给定名称的那个 bean。</p>
-<h3 id="方法级注解-1"><a href="#方法级注解-1" class="headerlink" title="方法级注解"></a>方法级注解</h3><p>正如我们之前看到的，*@Bean*注解是在方法级别应用的，默认情况下，Spring 使用方法名称作为 bean 名称。</p>
-<p>这个默认的 bean 名称可以被覆盖——我们可以使用*@Bean*注解指定值：</p>
+<p>与<code style="color:#b30049;background-color:#fdf5f5">@Component(“myBean”)</code>类似，我们可以使用<code style="color:#b30049;background-color:#fdf5f5">@Service(“myService”)</code>、<code style="color:#b30049;background-color:#fdf5f5">@Controller(“myController”)</code>和<code style="color:#b30049;background-color:#fdf5f5">@Bean(“myCustomBean”)</code>等其他注解指定名称，然后Spring 会注册具有给定名称的那个 bean。</p>
+<h3 id="方法级注解-1"><a href="#方法级注解-1" class="headerlink" title="方法级注解"></a>方法级注解</h3><p>正如我们之前看到的，<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>注解是在方法级别应用的，默认情况下，Spring 使用方法名称作为 bean 名称。</p>
+<p>这个默认的 bean 名称可以被覆盖——我们可以使用<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>注解指定值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyConfiguration &#123;</span><br><span class="line">    @Bean(&quot;beanComponent&quot;)</span><br><span class="line">    public MyCustomComponent myComponent() &#123;</span><br><span class="line">        return new MyCustomComponent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在这种情况下，当我们想要获取一个<em>MyCustomComponent</em>类型的 bean 时，我们可以使用名称“ <em>beanComponent</em> ”来引用这个 bean 。</p>
-<p>Spring <em>@Bean</em>注解通常在配置类方法中声明。它可以通过直接调用来引用同一个类中的其他*@Bean*方法。</p>
+<p>Spring <code style="color:#b30049;background-color:#fdf5f5">@Bean</code>注解通常在配置类方法中声明。它可以通过直接调用来引用同一个类中的其他<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>方法。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/beannamestrategy.png"></p>
 <hr>
-<h1 id="Spring-ApplicationContext"><a href="#Spring-ApplicationContext" class="headerlink" title="Spring ApplicationContext"></a>Spring ApplicationContext</h1><h2 id="ApplicationContext接口"><a href="#ApplicationContext接口" class="headerlink" title="ApplicationContext接口"></a><em>ApplicationContext</em>接口</h2><p>Spring 框架的主要特性之一是 IoC（控制反转）容器。在Spring IoC容器负责管理应用程序的对象。它使用依赖注入来实现控制反转。</p>
-<p><em>BeanFactory</em> 和<em>ApplicationContext</em> 接口<strong>代表 Spring IoC 容器</strong>。在这里，<em>BeanFactory</em>是访问 Spring 容器的根接口。它提供了管理 bean 的基本功能。</p>
-<p>另一方面，<em>ApplicationContext</em> 是<em>BeanFactory</em>的子接口。因此，它提供了<em>BeanFactory 的</em>所有功能<em>。</em></p>
-<p>此外，它还<strong>提供了</strong> <strong>更多特定于企业的功能</strong>。<em>ApplicationContext</em>的重要特性是<strong>解析消息、支持国际化、发布事件和应用层特定上下文</strong>。这就是我们将其用作默认 Spring 容器的原因。</p>
-<h2 id="在容器中配置Bean"><a href="#在容器中配置Bean" class="headerlink" title="在容器中配置Bean"></a>在容器中配置Bean</h2><p>正如我们所知，<em>ApplicationContext</em>的主要工作是管理 bean。</p>
-<p>因此，应用程序必须向<em>ApplicationContext</em>容器提供 bean 配置。一个 Spring bean 配置由一个或多个 bean 定义组成。此外，Spring 支持不同的 bean 配置方式。</p>
+<h1 id="Spring-ApplicationContext"><a href="#Spring-ApplicationContext" class="headerlink" title="Spring ApplicationContext"></a>Spring ApplicationContext</h1><h2 id="ApplicationContext接口"><a href="#ApplicationContext接口" class="headerlink" title="ApplicationContext接口"></a><em>ApplicationContext</em>接口</h2><p>Spring 框架的主要特性之一是<code style="color:#b30049;background-color:#fdf5f5">IoC</code>（控制反转）容器。在Spring <code style="color:#b30049;background-color:#fdf5f5">IoC</code>容器负责管理应用程序的对象。它使用依赖注入来实现控制反转。</p>
+<p><code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>和<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code> 接口<strong>代表 Spring IoC 容器</strong>。在这里，<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>是访问 Spring 容器的根接口。它提供了管理 bean 的基本功能。</p>
+<p>另一方面，<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code> 是<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>的子接口。因此，它提供了<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>的<em>所有功能</em>。</p>
+<p>此外，它还<strong>提供了</strong> <strong>更多特定于企业的功能</strong>。<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>的重要特性是<strong>解析消息、支持国际化、发布事件和应用层特定上下文</strong>。这就是我们将其用作默认 Spring 容器的原因。</p>
+<h2 id="在容器中配置Bean"><a href="#在容器中配置Bean" class="headerlink" title="在容器中配置Bean"></a>在容器中配置Bean</h2><p>正如我们所知，<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>的主要工作是管理 bean。</p>
+<p>因此，应用程序必须向<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext容器</code>提供 bean 配置。一个 Spring bean 配置由一个或多个 bean 定义组成。此外，Spring 支持不同的 bean 配置方式。</p>
 <h3 id="基于-Java-的配置"><a href="#基于-Java-的配置" class="headerlink" title="基于 Java 的配置"></a>基于 Java 的配置</h3><p>首先，我们将从基于 Java 的配置开始，因为它是最新和最受欢迎的 bean 配置方式。它从 Spring 3.0 开始可用。</p>
-<p>Java 配置通常在*<em>@Configuration**类中使用带有 @Bean 注解的方法</em>。方法上的*@Bean<em>注解表明该方法创建了一个 Spring bean。此外，用</em>@Configuration注解的类表示它包含Spring bean 配置。</p>
-<p>现在让我们创建一个配置类来将我们的<em>AccountService</em>类定义为 Spring bean：</p>
+<p>Java 配置通常在<code style="color:#b30049;background-color:#fdf5f5">@Configuration</code>类中使用带有 @Bean 注解的方法<em>。方法上的</em>@Bean<em>注解表明该方法创建了一个 Spring bean。此外，用</em><code style="color:#b30049;background-color:#fdf5f5">@Configuration</code>注解的类表示它包含Spring bean 配置。</p>
+<p>现在让我们创建一个配置类来将我们的<code style="color:#b30049;background-color:#fdf5f5">AccountService</code>类定义为 Spring bean：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> AccountService <span class="title">accountService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AccountService(accountRepository());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> AccountRepository <span class="title">accountRepository</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AccountRepository();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h3><p>Spring 2.5 引入了基于注解的配置，作为在 Java 中启用 bean 配置的第一步。</p>
-<p>在这种方法中，我们首先通过 XML 配置启用基于注解的配置。然后我们在 Java 类、方法、构造函数或字段上使用一组注解来配置 bean。这些注解的一些示例是*@Component<em>、</em>@Controller<em>、</em>@Service<em>、</em>@Repository<em>、</em>@Autowired<em>和</em>@Qualifier*。</p>
+<p>在这种方法中，我们首先通过<code style="color:#b30049;background-color:#fdf5f5">XML</code>配置启用基于注解的配置。然后我们在 Java 类、方法、构造函数或字段上使用一组注解来配置 bean。这些注解的一些示例是<code style="color:#b30049;background-color:#fdf5f5">@Component</code>、<code style="color:#b30049;background-color:#fdf5f5">@Controller</code>、<code style="color:#b30049;background-color:#fdf5f5">@Service</code>、<code style="color:#b30049;background-color:#fdf5f5">@Repository</code>、<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>和<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>。</p>
 <p>值得注意的是，我们也将这些注解用于基于 Java 的配置。另外值得一提的是，Spring 会在每个版本中不断为这些注解添加更多功能。</p>
 <p>现在让我们看一个这个配置的简单例子。</p>
-<p>首先，我们将创建 XML 配置<em>user-bean-config.xml</em>以启用注解：</p>
+<p>首先，我们将创建 XML 配置<code style="color:#b30049;background-color:#fdf5f5">user-bean-config.xml</code>以启用注解：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.baeldung.applicationcontext&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在这里，该注解的配置标签启用基于注解的映射。该<em>组件扫描</em>标签也告诉Spring到哪里寻找注解类。</p>
-<p>其次，我们将创建<em>UserService</em>类并使用*@Component*注解将其定义为 Spring bean ：</p>
+<p>其次，我们将创建<em>UserService</em>类并使用<code style="color:#b30049;background-color:#fdf5f5">@Component</code>注解将其定义为 Spring bean ：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">  <span class="comment">// user service code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="基于-XML-的配置"><a href="#基于-XML-的配置" class="headerlink" title="基于 XML 的配置"></a>基于 XML 的配置</h3><p>最后，让我们看一下基于 XML 的配置。这是在 Spring 中配置 bean 的传统方式。</p>
 <p>显然，在这种方法中，我们<strong>在一个 XML 配置文件中</strong>完成所有<strong>bean 映射</strong>。</p>
-<p>因此，让我们创建一个 XML 配置文件<em>account-bean-config.xml</em>，并为我们的<em>AccountService</em>类定义 bean ：</p>
+<p>因此，让我们创建一个 XML 配置文件<code style="color:#b30049;background-color:#fdf5f5">account-bean-config.xml</code>，并为我们的<em>AccountService</em>类定义 bean ：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans </span></span></span><br><span class="line"><span class="tag"><span class="string">    http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line">	  </span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.baeldung.applicationcontext.AccountService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;accountRepository&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;accountRepository&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountRepository&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.baeldung.applicationcontext.AccountRepository&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="ApplicationContext-的类型"><a href="#ApplicationContext-的类型" class="headerlink" title="ApplicationContext 的类型"></a><em>ApplicationContext 的</em>类型</h2><p>Spring 提供了适合不同需求的不同类型的<em>ApplicationContext</em>容器。这些是<em>ApplicationContext</em>接口的实现。那么让我们来看看<em>ApplicationContext 的</em>一些常见类型。</p>
-<h3 id="AnnotationConfigApplicationContext"><a href="#AnnotationConfigApplicationContext" class="headerlink" title="AnnotationConfigApplicationContext"></a><em>AnnotationConfigApplicationContext</em></h3><p>首先我们来看一下Spring 3.0中引入的AnnotationConfigApplicationContext类。它可以采取<strong>与注解的类@Configuration<em>，**</em></strong>@Component**，和JSR-330的元数据作为输入。从Java的配置类中加载上下文定义。</p>
-<p>因此，让我们看一个使用<em>AnnotationConfigApplicationContext</em>容器和基于 Java 的配置的简单示例：</p>
+<h2 id="ApplicationContext-的类型"><a href="#ApplicationContext-的类型" class="headerlink" title="ApplicationContext 的类型"></a><em>ApplicationContext 的</em>类型</h2><p>Spring 提供了适合不同需求的不同类型的<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>容器。这些是<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>接口的实现。那么让我们来看看<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code> 的一些常见类型。</p>
+<h3 id="AnnotationConfigApplicationContext"><a href="#AnnotationConfigApplicationContext" class="headerlink" title="AnnotationConfigApplicationContext"></a><em>AnnotationConfigApplicationContext</em></h3><p>首先我们来看一下Spring 3.0中引入的<code style="color:#b30049;background-color:#fdf5f5">AnnotationConfigApplicationContext</code>类。它可以采取与注解的类<code style="color:#b30049;background-color:#fdf5f5">@Configuration</code>，<code style="color:#b30049;background-color:#fdf5f5">@Component</code>，和JSR-330的元数据作为输入。从Java的配置类中加载上下文定义。</p>
+<p>因此，让我们看一个使用<code style="color:#b30049;background-color:#fdf5f5">AnnotationConfigApplicationContext</code>容器和基于 Java 的配置的简单示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(AccountConfig.class);</span><br><span class="line">AccountService accountService = context.getBean(AccountService.class);</span><br></pre></td></tr></table></figure>
 
 <h3 id="AnnotationConfigWebApplicationContext"><a href="#AnnotationConfigWebApplicationContext" class="headerlink" title="AnnotationConfigWebApplicationContext"></a><em>AnnotationConfigWebApplicationContext</em></h3><p>适用于 Web 应用下xml文件中加载上下文，使用注解方式加载上下文</p>
-<p>当我们 在<em>web.xml</em>文件中配置 Spring 的<em>ContextLoaderListener</em> servlet 侦听器或 Spring MVC <em>DispatcherServlet</em>时，我们可能会使用这个类。</p>
-<p>此外，从 Spring 3.0 开始，我们还可以通过编程方式配置这个应用程序上下文容器。我们需要做的就是实现WebApplicationInitializer接口：</p>
+<p>当我们 在<code style="color:#b30049;background-color:#fdf5f5">web.xml</code>文件中配置 Spring 的<code style="color:#b30049;background-color:#fdf5f5">ContextLoaderListener servlet</code>侦听器或<code style="color:#b30049;background-color:#fdf5f5">Spring MVC DispatcherServlet</code>时，我们可能会使用这个类。</p>
+<p>此外，从 Spring 3.0 开始，我们还可以通过编程方式配置这个应用程序上下文容器。我们需要做的就是实现<code style="color:#b30049;background-color:#fdf5f5">WebApplicationInitializer</code>接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyWebApplicationInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(ServletContext container)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    AnnotationConfigWebApplicationContext context = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">    context.register(AccountConfig.class);</span><br><span class="line">    context.setServletContext(container);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// servlet configuration</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="XmlWebApplicationContext"><a href="#XmlWebApplicationContext" class="headerlink" title="XmlWebApplicationContext"></a><em>XmlWebApplicationContext</em></h3><p>如果我们<strong>在 Web 应用程序中</strong>使用<strong>基于 XML 的配置</strong>，我们可以使用XmlWebApplicationContext类。</p>
-<p>事实上，配置这个容器就像<em>AnnotationConfigWebApplicationContext</em>类，也就是说我们可以在<em>web.xml 中</em>配置它<em>，</em> 或者实现<em>WebApplicationInitializer</em>接口：</p>
+<h3 id="XmlWebApplicationContext"><a href="#XmlWebApplicationContext" class="headerlink" title="XmlWebApplicationContext"></a><em>XmlWebApplicationContext</em></h3><p>如果我们<strong>在 Web 应用程序中</strong>使用<strong>基于 XML 的配置</strong>，我们可以使用<code style="color:#b30049;background-color:#fdf5f5">XmlWebApplicationContext</code>类。</p>
+<p>事实上，配置这个容器就像<code style="color:#b30049;background-color:#fdf5f5">AnnotationConfigWebApplicationContext</code>类，也就是说我们可以在<code style="color:#b30049;background-color:#fdf5f5">web.xml</code>中<em>配置它</em>， 或者实现<code style="color:#b30049;background-color:#fdf5f5">WebApplicationInitializer</code>接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyXmlWebApplicationInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(ServletContext container)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    XmlWebApplicationContext context = <span class="keyword">new</span> XmlWebApplicationContext();</span><br><span class="line">    context.setConfigLocation(<span class="string">&quot;/WEB-INF/spring/applicationContext.xml&quot;</span>);</span><br><span class="line">    context.setServletContext(container);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Servlet configuration</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="FileSystemXMLApplicationContext"><a href="#FileSystemXMLApplicationContext" class="headerlink" title="FileSystemXMLApplicationContext"></a><em>FileSystemXMLApplicationContext</em></h3><p>我们使用FileSystemXMLApplicationContext类<strong>从文件系统</strong>或 URL<strong>加载基于 XML 的 Spring 配置文件</strong>。当我们需要以编程方式加载<em>ApplicationContext</em>时，这个类很有用。一般来说，测试工具和独立应用程序是一些可能的用例。</p>
+<h3 id="FileSystemXMLApplicationContext"><a href="#FileSystemXMLApplicationContext" class="headerlink" title="FileSystemXMLApplicationContext"></a><em>FileSystemXMLApplicationContext</em></h3><p>我们使用<code style="color:#b30049;background-color:#fdf5f5">FileSystemXMLApplicationContext</code>类<strong>从文件系统</strong>或 URL<strong>加载基于 XML 的 Spring 配置文件</strong>。当我们需要以编程方式加载<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>时，这个类很有用。一般来说，测试工具和独立应用程序是一些可能的用例。</p>
 <p>例如，让我们看看如何创建这个 Spring 容器并为基于 XML 的配置加载 bean：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String path = <span class="string">&quot;C:/myProject/src/main/resources/applicationcontext/account-bean-config.xml&quot;</span>;</span><br><span class="line"></span><br><span class="line">ApplicationContext context = <span class="keyword">new</span> FileSystemXmlApplicationContext(path);</span><br><span class="line">AccountService accountService = context.getBean(<span class="string">&quot;accountService&quot;</span>, AccountService.class);</span><br></pre></td></tr></table></figure>
 
-<h3 id="ClassPathXmlApplicationContext"><a href="#ClassPathXmlApplicationContext" class="headerlink" title="ClassPathXmlApplicationContext"></a><em>ClassPathXmlApplicationContext</em></h3><p>如果我们想<strong>从 classpath 加载 XML 配置文件</strong>，我们可以使用ClassPathXmlApplicationContext类。与<em>FileSystemXMLApplicationContext</em>类似<em>，</em>它对于测试工具以及嵌入在 JAR 中的应用程序上下文很有用。</p>
+<h3 id="ClassPathXmlApplicationContext"><a href="#ClassPathXmlApplicationContext" class="headerlink" title="ClassPathXmlApplicationContext"></a><em>ClassPathXmlApplicationContext</em></h3><p>如果我们想<strong>从 classpath 加载 XML 配置文件</strong>，我们可以使用<code style="color:#b30049;background-color:#fdf5f5">ClassPathXmlApplicationContext</code>类。与<em>FileSystemXMLApplicationContext</em>类似<em>，</em>它对于测试工具以及嵌入在 JAR 中的应用程序上下文很有用。</p>
 <p>那么让我们看一个使用这个类的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;applicationcontext/account-bean-config.xml&quot;</span>);</span><br><span class="line">AccountService accountService = context.getBean(<span class="string">&quot;accountService&quot;</span>, AccountService.class);</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="BeanFactory-和-ApplicationContext-的区别"><a href="#BeanFactory-和-ApplicationContext-的区别" class="headerlink" title="BeanFactory 和 ApplicationContext 的区别"></a>BeanFactory 和 ApplicationContext 的区别</h1><p>Spring 框架带有两个 IOC 容器—— <em>BeanFactory</em>和<em>ApplicationContext</em>。该<em>Bean工厂</em>是IOC容器的最基本的版本，以及<em>ApplicationContext的</em>扩展的功能<em>Bean工厂</em>。</p>
+<h1 id="BeanFactory-和-ApplicationContext-的区别"><a href="#BeanFactory-和-ApplicationContext-的区别" class="headerlink" title="BeanFactory 和 ApplicationContext 的区别"></a>BeanFactory 和 ApplicationContext 的区别</h1><p>Spring 框架带有两个 IOC 容器—— <code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>和<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>。该<em>Bean工厂</em>是IOC容器的最基本的版本，以及<em>ApplicationContext的</em>扩展的功能<em>Bean工厂</em>。</p>
 <p>我们将通过实际示例了解这两个 IOC 容器之间的显着差异。</p>
 <p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80/beanfactoryand%20context.png"></p>
-<p>该<em>ApplicationContext的</em>带有先进的功能，包括正朝着企业应用面向好几个，而<em>Bean工厂</em>仅预装了基本功能。因此，通常建议使用<em>ApplicationContext的，</em>并且<strong>我们应该使用Bean工厂，只有当内存消耗是至关重要的</strong>。</p>
-<h1 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan"></a>@ComponentScan</h1><p>在这篇文章中，我们将看到*@ComponentScan* 注解可用的不同类型的过滤器选项 <em>。</em></p>
-<h2 id="ComponentScan过滤器"><a href="#ComponentScan过滤器" class="headerlink" title="@ ComponentScan过滤器"></a>@ <em>ComponentScan</em>过滤器</h2><p>默认情况下，使用*@Component、@Repository、@Service、@Controller<em>注解的</em>类<em>被注册为Spring beans。对于使用</em>@Component<em>注解的自定义注解的</em>类也是如此<em>。我们可以通过使用</em>@ComponentScan<em>注解的</em>includeFilters 和* <em>excludeFilters</em>参数 来扩展此行为。</p>
+<p>该<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>的带有先进的功能，包括正朝着企业应用面向好几个，而<em>Bean工厂</em>仅预装了基本功能。因此，通常建议使用<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>的，并且<strong>只有当内存消耗是至关重要的时候，我们才应该使用Bean工厂</strong>。</p>
+<h1 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan"></a>@ComponentScan</h1><p>在这篇文章中，我们将看到<code style="color:#b30049;background-color:#fdf5f5">@ComponentScan</code>注解可用的不同类型的过滤器选项 。</p>
+<h2 id="ComponentScan过滤器"><a href="#ComponentScan过滤器" class="headerlink" title="@ ComponentScan过滤器"></a>@ <em>ComponentScan</em>过滤器</h2><p>默认情况下，使用<code style="color:#b30049;background-color:#fdf5f5">@Component</code>、<code style="color:#b30049;background-color:#fdf5f5">@Repository</code>、<code style="color:#b30049;background-color:#fdf5f5">@Service</code>、<code style="color:#b30049;background-color:#fdf5f5">@Controller</code>注解的<em>类</em>被注册为Spring beans。对于使用<code style="color:#b30049;background-color:#fdf5f5">@Component</code>注解的自定义注解的<em>类也是如此</em>。我们可以通过使用<code style="color:#b30049;background-color:#fdf5f5">@ComponentScan</code>注解的<code style="color:#b30049;background-color:#fdf5f5">includeFilters</code>和 <code style="color:#b30049;background-color:#fdf5f5">excludeFilters</code>参数 来扩展此行为。</p>
 <p><strong>ComponentScan.Filter有五种类型的过滤器：</strong></p>
 <ul>
-<li><em>ANNOTATION</em>   按照注解过滤</li>
-<li><em>ASSIGNABLE_TYPE</em>  按照给定的类型</li>
-<li><em>ASPECTJ</em>  使用ASPECTJ表达式</li>
-<li><em>REGEX</em>  正则表达式</li>
-<li><em>CUSTOM</em>  自定义规则</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">ANNOTATION</code>   按照注解过滤</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">ASSIGNABLE_TYPE</code>  按照给定的类型</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">ASPECTJ</code>  使用ASPECTJ表达式</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">REGEX</code>  正则表达式</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">CUSTOM</code>  自定义规则</li>
 </ul>
-<h2 id="FilterType-ANNOTATION"><a href="#FilterType-ANNOTATION" class="headerlink" title="FilterType.ANNOTATION"></a><em>FilterType.ANNOTATION</em></h2><p>例如，假设我们有一个*@Anima* l 注解：</p>
+<h2 id="FilterType-ANNOTATION"><a href="#FilterType-ANNOTATION" class="headerlink" title="FilterType.ANNOTATION"></a><em>FilterType.ANNOTATION</em></h2><p>例如，假设我们有一个<code style="color:#b30049;background-color:#fdf5f5">@Animal</code>注解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Animal &#123; &#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在，让我们定义一个 使用*@Animal<em>的</em>Elephant*类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Animal</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Elephant</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 
-<p>最后，让我们使用 <em>FilterType.ANNOTATION</em>告诉 Spring 扫描 <em>@Animal 注解的</em>类：扫描仪很好地拾取了我们的<em>Elephant</em></p>
+<p>最后，让我们使用<code style="color:#b30049;background-color:#fdf5f5">FilterType.ANNOTATION</code>告诉 Spring 扫描 <code style="color:#b30049;background-color:#fdf5f5">@Animal</code> 注解的<em>类：扫描仪很好地拾取了我们的</em>Elephant</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,</span></span><br><span class="line"><span class="meta">        classes = Animal.class))</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComponentScanAnnotationFilterApp</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="FilterType-ASSIGNABLE-TYPE"><a href="#FilterType-ASSIGNABLE-TYPE" class="headerlink" title="FilterType.ASSIGNABLE_TYPE"></a><em>FilterType.ASSIGNABLE_TYPE</em></h2><p>首先，让我们声明<em>Animal</em> 接口：</p>
@@ -470,68 +354,68 @@
 <p>现在，让我们声明<em>Loin</em>类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Loin</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 
-<p>让我们使用<em>FilterType</em>。<em>REGEX</em>指示 Spring 扫描与正则表达式*.[nt]<em>匹配的类</em>。<em>我们的正则表达式计算所有包含</em>nt 的内容：*</p>
+<p>让我们使用<em>FilterType</em>。<em>REGEX</em>指示 Spring 扫描与正则表达式<code style="color:#b30049;background-color:#fdf5f5">.*[nt]</code>匹配的类<em>。</em>我们的正则表达式计算所有包含<em>nt 的内容：</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(includeFilters = @ComponentScan.Filter(type = FilterType.REGEX,</span></span><br><span class="line"><span class="meta">        pattern = &quot;.*[nt]&quot;))</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComponentScanRegexFilterApp</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 
 <p>这次在我们的测试中，我们将看到 Spring 扫描<em>Elephant</em>，而不是<em>Lion</em> <em>：</em></p>
 <h2 id="FilterType-ASPECTJ"><a href="#FilterType-ASPECTJ" class="headerlink" title="FilterType.ASPECTJ"></a><em>FilterType.ASPECTJ</em></h2><p>对于这个用例，我们可以重用与上一节相同的三个类。</p>
-<p>让我们使用 <em>FilterType.ASPECTJ</em>来指示 Spring 扫描与我们的<em>AspectJ</em>表达式匹配的类：</p>
+<p>让我们使用<code style="color:#b30049;background-color:#fdf5f5">FilterType.ASPECTJ</code>来指示 Spring 扫描与我们的<em>AspectJ</em>表达式匹配的类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(includeFilters = @ComponentScan.Filter(type = FilterType.ASPECTJ,</span></span><br><span class="line"><span class="meta">  pattern = &quot;com.baeldung.componentscan.filter.aspectj.* &quot;</span></span><br><span class="line"><span class="meta">  + &quot;&amp;&amp; !(com.baeldung.componentscan.filter.aspectj.L* &quot;</span></span><br><span class="line"><span class="meta">  + &quot;|| com.baeldung.componentscan.filter.aspectj.C*)&quot;))</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComponentScanAspectJFilterApp</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
 
 <p>虽然有点复杂，但我们这里的逻辑希望 bean 的类名中既不以“L”也不以“C”开头，因此我们又得到了<em>Elephant</em> s</p>
 <hr>
-<h1 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h1><h2 id="Autowire-消除歧义的需要"><a href="#Autowire-消除歧义的需要" class="headerlink" title="Autowire 消除歧义的需要"></a>Autowire 消除歧义的需要</h2><p>当需要自动注入特定精确的Bean时，@Autowire 是一种很好的方式，尽管它很有用，但在某些用例中，仅此注解不足以让 Spring 了解要注入哪个 bean。</p>
-<p>默认情况下，Spring 按类型解析自动装配的条目。</p>
+<h1 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h1><h2 id="Autowire-消除歧义的需要"><a href="#Autowire-消除歧义的需要" class="headerlink" title="Autowire 消除歧义的需要"></a>Autowire 消除歧义的需要</h2><p>当需要自动注入特定精确的Bean时，<code style="color:#b30049;background-color:#fdf5f5">@Autowire</code>是一种很好的方式，尽管它很有用，但在某些用例中，仅此注解不足以让 Spring 了解要注入哪个 bean。</p>
+<p><strong>默认情况下，Spring 按类型解析自动装配的条目。</strong></p>
 <p><strong>如果容器中有多个相同类型的 bean，则框架将抛出NoUniqueBeanDefinitionException</strong>， 表明有多个 bean 可用于自动装配。</p>
 <p>让我们想象这样一种情况，其中 Spring 存在两个可能的候选者作为 bean 协作者注入给定实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;fooFormatter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;foo&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component(&quot;barFormatter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;bar&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Formatter formatter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果我们尝试将<em>FooService</em>加载到我们的上下文中，Spring 框架将抛出一个<em>NoUniqueBeanDefinitionException</em>。这是因为<strong>Spring 不知道要注入哪个 bean</strong>。为了避免这个问题，有几种解决方案；该*@Qualifier*注解就是其中之一。</p>
-<h2 id="Qualifier注解"><a href="#Qualifier注解" class="headerlink" title="@ Qualifier注解"></a>@ <em>Qualifier</em>注解</h2><p>通过使用*@Qualifier*注解，我们可以<strong>消除需要注入哪个bean的问题</strong>。</p>
+<p>如果我们尝试将<em>FooService</em>加载到我们的上下文中，Spring 框架将抛出一个<code style="color:#b30049;background-color:#fdf5f5">NoUniqueBeanDefinitionException</code>。这是因为<strong>Spring 不知道要注入哪个 bean</strong>。为了避免这个问题，有几种解决方案；该<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>注解就是其中之一。</p>
+<h2 id="Qualifier注解"><a href="#Qualifier注解" class="headerlink" title="@ Qualifier注解"></a>@ <em>Qualifier</em>注解</h2><p>通过使用<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>注解，我们可以<strong>消除需要注入哪个bean的问题</strong>。</p>
 <p>让我们回顾一下之前的示例，看看我们如何通过包含*@Qualifier*注解来指示我们要使用哪个 bean 来解决问题：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier(&quot;fooFormatter&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Formatter formatter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过包含*@Qualifier<em>注解，连同我们想要使用的具体实现的名称，在这个例子中为</em>Foo，*我们可以避免当 Spring 找到多个相同类型的 bean 时产生歧义。</p>
 <p>我们需要<strong>考虑到要使用的限定符名称是@Component注解中声明的名称。</strong></p>
-<p>请注意，我们也可以在<em>Formatter</em>实现类上使用*@Qualifier<em>注解，而不是在它们的</em>@Component*注解中指定名称，以获得相同的效果：</p>
+<p>请注意，我们也可以在<em>Formatter</em>实现类上使用<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>注解，而不是在它们的<code style="color:#b30049;background-color:#fdf5f5">@Component</code>注解中指定名称，以获得相同的效果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Qualifier(&quot;fooFormatter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Qualifier(&quot;barFormatter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Qualifier-VS-Primary"><a href="#Qualifier-VS-Primary" class="headerlink" title="@Qualifier VS @Primary"></a><em>@Qualifier</em> VS <em>@Primary</em></h2><p>还有另一个名为*@Primary*的注解 ，当依赖注入存在歧义时，我们可以使用它来决定注入哪个 bean。</p>
-<p><strong>当存在多个相同类型的 bean 时，</strong>此注解<strong>定义了一个首选项</strong>。除非另有说明，否则将使用与*@Primary*注解关联的 bean 。</p>
+<h2 id="Qualifier-VS-Primary"><a href="#Qualifier-VS-Primary" class="headerlink" title="@Qualifier VS @Primary"></a><em>@Qualifier</em> VS <em>@Primary</em></h2><p>还有另一个名为<code style="color:#b30049;background-color:#fdf5f5">@Primary</code>的注解 ，当依赖注入存在歧义时，我们可以使用它来决定注入哪个 bean。</p>
+<p><strong>当存在多个相同类型的 bean 时，</strong>此注解<strong>定义了一个首选项</strong>。除非另有说明，否则将使用与@Primary注解关联的 bean 。</p>
 <p>让我们看一个例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Employee <span class="title">johnEmployee</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Employee(<span class="string">&quot;John&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Employee <span class="title">tonyEmployee</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Employee(<span class="string">&quot;Tony&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在此示例中，两种方法都返回相同的<em>Employee</em>类型。Spring 将注入的 bean 是<em>tonyEmployee</em>方法返回的<em>bean</em>。这是因为它包含*@Primary*注解。当我们想要<strong>指定默认情况下应该注入哪个特定类型的 bean</strong>时，此注解很有用。</p>
+<p>在此示例中，两种方法都返回相同的<em>Employee</em>类型。Spring 将注入的 bean 是<em>tonyEmployee</em>方法返回的<em>bean</em>。这是因为它包含<code style="color:#b30049;background-color:#fdf5f5">@Primary</code>注解。当我们想要<strong>指定默认情况下应该注入哪个特定类型的 bean</strong>时，此注解很有用。</p>
 <p>如果我们在某个注入时需要另一个 bean，我们需要特别指出它。我们可以通过*@Qualifier<em>注解来做到这一点。例如，我们可以通过使用</em>@Qualifier<em>注解来指定我们要使用</em>johnEmployee*方法返回的 bean 。</p>
-<p>值得注意的是，<strong>如果@Qualifier和@Primary注解都存在，那么@Qualifier注解将具有优先权。</strong>基本上，*@Primary<em>定义了一个默认值，而</em>@Qualifier*则非常具体。</p>
+<p>值得注意的是，<strong>如果@Qualifier和@Primary注解都存在，那么@Qualifier注解将具有优先权。</strong>基本上，<code style="color:#b30049;background-color:#fdf5f5">@Primary</code>定义了一个默认值，而<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>则非常具体。</p>
 <hr>
-<h1 id="理解-Spring-中的-getBean"><a href="#理解-Spring-中的-getBean" class="headerlink" title="理解 Spring 中的 getBean()"></a>理解 Spring 中的 getBean()</h1><p>我们将介绍*BeanFactory.getBean()*方法的不同变体。</p>
-<p>简而言之，正如该方法的名称所暗示的那样，<strong>它</strong> <strong>负责从 Spring 容器中检索 bean 实例</strong>。</p>
+<h1 id="理解-Spring-中的-getBean"><a href="#理解-Spring-中的-getBean" class="headerlink" title="理解 Spring 中的 getBean()"></a>理解 Spring 中的 getBean()</h1><p>我们将介绍<code style="color:#b30049;background-color:#fdf5f5">BeanFactory.getBean()</code>方法的不同变体。</p>
+<p>简而言之，正如该方法的名称所暗示的那样，<strong>它负责从 Spring 容器中检索 bean 实例</strong>。</p>
 <h2 id="Spring-Beans-设置"><a href="#Spring-Beans-设置" class="headerlink" title="Spring Beans 设置"></a>Spring Beans 设置</h2><p>首先，让我们定义几个 Spring bean 进行测试。我们可以通过多种方式为 Spring 容器提供 bean 定义，但在我们的示例中，我们将使用基于注解的 Java 配置：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnnotationConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &#123;&quot;tiger&quot;, &quot;kitty&quot;&#125;)</span></span><br><span class="line">    <span class="meta">@Scope(value = &quot;prototype&quot;)</span></span><br><span class="line">    <span class="function">Tiger <span class="title">getTiger</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tiger(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(name = &quot;lion&quot;)</span></span><br><span class="line">    <span class="function">Lion <span class="title">getLion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Lion(<span class="string">&quot;Hardcoded lion name&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们已经创建了两个 bean。<em>Lion</em>具有默认的单例范围。<em>Tiger</em>明确设置为原型范围。此外，请注意，我们为将在进一步请求中使用的每个 bean 定义了名称。</p>
-<h2 id="getBean-API"><a href="#getBean-API" class="headerlink" title="getBean() API"></a><em>getBean()</em> API</h2><p><em>BeanFactory</em>提供了*getBean()*方法的五种不同签名</p>
+<h2 id="getBean-API"><a href="#getBean-API" class="headerlink" title="getBean() API"></a><em>getBean()</em> API</h2><p><em>BeanFactory</em>提供了<code style="color:#b30049;background-color:#fdf5f5">getBean()</code>方法的<code style="color:#b30049;background-color:#fdf5f5">五种</code>不同签名</p>
 <h3 id="按名称检索-Bean"><a href="#按名称检索-Bean" class="headerlink" title="按名称检索 Bean"></a>按名称检索 Bean</h3><p>让我们看看如何使用名称检索<em>Lion</em> bean 实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object lion = context.getBean(<span class="string">&quot;lion&quot;</span>);</span><br><span class="line"></span><br><span class="line">assertEquals(Lion.class, lion.getClass());</span><br></pre></td></tr></table></figure>
 
-<p>在这个变体中，我们提供一个名称，作为回报，如果应用程序上下文中存在具有给定名称的 bean ，我们将获得一个<em>Object</em> 类的实例。否则，如果 bean 查找失败，则此实现和所有其他实现都将抛出<em>NoSuchBeanDefinitionException</em>。</p>
+<p>在这个变体中，我们提供一个名称，作为回报，如果应用程序上下文中存在具有给定名称的 bean ，我们将获得一个<em>Object</em> 类的实例。否则，如果 bean 查找失败，则此实现和所有其他实现都将抛出<code style="color:#b30049;background-color:#fdf5f5">NoSuchBeanDefinitionException</code>。</p>
 <p>主要的缺点是<strong>在检索 bean 后，我们必须将其强制转换为所需的类型</strong>如果返回的 bean 的类型与我们预期的不同，这可能会产生另一个异常。</p>
 <h3 id="按名称和类型检索-Bean"><a href="#按名称和类型检索-Bean" class="headerlink" title="按名称和类型检索 Bean"></a>按名称和类型检索 Bean</h3><p>这里我们需要指定请求的 bean 的名称和类型：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lion lion = context.getBean(<span class="string">&quot;lion&quot;</span>, Lion.class);</span><br></pre></td></tr></table></figure>
 
 <p>与前一种方法相比，这种方法更安全，因为我们可以立即获取有关类型不匹配的信息。</p>
-<h3 id="按类型检索-Bean"><a href="#按类型检索-Bean" class="headerlink" title="按类型检索 Bean"></a>按类型检索 Bean</h3><p>使用*getBean()*的第三个变体， 仅指定 bean 类型就足够了：</p>
+<h3 id="按类型检索-Bean"><a href="#按类型检索-Bean" class="headerlink" title="按类型检索 Bean"></a>按类型检索 Bean</h3><p>使用<code style="color:#b30049;background-color:#fdf5f5">getBean()</code>的第三个变体， 仅指定 bean 类型就足够了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lion lion = context.getBean(Lion.class);</span><br></pre></td></tr></table></figure>
 
 <p>在这种情况下，我们需要<strong>特别注意一个潜在的模棱两可的结果</strong></p>
-<p>在上面的示例中，由于<em>Lion</em>和<em>Tiger 都</em>实现了<em>Animal</em>接口，因此仅指定类型不足以明确确定结果。因此，我们得到一个<em>NoUniqueBeanDefinitionException</em>。</p>
+<p>在上面的示例中，由于<em>Lion</em>和<em>Tiger 都</em>实现了<em>Animal</em>接口，因此仅指定类型不足以明确确定结果。因此，我们得到一个<code style="color:#b30049;background-color:#fdf5f5">NoUniqueBeanDefinitionException</code>。</p>
 <h3 id="使用构造函数参数按名称检索-Bean"><a href="#使用构造函数参数按名称检索-Bean" class="headerlink" title="使用构造函数参数按名称检索 Bean"></a>使用构造函数参数按名称检索 Bean</h3><p>除了 bean 名称，我们还可以传递构造函数参数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tiger tiger = (Tiger) context.getBean(<span class="string">&quot;tiger&quot;</span>, <span class="string">&quot;Siberian&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p><strong>这个方法有点不同，因为它只适用于具有原型作用域的 bean</strong>。</p>
 <p>在单例的情况下，我们将得到一个<em>BeanDefinitionStoreException</em></p>
-<p>因为原型 bean 每次从应用程序容器请求时都会返回一个新创建的实例，所以<strong>我们可以</strong>在调用<em>getBean()*时 *</em>即时提供构造函数参数**：</p>
+<p>因为原型 bean 每次从应用程序容器请求时都会返回一个新创建的实例，所以我们可以在调用<code style="color:#b30049;background-color:#fdf5f5">getBean()</code>时 <strong>即时提供构造函数参数</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Tiger tiger = (Tiger) context.getBean(<span class="string">&quot;tiger&quot;</span>, <span class="string">&quot;Siberian&quot;</span>);</span><br><span class="line">Tiger secondTiger = (Tiger) context.getBean(<span class="string">&quot;tiger&quot;</span>, <span class="string">&quot;Striped&quot;</span>);</span><br><span class="line"></span><br><span class="line">assertEquals(<span class="string">&quot;Siberian&quot;</span>, tiger.getName());</span><br><span class="line">assertEquals(<span class="string">&quot;Striped&quot;</span>, secondTiger.getName());</span><br></pre></td></tr></table></figure>
 
 <p>正如我们所见，根据我们在请求 bean 时指定为第二个参数的内容，每个<em>Tiger</em>获得不同的名称。</p>
@@ -539,14 +423,16 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tiger tiger = context.getBean(Tiger.class, <span class="string">&quot;Shere Khan&quot;</span>);</span><br><span class="line"></span><br><span class="line">assertEquals(<span class="string">&quot;Shere Khan&quot;</span>, tiger.getName());</span><br></pre></td></tr></table></figure>
 
 <p>与使用构造函数参数按名称检索 bean 类似，<strong>此方法仅适用于具有原型范围的 bean</strong>。</p>
-<h2 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h2><p>尽管在<em>BeanFactory</em>接口中定义了<em>getBean()<em>方法，但它最常通过</em>ApplicationContext</em>访问<em>。</em>通常，<strong>我们不想在我们的程序中直接使用getBean()方法</strong>。</p>
+<h2 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h2><div class="note no-icon danger"><p>尽管在<em>BeanFactory</em>接口中定义了<em>getBean()<em>方法，但它最常通过</em>ApplicationContext</em>访问<em>。</em>通常，我们不想在我们的程序中直接使用getBean()方法。</p>
 <p>Bean 应该由容器管理。如果我们想使用其中之一，我们应该依赖依赖注入而不是直接调用<em>ApplicationContext.getBean()</em> <em>。</em>这样，我们就可以避免将应用程序逻辑与框架相关的细节混合在一起。</p>
+</div>
+
 <hr>
 <h1 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h1><p><strong>简单地说，我们可以使用@RequestParam从请求中提取查询参数、表单参数甚至文件。</strong></p>
-<h2 id="一个简单的映射"><a href="#一个简单的映射" class="headerlink" title="一个简单的映射"></a><strong>一个简单的映射</strong></h2><p>假设我们有一个端点*/api/foos<em>，它接受一个名为</em>id*的查询参数 ：</p>
+<h2 id="一个简单的映射"><a href="#一个简单的映射" class="headerlink" title="一个简单的映射"></a><strong>一个简单的映射</strong></h2><p>假设我们有一个端点<code>/api/foos</code>，它接受一个名为<code>id</code>的查询参数 ：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/api/foos&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getFoos</span><span class="params">(<span class="meta">@RequestParam</span> String id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ID: &quot;</span> + id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在这个例子中，我们使用*@RequestParam<em>来提取</em>id*查询参数。</p>
+<p>在这个例子中，我们使用<code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code>来提取<code>id</code>查询参数。</p>
 <p>一个简单的 GET 请求将调用<em>getFoos</em>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/api/foos?id=abc</span><br><span class="line">----</span><br><span class="line">ID: abc</span><br></pre></td></tr></table></figure>
 
@@ -554,8 +440,8 @@
 <h2 id="指定请求参数名称"><a href="#指定请求参数名称" class="headerlink" title="指定请求参数名称"></a><strong>指定请求参数名称</strong></h2><p>幸运的是，<strong>我们可以使用name属性配置@RequestParam名称</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/api/foos&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">addFoo</span><span class="params">(<span class="meta">@RequestParam(name = &quot;id&quot;)</span> String fooId, <span class="meta">@RequestParam</span> String name)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ID: &quot;</span> + fooId + <span class="string">&quot; Name: &quot;</span> + name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我们也可以做 *@RequestParam(value = “id”)*或者只是@RequestParam(“id”)。</p>
-<h2 id="可选的请求参数"><a href="#可选的请求参数" class="headerlink" title="可选的请求参数"></a><strong>可选的请求参数</strong></h2><p>默认用*@RequestParam*注解的方法参数 是必须的。</p>
+<p>我们也可以做 <code style="color:#b30049;background-color:#fdf5f5">@RequestParam(value = “id”)</code>或者只是<code style="color:#b30049;background-color:#fdf5f5">@RequestParam(“id”)</code>。</p>
+<h2 id="可选的请求参数"><a href="#可选的请求参数" class="headerlink" title="可选的请求参数"></a><strong>可选的请求参数</strong></h2><p>默认用<code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code>注解的方法参数 是必须的。</p>
 <p>这意味着如果请求中不存在该参数，我们将收到错误消息：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /api/foos HTTP/1.1</span><br><span class="line">-----</span><br><span class="line">400 Bad Request</span><br><span class="line">Required String parameter <span class="string">&#x27;id&#x27;</span> is not present</span><br></pre></td></tr></table></figure>
 
@@ -570,7 +456,7 @@
 
 <p>将正确调用该方法。</p>
 <p><strong>当未指定参数时，方法参数绑定到null。</strong></p>
-<h2 id="请求参数的默认值"><a href="#请求参数的默认值" class="headerlink" title="请求参数的默认值"></a><strong>请求参数的默认值</strong></h2><p>我们还可以 使用<em>defaultValue</em>属性为*@RequestParam*设置默认值：</p>
+<h2 id="请求参数的默认值"><a href="#请求参数的默认值" class="headerlink" title="请求参数的默认值"></a><strong>请求参数的默认值</strong></h2><p>我们还可以 使用<em>defaultValue</em>属性为<code>@RequestParam</code>设置默认值：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/api/foos&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getFoos</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;test&quot;)</span> String id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ID: &quot;</span> + id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>这就像required=false， 因为用户不再需要提供参数</strong>：</p>
@@ -586,7 +472,7 @@
 <p>然后将反映发送的任何参数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST -F <span class="string">&#x27;name=abc&#x27;</span> -F <span class="string">&#x27;id=123&#x27;</span> http://localhost:8080/api/foos</span><br><span class="line">-----</span><br><span class="line">Parameters are &#123;[name=abc], [id=123]&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="映射多值参数"><a href="#映射多值参数" class="headerlink" title="映射多值参数"></a><strong>映射多值参数</strong></h2><p>单个*@RequestParam*可以有多个值：</p>
+<h2 id="映射多值参数"><a href="#映射多值参数" class="headerlink" title="映射多值参数"></a><strong>映射多值参数</strong></h2><p>单个<code>@RequestParam</code>可以有多个值：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/api/foos&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getFoos</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;String&gt; id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;IDs are &quot;</span> + id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>Spring MVC 将映射一个逗号分隔的 id 参数</strong>：</p>
@@ -601,17 +487,21 @@
 <p>然后它在<em>ApplicationContext 中</em>注册每个 bean 。</p>
 <p>以下是其中一些注释的快速概览：</p>
 <ul>
-<li><em>@Component</em>是任何 Spring 管理的组件的通用<em>构造</em>型。</li>
-<li><em>@Service</em>在服务层注释类。</li>
-<li><em>@Repository</em>在持久层注释类，它将充当数据库存储库。</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">@Component</code>是任何 Spring 管理的组件的通用<em>构造</em>型。</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">@Service</code>在服务层注释类。</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">@Repository</code>在持久层注释类，它将充当数据库存储库。</li>
 </ul>
 <h2 id="有什么不同？"><a href="#有什么不同？" class="headerlink" title="有什么不同？"></a>有什么不同？</h2><p><strong>这些刻板印象之间的主要区别在于它们用于不同的分类。</strong>当我们为自动检测注释一个类时，我们应该使用相应的构造型。</p>
 <p>现在让我们更详细地了解它们。</p>
-<h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a><strong>@Component</strong></h3><p><strong>我们可以在整个应用程序中使用 @Component 将 bean 标记为 Spring 的托管组件</strong>。<code>@Component</code>是任何 Spring 管理的组件的通用构造型。Spring 只会使用*@Component<em>获取和注册 bean ，一般不会查找</em>@Service* 和 <em>@Repository</em>。</p>
-<p>它们在<em>ApplicationContext</em>中注册，因为它们用*@Component*注释：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Service &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Repository &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a><strong>@Component</strong></h3><p><strong>我们可以在整个应用程序中使用 @Component 将 bean 标记为 Spring 的托管组件</strong>。<code>@Component</code>是任何 Spring 管理的组件的通用构造型。Spring 只会使用<code>@Component</code>获取和注册 bean ，一般不会查找<code style="color:#b30049;background-color:#fdf5f5">@Service</code> 和 <code style="color:#b30049;background-color:#fdf5f5">@Repository</code>。</p>
+<p>它们在<em>ApplicationContext</em>中注册，因为它们用<code style="color:#b30049;background-color:#fdf5f5">@Component</code>作为元注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Service &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * The value may indicate a suggestion for a logical component name,</span></span><br><span class="line"><span class="comment">	 * to be turned into a Spring bean in case of an autodetected component.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the suggested component name, if any (or empty String otherwise)</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@AliasFor(annotation = Component.class)</span></span><br><span class="line">	<span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Repository &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * The value may indicate a suggestion for a logical component name,</span></span><br><span class="line"><span class="comment">	 * to be turned into a Spring bean in case of an autodetected component.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the suggested component name, if any (or empty String otherwise)</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@AliasFor(annotation = Component.class)</span></span><br><span class="line">	<span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><em>@Service</em> 和 <em>@Repository</em>是*@Component 的*特例。它们在技术上是相同的，但我们将它们用于不同的目的。</p>
+<div class="note success"><p>@Service 和 @Repository是@Component的特例，相当于给@Component 起的别名。它们在技术上是相同的，但我们将它们用于不同的目的。</p>
+</div>
+
+
+
 <h3 id="Repository"><a href="#Repository" class="headerlink" title="@Repository"></a><strong>@Repository</strong></h3><p><strong>@Repository的工作是捕获特定于持久性的异常并将它们作为 Spring 的统一未检查异常之一重新抛出</strong>。</p>
 <p>为此，Spring 提供了<em>PersistenceExceptionTranslationPostProcessor</em>，我们需要将其添加到我们的应用程序上下文中（如果我们使用 Spring Boot，则已包含）：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=</span></span><br><span class="line"><span class="tag">  &quot;<span class="attr">org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor</span>&quot;/&gt;</span></span><br></pre></td></tr></table></figure>
@@ -626,7 +516,7 @@
 <p>假设我们有一个依赖于实际处理业务逻辑的服务的应用程序类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexApp</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IService service;</span><br><span class="line">    <span class="comment">// standard constructors/getters/setters</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>现在让我们说<em>IService</em>是一个接口：</p>
+<p>现在让我们说<code style="color:#b30049;background-color:#fdf5f5">IService</code>是一个接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">serve</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这个接口可以有多个实现。</p>
@@ -649,14 +539,14 @@
 <p>现在让我们看看我们如何使用上述实现使用基于 XML 的配置将 bean 注入到<em>IndexApp 中</em>：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;messageService&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;com.baeldung.di.spring.StaticServiceFactory&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">factory-method</span>=<span class="string">&quot;getService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>   </span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;indexApp&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.baeldung.di.spring.IndexApp&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;service&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;messageService&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>在上面的例子中，我们使用<em>factory-method</em>调用静态<em>getService**方法</em>来创建一个带有 id <em>messageService</em>的 bean ，我们将其注入<em>IndexApp。</em></p>
+<p>在上面的例子中，我们使用<em>factory-method</em>调用静态<em>getService</em>方法来创建一个带有 id <em>messageService</em>的 bean ，我们将其注入<em>IndexApp。</em></p>
 <h3 id="使用工厂方法"><a href="#使用工厂方法" class="headerlink" title="使用工厂方法"></a><strong>使用工厂方法</strong></h3><p>让我们考虑一个实例工厂，它根据提供的数字返回一个<em>IService</em>实例。这一次，该方法不是静态的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceServiceFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IService <span class="title">getNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在让我们看看我们如何使用上面的实现来使用 XML 配置将 bean 注入到<em>IndexApp 中</em>：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;indexServiceFactory&quot;</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;com.baeldung.di.spring.InstanceServiceFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;messageService&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;com.baeldung.di.spring.InstanceServiceFactory&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">factory-method</span>=<span class="string">&quot;getService&quot;</span> <span class="attr">factory-bean</span>=<span class="string">&quot;indexServiceFactory&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;indexApp&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.baeldung.di.spring.IndexApp&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;service&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;messageService&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>在上面的示例中，我们使用<em>factory-method</em>调用<em>InstanceServiceFactory 实例</em>上的<em>getService**方法</em>来创建一个带有 id <em>messageService</em>的 bean ，我们将其注入<em>IndexApp</em>。</p>
+<p>在上面的示例中，我们使用<em>factory-method</em>调用<em>InstanceServiceFactory 实例</em>上的<em>getService</em>方法来创建一个带有 id <em>messageService</em>的 bean ，我们将其注入<em>IndexApp</em>。</p>
 <h2 id="访问配置的bean："><a href="#访问配置的bean：" class="headerlink" title="访问配置的bean："></a>访问配置的bean：</h2><p>这是我们如何访问配置的bean：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenGetBeans_returnsBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;...&quot;</span>);</span><br><span class="line">    IndexApp indexApp = applicationContext.getBean(<span class="string">&quot;indexApp&quot;</span>, IndexApp.class);</span><br><span class="line">    assertNotNull(indexApp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -664,7 +554,7 @@
 <h1 id="使用带有默认值的-Spring-Value"><a href="#使用带有默认值的-Spring-Value" class="headerlink" title="使用带有默认值的 Spring @Value"></a>使用带有默认值的 Spring @Value</h1><h2 id="字符串默认值"><a href="#字符串默认值" class="headerlink" title="字符串默认值"></a><strong>字符串默认值</strong></h2><p>让我们看一下为<em>String</em>属性设置默认值的基本语法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;some.key:my default value&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String stringWithDefaultValue;</span><br></pre></td></tr></table></figure>
 
-<p>如果<em>some.key</em>无法解析，<em>stringWith</em> <em>ithDefaultValue</em>将设置为<em>my default value 的默认值</em>。</p>
+<p>如果<code style="color:#b30049;background-color:#fdf5f5">some.key</code>无法解析，<code style="color:#b30049;background-color:#fdf5f5">stringWithDefaultValue</code>将设置为<code style="color:#b30049;background-color:#fdf5f5">my default value</code>的默认值。</p>
 <p>同样，我们可以设置一个零长度的<em>字符串</em>作为默认值：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;some.key:&#125;)</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">private String stringWithBlankDefaultValue;</span></span><br></pre></td></tr></table></figure>
 
@@ -691,15 +581,15 @@
 <p>我们可以操作属性来获取值<em>列表</em>，这里是字符串值 A、B 和 C 的列表：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;#&#123;&#x27;$&#123;listOfValues&#125;&#x27;.split(&#x27;,&#x27;)&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; valuesList;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Value-“-”-和-Value-“-”-的区别"><a href="#Value-“-”-和-Value-“-”-的区别" class="headerlink" title="@Value(“${}”)**和@Value(“#{}”)**的区别"></a><strong>@Value(“${}”)**和</strong>@Value(“#{}”)**的区别</h2><ul>
-<li>@Value(“${}”)主要获取的是配置文件 application.yml /application.proterties 中的配置信息。</li>
-<li>@Value(“#{}”) 表示SpEl表达式通常用来获取bean的属性，或者调用bean的某个方法或属性。当然还有可以表示常量</li>
+<h2 id="Value-“-”-和-Value-“-”-的区别"><a href="#Value-“-”-和-Value-“-”-的区别" class="headerlink" title="@Value(“${}”)和@Value(“#{}”)的区别"></a>@Value(“${}”)和@Value(“#{}”)的区别</h2><ul>
+<li><code style="color:#b30049;background-color:#fdf5f5">@Value("$&#123;&#125;")</code>主要获取的是配置文件<code style="color:#b30049;background-color:#fdf5f5"> application.yml /application.proterties</code>中的配置信息。</li>
+<li><code style="color:#b30049;background-color:#fdf5f5">@Value("#&#123;&#125;")</code> 表示SpEl表达式通常用来获取<code style="color:#b30049;background-color:#fdf5f5">bean的属性</code>，或者调用bean的某个方法或属性。当然还有可以表示常量</li>
 </ul>
 <p>在下面的示例中，我们希望将<em>some.system.key</em>设置为系统属性，如果未设置，我们希望使用<em>我的默认系统属性值</em> 作为默认值：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;#&#123;systemProperties[&#x27;some.key&#x27;] ?: &#x27;my default system property value&#x27;&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String spelWithDefaultValue;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="Autowired-vs-Resource-vs-Inject-的区别"><a href="#Autowired-vs-Resource-vs-Inject-的区别" class="headerlink" title="@Autowired vs @Resource vs @Inject 的区别"></a>@Autowired vs @Resource vs @Inject 的区别</h1><p>为了实现依赖注入 DI 而引入，Java 提供 <code>javax.annotation.Resource</code> , <code>javax.inject.Inject</code> 注解，Spring 框架提供了 <code>org.springframework.beans.factory.annotation.Autowired</code> 。依赖注入（Denpendency Injection，DI）， 控制反转（Inversion of Control, IoC），主要的目的是去除代码耦合。</p>
+<h1 id="Autowired-vs-Resource-vs-Inject-的区别"><a href="#Autowired-vs-Resource-vs-Inject-的区别" class="headerlink" title="@Autowired vs @Resource vs @Inject 的区别"></a>@Autowired vs @Resource vs @Inject 的区别</h1><p>为了实现依赖注入 DI 而引入，Java 提供<code style="color:#b30049;background-color:#fdf5f5">javax.annotation.Resource</code> , <code style="color:#b30049;background-color:#fdf5f5">javax.inject.Inject</code> 注解，Spring 框架提供了 <code style="color:#b30049;background-color:#fdf5f5">org.springframework.beans.factory.annotation.Autowired</code>。依赖注入（Denpendency Injection，DI）， 控制反转（Inversion of Control, IoC），主要的目的是去除代码耦合。</p>
 <h2 id="具体解释"><a href="#具体解释" class="headerlink" title="具体解释"></a>具体解释</h2><table>
 <thead>
 <tr>
@@ -724,22 +614,19 @@
 <td align="left">Java 需额外依赖</td>
 </tr>
 </tbody></table>
-<p><code>@Autowired</code>: Spring 特有的注解，@Autowired 通过<strong>类型</strong>来注入，比如通过类的类型，或者类的接口来注解 field 或者 constructor。为了防止在项目中实现同一个接口，或者一系列子类，可以使用 @Qualifier 注解来避免歧义。默认情况下 bean 的名字就是 qualifier 的值。 尽管你可以按照约定通过名字来使用 @Autowired 注解，@Autowired 根本上还是类型驱动的注入，并且附带可选的语义上的 qualifiers.</p>
-<p>@Inject: 该注解基于 <a target="_blank" rel="noopener" href="https://jcp.org/en/jsr/detail?id=330">JSR-330</a>, @Inject 注解是 Spring @Autowired 注解的代替品。所以使用 Spring 独有的 @Autowired 注解时，可以考虑选择使用 @Inject. @Autowired 和 @Inject 的不同之处在于是否有 required 属性，@Inject 没有 required 属性，因此在找不到合适的依赖对象时 inject 会失败，而 @Autowired 可以使用 required=false 来允许 null 注入。</p>
+<p><code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>: Spring 特有的注解，@Autowired 通过<strong>类型</strong>来注入，比如通过类的类型，或者类的接口来注解 field 或者 constructor。为了防止在项目中实现同一个接口，或者一系列子类，可以使用 @Qualifier 注解来避免歧义。默认情况下 bean 的名字就是 qualifier 的值。 尽管你可以按照约定通过名字来使用 @Autowired 注解，@Autowired 根本上还是<strong>类型驱动</strong>的注入，并且附带可选的语义上的 qualifiers.</p>
+<p><code style="color:#b30049;background-color:#fdf5f5">@Inject</code>: 该注解基于 <a target="_blank" rel="noopener" href="https://jcp.org/en/jsr/detail?id=330">JSR-330</a>, @Inject 注解是 Spring @Autowired 注解的代替品。所以使用 Spring 独有的 @Autowired 注解时，可以考虑选择使用 @Inject. @Autowired 和 @Inject 的不同之处在于是否有<code style="color:#b30049;background-color:#fdf5f5">required</code>属性，@Inject 没有 required 属性，因此在找不到合适的依赖对象时 inject 会失败，而 @Autowired 可以使用 required=false 来允许 null 注入。</p>
 <p>使用 @Inject 需要添加如下依赖：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.inject<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.inject<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>Advantage of @Inject annotation is that rather than inject a reference directly, you could ask @Inject to inject a Provider. The Provider interface enables, among other things, lazy injection of bean references and injection of multiple instances of a bean. In case we have few implementation of an interface or a subclass we can narrow down the selection using the @Named annotation to avoid ambiguity. @Named annotation works much like Spring’s @Qualifier</p>
-<p><code>@Resource</code>: JDK 1.6 支持注解，<a target="_blank" rel="noopener" href="https://jcp.org/en/jsr/detail?id=250">JSR-250</a> 引入。@Resource 和 @Autowired @Inject 类似，最主要的区别在于寻找存在的 Bean 注入的路径不同。<code>@Resource</code> 寻找的优先顺序为</p>
+<p><code style="color:#b30049;background-color:#fdf5f5">@Resource</code>: JDK 1.6 支持注解，<a target="_blank" rel="noopener" href="https://jcp.org/en/jsr/detail?id=250">JSR-250</a> 引入。@Resource 和 @Autowired @Inject 类似，最主要的区别在于寻找存在的 Bean 注入的路径不同。<code style="color:#b30049;background-color:#fdf5f5">@Resource</code>寻找的优先顺序为</p>
 <ul>
-<li><ol>
-<li>优先通过名字 (by name)</li>
-</ol>
-</li>
+<li>1）优先通过名字 (by name)</li>
 <li>2）其次是类型 (by type)</li>
 <li>3）再次是 qualifier(by qualifier)</li>
 </ul>
-<p>而 <code>@Autowired</code> and <code>@Inject</code> 寻找的顺序为</p>
+<p>而 <code style="color:#b30049;background-color:#fdf5f5">@Autowired</code> and <code style="color:#b30049;background-color:#fdf5f5">@Inject</code> 寻找的顺序为</p>
 <ol>
 <li>通过类型寻找</li>
 <li>通过 qualifier</li>
@@ -747,19 +634,19 @@
 </ol>
 <p>@Resource 如果没有指定 name 属性，当注解标注在 field 上，默认取字段名称作为 bean 名称寻找依赖对象；当标注在属性 setter 方法上，默认取属性名作为 bean 名称寻找依赖。如果没有指定 name 属性，并且按照默认名称找不到依赖对象时，回退到类型装配。</p>
 <hr>
-<h1 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h1><p>从 Spring 2.5 开始，该框架引入了注解驱动的<em>依赖注入</em>。此功能的主要注释是*@Autowired* <em>。</em> <strong>它允许 Spring 解析并将协作 bean 注入到我们的 bean 中。</strong></p>
-<h2 id="启用-Autowired-注解"><a href="#启用-Autowired-注解" class="headerlink" title="启用*@Autowired*注解"></a>启用*@Autowired*注解</h2><p>Spring 框架支持自动依赖注入。换句话说，<strong>通过在 Spring 配置文件中声明所有 bean 依赖项，Spring 容器可以自动装配协作 bean 之间的关系</strong>。这称为*<strong>Spring bean 自动装配</strong>。</p>
+<h1 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h1><p>从 Spring 2.5 开始，该框架引入了注解驱动的<em>依赖注入</em>。此功能的主要注释是<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code> <em>。</em> <strong>它允许 Spring 解析并将协作 bean 注入到我们的 bean 中。</strong></p>
+<h2 id="启用-Autowired注解"><a href="#启用-Autowired注解" class="headerlink" title="启用@Autowired注解"></a>启用@Autowired注解</h2><p>Spring 框架支持自动依赖注入。换句话说，<strong>通过在 Spring 配置文件中声明所有 bean 依赖项，Spring 容器可以自动装配协作 bean 之间的关系</strong>。这称为<strong>Spring bean 自动装配</strong>。</p>
 <p>要在我们的应用程序中使用基于 Java 的配置，让我们启用注解驱动注入 来加载我们的 Spring 配置：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.baeldung.autowire.sample&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>或者，[**注解](<a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-contextannotation-contextcomponentscan#:~:text=The">https://www.baeldung.com/spring-contextannotation-contextcomponentscan#:~:text=The</a>  can resolve.)主要用于激活 Spring XML 文件中的依赖注入注解。</p>
-<p>此外，<strong>Spring Boot 引入了@SpringBootApplication注解</strong>。这个单一的注解等效于使用*@Configuration<em>、</em>@EnableAutoConfiguration*和 <em>@ComponentScan</em>。</p>
+<p>或者，注解主要用于激活 Spring XML 文件中的依赖注入注解。</p>
+<p>此外，<strong>Spring Boot 引入了@SpringBootApplication注解</strong>。这个单一的注解等效于使用<code style="color:#b30049;background-color:#fdf5f5">@Configuration</code>、<code style="color:#b30049;background-color:#fdf5f5">@EnableAutoConfiguration</code>和 <code style="color:#b30049;background-color:#fdf5f5">@ComponentScan</code>。</p>
 <p>让我们在应用程序的主类中使用这个注解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VehicleFactoryApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(VehicleFactoryApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>因此，当我们运行这个 Spring Boot 应用程序时，<strong>它会自动扫描当前包及其子包中的组件</strong>。因此，它将在 Spring 的应用程序上下文中注册它们，并允许我们使用*@Autowired*注入 bean 。</p>
+<p>因此，当我们运行这个 Spring Boot 应用程序时，<strong>它会自动扫描当前包及其子包中的组件</strong>。因此，它将在 Spring 的应用程序上下文中注册它们，并允许我们使用<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>注入 bean 。</p>
 <h2 id="使用-Autowired"><a href="#使用-Autowired" class="headerlink" title="使用@Autowired"></a>使用@Autowired</h2><p>启用注解注入后，<strong>我们可以在属性、设置器和构造函数上使用自动装配</strong>。</p>
-<h3 id="Autowired用在属性上"><a href="#Autowired用在属性上" class="headerlink" title="@Autowired用在属性上"></a><strong>@Autowired用在属性上</strong></h3><p>让我们看看如何使用*@Autowired<em>注释</em>属性*。这消除了对 getter 和 setter 的需要。</p>
+<h3 id="Autowired用在属性上"><a href="#Autowired用在属性上" class="headerlink" title="@Autowired用在属性上"></a><strong>@Autowired用在属性上</strong></h3><p>让我们看看如何使用<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>注释属性。这消除了对 getter 和 setter 的需要。</p>
 <p>首先，让我们定义一个<em>fooFormatter</em> bean：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;fooFormatter&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;foo&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -767,11 +654,11 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;  </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其结果是，Spring注入<em>fooFormatter</em>时<em>FooService接口</em>被创建。</p>
-<h3 id="Autowired在-Setter-上"><a href="#Autowired在-Setter-上" class="headerlink" title="@Autowired在 Setter 上"></a><strong>@Autowired在 Setter 上</strong></h3><p>现在让我们尝试在 setter 方法上添加*@Autowired*注释。</p>
+<h3 id="Autowired在-Setter-上"><a href="#Autowired在-Setter-上" class="headerlink" title="@Autowired在 Setter 上"></a><strong>@Autowired在 Setter 上</strong></h3><p>现在让我们尝试在 setter 方法上添加 @Autowired 注释。</p>
 <p>在以下示例中，在创建<em>FooService</em>时使用<em>FooFormatter</em>实例调用 setter 方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFooFormatter</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fooFormatter = fooFormatter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Autowired在构造函数上"><a href="#Autowired在构造函数上" class="headerlink" title="@Autowired在构造函数上"></a><strong>@Autowired在构造函数上</strong></h3><p>最后，让我们在构造函数上使用*@Autowired*。</p>
+<h3 id="Autowired在构造函数上"><a href="#Autowired在构造函数上" class="headerlink" title="@Autowired在构造函数上"></a><strong>@Autowired在构造函数上</strong></h3><p>最后，让我们在构造函数上使用 @Autowired 。</p>
 <p>我们将看到Spring 注入了一个<em>FooFormatter</em>实例作为<em>FooService</em>构造函数的参数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooService</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fooFormatter = fooFormatter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -783,24 +670,24 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired(required = false)</span></span><br><span class="line">    <span class="keyword">private</span> FooDAO dataAccessor; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="PropertySource注解"><a href="#PropertySource注解" class="headerlink" title="@PropertySource注解"></a>@PropertySource注解</h1><p>@PropertySource注解是Spring 3.1开始引入的配置类注解。通过@PropertySource注解将properties配置文件中的值存储到Spring的 Environment中，Environment接口提供方法去读取配置文件中的值，参数是properties文件中定义的key值。也可以使用@Value 注解用${}占位符注入属性</p>
-<p>@PropertySource注解的源代码如下所示。</p>
+<h1 id="PropertySource注解"><a href="#PropertySource注解" class="headerlink" title="@PropertySource注解"></a>@PropertySource注解</h1><p><code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注解是Spring 3.1开始引入的配置类注解。通过<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注解将<code style="color:#b30049;background-color:#fdf5f5">properties</code>配置文件中的值存储到Spring的<code style="color:#b30049;background-color:#fdf5f5">Environment</code>中，<code style="color:#b30049;background-color:#fdf5f5">Environment</code>接口提供方法去读取配置文件中的值，参数是<code style="color:#b30049;background-color:#fdf5f5">properties</code>文件中定义的key值。也可以使用<code style="color:#b30049;background-color:#fdf5f5">@Value</code>注解用<code style="color:#b30049;background-color:#fdf5f5">$&#123;&#125;</code>占位符注入属性</p>
+<p><code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注解的源代码如下所示。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.springframework.context.annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Documented;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Repeatable;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.support.PropertySourceFactory;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Repeatable(PropertySources.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PropertySource &#123;</span><br><span class="line">	<span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line">	String[] value();</span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">ignoreResourceNotFound</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">	<span class="function">String <span class="title">encoding</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line">	Class&lt;? extends PropertySourceFactory&gt; factory() <span class="keyword">default</span> PropertySourceFactory.class;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>从@PropertySource的源码可以看出，我们可以通过@PropertySource注解指定多个properties文件，可以使用如下形式进行指定。</p>
+<p>从<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>的源码可以看出，我们可以通过<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注解指定多个<code style="color:#b30049;background-color:#fdf5f5">properties</code>文件，可以使用如下形式进行指定。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource(value=&#123;&quot;classpath:xxx.properties&quot;, &quot;classpath:yyy.properties&quot;&#125;)</span></span><br></pre></td></tr></table></figure>
 
-<p>细心的读者可以看到，在@PropertySource注解类的上面标注了如下的注解信息。</p>
+<p>细心的读者可以看到，在<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注解类的上面标注了如下的注解信息。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repeatable(PropertySources.class)</span></span><br></pre></td></tr></table></figure>
 
-<p>看到这里，小伙伴们是不是有种恍然大悟的感觉呢？没错，我们也可以使用@PropertySources注解来指定properties配置文件。</p>
-<h2 id="通过注解注册一个配置文件"><a href="#通过注解注册一个配置文件" class="headerlink" title="通过注解注册一个配置文件"></a>通过注解注册一个配置文件</h2><p>我们可以将此注解与*@Configuration*注解结合使用：</p>
+<p>看到这里，小伙伴们是不是有种恍然大悟的感觉呢？没错，我们也可以使用<code style="color:#b30049;background-color:#fdf5f5">@PropertySources</code>注解来指定<code style="color:#b30049;background-color:#fdf5f5">properties</code>配置文件。</p>
+<h2 id="通过注解注册一个配置文件"><a href="#通过注解注册一个配置文件" class="headerlink" title="通过注解注册一个配置文件"></a>通过注解注册一个配置文件</h2><p>我们可以将此注解与<code style="color:#b30049;background-color:#fdf5f5">@Configuration</code>注解结合使用：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@PropertySource(&quot;classpath:foo.properties&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PropertiesWithJavaConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>另一种注册新属性文件的非常有用的方法是使用占位符，它允许我们<strong>在运行时动态选择正确的文件</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource(&#123; </span></span><br><span class="line"><span class="meta">  &quot;classpath:persistence-$&#123;envTarget:mysql&#125;.properties&quot;</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-<h2 id="定义多个属性位置"><a href="#定义多个属性位置" class="headerlink" title="定义多个属性位置"></a>定义多个属性位置</h2><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html">根据 Java 8 约定</a>，@ <em>PropertySource</em>注释是可重复的。因此，如果我们使用 Java 8 或更高版本，我们可以使用此注释来定义多个属性位置：</p>
+<h2 id="定义多个属性位置"><a href="#定义多个属性位置" class="headerlink" title="定义多个属性位置"></a>定义多个属性位置</h2><p>根据 Java 8 约定，<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>注释是可重复的。因此，如果我们使用 Java 8 或更高版本，我们可以使用此注释来定义多个属性位置：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PropertySource(&quot;classpath:foo.properties&quot;)</span></span><br><span class="line"><span class="meta">@PropertySource(&quot;classpath:bar.properties&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PropertiesWithJavaConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>当然，<strong>我们也可以使用@PropertySources注解，指定一个@PropertySource数组。</strong>这适用于任何受支持的 Java 版本，而不仅仅是 Java 8 或更高版本：</p>
@@ -813,7 +700,7 @@
 <p><strong>我们还可以为属性指定一个默认值：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value( &quot;$&#123;jdbc.url:aDefaultUrl&#125;&quot; )</span></span><br><span class="line"><span class="keyword">private</span> String jdbcUrl;</span><br></pre></td></tr></table></figure>
 
-<p>Spring 3.1 中添加的新<em>PropertySourcesPlaceholderConfigurer**</em>解析了 bean 定义属性值和@Value注释中的${…} 占位符**。</p>
+<p>Spring 3.1 中添加的新<em>PropertySourcesPlaceholderConfigurer</em>解析了 bean 定义属性值和@Value注释中的<code style="color:#b30049;background-color:#fdf5f5">$&#123;…&#125;</code> 占位符。</p>
 <p>最后，我们可以 <strong>使用Environment API获取属性的值</strong> ：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br><span class="line">...</span><br><span class="line">dataSource.setUrl(env.getProperty(<span class="string">&quot;jdbc.url&quot;</span>));</span><br></pre></td></tr></table></figure>
 
@@ -859,12 +746,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" rel="prev" title="Macbook使用技巧">
-                  <i class="fa fa-chevron-left"></i> Macbook使用技巧
+                  <i class="fa fa-angle-left"></i> Macbook使用技巧
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2021/10/23/Java-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="深入浅出 Java 8 Lambda 表达式">
-                  深入浅出 Java 8 Lambda 表达式 <i class="fa fa-chevron-right"></i>
+                  深入浅出 Java 8 Lambda 表达式 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -877,82 +764,43 @@
 
 
 
-      
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wotzc</span>
-</div>
-
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
   </div>
--->
 
     </div>
   </footer>
 
   
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
 
   
 
@@ -961,11 +809,11 @@
 
 
 
-
-
   
 
-  
+
+
+
 
 </body>
 </html>

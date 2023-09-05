@@ -2,10 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,15 +14,12 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="基础语法let 关键字let关键字来声明变量 const 关键字const 关键字用来声明常量， const声明有以下特点  声明必须赋初始值 标识符一般为大写 不允许重复声明 值不允许修改 块儿级作用域注意 : 对象属性修改和数组元素变化不会触发const错误  变量的解构赋值ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。 数组的解构">
+    <meta name="description" content="基础语法let 关键字let关键字来声明变量 const 关键字const 关键字用来声明常量， const声明有以下特点  声明必须赋初始值 标识符一般为大写 不允许重复声明 值不允许修改 块儿级作用域注意 : 对象属性修改和数组元素变化不会触发const错误  变量的解构赋值ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。 数组的解构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6新特性">
 <meta property="og:url" content="http://example.com/2021/05/24/ES6%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
@@ -34,27 +29,23 @@
 <meta property="article:published_time" content="2021-05-24T01:18:28.000Z">
 <meta property="article:modified_time" content="2021-10-19T07:21:00.715Z">
 <meta property="article:author" content="wotzc">
+<meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="JavaWeb">
-<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
 
 <link rel="canonical" href="http://example.com/2021/05/24/ES6%E6%96%B0%E7%89%B9%E6%80%A7/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>ES6新特性 | Cai</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/05/24/ES6%E6%96%B0%E7%89%B9%E6%80%A7/","path":"2021/05/24/ES6新特性/","title":"ES6新特性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ES6新特性 | Cai</title>
   
+
+
 
 
 
@@ -62,52 +53,18 @@
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
-  
-  <a target="_blank" rel="noopener" href="https://github.com/wotzc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -118,14 +75,13 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Cai</h1>
+      <p class="site-title">Cai</p>
       <i class="logo-line"></i>
     </a>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
@@ -133,74 +89,16 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
 
-    </div>
-  </div>
-
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -215,68 +113,51 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#let-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.1.</span> <span class="nav-text">let 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.2.</span> <span class="nav-text">const 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">1.3.</span> <span class="nav-text">变量的解构赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">1.3.1.</span> <span class="nav-text">数组的解构赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">1.3.2.</span> <span class="nav-text">对象的解构赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">1.3.3.</span> <span class="nav-text">默认值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.</span> <span class="nav-text">模板字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.1.</span> <span class="nav-text">多行字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%B5%8C%E5%85%A5%E5%8F%98%E9%87%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">字符串中嵌入变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%AE%80%E5%8C%96%E5%86%99%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">对象的简化写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rest-%E5%8F%82%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">rest 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.8.</span> <span class="nav-text">扩展运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%90%88%E5%B9%B6"><span class="nav-number">1.8.1.</span> <span class="nav-text">数组的合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%85%8B%E9%9A%86"><span class="nav-number">1.8.2.</span> <span class="nav-text">数组的克隆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbol"><span class="nav-number">2.</span> <span class="nav-text">Symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol%E5%86%85%E7%BD%AE%E5%80%BC"><span class="nav-number">2.1.</span> <span class="nav-text">Symbol内置值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Iterator%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">Iterator迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4-Iterator-%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">默认 Iterator 接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator-%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">Generator 生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">next()函数的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator-%E5%87%BD%E6%95%B0%E7%9A%84%E5%BC%82%E6%AD%A5%E5%BA%94%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">Generator 函数的异步应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">传统方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generator%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">Generator函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#promise%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">promise对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">5.1.</span> <span class="nav-text">Promise的含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-prototype-then"><span class="nav-number">5.3.</span> <span class="nav-text">Promise.prototype.then()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-prototype-catch"><span class="nav-number">5.4.</span> <span class="nav-text">Promise.prototype.catch()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">6.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88"><span class="nav-number">6.1.</span> <span class="nav-text">如何创建一个集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">Set 实例的属性和方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">7.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-Methods"><span class="nav-number">7.1.</span> <span class="nav-text">Map Methods</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">8.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">8.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-number">8.2.</span> <span class="nav-text">静态成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="nav-number">8.3.</span> <span class="nav-text">Class的继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getter%E5%92%8Csetter"><span class="nav-number">8.4.</span> <span class="nav-text">getter和setter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%9A%84%E6%89%A9%E5%B1%95"><span class="nav-number">9.</span> <span class="nav-text">数值的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Number-EPSILON"><span class="nav-number">9.1.</span> <span class="nav-text">Number.EPSILON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E5%85%AB%E8%BF%9B%E5%88%B6"><span class="nav-number">9.2.</span> <span class="nav-text">二进制和八进制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0Number-%E5%B1%9E%E6%80%A7"><span class="nav-number">9.3.</span> <span class="nav-text">新Number 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0Number-%E6%96%B9%E6%B3%95"><span class="nav-number">9.4.</span> <span class="nav-text">新Number 方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E6%89%A9%E5%B1%95"><span class="nav-number">10.</span> <span class="nav-text">对象方法的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-is"><span class="nav-number">10.1.</span> <span class="nav-text">Object.is()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-assign"><span class="nav-number">10.2.</span> <span class="nav-text">Object.assign()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">10.2.1.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%94%A8%E9%80%94"><span class="nav-number">10.2.2.</span> <span class="nav-text">常见用途</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">模块化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#export-%E5%91%BD%E4%BB%A4"><span class="nav-number">11.1.</span> <span class="nav-text">export 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#export-default-%E5%91%BD%E4%BB%A4"><span class="nav-number">11.1.1.</span> <span class="nav-text">export default 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import-%E5%91%BD%E4%BB%A4"><span class="nav-number">11.2.</span> <span class="nav-text">import 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E6%95%B4%E4%BD%93%E5%8A%A0%E8%BD%BD"><span class="nav-number">11.2.1.</span> <span class="nav-text">模块的整体加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E9%80%89%E6%8B%A9%E5%8A%A0%E8%BD%BD"><span class="nav-number">11.2.2.</span> <span class="nav-text">模块的选择加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="nav-number">11.3.</span> <span class="nav-text">浏览器的模块加载</span></a></li></ol></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="wotzc"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">wotzc</p>
   <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">38</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">17</span>
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">62</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -291,11 +172,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="wotzc">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ES6新特性 | Cai">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -312,13 +198,13 @@
 
       <time title="创建时间：2021-05-24 09:18:28" itemprop="dateCreated datePublished" datetime="2021-05-24T09:18:28+08:00">2021-05-24</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
 
   
 </div>
@@ -329,8 +215,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="let-关键字"><a href="#let-关键字" class="headerlink" title="let 关键字"></a>let 关键字</h2><p>let关键字来声明变量</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="let-关键字"><a href="#let-关键字" class="headerlink" title="let 关键字"></a>let 关键字</h2><p>let关键字来声明变量</p>
 <h2 id="const-关键字"><a href="#const-关键字" class="headerlink" title="const 关键字"></a>const 关键字</h2><p>const 关键字用来声明常量， const声明有以下特点</p>
 <ol>
 <li>声明必须赋初始值</li>
@@ -894,9 +779,9 @@
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
               <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
               <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           </div>
 
         
@@ -904,12 +789,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2021/04/15/%E5%88%9D%E8%AF%86Maven/" rel="prev" title="初识Maven">
-                  <i class="fa fa-chevron-left"></i> 初识Maven
+                  <i class="fa fa-angle-left"></i> 初识Maven
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2021/07/12/Spring5/" rel="next" title="Spring5">
-                  Spring5 <i class="fa fa-chevron-right"></i>
+                  Spring5 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -922,82 +807,43 @@
 
 
 
-      
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wotzc</span>
-</div>
-
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
   </div>
--->
 
     </div>
   </footer>
 
   
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
 
   
 
@@ -1006,11 +852,11 @@
 
 
 
-
-
   
 
-  
+
+
+
 
 </body>
 </html>

@@ -2,10 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,15 +14,12 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="介绍pandas 是一个 Python 包，它提供快速、灵活且富有表现力的数据结构，旨在使“关系”或“标记”数据的处理变得简单直观。 它的目标是成为用 Python 进行实际、真实世界数据分析的基本高级构建块。 此外，它还有更广泛的目标，即成为任何语言中最强大、最灵活的开源数据分析&#x2F;操作工具。 它已经在朝着这个目标前进。 pandas 非常适合下列这些类型的数据：  具有异构类型列的表格数据，如">
+    <meta name="description" content="介绍pandas 是一个 Python 包，它提供快速、灵活且富有表现力的数据结构，旨在使“关系”或“标记”数据的处理变得简单直观。 它的目标是成为用 Python 进行实际、真实世界数据分析的基本高级构建块。 此外，它还有更广泛的目标，即成为任何语言中最强大、最灵活的开源数据分析&#x2F;操作工具。 它已经在朝着这个目标前进。 pandas 非常适合下列这些类型的数据：  具有异构类型列的表格数据，如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pandas教程">
 <meta property="og:url" content="http://example.com/2023/08/21/Pandas%E6%95%99%E7%A8%8B/index.html">
@@ -59,7 +54,7 @@
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/hour_of_the_day.png">
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/09_time_section.png">
 <meta property="article:published_time" content="2023-08-21T03:00:04.000Z">
-<meta property="article:modified_time" content="2023-08-25T06:18:10.247Z">
+<meta property="article:modified_time" content="2023-08-31T12:00:39.050Z">
 <meta property="article:author" content="wotzc">
 <meta property="article:tag" content="Excel处理">
 <meta property="article:tag" content="Python">
@@ -71,18 +66,14 @@
 <link rel="canonical" href="http://example.com/2023/08/21/Pandas%E6%95%99%E7%A8%8B/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>Pandas教程 | Cai</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/08/21/Pandas%E6%95%99%E7%A8%8B/","path":"2023/08/21/Pandas教程/","title":"Pandas教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Pandas教程 | Cai</title>
   
+
+
 
 
 
@@ -90,52 +81,18 @@
 
 
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
-  
-  <a target="_blank" rel="noopener" href="https://github.com/wotzc" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -146,14 +103,13 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Cai</h1>
+      <p class="site-title">Cai</p>
       <i class="logo-line"></i>
     </a>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
@@ -161,74 +117,16 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
 
-    </div>
-  </div>
-
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -243,68 +141,51 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pandas-%E5%A4%84%E7%90%86%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">pandas 处理什么样的数据？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%8C%85"><span class="nav-number">4.1.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pandas-%E6%95%B0%E6%8D%AE%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.2.</span> <span class="nav-text">pandas 数据表表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame%E4%B8%AD%E6%AF%8F%E4%B8%80%E5%88%97%E9%83%BD%E6%98%AF%E4%B8%80%E4%B8%AA-Series"><span class="nav-number">4.3.</span> <span class="nav-text">DataFrame中每一列都是一个 Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-DataFrame-%E6%88%96-Series-%E5%81%9A%E4%B8%80%E4%BA%9B%E4%BA%8B%E6%83%85"><span class="nav-number">4.4.</span> <span class="nav-text">使用 DataFrame 或 Series 做一些事情</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%BB%E5%86%99%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">如何读写表格数据？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%89%E6%8B%A9DataFrame%E7%9A%84%E5%AD%90%E9%9B%86"><span class="nav-number">6.</span> <span class="nav-text">选择DataFrame的子集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9DataFrame%E7%9A%84%E7%89%B9%E5%AE%9A%E5%88%97%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">如何选择DataFrame的特定列？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9DataFrame%E7%9A%84%E7%89%B9%E5%AE%9A%E8%A1%8C%EF%BC%9F"><span class="nav-number">6.2.</span> <span class="nav-text">如何选择DataFrame的特定行？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9DataFrame%E7%9A%84%E7%89%B9%E5%AE%9A%E8%A1%8C%E5%92%8C%E5%88%97%EF%BC%9F"><span class="nav-number">6.3.</span> <span class="nav-text">如何选择DataFrame的特定行和列？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-pandas-%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%98%E5%9B%BE%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如何在 pandas 中创建绘图？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%8E%E7%8E%B0%E6%9C%89%E5%88%97%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%97"><span class="nav-number">8.</span> <span class="nav-text">如何从现有列创建新列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E6%B1%87%E6%80%BB%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">9.</span> <span class="nav-text">如何计算汇总统计数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E6%80%BB%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">9.1.</span> <span class="nav-text">汇总统计数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E5%B9%B6%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%BB%84"><span class="nav-number">9.2.</span> <span class="nav-text">聚合统计数据并按类别分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E7%B1%BB%E5%88%AB%E7%BB%9F%E8%AE%A1%E8%AE%B0%E5%BD%95%E6%95%B0"><span class="nav-number">9.3.</span> <span class="nav-text">按类别统计记录数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%87%8D%E5%A1%91%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80"><span class="nav-number">10.</span> <span class="nav-text">如何重塑表格布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%A1%A8%E8%A1%8C%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="nav-number">10.1.</span> <span class="nav-text">对表行进行排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%95%BF%E5%88%B0%E5%AE%BD%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%A0%BC%E5%BC%8F"><span class="nav-number">10.2.</span> <span class="nav-text">从长到宽的表格格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8"><span class="nav-number">10.2.1.</span> <span class="nav-text">数据透视表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%AE%BD%E5%88%B0%E9%95%BF%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%A0%BC%E5%BC%8F"><span class="nav-number">10.3.</span> <span class="nav-text">从宽到长的表格格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%90%88%E5%B9%B6%E5%A4%9A%E4%B8%AA%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">11.</span> <span class="nav-text">如何合并多个表的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E7%94%A8%E6%A0%87%E8%AF%86%E7%AC%A6%E8%BF%9E%E6%8E%A5%E8%A1%A8"><span class="nav-number">11.1.</span> <span class="nav-text">使用通用标识符连接表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BD%BB%E6%9D%BE%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE"><span class="nav-number">12.</span> <span class="nav-text">如何轻松处理时间序列数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-pandas-%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E5%B1%9E%E6%80%A7"><span class="nav-number">12.1.</span> <span class="nav-text">使用 pandas 日期时间属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E4%BD%9C%E4%B8%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">12.2.</span> <span class="nav-text">日期时间作为索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">13.</span> <span class="nav-text">如何操作文本数据</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="wotzc"
       src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">wotzc</p>
   <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">38</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">17</span>
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">62</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -319,11 +200,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="wotzc">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Pandas教程 | Cai">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -340,13 +226,13 @@
 
       <time title="创建时间：2023-08-21 11:00:04" itemprop="dateCreated datePublished" datetime="2023-08-21T11:00:04+08:00">2023-08-21</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2023-08-25 14:18:10" itemprop="dateModified" datetime="2023-08-25T14:18:10+08:00">2023-08-25</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-31 20:00:39" itemprop="dateModified" datetime="2023-08-31T20:00:39+08:00">2023-08-31</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -366,8 +252,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>pandas 是一个 Python 包，它提供快速、灵活且富有表现力的数据结构，旨在使“关系”或“标记”数据的处理变得简单直观。 它的目标是成为用 Python 进行实际、真实世界数据分析的基本高级构建块。 此外，它还有更广泛的目标，即成为任何语言中最强大、最灵活的开源数据分析/操作工具。 它已经在朝着这个目标前进。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>pandas 是一个 Python 包，它提供快速、灵活且富有表现力的数据结构，旨在使“关系”或“标记”数据的处理变得简单直观。 它的目标是成为用 Python 进行实际、真实世界数据分析的基本高级构建块。 此外，它还有更广泛的目标，即成为任何语言中最强大、最灵活的开源数据分析/操作工具。 它已经在朝着这个目标前进。</p>
 <p>pandas 非常适合下列这些类型的数据：</p>
 <ul>
 <li>具有异构类型列的表格数据，如 SQL 表或 Excel 电子表格</li>
@@ -441,22 +326,22 @@
 <h1 id="如何读写表格数据？"><a href="#如何读写表格数据？" class="headerlink" title="如何读写表格数据？"></a>如何读写表格数据？</h1><p>数据集：</p>
 <p>本教程使用<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download">成人人口普查收入</a>数据集，存储为 <code>csv 文件</code>。如下所示:</p>
 <p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_dataset.png"></p>
-<p><code>Pandas</code>提供了<span style="color: red; font-weight: bold">read_csv()</span>函数将Excel文件读取为<code>DataFrame</code>对象。</p>
+<p><code>Pandas</code>提供了<code style="color:#b30049;background-color:#fdf5f5">read_csv()</code>函数将Excel文件读取为<code>DataFrame</code>对象。</p>
 <p><code>pandas</code> 支持许多不同的文件格式或开箱即用的数据源（<code>csv</code>、<code>excel</code>、<code>sql</code>、<code>json</code>、<code>parquet</code>…），读取每个文件格式或数据源都使用带有前缀<code>read_*</code>的函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_csv(<span class="string">&quot;data/adult.csv&quot;</span>)</span><br><span class="line">print(adult)</span><br></pre></td></tr></table></figure>
 
 <p>Out：</p>
 <p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/read_excel.png"></p>
 <p>请确保读完数据之后总是有一个数据检查。显示 <code>DataFrame</code> 时，默认显示前 5 行和后 5 行。</p>
-<p>要查看 DataFrame 的前 N 行，请使用该 <span style="color: red; font-weight: bold">head()</span> 方法并以所需的行数作为参数。</p>
+<p>要查看 DataFrame 的前 N 行，请使用该 <code style="color:#b30049;background-color:#fdf5f5">head()</code> 方法并以所需的行数作为参数。</p>
 <p>我想查看 <code>pandas</code> <code>DataFrame</code> 的前 8 行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.head(<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
 
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   age  workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   90          ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   82    Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   66          ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54    Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41    Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">5   34    Private  216864  ...             45   United-States  &lt;&#x3D;50K</span><br><span class="line">6   38    Private  150601  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">7   74  State-gov   88638  ...             20   United-States   &gt;50K</span><br></pre></td></tr></table></figure>
 
-<p>对最后 N 行感兴趣吗？pandas也提供了一种  <span style="color: red; font-weight: bold">tail() </span>方法。例如，<code>adult.tail(10)</code>将返回 <code>DataFrame</code> 的最后 10 行。</p>
-<p>可以通过请求 <code>pandas</code>  <span style="color: red; font-weight: bold">dtypes</span> 属性来检查 <code>pandas</code> 如何解释每个列数据类型：</p>
+<p>对最后 N 行感兴趣吗？pandas也提供了一种  <code style="color:#b30049;background-color:#fdf5f5">tail() </code>方法。例如，<code>adult.tail(10)</code>将返回 <code>DataFrame</code> 的最后 10 行。</p>
+<p>可以通过请求 <code>pandas</code>  <code style="color:#b30049;background-color:#fdf5f5">dtypes</code> 属性来检查 <code>pandas</code> 如何解释每个列数据类型：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.dtypes)</span><br></pre></td></tr></table></figure>
 
 <p>Out:</p>
@@ -466,7 +351,7 @@
 <p>将<code>DataFrame</code>保存为Excel文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adult.to_excel(&quot;adult.xlsx&quot;, sheet_name&#x3D;&quot;person&quot;, index&#x3D;False)</span><br></pre></td></tr></table></figure>
 
-<p><span style="color: red; font-weight: bold"> read_*</span>函数常用于读取函数到<code>Pandas</code>中，而<code>to_*</code>函数常用于存储数据。</p>
+<p><code style="color:#b30049;background-color:#fdf5f5"> read_*</code>函数常用于读取函数到<code>Pandas</code>中，而<code>to_*</code>函数常用于存储数据。</p>
 <p>该<code>to_excel()</code>方法将数据存储为 <code>Excel</code> 文件。在此示例中，<code>sheet_name</code>名为<em>“person”</em>而不是默认的<em>“Sheet1”</em>。通过设置 <code>index=False</code>行索引标签不会保存在电子表格中。</p>
 <p>读取函数<code>read_excel()</code>会将数据重新加载到 <code>DataFrame</code>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;adult.xlsx&quot;</span>)</span><br><span class="line">print(adult)</span><br></pre></td></tr></table></figure>
@@ -519,9 +404,11 @@
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   age     sex</span><br><span class="line">0   90  Female</span><br><span class="line">1   82  Female</span><br><span class="line">2   66  Female</span><br><span class="line">3   54  Female</span><br><span class="line">4   41  Female</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>要选择多个列，请在选择括号内使用列名称列表<code>[]</code>。</p>
-</blockquote>
+<div class="note success no-icon"><p>要选择多个列，请在选择括号内使用列名称列表<code>[]</code>。</p>
+</div>
+
+
+
 <p>返回的数据类型是 <code>pandas DataFrame</code>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">type</span>(age_sex))</span><br></pre></td></tr></table></figure>
 
@@ -548,7 +435,7 @@
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1     True</span><br><span class="line">2     True</span><br><span class="line">3    False</span><br><span class="line">4    False</span><br><span class="line">Name: age, dtype: bool</span><br></pre></td></tr></table></figure>
 
-<p>条件表达式（也可以是 <code>==</code>, <code>!=</code>, <code>&lt;</code>, &lt;=,… ）的输出实际上是一组<code>pandas Series</code>的布尔值（<code>True</code>或<code>False</code>），</p>
+<p>条件表达式（也可以是 <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>,… ）的输出实际上是一组<code>pandas Series</code>的布尔值（<code>True</code>或<code>False</code>），</p>
 <p>其行数与原始 <code>DataFrame</code> 相同 。这样的一系列布尔值可用于将其放在选择括号 [] 之间来过滤 DataFrame， 仅选择值为 <code>True</code> 的行。</p>
 <p>假如我们只对<code>native.country</code>是<code>China</code>和<code>India</code>的用户感兴趣。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">country = adult[adult[<span class="string">&quot;native.country&quot;</span>].isin([<span class="string">&quot;China&quot;</span>, <span class="string">&quot;India&quot;</span>])]</span><br><span class="line">print(country.head())</span><br></pre></td></tr></table></figure>
@@ -563,22 +450,22 @@
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     age         workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">63    51  Self-emp-not-inc  160724  ...             40           China   &gt;50K</span><br><span class="line">90    39           Private  198654  ...             67           India   &gt;50K</span><br><span class="line">214   42      Self-emp-inc   23510  ...             60           India   &gt;50K</span><br><span class="line">244   64           Private  149044  ...             60           China  &lt;&#x3D;50K</span><br><span class="line">377   30           Private  315640  ...             40           China   &gt;50K</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>组合多个条件语句时，每个条件必须用括号 <span style="color:red;font-family:bold">()</span> 括起来。 而且，不能使用<span style="color:red;font-family:bold"> or </span>或<span style="color:red;font-family:bold"> and </span>，而需要使用或运算符<span style="color:red;font-family:bold">  | </span>以及与运算符<span style="color:red;font-family:bold">  &amp; </span>。</p>
-</blockquote>
+<div class="note success no-icon"><p>组合多个条件语句时，每个条件必须用括号 <code style="color:red;font-family:bold">()</code> 括起来。 而且，不能使用<code style="color:red;font-family:bold"> or </code>或<code style="color:red;font-family:bold"> and </code>，而需要使用或运算符<code style="color:red;font-family:bold">  | </code>以及与运算符<code style="color:red;font-family:bold">  & </code>。</p>
+</div>
+
 <p>假如我们只对年龄已知的用户感兴趣。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adult &#x3D; pd.read_excel(&quot;adult.xlsx&quot;)</span><br><span class="line">age_not_no &#x3D; adult[adult[&quot;age&quot;].notna()]</span><br><span class="line">print(age_not_no.head())</span><br></pre></td></tr></table></figure>
 
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   90         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   82   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   66         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54   Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41   Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line"></span><br><span class="line">[5 rows x 15 columns]</span><br></pre></td></tr></table></figure>
 
-<p><span style="color:red; font-weight: bold">notna() </span>条件函数对于值不是 <code>Null</code> 值的每一行返回 <code>True</code>。 因此，可以结合选择括号<code>[]</code>来过滤数据表。</p>
+<p><code style="color:red; font-weight: bold">notna() </code>条件函数对于值不是 <code>Null</code> 值的每一行返回 <code>True</code>。 因此，可以结合选择括号<code>[]</code>来过滤数据表。</p>
 <h2 id="如何选择DataFrame的特定行和列？"><a href="#如何选择DataFrame的特定行和列？" class="headerlink" title="如何选择DataFrame的特定行和列？"></a>如何选择DataFrame的特定行和列？</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/03_subset_columns_rows.png"></p>
 <p>假如对35 岁以上人员的性别感兴趣。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult_names = adult.loc[adult[<span class="string">&quot;age&quot;</span>] &gt; <span class="number">35</span>, <span class="string">&quot;sex&quot;</span>]</span><br><span class="line">print(adult_names.head())</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>在这种情况下，行和列的子集是一次性生成的，仅使用括号选择<span style="color:red;font-weight:bold"> [] </span>已经不够了。 选择括号<span style="color:red;font-weight:bold"> [] </span>前面需要<span style="color:red;font-weight:bold"> loc/iloc </span>运算符。 使用<span style="color:red;font-weight:bold"> loc/iloc </span>时，逗号之前的部分是您想要选择的行，逗号之后的部分是您想要选择的列。</p>
+<p>在这种情况下，行和列的子集是一次性生成的，仅使用括号选择<code style="color:red;font-weight:bold"> [] </code>已经不够了。 选择括号<code style="color:red;font-weight:bold"> [] </code>前面需要<code style="color:red;font-weight:bold"> loc/iloc </code>运算符。 使用<code style="color:red;font-weight:bold"> loc/iloc </code>时，逗号之前的部分是您想要选择的行，逗号之后的部分是您想要选择的列。</p>
 </blockquote>
 <p>使用列名、行标签或条件表达式时，请在选择括号 [] 前面使用 loc 运算符。 对于逗号之前和之后的部分，您可以使用单个标签、标签列表、标签切片、条件表达式或冒号。 使用冒号指定您要选择所有行或列。</p>
 <p>假如对第 10 行到第 25 行和第 3 到第 5 列感兴趣。</p>
@@ -587,7 +474,7 @@
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    fnlwgt     education  education.num</span><br><span class="line">9    70037  Some-college             10</span><br><span class="line">10  172274     Doctorate             16</span><br><span class="line">11  164526   Prof-school             15</span><br><span class="line">12  129177     Bachelors             13</span><br><span class="line">13  136204       Masters             14</span><br><span class="line">14  172175     Doctorate             16</span><br><span class="line">15   45363   Prof-school             15</span><br><span class="line">16  172822          11th              7</span><br><span class="line">17  317847       Masters             14</span><br><span class="line">18  119592    Assoc-acdm             12</span><br><span class="line">19  203034     Bachelors             13</span><br><span class="line">20  188774     Bachelors             13</span><br><span class="line">21   77009          11th              7</span><br><span class="line">22   29059       HS-grad              9</span><br><span class="line">23  153870  Some-college             10</span><br><span class="line">24  135285       HS-grad              9</span><br></pre></td></tr></table></figure>
 
-<p>同样，行和列的子集是一次性生成的，仅使用选择括号<span style="color:red;font-weight:bold"> [] </span>已经不够了。 当根据表中的位置对某些行和/或列特别感兴趣时，请在选择括号<span style="color:red;font-weight:bold"> [] </span>前面使用<span style="color:red;font-weight:bold"> iloc </span>运算符。</p>
+<p>同样，行和列的子集是一次性生成的，仅使用选择括号<code style="color:red;font-weight:bold"> [] </code>已经不够了。 当根据表中的位置对某些行和/或列特别感兴趣时，请在选择括号<code style="color:red;font-weight:bold"> [] </code>前面使用<code style="color:red;font-weight:bold"> iloc </code>运算符。</p>
 <p>当使用 loc 或 iloc 选择特定行和/或列时，我们对我们所选的特定行和/或列赋值。 </p>
 <p>例如，要将前三行人员的年龄统一改成20：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult.iloc[<span class="number">0</span>:<span class="number">3</span>, <span class="number">0</span>] = <span class="number">20</span></span><br><span class="line">print(adult.head(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
@@ -596,13 +483,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   20         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   20   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   20         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54   Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41   Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p><span style="color:red;font-weight:bold">Remember</span>:</p>
+<p><code style="color:red;font-weight:bold">Remember</code>:</p>
 <ul>
-<li><span style="color:green;font-weight:bold">要选择数据子集时，使用方括号[]。</span></li>
-<li><span style="color:green;font-weight:bold">在括号内，您可以使用单个列/行标签、列/行标签列表、标签切片、条件表达式或冒号。</span></li>
-<li><span style="color:green;font-weight:bold">通过 loc 使用行名和列名选择特定的行和列。</span></li>
-<li><span style="color:green;font-weight:bold">通过 iloc 使用坐标轴位置选择特定的行和列。</span></li>
-<li><span style="color:green;font-weight:bold">你可以为 loc 或 iloc 选择的行或列赋新值。</span></li>
+<li><code style="color:green;font-weight:bold">要选择数据子集时，使用方括号[]。</code></li>
+<li><code style="color:green;font-weight:bold">在括号内，您可以使用单个列/行标签、列/行标签列表、标签切片、条件表达式或冒号。</code></li>
+<li><code style="color:green;font-weight:bold">通过 loc 使用行名和列名选择特定的行和列。</code></li>
+<li><code style="color:green;font-weight:bold">通过 iloc 使用坐标轴位置选择特定的行和列。</code></li>
+<li><code style="color:green;font-weight:bold">你可以为 loc 或 iloc 选择的行或列赋新值。</code></li>
 </ul>
 </blockquote>
 <hr>
@@ -636,14 +523,14 @@
 <p>除了使用绘图功能时的默认线图之外，还可以使用许多其他图形来绘制数据。</p>
 <p>绘图方法允许使用除默认线图之外的多种绘图样式，可以通过<code>plot()</code>方法的<code>kind</code>参数进行设置:</p>
 <ul>
-<li><span style="color:red;font-weight:bold">“bar” </span>或<span style="color:red;font-weight:bold"> “barh” </span>绘制柱状图</li>
-<li><span style="color:red;font-weight:bold">“hist” </span>绘制直方图</li>
-<li><span style="color:red;font-weight:bold"> “box” </span>绘制箱形图</li>
-<li><span style="color:red;font-weight:bold"> “kde” </span>或<span style="color:red;font-weight:bold"> “density” </span>绘制密度图</li>
-<li><span style="color:red;font-weight:bold"> “area” </span>绘制面积图</li>
-<li><span style="color:red;font-weight:bold"> “scatter” </span>绘制散点图</li>
-<li><span style="color:red;font-weight:bold"> “hexbin” </span>绘制六边形箱图</li>
-<li> <span style="color:red;font-weight:bold"> “pie” </span>绘制饼状图</li>
+<li><code style="color:red;font-weight:bold">"bar" </code>或<code style="color:red;font-weight:bold"> "barh" </code>绘制柱状图</li>
+<li><code style="color:red;font-weight:bold">"hist" </code>绘制直方图</li>
+<li><code style="color:red;font-weight:bold"> "box" </code>绘制箱形图</li>
+<li><code style="color:red;font-weight:bold"> "kde" </code>或<code style="color:red;font-weight:bold"> "density" </code>绘制密度图</li>
+<li><code style="color:red;font-weight:bold"> "area" </code>绘制面积图</li>
+<li><code style="color:red;font-weight:bold"> "scatter" </code>绘制散点图</li>
+<li><code style="color:red;font-weight:bold"> "hexbin" </code>绘制六边形箱图</li>
+<li> <code style="color:red;font-weight:bold"> "pie" </code>绘制饼状图</li>
 </ul>
 <p>例如，可以通过以下方式创建箱线图：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">air_quality.plot.box()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
@@ -928,7 +815,7 @@
 <p>Out:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    city country                  date.utc  ... value   unit  month</span><br><span class="line">0  Paris      FR 2019-06-21 00:00:00+00:00  ...  20.0  µg&#x2F;m³      6</span><br><span class="line">1  Paris      FR 2019-06-20 23:00:00+00:00  ...  21.8  µg&#x2F;m³      6</span><br><span class="line">2  Paris      FR 2019-06-20 22:00:00+00:00  ...  26.5  µg&#x2F;m³      6</span><br><span class="line">3  Paris      FR 2019-06-20 21:00:00+00:00  ...  24.9  µg&#x2F;m³      6</span><br><span class="line">4  Paris      FR 2019-06-20 20:00:00+00:00  ...  21.4  µg&#x2F;m³      6</span><br><span class="line"></span><br><span class="line">[5 rows x 8 columns]</span><br></pre></td></tr></table></figure>
 
-<p>通过使用 <code>Timestamp</code> 对象来表示日期，<code>pandas</code> 提供了许多与时间相关的属性。 例如月份<code>month</code>，还有年份<code>year</code>、季度<code>quarter</code>……所有这些属性都可以通过<span style="color:red;font-weight:bold"> dt </span>访问器访问。</p>
+<p>通过使用 <code>Timestamp</code> 对象来表示日期，<code>pandas</code> 提供了许多与时间相关的属性。 例如月份<code>month</code>，还有年份<code>year</code>、季度<code>quarter</code>……所有这些属性都可以通过<code style="color:red;font-weight:bold"> dt </code>访问器访问。</p>
 <p>每个测量位置一周中每一天的平均二氧化氮浓度是多少？</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(air_quality.groupby(</span><br><span class="line">        [air_quality[<span class="string">&quot;date.utc&quot;</span>].dt.weekday, <span class="string">&quot;location&quot;</span>])[<span class="string">&quot;value&quot;</span>].mean())</span><br></pre></td></tr></table></figure>
 
@@ -1034,12 +921,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2023/08/19/Java%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9FLogback-SLf4J/" rel="prev" title="Java日志系统Logback+SLf4J">
-                  <i class="fa fa-chevron-left"></i> Java日志系统Logback+SLf4J
+                  <i class="fa fa-angle-left"></i> Java日志系统Logback+SLf4J
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2023/08/25/Maven-POM/" rel="next" title="Maven POM">
-                  Maven POM <i class="fa fa-chevron-right"></i>
+                  Maven POM <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -1052,82 +939,43 @@
 
 
 
-      
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">wotzc</span>
-</div>
-
-<!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
   </div>
--->
 
     </div>
   </footer>
 
   
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
 
   
 
@@ -1136,11 +984,11 @@
 
 
 
-
-
   
 
-  
+
+
+
 
 </body>
 </html>
