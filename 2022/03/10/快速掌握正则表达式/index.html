@@ -28,7 +28,7 @@
 <meta property="og:description" content="什么是正则表达式？在编写处理字符串的程序或网页时，经常会有查找符合某些复杂规则的字符串的需要。正则表达式就是用于描述这些规则的工具。换句话说，正则表达式就是记录文本规则的代码。 很可能你使用过Windows&#x2F;Dos下用于文件查找的通配符(wildcard)，也就是*和?。如果你想查找某个目录下的所有的Word文档的话，你会搜索*.doc。在这里，会被解释成任意的字符串。和通配符类似，正则表达式也是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-10T06:56:28.000Z">
-<meta property="article:modified_time" content="2023-09-05T07:51:58.359Z">
+<meta property="article:modified_time" content="2023-09-05T08:48:01.650Z">
 <meta property="article:author" content="wotzc">
 <meta property="article:tag" content="正则表达式">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 15:51:58" itemprop="dateModified" datetime="2023-09-05T15:51:58+08:00">2023-09-05</time>
+      <time title="修改时间：2023-09-05 16:48:01" itemprop="dateModified" datetime="2023-09-05T16:48:01+08:00">2023-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -224,32 +224,32 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="什么是正则表达式？"><a href="#什么是正则表达式？" class="headerlink" title="什么是正则表达式？"></a>什么是正则表达式？</h1><p>在编写处理字符串的程序或网页时，经常会有查找符合某些复杂规则的字符串的需要。<strong>正则表达式</strong>就是用于描述这些规则的工具。换句话说，正则表达式就是记录文本规则的代码。</p>
-<p>很可能你使用过Windows/Dos下用于文件查找的通配符(wildcard)，也就是<code style="color:red;background-color:#282828">*</code>和<code style="color:red;background-color:#282828">?</code>。如果你想查找某个目录下的所有的Word文档的话，你会搜索*.doc。在这里，<em>会被解释成任意的字符串。和通配符类似，正则表达式也是用来进行文本匹配的工具，只不过比起通配符，它能更精确地描述你的需求——当然，代价就是更复杂——比如你可以编写一个正则表达式，用来查找所有以0开头，后面跟着2-3个数字，然后是一个连字号“-”，最后是7或8位数字的字符串(像</em>010-12345678<em>或</em>0376-7654321)。</p>
+<p>很可能你使用过Windows/Dos下用于文件查找的通配符(wildcard)，也就是<code>*</code>和<code>?</code>。如果你想查找某个目录下的所有的Word文档的话，你会搜索*.doc。在这里，<em>会被解释成任意的字符串。和通配符类似，正则表达式也是用来进行文本匹配的工具，只不过比起通配符，它能更精确地描述你的需求——当然，代价就是更复杂——比如你可以编写一个正则表达式，用来查找所有以0开头，后面跟着2-3个数字，然后是一个连字号“-”，最后是7或8位数字的字符串(像</em>010-12345678<em>或</em>0376-7654321)。</p>
 <h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>学习正则表达式的最好方法是从例子开始，理解例子之后再自己对例子进行修改，实验。下面给出了不少简单的例子，并对它们作了详细的说明。</p>
-<p>假设你在一篇英文小说里查找hi，你可以使用正则表达式<code style="color:red;background-color:#282828">hi</code>。</p>
-<p>这几乎是最简单的正则表达式了，它可以精确匹配这样的字符串：由两个字符组成，前一个字符是<code style="color:red;background-color:#282828">h</code>,后一个是<code style="color:red;background-color:#282828">i</code>。通常，处理正则表达式的工具会提供一个<code style="color:red;background-color:#282828">忽略大小写</code>的选项，如果选中了这个选项，它可以匹配<em>hi</em>,<em>HI</em>,<em>Hi</em>,<em>hI</em>这四种情况中的任意一种。</p>
+<p>假设你在一篇英文小说里查找hi，你可以使用正则表达式<code>hi</code>。</p>
+<p>这几乎是最简单的正则表达式了，它可以精确匹配这样的字符串：由两个字符组成，前一个字符是<code>h</code>,后一个是<code>i</code>。通常，处理正则表达式的工具会提供一个<code>忽略大小写</code>的选项，如果选中了这个选项，它可以匹配<em>hi</em>,<em>HI</em>,<em>Hi</em>,<em>hI</em>这四种情况中的任意一种。</p>
 <p>不幸的是，很多单词里包含<em>hi</em>这两个连续的字符，比如<em>him</em>,<em>history</em>,<em>high</em>等等。用<span style="color:red">hi</span>来查找的话，这里边的<em>hi</em>也会被找出来。如果要精确地查找hi这个单词的话，我们应该使用<span style="color:red">\bhi\b</span>。</p>
-<p><code style="color:red;background-color:#282828">\b</code>是正则表达式规定的一个特殊代码（好吧，某些人叫它<strong>元字符，metacharacter</strong>），代表着单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是<code style="color:red;background-color:#282828">\b</code>并不匹配这些单词分隔字符中的任何一个，它<strong>只匹配一个位置</strong>。</p>
-<p>假如你要找的是hi后面不远处跟着一个Lucy，你应该用<code style="color:red;background-color:#282828">\bhi\b.*\bLucy\b</code>。</p>
-<p>这里，<code style="color:red;background-color:#282828">.</code>是另一个元字符，匹配除了换行符以外的任意字符。<code style="color:red;background-color:#282828">*</code>同样是元字符，不过它代表的不是字符，也不是位置，而是数量——它指定<em>前边的内容可以连续重复使用任意次以使整个表达式得到匹配。因此，<code style="color:red;background-color:#282828">.\</em></code>连在一起就意味着<code style="color:red;background-color:#282828">任意数量的不包含换行的字符</code>。现在\bhi\b.*\bLucy\b的意思就很明显了：先是一个单词hi,然后是任意个任意字符(但不能是换行)，最后是Lucy这个单词。</p>
-<p>换行符就是<code style="color:red;background-color:#282828">'\n'</code>,ASCII编码为10(十六进制0x0A)的字符。</p>
+<p><code>\b</code>是正则表达式规定的一个特殊代码（好吧，某些人叫它<strong>元字符，metacharacter</strong>），代表着单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是<code>\b</code>并不匹配这些单词分隔字符中的任何一个，它<strong>只匹配一个位置</strong>。</p>
+<p>假如你要找的是hi后面不远处跟着一个Lucy，你应该用<code>\bhi\b.*\bLucy\b</code>。</p>
+<p>这里，<code>.</code>是另一个元字符，匹配除了换行符以外的任意字符。<code>*</code>同样是元字符，不过它代表的不是字符，也不是位置，而是数量——它指定<em>前边的内容可以连续重复使用任意次以使整个表达式得到匹配。因此，<code>.\</em></code>连在一起就意味着<code>任意数量的不包含换行的字符</code>。现在\bhi\b.*\bLucy\b的意思就很明显了：先是一个单词hi,然后是任意个任意字符(但不能是换行)，最后是Lucy这个单词。</p>
+<p>换行符就是<code>'\n'</code>,ASCII编码为10(十六进制0x0A)的字符。</p>
 <p>如果同时使用其它元字符，我们就能构造出功能更强大的正则表达式。比如下面这个例子：</p>
-<p><code style="color:red;background-color:#282828">0\d\d-\d\d\d\d\d\d\d\d</code>匹配这样的字符串：以0开头，然后是两个数字，然后是一个连字号“-”，最后是8个数字(也就是中国的电话号码。当然，这个例子只能匹配区号为3位的情形)。</p>
-<p>这里的<code style="color:red;background-color:#282828">\d</code>是个新的元字符，<code style="color:red;background-color:#282828">匹配一位数字(0，或1，或2，或……)</code>。<code style="color:red;background-color:#282828">-</code>不是元字符，只匹配它本身——连字符(或者减号，或者中横线，或者随你怎么称呼它)。</p>
-<p>为了避免那么多烦人的重复，我们也可以这样写这个表达式：<code style="color:red;background-color:#282828">0\d&#123;2&#125;-\d&#123;8&#125;</code>。这里\d后面的{2}({8})的意思是前面\d必须连续重复匹配2次(8次)。</p>
+<p><code>0\d\d-\d\d\d\d\d\d\d\d</code>匹配这样的字符串：以0开头，然后是两个数字，然后是一个连字号“-”，最后是8个数字(也就是中国的电话号码。当然，这个例子只能匹配区号为3位的情形)。</p>
+<p>这里的<code>\d</code>是个新的元字符，<code>匹配一位数字(0，或1，或2，或……)</code>。<code>-</code>不是元字符，只匹配它本身——连字符(或者减号，或者中横线，或者随你怎么称呼它)。</p>
+<p>为了避免那么多烦人的重复，我们也可以这样写这个表达式：<code>0\d&#123;2&#125;-\d&#123;8&#125;</code>。这里\d后面的{2}({8})的意思是前面\d必须连续重复匹配2次(8次)。</p>
 <div class="note success"><p><strong>注解：</strong></p>
 <ol>
-<li>如果需要更精确的说法，<code style="color:red;background-color:#282828">\b</code>匹配这样的位置：它的前一个字符和后一个字符不全是(一个是,一个不是或不存在)<code style="color:red;background-color:#282828">\w</code>。</li>
-<li>换行符就是<code style="color:red;background-color:#282828">'\n'</code>，ASCII编码为10(十六进制0x0A)的字符。</li>
+<li>如果需要更精确的说法，<code>\b</code>匹配这样的位置：它的前一个字符和后一个字符不全是(一个是,一个不是或不存在)<code>\w</code>。</li>
+<li>换行符就是<code>'\n'</code>，ASCII编码为10(十六进制0x0A)的字符。</li>
 </ol>
 </div>
 
-<h1 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h1><p>现在你已经知道几个很有用的元字符了，如<code style="color:red;background-color:#282828">\b</code>,<code style="color:red;background-color:#282828">.</code>,<code style="color:red;background-color:#282828">*</code>，还有<code style="color:red;background-color:#282828">\d.</code>正则表达式里还有更多的元字符，比如<code style="color:red;background-color:#282828">\s</code>匹配任意的空白符，包括空格，制表符(Tab)，换行符，中文全角空格等。<code style="color:red;background-color:#282828">\w</code>匹配字母或数字或下划线或汉字等。</p>
+<h1 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h1><p>现在你已经知道几个很有用的元字符了，如<code>\b</code>,<code>.</code>,<code>*</code>，还有<code>\d.</code>正则表达式里还有更多的元字符，比如<code>\s</code>匹配任意的空白符，包括空格，制表符(Tab)，换行符，中文全角空格等。<code>\w</code>匹配字母或数字或下划线或汉字等。</p>
 <p>对中文/汉字的特殊处理是由.Net提供的正则表达式引擎支持的，其它环境下的具体情况请查看相关文档。</p>
 <p>下面来看看更多的例子：</p>
-<p><code style="color:red;background-color:#282828">\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(<code style="color:red;background-color:#282828">\b</code>)，然后是字母a，然后是任意数量的字母或数字(<code style="color:red;background-color:#282828">\w</code>)，最后是单词结束处(<code style="color:red;background-color:#282828">\b</code>)。</p>
-<p><code style="color:red;background-color:#282828">\d+</code>匹配1个或更多连续的数字。这里的<code style="color:red;background-color:#282828">+</code>是和<code style="color:red;background-color:#282828">*</code>类似的元字符，不同的是<code style="color:red;background-color:#282828">*</code>匹配重复任意次(可能是0次)，而<code style="color:red;background-color:#282828">+</code>则匹配重复1次或更多次。</p>
-<p><code style="color:red;background-color:#282828">\b\w&#123;6&#125;\b</code> 匹配刚好6个字符的单词。</p>
+<p><code>\ba\w*\b</code>匹配以字母a开头的单词——先是某个单词开始处(<code>\b</code>)，然后是字母a，然后是任意数量的字母或数字(<code>\w</code>)，最后是单词结束处(<code>\b</code>)。</p>
+<p><code>\d+</code>匹配1个或更多连续的数字。这里的<code>+</code>是和<code>*</code>类似的元字符，不同的是<code>*</code>匹配重复任意次(可能是0次)，而<code>+</code>则匹配重复1次或更多次。</p>
+<p><code>\b\w&#123;6&#125;\b</code> 匹配刚好6个字符的单词。</p>
 <table>
 <thead>
 <tr>
@@ -258,38 +258,38 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code style="color:red;background-color:#282828">.</code></td>
+<td align="center"><code>.</code></td>
 <td align="center">匹配除换行符以外的任意字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\w</code></td>
+<td align="center"><code>\w</code></td>
 <td align="center">匹配字母或数字或下划线</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\s</code></td>
+<td align="center"><code>\s</code></td>
 <td align="center">匹配任意的空白符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\d</code></td>
+<td align="center"><code>\d</code></td>
 <td align="center">匹配数字</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\b</code></td>
+<td align="center"><code>\b</code></td>
 <td align="center">匹配单词的开始或结束</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">^</code></td>
+<td align="center"><code>^</code></td>
 <td align="center">匹配字符串的开始</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">$</code></td>
+<td align="center"><code>$</code></td>
 <td align="center">匹配字符串的结束</td>
 </tr>
 </tbody></table>
-<p>元字符<code style="color:red;background-color:#282828">^</code>（和数字6在同一个键位上的符号）和<code style="color:red;background-color:#282828">$</code>都匹配一个位置，这和<code style="color:red;background-color:#282828">\b</code>有点类似。<code style="color:red;background-color:#282828">^</code>匹配你要用来查找的字符串的开头，<code style="color:red;background-color:#282828">$</code>匹配结尾。这两个代码在验证输入的内容时非常有用，比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code style="color:red;background-color:#282828">^\d&#123;5,12&#125;$</code>。</p>
-<p>这里的<code style="color:red;background-color:#282828">&#123;5,12&#125;</code>和前面介绍过的<code style="color:red;background-color:#282828">&#123;2&#125;</code>是类似的，只不过<code style="color:red;background-color:#282828">&#123;2&#125;</code>匹配只能不多不少重复2次，<code style="color:red;background-color:#282828">&#123;5,12&#125;</code>则是重复的次数不能少于5次，不能多于12次，否则都不匹配。</p>
-<p>因为使用了<code style="color:red;background-color:#282828">^</code>和<code style="color:red;background-color:#282828">$</code>，所以输入的整个字符串都要用来和<code style="color:red;background-color:#282828">\d&#123;5,12&#125;</code>来匹配，也就是说整个输入必须是5到12个数字，因此如果输入的QQ号能匹配这个正则表达式的话，那就符合要求了。</p>
-<p>和忽略大小写的选项类似，有些正则表达式处理工具还有一个处理多行的选项。如果选中了这个选项，<code style="color:red;background-color:#282828">^</code>和<code style="color:red;background-color:#282828">$</code>的意义就变成了匹配行的开始处和结束处。</p>
+<p>元字符<code>^</code>（和数字6在同一个键位上的符号）和<code>$</code>都匹配一个位置，这和<code>\b</code>有点类似。<code>^</code>匹配你要用来查找的字符串的开头，<code>$</code>匹配结尾。这两个代码在验证输入的内容时非常有用，比如一个网站如果要求你填写的QQ号必须为5位到12位数字时，可以使用：<code>^\d&#123;5,12&#125;$</code>。</p>
+<p>这里的<code>&#123;5,12&#125;</code>和前面介绍过的<code>&#123;2&#125;</code>是类似的，只不过<code>&#123;2&#125;</code>匹配只能不多不少重复2次，<code>&#123;5,12&#125;</code>则是重复的次数不能少于5次，不能多于12次，否则都不匹配。</p>
+<p>因为使用了<code>^</code>和<code>$</code>，所以输入的整个字符串都要用来和<code>\d&#123;5,12&#125;</code>来匹配，也就是说整个输入必须是5到12个数字，因此如果输入的QQ号能匹配这个正则表达式的话，那就符合要求了。</p>
+<p>和忽略大小写的选项类似，有些正则表达式处理工具还有一个处理多行的选项。如果选中了这个选项，<code>^</code>和<code>$</code>的意义就变成了匹配行的开始处和结束处。</p>
 <div class="note success"><p><strong>注解：</strong></p>
 <ol>
 <li>对中文/汉字的特殊处理是由.Net提供的正则表达式引擎支持的，其它环境下的具体情况请查看相关文档。</li>
@@ -297,9 +297,9 @@
 </ol>
 </div>
 
-<h1 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h1><p>有时候在我们查找<code style="color:red;background-color:#282828"> . </code>，或者<code style="color:red;background-color:#282828">*</code>，或者一些元字符本身的话，会有一些问题出现，因为这些元字符已经变成别的意思了，所以我们没有办法指定这些元字符。出现这种情况，我们就得使用<code style="color:red;background-color:#282828">\</code>来取消这些字符的特殊意义。所以，我们应该使用<code style="color:red;background-color:#282828">\.</code>和<code style="color:red;background-color:#282828">\*</code>。当然，要查找<code style="color:red;background-color:#282828">\</code>本身，你也得用<code style="color:red;background-color:#282828">\\</code>.</p>
-<p>例如：<code style="color:red;background-color:#282828">deerchao.net</code>匹配<code style="color:red;background-color:#282828">deerchao.net</code>，<code style="color:red;background-color:#282828">C:\Windows</code>匹配<code style="color:red;background-color:#282828">C:\Windows</code>。</p>
-<h1 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h1><p>你已经看过了前面的<code style="color:red;background-color:#282828">*</code>，<code style="color:red;background-color:#282828">+</code>，<code style="color:red;background-color:#282828">&#123;2&#125;</code>，<code style="color:red;background-color:#282828">&#123;5,12&#125;</code>这几个匹配重复的方式了。下面是正则表达式中所有的限定符(指定数量的代码，例如*,{5,12}等)：</p>
+<h1 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h1><p>有时候在我们查找<code> . </code>，或者<code>*</code>，或者一些元字符本身的话，会有一些问题出现，因为这些元字符已经变成别的意思了，所以我们没有办法指定这些元字符。出现这种情况，我们就得使用<code>\</code>来取消这些字符的特殊意义。所以，我们应该使用<code>\.</code>和<code>\*</code>。当然，要查找<code>\</code>本身，你也得用<code>\\</code>.</p>
+<p>例如：<code>deerchao.net</code>匹配<code>deerchao.net</code>，<code>C:\Windows</code>匹配<code>C:\Windows</code>。</p>
+<h1 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h1><p>你已经看过了前面的<code>*</code>，<code>+</code>，<code>&#123;2&#125;</code>，<code>&#123;5,12&#125;</code>这几个匹配重复的方式了。下面是正则表达式中所有的限定符(指定数量的代码，例如*,{5,12}等)：</p>
 <table>
 <thead>
 <tr>
@@ -308,49 +308,49 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code style="color:red;background-color:#282828">*</code></td>
+<td align="center"><code>*</code></td>
 <td align="center">重复零次或更多次</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">+</code></td>
+<td align="center"><code>+</code></td>
 <td align="center">重复一次或更多次</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">?</code></td>
+<td align="center"><code>?</code></td>
 <td align="center">重复零次或一次</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">&#123;n&#125;</code></td>
+<td align="center"><code>&#123;n&#125;</code></td>
 <td align="center">重复n次</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">&#123;n,&#125;</code></td>
+<td align="center"><code>&#123;n,&#125;</code></td>
 <td align="center">重复n次或更多次</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">&#123;n,m&#125;</code></td>
+<td align="center"><code>&#123;n,m&#125;</code></td>
 <td align="center">重复n到m次</td>
 </tr>
 </tbody></table>
 <p>下面是一些使用重复的例子：</p>
-<p><code style="color:red;background-color:#282828">Windows\d+</code>匹配Windows后面跟1个或更多数字</p>
-<p><code style="color:red;background-color:#282828">^\w+</code>匹配一行的第一个单词(或整个字符串的第一个单词，具体匹配哪个意思得看选项设置)</p>
+<p><code>Windows\d+</code>匹配Windows后面跟1个或更多数字</p>
+<p><code>^\w+</code>匹配一行的第一个单词(或整个字符串的第一个单词，具体匹配哪个意思得看选项设置)</p>
 <h1 id="正则表达式之字符类"><a href="#正则表达式之字符类" class="headerlink" title="正则表达式之字符类"></a>正则表达式之字符类</h1><p>如果想要查找数字，字母或数字，空白是很简单的，因为对应这些字符集合的元字符是已经存在的了，不过要想匹配像元音字母a，e，i，o，u这些没有预先定义元字符的字符集合该怎么做呢？</p>
-<p>有个很简单的方法，只需要在方括号里列出它们就可以了，像<code style="color:red;background-color:#282828">[aeiou]</code>就匹配任何一个英文元音字母，<code style="color:red;background-color:#282828">[.?!]</code>匹配标点符号(.或?或!)。</p>
-<p>我们也可以轻松地指定一个字符<strong>范围</strong>，像<code style="color:red;background-color:#282828">[0-9]</code>代表的含意与<code style="color:red;background-color:#282828">\d</code>就是完全一致的：一位数字；同理<code style="color:red;background-color:#282828">[a-z0-9A-Z_]</code>也完全等同于<code>\w</code>（如果只考虑英文的话）。</p>
-<p>下面是一个更复杂的表达式：<code style="color:red;background-color:#282828">(?0\d&#123;2&#125;[) -]?\d&#123;8&#125;</code>。</p>
-<p>这个表达式可以匹配几种格式的电话号码，像(010)88886666，或022-22334455，或02912345678等。我们对它进行一些分析吧：首先是一个转义字符<code style="color:red;background-color:#282828">(</code>,它能出现0次或1次(<code style="color:red;background-color:#282828">?</code>),然后是一个<code style="color:red;background-color:#282828">0</code>，后面跟着2个数字(<code style="color:red;background-color:#282828">\d&#123;2&#125;</code>)，然后是<code style="color:red;background-color:#282828">)</code>或<code style="color:red;background-color:#282828">-</code>或<code style="color:red;background-color:#282828">空格</code>中的一个，它出现1次或不出现(<code style="color:red;background-color:#282828">?</code>)，最后是8个数字(<code style="color:red;background-color:#282828">\d&#123;8&#125;</code>)。</p>
-<div class="note success"><p><strong>注解：</strong><code style="color:red;background-color:#282828"> (</code>和<code style="color:red;background-color:#282828">)</code>也是元字符，后面的分组节里会提到，所以在这里需要使用转义。</p>
+<p>有个很简单的方法，只需要在方括号里列出它们就可以了，像<code>[aeiou]</code>就匹配任何一个英文元音字母，<code>[.?!]</code>匹配标点符号(.或?或!)。</p>
+<p>我们也可以轻松地指定一个字符<strong>范围</strong>，像<code>[0-9]</code>代表的含意与<code>\d</code>就是完全一致的：一位数字；同理<code>[a-z0-9A-Z_]</code>也完全等同于<code>\w</code>（如果只考虑英文的话）。</p>
+<p>下面是一个更复杂的表达式：<code>(?0\d&#123;2&#125;[) -]?\d&#123;8&#125;</code>。</p>
+<p>这个表达式可以匹配几种格式的电话号码，像(010)88886666，或022-22334455，或02912345678等。我们对它进行一些分析吧：首先是一个转义字符<code>(</code>,它能出现0次或1次(<code>?</code>),然后是一个<code>0</code>，后面跟着2个数字(<code>\d&#123;2&#125;</code>)，然后是<code>)</code>或<code>-</code>或<code>空格</code>中的一个，它出现1次或不出现(<code>?</code>)，最后是8个数字(<code>\d&#123;8&#125;</code>)。</p>
+<div class="note success"><p><strong>注解：</strong><code> (</code>和<code>)</code>也是元字符，后面的分组节里会提到，所以在这里需要使用转义。</p>
 </div>
 
-<h1 id="正则表达式的分枝条件"><a href="#正则表达式的分枝条件" class="headerlink" title="正则表达式的分枝条件"></a>正则表达式的分枝条件</h1><p>但是在上节内容介绍的那个表达式也可以用来匹配类似<em>010)12345678</em>或*(022-87654321*这样的错误的格式。怎么办？要想解决这个问题，我们可以使用<strong>分枝条件。</strong>正则表达式里的<strong>分枝条件</strong>指的是有几种规则，只要满足这些规则中的任意一种，都会被当成匹配，因此我们要使用<code style="color:red;background-color:#282828">|</code>把这些规则分开。为了更好的理解上述内容，我们来看看几个例子：</p>
-<p><code style="color:red;background-color:#282828">0\d&#123;2&#125;-\d&#123;8&#125;|0\d&#123;3&#125;-\d&#123;7&#125;</code>这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如010-12345678)，一种是4位区号，7位本地号(0376-2233445)。</p>
-<p><code style="color:red;background-color:#282828">(0\d&#123;2&#125;)[- ]?\d&#123;8&#125;|0\d&#123;2&#125;[- ]?\d&#123;8&#125;</code>这个表达式匹配3位区号的电话号码，其中区号可以用小括号括起来，也可以不用，区号与本地号间可以用连字号或空格间隔，也可以没有间隔。你可以试试用分枝条件把这个表达式扩展成也支持4位区号的。</p>
-<p><code style="color:red;background-color:#282828">\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</code>这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。之所以要给出这个例子是因为它能说明一个问题：<strong>使用分枝条件时，要注意各个条件的顺序</strong>。如果你把它改成<code style="color:red;background-color:#282828">\d&#123;5&#125;|\d&#123;5&#125;-\d&#123;4&#125;</code>的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。原因是匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。</p>
+<h1 id="正则表达式的分枝条件"><a href="#正则表达式的分枝条件" class="headerlink" title="正则表达式的分枝条件"></a>正则表达式的分枝条件</h1><p>但是在上节内容介绍的那个表达式也可以用来匹配类似<em>010)12345678</em>或*(022-87654321*这样的错误的格式。怎么办？要想解决这个问题，我们可以使用<strong>分枝条件。</strong>正则表达式里的<strong>分枝条件</strong>指的是有几种规则，只要满足这些规则中的任意一种，都会被当成匹配，因此我们要使用<code>|</code>把这些规则分开。为了更好的理解上述内容，我们来看看几个例子：</p>
+<p><code>0\d&#123;2&#125;-\d&#123;8&#125;|0\d&#123;3&#125;-\d&#123;7&#125;</code>这个表达式能匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如010-12345678)，一种是4位区号，7位本地号(0376-2233445)。</p>
+<p><code>(0\d&#123;2&#125;)[- ]?\d&#123;8&#125;|0\d&#123;2&#125;[- ]?\d&#123;8&#125;</code>这个表达式匹配3位区号的电话号码，其中区号可以用小括号括起来，也可以不用，区号与本地号间可以用连字号或空格间隔，也可以没有间隔。你可以试试用分枝条件把这个表达式扩展成也支持4位区号的。</p>
+<p><code>\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</code>这个表达式用于匹配美国的邮政编码。美国邮编的规则是5位数字，或者用连字号间隔的9位数字。之所以要给出这个例子是因为它能说明一个问题：<strong>使用分枝条件时，要注意各个条件的顺序</strong>。如果你把它改成<code>\d&#123;5&#125;|\d&#123;5&#125;-\d&#123;4&#125;</code>的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。原因是匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。</p>
 <h1 id="正则表达式之分组"><a href="#正则表达式之分组" class="headerlink" title="正则表达式之分组"></a>正则表达式之分组</h1><p>在上述章节中我们已经知道直接在字符后面加上限定符就可以重复单个字符，那么多个字符的重复又该如何实现呢？你可以使用小括号来指定子表达式（也称为<strong>分组</strong>），然后对于这个子表达式的重复次数你就可以自行规定了，子表达式也可以进行一些其他的操作，这个在后面会进行介绍。</p>
-<p><code style="color:red;background-color:#282828">(\d&#123;1,3&#125;.)&#123;3&#125;\d&#123;1,3&#125;</code>是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：<code style="color:red;background-color:#282828">\d&#123;1,3&#125;</code>匹配1到3位的数字，<code style="color:red;background-color:#282828">(\d&#123;1,3&#125;.)&#123;3&#125;</code>匹配三位数字加上一个英文句号(这个整体也就是这个<strong>分组</strong>)重复3次，最后再加上一个一到三位的数字<code style="color:red;background-color:#282828">(\d&#123;1,3&#125;)</code>。</p>
-<p>不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：<code style="color:red;background-color:#282828">((2[0-4]\d|25[0-5]|[01]?\d\d?).)&#123;3&#125;(2[0-4]\d|25[0-5]|[01]?\d\d?)</code>。</p>
-<p>理解这个表达式的关键是理解<code style="color:red;background-color:#282828">2[0-4]\d|25[0-5]|[01]?\d\d?</code>，这里我就不细说了，你自己应该能分析得出来它的意义。</p>
+<p><code>(\d&#123;1,3&#125;.)&#123;3&#125;\d&#123;1,3&#125;</code>是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：<code>\d&#123;1,3&#125;</code>匹配1到3位的数字，<code>(\d&#123;1,3&#125;.)&#123;3&#125;</code>匹配三位数字加上一个英文句号(这个整体也就是这个<strong>分组</strong>)重复3次，最后再加上一个一到三位的数字<code>(\d&#123;1,3&#125;)</code>。</p>
+<p>不幸的是，它也将匹配256.300.888.999这种不可能存在的IP地址。如果能使用算术比较的话，或许能简单地解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：<code>((2[0-4]\d|25[0-5]|[01]?\d\d?).)&#123;3&#125;(2[0-4]\d|25[0-5]|[01]?\d\d?)</code>。</p>
+<p>理解这个表达式的关键是理解<code>2[0-4]\d|25[0-5]|[01]?\d\d?</code>，这里我就不细说了，你自己应该能分析得出来它的意义。</p>
 <p><strong>注解：</strong></p>
 <ol>
 <li>IP地址中每个数字都不能大于255. 经常有人问我，01.02.03.04 这样前面带有0的数字, 是不是正确的IP地址呢? 答案是: 是的, IP 地址里的数字可以包含有前导 0 (leading zeroes).</li>
@@ -364,54 +364,54 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code style="color:red;background-color:#282828">\W</code></td>
+<td align="center"><code>\W</code></td>
 <td align="center">匹配任意不是字母，数字，下划线，汉字的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\S</code></td>
+<td align="center"><code>\S</code></td>
 <td align="center">匹配任意不是空白符的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\D</code></td>
+<td align="center"><code>\D</code></td>
 <td align="center">匹配任意非数字的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\B</code></td>
+<td align="center"><code>\B</code></td>
 <td align="center">匹配不是单词开头或结束的位置</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">[^x]</code></td>
+<td align="center"><code>[^x]</code></td>
 <td align="center">匹配除了x以外的任意字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">[^aeiou]</code></td>
+<td align="center"><code>[^aeiou]</code></td>
 <td align="center">匹配除了aeiou这几个字母以外的任意字符</td>
 </tr>
 </tbody></table>
-<p>例子：<code style="color:red;background-color:#282828">\S+</code>匹配不包含空白符的字符串。</p>
-<p><code style="color:red;background-color:#282828"><a[^>]+></code>匹配用尖括号括起来的以a开头的字符串。</p>
+<p>例子：<code>\S+</code>匹配不包含空白符的字符串。</p>
+<p><code><a[^>]+></code>匹配用尖括号括起来的以a开头的字符串。</p>
 <p>怎么查找<strong>不是某个字符或不在某个字符类里</strong>的字符的方法（反义）我们之前已经提过了。但是如果我们的目的不是去匹配某个字符，而是只想要该字符是否出现过，怎么办？例如，如果我们想要查找的单词中出现了字母q，但是字母q的后面跟着的不是字母u的话，我们可以尝试：</p>
-<p><code style="color:red;background-color:#282828">\b\w*q[^u]\w*\b</code>匹配包含<strong>后面不是字母u的字母q</strong>的单词。但是如果多做测试(或者你思维足够敏锐，直接就观察出来了)，你会发现，如果q出现在单词的结尾的话，像<strong>Iraq,Benq</strong>，这个表达式就会出错。这是因为<code style="color:red;background-color:#282828">[^u]</code>总要匹配一个字符，所以如果q是单词的最后一个字符的话，后面的<code style="color:red;background-color:#282828">[^u]</code>将会匹配q后面的单词分隔符(可能是空格，或者是句号或其它的什么)，后面的<code style="color:red;background-color:#282828">\w*\b</code>将会匹配下一个单词，于是<code style="color:red;background-color:#282828">\b\w*q[^u]\w*\b</code>就能匹配整个<code style="color:red;background-color:#282828">Iraq fighting</code>。<strong>负向零宽断言</strong>能解决这样的问题，因为它只匹配一个位置，并不<strong>消费</strong>任何字符。现在，我们可以这样来解决这个题：<code style="color:red;background-color:#282828">\b\w*q(?!u)\w*\b</code>。</p>
-<p>零宽度负预测先行断言<code style="color:red;background-color:#282828">(?!exp)</code>，断言此位置的后面不能匹配表达式exp。例如：<code style="color:red;background-color:#282828">\d&#123;3&#125;(?!\d)</code>匹配三位数字，而且这三位数字的后面不能是数字；<code style="color:red;background-color:#282828">\b((?!abc)\w)+\b</code>匹配不包含连续字符串abc的单词。</p>
+<p><code>\b\w*q[^u]\w*\b</code>匹配包含<strong>后面不是字母u的字母q</strong>的单词。但是如果多做测试(或者你思维足够敏锐，直接就观察出来了)，你会发现，如果q出现在单词的结尾的话，像<strong>Iraq,Benq</strong>，这个表达式就会出错。这是因为<code>[^u]</code>总要匹配一个字符，所以如果q是单词的最后一个字符的话，后面的<code>[^u]</code>将会匹配q后面的单词分隔符(可能是空格，或者是句号或其它的什么)，后面的<code>\w*\b</code>将会匹配下一个单词，于是<code>\b\w*q[^u]\w*\b</code>就能匹配整个<code>Iraq fighting</code>。<strong>负向零宽断言</strong>能解决这样的问题，因为它只匹配一个位置，并不<strong>消费</strong>任何字符。现在，我们可以这样来解决这个题：<code>\b\w*q(?!u)\w*\b</code>。</p>
+<p>零宽度负预测先行断言<code>(?!exp)</code>，断言此位置的后面不能匹配表达式exp。例如：<code>\d&#123;3&#125;(?!\d)</code>匹配三位数字，而且这三位数字的后面不能是数字；<code>\b((?!abc)\w)+\b</code>匹配不包含连续字符串abc的单词。</p>
 <p>同理，我们可以用<code>(?&lt;!exp)</code>，零宽度负回顾后发断言来断言此位置的前面不能匹配表达式exp：<code>(?&lt;![a-z])\d&#123;7&#125;</code>匹配前面不是小写字母的七位数字。</p>
-<p>一个更复杂的例子：<code style="color:red;background-color:#282828">(?<=<(\w+)>).*(?=</\1>)</code>匹配不包含属性的简单HTML标签内里的内容。<code style="color:red;background-color:#282828">(?<=<(\w+)>)</code>指定了这样的<strong>前缀</strong>：被尖括号括起来的单词(比如可能是<code style="color:red;background-color:#282828">)</code>，然后是<code style="color:red;background-color:#282828">.*</code>(任意的字符串)，最后是一个<strong>后缀</strong><code style="color:red;background-color:#282828">(?=</\1>)</code>。注意后缀里的<code style="color:red;background-color:#282828">/</code>，它用到了前面提过的字符转义；<code style="color:red;background-color:#282828">\1</code>则是一个反向引用，引用的正是捕获的第一组，前面的<code style="color:red;background-color:#282828">(\w+)</code>匹配的内容，这样如果前缀实际上是<b>的话，后缀就是</b>了。整个表达式匹配的是<b>和</b>之间的内容(再次提醒，不包括前缀和后缀本身)。</p>
+<p>一个更复杂的例子：<code>(?<=<(\w+)>).*(?=</\1>)</code>匹配不包含属性的简单HTML标签内里的内容。<code>(?<=<(\w+)>)</code>指定了这样的<strong>前缀</strong>：被尖括号括起来的单词(比如可能是<code>)</code>，然后是<code>.*</code>(任意的字符串)，最后是一个<strong>后缀</strong><code>(?=</\1>)</code>。注意后缀里的<code>/</code>，它用到了前面提过的字符转义；<code>\1</code>则是一个反向引用，引用的正是捕获的第一组，前面的<code>(\w+)</code>匹配的内容，这样如果前缀实际上是<b>的话，后缀就是</b>了。整个表达式匹配的是<b>和</b>之间的内容(再次提醒，不包括前缀和后缀本身)。</p>
 <p><strong>注解：</strong></p>
 <ul>
-<li>请详细分析表达式<code style="color:red;background-color:#282828">(?<=<(\w+)>).*(?=</\1>)</code>，这个表达式最能表现零宽断言的真正用途。</li>
+<li>请详细分析表达式<code>(?<=<(\w+)>).*(?=</\1>)</code>，这个表达式最能表现零宽断言的真正用途。</li>
 </ul>
-<h1 id="正则表达式之注释"><a href="#正则表达式之注释" class="headerlink" title="正则表达式之注释"></a>正则表达式之注释</h1><p>小括号还有另一种用途，就是通过语法<code style="color:red;background-color:#282828">(?#comment)</code>来包含注释。例如：<code style="color:red;background-color:#282828">2[0-4]\d(?#200-249)|25[0-5](?#250-255)|[01]?\d\d?(?#0-199)</code>。</p>
+<h1 id="正则表达式之注释"><a href="#正则表达式之注释" class="headerlink" title="正则表达式之注释"></a>正则表达式之注释</h1><p>小括号还有另一种用途，就是通过语法<code>(?#comment)</code>来包含注释。例如：<code>2[0-4]\d(?#200-249)|25[0-5](?#250-255)|[01]?\d\d?(?#0-199)</code>。</p>
 <p>如果要包含注释，最好是启用“忽略模式里的空白符”选项，因为这样在编写表达式时能任意的添加空格，Tab，换行，而实际使用时这些都将被忽略。启用这个选项后，在#后面到这一行结束的所有文本都将被当成注释忽略掉。</p>
 <p>例如，我们可以前面的一个表达式写成这样：</p>
-<p><code style="color:red;background-color:#282828">(?<= # 断言要匹配的文本的前缀</code></p>
-<p><code style="color:red;background-color:#282828"><(\w+)> # 查找尖括号括起来的字母或数字(即HTML/XML标签)</code></p>
-<p><code style="color:red;background-color:#282828">) # 前缀结束</code></p>
-<p><code style="color:red;background-color:#282828">.* # 匹配任意文本</code></p>
-<p><code style="color:red;background-color:#282828">(?= # 断言要匹配的文本的后缀</code></p>
-<p><code style="color:red;background-color:#282828"></\1> # 查找尖括号括起来的内容：前面是一个"/"，后面是先前捕获的标签</code></p>
-<p><code style="color:red;background-color:#282828">) # 后缀结束</code></p>
-<h1 id="正则表达式之贪婪与懒惰"><a href="#正则表达式之贪婪与懒惰" class="headerlink" title="正则表达式之贪婪与懒惰"></a>正则表达式之贪婪与懒惰</h1><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配<strong>尽可能多</strong>的字符。以这个表达式为例：<code style="color:red;background-color:#282828">a.*b</code>，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串<em>aabab</em>。这被称为<strong>贪婪</strong>匹配。</p>
-<p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号<code style="color:red;background-color:#282828">?</code>。这样<code style="color:red;background-color:#282828">.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：</p>
-<p><code style="color:red;background-color:#282828">a.*?b</code>匹配最短的，以a开始，以b结束的字符串。如果把它应用于<em>aabab</em>的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。</p>
+<p><code>(?<= # 断言要匹配的文本的前缀</code></p>
+<p><code><(\w+)> # 查找尖括号括起来的字母或数字(即HTML/XML标签)</code></p>
+<p><code>) # 前缀结束</code></p>
+<p><code>.* # 匹配任意文本</code></p>
+<p><code>(?= # 断言要匹配的文本的后缀</code></p>
+<p><code></\1> # 查找尖括号括起来的内容：前面是一个"/"，后面是先前捕获的标签</code></p>
+<p><code>) # 后缀结束</code></p>
+<h1 id="正则表达式之贪婪与懒惰"><a href="#正则表达式之贪婪与懒惰" class="headerlink" title="正则表达式之贪婪与懒惰"></a>正则表达式之贪婪与懒惰</h1><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配<strong>尽可能多</strong>的字符。以这个表达式为例：<code>a.*b</code>，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串<em>aabab</em>。这被称为<strong>贪婪</strong>匹配。</p>
+<p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号<code>?</code>。这样<code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：</p>
+<p><code>a.*?b</code>匹配最短的，以a开始，以b结束的字符串。如果把它应用于<em>aabab</em>的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。</p>
 <table>
 <thead>
 <tr>
@@ -420,23 +420,23 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code style="color:red;background-color:#282828">*?</code></td>
+<td align="center"><code>*?</code></td>
 <td align="center">重复任意次，但尽可能少重复</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">+?</code></td>
+<td align="center"><code>+?</code></td>
 <td align="center">重复1次或更多次，但尽可能少重复</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">??</code></td>
+<td align="center"><code>??</code></td>
 <td align="center">重复0次或1次，但尽可能少重复</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">&#123;n,m&#125;?</code></td>
+<td align="center"><code>&#123;n,m&#125;?</code></td>
 <td align="center">重复n到m次，但尽可能少重复</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">&#123;n,&#125;?</code></td>
+<td align="center"><code>&#123;n,&#125;?</code></td>
 <td align="center">重复n次以上，但尽可能少重复</td>
 </tr>
 </tbody></table>
@@ -458,15 +458,15 @@
 </tr>
 <tr>
 <td align="center">Multiline(多行模式)</td>
-<td align="center">更改<code style="color:red;background-color:#282828">^</code>和<code style="color:red;background-color:#282828">$</code>的含义，使它们分别在任意一行的行首和行尾匹配，而不仅仅在整个字符串的开头和结尾匹配。(在此模式下,<code style="color:red;background-color:#282828">$</code>的精确含意是:匹配\n之前的位置以及字符串结束前的位置.)</td>
+<td align="center">更改<code>^</code>和<code>$</code>的含义，使它们分别在任意一行的行首和行尾匹配，而不仅仅在整个字符串的开头和结尾匹配。(在此模式下,<code>$</code>的精确含意是:匹配\n之前的位置以及字符串结束前的位置.)</td>
 </tr>
 <tr>
 <td align="center">Singleline(单行模式)</td>
-<td align="center">更改<code style="color:red;background-color:#282828">.</code>的含义，使它与每一个字符匹配（包括换行符\n）。</td>
+<td align="center">更改<code>.</code>的含义，使它与每一个字符匹配（包括换行符\n）。</td>
 </tr>
 <tr>
 <td align="center">IgnorePatternWhitespace(忽略空白)</td>
-<td align="center">忽略表达式中的非转义空白并启用由<code style="color:red;background-color:#282828">#</code>标记的注释。</td>
+<td align="center">忽略表达式中的非转义空白并启用由<code>#</code>标记的注释。</td>
 </tr>
 <tr>
 <td align="center">ExplicitCapture(显式捕获)</td>
@@ -487,103 +487,103 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><code style="color:red;background-color:#282828">\a</code></td>
+<td align="center"><code>\a</code></td>
 <td align="center">报警字符(打印它的效果是电脑嘀一声)</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\b</code></td>
+<td align="center"><code>\b</code></td>
 <td align="center">通常是单词分界位置，但如果在字符类里使用代表退格</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\t</code></td>
+<td align="center"><code>\t</code></td>
 <td align="center">制表符，Tab</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\r</code></td>
+<td align="center"><code>\r</code></td>
 <td align="center">回车</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\v</code></td>
+<td align="center"><code>\v</code></td>
 <td align="center">竖向制表符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\f</code></td>
+<td align="center"><code>\f</code></td>
 <td align="center">换页符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\n</code></td>
+<td align="center"><code>\n</code></td>
 <td align="center">换行符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\e</code></td>
+<td align="center"><code>\e</code></td>
 <td align="center">Escape</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\0nn</code></td>
+<td align="center"><code>\0nn</code></td>
 <td align="center">ASCII代码中八进制代码为nn的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\xnn</code></td>
+<td align="center"><code>\xnn</code></td>
 <td align="center">ASCII代码中十六进制代码为nn的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\unnnn</code></td>
+<td align="center"><code>\unnnn</code></td>
 <td align="center">Unicode代码中十六进制代码为nnnn的字符</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\cN</code></td>
+<td align="center"><code>\cN</code></td>
 <td align="center">ASCII控制字符。比如\cC代表Ctrl+C</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\A</code></td>
+<td align="center"><code>\A</code></td>
 <td align="center">字符串开头(类似^，但不受处理多行选项的影响)</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\Z</code></td>
+<td align="center"><code>\Z</code></td>
 <td align="center">字符串结尾或行尾(不受处理多行选项的影响)</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\z</code></td>
+<td align="center"><code>\z</code></td>
 <td align="center">字符串结尾(类似$，但不受处理多行选项的影响)</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\G</code></td>
+<td align="center"><code>\G</code></td>
 <td align="center">当前搜索的开头</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">\p&#123;name&#125;</code></td>
+<td align="center"><code>\p&#123;name&#125;</code></td>
 <td align="center">Unicode中命名为name的字符类，例如\p{IsGreek}</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?>exp)</code></td>
+<td align="center"><code>(?>exp)</code></td>
 <td align="center">贪婪子表达式</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?<x>-<y>exp)</code></td>
+<td align="center"><code>(?<x>-<y>exp)</code></td>
 <td align="center">平衡组</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?im-nsx:exp)</code></td>
+<td align="center"><code>(?im-nsx:exp)</code></td>
 <td align="center">在子表达式exp中改变处理选项</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?im-nsx)</code></td>
+<td align="center"><code>(?im-nsx)</code></td>
 <td align="center">为表达式后面的部分改变处理选项</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?(exp)yes|no)</code></td>
+<td align="center"><code>(?(exp)yes|no)</code></td>
 <td align="center">把exp当作零宽正向先行断言，如果在这个位置能匹配，使用yes作为此组的表达式；否则使用no</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?(exp)yes)</code></td>
+<td align="center"><code>(?(exp)yes)</code></td>
 <td align="center">同上，只是使用空表达式作为no</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?(name)yes|no)</code></td>
+<td align="center"><code>(?(name)yes|no)</code></td>
 <td align="center">如果命名为name的组捕获到了内容，使用yes作为表达式；否则使用no</td>
 </tr>
 <tr>
-<td align="center"><code style="color:red;background-color:#282828">(?(name)yes)</code></td>
+<td align="center"><code>(?(name)yes)</code></td>
 <td align="center">同上，只是使用空表达式作为no</td>
 </tr>
 </tbody></table>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="配置文件properties SpringBoot自动加载特地目录下的application.properties配置文件，在实际的使用中，一般放在resources文件夹下。 application.properties采用key&#x3D;value配置形式  SpringBoot的设计思想是约定大于配置，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Co">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-20T07:51:44.000Z">
-<meta property="article:modified_time" content="2023-09-05T07:23:49.497Z">
+<meta property="article:modified_time" content="2023-09-05T09:01:57.560Z">
 <meta property="article:author" content="wotzc">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="SpringBoot">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 15:23:49" itemprop="dateModified" datetime="2023-09-05T15:23:49+08:00">2023-09-05</time>
+      <time title="修改时间：2023-09-05 17:01:57" itemprop="dateModified" datetime="2023-09-05T17:01:57+08:00">2023-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -226,23 +226,23 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h2 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h2><ul>
-<li>SpringBoot自动加载特地目录下的<code style="color:#b30049;background-color:#fdf5f5">application.properties</code>配置文件，在实际的使用中，一般放在<code style="color:#b30049;background-color:#fdf5f5">resources</code>文件夹下。</li>
-<li><code style="color:#b30049;background-color:#fdf5f5">application.properties</code>采用<code style="color:#b30049;background-color:#fdf5f5">key=value</code>配置形式</li>
+<li>SpringBoot自动加载特地目录下的<code>application.properties</code>配置文件，在实际的使用中，一般放在<code>resources</code>文件夹下。</li>
+<li><code>application.properties</code>采用<code>key=value</code>配置形式</li>
 </ul>
-<p>SpringBoot的设计思想是<strong>约定大于配置</strong>，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Config。<code style="color:#b30049;background-color:#fdf5f5">properties</code>和<code style="color:#b30049;background-color:#fdf5f5">yml</code>是SpringBoot项目常用的两种文件配置方式。SpringBoot项目默认加载以下目录下的application.properties文件。在实际的使用中，一般放在resources文件夹下。</p>
+<p>SpringBoot的设计思想是<strong>约定大于配置</strong>，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Config。<code>properties</code>和<code>yml</code>是SpringBoot项目常用的两种文件配置方式。SpringBoot项目默认加载以下目录下的application.properties文件。在实际的使用中，一般放在resources文件夹下。</p>
 <div class="note no-icon default"><p>参考资料<br>SpringApplication loads properties from application.properties files in the following locations and adds them to the Spring Environment:<br>A /config subdirectory of the current directory The current directory A classpath /config package The classpath root</p>
 </div>
 
 <h2 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h2><p>YAML 是 “YAML Ain’t Markup Language”（YAML 不是一种标记语言）的递归缩写。在开发的这种语言时，YAML 的意思其实是：”Yet Another Markup Language”（仍是一种标记语言）。 </p>
 <p>非常适合用来做以数据为中心的配置文件。</p>
 <h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ul>
-<li><code style="color:#b30049;background-color:#fdf5f5">key: value</code>；<strong>kv之间有空格</strong></li>
+<li><code>key: value</code>；<strong>kv之间有空格</strong></li>
 <li><strong>大小写敏感</strong></li>
 <li><strong>使用缩进表示层级关系</strong></li>
 <li><strong>缩进不允许使用tab，只允许空格</strong></li>
 <li><strong>缩进的空格数不重要，只要相同层级的元素左对齐即可</strong></li>
-<li><code style="color:#b30049;background-color:#fdf5f5">#</code><strong>表示注释</strong></li>
-<li><strong>字符串无需加引号，如果要加</strong>，<code style="color:#b30049;background-color:#fdf5f5">''</code>与<code style="color:#b30049;background-color:#fdf5f5">""</code>表示字符串内容会被转义/不转义</li>
+<li><code>#</code><strong>表示注释</strong></li>
+<li><strong>字符串无需加引号，如果要加</strong>，<code>''</code>与<code>""</code>表示字符串内容会被转义/不转义</li>
 </ul>
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>●字面量：单个的、不可再分的值。date、boolean、string、number、null</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">k:</span> <span class="string">v</span></span><br></pre></td></tr></table></figure>
@@ -327,7 +327,7 @@
 <li>但是不可以配置静态资源的访问前缀。否则导致 index.html不能被默认访问</li>
 </ul>
 <h2 id="自定义Favicon"><a href="#自定义Favicon" class="headerlink" title="自定义Favicon"></a>自定义Favicon</h2><p>favicon.ico 放在静态资源目录下即可。</p>
-<h2 id="请求参数处理"><a href="#请求参数处理" class="headerlink" title="请求参数处理"></a>请求参数处理</h2><h3 id="普通参数与基本注解"><a href="#普通参数与基本注解" class="headerlink" title="普通参数与基本注解"></a>普通参数与基本注解</h3><p>注解：<br><code style="color:#b30049;background-color:#fdf5f5">@PathVariable</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestHeader</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code>、<code style="color:#b30049;background-color:#fdf5f5">@CookieValue</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestBody</code></p>
+<h2 id="请求参数处理"><a href="#请求参数处理" class="headerlink" title="请求参数处理"></a>请求参数处理</h2><h3 id="普通参数与基本注解"><a href="#普通参数与基本注解" class="headerlink" title="普通参数与基本注解"></a>普通参数与基本注解</h3><p>注解：<br><code>@PathVariable</code>、<code>@RequestHeader</code>、<code>@RequestParam</code>、<code>@CookieValue</code>、<code>@RequestBody</code></p>
 <table>
 <thead>
 <tr>
@@ -336,23 +336,23 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><code style="color:#b30049;background-color:#fdf5f5">@PathVariable</code></td>
+<td align="left"><code>@PathVariable</code></td>
 <td align="left">通过 @PathVariable 可以将URL中占位符参数{xxx}绑定到处理器类的方法形参中@PathVariable(“xxx“)</td>
 </tr>
 <tr>
-<td align="left"><code style="color:#b30049;background-color:#fdf5f5">@RequestHeader</code></td>
+<td align="left"><code>@RequestHeader</code></td>
 <td align="left">是获取请求头中的数据，通过指定参数 value 的值来获取请求头中指定的参数值。**</td>
 </tr>
 <tr>
-<td align="left"><code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code></td>
+<td align="left"><code>@RequestParam</code></td>
 <td align="left">@RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上</td>
 </tr>
 <tr>
-<td align="left"><code style="color:#b30049;background-color:#fdf5f5">@CookieValue</code></td>
+<td align="left"><code>@CookieValue</code></td>
 <td align="left">@CookieValue注解主要是将请求的Cookie数据，映射到功能处理方法的参数上。</td>
 </tr>
 <tr>
-<td align="left"><code style="color:#b30049;background-color:#fdf5f5">@RequestBody</code></td>
+<td align="left"><code>@RequestBody</code></td>
 <td align="left">主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)；GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。</td>
 </tr>
 </tbody></table>
