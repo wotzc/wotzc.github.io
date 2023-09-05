@@ -14,21 +14,21 @@ categories: Spring注解
 
 ### @ComponentScan 
 
-在配置类上添加 @ComponentScan 注解。该注解默认会扫描该类所在的包下所有的配置类，相当于之前的 <context:component-scan>。@ComponentScan注解默认就会装配标识了@Controller，@Service，@Repository，@Component注解的类到spring容器中。
+在配置类上添加<code style="color:#b30049;background-color:#fdf5f5">@ComponentScan</code>注解。该注解默认会扫描该类所在的包下所有的配置类，相当于之前的 <context:component-scan>。<code style="color:#b30049;background-color:#fdf5f5">@ComponentScan</code>注解默认就会装配标识了<code style="color:#b30049;background-color:#fdf5f5">@Controller</code>，<code style="color:#b30049;background-color:#fdf5f5">@Service</code>，<code style="color:#b30049;background-color:#fdf5f5">@Repository</code>，<code style="color:#b30049;background-color:#fdf5f5">@Component</code>注解的类到spring容器中。
 
 basePackages与value: 用于指定包的路径，进行扫描
 
 basePackageClasses：指定扫描类
 
-includeFilters：指定某些定义Filter满足条件的组件 FilterType有5种类型如：
+<code style="color:#b30049;background-color:#fdf5f5">includeFilters</code>：指定某些定义Filter满足条件的组件 FilterType有5种类型如：
 
-- ANNOTATION, 注解类型 默认
-- ASSIGNABLE_TYPE,指定固定类
-- ASPECTJ， ASPECTJ类型
-- REGEX,正则表达式
-- CUSTOM,自定义类型
+- <code style="color:#b30049;background-color:#fdf5f5">ANNOTATION</code>，注解类型(默认)
+- <code style="color:#b30049;background-color:#fdf5f5">ASSIGNABLE_TYPE</code>，指定固定类
+- <code style="color:#b30049;background-color:#fdf5f5">ASPECTJ</code>， ASPECTJ类型
+- <code style="color:#b30049;background-color:#fdf5f5">REGEX</code>，正则表达式
+- <code style="color:#b30049;background-color:#fdf5f5">CUSTOM</code>，自定义类型
 
-excludeFilters：过滤器，和includeFilters作用刚好相反，用来对扫描的类进行排除的，被排除的类不会被注册到容器中
+<code style="color:#b30049;background-color:#fdf5f5">excludeFilters</code>：过滤器，和includeFilters作用刚好相反，用来对扫描的类进行排除的，被排除的类不会被注册到容器中
 
 ```java
 @ComponentScan(value="com.wotzc",useDefaultFilters=true,
@@ -43,9 +43,9 @@ public class MainScanConfig {
 
 ### @Scope
 
-@Scope注解是springIoc容器中的一个作用域，在 Spring IoC 容器中具有以下几种作用域：基本作用域**singleton（单例）默认值**、**prototype(多例)**，Web 作用域（reqeust、session、globalsession），自定义作用域
+<code style="color:#b30049;background-color:#fdf5f5">@Scope</code>注解是springIoc容器中的一个作用域，在 Spring IoC 容器中具有以下几种作用域：基本作用域<code style="color:#b30049;background-color:#fdf5f5">singleton</code>（单例）默认值、<code style="color:#b30049;background-color:#fdf5f5">prototype</code>(多例)，<code style="color:#b30049;background-color:#fdf5f5">Web 作用域</code>（reqeust、session、globalsession），<code style="color:#b30049;background-color:#fdf5f5">自定义作用域</code>
 
-```
+```java
 @Scope("prototype")//多实例，IOC容器启动创建的时候，并不会创建对象放在容器在容器当中，当你需要的时候，需要从容器当中取该对象的时候，就会创建。@Scope("singleton")//单实例 IOC容器启动的时候就会调用方法创建对象，以后每次获取都是从容器当中拿同一个对象（map当中）。
 @Scope("request")//同一个请求创建一个实例
 @Scope("session")//同一个session创建一个实例
@@ -53,7 +53,7 @@ public class MainScanConfig {
 
 ### @Lazy
 
-Spring IoC （ApplicationContext） 容器一般都会在启动的时候实例化所有单实例 bean 。如果我们想要 Spring 在启动的时候延迟加载 bean，即在调用某个 bean 的时候再去初始化，那么就可以使用 @Lazy 注解。
+Spring IoC （ApplicationContext） 容器一般都会在启动的时候实例化所有单实例 bean 。如果我们想要 Spring 在启动的时候延迟加载 bean，即在调用某个 bean 的时候再去初始化，那么就可以使用<code style="color:#b30049;background-color:#fdf5f5">@Lazy</code>注解。
 
 ```java
 @Lazy
@@ -65,9 +65,9 @@ public Person person() {
 
 ### @Conditional
 
-@Conditional是Spring4新提供的注解，它的作用是按照一定的条件进行判断，满足条件就给容器注册bean。
+<code style="color:#b30049;background-color:#fdf5f5">@Conditional</code>是Spring4新提供的注解，它的作用是按照一定的条件进行判断，满足条件就给容器注册bean。
 
-@Conditional的定义：
+<code style="color:#b30049;background-color:#fdf5f5">@Conditional</code>的定义：
 
 ```java
 //此注解可以标注在类和方法上
@@ -91,7 +91,7 @@ public interface Condition {
 }
 ```
 
-Condition是个接口，需要实现matches方法，返回true则注入bean，false则不注入。
+Condition是个接口，需要实现<code style="color:#b30049;background-color:#fdf5f5">matches</code>方法，返回true则注入bean，false则不注入。
 
 首先，创建一个WindowsCondition类：
 
@@ -127,7 +127,7 @@ public class WindowsCondition implements Condition {
 }
 ```
 
-matches方法的两个参数的意思在注释中讲述了，值得一提的是，conditionContext提供了多种方法，方便获取各种信息，也是SpringBoot中 @ConditonalOnXX注解多样扩展的基础。
+matches方法的两个参数的意思在注释中讲述了，值得一提的是，conditionContext提供了多种方法，方便获取各种信息，也是SpringBoot中<code style="color:#b30049;background-color:#fdf5f5">@ConditonalOnXX</code>注解多样扩展的基础。
 
 接着，创建LinuxCondition类：
 
@@ -176,15 +176,17 @@ public class BeanConfig {
 
 ### @Bean
 
-> ```
-> Spring的@Bean注解用于告诉方法，产生一个Bean对象，然后这个Bean对象交给Spring管理。 产生这个Bean对象的方法Spring只会调用一次，随后这个Spring将会将这个Bean对象放在自己的IOC容器中。@Bean明确地指示了一种方法，什么方法呢？产生一个bean的方法，并且交给Spring容器管理；从这我们就明白了为啥@Bean是放在方法的注释上了，因为它很明确地告诉被注释的方法，你给我产生一个Bean，然后交给Spring容器，剩下的你就别管了。记住，@Bean就放在方法上，就是让方法去产生一个Bean，然后交给Spring容器。
-> ```
+{% note no-icon primary %}
+
+Spring的@Bean注解用于告诉方法，产生一个Bean对象，然后这个Bean对象交给Spring管理。 产生这个Bean对象的方法Spring只会调用一次，随后这个Spring将会将这个Bean对象放在自己的IOC容器中。@Bean明确地指示了一种方法，什么方法呢？产生一个bean的方法，并且交给Spring容器管理；从这我们就明白了为啥@Bean是放在方法的注释上了，因为它很明确地告诉被注释的方法，你给我产生一个Bean，然后交给Spring容器，剩下的你就别管了。记住，@Bean就放在方法上，就是让方法去产生一个Bean，然后交给Spring容器。
+
+{% endnote %}
 
 **为什么要有@Bean注解？**
 
 不知道大家有没有想过，用于注册Bean的注解的有那么多个，为何还要出现@Bean注解？
 
-原因很简单：类似@Component , @Repository , @ Controller , @Service 这些注册Bean的注解存在局限性，只能局限作用于自己编写的类，如果是一个jar包第三方库要加入IOC容器的话，这些注解就手无缚鸡之力了，是的，@Bean注解就可以做到这一点！当然除了@Bean注解能做到还有@Import也能把第三方库中的类实例交给spring管理，而且@Import更加方便快捷
+原因很简单：类似<code style="color:#b30049;background-color:#fdf5f5">@Component</code> , <code style="color:#b30049;background-color:#fdf5f5">@Repository</code> , <code style="color:#b30049;background-color:#fdf5f5">@ Controller</code> ,<code style="color:#b30049;background-color:#fdf5f5"> @Service</code> 这些注册Bean的注解存在局限性，只能局限作用于自己编写的类，如果是一个jar包第三方库要加入<code style="color:#b30049;background-color:#fdf5f5">IOC容器</code>的话，这些注解就手无缚鸡之力了，是的，<code style="color:#b30049;background-color:#fdf5f5">@Bean</code>注解就可以做到这一点！当然除了@Bean注解能做到还有<code style="color:#b30049;background-color:#fdf5f5">@Import</code>也能把第三方库中的类实例交给spring管理，而且<code style="color:#b30049;background-color:#fdf5f5">@Import</code>更加方便快捷
 
 @Bean 基本构成：
 
@@ -214,27 +216,31 @@ public @interface Bean {
 
 **name**： 此bean 的名称，或多个名称，主要的bean的名称加别名。如果未指定，则bean的名称是带注解方法的名称。如果指定了，方法的名称就会忽略，如果没有其他属性声明的话，bean的名称和别名可能通过value属性配置
 
-**autowire** ： 此注解的方法表示自动装配的类型，返回一个`Autowire`类型的枚举，装配方式 有三个选项
-Autowire.NO (默认设置)
-Autowire.BY_NAME
-Autowire.BY_TYPE
-指定 bean 的装配方式， 根据名称 和 根据类型 装配， 一般不设置，采用默认即可。autowire的默认值为`No`，默认表示不通过自动装配。
+**autowire** ： 此注解的方法表示自动装配的类型，返回一个<code style="color:#b30049;background-color:#fdf5f5">Autowire</code>类型的枚举，装配方式 有三个选项
+<code style="color:#b30049;background-color:#fdf5f5">Autowire.NO</code>(默认设置)
+<code style="color:#b30049;background-color:#fdf5f5">Autowire.BY_NAME</code>
+<code style="color:#b30049;background-color:#fdf5f5">Autowire.BY_TYPE</code>
+指定 bean 的装配方式， 根据**名称**和**根据类型**装配， 一般不设置，采用默认即可。autowire的默认值为`No`，默认表示不通过自动装配。
 
 **bean** 的初始化方法， 直接指定方法名称即可，不用带括号
 
-**destroyMethod ** bean 的销毁方法， 在调用 IoC 容器的 close() 方法时，会执行到该属性指定的方法。不过，只是单实例的 bean 才会调用该方法，如果是多实例的情况下，不会调用该方法
+**destroyMethod**: bean 的销毁方法， 在调用 IoC 容器的<code style="color:#b30049;background-color:#fdf5f5">close()</code>方法时，会执行到该属性指定的方法。不过，只是单实例的 bean 才会调用该方法，如果是多实例的情况下，不会调用该方法
 
 ----
 
 ### @Import
 
-**@Import只能用在类上** ，@Import通过快速导入的方式实现把实例加入spring的IOC容器中
+**@Import只能用在类上** ，<code style="color:#b30049;background-color:#fdf5f5">@Import</code>通过快速导入的方式实现把实例加入spring的IOC容器中
 
 @Import的三种用法主要包括：
 
-> 1、直接填class数组方式
-> 2、ImportSelector方式【重点】
-> 3、ImportBeanDefinitionRegistrar方式
+{% note no-icon primary %}
+
+1、直接填class数组方式
+2、ImportSelector方式【重点】
+3、ImportBeanDefinitionRegistrar方式
+
+{% endnote %}
 
 **第一种用法：直接填class数组**
 
@@ -268,10 +274,12 @@ public class Myclass implements ImportSelector {
 
 分析实现接口的selectImports方法：
 
-```
+{% note success %}
+
 - 1、返回值： 就是我们实际上要导入到容器中的组件全类名
 - 2、参数： AnnotationMetadata表示当前被@Import注解给标注的所有注解信息
-```
+
+{% endnote %}
 
 ```java
 public class Myclass implements ImportSelector {
@@ -307,12 +315,14 @@ public class Myclass2 implements ImportBeanDefinitionRegistrar {
 
 ### @FactoryBean
 
-> ```
-> 该类是SpringIOC容器是创建Bean的一种形式，这种方式创建Bean会有加成方式，融合了简单的工厂设计模式于装饰器模式
-> Interface to be implemented by objects used within a {@link BeanFactory} which  are themselves factories for individual objects. If a bean implements this  interface, it is used as a factory for an object to expose, not directly as a  bean instance that will be exposed itself.
-> ```
+{% note no-icon info %}
 
-在某些情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在<bean>中提供大量的配置信息。配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个org.springframework.bean.factory.FactoryBean的工厂类接口，用户可以通过实现该接口定制实例化Bean的逻辑。FactoryBean接口对于Spring框架来说占用重要的地位。
+该类是SpringIOC容器是创建Bean的一种形式，这种方式创建Bean会有加成方式，融合了简单的工厂设计模式于装饰器模式
+Interface to be implemented by objects used within a {@link BeanFactory} which  are themselves factories for individual objects. If a bean implements this  interface, it is used as a factory for an object to expose, not directly as a  bean instance that will be exposed itself.
+
+{% endnote %}
+
+在某些情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在<code style="color:#b30049;background-color:#fdf5f5">\<bean></code>中提供大量的配置信息。配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个<code style="color:#b30049;background-color:#fdf5f5">org.springframework.bean.factory.FactoryBean</code>的工厂类接口，用户可以通过实现该接口定制实例化Bean的逻辑。<code style="color:#b30049;background-color:#fdf5f5">FactoryBean</code>接口对于Spring框架来说占有重要的地位。
 
 ```java
 public interface FactoryBean<T> {
@@ -340,11 +350,11 @@ public void someMethod(){
 
 ### @PreDestroy
 
-容器移除对象之前调用，@PostConstruct和@PreDestroy都只能用在方法上
+容器移除对象之前调用，<code style="color:#b30049;background-color:#fdf5f5">@PostConstruct</code>和<code style="color:#b30049;background-color:#fdf5f5">@PreDestroy</code>都只能用在方法上
 
 ### BeanPostProcessor
 
-- BeanPostProcessor也称为Bean后置处理器，它是Spring中定义的接口，在Spring容器的创建过程中（具体为Bean初始化前后）会回调BeanPostProcessor中定义的两个方法。BeanPostProcessor的源码如下
+- <code style="color:#b30049;background-color:#fdf5f5">BeanPostProcessor</code>也称为Bean后置处理器，它是Spring中定义的接口，在Spring容器的创建过程中（具体为Bean初始化前后）会回调<code style="color:#b30049;background-color:#fdf5f5">BeanPostProcessor</code>中定义的两个方法。BeanPostProcessor的源码如下
 
 ```java
 public interface BeanPostProcessor {
@@ -355,13 +365,13 @@ public interface BeanPostProcessor {
 }
 ```
 
-- 其中postProcessBeforeInitialization方法会在每一个bean对象的初始化方法调用之前回调；postProcessAfterInitialization方法会在每个bean对象的初始化方法调用之后被回调。
+- 其中<code style="color:#b30049;background-color:#fdf5f5">postProcessBeforeInitialization</code>方法会在每一个bean对象的初始化方法调用之前回调；<code style="color:#b30049;background-color:#fdf5f5">postProcessAfterInitialization</code>方法会在每个bean对象的初始化方法调用之后被回调。
 
 ## 组件赋值
 
 ### @Value
 
-不通过配置文件的注入属性的情况，通过@Value将外部的值动态注入到Bean中
+不通过配置文件的注入属性的情况，通过<code style="color:#b30049;background-color:#fdf5f5">@Value</code>将外部的值动态注入到Bean中
 
 使用的情况有：
 
@@ -374,7 +384,7 @@ public interface BeanPostProcessor {
 
    
 
-2. 可以写SpEL：#{}
+2. 可以写SpEL获取某个bean的属性：#{}
 
    ```java
    @Value("#{20-2}")
@@ -385,8 +395,8 @@ public interface BeanPostProcessor {
 
 通过@Value将外部配置文件的值动态注入到Bean中。配置文件主要有两类：
 
-- application.properties。application.properties在spring boot启动时默认加载此文件
-- 自定义属性文件。自定义属性文件通过@PropertySource加载。@PropertySource可以同时加载多个文件，也可以加载单个文件。
+- <code style="color:#b30049;background-color:#fdf5f5">application.properties</code>。application.properties在spring boot启动时默认加载此文件
+- 自定义属性文件。自定义属性文件通过<code style="color:#b30049;background-color:#fdf5f5">@PropertySource</code>加载。@PropertySource可以同时加载多个文件，也可以加载单个文件。
 
 ```
 # 自己配置的参数
@@ -405,13 +415,13 @@ public class TesseractOrcServiceImpl implements TesseractOrcService {
 
 ### @Autowired
 
-@autowired 注释来源于英文单词 autowire,这个单词的意思是自动装配的意思。自动装配又是什么意思？这个词语本来的意思是指的一些工业上的用机器代替人口，自动将一些需要完成的组装任务，或者别的一些任务完成。而在 Spring 的世界当中，自动装配指的就是使用将 Spring 容器中的 bean 自动的和我们需要这个 bean 的类组装在一起。
+<code style="color:#b30049;background-color:#fdf5f5">@autowired</code>注释来源于英文单词 autowire,这个单词的意思是自动装配的意思。自动装配又是什么意思？这个词语本来的意思是指的一些工业上的用机器代替人口，自动将一些需要完成的组装任务，或者别的一些任务完成。而在 Spring 的世界当中，自动装配指的就是使用将 Spring 容器中的 bean 自动的和我们需要这个 bean 的类组装在一起。
 
-@Autowired是用在JavaBean中的注解，通过byType形式，用来给指定的字段或方法注入所需的外部资源
+<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>是用在JavaBean中的注解，通过byType形式，用来给指定的字段或方法注入所需的外部资源
 
 自动装备一定要将属性赋值好，没有就会报错。
 
-默认情况下，@Autowired 注释意味着依赖是必须的，它类似于 @Required 注释，然而，你可以使用 @Autowired 的 **（required=false）** 选项关闭默认行为。
+默认情况下，<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>注释意味着依赖是必须的，它类似于<code style="color:#b30049;background-color:#fdf5f5">@Required</code>注释，然而，你可以使用<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>的 **（required=false）** 选项关闭默认行为。
 
 即使你不为 age 属性传递任何参数，下面的示例也会成功运行，
 
@@ -450,7 +460,7 @@ public class Student {
 
 ### @Primary
 
-当一个接口有2个不同实现时,使用@Autowired注解时会报org.springframework.beans.factory.NoUniqueBeanDefinitionException异常信息。
+当一个接口有2个不同实现时,使用@Autowired注解时会报<code style="color:#b30049;background-color:#fdf5f5">org.springframework.beans.factory.NoUniqueBeanDefinitionException</code>异常信息。
 
 Primary可以理解为默认优先选择,不可以同时设置多个,内部实质是设置BeanDefinition的primary属性
 
@@ -469,17 +479,17 @@ Primary可以理解为默认优先选择,不可以同时设置多个,内部实�
 
 ### @Inject
 
-- @Inject是JSR330 (Dependency Injection for Java)中的规范，需要导入javax.inject.Inject;实现注入。
+- @Inject是JSR330 (Dependency Injection for Java)中的规范，需要导入<code style="color:#b30049;background-color:#fdf5f5">javax.inject.Inject</code>;实现注入。
 - @Inject是根据**类型**进行自动装配的，如果需要按名称进行装配，则需要配合@Named；
 - @Inject可以作用在变量、setter方法、构造函数上。
 
-@Resource,@Autowired,@Inject 这3种都是用来注入bean的，它们属于不同的程序中。
+<code style="color:#b30049;background-color:#fdf5f5">@Resource</code>,<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>,<code style="color:#b30049;background-color:#fdf5f5">@Inject</code>这3种都是用来注入bean的，它们属于不同的程序中。
 
 ![img](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8/autowiredpng.png)
 
 JSR是Java Specification Requests的缩写，意思是Java 规范提案。是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准。
 
-**@Resource** 没有支持**@Primary**功能；没有支持@Autowired(required = false)；
+**@Resource** 没有支持@Primary功能；没有支持@Autowired(required = false)；
 
 **@Inject** 需要导入javax.inject的包；没有支持@Autowired(required = false)；
 
@@ -565,38 +575,38 @@ public class IOCTestProfile {
 
 ### @Pointcut
 
-通过@Pointcut定义切入点
+通过<code style="color:#b30049;background-color:#fdf5f5">@Pointcut</code>定义切入点
 
-格式：@Pointcut(value=“表达标签(表达式格式) ”)
-如：@Pointcut (value=“execution(* com.cn.spring.aspectj.NotVeryUsefulAspectService.*(…))”)
+格式：<code style="color:#b30049;background-color:#fdf5f5">@Pointcut(value=“表达标签(表达式格式) ”)</code>
+如：<code style="color:#b30049;background-color:#fdf5f5">@Pointcut (value=“execution(* com.cn.spring.aspectj.NotVeryUsefulAspectService.*(…))”)</code>
 
 **表达式标签**
 
-- execution()：用于匹配方法执行的连接点
-- args(): 用于匹配当前执行的方法传入的参数为指定类型的执行方法
-- this(): 用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；
-- target(): 用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；
-- within(): 用于匹配指定类型内的方法执行；
-- @args():于匹配当前执行的方法传入的参数持有指定注解的执行；
-- @target():用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；
-- @within():用于匹配所以持有指定注解类型内的方法；
-- @annotation:用于匹配当前执行方法持有指定注解的方法；
+- <code style="color:#b30049;background-color:#fdf5f5">execution()</code>：用于匹配方法执行的连接点
+- <code style="color:#b30049;background-color:#fdf5f5">args()</code>: 用于匹配当前执行的方法传入的参数为指定类型的执行方法
+- <code style="color:#b30049;background-color:#fdf5f5">this()</code>: 用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；
+- <code style="color:#b30049;background-color:#fdf5f5">target()</code>: 用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；
+- <code style="color:#b30049;background-color:#fdf5f5">within()</code>: 用于匹配指定类型内的方法执行；
+- <code style="color:#b30049;background-color:#fdf5f5">@args()</code>:于匹配当前执行的方法传入的参数持有指定注解的执行；
+- <code style="color:#b30049;background-color:#fdf5f5">@target()</code>:用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；
+- <code style="color:#b30049;background-color:#fdf5f5">@within()</code>:用于匹配所以持有指定注解类型内的方法；
+- <code style="color:#b30049;background-color:#fdf5f5">@annotation</code>:用于匹配当前执行方法持有指定注解的方法；
 
-其中execution 是用的最多的,execution格式：
+其中<code style="color:#b30049;background-color:#fdf5f5">execution</code>是用的最多的，<code style="color:#b30049;background-color:#fdf5f5">execution</code>格式：
 
-execution(modifier-pattern?  ret-type-pattern  declaring-type-pattern?  name-pattern(param-pattern)  throws-pattern?)
-其中带 ?号的 modifiers-pattern?，declaring-type-pattern?，hrows-pattern?是可选项
-ret-type-pattern,name-pattern, parameters-pattern是必选项；
+<code style="color:#b30049;background-color:#fdf5f5">execution(modifier-pattern?  ret-type-pattern  declaring-type-pattern?  name-pattern(param-pattern)  throws-pattern?)</code>
+其中带<code style="color:#b30049;background-color:#fdf5f5">?</code>号的<code style="color:#b30049;background-color:#fdf5f5">modifiers-pattern?</code>，<code style="color:#b30049;background-color:#fdf5f5">declaring-type-pattern?</code>，<code style="color:#b30049;background-color:#fdf5f5">hrows-pattern?</code>是可选项
+<code style="color:#b30049;background-color:#fdf5f5">ret-type-pattern</code>，<code style="color:#b30049;background-color:#fdf5f5">name-pattern</code>， <code style="color:#b30049;background-color:#fdf5f5">parameters-pattern</code>是必选项；
 
-- modifier-pattern? 修饰符匹配，如public 表示匹配公有方法
-- ret-type-pattern 返回值匹配，* 表示任何返回值,全路径的类名等
-- declaring-type-pattern? 类路径匹配
-- name-pattern 方法名匹配，* 代表所有,set*,代表以set开头的所有方法
-- (param-pattern) 参数匹配，指定方法参数(声明的类型),
-  (..)代表所有参数,
-  (*)代表一个参数,
-  (*,String)代表第一个参数为任何值,第二个为String类型.
-- throws-pattern? 异常类型匹配
+- <code style="color:#b30049;background-color:#fdf5f5">modifier-pattern?</code> **修饰符匹配**，如public 表示匹配公有方法
+- <code style="color:#b30049;background-color:#fdf5f5">ret-type-pattern</code> **返回值匹配**，<code style="color:#b30049;background-color:#fdf5f5">*</code> 表示任何返回值，全路径的类名等
+- <code style="color:#b30049;background-color:#fdf5f5">declaring-type-pattern?</code> 类路径匹配
+- <code style="color:#b30049;background-color:#fdf5f5">name-pattern</code> 方法名匹配，<code style="color:#b30049;background-color:#fdf5f5">\*</code>代表所有,<code style="color:#b30049;background-color:#fdf5f5">set*</code>代表以set开头的所有方法
+- <code style="color:#b30049;background-color:#fdf5f5">(param-pattern)</code>参数匹配，指定方法参数(声明的类型),
+  <code style="color:#b30049;background-color:#fdf5f5">(..)</code>代表所有参数,
+  <code style="color:#b30049;background-color:#fdf5f5">(\*)</code>代表一个参数,
+  <code style="color:#b30049;background-color:#fdf5f5">(*,String)</code>代表第一个参数为任何值,第二个为String类型.
+- <code style="color:#b30049;background-color:#fdf5f5">throws-pattern?</code> 异常类型匹配
 
 **例子**
 
@@ -609,17 +619,17 @@ ret-type-pattern,name-pattern, parameters-pattern是必选项；
 
 **AspectJ类型匹配的通配符：**
 
-- \* 匹 配 任 何 数 量 字 符 ； 
-- . . 匹 配 任 何 数 量 字 符 的 重 复 ， 如 在 类 型 模 式 中 匹 配 任 何 数 量 子 包 ； 而 在 方 法 参 数 模 式 中 匹 配 任 何 数 量 参 数 。
-- +：匹 配 指 定 类 型 的 子 类 型 ； 仅 能 作 为 后 缀 放 在 类 型 模 式 后 边 。
+- <code style="color:#b30049;background-color:#fdf5f5">\*</code>匹配任何数量字符； 
+- <code style="color:#b30049;background-color:#fdf5f5">..</code>匹配任何数量字符的重复，如在类型模式中匹配任何数量子包；而在方法参数模式中匹配任何数量参数。
+- <code style="color:#b30049;background-color:#fdf5f5">+</code>匹配指定类型的子类型；仅能作为后缀放在类型模式后边 。
 
 如：
 
-- java.lang.String 匹配String类型；
-- java.*.String 匹配java包下的任何“一级子包”下的String类型；如匹配java.lang.String，但不匹配java.lang.ss.String
-- java..* 匹配java包及任何子包下的任何类型; 如匹配java.lang.String、java.lang.annotation.Annotation
-- java.lang.*ing 匹配任何java.lang包下的以ing结尾的类型；
-- java.lang.Number+ 匹配java.lang包下的任何Number的自类型；如匹配java.lang.Integer，也匹配java.math.BigIntege
+- <code style="color:#b30049;background-color:#fdf5f5">java.lang.String</code>匹配String类型；
+- <code style="color:#b30049;background-color:#fdf5f5">java.*.String</code>匹配java包下的任何“一级子包”下的String类型；如匹配`java.lang.String`，但不匹配`java.lang.ss.String`
+- <code style="color:#b30049;background-color:#fdf5f5">java..*</code> 匹配java包及任何子包下的任何类型; 如匹配`java.lang.String`、`java.lang.annotation.Annotation`
+- <code style="color:#b30049;background-color:#fdf5f5">java.lang.*ing</code>匹配任何java.lang包下的以ing结尾的类型；
+- <code style="color:#b30049;background-color:#fdf5f5">java.lang.Number+</code>匹配java.lang包下的任何Number的自类型；如匹配java.lang.Integer，也匹配java.math.BigIntege
 
 ### @Aspect
 
@@ -659,7 +669,7 @@ public void afterThrowing(JoinPoint joinPoint, Exception e) {
 
 ### @Around
 
-环绕通知方法可以包含上面四种通知方法，环绕通知的功能最全面。环绕通知需要携带 ProceedingJoinPoint 类型的参数，且环绕通知必须有返回值, 返回值即为目标方法的返回值。在切面类中创建环绕通知方法，示例如下：
+环绕通知方法可以包含上面四种通知方法，环绕通知的功能最全面。环绕通知需要携带<code style="color:#b30049;background-color:#fdf5f5">ProceedingJoinPoint</code>类型的参数，且环绕通知必须有返回值, 返回值即为目标方法的返回值。在切面类中创建环绕通知方法，示例如下：
 
 ```java
 @Around("execution(public int lzj.com.spring.aop.ArithmeticCalculator.*(int, int))")
@@ -700,11 +710,10 @@ public void afterThrowing(JoinPoint joinPoint, Exception e) {
 
 注解原理：
 
-@EnableXXX原理：注解上有个XXXRegistrar，或通过XXXSelector引入XXXRegistrar，XXXRegistrar实现了 
-ImportBeanDefinitionRegistrar的registerBeanDefinitions方法，给容器注册XXXCreator。这个Creator实现了后置处理器， 
-后置处理器在对象创建以后，包装对象，返回一个代理对象，代理对象执行方法利用拦截器链进行调用
+<code style="color:#b30049;background-color:#fdf5f5">@EnableXXX</code>原理：注解上有个<code style="color:#b30049;background-color:#fdf5f5">XXXRegistrar</code>，或通过<code style="color:#b30049;background-color:#fdf5f5">XXXSelector</code>引入<code style="color:#b30049;background-color:#fdf5f5">XXXRegistrar</code>，<code style="color:#b30049;background-color:#fdf5f5">XXXRegistrar</code>实现了 
+<code style="color:#b30049;background-color:#fdf5f5">ImportBeanDefinitionRegistrar</code>的<code style="color:#b30049;background-color:#fdf5f5">registerBeanDefinitions</code>方法，给容器注册<code style="color:#b30049;background-color:#fdf5f5">XXXCreator</code>。这个Creator实现了后置处理器， 后置处理器在对象创建以后，包装对象，返回一个代理对象，代理对象执行方法利用拦截器链进行调用。
 
-```
+```python
 * 1）、@EnableTransactionManagement
 *        利用TransactionManagementConfigurationSelector给容器中会导入组件
 *        导入两个组件
@@ -734,10 +743,10 @@ ImportBeanDefinitionRegistrar的registerBeanDefinitions方法，给容器注册X
 
 ### @Transactional
 
-@Target({ ElementType.METHOD, ElementType.TYPE }) 可以标注在类上，以及方法上
+<code style="color:#b30049;background-color:#fdf5f5">@Target({ ElementType.METHOD, ElementType.TYPE })</code>可以标注在类上，以及方法上
 
-@Transactional 注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。
-系统设计：将标签放置在需要进行事务管理的方法上，而不是放在所有接口实现类上：只读的接口就不需要事务管理，由于配置了@Transactional就需要AOP拦截及事务的处理，可能影响系统性能。
+<code style="color:#b30049;background-color:#fdf5f5">@Transactional</code>注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。
+系统设计：将标签放置在需要进行事务管理的方法上，而不是放在所有接口实现类上：只读的接口就不需要事务管理，由于配置了<code style="color:#b30049;background-color:#fdf5f5">@Transactional</code>就需要AOP拦截及事务的处理，可能影响系统性能。
 
 ```java
 @Target({ElementType.METHOD, ElementType.TYPE})
@@ -799,7 +808,7 @@ public @interface Transactional {
 
 ```
 
-**isolation属性**：事务的隔离级别，I也在org.springframework.transaction.annotation.Isolation枚举类中
+**isolation属性**：事务的隔离级别，也在<code style="color:#b30049;background-color:#fdf5f5">org.springframework.transaction.annotation.Isolation</code>枚举类中
 
 ```java
 
@@ -834,24 +843,24 @@ public enum Isolation {
 
 **readOnly：是否只读**
 
-1. true:  只读 ；代表着只会对数据库进行读取操作， 不会有修改的操作，如果确保当前的事务只有读取操作，就有必要设置为只读，可以帮助数据库，引擎优化事务
-2. false: 非只读  不仅会读取数据还会有修改操作
+1. <code style="color:#b30049;background-color:#fdf5f5">true</code>:  只读 ；代表着只会对数据库进行读取操作， 不会有修改的操作，如果确保当前的事务只有读取操作，就有必要设置为只读，可以帮助数据库，引擎优化事务
+2. <code style="color:#b30049;background-color:#fdf5f5">false</code>: 非只读  不仅会读取数据还会有修改操作
 
 ## 扩展原理
 
-BeanFactoryPostProcessor是beanFactory的后置处理器，在BeanFactory标准初始化之后调用，所有的bean定义已经保存加载到beanFactory，但是bean实例还未创建。
+<code style="color:#b30049;background-color:#fdf5f5">BeanFactoryPostProcessor</code>是<code style="color:#b30049;background-color:#fdf5f5">beanFactory</code>的后置处理器，在BeanFactory标准初始化之后调用，所有的bean定义已经保存加载到beanFactory，但是bean实例还未创建。
 
 ### BeanFactoryPostProcessor原理
 
-1.ioc容器创建对象
+1. ioc容器创建对象
 
-2.invokeBeanFactoryPostProcessors(beanFactory)
+2. invokeBeanFactoryPostProcessors(beanFactory)
 
- 如何找到所有的BeanFactoryPostProcessor并执行他们的方法：
+ 如何找到所有的<code style="color:#b30049;background-color:#fdf5f5">BeanFactoryPostProcessor</code>并执行他们的方法：
 
-1）.直接在BeanFactory中找到所有类型是BeanFactoryPostProcessor的组件，并执行他们的方法
+1）直接在BeanFactory中找到所有类型是BeanFactoryPostProcessor的组件，并执行他们的方法
 
-2）.在初始化创建其他组件前面执行
+2）在初始化创建其他组件前面执行
 
 ### BeanDefinitionRegistryPostProcessor
 
@@ -874,11 +883,11 @@ public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProc
 
 ```
 
-postProcessBeanDefinitionRegistry()；在所有bean定义信息将要被加载，bean实例还未创建的时候调用
+<code style="color:#b30049;background-color:#fdf5f5">postProcessBeanDefinitionRegistry()</code>；在所有bean定义信息将要被加载，bean实例还未创建的时候调用
 
-优于BeanFactoryPostProcessor执行
+优于<code style="color:#b30049;background-color:#fdf5f5">BeanFactoryPostProcessor</code>执行
 
-利用BeanDefinitionRegistryPostProcessor给容器再额外添加一些组件
+利用<code style="color:#b30049;background-color:#fdf5f5">BeanDefinitionRegistryPostProcessor</code>给容器再额外添加一些组件
 
 原理：
 
@@ -892,7 +901,7 @@ postProcessBeanDefinitionRegistry()；在所有bean定义信息将要被加载�
 
 ### ApplicationListener
 
-ApplicationListener：监听容器中发布的事件。事件驱动模型开发
+<code style="color:#b30049;background-color:#fdf5f5">ApplicationListener</code>：监听容器中发布的事件。事件驱动模型开发
 
 ```java
 public interface ApplicationListener<E extends ApplicationEvent>
@@ -908,10 +917,10 @@ public interface ApplicationListener<E extends ApplicationEvent>
 
 3）只要容器中有相关的事件发布，我们就能监听到这个事件
 
-​		ContextRefreshedEvent：容器刷新完成（所有Bean都完全创建）会发布这个事件
+​		<code style="color:#b30049;background-color:#fdf5f5">ContextRefreshedEvent</code>：容器刷新完成（所有Bean都完全创建）会发布这个事件
 
-​		ContextClosedEvent：关闭容器会发布这个事件
+​		<code style="color:#b30049;background-color:#fdf5f5">ContextClosedEvent</code>：关闭容器会发布这个事件
 
 4）发布一个事件：
 
-​		applicationContext.publishEvent();
+​		<code style="color:#b30049;background-color:#fdf5f5">applicationContext.publishEvent();</code>

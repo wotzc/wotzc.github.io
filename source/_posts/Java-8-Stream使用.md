@@ -12,7 +12,11 @@ Categories: Java8
 
 我们先来看看Java里面是怎么定义Stream的：
 
-> A sequence of elements supporting sequential and parallel aggregate operations.
+{% note no-icon primary %}
+
+A sequence of elements supporting sequential and parallel aggregate operations.
+
+{% endnote %}
 
 我们来解读一下上面的那句话：
 
@@ -23,11 +27,11 @@ Stream API可以极大提高Java程序员的生产力，让程序员写出高效
 
 Stream有哪些特点：
 
-- `元素的序列`：与集合一样可以访问里面的元素，集合讲的是数据，而流讲的是操作，比如：filter、map
-- `源`: 流也需要又一个提供数据的源，顺序和生成时的顺序一致
-- `数据的操作`：流支持类似于数据库的操作，支持顺序或者并行处理数据；上面的例子用流来实现会更加的简洁
+- <code style="color:#b30049;background-color:#fdf5f5">元素的序列</code>：与集合一样可以访问里面的元素，集合讲的是数据，而流讲的是操作，比如：filter、map
+- <code style="color:#b30049;background-color:#fdf5f5">源</code>: 流也需要又一个提供数据的源，顺序和生成时的顺序一致
+- <code style="color:#b30049;background-color:#fdf5f5">数据的操作</code>：流支持类似于数据库的操作，支持顺序或者并行处理数据；上面的例子用流来实现会更加的简洁
 
-```arduino
+```java
 public List<Integer> getGt5Data() {
     return Stream.of(1, 7, 3, 8, 2, 4, 9)
             .filter(num -> num > 5)
@@ -35,13 +39,13 @@ public List<Integer> getGt5Data() {
 }
 ```
 
-- `流水线操作`：很多流的方法本身也会返回一个流，这样可以把多个操作连接起来，形成流水线操作
+- <code style="color:#b30049;background-color:#fdf5f5">流水线操作</code>：很多流的方法本身也会返回一个流，这样可以把多个操作连接起来，形成流水线操作
 
-- `内部迭代`：与以往的迭代不同，流使用的内部迭代，用户只需要专注于数据处理
+- <code style="color:#b30049;background-color:#fdf5f5">内部迭代</code>：与以往的迭代不同，流使用的内部迭代，用户只需要专注于数据处理
 
-- `只能遍历一次`： 遍历完成之后我们的流就已经消费完了，再次遍历的话会抛出异常
+- <code style="color:#b30049;background-color:#fdf5f5">只能遍历一次</code>： 遍历完成之后我们的流就已经消费完了，再次遍历的话会抛出异常
 
-  <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/JavaStream.png" style="zoom: 67%;" />
+  <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/JavaStream.png"  />
 
 ------
 
@@ -57,7 +61,7 @@ Java8中的Stream定义了很多方法，基本可以把他们分为两类：中
 
 什么是操作符呢？操作符就是对数据进行的一种处理工作，一道加工程序；就好像工厂的工人对流水线上的产品进行一道加工程序一样。
 
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/CoreStreamOperations.png" style="zoom:67%;" />
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/CoreStreamOperations.png"  />
 
 **Stream**的操作符大体上分为两种：**中间操作符**和**终止操作符**
 
@@ -65,29 +69,29 @@ Java8中的Stream定义了很多方法，基本可以把他们分为两类：中
 
 对于数据流来说，中间操作符在执行制定处理程序后，数据流依然可以传递给下一级的操作符。
 
-中间操作符包含8种(排除了parallel,sequential,这两个操作并不涉及到对数据流的加工操作)：
+中间操作符包含<code style="color:#b30049;background-color:#fdf5f5">8种</code>(排除了parallel,sequential,这两个操作并不涉及到对数据流的加工操作)：
 
-> 1. map(mapToInt,mapToLong,mapToDouble) 转换操作符，把比如A->B，这里默认提供了转int，long，double的操作符。
-> 2. flatmap(flatmapToInt,flatmapToLong,flatmapToDouble) 拍平操作比如把 int[]{2,3,4} 拍平 变成 2，3，4 也就是从原来的一个数据变成了3个数据，这里默认提供了拍平成int,long,double的操作符。
-> 3. limit 限流操作，比如数据流中有10个 我只要出前3个就可以使用。
-> 4. distint 去重操作，对重复元素去重，底层使用了equals方法。
-> 5. filter 过滤操作，把不想要的数据过滤。
-> 6. peek 挑出操作，如果想对数据进行某些操作，如：读取、编辑修改等。
-> 7. skip 跳过操作，跳过某些元素。
-> 8. sorted(unordered) 排序操作，对元素排序，前提是实现Comparable接口，当然也可以自定义比较器。
+> 1. <code style="color:#b30049;background-color:#fdf5f5">map</code>(mapToInt,mapToLong,mapToDouble) 转换操作符，把比如<code style="color:#b30049;background-color:#fdf5f5">A->B</code>，这里默认提供了转int，long，double的操作符。
+> 2. <code style="color:#b30049;background-color:#fdf5f5">flatmap</code>(flatmapToInt,flatmapToLong,flatmapToDouble) 拍平操作比如把 int[]{2,3,4} 拍平 变成 2，3，4 也就是从原来的一个数据变成了3个数据，这里默认提供了拍平成int,long,double的操作符。
+> 3. <code style="color:#b30049;background-color:#fdf5f5">limit</code>限流操作，比如数据流中有10个 我只要出前3个就可以使用。
+> 4. <code style="color:#b30049;background-color:#fdf5f5">distint</code>去重操作，对重复元素去重，底层使用了equals方法。
+> 5. <code style="color:#b30049;background-color:#fdf5f5">filter</code>过滤操作，把不想要的数据过滤。
+> 6. <code style="color:#b30049;background-color:#fdf5f5">peek</code>挑出操作，如果想对数据进行某些操作，如：读取、编辑修改等。
+> 7. <code style="color:#b30049;background-color:#fdf5f5">skip</code>跳过操作，跳过某些元素。
+> 8. <code style="color:#b30049;background-color:#fdf5f5">sorted</code>(unordered)排序操作，对元素排序，前提是实现Comparable接口，当然也可以自定义比较器。
 
 ### 终止操作符
 
 数据经过中间加工操作，就轮到终止操作符上场了；终止操作符就是用来对数据进行收集或者消费的，数据到了终止操作这里就不会向下流动了，终止操作符只能使用一次。
 
-> 1. collect 收集操作，将所有数据收集起来，这个操作非常重要，官方的提供的Collectors 提供了非常多收集器，可以说Stream 的核心在于Collectors。
-> 2. count 统计操作，统计最终的数据个数。
-> 3. findFirst、findAny 查找操作，查找第一个、查找任何一个 返回的类型为Optional。
-> 4. noneMatch、allMatch、anyMatch 匹配操作，数据流中是否存在符合条件的元素 返回值为bool 值。
-> 5. min、max 最值操作，需要自定义比较器，返回数据流中最大最小的值。
-> 6. reduce 规约操作，将整个数据流的值规约为一个值，count、min、max底层就是使用reduce。
-> 7. forEach、forEachOrdered 遍历操作，这里就是对最终的数据进行消费了。
-> 8. toArray 数组操作，将数据流的元素转换成数组。
+> 1. <code style="color:#b30049;background-color:#fdf5f5">collect</code>收集操作，将所有数据收集起来，这个操作非常重要，官方的提供的Collectors 提供了非常多收集器，可以说Stream 的核心在于Collectors。
+> 2. <code style="color:#b30049;background-color:#fdf5f5">count</code>统计操作，统计最终的数据个数。
+> 3. <code style="color:#b30049;background-color:#fdf5f5">findFirst</code>、<code style="color:#b30049;background-color:#fdf5f5">findAny</code>查找操作，查找第一个、查找任何一个 返回的类型为Optional。
+> 4. <code style="color:#b30049;background-color:#fdf5f5">noneMatch</code>、<code style="color:#b30049;background-color:#fdf5f5">allMatch</code>、<code style="color:#b30049;background-color:#fdf5f5">anyMatch</code>匹配操作，数据流中是否存在符合条件的元素 返回值为bool 值。
+> 5. <code style="color:#b30049;background-color:#fdf5f5">min</code>、<code style="color:#b30049;background-color:#fdf5f5">max</code>最值操作，需要自定义比较器，返回数据流中最大最小的值。
+> 6. <code style="color:#b30049;background-color:#fdf5f5">reduce </code>约操作，将整个数据流的值规约为一个值，count、min、max底层就是使用reduce。
+> 7. <code style="color:#b30049;background-color:#fdf5f5">forEach</code>、<code style="color:#b30049;background-color:#fdf5f5">forEachOrdered</code>遍历操作，这里就是对最终的数据进行消费了。
+> 8. <code style="color:#b30049;background-color:#fdf5f5">toArray</code>数组操作，将数据流的元素转换成数组。
 
 这里只介绍了Stream，并没有涉及到**IntStream**、**LongStream**、**DoubleStream**，这三个流实现了一些特有的操作符，这里不做介绍。
 
@@ -97,7 +101,7 @@ Java8中的Stream定义了很多方法，基本可以把他们分为两类：中
 
 ## Stream.of()
 
-通过`Stream类`中的静态方法 `of()`
+通过`Stream类`中的静态方法 <code style="color:#b30049;background-color:#fdf5f5">of()</code>
 
 ```java
 Stream<Integer> stream = Stream.of(1,2,3,4,5,6,7,8,9);
@@ -113,7 +117,7 @@ stream.forEach(p -> System.out.println(p));
 
 ## List.stream()
 
-通过`Collection 系列集合`提供的`串行流：stream()`、`并行流： paralleStream()`
+通过`Collection 系列集合`提供的<code style="color:#b30049;background-color:#fdf5f5">串行流：stream()</code>、<code style="color:#b30049;background-color:#fdf5f5">并行流： paralleStream()</code>
 
 ```java
 List<Integer> list = new ArrayList<Integer>();
@@ -131,7 +135,7 @@ stream.forEach(p -> System.out.println(p));
 **使用Stream类的静态方法 iterate 创建无限流**
 iterate方法：
 
-Stream<T> iterate(final T seed, final UnaryOperator<T> f)
+Stream\<T> iterate(final T seed, final UnaryOperator\<T> f)
 
 参数 seed 起始值，UnaryOperator 函数式接口 继承Function<T,T> 此时参数类型符合返回值类型一致
 
@@ -162,7 +166,7 @@ stream.forEach(p -> System.out.println(p));
 
 # Stream中间操作
 
-中间操作会返回另外一个流，这样可以让多个操作连接起来形成一个流水线的操作，<span style="color:red">**只要不触发终端操作，那么这个中间操作都不会实际执行。**</span>
+中间操作会返回另外一个流，这样可以让多个操作连接起来形成一个流水线的操作，{%	label danger @只要不触发终端操作，那么这个中间操作都不会实际执行。	%}
 
 **注意点**：
 
@@ -178,7 +182,7 @@ stream.forEach(p -> System.out.println(p));
     });
 ```
 
-<span style="color:red">此时只有中间操作，无终止操作，无结果，控制台无输出。</span>
+{%	label danger @此时只有中间操作，无终止操作，无结果，控制台无输出。	%}
 
 在继续之前，让我们先构建一个`List`字符串。我们将在此列表上构建我们的示例，以便于关联和理解。
 
@@ -196,7 +200,7 @@ memberNames.add("Lokesh");
 
 ## filter()
 
-该`filter()`方法接受一个Predicate来过滤流的所有元素。此操作是中间操作，它使我们能够对结果调用另一个流操作（例如forEach()）。
+该<code style="color:#b30049;background-color:#fdf5f5">filter()</code>方法接受一个Predicate来过滤流的所有元素。此操作是中间操作，它使我们能够对结果调用另一个流操作（例如forEach()）。
 
 Lambda表达式写法：
 
@@ -222,9 +226,9 @@ Aman
 
 ## map()
 
-`map()`中间操作的流中的每个元素转换成经由给定功能的另一个对象。
+<code style="color:#b30049;background-color:#fdf5f5">map()</code>中间操作的流中的每个元素转换成经由给定功能的另一个对象。
 
-以下示例将每个字符串转换为大写字符串。但我们也可以使用`map()`将对象转换为另一种类型。
+以下示例将每个字符串转换为大写字符串。但我们也可以使用<code style="color:#b30049;background-color:#fdf5f5">map()</code>将对象转换为另一种类型。
 
 ```java
 memberNames.stream().filter((s) -> s.startsWith("A"))
@@ -241,7 +245,7 @@ AMAN
 
 ## flatmap()
 
-flatMap()是两步过程，即**map() + Flattening**。它有助于转换`Collection<Collection<T>>`为Collection<T>
+flatMap()是两步过程，即**map() + Flattening**。它有助于转换`Collection<Collection<T>>`为`Collection<T>`
 
 - flatmap 作用就是将元素拍平拍扁 ，将拍扁的元素重新组成Stream，并将这些Stream 串行合并成一条Stream
 
@@ -260,13 +264,11 @@ List<Integer> listOfAllIntegers = listOfLists.stream()
 System.out.println(listOfAllIntegers);      //[1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-
-
 ## sorted()
 
-对Stream的排序通过sorted进行，它比数组的排序更强之处在于你可以首先对Stream进行各类map、filter、limit、skip甚至distinct来减少元素数量后再排序，这能帮助程序明显缩短执行时间。
+对Stream的排序通过<code style="color:#b30049;background-color:#fdf5f5">sorted</code>进行，它比数组的排序更强之处在于你可以首先对Stream进行各类map、filter、limit、skip甚至distinct来减少元素数量后再排序，这能帮助程序明显缩短执行时间。
 
-该`sorted()`方法是返回流的排序视图的中间操作。除非我们传递自定义Comparator ，否则流中的元素按自然顺序排序。
+该<code style="color:#b30049;background-color:#fdf5f5">sorted()</code>方法是返回流的排序视图的中间操作。除非我们传递自定义Comparator ，否则流中的元素按自然顺序排序。
 
 ### 自然排序
 
@@ -290,13 +292,13 @@ dd
 
 ### 指定排序
 
-```
+```java
 sorted(Comparator com)
 ```
 
 - 根据`实现Comparator接口的指定方法`进行排序
 
-```
+```java
 stuList.stream().sorted(
             (a,b) ->{
                 if (a.getAge().equals(b.getAge())){
@@ -312,11 +314,11 @@ stuList.stream().sorted(
 
 **语法**
 
-```
+```java
 Stream<T> limit(long maxSize)
 ```
 
-这里`maxSize`应该限制流的元素数量；并且方法返回值是一个新的，`Stream`由从原始流中挑选的元素组成。
+这里<code style="color:#b30049;background-color:#fdf5f5">maxSize</code>应该限制流的元素数量；并且方法返回值是一个新的，`Stream`由从原始流中挑选的元素组成。
 
 **示例 1：Java 程序从无限的偶数流中获取前 10 个偶数**
 
@@ -365,7 +367,7 @@ Stream<Integer> evenNumInfiniteStream = Stream.iterate(0, n -> n + 2);
 
 ## distinct()
 
-distinct()去重原理为通过流所生成元素的`hashCode()`和`equals()`来去除`重复`元素
+<code style="color:#b30049;background-color:#fdf5f5">distinct()</code>去重原理为通过流所生成元素的<code style="color:#b30049;background-color:#fdf5f5">hashCode()</code>和<code style="color:#b30049;background-color:#fdf5f5">equals()</code>来去除`重复`元素
 
 ### 字符串或包装类型去重
 
@@ -398,7 +400,9 @@ System.out.println(distinctElements);
 
 让我们为我们的示例创建一个 Person 类。它有三个领域：`id`，`fname`和`lname`。如果两个人相同，则他们`id`是相等的。
 
-> 不要忘记覆盖该类型的`equals()`和`hashCode()`方法
+{% note primary no-icon %}
+不要忘记覆盖该类型的`equals()`和`hashCode()`方法
+{% endnote %}
 
 ```java
 public class Person {
@@ -461,7 +465,7 @@ public class Person {
 }
 ```
 
-我们测试一下代码。我们将在`List`. 然后我们将使用该`Stream.distinct()`方法查找具有唯一性的 Person 类的所有实例`id`。
+我们测试一下代码。我们创建`List`. 然后我们将使用该<code style="color:#b30049;background-color:#fdf5f5">Stream.distinct()</code>方法查找具有唯一性的 Person 类的所有实例`id`。
 
 ```java
 //Java 程序通过 id 查找不同的人
@@ -503,7 +507,7 @@ Java 没有任何用于在使用提供的用户函数比较对象时查找不同
 
 **distinctByKey()**
 
-该`distinctByKey()`函数使用一个`ConcurrentHashMap`实例来确定是否存在具有相同值的现有键——其中键是从函数引用中获取的。
+该<code style="color:#b30049;background-color:#fdf5f5">distinctByKey()</code>函数使用一个<code style="color:#b30049;background-color:#fdf5f5">ConcurrentHashMap</code>实例来确定是否存在具有相同值的现有键——其中键是从函数引用中获取的。
 
 此函数的参数是一个lambda 表达式，用于生成映射键以进行比较。
 
@@ -519,7 +523,7 @@ Java 没有任何用于在使用提供的用户函数比较对象时查找不同
 
 **示例：**
 
-检查我们`distinctByKey(p -> p.getFname() + " " + p.getLname())`在`filter()`方法中的使用方式。
+检查我们<code style="color:#b30049;background-color:#fdf5f5">distinctByKey(p -> p.getFname() + " " + p.getLname())</code>在<code style="color:#b30049;background-color:#fdf5f5">filter()</code>方法中的使用方式。
 
 ```java
 Java 程序按姓名查找不同的人Person lokeshOne = new Person(1, "Lokesh", "Gupta");
@@ -555,7 +559,7 @@ Person [id=6, fname=Alex, lname=Kolen]
 
 ## peek()
 
- peek：如同于map，能得到流中的每一个元素。但map接收的是一个Function表达式，有返回值；而peek接收的是Consumer表达式，没有返回值。
+ <code style="color:#b30049;background-color:#fdf5f5">peek</code>：如同于map，能得到流中的每一个元素。但map接收的是一个Function表达式，有返回值；而peek接收的是Consumer表达式，没有返回值。
 
 `peek()`存在主要是为了支持**调试**
 
@@ -620,7 +624,7 @@ FOUR
 
 ## foreach()
 
-**Stream forEach(Consumer action)**对流的每个元素执行一个操作。Stream forEach(Consumer action) 是一个***终端操作，***即它可以遍历流以产生结果或副作用。
+<code style="color:#b30049;background-color:#fdf5f5">Stream forEach(Consumer action)</code>对流的每个元素执行一个操作。Stream forEach(Consumer action) 是一个终端操作，即它可以遍历流以产生结果或副作用。
 
 ```java
 memberNames.forEach(System.out::println);
@@ -628,18 +632,18 @@ memberNames.forEach(System.out::println);
 
 **方法语法**
 
-该`forEach()`方法的语法如下：
+该<code style="color:#b30049;background-color:#fdf5f5">forEach()</code>方法的语法如下：
 
 ```java
 void forEach(Consumer<? super T> action)
 ```
 
-`Consumer`是一个[功能接口](https://howtodoinjava.com/java8/functional-interface-tutorial/)，`action`表示要对 Stream 中的每个元素执行的**[非干扰操作](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/package-summary.html#NonInterference)**。
+<code style="color:#b30049;background-color:#fdf5f5">Consumer</code>是一个[功能接口](https://howtodoinjava.com/java8/functional-interface-tutorial/)，<code style="color:#b30049;background-color:#fdf5f5">action</code>表示要对 Stream 中的每个元素执行的[非干扰操作](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/package-summary.html#NonInterference)。
 
 **特点：**
 
-- 该`forEach()`方法是**终端操作**。这意味着它不再返回`Stream`。
-- 执行**forEach()**后，认为流管道已消耗，不能再使用 Stream。
+- 该<code style="color:#b30049;background-color:#fdf5f5">forEach()</code>方法是**终端操作**。这意味着它不再返回`Stream`。
+- 执行<code style="color:#b30049;background-color:#fdf5f5">forEach()</code>后，认为流管道已消耗，不能再使用 Stream。
 - 如果我们需要再次遍历相同的数据源（支持 Stream 的集合），我们必须返回数据源以获取新的流。
 - 对于*并行流*，该`forEach()`操作不保证流中元素的顺序，因为这样做会牺牲[并行性](https://howtodoinjava.com/java/multi-threading/concurrency-vs-parallelism/)的好处。
 - **使用 Lambda 运算符：**在stream().forEach() 中，使用了 lambda，因此不允许对循环外的变量进行操作。只能对相关集合进行操作。
@@ -698,7 +702,7 @@ In the above example, both statements guarantee that output will be 2, 4, 6, 8, 
 
 ## toArray()
 
-该`toArray()`方法返回一个包含给定流元素的数组。这是**终端操作**。
+该<code style="color:#b30049;background-color:#fdf5f5">toArray()</code>方法返回一个包含给定流元素的数组。这是**终端操作**。
 
 **示例 ：将字符串流转换为字符串数组**
 
@@ -723,7 +727,7 @@ System.out.println(Arrays.toString(tokenArray));
 
 *reduce*操作将二元运算符应用于流中的每个元素，其中运算符的第一个参数是前一个reduce操作的返回值，第二个参数是当前流元素。
 
-Optional<T> reduce(BinaryOperator<T> accumulator)：第一次执行时，accumulator函数的第一个参数为流中的第一个元素，第二个参数为流中元素的第二个元素；第二次执行时，第一个参数为第一次函数执行的结果，第二个参数为流中的第三个元素；依次类推。
+<code style="color:#b30049;background-color:#fdf5f5">Optional\<T> reduce(BinaryOperator\<T> accumulator)</code>：第一次执行时，accumulator函数的第一个参数为流中的第一个元素，第二个参数为流中元素的第二个元素；第二次执行时，第一个参数为第一次函数执行的结果，第二个参数为流中的第三个元素；依次类推。
 **示例 1：获取最长的字符串**
 
 ```java
@@ -745,7 +749,7 @@ System.out.println("The sum of all elements is " + sum);
 
 ### collect() 流式传输到 List
 
-`collect()`方法用于从`stream`接收元素并将它们存储在集合中。
+<code style="color:#b30049;background-color:#fdf5f5">collect()</code>方法用于从`stream`接收元素并将它们存储在集合中。
 
 ```java
 List<String> memNamesInUppercase = memberNames.stream().sorted()
@@ -763,7 +767,7 @@ System.out.print(memNamesInUppercase);
 
 ### collect() 流式传输到 Set
 
-我们可以使用 Collectors.toSet() 将流元素收集到一个新的 Set 中。
+我们可以使用<code style="color:#b30049;background-color:#fdf5f5">Collectors.toSet()</code>将流元素收集到一个新的 Set 中。
 
 ```java
 List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
@@ -774,7 +778,7 @@ System.out.println(oddNumbers); // [1, 3, 5]
 
 ### collect() 流式传输到 Map
 
-我们可以使用 Collectors.toMap() 函数将流元素收集到`Map`。此方法接受映射键的两个参数和 Map 中的相应值。
+我们可以使用<code style="color:#b30049;background-color:#fdf5f5">Collectors.toMap()</code>函数将流元素收集到`Map`。此方法接受映射键的两个参数和 Map 中的相应值。
 
 ```
 List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
@@ -804,17 +808,17 @@ String valueObject = Stream.of("1", new StringBuffer("2"), new StringBuilder("3"
 
 ### Collectors类中的常用方法
 
-- `counting`-统计数量
-- `averagingDouble`-求平均值并转换成Double类型
-- `averagingInt`-求平均值并转换成Int类型
-- `averagingLong`-求平均值并转换成Long类型
-- `summingDouble`-求和并转换成Double类型
-- `summingInt`-求和并转换成Int类型
-- `summingLong`-求和并转换成Long类型
-- `maxBy`-根据函数条件求最大值
-- `groupingBy`-分组
-- `partitioningBy`-分区
-- `joining`-连接字符串
+- <code style="color:#b30049;background-color:#fdf5f5">counting</code>-统计数量
+- <code style="color:#b30049;background-color:#fdf5f5">averagingDouble</code>-求平均值并转换成Double类型
+- <code style="color:#b30049;background-color:#fdf5f5">averagingInt</code>-求平均值并转换成Int类型
+- <code style="color:#b30049;background-color:#fdf5f5">averagingLong</code>-求平均值并转换成Long类型
+- <code style="color:#b30049;background-color:#fdf5f5">summingDouble</code>-求和并转换成Double类型
+- <code style="color:#b30049;background-color:#fdf5f5">summingInt</code>-求和并转换成Int类型
+- <code style="color:#b30049;background-color:#fdf5f5">summingLong</code>-求和并转换成Long类型
+- <code style="color:#b30049;background-color:#fdf5f5">maxBy</code>-根据函数条件求最大值
+- <code style="color:#b30049;background-color:#fdf5f5">groupingBy</code>-分组
+- <code style="color:#b30049;background-color:#fdf5f5">partitioningBy</code>-分区
+- <code style="color:#b30049;background-color:#fdf5f5">joining</code>-连接字符串
 
 示例 求年龄的平均值
 
@@ -1181,6 +1185,6 @@ List<Integer> transactionsIds =
                 .collect(toList());
 ```
 
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/transac1.png" style="zoom:67%;" />
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/transac1.png"  />
 
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/transac.png" style="zoom:67%;" />
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/java8Stream/transac.png"  />

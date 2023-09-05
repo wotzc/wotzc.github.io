@@ -42,15 +42,15 @@ categories: Python
 
 计算机中的变量是实际存在的数据或者说是存储器中存储数据的一块内存空间，变量的值可以被读取和修改，这是所有计算和控制的基础。计算机能处理的数据有很多种类型，除了数值之外还可以处理文本、图形、音频、视频等各种各样的数据，那么不同的数据就需要定义不同的存储类型。Python中的数据类型很多，而且也允许我们自定义新的数据类型（这一点在后面会讲到），我们先介绍几种常用的数据类型。
 
-- <span style="color:red">`整型`</span>：Python中可以处理任意大小的整数（Python 2.x中有`int`和`long`两种类型的整数，但这种区分对Python来说意义不大，因此在Python 3.x中整数只有int这一种了），而且支持二进制（如`0b100`，换算成十进制是4）、八进制（如`0o100`，换算成十进制是64）、十进制（`100`）和十六进制（`0x100`，换算成十进制是256）的表示法。
-- <span style="color:red">`浮点型`</span>：浮点数也就是小数，之所以称为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的，浮点数除了数学写法（如`123.456`）之外还支持科学计数法（如`1.23456e2`）。
-- <span style="color:red">`字符串型`</span>：字符串是以单引号或双引号括起来的任意文本，比如`'hello'`和`"hello"`,字符串还有原始字符串表示法、字节字符串表示法、Unicode字符串表示法，而且可以书写成多行的形式（用三个单引号或三个双引号开头，三个单引号或三个双引号结尾）。
-- <span style="color:red">`布尔型`</span>：布尔值只有`True`、`False`两种值，要么是`True`，要么是`False`，在Python中，可以直接用`True`、`False`表示布尔值（请注意大小写），也可以通过布尔运算计算出来（例如`3 < 5`会产生布尔值`True`，而`2 == 1`会产生布尔值`False`）。
-- <span style="color:red">`复数型`</span>：形如`3+5j`，跟数学上的复数表示一样，唯一不同的是虚部的`i`换成了`j`。实际上，这个类型并不常用，大家了解一下就可以了。
+- <code style="color:#b30049;background-color:#fdf5f5">整型</code>：Python中可以处理任意大小的整数（Python 2.x中有`int`和`long`两种类型的整数，但这种区分对Python来说意义不大，因此在Python 3.x中整数只有int这一种了），而且支持二进制（如`0b100`，换算成十进制是4）、八进制（如`0o100`，换算成十进制是64）、十进制（`100`）和十六进制（`0x100`，换算成十进制是256）的表示法。
+- <code style="color:#b30049;background-color:#fdf5f5">浮点型</code>：浮点数也就是小数，之所以称为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的，浮点数除了数学写法（如`123.456`）之外还支持科学计数法（如`1.23456e2`）。
+- <code style="color:#b30049;background-color:#fdf5f5">字符串型</code>：字符串是以单引号或双引号括起来的任意文本，比如`'hello'`和`"hello"`,字符串还有原始字符串表示法、字节字符串表示法、Unicode字符串表示法，而且可以书写成多行的形式（用三个单引号或三个双引号开头，三个单引号或三个双引号结尾）。
+- <code style="color:#b30049;background-color:#fdf5f5">布尔型</code>：布尔值只有`True`、`False`两种值，要么是`True`，要么是`False`，在Python中，可以直接用`True`、`False`表示布尔值（请注意大小写），也可以通过布尔运算计算出来（例如`3 < 5`会产生布尔值`True`，而`2 == 1`会产生布尔值`False`）。
+- <code style="color:#b30049;background-color:#fdf5f5">复数型</code>：形如`3+5j`，跟数学上的复数表示一样，唯一不同的是虚部的`i`换成了`j`。实际上，这个类型并不常用，大家了解一下就可以了。
 
 
 
-在Python中可以使用<span style="color:red">`type`</span>函数对变量的类型进行检查。
+在Python中可以使用<code style="color:#b30049;background-color:#fdf5f5">type</code>函数对变量的类型进行检查。
 
 ```python
 a = 100
@@ -69,11 +69,11 @@ print(type(e))    # <class 'bool'>
 
 可以使用Python中内置的函数对变量类型进行转换。
 
-- **<span style="color:green">`int()`</span>**：将一个数值或字符串转换成整数，可以指定进制。
-- **<span style="color:green">`float()`</span>**：将一个字符串转换成浮点数。
-- **<span style="color:green">`str()`</span>**：将指定的对象转换成字符串形式，可以指定编码。
-- **<span style="color:green">`chr()`</span>**：将整数转换成该编码对应的字符串（一个字符）。
-- **<span style="color:green">`ord()`</span>**：将字符串（一个字符）转换成对应的编码（整数）。
+- <code style="color:#b30049;background-color:#fdf5f5">int()</code>：将一个数值或字符串转换成整数，可以指定进制。
+- <code style="color:#b30049;background-color:#fdf5f5">float()</code>：将一个字符串转换成浮点数。
+- <code style="color:#b30049;background-color:#fdf5f5">str()</code>：将指定的对象转换成字符串形式，可以指定编码。
+- <code style="color:#b30049;background-color:#fdf5f5">chr()</code>：将整数转换成该编码对应的字符串（一个字符）。
+- <code style="color:#b30049;background-color:#fdf5f5">ord()</code>：将字符串（一个字符）转换成对应的编码（整数）。
 
 ## 格式化输出
 
@@ -91,7 +91,9 @@ print('%d %% %d = %d' % (a, b, a % b))
 print('%d ** %d = %d' % (a, b, a ** b))
 ```
 
-> **说明**：上面的print函数中输出的字符串使用了占位符语法，其中`%d`是整数的占位符，`%f`是小数的占位符，`%%`表示百分号（因为百分号代表了占位符，所以带占位符的字符串中要表示百分号必须写成`%%`），字符串之后的`%`后面跟的变量值会替换掉占位符然后输出到终端中，运行上面的程序，看看程序执行结果就明白啦。
+{% note info %}
+**说明**：上面的print函数中输出的字符串使用了占位符语法，其中`%d`是整数的占位符，`%f`是小数的占位符，`%%`表示百分号（因为百分号代表了占位符，所以带占位符的字符串中要表示百分号必须写成`%%`），字符串之后的`%`后面跟的变量值会替换掉占位符然后输出到终端中，运行上面的程序，看看程序执行结果就明白啦。
+{% endnote %}
 
 除了这种格式化字符串的方式外，还可以用下面的方式来格式化字符串
 
@@ -107,9 +109,9 @@ print(f'{a1} + {b1} = {a1 + b1}')
 
 ## if语句的使用
 
-虽然都是用 <span style="color:red">`if`</span> 关键词定义判断，但与**C，Java**等语言不同，**Python**不使用 <span style="color:red">`{}` </span>将<span style="color:red"> `if`</span> 语句控制的区域包含起来。**Python**使用的是缩进方法。同时，也不需要用 <span style="color:red">`()`</span>将判断条件括起来。
+虽然都是用 <code style="color:#b30049;background-color:#fdf5f5">if</code> 关键词定义判断，但与**C，Java**等语言不同，**Python**不使用 <code style="color:#b30049;background-color:#fdf5f5">{}</code>将<code style="color:#b30049;background-color:#fdf5f5">if</code> 语句控制的区域包含起来。**Python**使用的是缩进方法。同时，也不需要用 <code style="color:#b30049;background-color:#fdf5f5">()</code>将判断条件括起来。
 
-一个完整的 <span style="color:red">`if` </span>结构通常如下所示（注意：条件后的 <span style="color:red">`:` </span>是必须要的，缩进值需要一样）：
+一个完整的 <code style="color:#b30049;background-color:#fdf5f5">if</code>结构通常如下所示（注意：条件后的 <code style="color:#b30049;background-color:#fdf5f5">:</code>是必须要的，缩进值需要一样）：
 
 ```
 if <condition 1>:
@@ -132,11 +134,11 @@ else:
 x is zero
 ```
 
-<span style="color:red">`elif` </span>的个数没有限制，可以是1个或者多个，也可以没有。
+<code style="color:#b30049;background-color:#fdf5f5">elif</code>的个数没有限制，可以是1个或者多个，也可以没有。
 
-<span style="color:red">`else`</span> 最多只有1个，也可以没有。
+<code style="color:#b30049;background-color:#fdf5f5">else</code> 最多只有1个，也可以没有。
 
-可以使用 <span style="color:red">`and`</span> ，<span style="color:red"> `or` </span>, <span style="color:red">`not` </span>等关键词结合多个判断条件：
+可以使用 <code style="color:#b30049;background-color:#fdf5f5">and</code> ，<code style="color:#b30049;background-color:#fdf5f5">or</code>, <code style="color:#b30049;background-color:#fdf5f5">not</code>等关键词结合多个判断条件：
 
 ```python
 x = 10
@@ -180,7 +182,7 @@ This is not a leap year.
 
 # 循环结构
 
-循环结构就是程序中控制某条或某些指令重复执行的结构。在Python中构造循环结构有两种做法，一种是<span style="color:red">`for-in`</span>循环，一种是<span style="color:red">`while`</span>循环。
+循环结构就是程序中控制某条或某些指令重复执行的结构。在Python中构造循环结构有两种做法，一种是<code style="color:#b30049;background-color:#fdf5f5">for-in</code>循环，一种是<code style="color:#b30049;background-color:#fdf5f5">while</code>循环。
 
 ## for-in循环
 
@@ -189,7 +191,7 @@ for <variable> in <sequence>:
     <indented block of code>
 ```
 
-如果明确的知道循环执行的次数或者要对一个容器进行迭代（后面会讲到），那么我们推荐使用<span style="color:red">`for-in`</span>循环，例如下面代码中计算1~100求和的结果
+如果明确的知道循环执行的次数或者要对一个容器进行迭代（后面会讲到），那么我们推荐使用<code style="color:#b30049;background-color:#fdf5f5">for-in</code>循环，例如下面代码中计算1~100求和的结果
 
 ```python
 sum = 0
@@ -198,12 +200,12 @@ for x in range(101):
 print(sum)
 ```
 
-需要说明的是上面代码中的<span style="color:red">`range(1, 101)`</span>可以用来构造一个从1到100的范围，当我们把这样一个范围放到<span style="color:red">`for-in`</span>循环中，就可以通过前面的循环变量<span style="color:red">`x`</span>依次取出从1到100的整数。当然，<span style="color:red">`range`</span>的用法非常灵活，下面给出了一个例子：
+需要说明的是上面代码中的<code style="color:#b30049;background-color:#fdf5f5">range(1, 101)</code>可以用来构造一个从1到100的范围，当我们把这样一个范围放到<code style="color:#b30049;background-color:#fdf5f5">for-in</code>循环中，就可以通过前面的循环变量<code style="color:#b30049;background-color:#fdf5f5">x</code>依次取出从1到100的整数。当然，<code style="color:#b30049;background-color:#fdf5f5">range</code>的用法非常灵活，下面给出了一个例子：
 
-- <span style="color:red">`range(101)`</span>：可以用来产生0到100范围的整数，需要注意的是取不到101。
-- <span style="color:red">`range(1, 101)`</span>：可以用来产生1到100范围的整数，相当于前面是闭区间后面是开区间。
-- <span style="color:red">`range(1, 101, 2)`</span>：可以用来产生1到100的奇数，其中2是步长，即每次数值递增的值。
-- <span style="color:red">`range(100, 0, -2)`</span>：可以用来产生100到1的偶数，其中-2是步长，即每次数字递减的值。
+- <code style="color:#b30049;background-color:#fdf5f5">range(101)</code>：可以用来产生0到100范围的整数，需要注意的是取不到101。
+- <code style="color:#b30049;background-color:#fdf5f5">range(1, 101)</code>：可以用来产生1到100范围的整数，相当于前面是闭区间后面是开区间。
+- <code style="color:#b30049;background-color:#fdf5f5">range(1, 101, 2)</code>：可以用来产生1到100的奇数，其中2是步长，即每次数值递增的值。
+- <code style="color:#b30049;background-color:#fdf5f5">range(100, 0, -2)</code>：可以用来产生100到1的偶数，其中-2是步长，即每次数字递减的值。
 
 知道了这一点，我们可以用下面的代码来实现1~100之间的偶数求和。
 
@@ -242,7 +244,7 @@ print total
 
 ## continue 语句
 
-遇到 <span style="color:red">`continue`</span> 的时候，程序会返回到循环的最开始重新执行。
+遇到 <code style="color:#b30049;background-color:#fdf5f5">continue</code> 的时候，程序会返回到循环的最开始重新执行。
 
 例如在循环中忽略一些特定的值：
 
@@ -263,14 +265,14 @@ for i in values:
 
 ## break 语句
 
-遇到 <span style="color:red">`break`</span> 的时候，程序会跳出循环，不管循环条件是不是满足
+遇到 <code style="color:#b30049;background-color:#fdf5f5">break</code> 的时候，程序会跳出循环，不管循环条件是不是满足
 
 ## else语句
 
-与 <span style="color:red">`if`</span>  一样， <span style="color:red">`while`</span>  和 <span style="color:red">`for`</span>  循环后面也可以跟着 <span style="color:red">`else`</span>  语句，不过要和<span style="color:red">`break`</span> 一起连用。
+与 <code style="color:#b30049;background-color:#fdf5f5">if</code>  一样， <code style="color:#b30049;background-color:#fdf5f5">while</code>  和 <code style="color:#b30049;background-color:#fdf5f5">for</code>  循环后面也可以跟着 <code style="color:#b30049;background-color:#fdf5f5">else</code>  语句，不过要和<code style="color:#b30049;background-color:#fdf5f5">break</code> 一起连用。
 
-- 当循环正常结束时，循环条件不满足， <span style="color:red">`else`</span>  被执行；
-- 当循环被 <span style="color:red">`break`</span>  结束时，循环条件仍然满足， <span style="color:red">`else`</span>  不执行。
+- 当循环正常结束时，循环条件不满足， <code style="color:#b30049;background-color:#fdf5f5">else</code>  被执行；
+- 当循环被 <code style="color:#b30049;background-color:#fdf5f5">break</code>  结束时，循环条件仍然满足， <code style="color:#b30049;background-color:#fdf5f5">else</code>  不执行。
 
 不执行：
 
@@ -310,19 +312,19 @@ All values greater than 10
 
 容器型数据类型包括：
 
-| 类型                                         | 例子                     |
-| -------------------------------------------- | ------------------------ |
-| <span style="color:red">`列表(list)`</span>  | `[1, 1.2, 'hello']`      |
-| <span style="color:red">`元组(Tuple)`</span> | `(10, 11, 12, 13, 14)`   |
-| <span style="color:red">`集合(set)`</span>   | `{1, 2, 3, 1}`           |
-| <span style="color:red">`字典(dict)`</span>  | `{'dogs': 5, 'pigs': 3}` |
-| <span style="color:red">`Numpy数组`</span>   | `array([1, 2, 3])`       |
+| 类型                                                         | 例子                     |
+| ------------------------------------------------------------ | ------------------------ |
+| <code style="color:#b30049;background-color:#fdf5f5">列表(list)</code> | `[1, 1.2, 'hello']`      |
+| <code style="color:#b30049;background-color:#fdf5f5">元组(Tuple)</code> | `(10, 11, 12, 13, 14)`   |
+| <code style="color:#b30049;background-color:#fdf5f5">集合(set)</code> | `{1, 2, 3, 1}`           |
+| <code style="color:#b30049;background-color:#fdf5f5">字典(dict)</code> | `{'dogs': 5, 'pigs': 3}` |
+| <code style="color:#b30049;background-color:#fdf5f5">Numpy数组</code> | `array([1, 2, 3])`       |
 
 ## 列表
 
 在**Python**中，列表是一个有序的序列。
 
-列表用一对 **<span style="color:#ff8800">`[]`</span>** 生成，中间的元素用 **<span style="color:#ff8800">`,`</span>** 隔开，其中的元素不需要是同一类型，同时列表的长度也不固定。
+列表用一对 <code style="color:#b30049;background-color:#fdf5f5">[]</code> 生成，中间的元素用 <code style="color:#b30049;background-color:#fdf5f5">,</code>隔开，其中的元素不需要是同一类型，同时列表的长度也不固定。
 
 ```python
 l = [1, 2.0, 'hello']
@@ -356,7 +358,7 @@ empty_list
 
 ### 长度
 
-用 <span style="color:red">`len`</span> 查看列表长度：
+用 <code style="color:#b30049;background-color:#fdf5f5">len</code> 查看列表长度：
 
 ```
 len(l)
@@ -512,7 +514,7 @@ ValueError: attempt to assign sequence of size 0 to extended slice of size 3
 
 #### 向列表添加单个元素
 
-<span style="color:red">`l.append(ob)`</span> 将元素 <span style="color:red">`ob`</span> 添加到列表 <span style="color:red">`l`</span> 的最后。
+<code style="color:#b30049;background-color:#fdf5f5">l.append(ob)</code> 将元素 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 添加到列表 <code style="color:#b30049;background-color:#fdf5f5">l</code> 的最后。
 
 ```python
 a = [10, 11, 12]
@@ -531,7 +533,7 @@ print(a)
 
 #### 向列表添加序列
 
-<span style="color:red">`l.extend(lst)`</span> 将序列 <span style="color:red">`lst`</span> 的元素依次添加到列表 <span style="color:red">`l`</span> 的最后，作用相当于 <span style="color:red">`l += lst`</span>。
+<code style="color:#b30049;background-color:#fdf5f5">l.extend(lst)</code> 将序列 <code style="color:#b30049;background-color:#fdf5f5">lst</code> 的元素依次添加到列表 <code style="color:#b30049;background-color:#fdf5f5">l</code> 的最后，作用相当于 <code style="color:#b30049;background-color:#fdf5f5">l += lst</code>。
 
 ```python
 a = [10, 11, 12, 11]
@@ -545,7 +547,7 @@ print(a)
 
 #### 插入元素
 
-<span style="color:red">`l.insert(idx, ob)`</span> 在索引 <span style="color:red">`idx`</span> 处插入<span style="color:red"> `ob`</span> ，之后的元素依次后移。
+<code style="color:#b30049;background-color:#fdf5f5">l.insert(idx, ob)</code> 在索引 <code style="color:#b30049;background-color:#fdf5f5">idx</code> 处插入<code style="color:#b30049;background-color:#fdf5f5">ob</code> ，之后的元素依次后移。
 
 ```python
 a = [10, 11, 12, 13, 11]
@@ -560,7 +562,7 @@ print(a)
 
 #### 删除元素
 
-**Python**提供了删除列表中元素的方法 'del'。
+**Python**提供了删除列表中元素的方法<code style="color:#b30049;background-color:#fdf5f5">del</code>。
 
 删除列表中的第一个元素：
 
@@ -597,7 +599,7 @@ print(a)
 
 #### 移除元素
 
-<span style="color:red">`l.remove(ob)`</span> 会将列表中第一个出现的 <span style="color:red">`ob`</span> 删除，如果 <span style="color:red">`ob`</span> 不在 <span style="color:red">`l`</span> 中会报错。
+<code style="color:#b30049;background-color:#fdf5f5">l.remove(ob)</code> 会将列表中第一个出现的 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 删除，如果 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 不在 <code style="color:#b30049;background-color:#fdf5f5">l</code> 中会报错。
 
 ```python
 a = [10, 11, 12, 13, 11]
@@ -609,7 +611,7 @@ print a
 
 #### 弹出元素
 
-<span style="color:red">`l.pop(idx)`</span> 会将索引 <span style="color:red">`idx`</span> 处的元素删除，并返回这个元素。
+<code style="color:#b30049;background-color:#fdf5f5">l.pop(idx)</code> 会将索引 <code style="color:#b30049;background-color:#fdf5f5">idx</code> 处的元素删除，并返回这个元素。
 
 ```python
 a = [10, 11, 12, 13, 11]
@@ -639,7 +641,7 @@ for index, elem in enumerate(list1):
 
 #### 测试从属关系
 
-用 <span style="color:red">`in`</span> 来看某个元素是否在某个序列（不仅仅是列表）中，用<span style="color:red">`not in`</span>来判断是否不在某个序列中。
+用 <code style="color:#b30049;background-color:#fdf5f5">in</code> 来看某个元素是否在某个序列（不仅仅是列表）中，用<code style="color:#b30049;background-color:#fdf5f5">not in</code>来判断是否不在某个序列中。
 
 ```python
 a = [10, 11, 12, 13, 14]
@@ -682,7 +684,7 @@ a[2][1]
 
 #### 列表中某个元素个数count
 
-<span style="color:red">`l.count(ob)`</span> 返回列表中元素 <span style="color:red">`ob`</span> 出现的次数。
+<code style="color:#b30049;background-color:#fdf5f5">l.count(ob)</code> 返回列表中元素 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 出现的次数。
 
 ```python
 a = [11, 12, 13, 12, 11]
@@ -695,7 +697,7 @@ a.count(11)
 
 #### 列表中某个元素位置index
 
-<span style="color:red">`l.index(ob)`</span> 返回列表中元素 <span style="color:red">`ob`</span> 第一次出现的索引位置，如果 <span style="color:red">`ob`</span> 不在 <span style="color:red">`l`</span> 中会报错。
+<code style="color:#b30049;background-color:#fdf5f5">l.index(ob)</code> 返回列表中元素 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 第一次出现的索引位置，如果 <code style="color:#b30049;background-color:#fdf5f5">ob</code> 不在 <code style="color:#b30049;background-color:#fdf5f5">l</code> 中会报错。
 
 ```
 a.index(12)
@@ -707,7 +709,7 @@ a.index(12)
 
 ### 排序
 
-<span style="color:red">`l.sort()`</span> 会将列表中的元素按照一定的规则排序：
+<code style="color:#b30049;background-color:#fdf5f5">l.sort()</code> 会将列表中的元素按照一定的规则排序：
 
 ```python
 a = [10, 1, 11, 13, 11, 2]
@@ -716,7 +718,7 @@ print(a)
 [1, 2, 10, 11, 11, 13]
 ```
 
-如果不想改变原来列表中的值，可以使用 <span style="color:red">`sorted`</span> 函数：
+如果不想改变原来列表中的值，可以使用 <code style="color:#b30049;background-color:#fdf5f5">sorted</code> 函数：
 
 ```python
 a = [10, 1, 11, 13, 11, 2]
@@ -729,7 +731,7 @@ print(b)
 
 ### 列表反向
 
- <span style="color:red">`l.reverse()`</span> 会将列表中的元素从后向前排列。
+ <code style="color:#b30049;background-color:#fdf5f5">l.reverse()</code> 会将列表中的元素从后向前排列。
 
 ```python
 a = [1, 2, 3, 4, 5, 6]
@@ -753,7 +755,7 @@ print(b)
 
 ## 元组
 
-与列表相似，元组<span style="color:red">`Tuple`</span>也是个有序序列，但是元组是不可变的，用<span style="color:red">`()`</span>生成。
+与列表相似，元组<code style="color:#b30049;background-color:#fdf5f5">Tuple</code>也是个有序序列，但是元组是不可变的，用<code style="color:#b30049;background-color:#fdf5f5">()</code>生成。
 
 ```python
 t = (10, 11, 12, 13, 14)
@@ -801,7 +803,7 @@ TypeError: 'tuple' object does not support item assignment
 
 ### 单个元素的元组生成
 
-由于<span style="color:red">`()`</span>在表达式中被应用，只含有单个元素的元组容易和表达式混淆，所以采用下列方式定义只有一个元素的元组：
+由于<code style="color:#b30049;background-color:#fdf5f5">()</code>在表达式中被应用，只含有单个元素的元组容易和表达式混淆，所以采用下列方式定义只有一个元素的元组：
 
 ```python
 a = (10,)
@@ -839,7 +841,7 @@ print(a[0])
 
 ### 元组方法
 
-由于元组是不可变的，所以只能有一些不可变的方法，例如计算元素个数 <span style="color:red">`count`</span> 和元素位置 <span style="color:red">`index`</span> ，用法与列表一样。
+由于元组是不可变的，所以只能有一些不可变的方法，例如计算元素个数 <code style="color:#b30049;background-color:#fdf5f5">count</code> 和元素位置 <code style="color:#b30049;background-color:#fdf5f5">index</code> ，用法与列表一样。
 
 ```python
 a.count(10)
@@ -882,7 +884,7 @@ hello,
 python!
 ```
 
-Python 用一对 <span style="color:red">`"""`</span> 或者 <span style="color:red">`'''`</span> 来生成多行字符串：
+Python 用一对 <code style="color:#b30049;background-color:#fdf5f5">"""</code> 或者 <code style="color:#b30049;background-color:#fdf5f5">'''</code> 来生成多行字符串：
 
 ```python
 strs = '''
@@ -894,7 +896,7 @@ python!
 print(strs)
 ```
 
-可以在字符串中使用<span style="color:red">`\`</span>（反斜杠）来表示转义，也就是说`\`后面的字符不再是它原来的意义，例如：`\n`不是代表反斜杠和字符n，而是表示换行；而`\t`也不是代表反斜杠和字符t，而是表示制表符。所以如果想在字符串中表示`'`要写成`\'`，同理想表示`\`要写成`\\`。可以运行下面的代码看看会输出什么。
+可以在字符串中使用（反斜杠）来表示转义，也就是说`\`后面的字符不再是它原来的意义，例如：`\n`不是代表反斜杠和字符n，而是表示换行；而`\t`也不是代表反斜杠和字符t，而是表示制表符。所以如果想在字符串中表示`'`要写成`\'`，同理想表示`\`要写成`\\`。可以运行下面的代码看看会输出什么。
 
 ```python
 s1 = '\'hello, world!\''
@@ -907,7 +909,7 @@ print(s1, s2, end='')
 \hello, world!\
 ```
 
-我们可以通过在字符串的最前面加上字母<span style="color:red">`r`</span>来表示原始字符
+我们可以通过在字符串的最前面加上字母<code style="color:#b30049;background-color:#fdf5f5">r</code>来表示原始字符
 
 ```python
 s1 = r'\'hello, world!\''
@@ -919,7 +921,7 @@ print(s1, s2, end='')
 \'hello, world!\' \n\\hello, world!\\\n
 ```
 
-格式化字符串还有更为简洁的书写方式，就是在字符串前加上字母<span style="color:red">`f`</span>，我们可以使用下面的语法糖来简化上面的代码。
+格式化字符串还有更为简洁的书写方式，就是在字符串前加上字母<code style="color:#b30049;background-color:#fdf5f5">f</code>，我们可以使用下面的语法糖来简化上面的代码。
 
 ```python
 a, b = 5, 10
@@ -959,7 +961,7 @@ print(s)
 len(s)
 ```
 
-使用<span style="color:red">`in`</span>和<span style="color:red">`not in`</span>来判断一个字符串是否包含另外一个字符串（成员运算）
+使用<code style="color:#b30049;background-color:#fdf5f5">in</code>和<code style="color:#b30049;background-color:#fdf5f5">not in</code>来判断一个字符串是否包含另外一个字符串（成员运算）
 
 ```python
 s = 'hello,world'
@@ -969,7 +971,7 @@ print('good' in s) //False
 
 ### 索引和切片
 
-我们也可以用<span style="color:red">`[]`</span>和<span style="color:red">`[:]`</span>运算符从字符串取出某个字符或某些字符（切片运算）
+我们也可以用<code style="color:#b30049;background-color:#fdf5f5">[]</code>和<code style="color:#b30049;background-color:#fdf5f5">[:]</code>运算符从字符串取出某个字符或某些字符（切片运算）
 
 ```python
 s = 'hello,world'
@@ -1009,9 +1011,9 @@ for str in iter(strs):
 
 #### 大小写转换
 
-<span style="color:red">`s.upper()`</span>方法返回一个将s中的字母全部大写的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.upper()</code>方法返回一个将s中的字母全部大写的新字符串。
 
-<span style="color:red">`s.lower()`</span>方法返回一个将s中的字母全部小写的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.lower()</code>方法返回一个将s中的字母全部小写的新字符串。
 
 ```python
 "hello world".upper()
@@ -1036,27 +1038,29 @@ HELLO WORLD
 
 #### 首字母大写
 
-<span style="color:red">`s.capitalize()`</span>方法返回一个将s中首字母大写的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.capitalize()</code>方法返回一个将s中首字母大写的新字符串。
 
 ```python
 s = 'hello,world'
 print(s.capitalize()) //Hello,world
 ```
 
-<span style="color:red">`s.title()`</span>方法返回一个将s中每个首字母大写的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.title()</code>方法返回一个将s中每个首字母大写的新字符串。
 
 ```python
 print(s.title())
 Hello,World
 ```
 
-> <span style="color:red">str类型是不可变类型</span>
+{% note danger %}
+str类型是不可变类型
+{% endnote %}
 
 #### 查找子串
 
-<span style="color:red">`s.index()`</span>从左到右查找子串，可以指定起始查找位置，默认是0
+<code style="color:#b30049;background-color:#fdf5f5">s.index()</code>从左到右查找子串，可以指定起始查找位置，默认是0
 
-<span style="color:red">`s.rindex()`</span> 则是从右向左查找
+<code style="color:#b30049;background-color:#fdf5f5">s.rindex()</code> 则是从右向左查找
 
 ```python
 s = 'hello,world'
@@ -1084,7 +1088,7 @@ Traceback (most recent call last):
 ValueError: substring not found
 ```
 
-<span style="color:red">`s.find()`</span> 查找不到则会返回-1
+<code style="color:#b30049;background-color:#fdf5f5">s.find()</code> 查找不到则会返回-1
 
 ```python
 print(s.find('l'))
@@ -1123,9 +1127,9 @@ hello,world---------------------------------------
 
 #### 格式化字符串
 
-**Python**用字符串的<span style="color:red">`format()`</span>方法来格式化字符串。
+**Python**用字符串的<code style="color:#b30049;background-color:#fdf5f5">format()</code>方法来格式化字符串。
 
-具体用法如下，字符串中花括号 <span style="color:red">`{}`</span> 的部分会被format传入的参数替代，传入的值可以是字符串，也可以是数字或者别的对象。
+具体用法如下，字符串中花括号 <code style="color:#b30049;background-color:#fdf5f5">{}</code> 的部分会被format传入的参数替代，传入的值可以是字符串，也可以是数字或者别的对象。
 
 ```python
 a, b = 5, 10
@@ -1171,11 +1175,11 @@ print(f'{a} * {b} = {a * b}')
 
 #### 去除多余空格
 
-<span style="color:red">`s.strip()`</span>返回一个将s两端的多余空格除去的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.strip()</code>返回一个将s两端的多余空格除去的新字符串。
 
-<span style="color:red">`s.lstrip()`</span>返回一个将s开头的多余空格除去的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.lstrip()</code>返回一个将s开头的多余空格除去的新字符串。
 
-<span style="color:red">`s.rstrip()`</span>返回一个将s结尾的多余空格除去的新字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.rstrip()</code>返回一个将s结尾的多余空格除去的新字符串。
 
 ```python
 s = "  hello world   "
@@ -1214,7 +1218,7 @@ s.rstrip()
 
 #### 分割与连接
 
-<span style="color:red">`s.split()`</span>将s按照空格（包括多个空格，制表符`\t`，换行符`\n`等）分割，并返回所有分割得到的字符串。
+<code style="color:#b30049;background-color:#fdf5f5">s.split()</code>将s按照空格（包括多个空格，制表符`\t`，换行符`\n`等）分割，并返回所有分割得到的字符串。
 
 ```python
 line = "1 2 3 4  5"
@@ -1223,7 +1227,7 @@ print numbers
 ['1', '2', '3', '4', '5'
 ```
 
-<span style="color:red">`s.split(sep)`</span>以给定的sep为分隔符对s进行分割。
+<code style="color:#b30049;background-color:#fdf5f5">s.split(sep)</code>以给定的sep为分隔符对s进行分割。
 
 ```python
 line = "1,2,3,4,5"
@@ -1258,7 +1262,7 @@ print(numbers)
 ['1', '2', '3', '4,5,6']
 ```
 
-<span style="color:red">`s.rsplit()`</span>则是从右向左拆分
+<code style="color:#b30049;background-color:#fdf5f5">s.rsplit()</code>则是从右向左拆分
 
 ```python
 s = "i love you"
@@ -1269,7 +1273,7 @@ print(s.rsplit(" ", 1))
 ['i love', 'you']
 ```
 
-与分割相反，<span style="color:red">`s.join(str_sequence)`</span>的作用是以s为连接符将字符串序列str_sequence中的元素连接起来，并返回连接后得到的新字符串：
+与分割相反，<code style="color:#b30049;background-color:#fdf5f5">s.join(str_sequence)</code>的作用是以s为连接符将字符串序列str_sequence中的元素连接起来，并返回连接后得到的新字符串：
 
 ```python
 strList = ["i","love","you"]
@@ -1284,13 +1288,13 @@ i love you
 
 ## 集合
 
-之前看到的列表和字符串都是一种有序序列，而集合 <span style="color:red">`set`</span> 是一种无序的序列。
+之前看到的列表和字符串都是一种有序序列，而集合 <code style="color:#b30049;background-color:#fdf5f5">set</code> 是一种无序的序列。
 
 因为集合是无序的，所以当集合中存在两个同样的元素的时候，Python只会保存其中的一个（唯一性）；同时为了确保其中不包含同样的元素，集合中放入的元素只能是不可变的对象（确定性）。
 
 ### 定义集合
 
-可以用<span style="color:red">`set()`</span>函数来显示的生成空集合：
+可以用<code style="color:#b30049;background-color:#fdf5f5">set()</code>函数来显示的生成空集合：
 
 ```python
 a = set()
@@ -1314,7 +1318,7 @@ print(a)
 
 集合会自动去除重复元素 `1`。
 
-可以看到，集合中的元素是用大括号<span style="color:red">`{}`</span>包含起来的，这意味着可以用<span style="color:red">`{}`</span>的形式来创建集合：
+可以看到，集合中的元素是用大括号<code style="color:#b30049;background-color:#fdf5f5">{}</code>包含起来的，这意味着可以用<code style="color:#b30049;background-color:#fdf5f5">{}</code>的形式来创建集合：
 
 ```python
 a = {1, 2, 3, 1}
@@ -1325,7 +1329,7 @@ print(a)
 {1, 2, 3}
 ```
 
-但是创建空集合的时候只能用<span style="color:red">`set`</span>来创建，因为在Python中<span style="color:red">`{}`</span>创建的是一个空的字典：
+但是创建空集合的时候只能用<code style="color:#b30049;background-color:#fdf5f5">set</code>来创建，因为在Python中<code style="color:#b30049;background-color:#fdf5f5">{}</code>创建的是一个空的字典：
 
 ```python
 s = {}
@@ -1361,7 +1365,7 @@ b = {3, 4, 5, 6}
 
 两个集合的并，返回包含两个集合所有元素的集合（去除重复）。
 
-可以用方法 <span style="color:red">`a.union(b)`</span> 或者操作 <span style="color:red">`a | b`</span> 实现。
+可以用方法 <code style="color:#b30049;background-color:#fdf5f5">a.union(b)</code> 或者操作 <code style="color:#b30049;background-color:#fdf5f5">a | b</code> 实现。
 
 ```python
 a.union(b)
@@ -1391,7 +1395,7 @@ a | b
 
 两个集合的交，返回包含两个集合共有元素的集合。
 
-可以用方法 <span style="color:red">`a.intersection(b)`</span> 或者操作 <span style="color:red">`a & b`</span> 实现。
+可以用方法 <code style="color:#b30049;background-color:#fdf5f5">a.intersection(b)</code> 或者操作 <code style="color:#b30049;background-color:#fdf5f5">a & b</code> 实现。
 
 ```
 a.intersection(b)
@@ -1426,9 +1430,9 @@ set([3, 4])
 
 #### 差
 
-<span style="color:red">`a`</span> 和 <span style="color:red">`b`</span> 的差集，返回只在 `a` 不在 `b` 的元素组成的集合。
+<code style="color:#b30049;background-color:#fdf5f5">a</code> 和 <code style="color:#b30049;background-color:#fdf5f5">b</code> 的差集，返回只在 `a` 不在 `b` 的元素组成的集合。
 
-可以用方法 <span style="color:red">`a.difference(b)`</span> 或者操作 <span style="color:red">`a - b`</span> 实现。
+可以用方法 <code style="color:#b30049;background-color:#fdf5f5">a.difference(b)</code> 或者操作 <code style="color:#b30049;background-color:#fdf5f5">a - b</code> 实现。
 
 ```python
 a.difference(b)
@@ -1446,7 +1450,7 @@ a - b
 {1, 2}
 ```
 
-注意，<span style="color:red">`a - b`</span> 与 <span style="color:red">`b - a`</span>并不一样，<span style="color:red">`b - a`</span> 返回的是返回 b 不在 a 的元素组成的集合：
+注意，<code style="color:#b30049;background-color:#fdf5f5">a - b</code> 与 <code style="color:#b30049;background-color:#fdf5f5">b - a</code>并不一样，<code style="color:#b30049;background-color:#fdf5f5">b - a</code> 返回的是返回 b 不在 a 的元素组成的集合：
 
 ```
 b.difference(a)
@@ -1468,7 +1472,7 @@ b - a
 
 `a` 和`b` 的对称差集，返回在 `a` 或在 `b` 中，但是不同时在 `a` 和 `b` 中的元素组成的集合。
 
-可以用方法 <span style="color:red">`a.symmetric_difference(b)`</span> 或者操作 <span style="color:red">`a ^ b`</span> 实现（异或操作符）。
+可以用方法 <code style="color:#b30049;background-color:#fdf5f5">a.symmetric_difference(b)</code> 或者操作 <code style="color:#b30049;background-color:#fdf5f5">a ^ b</code> 实现（异或操作符）。
 
 ```python
 a.symmetric_difference(b)
@@ -1503,7 +1507,7 @@ a = {1, 2, 3}
 b = {1, 2}
 ```
 
-要判断 <span style="color:red">`b`</span> 是不是 <span style="color:red">`a`</span> 的子集，可以用 <span style="color:red">`b.issubset(a)`</span>  方法，或者更简单的用操作 <span style="color:red">`b <= a`</span>  ：
+要判断 <code style="color:#b30049;background-color:#fdf5f5">b</code> 是不是 <code style="color:#b30049;background-color:#fdf5f5">a</code> 的子集，可以用 <code style="color:#b30049;background-color:#fdf5f5">b.issubset(a)</code>  方法，或者更简单的用操作 <code style="color:#b30049;background-color:#fdf5f5">b <= a</code>  ：
 
 ```python
 b.issubset(a)
@@ -1521,7 +1525,7 @@ b <= a
 True
 ```
 
-与之对应，也可以用 <span style="color:red">`a.issuperset(b)`</span> 或者 <span style="color:red">`a >= b`</span> 来判断：
+与之对应，也可以用 <code style="color:#b30049;background-color:#fdf5f5">a.issuperset(b)</code> 或者 <code style="color:#b30049;background-color:#fdf5f5">a >= b</code> 来判断：
 
 ```python
 a.issuperset(b)
@@ -1563,7 +1567,7 @@ False
 
 ##### `add` 方法向集合添加单个元素
 
-跟列表的 <span style="color:red">`append`</span> 方法类似，用来向集合添加单个元素。
+跟列表的 <code style="color:#b30049;background-color:#fdf5f5">append</code> 方法类似，用来向集合添加单个元素。
 
 ```python
 s.add(a)
@@ -1594,7 +1598,7 @@ print(t)
 
 ##### `update` 方法向集合添加多个元素
 
-跟列表的<span style="color:red">`extend`</span>方法类似，用来向集合添加多个元素。
+跟列表的<code style="color:#b30049;background-color:#fdf5f5">extend</code>方法类似，用来向集合添加多个元素。
 
 ```python
 s.update(seq)
@@ -1640,7 +1644,7 @@ KeyError: 10
 
 ##### pop方法弹出元素
 
-由于集合没有顺序，不能像列表一样按照位置弹出元素，所以<span style="color:red">`pop`</span> 方法删除并返回集合中任意一个元素，如果集合中没有元素会报错。
+由于集合没有顺序，不能像列表一样按照位置弹出元素，所以<code style="color:#b30049;background-color:#fdf5f5">pop</code> 方法删除并返回集合中任意一个元素，如果集合中没有元素会报错。
 
 ```python
 t.pop()
@@ -1671,7 +1675,7 @@ KeyError: 'pop from an empty set'
 
 ##### discard 方法
 
-作用与 <span style="color:red">`remove`</span> 一样，但是当元素在集合中不存在的时候不会报错。
+作用与 <code style="color:#b30049;background-color:#fdf5f5">remove</code> 一样，但是当元素在集合中不存在的时候不会报错。
 
 ```python
 t.discard(3)
@@ -1711,7 +1715,7 @@ t.clear()
 
 ## 字典
 
-字典 <span style="color:red">`dictionary`</span>  ，在一些编程语言中也称为 <span style="color:red">`hash`</span>  ， <span style="color:red">`map`</span>  ，是一种由键值对组成的数据结构。
+字典 <code style="color:#b30049;background-color:#fdf5f5">dictionary</code>  ，在一些编程语言中也称为 <code style="color:#b30049;background-color:#fdf5f5">hash</code>  ， <code style="color:#b30049;background-color:#fdf5f5">map</code>  ，是一种由键值对组成的数据结构。
 
 顾名思义，我们把键想象成字典中的单词，值想象成词对应的定义，那么——
 
@@ -1728,7 +1732,7 @@ items1 = dict(one=1, two=2, three=3, four=4)
 items3 = {num: num ** 2 for num in range(1, 10)}
 ```
 
-**Python** 使用 <span style="color:red">`{}`</span> 或者 <span style="color:red">`dict()`</span> 来创建一个空的字典：
+**Python** 使用 <code style="color:#b30049;background-color:#fdf5f5">{}</code> 或者 <code style="color:#b30049;background-color:#fdf5f5">dict()</code> 来创建一个空的字典：
 
 ```python
 a = {}
@@ -1804,7 +1808,7 @@ for key, value in dic.items():
 
 ### 字典没有顺序
 
-当我们 <span style="color:red">`print`</span> 一个字典时，**Python**并不一定按照插入键值的先后顺序进行显示,因为字典中的键本身不一定是有序的。
+当我们 <code style="color:#b30049;background-color:#fdf5f5">print</code> 一个字典时，**Python**并不一定按照插入键值的先后顺序进行显示,因为字典中的键本身不一定是有序的。
 
 ```python
 print a
@@ -1832,7 +1836,7 @@ KeyError: 0
 
 ### 使用 dict 初始化字典
 
-除了通常的定义方式，还可以通过 <span style="color:red">`dict()`</span> 转化来生成字典：
+除了通常的定义方式，还可以通过 <code style="color:#b30049;background-color:#fdf5f5">dict()</code> 转化来生成字典：
 
 ```python
 inventory = dict(
@@ -1861,7 +1865,7 @@ inventory
 
 ## 适合做键的类型
 
-在不可变类型中，<span style="color:red">`整数`</span>和<span style="color:red">`字符串`</span>是字典中最常用的类型；而<span style="color:red">`浮点数`</span>通常不推荐用来做键，原因如下：
+在不可变类型中，<code style="color:#b30049;background-color:#fdf5f5">整数</code>和<code style="color:#b30049;background-color:#fdf5f5">字符串</code>是字典中最常用的类型；而<code style="color:#b30049;background-color:#fdf5f5">浮点数</code>通常不推荐用来做键，原因如下：
 
 ```python
 data = {}
@@ -1878,7 +1882,7 @@ KeyError                                  Traceback (most recent call last)
 KeyError: 3.3
 ```
 
-事实上，观察<span style="color:red">`data`</span>的值就会发现，这个错误是由浮点数的精度问题所引起的：
+事实上，观察<code style="color:#b30049;background-color:#fdf5f5">data</code>的值就会发现，这个错误是由浮点数的精度问题所引起的：
 
 ```python
 data
@@ -1897,7 +1901,7 @@ connections[('Austin', 'New York')] = 200
 connections[('New York', 'Austin')] = 400
 ```
 
-元组是有序的，因此 <span style="color:red">`('New York', 'Austin')`</span> 和 <span style="color:red">`('Austin', 'New York')`</span> 是两个不同的键：
+元组是有序的，因此 <code style="color:#b30049;background-color:#fdf5f5">('New York', 'Austin')</code> 和 <code style="color:#b30049;background-color:#fdf5f5">('Austin', 'New York')</code> 是两个不同的键：
 
 ```python
 print connections[('Austin', 'New York')]
@@ -1910,13 +1914,13 @@ print connections[('New York', 'Austin')]
 
 ### `get` 方法
 
-之前已经见过，用索引可以找到一个键对应的值，但是当字典中没有这个键的时候，Python会报错，这时候可以使用字典的  <span style="color:red">`get`</span> 方法来处理这种情况，其用法如下：
+之前已经见过，用索引可以找到一个键对应的值，但是当字典中没有这个键的时候，Python会报错，这时候可以使用字典的  <code style="color:#b30049;background-color:#fdf5f5">get</code> 方法来处理这种情况，其用法如下：
 
 ```python
 d.get(key, default = None)
 ```
 
-返回字典中键 <span style="color:red">`key`</span> 对应的值，如果没有这个键，返回 <span style="color:red">`default`</span>  指定的值（默认是 <span style="color:red">`None`</span>  ）。
+返回字典中键 <code style="color:#b30049;background-color:#fdf5f5">key</code> 对应的值，如果没有这个键，返回 <code style="color:#b30049;background-color:#fdf5f5">default</code>  指定的值（默认是 <code style="color:#b30049;background-color:#fdf5f5">None</code>  ）。
 
 ```python
 a = {}
@@ -1955,13 +1959,13 @@ a.get("three", "undefined")
 
 ### `pop` 方法删除元素
 
-<span style="color:red">`pop()`</span> 方法可以用来弹出字典中某个键对应的值，同时也可以指定默认参数：
+<code style="color:#b30049;background-color:#fdf5f5">pop()</code> 方法可以用来弹出字典中某个键对应的值，同时也可以指定默认参数：
 
 ```python
 d.pop(key, default = None)
 ```
 
-删除并返回字典中键 <span style="color:red">`key`</span>  对应的值，如果没有这个键，返回 <span style="color:red">`default`</span>  指定的值（默认是 <span style="color:red">`None`</span>  ）。
+删除并返回字典中键 <code style="color:#b30049;background-color:#fdf5f5">key</code>  对应的值，如果没有这个键，返回 <code style="color:#b30049;background-color:#fdf5f5">default</code>  指定的值（默认是 <code style="color:#b30049;background-color:#fdf5f5">None</code>  ）。
 
 ```python
 print(a)
@@ -1999,7 +2003,7 @@ a.pop("two", 'not exist')
 'not exist'
 ```
 
-与列表一样，<span style="color:red">`del`</span> 函数可以用来删除字典中特定的键值对，例如：
+与列表一样，<code style="color:#b30049;background-color:#fdf5f5">del</code> 函数可以用来删除字典中特定的键值对，例如：
 
 ```python
 del a["one"]
@@ -2010,17 +2014,17 @@ print(a)
 {}
 ```
 
-可以用<span style="color:red">`popItem()`</span> 方法删除最后一个元素
+可以用<code style="color:#b30049;background-color:#fdf5f5">popItem()</code> 方法删除最后一个元素
 
 ### `update`方法更新字典
 
-之前已经知道，可以通过索引来插入、修改单个键值对，但是如果想对多个键值对进行操作，这种方法就显得比较麻烦，好在有 <span style="color:red">`update`</span> 方法：
+之前已经知道，可以通过索引来插入、修改单个键值对，但是如果想对多个键值对进行操作，这种方法就显得比较麻烦，好在有 <code style="color:#b30049;background-color:#fdf5f5">update</code> 方法：
 
 ```python
 d.update(newd)
 ```
 
-将字典<span style="color:red">`newd`</span>中的内容更新到<span style="color:red">`d`</span>中去。
+将字典<code style="color:#b30049;background-color:#fdf5f5">newd</code>中的内容更新到<code style="color:#b30049;background-color:#fdf5f5">d</code>中去。
 
 ```python
 person = {}
@@ -2040,7 +2044,7 @@ print person
 {'middle': 'Clerk', 'born': 1831, 'last': 'Maxwell', 'first': 'James'}
 ```
 
-类似的方法还有<span style="color:red">`a.setdefault()`</span>
+类似的方法还有<code style="color:#b30049;background-color:#fdf5f5">a.setdefault()</code>
 
 `If key is in the dictionary, return its value.`
 `If not, insert key with a value of default and return default. default defaults to None.`
@@ -2051,7 +2055,7 @@ print person
 barn = {'cows': 1, 'dogs': 5, 'cats': 3}
 ```
 
-<span style="color:red">`in`</span> 可以用来判断字典中是否有某个特定的键：
+<code style="color:#b30049;background-color:#fdf5f5">in</code> 可以用来判断字典中是否有某个特定的键：
 
 ```python
 'chickens' in barn
@@ -2087,7 +2091,7 @@ print(b)
 
 ## 定义函数
 
-函数<span style="color:red">`function`</span> ，通常接受输入参数，并有返回值。
+函数<code style="color:#b30049;background-color:#fdf5f5">function</code> ，通常接受输入参数，并有返回值。
 
 它负责完成某项特定任务，而且相较于其他代码，具备相对的独立性。
 
@@ -2100,11 +2104,11 @@ def add(x, y):
 
 函数通常有一下几个特征：
 
-- 使用 <span style="color:red">`def`</span> 关键词来定义一个函数。
-- <span style="color:red">`def`</span> 后面是函数的名称，括号中是函数的参数，不同的参数用 <span style="color:red">`,`</span> 隔开， <span style="color:red">`def foo():`</span> 的形式是必须要有的，参数可以为空；
+- 使用 <code style="color:#b30049;background-color:#fdf5f5">def</code> 关键词来定义一个函数。
+- <code style="color:#b30049;background-color:#fdf5f5">def</code> 后面是函数的名称，括号中是函数的参数，不同的参数用 <code style="color:#b30049;background-color:#fdf5f5">,</code> 隔开， <code style="color:#b30049;background-color:#fdf5f5">def foo():</code> 的形式是必须要有的，参数可以为空；
 - 使用缩进来划分函数的内容；
-- <span style="color:red">`docstring`</span> 用 <span style="color:red">`"""`</span> 包含的字符串，用来解释函数的用途，可省略；
-- <span style="color:red">`return`</span> 返回特定的值，如果省略，返回 <span style="color:red">`None`</span> 。
+- <code style="color:#b30049;background-color:#fdf5f5">docstring</code> 用 <code style="color:#b30049;background-color:#fdf5f5">"""</code> 包含的字符串，用来解释函数的用途，可省略；
+- <code style="color:#b30049;background-color:#fdf5f5">return</code> 返回特定的值，如果省略，返回 <code style="color:#b30049;background-color:#fdf5f5">None</code> 。
 
 函数的文档注释：
 
@@ -2236,7 +2240,9 @@ TypeError: quad() got multiple values for keyword argument 'a'
 
 ## 作用域
 
-> A scope is a textual region of a Python program where a namespace is directly accessible. "Directly accessible" here means that an unqualified reference to a name attempts to find the name in the namespace.
+{% note info %}
+A scope is a textual region of a Python program where a namespace is directly accessible. "Directly accessible" here means that an unqualified reference to a name attempts to find the name in the namespace.
+{% endnote %}
 
 在一个 python 程序中，直接访问一个变量，会从内到外依次访问所有的作用域直到找到，否则会报未定义的错误。
 
@@ -2329,7 +2335,7 @@ def foo():
 foo()
 ```
 
-当然上面的这种情况我们很容易就能避免，但是如果项目是由多人协作进行团队开发的时候，团队中可能有多个程序员都定义了名为<span style="color:red">`foo`</span>的函数，那么怎么解决这种命名冲突呢？答案其实很简单，Python中每个文件就代表了一个模块（module），我们在不同的模块中可以有同名的函数，在使用函数的时候我们通过<span style="color:red">`import`</span>关键字导入指定的模块就可以区分到底要使用的是哪个模块中的<span style="color:red">`foo`</span>函数，代码如下所示。
+当然上面的这种情况我们很容易就能避免，但是如果项目是由多人协作进行团队开发的时候，团队中可能有多个程序员都定义了名为<code style="color:#b30049;background-color:#fdf5f5">foo</code>的函数，那么怎么解决这种命名冲突呢？答案其实很简单，Python中每个文件就代表了一个模块（module），我们在不同的模块中可以有同名的函数，在使用函数的时候我们通过<code style="color:#b30049;background-color:#fdf5f5">import</code>关键字导入指定的模块就可以区分到底要使用的是哪个模块中的<code style="color:#b30049;background-color:#fdf5f5">foo</code>函数，代码如下所示。
 
 `module1.py`
 
@@ -2438,7 +2444,7 @@ def add(x, *args):
     return total
 ```
 
-这里，<span style="color:red">`*args`</span> 表示参数数目不定，可以看成一个元组，把第一个参数后面的参数当作元组中的元素。
+这里，<code style="color:#b30049;background-color:#fdf5f5">*args</code> 表示参数数目不定，可以看成一个元组，把第一个参数后面的参数当作元组中的元素。
 
 ```python
 print(add(1, 2, 3, 4))
@@ -2460,7 +2466,7 @@ def add(x, **kwargs):
     return total
 ```
 
-这里， <span style="color:red">`**kwargs`</span> 表示参数数目不定，相当于一个字典，关键词和值对应于键值对。
+这里， <code style="color:#b30049;background-color:#fdf5f5">**kwargs</code> 表示参数数目不定，相当于一个字典，关键词和值对应于键值对。
 
 ```python
 print(add(10, y=11, z=12, w=13))
@@ -2483,7 +2489,7 @@ foo(2, 3, x='bar', z=10)
 (2, 3) {'x': 'bar', 'z': 10}
 ```
 
-不过要按顺序传入参数，先传入位置参数 <span style="color:red">`args`</span> ，在传入关键词参数 <span style="color:red">`kwargs`</span> 。
+不过要按顺序传入参数，先传入位置参数 <code style="color:#b30049;background-color:#fdf5f5">args</code> ，在传入关键词参数 <code style="color:#b30049;background-color:#fdf5f5">kwargs</code> 。
 
 ## 命名关键字参数
 
@@ -2557,7 +2563,7 @@ z = (2, 3)
 print add(*z) #5
 ```
 
-这里的<span style="color:red">`*`</span>必不可少。
+这里的<code style="color:#b30049;background-color:#fdf5f5">*</code>必不可少。
 
 事实上，还可以通过字典传入参数来执行函数：
 
@@ -2573,7 +2579,7 @@ print add(**w) # 5
 
 ## map 方法生成序列
 
-可以通过 <span style="color:red">`map`</span> 的方式利用函数来生成序列：
+可以通过 <code style="color:#b30049;background-color:#fdf5f5">map</code> 的方式利用函数来生成序列：
 
 ```python
 def sqr(x): 
@@ -2583,7 +2589,7 @@ a = [2,3,4]
 print map(sqr, a)
 ```
 
-<span style="color:red">`map`</span>方法返回一个迭代器:
+<code style="color:#b30049;background-color:#fdf5f5">map</code>方法返回一个迭代器:
 
 ```
 [4, 9, 16]
@@ -2599,9 +2605,9 @@ print(list(map(sqr, a))) # [4, 9, 16]
 map(aFun, aSeq)
 ```
 
-将函数 <span style="color:red">`aFun`</span> 应用到序列 <span style="color:red">`aSeq`</span> 上的每一个元素上，返回一个迭代器，不管这个序列原来是什么类型。
+将函数 <code style="color:#b30049;background-color:#fdf5f5">aFun</code> 应用到序列 <code style="color:#b30049;background-color:#fdf5f5">aSeq</code> 上的每一个元素上，返回一个迭代器，不管这个序列原来是什么类型。
 
-事实上，根据函数参数的多少，<span style="color:red">`map`</span> 可以接受多组序列，将其对应的元素作为参数传入函数：
+事实上，根据函数参数的多少，<code style="color:#b30049;background-color:#fdf5f5">map</code> 可以接受多组序列，将其对应的元素作为参数传入函数：
 
 ```python
 def add(x, y):
@@ -2650,9 +2656,9 @@ print(calculate(1, multipication, 1, 2, 3, 4))
 
 ## Lambda函数
 
-关键字<span style="color:red">`lambda`</span>表示匿名函数，冒号前面的表示函数参数。
+关键字<code style="color:#b30049;background-color:#fdf5f5">lambda</code>表示匿名函数，冒号前面的表示函数参数。
 
-匿名函数有个限制，就是只能有一个表达式，不用写<span style="color:red">`return`</span>，返回值就是该表达式的结果。
+匿名函数有个限制，就是只能有一个表达式，不用写<code style="color:#b30049;background-color:#fdf5f5">return</code>，返回值就是该表达式的结果。
 
 用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。此外，匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量，再利用变量来调用该函数：
 
@@ -2672,7 +2678,7 @@ print(calculate(1, lambda a, b: a * b, 1, 2, 3, 4))
 
 ## 模块
 
-Python会将所有 <span style="color:red">`.py`</span> 结尾的文件认定为Python代码文件，**在 Python 中，一个 .py 文件就称之为一个模块（Module）。**考虑下面的脚本 <span style="color:red">`ex1.py`</span> ：
+Python会将所有 <code style="color:#b30049;background-color:#fdf5f5">.py</code> 结尾的文件认定为Python代码文件，**在 Python 中，一个 .py 文件就称之为一个模块（Module）。**考虑下面的脚本 <code style="color:#b30049;background-color:#fdf5f5">ex1.py</code> ：
 
 ```python
 %%writefile ex1.py
@@ -2696,7 +2702,7 @@ print(sum(w), PI)
 6 3.1416
 ```
 
-这个脚本可以当作一个模块，可以使用<span style="color:red">`import`</span> 关键词加载并执行它（这里要求`ex1.py`在当前工作目录）：
+这个脚本可以当作一个模块，可以使用<code style="color:#b30049;background-color:#fdf5f5">import</code> 关键词加载并执行它（这里要求`ex1.py`在当前工作目录）：
 
 ```python
 import ex1
@@ -2772,9 +2778,9 @@ os.remove('ex1.py')
 
 ## `__name__` 属性
 
-有时候我们想将一个 <span style="color:red">`.py`</span> 文件既当作脚本，又能当作模块用，这个时候可以使用 <span style="color:red">`__name__`</span> 这个属性。
+有时候我们想将一个 <code style="color:#b30049;background-color:#fdf5f5">.py</code> 文件既当作脚本，又能当作模块用，这个时候可以使用 <code style="color:#b30049;background-color:#fdf5f5">\__name__</code> 这个属性。
 
-只有当文件被当作脚本执行的时候， <span style="color:red">`__name__`</span>的值才会是 <span style="color:red">`'__main__'`</span>，所以我们可以：
+只有当文件被当作脚本执行的时候，<code style="color:#b30049;background-color:#fdf5f5">\_\_name\_\_</code>的值才会是 <code style="color:#b30049;background-color:#fdf5f5">\_\_main__</code>，所以我们可以：
 
 `ex2.py`
 
@@ -2846,7 +2852,7 @@ e2.PI
 from ex2 import add, PI
 ```
 
-使用 <span style="color:red">`from`</span> 后，可以直接使用<span style="color:red"> `add`</span> ， <span style="color:red">`PI`</span>：
+使用 <code style="color:#b30049;background-color:#fdf5f5">from</code> 后，可以直接使用<code style="color:#b30049;background-color:#fdf5f5">add</code> ， <code style="color:#b30049;background-color:#fdf5f5">PI</code>：
 
 ```python
 print(add(2, 3))
@@ -2856,7 +2862,7 @@ print(add(2, 3))
 5
 ```
 
-或者使用 <span style="color:red">`*`</span> 导入所有变量：
+或者使用 <code style="color:#b30049;background-color:#fdf5f5">*</code> 导入所有变量：
 
 ```python
 from ex2 import *
@@ -2895,12 +2901,12 @@ from foo.bar import func
 from foo.baz import zap
 ```
 
-<span style="color:red">`bar`</span> 和 <span style="color:red">`baz`</span> 都是 <span style="color:red">`foo`</span> 文件夹下的 <span style="color:red">`.py`</span> 文件。
+<code style="color:#b30049;background-color:#fdf5f5">bar</code> 和 <code style="color:#b30049;background-color:#fdf5f5">baz</code> 都是 <code style="color:#b30049;background-color:#fdf5f5">foo</code> 文件夹下的 <code style="color:#b30049;background-color:#fdf5f5">.py</code> 文件。
 
 导入包要求：
 
-- 文件夹 <span style="color:red">`foo`</span> 在**Python**的搜索路径中
-- <span style="color:red">`__init__.py`</span> 表示 <span style="color:red">`foo`</span> 是一个包，它可以是个空文件。
+- 文件夹 <code style="color:#b30049;background-color:#fdf5f5">foo</code> 在**Python**的搜索路径中
+- <code style="color:#b30049;background-color:#fdf5f5">\__init__.py</code> 表示 <code style="color:#b30049;background-color:#fdf5f5">foo</code> 是一个包，它可以是个空文件。
 
 ### 解决命名冲突
 
@@ -2992,7 +2998,7 @@ Python 就是一门面向对象的语言,
 
 ## 定义类
 
-在Python中可以使用<span style="color:red">`class`</span>关键字定义类，**类的命名采用驼峰命名法**，然后在类中通过之前学习过的函数来定义方法，这样就可以将对象的动态特征描述出来，代码如下所示。
+在Python中可以使用<code style="color:#b30049;background-color:#fdf5f5">class</code>关键字定义类，**类的命名采用驼峰命名法**，然后在类中通过之前学习过的函数来定义方法，这样就可以将对象的动态特征描述出来，代码如下所示。
 
 ```python
 class Student(object):
@@ -3035,9 +3041,9 @@ s.study()
 
 Python 的类方法和静态方法很相似，它们都推荐使用类来调用（其实也可使用对象来调用）。
 
-类方法和静态方法的区别在于，Python会自动绑定类方法的第一个参数，类方法的第一个参数（通常建议参数名为 <span style="color:red">`cls`</span>）会自动绑定到类本身；但对于静态方法则不会自动绑定。
+类方法和静态方法的区别在于，Python会自动绑定类方法的第一个参数，类方法的第一个参数（通常建议参数名为 <code style="color:#b30049;background-color:#fdf5f5">cls</code>）会自动绑定到类本身；但对于静态方法则不会自动绑定。
 
-使用 <span style="color:red">`＠classmethod`</span> 修饰的方法就是类方法；使用 <span style="color:red">`＠staticmethod`</span> 修饰的方法就是静态方法。
+使用 <code style="color:#b30049;background-color:#fdf5f5">＠classmethod</code> 修饰的方法就是类方法；使用 <code style="color:#b30049;background-color:#fdf5f5">＠staticmethod</code> 修饰的方法就是静态方法。
 
 ```python
 class Bird:
@@ -3164,9 +3170,9 @@ s.study()
 
 对于 class 的继承关系来说，有些时候我们需要判断 class 的类型，该怎么办呢？
 
-可以使用 <span style="color:red">`isinstance()`</span> 函数,
+可以使用 <code style="color:#b30049;background-color:#fdf5f5">isinstance()</code> 函数,
 
-一个例子就能看懂 <span style="color:red">`isinstance()`</span> 函数的用法了。
+一个例子就能看懂 <code style="color:#b30049;background-color:#fdf5f5">isinstance()</code> 函数的用法了。
 
 ```python
 class User1(object):
@@ -3210,11 +3216,11 @@ False
 
 # 文件和异常
 
-在Python中实现文件的读写操作其实非常简单，通过Python内置的<span style="color:red">`open`</span>函数，我们可以指定文件名、操作模式、编码信息等来获得操作文件的对象，接下来就可以对文件进行读写操作了。这里所说的操作模式是指要打开什么样的文件（字符文件还是二进制文件）以及做什么样的操作（读、写还是追加），具体的如下表所示。
+在Python中实现文件的读写操作其实非常简单，通过Python内置的<code style="color:#b30049;background-color:#fdf5f5">open</code>函数，我们可以指定文件名、操作模式、编码信息等来获得操作文件的对象，接下来就可以对文件进行读写操作了。这里所说的操作模式是指要打开什么样的文件（字符文件还是二进制文件）以及做什么样的操作（读、写还是追加），具体的如下表所示。
 
 ## 读写文本文件
 
-读取文本文件时，需要在使用<span style="color:red">`open`</span>函数时指定好带路径的文件名（可以使用相对路径或绝对路径）并将文件模式设置为<span style="color:red">`'r'`</span>（如果不指定，默认值也是<span style="color:red">`'r'`</span>），然后通过<span style="color:red">`encoding`</span>参数指定编码（如果不指定，默认值是None，那么在读取文件时使用的是操作系统默认的编码），如果不能保证保存文件时使用的编码方式与encoding参数指定的编码方式是一致的，那么就可能因无法解码字符而导致读取失败。下面的例子演示了如何读取一个纯文本文件。
+读取文本文件时，需要在使用<code style="color:#b30049;background-color:#fdf5f5">open</code>函数时指定好带路径的文件名（可以使用相对路径或绝对路径）并将文件模式设置为<code style="color:#b30049;background-color:#fdf5f5">'r'</code>（如果不指定，默认值也是<code style="color:#b30049;background-color:#fdf5f5">'r'</code>），然后通过<code style="color:#b30049;background-color:#fdf5f5">encoding</code>参数指定编码（如果不指定，默认值是None，那么在读取文件时使用的是操作系统默认的编码），如果不能保证保存文件时使用的编码方式与encoding参数指定的编码方式是一致的，那么就可能因无法解码字符而导致读取失败。下面的例子演示了如何读取一个纯文本文件。
 
 ```python
 def main():
@@ -3227,7 +3233,7 @@ if __name__ == '__main__':
     main()
 ```
 
-请注意上面的代码，如果<span style="color:red">`open`</span>函数指定的文件并不存在或者无法打开，那么将引发异常状况导致程序崩溃。为了让代码有一定的健壮性和容错性，我们可以使用Python的异常机制对可能在运行时发生状况的代码进行适当的处理，如下所示。
+请注意上面的代码，如果<code style="color:#b30049;background-color:#fdf5f5">open</code>函数指定的文件并不存在或者无法打开，那么将引发异常状况导致程序崩溃。为了让代码有一定的健壮性和容错性，我们可以使用Python的异常机制对可能在运行时发生状况的代码进行适当的处理，如下所示。
 
 ```python
 def main():
@@ -3250,7 +3256,7 @@ if __name__ == '__main__':
     main()
 ```
 
-在Python中，我们可以将那些在运行时可能会出现状况的代码放在<span style="color:red">`try`</span>代码块中，在<span style="color:red">`try`</span>代码块的后面可以跟上一个或多个<span style="color:red">`except`</span>来捕获可能出现的异常状况。例如在上面读取文件的过程中，文件找不到会引发<span style="color:red">`FileNotFoundError`</span>，指定了未知的编码会引发<span style="color:red">`LookupError`</span>，而如果读取文件时无法按指定方式解码会引发<span style="color:red">`UnicodeDecodeError`</span>，我们在<span style="color:red">`try`</span>后面跟上了三个<span style="color:red">`except`</span>分别处理这三种不同的异常状况。最后我们使用<span style="color:red">`finally`</span>代码块来关闭打开的文件，释放掉程序中获取的外部资源，由于<span style="color:red">`finally`</span>块的代码不论程序正常还是异常都会执行到（甚至是调用了<span style="color:red">`sys`</span>模块的<span style="color:red">`exit`</span>函数退出Python环境，<span style="color:red">`finally`</span>块都会被执行，因为<span style="color:red">`exit`</span>函数实质上是引发了<span style="color:red">`SystemExit`</span>异常），因此我们通常把<span style="color:red">`finally`</span>块称为“总是执行代码块”，它最适合用来做释放外部资源的操作。如果不愿意在<span style="color:red">`finally`</span>代码块中关闭文件对象释放资源，也可以使用上下文语法，通过<span style="color:red">`with`</span>关键字指定文件对象的上下文环境并在离开上下文环境时自动释放文件资源，代码如下所示。
+在Python中，我们可以将那些在运行时可能会出现状况的代码放在<code style="color:#b30049;background-color:#fdf5f5">try</code>代码块中，在<code style="color:#b30049;background-color:#fdf5f5">try</code>代码块的后面可以跟上一个或多个<code style="color:#b30049;background-color:#fdf5f5">except</code>来捕获可能出现的异常状况。例如在上面读取文件的过程中，文件找不到会引发<code style="color:#b30049;background-color:#fdf5f5">FileNotFoundError</code>，指定了未知的编码会引发<code style="color:#b30049;background-color:#fdf5f5">LookupError</code>，而如果读取文件时无法按指定方式解码会引发<code style="color:#b30049;background-color:#fdf5f5">UnicodeDecodeError</code>，我们在<code style="color:#b30049;background-color:#fdf5f5">try</code>后面跟上了三个<code style="color:#b30049;background-color:#fdf5f5">except</code>分别处理这三种不同的异常状况。最后我们使用<code style="color:#b30049;background-color:#fdf5f5">finally</code>代码块来关闭打开的文件，释放掉程序中获取的外部资源，由于<code style="color:#b30049;background-color:#fdf5f5">finally</code>块的代码不论程序正常还是异常都会执行到（甚至是调用了<code style="color:#b30049;background-color:#fdf5f5">sys</code>模块的<code style="color:#b30049;background-color:#fdf5f5">exit</code>函数退出Python环境，<code style="color:#b30049;background-color:#fdf5f5">finally</code>块都会被执行，因为<code style="color:#b30049;background-color:#fdf5f5">exit</code>函数实质上是引发了<code style="color:#b30049;background-color:#fdf5f5">SystemExit</code>异常），因此我们通常把<code style="color:#b30049;background-color:#fdf5f5">finally</code>块称为“总是执行代码块”，它最适合用来做释放外部资源的操作。如果不愿意在<code style="color:#b30049;background-color:#fdf5f5">finally</code>代码块中关闭文件对象释放资源，也可以使用上下文语法，通过<code style="color:#b30049;background-color:#fdf5f5">with</code>关键字指定文件对象的上下文环境并在离开上下文环境时自动释放文件资源，代码如下所示。
 
 ```python
 def main():
@@ -3271,7 +3277,7 @@ if __name__ == '__main__':
 
 ## 写文件
 
-使用 <span style="color:red">`w`</span> 模式时，如果文件不存在会被创建，如果文件已经存在， <span style="color:red">`w`</span> 模式会覆盖之前写的所有内容：
+使用 <code style="color:#b30049;background-color:#fdf5f5">w</code> 模式时，如果文件不存在会被创建，如果文件已经存在， <code style="color:#b30049;background-color:#fdf5f5">w</code> 模式会覆盖之前写的所有内容：
 
 ```python
 def main():
@@ -3297,7 +3303,7 @@ if __name__ == '__main__':
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2022/python%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/sushiyyds.png" style="zoom:67%;" />
 
-除了写入模式，还有追加模式  <span style="color:red">`a`</span> ，追加模式不会覆盖之前已经写入的内容，而是在之后继续写入：
+除了写入模式，还有追加模式  <code style="color:#b30049;background-color:#fdf5f5">a</code> ，追加模式不会覆盖之前已经写入的内容，而是在之后继续写入：
 
 ```python
 def main():

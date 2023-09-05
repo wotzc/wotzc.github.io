@@ -10,92 +10,92 @@ categories: JavaWeb
 
 # What is the POM?
 
-POM 代表“项目对象模型”，即"Project Object Model"。它是 Maven 项目的 XML 表示形式，保存在名为<span style="color:red;font-weight:bold"> pom.xml </span>的文件中。当 Maven 人员在场时，谈论项目是在哲学意义上谈论项目，而不仅仅是包含代码的文件集合。一个项目包含配置文件、相关开发人员及其角色、缺陷、跟踪系统、组织和许可证、项目所在的 URL、项目的依赖关系，以及赋予代码生命的所有其他小部件。它是与项目有关的所有事项的一站式商店。事实上，在 Maven 的世界里，一个项目根本不需要包含任何代码，只需要一个<span style="color:red;font-weight:bold"> pom.xml </span>。
+POM 代表“项目对象模型”，即"Project Object Model"。它是 Maven 项目的 XML 表示形式，保存在名为<code style="color:#b30049;background-color:#fdf5f5">pom.xml</code>的文件中。当 Maven 人员在场时，谈论项目是在哲学意义上谈论项目，而不仅仅是包含代码的文件集合。一个项目包含配置文件、相关开发人员及其角色、缺陷、跟踪系统、组织和许可证、项目所在的 URL、项目的依赖关系，以及赋予代码生命的所有其他小部件。它是与项目有关的所有事项的一站式商店。事实上，在 Maven 的世界里，一个项目根本不需要包含任何代码，只需要一个<code style="color:#b30049;background-color:#fdf5f5">pom.xml</code>。
 
 # Quick Overview
 
-这是 `POM` 的项目元素下的直接元素列表。请注意，<span style="color:red;font-weight:bold"> modelVersion  </span>的版本是 <span style="color:red;font-weight:bold">  4.0.0 </span>，这是目前唯一支持的 `POM` 版本，而且始终是必需的。
+这是 `POM` 的项目元素下的直接元素列表。请注意，<code style="color:#b30049;background-color:#fdf5f5">modelVersion</code>的版本是<code style="color:#b30049;background-color:#fdf5f5">4.0.0</code>，这是目前唯一支持的 `POM` 版本，而且始终是必需的。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
- 
-  <!-- The Basics -->
-  <groupId>...</groupId>
-  <artifactId>...</artifactId>
-  <version>...</version>
-  <packaging>...</packaging>
-  <dependencies>...</dependencies>
-  <parent>...</parent>
-  <dependencyManagement>...</dependencyManagement>
-  <modules>...</modules>
-  <properties>...</properties>
- 
-  <!-- Build Settings -->
-  <build>...</build>
-  <reporting>...</reporting>
- 
-  <!-- More Project Information -->
-  <name>...</name>
-  <description>...</description>
-  <url>...</url>
-  <inceptionYear>...</inceptionYear>
-  <licenses>...</licenses>
-  <organization>...</organization>
-  <developers>...</developers>
-  <contributors>...</contributors>
- 
-  <!-- Environment Settings -->
-  <issueManagement>...</issueManagement>
-  <ciManagement>...</ciManagement>
-  <mailingLists>...</mailingLists>
-  <scm>...</scm>
-  <prerequisites>...</prerequisites>
-  <repositories>...</repositories>
-  <pluginRepositories>...</pluginRepositories>
-  <distributionManagement>...</distributionManagement>
-  <profiles>...</profiles>
+ <modelVersion>4.0.0</modelVersion>
+
+ <!-- The Basics -->
+ <groupId>...</groupId>
+ <artifactId>...</artifactId>
+ <version>...</version>
+ <packaging>...</packaging>
+ <dependencies>...</dependencies>
+ <parent>...</parent>
+ <dependencyManagement>...</dependencyManagement>
+ <modules>...</modules>
+ <properties>...</properties>
+
+ <!-- Build Settings -->
+ <build>...</build>
+ <reporting>...</reporting>
+
+ <!-- More Project Information -->
+ <name>...</name>
+ <description>...</description>
+ <url>...</url>
+ <inceptionYear>...</inceptionYear>
+ <licenses>...</licenses>
+ <organization>...</organization>
+ <developers>...</developers>
+ <contributors>...</contributors>
+
+ <!-- Environment Settings -->
+ <issueManagement>...</issueManagement>
+ <ciManagement>...</ciManagement>
+ <mailingLists>...</mailingLists>
+ <scm>...</scm>
+ <prerequisites>...</prerequisites>
+ <repositories>...</repositories>
+ <pluginRepositories>...</pluginRepositories>
+ <distributionManagement>...</distributionManagement>
+ <profiles>...</profiles>
 </project>
 ```
 
 # POM文件基础信息
 
-POM 包含项目的所有必要信息，以及构建过程中要使用的插件配置。它是 "who", "what",  "where"的声明式表现，而构建生命周期是 "when" and "how"。这并不是说 POM 不能影响应用生命周期的流程--它可以。例如，通过配置<span style="color:red;font-weight:bold">  maven-antrun-plugin </span>，就可以在 POM 中嵌入 Apache Ant 任务。然而，这最终只是一个声明。 build.xml 准确地告诉 Ant 在运行时要做什么（过程式），而 POM 则说明其配置（声明式）。如果某种外力导致生命周期跳过 Ant 插件的执行，也不会阻止已执行的插件发挥其魔力。这与 build.xml 文件不同，在 build.xml 文件中，任务几乎总是依赖于在它之前执行的行。
+POM 包含项目的所有必要信息，以及构建过程中要使用的插件配置。它是 "who", "what",  "where"的声明式表现，而构建生命周期是 "when" and "how"。这并不是说 POM 不能影响应用生命周期的流程--它可以。例如，通过配置<code style="color:#b30049;background-color:#fdf5f5">maven-antrun-plugin</code>，就可以在 POM 中嵌入 Apache Ant 任务。然而，这最终只是一个声明。 build.xml 准确地告诉 Ant 在运行时要做什么（过程式），而 POM 则说明其配置（声明式）。如果某种外力导致生命周期跳过 Ant 插件的执行，也不会阻止已执行的插件发挥其魔力。这与 build.xml 文件不同，在 build.xml 文件中，任务几乎总是依赖于在它之前执行的行。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+ <modelVersion>4.0.0</modelVersion>
  
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>my-project</artifactId>
-  <version>1.0</version>
+ <groupId>org.codehaus.mojo</groupId>
+ <artifactId>my-project</artifactId>
+ <version>1.0</version>
 </project>
 ```
 
 # Maven 坐标
 
-上面定义的 POM 是 Maven 允许的最低限度。<span style="color:red;font-weight:bold"> groupId:artifactId:version </span>都是必填字段（不过，如果 groupId 和 version 是继承自父版本，则无需明确定义，有关继承的内容稍后详述）。这三个字段的作用很像地址和时间戳。这标记了版本库中的一个特定位置，就像 Maven 项目的坐标系：
+上面定义的 POM 是 Maven 允许的最低限度。<code style="color:#b30049;background-color:#fdf5f5">groupId:artifactId:version</code>都是必填字段（不过，如果 groupId 和 version 是继承自父版本，则无需明确定义，有关继承的内容稍后详述）。这三个字段的作用很像地址和时间戳。这标记了版本库中的一个特定位置，就像 Maven 项目的坐标系：
 
-- **groupId**：这通常在一个组织或项目中是唯一的。例如，所有核心 Maven 工程都（应该）使用的 `groupId` 是<span style="color:red;font-weight:bold"> org.apache.maven </span>。`groupId`不一定使用点符号，例如 junit 项目。请注意，点标记的 groupId 不必与项目包含的包结构相对应。 但是，这是一个值得遵循的好习惯。当存储在存储库中时，该组的行为与操作系统中的 Java 打包结构非常相似。 这些点被操作系统特定的目录分隔符（例如 Unix 中的“/”）替换，成为基础存储库的相对目录结构。 在给出的示例中，<span style="color:red;font-weight:bold"> org.codehaus.mojo </span>组位于目录<span style="color:red;font-weight:bold"> $M2_REPO/org/codehaus/mojo </span>中。
-- **artifactId**：`artifactId` 通常是项目的名称。虽然 `groupId` 很重要，但小组内的人在讨论中很少会提到 groupId（他们通常都是同一个 ID，例如 MojoHaus 项目的 groupId：<span style="color:red;font-weight:bold"> org.codehaus.mojo）</span>。它与 `groupId` 一起创建了一个key，该key将此项目与世界上其他所有项目区分开来（至少应该如此：）。`artifactId` 配合 `groupId` ， 完全定义了工程在版本库中的唯一地址。在上述项目中，<span style="color:red;font-weight:bold">my-project</span>位于 <span style="color:red;font-weight:bold">$M2_REPO/org/codehaus/mojo/my-project</span>。
-- **version**: groupId:artifactId 表示的是一个项目，但它们无法确定我们谈论的是该项目的哪个版本。我们想要 2018 年（4.12 版）的 junit:junit，还是 2007 年（3.8.2 版）的 junit:junit？简而言之：代码发生了变化，这些变化就应该进行版本化，而这个元素可以使这些版本保持一致。my-project 1.0 版本的文件存放在<span style="color:red;font-weight:bold">$M2_REPO/org/codehaus/mojo/my-project/1.0</span> 的目录结构中。
+- **groupId**：这通常在一个组织或项目中是唯一的。例如，所有核心 Maven 工程都（应该）使用的 `groupId` 是<code style="color:#b30049;background-color:#fdf5f5">org.apache.maven</code>。`groupId`不一定使用点符号，例如 junit 项目。请注意，点标记的 groupId 不必与项目包含的包结构相对应。 但是，这是一个值得遵循的好习惯。当存储在存储库中时，该组的行为与操作系统中的 Java 打包结构非常相似。 这些点被操作系统特定的目录分隔符（例如 Unix 中的“/”）替换，成为基础存储库的相对目录结构。 在给出的示例中，<code style="color:#b30049;background-color:#fdf5f5">org.codehaus.mojo</code>组位于目录<code style="color:#b30049;background-color:#fdf5f5">$M2_REPO/org/codehaus/mojo</code>中。
+- **artifactId**：`artifactId` 通常是项目的名称。虽然 `groupId` 很重要，但小组内的人在讨论中很少会提到 groupId（他们通常都是同一个 ID，例如 MojoHaus 项目的 groupId：<code style="color:#b30049;background-color:#fdf5f5">org.codehaus.mojo</code>。它与 `groupId` 一起创建了一个key，该key将此项目与世界上其他所有项目区分开来（至少应该如此：）。`artifactId` 配合 `groupId` ， 完全定义了工程在版本库中的唯一地址。在上述项目中，<code style="color:#b30049;background-color:#fdf5f5">my-project</code>位于<code style="color:#b30049;background-color:#fdf5f5">$M2_REPO/org/codehaus/mojo/my-project</code>。
+- **version**: groupId:artifactId 表示的是一个项目，但它们无法确定我们谈论的是该项目的哪个版本。我们想要 2018 年（4.12 版）的 junit:junit，还是 2007 年（3.8.2 版）的 junit:junit？简而言之：代码发生了变化，这些变化就应该进行版本化，而这个元素可以使这些版本保持一致。my-project 1.0 版本的文件存放在<code style="color:#b30049;background-color:#fdf5f5">$M2_REPO/org/codehaus/mojo/my-project/1.0</code>的目录结构中。
 
 # Packaging-打包
 
-现在，我们有了<span style="color:red;font-weight:bold"> groupId:artifactId:version </span>的地址结构，还需要一个标准标签来提供真正完整的内容：那就是项目的包装。在我们的例子中，上面定义的<span style="color:red;font-weight:bold"> org.codehaus.mojo:my-project:1.0</span> 的 POM 示例将打包为 <span style="color:red;font-weight:bold">jar</span>。我们可以通过声明不同的打包方式将其变为 <span style="color:red;font-weight:bold">war</span>：
+现在，我们有了<code style="color:#b30049;background-color:#fdf5f5">groupId:artifactId:version</code>的地址结构，还需要一个标准标签来提供真正完整的内容：那就是项目的包装。在我们的例子中，上面定义的<code style="color:#b30049;background-color:#fdf5f5">org.codehaus.mojo:my-project:1.0</code>的 POM 示例将打包为<code style="color:#b30049;background-color:#fdf5f5">jar</code>。我们可以通过声明不同的打包方式将其变为<code style="color:#b30049;background-color:#fdf5f5">war</code>：
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <packaging>war</packaging>
+ <packaging>war</packaging>
   ...
 </project>
 ```
 
-如果没有声明<span style="color:red;font-weight:bold">packaging</span>，Maven 默认的<span style="color:red;font-weight:bold">packaging</span>为 jar。当前的核心打包方式有：<span style="color:red;font-weight:bold">pom</span>、<span style="color:red;font-weight:bold">jar</span>、<span style="color:red;font-weight:bold">maven-plugin</span>、<span style="color:red;font-weight:bold">ejb</span>、<span style="color:red;font-weight:bold">war</span>、<span style="color:red;font-weight:bold">ear</span>、<span style="color:red;font-weight:bold">rar</span>。
+如果没有声明<code style="color:#b30049;background-color:#fdf5f5">packaging</code>，Maven 默认的<code style="color:#b30049;background-color:#fdf5f5">packaging</code>为 jar。当前的核心打包方式有：<code style="color:#b30049;background-color:#fdf5f5">pom</code>、<code style="color:#b30049;background-color:#fdf5f5">jar</code>、<code style="color:#b30049;background-color:#fdf5f5">maven-plugin</code>、<code style="color:#b30049;background-color:#fdf5f5">ejb</code>、<code style="color:#b30049;background-color:#fdf5f5">war</code>、<code style="color:#b30049;background-color:#fdf5f5">ear</code>、<code style="color:#b30049;background-color:#fdf5f5">rar</code>。
 
 # POM Relationships
 
@@ -107,17 +107,17 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <type>jar</type>
-      <scope>test</scope>
-      <optional>true</optional>
-    </dependency>
+ <dependencies>
+   <dependency>
+     <groupId>junit</groupId>
+     <artifactId>junit</artifactId>
+     <version>4.12</version>
+     <type>jar</type>
+     <scope>test</scope>
+     <optional>true</optional>
+   </dependency>
     ...
-  </dependencies>
+ </dependencies>
   ...
 </project>
 ```
@@ -128,27 +128,27 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 
 - **type**:
 
-  对应于所选的依赖关系类型。 默认为<span style="color:red;font-weight:bold"> jar</span>。虽然它通常表示依赖项文件名的扩展名，但情况并非总是如此：类型可以映射到不同的扩展名和分类器。<span style="color:red;font-weight:bold">type</span>通常与所使用的<span style="color:red;font-weight:bold">packaging</span>相对应，但也并非总是如此。
+  对应于所选的依赖关系类型。 默认为<code style="color:#b30049;background-color:#fdf5f5">jar</code>。虽然它通常表示依赖项文件名的扩展名，但情况并非总是如此：类型可以映射到不同的扩展名和分类器。<code style="color:#b30049;background-color:#fdf5f5">type</code>通常与所使用的<code style="color:#b30049;background-color:#fdf5f5">packaging</code>相对应，但也并非总是如此。
 
 - **scope**:
 
   该元素指的是当前任务（编译和运行时、测试等）的类路径，以及如何限制依赖关系的传递性。有五种作用域可供选择：
 
-  - <span style="color:red;font-weight:bold">compile</span> - 这是<span style="color:red;font-weight:bold">scope</span>，在未指定任何作用域时使用。编译依赖项在所有类路径中都可用。 此外，这些依赖关系会传播到依赖项目。
-  - <span style="color:red;font-weight:bold">provided</span> - 这与`compile`很相似，但表示您希望 JDK 或容器在运行时提供它。它只能在编译和测试的`classpath` 上使用，而且不具有传递性。
-  - <span style="color:red;font-weight:bold">runtime</span> - 此作用域表示编译时不需要该依赖关系，但执行时需要。它在运行时和测试类路径中，但不在编译类路径中。
-  - <span style="color:red;font-weight:bold">test</span> - 此范围表示应用程序的正常使用不需要依赖项，并且仅适用于测试编译和执行阶段。 它不具有传递性。
-  - <span style="color:red;font-weight:bold">system</span> - 此范围与提供的`prvoide`类似，只是您必须显式提供包含它的 `JAR`。 该工件始终可用，无需在资源库中查找。
+  - <code style="color:#b30049;background-color:#fdf5f5">compile</code>- 这是<code style="color:#b30049;background-color:#fdf5f5">scope</code>，在未指定任何作用域时使用。编译依赖项在所有类路径中都可用。 此外，这些依赖关系会传播到依赖项目。
+  - <code style="color:#b30049;background-color:#fdf5f5">provided</code>- 这与`compile`很相似，但表示您希望 JDK 或容器在运行时提供它。它只能在编译和测试的`classpath` 上使用，而且不具有传递性。
+  - <code style="color:#b30049;background-color:#fdf5f5">runtime</code>- 此作用域表示编译时不需要该依赖关系，但执行时需要。它在运行时和测试类路径中，但不在编译类路径中。
+  - <code style="color:#b30049;background-color:#fdf5f5">test</code>- 此范围表示应用程序的正常使用不需要依赖项，并且仅适用于测试编译和执行阶段。 它不具有传递性。
+  - <code style="color:#b30049;background-color:#fdf5f5">system</code>- 此范围与提供的`prvoide`类似，只是您必须显式提供包含它的 `JAR`。 该工件始终可用，无需在资源库中查找。
 
 - **systemPath**:
 
-  仅在 <span style="color:red;font-weight:bold">\<scope></span>范围为<span style="color:red;font-weight:bold">system</span>时才使用。否则，如果设置了该元素，编译将失败。路径必须是绝对路径，因此建议使用属性指定特定机器的路径，如<span style="color:red;font-weight:bold"> ${java.home}/lib</span>。它会假定系统依赖作用域具有优先权，因此 Maven 不会检查项目的远程资源库，而是检查系统路径该文件是否存在。如果不存在，Maven 会导致构建失败，并建议您手动下载和安装。
+  仅在<code style="color:#b30049;background-color:#fdf5f5">\<scope></code>范围为<code style="color:#b30049;background-color:#fdf5f5">system</code>时才使用。否则，如果设置了该元素，编译将失败。路径必须是绝对路径，因此建议使用属性指定特定机器的路径，如<code style="color:#b30049;background-color:#fdf5f5">${java.home}/lib</code>。它会假定系统依赖作用域具有优先权，因此 Maven 不会检查项目的远程资源库，而是检查系统路径该文件是否存在。如果不存在，Maven 会导致构建失败，并建议您手动下载和安装。
 
 - **optional**:
 
-  当项目本身是依赖项时，标记为<span style="color:red;font-weight:bold">optional</span>。例如，假设项目<span style="color:red;font-weight:bold">A</span>需要依赖项目<span style="color:red;font-weight:bold">B</span>来编译一部分代码，而这部分代码在运行时可能用不到，那么我们的所有项目可能都不需要项目<span style="color:red;font-weight:bold">B</span>。因此，如果项目 <span style="color:red;font-weight:bold">X</span>将项目<span style="color:red;font-weight:bold">A</span>作为自己的依赖项，那么 Maven 就根本不需要安装项目<span style="color:red;font-weight:bold">B</span>。如果<span style="color:red;font-weight:bold">=></span>表示必须依赖，而<span style="color:red;font-weight:bold">--></span>表示可选，那么在构建<span style="color:red;font-weight:bold">A</span>时会出现<span style="color:red;font-weight:bold">A=>B</span>的情况，而构建<span style="color:red;font-weight:bold">X</span>时可能会出现<span style="color:red;font-weight:bold">X=>A-->B</span>的情况。
+  当项目本身是依赖项时，标记为<code style="color:#b30049;background-color:#fdf5f5">optional</code>。例如，假设项目<code style="color:#b30049;background-color:#fdf5f5">A</code>需要依赖项目<code style="color:#b30049;background-color:#fdf5f5">B</code>来编译一部分代码，而这部分代码在运行时可能用不到，那么我们的所有项目可能都不需要项目<code style="color:#b30049;background-color:#fdf5f5">B</code>。因此，如果项目<code style="color:#b30049;background-color:#fdf5f5">X</code>将项目<code style="color:#b30049;background-color:#fdf5f5">A</code>作为自己的依赖项，那么 Maven 就根本不需要安装项目<code style="color:#b30049;background-color:#fdf5f5">B</code>。如果<code style="color:#b30049;background-color:#fdf5f5">=></code>表示必须依赖，而<code style="color:#b30049;background-color:#fdf5f5">--></code>表示可选，那么在构建<code style="color:#b30049;background-color:#fdf5f5">A</code>时会出现<code style="color:#b30049;background-color:#fdf5f5">A=>B</code>的情况，而构建<code style="color:#b30049;background-color:#fdf5f5">X</code>时可能会出现<code style="color:#b30049;background-color:#fdf5f5">X=>A-->B</code>的情况。
 
-  简而言之，<span style="color:red;font-weight:bold">optional</span>让其他项目知道，当您使用此项目时，不需要此依赖项即可正常工作。
+  简而言之，<code style="color:#b30049;background-color:#fdf5f5">optional</code>让其他项目知道，当您使用此项目时，不需要此依赖项即可正常工作。
 
 ## 依赖关系版本要求规范
 
@@ -156,14 +156,14 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 
 版本要求的语法如下：
 
-- <span style="color:red;font-weight:bold">1.0</span>: 1.0 的软要求。 如果依赖关系树中较早没有出现其他版本，则使用 1.0。
-- <span style="color:red;font-weight:bold">[1.0]</span>：1.0 的硬性要求。 使用 1.0 并且仅使用 1.0。
-- <span style="color:red;font-weight:bold">(,1.0]</span>: 任何 <= 1.0 版本的硬性要求。
-- <span style="color:red;font-weight:bold">[1.2,1.3]</span>: 1.2 和 1.3（含）之间任何版本的硬性要求。
-- <span style="color:red;font-weight:bold">[1.0,2.0)</span>: 1.0 <= x < 2.0；硬性要求在 1.0（含）和 2.0（不含）之间的任何版本。
-- <span style="color:red;font-weight:bold">[1.5,)</span>: 任何大于或等于 1.5 版本的硬性要求。
-- <span style="color:red;font-weight:bold">(,1.0],[1.2,)</span>: 小于或等于 1.0 或大于或等于 1.2 的任何版本的硬性要求，但不包括 1.1。多个要求之间用逗号分隔。
-- <span style="color:red;font-weight:bold">(,1.1),(1.1,)</span>: 除 1.1 之外的任何版本的硬性需求；例如，因为 1.1 存在关键漏洞。
+- <code style="color:#b30049;background-color:#fdf5f5">1.0</code>: 1.0 的软要求。 如果依赖关系树中较早没有出现其他版本，则使用 1.0。
+- <code style="color:#b30049;background-color:#fdf5f5">[1.0]</code>：1.0 的硬性要求。 使用 1.0 并且仅使用 1.0。
+- <code style="color:#b30049;background-color:#fdf5f5">(,1.0]</code>: 任何<= 1.0 版本的硬性要求。
+- <code style="color:#b30049;background-color:#fdf5f5">[1.2,1.3]</code>: 1.2 和 1.3（含）之间任何版本的硬性要求。
+- <code style="color:#b30049;background-color:#fdf5f5">[1.0,2.0)</code>: 1.0<= x< 2.0；硬性要求在 1.0（含）和 2.0（不含）之间的任何版本。
+- <code style="color:#b30049;background-color:#fdf5f5">[1.5,)</code>: 任何大于或等于 1.5 版本的硬性要求。
+- <code style="color:#b30049;background-color:#fdf5f5">(,1.0],[1.2,)</code>: 小于或等于 1.0 或大于或等于 1.2 的任何版本的硬性要求，但不包括 1.1。多个要求之间用逗号分隔。
+- <code style="color:#b30049;background-color:#fdf5f5">(,1.1),(1.1,)</code>: 除 1.1 之外的任何版本的硬性需求；例如，因为 1.1 存在关键漏洞。
   Maven 挑选每个项目中满足该项目依赖项所有硬性要求的最高版本。如果没有任何版本满足所有硬性要求，则构建失败。
 
 ## 版本顺序规范
@@ -176,20 +176,24 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 
 拆分和替换示例：
 
-- <span style="color:red;font-weight:bold">1-1.foo-bar1baz-.1</span> -> <span style="color:red;font-weight:bold">1-1.foo-bar-1-baz-0.1</span>
+{% note success %}
+
+1-1.foo-bar1baz-.1 ->1-1.foo-bar-1-baz-0.1
+
+{% endnote %}
 
 然后，从版本末尾开始，修剪尾随的“null”值（0、“”、“final”、“ga”）。 从头到尾对每个剩余的连字符重复此过程。
 
 修剪示例：
 
-- <span style="color:red;font-weight:bold">1.0.0</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1.g</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1.fina</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1.0</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1.</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1-</span> -> <span style="color:red;font-weight:bold">1</span>
-- <span style="color:red;font-weight:bold">1.0.0-foo.0.0</span> -> <span style="color:red;font-weight:bold">1-foo</span>
-- <span style="color:red;font-weight:bold">1.0.0-0.0.0</span> -> <span style="color:red;font-weight:bold">1</span>
+- <code style="color:#b30049;background-color:#fdf5f5">1.0.0</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.g</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.fina</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.0</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1-</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.0.0-foo.0.0</code>-><code style="color:#b30049;background-color:#fdf5f5">1-foo</code>
+- <code style="color:#b30049;background-color:#fdf5f5">1.0.0-0.0.0</code>-><code style="color:#b30049;background-color:#fdf5f5">1</code>
 
 版本顺序是这一前缀标记序列的字典顺序，较短的标记填充有足够的“空”值和匹配的前缀，以与较长的标记具有相同的长度。 填充的“null”值取决于其他版本的前缀：0 表示“.”，“”表示“-”。 前缀令牌顺序为：
 
@@ -197,46 +201,46 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 
 - 数字标记具有自然顺序。
 - 非数字标记（“限定符”）按字母顺序排列，但以下标记除外（按此顺序排在第一位）
-  - "`alpha`" < "`beta`" < "`milestone`" < "`rc`" = "`cr`" < "`snapshot`" < "" = "`final`" = "`ga`" < "`sp`"
+  - "`alpha`"< "`beta`"< "`milestone`"< "`rc`" = "`cr`"< "`snapshot`"< "" = "`final`" = "`ga`"< "`sp`"
   - 当直接跟数字时，“alpha”、“beta”和“milestone”限定符可以分别缩写为“a”、“b”和“m”。
     否则“.qualifier”=“-qualifier”<“-number”<“.number”
-  - alpha = a <<\<beta>> = b <<\<milestone>> = m <<\<rc>> = cr <<\<snapshot>> '<<<>>' = final = ga = release < sp
+  - alpha = a<<\<beta>>= b<<\<milestone>>= m<<\<rc>>= cr<<\<snapshot>>'<<<>>' = final = ga = release< sp
 
 鼓励遵守 semver 规则，不鼓励使用某些限定词：
 
-- 与<span style="color:red;font-weight:bold">ea</span> and <span style="color:red;font-weight:bold">preview</span>相比，更倾向使用<span style="color:red;font-weight:bold">alpha</span>, <span style="color:red;font-weight:bold">beta</span> 和 <span style="color:red;font-weight:bold">milestone</span>
-- 优先选择 <span style="color:red;font-weight:bold">1.0.0-RC1</span>，而不是 <span style="color:red;font-weight:bold">1.0.0.0.RC1</span>
-- 不鼓励使用 <span style="color:red;font-weight:bold">CR</span>修饰符。请使用<span style="color:red;font-weight:bold">RC</span>
-- 不鼓励使用 <span style="color:red;font-weight:bold">final</span>、<span style="color:red;font-weight:bold">ga</span>和 <span style="color:red;font-weight:bold">release</span>限定符。请勿使用限定符。
-- 不鼓励使用<span style="color:red;font-weight:bold">SP</span>限定符。 而是增加补丁版本。
+- 与<code style="color:#b30049;background-color:#fdf5f5">ea</code>and<code style="color:#b30049;background-color:#fdf5f5">preview</code>相比，更倾向使用<code style="color:#b30049;background-color:#fdf5f5">alpha</code>,<code style="color:#b30049;background-color:#fdf5f5">beta</code>和<code style="color:#b30049;background-color:#fdf5f5">milestone</code>
+- 优先选择<code style="color:#b30049;background-color:#fdf5f5">1.0.0-RC1</code>，而不是<code style="color:#b30049;background-color:#fdf5f5">1.0.0.0.RC1</code>
+- 不鼓励使用<code style="color:#b30049;background-color:#fdf5f5">CR</code>修饰符。请使用<code style="color:#b30049;background-color:#fdf5f5">RC</code>
+- 不鼓励使用<code style="color:#b30049;background-color:#fdf5f5">final</code>、<code style="color:#b30049;background-color:#fdf5f5">ga</code>和<code style="color:#b30049;background-color:#fdf5f5">release</code>限定符。请勿使用限定符。
+- 不鼓励使用<code style="color:#b30049;background-color:#fdf5f5">SP</code>限定符。 而是增加补丁版本。
 
 ## Exclusions-排除项
 
-限制依赖项的传递依赖关系有时很有用。依赖项可能指定了不正确的作用域，或与项目中的其他依赖项发生冲突。<span style="color:red;font-weight:bold">Exclusions</span>会告诉 Maven 不要在类路径中包含指定的<span style="color:red;font-weight:bold">artifact</span>，即使该<span style="color:red;font-weight:bold">artifact</span>是本项目一个或多个依赖项的依赖项（传递依赖项）。例如，<span style="color:red;font-weight:bold">maven-embedder</span>依赖于<span style="color:red;font-weight:bold">maven-core</span>。假设您想依赖<span style="color:red;font-weight:bold">maven-embedder</span>，但不想在 classpath 中包含<span style="color:red;font-weight:bold">maven-core</span>或其依赖项。那么就在声明依赖<span style="color:red;font-weight:bold">maven-embedder</span>的元素中添加<span style="color:red;font-weight:bold">maven-core</span>作为排除项：
+限制依赖项的传递依赖关系有时很有用。依赖项可能指定了不正确的作用域，或与项目中的其他依赖项发生冲突。<code style="color:#b30049;background-color:#fdf5f5">Exclusions</code>会告诉 Maven 不要在类路径中包含指定的<code style="color:#b30049;background-color:#fdf5f5">artifact</code>，即使该<code style="color:#b30049;background-color:#fdf5f5">artifact</code>是本项目一个或多个依赖项的依赖项（传递依赖项）。例如，<code style="color:#b30049;background-color:#fdf5f5">maven-embedder</code>依赖于<code style="color:#b30049;background-color:#fdf5f5">maven-core</code>。假设您想依赖<code style="color:#b30049;background-color:#fdf5f5">maven-embedder</code>，但不想在 classpath 中包含<code style="color:#b30049;background-color:#fdf5f5">maven-core</code>或其依赖项。那么就在声明依赖<code style="color:#b30049;background-color:#fdf5f5">maven-embedder</code>的元素中添加<code style="color:#b30049;background-color:#fdf5f5">maven-core</code>作为排除项：
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-embedder</artifactId>
-      <version>3.9.4</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+ <dependencies>
+   <dependency>
+     <groupId>org.apache.maven</groupId>
+     <artifactId>maven-embedder</artifactId>
+     <version>3.9.4</version>
+     <exclusions>
+       <exclusion>
+         <groupId>org.apache.maven</groupId>
+         <artifactId>maven-core</artifactId>
+       </exclusion>
+     </exclusions>
+   </dependency>
     ...
-  </dependencies>
+ </dependencies>
   ...
 </project>
 ```
 
-这只会从<span style="color:red;font-weight:bold">maven-embedder</span>依赖项中删除到<span style="color:red;font-weight:bold">maven-core</span>的路径。 如果<span style="color:red;font-weight:bold">maven-core</span>在 POM 中的其他位置显示为直接或传递依赖项，它仍然可以添加到类路径中。
+这只会从<code style="color:#b30049;background-color:#fdf5f5">maven-embedder</code>依赖项中删除到<code style="color:#b30049;background-color:#fdf5f5">maven-core</code>的路径。 如果<code style="color:#b30049;background-color:#fdf5f5">maven-core</code>在 POM 中的其他位置显示为直接或传递依赖项，它仍然可以添加到类路径中。
 
 通配符排除可以轻松排除依赖项的所有传递依赖项。 在下面的情况下，您可能正在使用 maven-embedder 并且想要管理您使用的依赖项，因此您排除所有传递依赖项：
 
@@ -244,25 +248,25 @@ POM 的基石是其依赖列表。大多数项目都需要依赖其他项目才�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-embedder</artifactId>
-      <version>3.8.6</version>
-      <exclusions>
-        <exclusion>
-          <groupId>*</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+ <dependencies>
+   <dependency>
+     <groupId>org.apache.maven</groupId>
+     <artifactId>maven-embedder</artifactId>
+     <version>3.8.6</version>
+     <exclusions>
+       <exclusion>
+         <groupId>*</groupId>
+         <artifactId>*</artifactId>
+       </exclusion>
+     </exclusions>
+   </dependency>
     ...
-  </dependencies>
+ </dependencies>
   ...
 </project>
 ```
 
-- **exclusions**： Exclusions包含一个或多个<span style="color:red;font-weight:bold">\<exclusion></span>，每个元素都包含表示要排除的依赖关系的<span style="color:red;font-weight:bold">groupId</span>和<span style="color:red;font-weight:bold">artifactId</span>。与<span style="color:red;font-weight:bold">optional</span>不同的是，<span style="color:red;font-weight:bold">exclusions</span>会主动将<span style="color:red;font-weight:bold">artifacts</span>从依赖关系树中移除，而<span style="color:red;font-weight:bold">optional</span>可能会也可能不会被安装和使用。
+- **exclusions**： Exclusions包含一个或多个<code style="color:#b30049;background-color:#fdf5f5">\<exclusion></code>，每个元素都包含表示要排除的依赖关系的<code style="color:#b30049;background-color:#fdf5f5">groupId</code>和<code style="color:#b30049;background-color:#fdf5f5">artifactId</code>。与<code style="color:#b30049;background-color:#fdf5f5">optional</code>不同的是，<code style="color:#b30049;background-color:#fdf5f5">exclusions</code>会主动将<code style="color:#b30049;background-color:#fdf5f5">artifacts</code>从依赖关系树中移除，而<code style="color:#b30049;background-color:#fdf5f5">optional</code>可能会也可能不会被安装和使用。
 
 ## Inheritance-继承
 
@@ -271,16 +275,16 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+ <modelVersion>4.0.0</modelVersion>
  
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>my-parent</artifactId>
-  <version>2.0</version>
-  <packaging>pom</packaging>
+ <groupId>org.codehaus.mojo</groupId>
+ <artifactId>my-parent</artifactId>
+ <version>2.0</version>
+ <packaging>pom</packaging>
 </project>
 ```
 
-父项目和聚合（多模块）项目的<span style="color:red;font-weight:bold">packaging</span>类型需要为<span style="color:red;font-weight:bold">pom</span>。这些类型定义了与一组生命周期阶段绑定的目标。例如，如果打包类型为<span style="color:red;font-weight:bold">jar</span>，那么打包阶段将执行<span style="color:red;font-weight:bold">jar:jar</span>目标。现在，我们可以为父 POM 添加值，这些值将由其子 POM 继承。父 POM 中的大多数元素都会被其子 POM 继承，其中包括:
+父项目和聚合（多模块）项目的<code style="color:#b30049;background-color:#fdf5f5">packaging</code>类型需要为<code style="color:#b30049;background-color:#fdf5f5">pom</code>。这些类型定义了与一组生命周期阶段绑定的目标。例如，如果打包类型为<code style="color:#b30049;background-color:#fdf5f5">jar</code>，那么打包阶段将执行<code style="color:#b30049;background-color:#fdf5f5">jar:jar</code>目标。现在，我们可以为父 POM 添加值，这些值将由其子 POM 继承。父 POM 中的大多数元素都会被其子 POM 继承，其中包括:
 
 - groupId
 - version
@@ -307,7 +311,7 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 - reporting
 - profiles
 
-<span style="color:red;font-weight:bold">不继承的重要元素包括:</span>
+<code style="color:#b30049;background-color:#fdf5f5">不继承的重要元素包括:</code>
 
 - artifactId
 - name
@@ -316,166 +320,166 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+ <modelVersion>4.0.0</modelVersion>
  
-  <parent>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>my-parent</artifactId>
-    <version>2.0</version>
-    <relativePath>../my-parent</relativePath>
-  </parent>
+ <parent>
+   <groupId>org.codehaus.mojo</groupId>
+   <artifactId>my-parent</artifactId>
+   <version>2.0</version>
+   <relativePath>../my-parent</relativePath>
+ </parent>
  
-  <artifactId>my-project</artifactId>
+ <artifactId>my-project</artifactId>
 </project>
 ```
 
-注意<span style="color:red;font-weight:bold">relativePath</span>元素。它不是必需的，但可以用来指示 Maven 在搜索本地和远程版本库之前，首先搜索该项目父节点的路径。
+注意<code style="color:#b30049;background-color:#fdf5f5">relativePath</code>元素。它不是必需的，但可以用来指示 Maven 在搜索本地和远程版本库之前，首先搜索该项目父节点的路径。
 
 要查看继承的实际效果，只需查看 ASF 或 Maven 父 POM 即可。
 
 ## The Super POM
 
-与面向对象编程中的对象继承类似，扩展父 POM 的 POM 会从该父 POM 继承某些值。 此外，正如 Java 对象最终继承自 <span style="color:red;font-weight:bold">java.lang.Object</span>一样，所有项目对象模型都继承自基础 Super POM。 下面的代码片段是 Maven 3.5.4 的 Super POM。
+与面向对象编程中的对象继承类似，扩展父 POM 的 POM 会从该父 POM 继承某些值。 此外，正如 Java 对象最终继承自<code style="color:#b30049;background-color:#fdf5f5">java.lang.Object</code>一样，所有项目对象模型都继承自基础 Super POM。 下面的代码片段是 Maven 3.5.4 的 Super POM。
 
 ```xml
 <project>
-  <modelVersion>4.0.0</modelVersion>
+ <modelVersion>4.0.0</modelVersion>
  
-  <repositories>
-    <repository>
-      <id>central</id>
-      <name>Central Repository</name>
-      <url>https://repo.maven.apache.org/maven2</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+ <repositories>
+   <repository>
+     <id>central</id>
+     <name>Central Repository</name>
+     <url>https://repo.maven.apache.org/maven2</url>
+     <layout>default</layout>
+     <snapshots>
+       <enabled>false</enabled>
+     </snapshots>
+   </repository>
+ </repositories>
  
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <name>Central Repository</name>
-      <url>https://repo.maven.apache.org/maven2</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-    </pluginRepository>
-  </pluginRepositories>
+ <pluginRepositories>
+   <pluginRepository>
+     <id>central</id>
+     <name>Central Repository</name>
+     <url>https://repo.maven.apache.org/maven2</url>
+     <layout>default</layout>
+     <snapshots>
+       <enabled>false</enabled>
+     </snapshots>
+     <releases>
+       <updatePolicy>never</updatePolicy>
+     </releases>
+   </pluginRepository>
+ </pluginRepositories>
  
-  <build>
-    <directory>${project.basedir}/target</directory>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-    <finalName>${project.artifactId}-${project.version}</finalName>
-    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-    </testResources>
-    <pluginManagement>
-      <!-- NOTE: These plugins will be removed from future versions of the super POM -->
-      <!-- They are kept for the moment as they are very unlikely to conflict with lifecycle mappings (MNG-4453) -->
-      <plugins>
-        <plugin>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.3</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.2-beta-5</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.8</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.3</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+ <build>
+   <directory>${project.basedir}/target</directory>
+   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+   <finalName>${project.artifactId}-${project.version}</finalName>
+   <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+   <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+   <scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
+   <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+   <resources>
+     <resource>
+       <directory>${project.basedir}/src/main/resources</directory>
+     </resource>
+   </resources>
+   <testResources>
+     <testResource>
+       <directory>${project.basedir}/src/test/resources</directory>
+     </testResource>
+   </testResources>
+   <pluginManagement>
+     <!-- NOTE: These plugins will be removed from future versions of the super POM -->
+     <!-- They are kept for the moment as they are very unlikely to conflict with lifecycle mappings (MNG-4453) -->
+     <plugins>
+       <plugin>
+         <artifactId>maven-antrun-plugin</artifactId>
+         <version>1.3</version>
+       </plugin>
+       <plugin>
+         <artifactId>maven-assembly-plugin</artifactId>
+         <version>2.2-beta-5</version>
+       </plugin>
+       <plugin>
+         <artifactId>maven-dependency-plugin</artifactId>
+         <version>2.8</version>
+       </plugin>
+       <plugin>
+         <artifactId>maven-release-plugin</artifactId>
+         <version>2.5.3</version>
+       </plugin>
+     </plugins>
+   </pluginManagement>
+ </build>
  
-  <reporting>
-    <outputDirectory>${project.build.directory}/site</outputDirectory>
-  </reporting>
+ <reporting>
+   <outputDirectory>${project.build.directory}/site</outputDirectory>
+ </reporting>
  
-  <profiles>
-    <!-- NOTE: The release profile will be removed from future versions of the super POM -->
-    <profile>
-      <id>release-profile</id>
+ <profiles>
+   <!-- NOTE: The release profile will be removed from future versions of the super POM -->
+   <profile>
+     <id>release-profile</id>
  
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
+     <activation>
+       <property>
+         <name>performRelease</name>
+         <value>true</value>
+       </property>
+     </activation>
  
-      <build>
-        <plugins>
-          <plugin>
-            <inherited>true</inherited>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <inherited>true</inherited>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <inherited>true</inherited>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <configuration>
-              <updateReleaseInfo>true</updateReleaseInfo>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+     <build>
+       <plugins>
+         <plugin>
+           <inherited>true</inherited>
+           <artifactId>maven-source-plugin</artifactId>
+           <executions>
+             <execution>
+               <id>attach-sources</id>
+               <goals>
+                 <goal>jar-no-fork</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+         <plugin>
+           <inherited>true</inherited>
+           <artifactId>maven-javadoc-plugin</artifactId>
+           <executions>
+             <execution>
+               <id>attach-javadocs</id>
+               <goals>
+                 <goal>jar</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+         <plugin>
+           <inherited>true</inherited>
+           <artifactId>maven-deploy-plugin</artifactId>
+           <configuration>
+             <updateReleaseInfo>true</updateReleaseInfo>
+           </configuration>
+         </plugin>
+       </plugins>
+     </build>
+   </profile>
+ </profiles>
  
 </project>
 ```
 
-您可以创建一个最小的<span style="color:red;font-weight:bold">pom.xml</span>，并在命令行中执行： <span style="color:red;font-weight:bold">mvn help:effective-pom</span>来查看超级 POM 如何影响您的项目对象模型。
+您可以创建一个最小的<code style="color:#b30049;background-color:#fdf5f5">pom.xml</code>，并在命令行中执行：<code style="color:#b30049;background-color:#fdf5f5">mvn help:effective-pom</code>来查看超级 POM 如何影响您的项目对象模型。
 
 ### Dependency Management-依赖管理
 
-除了继承某些顶层元素外，父类还拥有为子 POM 和传递依赖关系配置值的元素。其中一个元素就是依赖关系管理<span style="color:red;font-weight:bold">dependencyManagement</span>。
+除了继承某些顶层元素外，父类还拥有为子 POM 和传递依赖关系配置值的元素。其中一个元素就是依赖关系管理<code style="color:#b30049;background-color:#fdf5f5">dependencyManagement</code>。
 
-- **dependencyManagement**: POM 使用它来帮助管理其所有子项的依赖关系信息。如果<span style="color:red;font-weight:bold">my-parent</span>项目使用<span style="color:red;font-weight:bold">dependencyManagement</span>定义了对<span style="color:red;font-weight:bold">junit:junit:4.12</span>的依赖项，则从该项目继承的 `POM` 设置其依赖项时，可以仅给出<span style="color:red;font-weight:bold">groupId=junit</span>和<span style="color:red;font-weight:bold">artifactId=junit</span>即可，Maven 将自动填写父依赖项设置的版本 。这种方法的好处显而易见。依赖关系的详细信息可以在一个中心位置设置，并传播到所有继承的 POM。
+- **dependencyManagement**: POM 使用它来帮助管理其所有子项的依赖关系信息。如果<code style="color:#b30049;background-color:#fdf5f5">my-parent</code>项目使用<code style="color:#b30049;background-color:#fdf5f5">dependencyManagement</code>定义了对<code style="color:#b30049;background-color:#fdf5f5">junit:junit:4.12</code>的依赖项，则从该项目继承的 `POM` 设置其依赖项时，可以仅给出<code style="color:#b30049;background-color:#fdf5f5">groupId=junit</code>和<code style="color:#b30049;background-color:#fdf5f5">artifactId=junit</code>即可，Maven 将自动填写父依赖项设置的版本 。这种方法的好处显而易见。依赖关系的详细信息可以在一个中心位置设置，并传播到所有继承的 POM。
 
-  需要注意的是，从传递依赖关系中合并进来的<span style="color:red;font-weight:bold">artifacts</span>的版本和范围也受依赖关系管理部分中的版本规范控制。这可能会导致意想不到的后果。 考虑这样一种情况，您的项目使用两个依赖项：dep1 和 dep2。 dep2 反过来也使用 dep1，并且需要特定的最低版本才能运行。 如果您随后使用 dependencyManagement 指定旧版本，dep2 将被迫使用旧版本，并失败。 所以，你必须小心检查整个依赖树以避免这个问题； mvn dependency:tree 很有帮助。
+  需要注意的是，从传递依赖关系中合并进来的<code style="color:#b30049;background-color:#fdf5f5">artifacts</code>的版本和范围也受依赖关系管理部分中的版本规范控制。这可能会导致意想不到的后果。 考虑这样一种情况，您的项目使用两个依赖项：dep1 和 dep2。 dep2 反过来也使用 dep1，并且需要特定的最低版本才能运行。 如果您随后使用 dependencyManagement 指定旧版本，dep2 将被迫使用旧版本，并失败。 所以，你必须小心检查整个依赖树以避免这个问题； mvn dependency:tree 很有帮助。
 
 ------------
 
@@ -486,18 +490,18 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+ <modelVersion>4.0.0</modelVersion>
  
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>my-parent</artifactId>
-  <version>2.0</version>
-  <packaging>pom</packaging>
+ <groupId>org.codehaus.mojo</groupId>
+ <artifactId>my-parent</artifactId>
+ <version>2.0</version>
+ <packaging>pom</packaging>
  
-  <modules>
-    <module>my-project</module>
-    <module>another-project</module>
-    <module>third-project/pom-example.xml</module>
-  </modules>
+ <modules>
+   <module>my-project</module>
+   <module>another-project</module>
+   <module>third-project/pom-example.xml</module>
+ </modules>
 </project>
 ```
 
@@ -505,44 +509,44 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 
 ### 关于继承与聚合的最后一点说明
 
-继承和聚合为通过单一的高级 POM 控制构建创造了良好的动态效果。你经常会看到既是父项目又是聚合项目的项目。例如，整个 Maven 核心通过单个基础 POM<span style="color:red;font-weight:bold">org.apache.maven:maven</span>运行，因此构建 Maven 项目可以通过单个命令来执行：mvn compile。不过，聚合项目和父项目都是 POM 项目，它们并不相同，不能混为一谈。POM 项目可以从其聚合的任何模块继承，但不一定拥有这些模块。相反，一个 POM 项目可以聚合不从它继承的项目。
+继承和聚合为通过单一的高级 POM 控制构建创造了良好的动态效果。你经常会看到既是父项目又是聚合项目的项目。例如，整个 Maven 核心通过单个基础 POM<code style="color:#b30049;background-color:#fdf5f5">org.apache.maven:maven</code>运行，因此构建 Maven 项目可以通过单个命令来执行：mvn compile。不过，聚合项目和父项目都是 POM 项目，它们并不相同，不能混为一谈。POM 项目可以从其聚合的任何模块继承，但不一定拥有这些模块。相反，一个 POM 项目可以聚合不从它继承的项目。
 
 ## Propertie-属性
 
-属性是理解 POM 基础知识的最后一个必需部分。Maven 属性是值占位符，就像 Ant 中的属性一样。它们的值可以通过使用符号<span style="color:red;font-weight:bold">${X}</span>在 POM 中的任何位置访问，其中<span style="color:red;font-weight:bold">X</span>是属性。 或者它们可以被插件用作默认值，例如：
+属性是理解 POM 基础知识的最后一个必需部分。Maven 属性是值占位符，就像 Ant 中的属性一样。它们的值可以通过使用符号<code style="color:#b30049;background-color:#fdf5f5">${X}</code>在 POM 中的任何位置访问，其中<code style="color:#b30049;background-color:#fdf5f5">X</code>是属性。 或者它们可以被插件用作默认值，例如：
 
 ```xml
 <project>
   ...
-  <properties>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <!-- Following project.-properties are reserved for Maven in will become elements in a future POM definition. -->
-    <!-- Don't start your own properties properties with project. -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
+ <properties>
+   <maven.compiler.source>1.7</maven.compiler.source>
+   <maven.compiler.target>1.7</maven.compiler.target>
+   <!-- Following project.-properties are reserved for Maven in will become elements in a future POM definition. -->
+   <!-- Don't start your own properties properties with project. -->
+   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ </properties>
   ...
 </project>
 ```
 
 它们有五种不同的风格：
 
-1. <span style="color:red;font-weight:bold">env.X</span>：在变量前添加“env”前缀。 将返回 shell 的环境变量。 例如，${env.PATH} 包含 PATH 环境变量。注意：虽然 Windows 环境变量本身不区分大小写，但属性的查找却区分大小写。换句话说，Windows shell 会返回 %PATH% 和 %Path% 的相同值，而 Maven 则会区分 ${env.PATH} 和 ${env.Path}。为可靠起见，环境变量的名称统一为大写。
-2. project.x：POM 中的点 (.) 表示的路径将包含相应元素的值。 例如：<span style="color:red;font-weight:bold">\<project>\<version>1.0\</version>\</project></span> 可通过<span style="color:red;font-weight:bold">${project.version}</span>访问。
-3. settings.xml 中的点 (.) 符号路径将包含相应元素的值。例如 <span style="color:red;font-weight:bold">\<settings>\<offline>false\</offline>\</settings></span>可通过<span style="color:red;font-weight:bold">${settings.offline}</span>访问。
-4. 所有通过 <span style="color:red;font-weight:bold">java.lang.System.getProperties()</span>访问的属性都可作为 POM 属性使用，如<span style="color:red;font-weight:bold">${java.home}</span>。
-5. <span style="color:red;font-weight:bold">x</span>: 设置在 POM 中的 <span style="color:red;font-weight:bold">\<properties /></span>元素中。<span style="color:red;font-weight:bold">\<properties>\<someVar>value\</someVar>\</properties></span>的值可用作<span style="color:red;font-weight:bold">${someVar}</span>。
+1. <code style="color:#b30049;background-color:#fdf5f5">env.X</code>：在变量前添加“env”前缀。 将返回 shell 的环境变量。 例如，${env.PATH} 包含 PATH 环境变量。注意：虽然 Windows 环境变量本身不区分大小写，但属性的查找却区分大小写。换句话说，Windows shell 会返回 %PATH% 和 %Path% 的相同值，而 Maven 则会区分 ${env.PATH} 和 ${env.Path}。为可靠起见，环境变量的名称统一为大写。
+2. project.x：POM 中的点 (.) 表示的路径将包含相应元素的值。 例如：<code style="color:#b30049;background-color:#fdf5f5">\<project>\<version>1.0\</version>\</project></code>可通过<code style="color:#b30049;background-color:#fdf5f5">${project.version}</code>访问。
+3. settings.xml 中的点 (.) 符号路径将包含相应元素的值。例如<code style="color:#b30049;background-color:#fdf5f5">\<settings>\<offline>false\</offline>\</settings></code>可通过<code style="color:#b30049;background-color:#fdf5f5">${settings.offline}</code>访问。
+4. 所有通过<code style="color:#b30049;background-color:#fdf5f5">java.lang.System.getProperties()</code>访问的属性都可作为 POM 属性使用，如<code style="color:#b30049;background-color:#fdf5f5">${java.home}</code>。
+5. <code style="color:#b30049;background-color:#fdf5f5">x</code>: 设置在 POM 中的<code style="color:#b30049;background-color:#fdf5f5">\<properties /></code>元素中。<code style="color:#b30049;background-color:#fdf5f5">\<properties>\<someVar>value\</someVar>\</properties></code>的值可用作<code style="color:#b30049;background-color:#fdf5f5">${someVar}</code>。
 
 -------
 
 # Build Settings
 
-除了上面给出的 POM 基础知识之外，在声明 POM 的基本能力之前，还必须了解两个要素。它们分别是<span style="color:red;font-weight:bold">build</span>元素和<span style="color:red;font-weight:bold">reporting</span>元素，前者负责处理诸如声明项目目录结构和管理插件等事务，后者则在很大程度上反映了用于报告目的的构建元素。
+除了上面给出的 POM 基础知识之外，在声明 POM 的基本能力之前，还必须了解两个要素。它们分别是<code style="color:#b30049;background-color:#fdf5f5">build</code>元素和<code style="color:#b30049;background-color:#fdf5f5">reporting</code>元素，前者负责处理诸如声明项目目录结构和管理插件等事务，后者则在很大程度上反映了用于报告目的的构建元素。
 
 ## Build
 
-根据 POM 4.0.0 XSD，<span style="color:red;font-weight:bold">build</span>元素在概念上分为两部分：有一个<span style="color:red;font-weight:bold">BaseBuild</span>类型，其中包含两个构建元素通用的元素集（项目下的顶级构建元素和配置文件下的构建元素） ，如下所述）； 还有<span style="color:red;font-weight:bold">Build</span>类型，它包含<span style="color:red;font-weight:bold">BaseBuild</span>集以及顶级定义的更多元素。 让我们首先分析两者之间的共同点。
+根据 POM 4.0.0 XSD，<code style="color:#b30049;background-color:#fdf5f5">build</code>元素在概念上分为两部分：有一个<code style="color:#b30049;background-color:#fdf5f5">BaseBuild</code>类型，其中包含两个构建元素通用的元素集（项目下的顶级构建元素和配置文件下的构建元素） ，如下所述）； 还有<code style="color:#b30049;background-color:#fdf5f5">Build</code>类型，它包含<code style="color:#b30049;background-color:#fdf5f5">BaseBuild</code>集以及顶级定义的更多元素。 让我们首先分析两者之间的共同点。
 
 注：这些不同的构建元素可分别称为 "项目构建 "和 "配置文件构建"。
 
@@ -550,111 +554,111 @@ Maven 为构建管理带来的一个强大功能是项目继承概念。虽然�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <!-- "Project Build" contains more elements than just the BaseBuild set -->
-  <build>...</build>
+ <!-- "Project Build" contains more elements than just the BaseBuild set -->
+ <build>...</build>
  
-  <profiles>
-    <profile>
-      <!-- "Profile Build" contains a subset of "Project Build"s elements -->
-      <build>...</build>
-    </profile>
-  </profiles>
+ <profiles>
+   <profile>
+     <!-- "Profile Build" contains a subset of "Project Build"s elements -->
+     <build>...</build>
+   </profile>
+ </profiles>
 </project>
 ```
 
 ### The BaseBuild Element Set
 
-<span style="color:red;font-weight:bold">BaseBuild</span>顾名思义：POM 中<span style="color:red;font-weight:bold">\<build></span>与<span style="color:red;font-weight:bold">\</build></span>之间的基本元素集。
+<code style="color:#b30049;background-color:#fdf5f5">BaseBuild</code>顾名思义：POM 中<code style="color:#b30049;background-color:#fdf5f5">\<build></code>与<code style="color:#b30049;background-color:#fdf5f5">\</build></code>之间的基本元素集。
 
 ```xml
 <build>
-  <defaultGoal>install</defaultGoal>
-  <directory>${basedir}/target</directory>
-  <finalName>${artifactId}-${version}</finalName>
-  <filters>
-    <filter>filters/filter1.properties</filter>
-  </filters>
+ <defaultGoal>install</defaultGoal>
+ <directory>${basedir}/target</directory>
+ <finalName>${artifactId}-${version}</finalName>
+ <filters>
+   <filter>filters/filter1.properties</filter>
+ </filters>
   ...
 </build>
 ```
 
-- **defaultGoal**:  如果没有给出，则执行的默认目标或阶段。如果给出了目标，则应按照命令行中的方式进行定义（例如<span style="color:red;font-weight:bold">jar:jar</span>）。 如果定义了阶段（例如<span style="color:red;font-weight:bold">install</span>），情况也是如此。
-- **directory**: 这是项目构建后输出文件的目录，或者用 Maven 的话说，就是构建的目标。 它适当地默认为 <span style="color:red;font-weight:bold">${basedir}/target</span>。
-- **finalName**: 这是最终构建时项目的名称（不带文件扩展名，例如：<span style="color:red;font-weight:bold">my-project-1.0.jar</span>）。 默认为 <span style="color:red;font-weight:bold">${artifactId}-${version}</span>。不过，"finalName "这个术语有点名不副实，因为构建捆绑项目的插件完全有权忽略/修改这个名称（但它们通常不会这样做）。例如，如果<span style="color:red;font-weight:bold">maven-jar-plugin</span>被配置为给 jar 提供一个 test 分类器，那么上面定义的实际 jar 将被构建为<span style="color:red;font-weight:bold">my-project-1.0-test.jar</span>。
-- **filter**: 定义 <span style="color:red;font-weight:bold">*.properties</span>文件，其中包含一些列的属性值适用于资源文件列表。 换句话说，过滤器文件中定义的“<span style="color:red;font-weight:bold">name=value</span>”对将替换构建时资源中的<span style="color:red;font-weight:bold">${name}</span>字符串。上面的示例定义了<span style="color:red;font-weight:bold">filters/</span>目录下的<span style="color:red;font-weight:bold">filter1.properties</span>文件。 Maven的默认过滤器目录是<span style="color:red;font-weight:bold">${basedir}/src/main/filters/</span>。
+- **defaultGoal**:  如果没有给出，则执行的默认目标或阶段。如果给出了目标，则应按照命令行中的方式进行定义（例如<code style="color:#b30049;background-color:#fdf5f5">jar:jar</code>）。 如果定义了阶段（例如<code style="color:#b30049;background-color:#fdf5f5">install</code>），情况也是如此。
+- **directory**: 这是项目构建后输出文件的目录，或者用 Maven 的话说，就是构建的目标。 它适当地默认为<code style="color:#b30049;background-color:#fdf5f5">${basedir}/target</code>。
+- **finalName**: 这是最终构建时项目的名称（不带文件扩展名，例如：<code style="color:#b30049;background-color:#fdf5f5">my-project-1.0.jar</code>）。 默认为<code style="color:#b30049;background-color:#fdf5f5">${artifactId}-${version}</code>。不过，"finalName "这个术语有点名不副实，因为构建捆绑项目的插件完全有权忽略/修改这个名称（但它们通常不会这样做）。例如，如果<code style="color:#b30049;background-color:#fdf5f5">maven-jar-plugin</code>被配置为给 jar 提供一个 test 分类器，那么上面定义的实际 jar 将被构建为<code style="color:#b30049;background-color:#fdf5f5">my-project-1.0-test.jar</code>。
+- **filter**: 定义<code style="color:#b30049;background-color:#fdf5f5">*.properties</code>文件，其中包含一些列的属性值适用于资源文件列表。 换句话说，过滤器文件中定义的“<code style="color:#b30049;background-color:#fdf5f5">name=value</code>”对将替换构建时资源中的<code style="color:#b30049;background-color:#fdf5f5">${name}</code>字符串。上面的示例定义了<code style="color:#b30049;background-color:#fdf5f5">filters/</code>目录下的<code style="color:#b30049;background-color:#fdf5f5">filter1.properties</code>文件。 Maven的默认过滤器目录是<code style="color:#b30049;background-color:#fdf5f5">${basedir}/src/main/filters/</code>。
 
 #### Resources
 
 build元素的另一个功能是指定资源文件在项目中存在的位置。资源（通常）不是代码。 它们不会被编译，而是要捆绑在项目中或出于各种其他原因（例如代码生成）而使用的项目。
 
-例如，Plexus 项目需要在 META-INF/plexus 目录中放置一个<span style="color:red;font-weight:bold">configuration.xml</span>文件（该文件指定了容器的组件配置）。虽然我们可以很容易地将该文件放在<span style="color:red;font-weight:bold">src/main/resources/META-INF/plexus</span>目录中，但我们还是想让 Plexus 拥有自己的<span style="color:red;font-weight:bold">src/main/plexus</span>目录。为了让 JAR 插件正确地捆绑资源，您需要指定与下面类似的资源：
+例如，Plexus 项目需要在 META-INF/plexus 目录中放置一个<code style="color:#b30049;background-color:#fdf5f5">configuration.xml</code>文件（该文件指定了容器的组件配置）。虽然我们可以很容易地将该文件放在<code style="color:#b30049;background-color:#fdf5f5">src/main/resources/META-INF/plexus</code>目录中，但我们还是想让 Plexus 拥有自己的<code style="color:#b30049;background-color:#fdf5f5">src/main/plexus</code>目录。为了让 JAR 插件正确地捆绑资源，您需要指定与下面类似的资源：
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <build>
+ <build>
     ...
-    <resources>
-      <resource>
-        <targetPath>META-INF/plexus</targetPath>
-        <filtering>false</filtering>
-        <directory>${basedir}/src/main/plexus</directory>
-        <includes>
-          <include>configuration.xml</include>
-        </includes>
-        <excludes>
-          <exclude>**/*.properties</exclude>
-        </excludes>
-      </resource>
-    </resources>
-    <testResources>
+   <resources>
+     <resource>
+       <targetPath>META-INF/plexus</targetPath>
+       <filtering>false</filtering>
+       <directory>${basedir}/src/main/plexus</directory>
+       <includes>
+         <include>configuration.xml</include>
+       </includes>
+       <excludes>
+         <exclude>**/*.properties</exclude>
+       </excludes>
+     </resource>
+   </resources>
+   <testResources>
       ...
-    </testResources>
+   </testResources>
     ...
-  </build>
+ </build>
 </project>
 ```
 
 - **resources：**是资源元素的列表，每个元素都描述了与此项目相关的文件的包含内容和位置。
 - **targetPath：**指定用于放置构建资源集的目录结构。目标路径默认为基本目录。对于将打包到 JAR 中的资源，通常指定的目标路径是 META-INF。
-- **filtering**：<span style="color:red;font-weight:bold">true</span>或<span style="color:red;font-weight:bold">false</span>，表示是否对该资源启用过滤。请注意，不必定义过滤器<span style="color:red;font-weight:bold">*.properties</span>文件即可进行过滤，资源还可以使用 POM 中默认定义的属性（例如 ${project.version}）。使用以下命令传递到命令行 “-D”标志（例如“-Dname=value”）或由属性元素显式定义。 过滤器文件已在上面介绍过。
-- **directory：**该元素的值定义在哪里可以找到资源文件。 构建的默认目录是<span style="color:red;font-weight:bold">${basedir}/src/main/resources</span>。
+- **filtering**：<code style="color:#b30049;background-color:#fdf5f5">true</code>或<code style="color:#b30049;background-color:#fdf5f5">false</code>，表示是否对该资源启用过滤。请注意，不必定义过滤器<code style="color:#b30049;background-color:#fdf5f5">*.properties</code>文件即可进行过滤，资源还可以使用 POM 中默认定义的属性（例如 ${project.version}）。使用以下命令传递到命令行 “-D”标志（例如“-Dname=value”）或由属性元素显式定义。 过滤器文件已在上面介绍过。
+- **directory：**该元素的值定义在哪里可以找到资源文件。 构建的默认目录是<code style="color:#b30049;background-color:#fdf5f5">${basedir}/src/main/resources</code>。
 - **includes**: 包括：一组文件模式，指定要作为指定目录下的资源包含的文件，使用 * 作为通配符。
-- **excludes**: 与<span style="color:red;font-weight:bold">includes</span>相同的结构，指定要忽略哪些文件。 在<span style="color:red;font-weight:bold">includes</span>和<span style="color:red;font-weight:bold">excludes</span>发生冲突时，<span style="color:red;font-weight:bold">excludes</span>获胜。
-- **testResources**: 它们的定义与<span style="color:red;font-weight:bold">resources</span>类似，但自然是在测试阶段使用。唯一的区别是项目的默认（Super POM 定义的）测试资源目录是<span style="color:red;font-weight:bold">${basedir}/src/test/resources</span>。测试资源不会被部署。
+- **excludes**: 与<code style="color:#b30049;background-color:#fdf5f5">includes</code>相同的结构，指定要忽略哪些文件。 在<code style="color:#b30049;background-color:#fdf5f5">includes</code>和<code style="color:#b30049;background-color:#fdf5f5">excludes</code>发生冲突时，<code style="color:#b30049;background-color:#fdf5f5">excludes</code>获胜。
+- **testResources**: 它们的定义与<code style="color:#b30049;background-color:#fdf5f5">resources</code>类似，但自然是在测试阶段使用。唯一的区别是项目的默认（Super POM 定义的）测试资源目录是<code style="color:#b30049;background-color:#fdf5f5">${basedir}/src/test/resources</code>。测试资源不会被部署。
 
 #### Plugins
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <build>
+ <build>
     ...
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.6</version>
-        <extensions>false</extensions>
-        <inherited>true</inherited>
-        <configuration>
-          <classifier>test</classifier>
-        </configuration>
-        <dependencies>...</dependencies>
-        <executions>...</executions>
-      </plugin>
-    </plugins>
-  </build>
+   <plugins>
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-jar-plugin</artifactId>
+       <version>2.6</version>
+       <extensions>false</extensions>
+       <inherited>true</inherited>
+       <configuration>
+         <classifier>test</classifier>
+       </configuration>
+       <dependencies>...</dependencies>
+       <executions>...</executions>
+     </plugin>
+   </plugins>
+ </build>
 </project>
 ```
 
-除了<span style="color:red;font-weight:bold">groupId:artifactId:version</span>的标准坐标外，还有一些元素用于配置插件或构建与插件的交互。
+除了<code style="color:#b30049;background-color:#fdf5f5">groupId:artifactId:version</code>的标准坐标外，还有一些元素用于配置插件或构建与插件的交互。
 
-- **extensions:** <span style="color:red;font-weight:bold">true</span>或<span style="color:red;font-weight:bold">false</span>，是否加载该插件的扩展。 默认情况下为<span style="color:red;font-weight:bold">false</span>。 本文档稍后将介绍扩展。
-- **inherited**:<span style="color:red;font-weight:bold">true</span>或<span style="color:red;font-weight:bold">false</span>，表示此插件配置是否应用于继承自此插件的 POM。默认值为<span style="color:red;font-weight:bold"><true</span>。
-- **configuration**: 这是单个插件的特定属性。无需太深入地了解插件如何工作的机制，只需说明插件 Mojo 可能期望的任何属性（这些是 Java Mojo bean 中的 getter 和 setter）都可以在这里指定。在上面示例中，我们在<span style="color:red;font-weight:bold">maven-jar-plugin</span>中将<span style="color:red;font-weight:bold">classifier</span>设置为<span style="color:red;font-weight:bold">test</span>。值得注意的是，所有配置元素，无论它们位于 POM 中的什么位置，都是为了将值传递到另一个底层系统，例如插件。 换句话说：POM 模式永远不会明确要求配置元素中的值，但插件目标完全有权要求配置值。
+- **extensions:**<code style="color:#b30049;background-color:#fdf5f5">true</code>或<code style="color:#b30049;background-color:#fdf5f5">false</code>，是否加载该插件的扩展。 默认情况下为<code style="color:#b30049;background-color:#fdf5f5">false</code>。 本文档稍后将介绍扩展。
+- **inherited**:<code style="color:#b30049;background-color:#fdf5f5">true</code>或<code style="color:#b30049;background-color:#fdf5f5">false</code>，表示此插件配置是否应用于继承自此插件的 POM。默认值为<code style="color:#b30049;background-color:#fdf5f5">true</code>。
+- **configuration**: 这是单个插件的特定属性。无需太深入地了解插件如何工作的机制，只需说明插件 Mojo 可能期望的任何属性（这些是 Java Mojo bean 中的 getter 和 setter）都可以在这里指定。在上面示例中，我们在<code style="color:#b30049;background-color:#fdf5f5">maven-jar-plugin</code>中将<code style="color:#b30049;background-color:#fdf5f5">classifier</code>设置为<code style="color:#b30049;background-color:#fdf5f5">test</code>。值得注意的是，所有配置元素，无论它们位于 POM 中的什么位置，都是为了将值传递到另一个底层系统，例如插件。 换句话说：POM 模式永远不会明确要求配置元素中的值，但插件目标完全有权要求配置值。
 
-如果您的 POM 声明了一个parent，它将从父类的<span style="color:red;font-weight:bold">build/plugins</span>或<span style="color:red;font-weight:bold">pluginManagement</span>部分继承插件配置。
+如果您的 POM 声明了一个parent，它将从父类的<code style="color:#b30049;background-color:#fdf5f5">build/plugins</code>或<code style="color:#b30049;background-color:#fdf5f5">pluginManagement</code>部分继承插件配置。
 
 **default configuration inheritance:**
 
@@ -662,34 +666,34 @@ build元素的另一个功能是指定资源文件在项目中存在的位置。
 
 ```xml
 <plugin>
-  <groupId>my.group</groupId>
-  <artifactId>my-plugin</artifactId>
-  <configuration>
-    <items>
-      <item>parent-1</item>
-      <item>parent-2</item>
-    </items>
-    <properties>
-      <parentKey>parent</parentKey>
-    </properties>
-  </configuration>
+ <groupId>my.group</groupId>
+ <artifactId>my-plugin</artifactId>
+ <configuration>
+   <items>
+     <item>parent-1</item>
+     <item>parent-2</item>
+   </items>
+   <properties>
+     <parentKey>parent</parentKey>
+   </properties>
+ </configuration>
 </plugin>
 ```
 
-下面是使用该父级作为<span style="color:red;font-weight:bold">parent</span>的项目中的插件配置：
+下面是使用该父级作为<code style="color:#b30049;background-color:#fdf5f5">parent</code>的项目中的插件配置：
 
 ```xml
 <plugin>
-  <groupId>my.group</groupId>
-  <artifactId>my-plugin</artifactId>
-  <configuration>
-    <items>
-      <item>child-1</item>
-    </items>
-    <properties>
-      <childKey>child</childKey>
-    </properties>
-  </configuration>
+ <groupId>my.group</groupId>
+ <artifactId>my-plugin</artifactId>
+ <configuration>
+   <items>
+     <item>child-1</item>
+   </items>
+   <properties>
+     <childKey>child</childKey>
+   </properties>
+ </configuration>
 </plugin>
 ```
 
@@ -699,36 +703,36 @@ build元素的另一个功能是指定资源文件在项目中存在的位置。
 
 ```xml
 <plugin>
-  <groupId>my.group</groupId>
-  <artifactId>my-plugin</artifactId>
-  <configuration>
-    <items>
-      <item>child-1</item>
-    </items>
-    <properties>
-      <childKey>child</childKey>
-      <parentKey>parent</parentKey>
-    </properties>
-  </configuration>
+ <groupId>my.group</groupId>
+ <artifactId>my-plugin</artifactId>
+ <configuration>
+   <items>
+     <item>child-1</item>
+   </items>
+   <properties>
+     <childKey>child</childKey>
+     <parentKey>parent</parentKey>
+   </properties>
+ </configuration>
 </plugin>
 ```
 
-高级配置继承：<span style="color:red;font-weight:bold">combine.child</span>和<span style="color:red;font-weight:bold">combine.self</span>
+高级配置继承：<code style="color:#b30049;background-color:#fdf5f5">combine.child</code>和<code style="color:#b30049;background-color:#fdf5f5">combine.self</code>
 
-你可以控制子POM如何从父POM继承配置通过向配置元素的子元素添加属性。这些属性是<span style="color:red;font-weight:bold">combine.children</span>和 <span style="color:red;font-weight:bold">combine.self</span>。在子 POM 中使用这些属性来控制 Maven 如何将父 POM 中的插件配置与子 POM 中的显式配置相结合。
+你可以控制子POM如何从父POM继承配置通过向配置元素的子元素添加属性。这些属性是<code style="color:#b30049;background-color:#fdf5f5">combine.children</code>和<code style="color:#b30049;background-color:#fdf5f5">combine.self</code>。在子 POM 中使用这些属性来控制 Maven 如何将父 POM 中的插件配置与子 POM 中的显式配置相结合。
 
 以下是带有这两个属性说明的子配置：
 
 ```xml
 <configuration>
-  <items combine.children="append">
-    <!-- combine.children="merge" is the default -->
-    <item>child-1</item>
-  </items>
-  <properties combine.self="override">
-    <!-- combine.self="merge" is the default -->
-    <childKey>child</childKey>
-  </properties>
+ <items combine.children="append">
+   <!-- combine.children="merge" is the default -->
+   <item>child-1</item>
+ </items>
+ <properties combine.self="override">
+   <!-- combine.self="merge" is the default -->
+   <childKey>child</childKey>
+ </properties>
 </configuration>
 ```
 
@@ -736,117 +740,117 @@ build元素的另一个功能是指定资源文件在项目中存在的位置。
 
 ```xml
 <configuration>
-  <items combine.children="append">
-    <item>parent-1</item>
-    <item>parent-2</item>
-    <item>child-1</item>
-  </items>
-  <properties combine.self="override">
-    <childKey>child</childKey>
-  </properties>
+ <items combine.children="append">
+   <item>parent-1</item>
+   <item>parent-2</item>
+   <item>child-1</item>
+ </items>
+ <properties combine.self="override">
+   <childKey>child</childKey>
+ </properties>
 </configuration>
 ```
 
-<span style="color:red;font-weight:bold">combine.children="append "</span>的结果是按顺序连接父元素和子元素。而<span style="color:red;font-weight:bold">combine.self="override"</span>则会完全抑制父元素的配置。您不能在一个<span style="color:red;font-weight:bold">element</span>上同时使用<span style="color:red;font-weight:bold">combine.self="override"</span>和<span style="color:red;font-weight:bold">combine.children="append" </span>； 如果你尝试，<span style="color:red;font-weight:bold">override</span>将会获胜。
+<code style="color:#b30049;background-color:#fdf5f5">combine.children="append "</code>的结果是按顺序连接父元素和子元素。而<code style="color:#b30049;background-color:#fdf5f5">combine.self="override"</code>则会完全抑制父元素的配置。您不能在一个<code style="color:#b30049;background-color:#fdf5f5">element</code>上同时使用<code style="color:#b30049;background-color:#fdf5f5">combine.self="override"</code>和<code style="color:#b30049;background-color:#fdf5f5">combine.children="append"</code>； 如果你尝试，<code style="color:#b30049;background-color:#fdf5f5">override</code>将会获胜。
 
 请注意，这些属性只适用于它们所声明的配置元素，不会传播到嵌套元素。也就是说，如果子 POM 中项目元素的内容是复杂结构而非文本，那么其子元素仍将采用默认的合并策略，除非它们本身也标有属性。
 
-<span style="color:red;font-weight:bold">merge.*</span>属性从父 POM 继承到子 POM。 将这些属性添加到父 POM 时要小心，因为这可能会影响子 POM 或孙 POM。
+<code style="color:#b30049;background-color:#fdf5f5">merge.*</code>属性从父 POM 继承到子 POM。 将这些属性添加到父 POM 时要小心，因为这可能会影响子 POM 或孙 POM。
 
-- **dependencies:** <span style="color:red;font-weight:bold">dependencies</span>在 POM 中经常出现，它是所有<span style="color:red;font-weight:bold">plugins</span>元素块下的一个元素。<span style="color:red;font-weight:bold">dependencies</span>有着与基础构建相同的结构和功能。这种情况下的主要区别在于依赖项不再作为项目的依赖项，而是作为其所在插件的依赖项。其强大之处在于可以更改插件的依赖项列表，可能是通过排除删除未使用的运行时依赖项，或者更改所需依赖项的版本。 有关更多信息，请参阅上面的依赖项。
-- **executions:** 需要注意的是，一个<span style="color:red;font-weight:bold">plugin</span>可能有多个<span style="color:red;font-weight:bold">goals</span>。每个目标都可能有单独的配置，甚至可能将插件的目标完全绑定到不同的阶段。<span style="color:red;font-weight:bold">executions</span>配置了一个插件<span style="color:red;font-weight:bold">goals</span>的执行。
+- **dependencies:**<code style="color:#b30049;background-color:#fdf5f5">dependencies</code>在 POM 中经常出现，它是所有<code style="color:#b30049;background-color:#fdf5f5">plugins</code>元素块下的一个元素。<code style="color:#b30049;background-color:#fdf5f5">dependencies</code>有着与基础构建相同的结构和功能。这种情况下的主要区别在于依赖项不再作为项目的依赖项，而是作为其所在插件的依赖项。其强大之处在于可以更改插件的依赖项列表，可能是通过排除删除未使用的运行时依赖项，或者更改所需依赖项的版本。 有关更多信息，请参阅上面的依赖项。
+- **executions:** 需要注意的是，一个<code style="color:#b30049;background-color:#fdf5f5">plugin</code>可能有多个<code style="color:#b30049;background-color:#fdf5f5">goals</code>。每个目标都可能有单独的配置，甚至可能将插件的目标完全绑定到不同的阶段。<code style="color:#b30049;background-color:#fdf5f5">executions</code>配置了一个插件<code style="color:#b30049;background-color:#fdf5f5">goals</code>的执行。
 
-例如，假设要<span style="color:red;font-weight:bold">antrun:run</span>目标绑定到<span style="color:red;font-weight:bold">verify</span>阶段。我们希望该任务能呼应构建目录，并通过将<span style="color:red;font-weight:bold">inherited</span>设置为<span style="color:red;font-weight:bold">false</span>来避免将此配置传递给其子任务（假设它是父任务）。执行结果如下。
+例如，假设要<code style="color:#b30049;background-color:#fdf5f5">antrun:run</code>目标绑定到<code style="color:#b30049;background-color:#fdf5f5">verify</code>阶段。我们希望该任务能呼应构建目录，并通过将<code style="color:#b30049;background-color:#fdf5f5">inherited</code>设置为<code style="color:#b30049;background-color:#fdf5f5">false</code>来避免将此配置传递给其子任务（假设它是父任务）。执行结果如下。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution>
-            <id>echodir</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>verify</phase>
-            <inherited>false</inherited>
-            <configuration>
-              <tasks>
-                <echo>Build Dir: /home/jenkins/82467a7c/workspace/aven_maven-box_maven-site_master/target</echo>
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
+ <build>
+   <plugins>
+     <plugin>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <version>1.1</version>
+       <executions>
+         <execution>
+           <id>echodir</id>
+           <goals>
+             <goal>run</goal>
+           </goals>
+           <phase>verify</phase>
+           <inherited>false</inherited>
+           <configuration>
+             <tasks>
+               <echo>Build Dir: /home/jenkins/82467a7c/workspace/aven_maven-box_maven-site_master/target</echo>
+             </tasks>
+           </configuration>
+         </execution>
+       </executions>
  
-      </plugin>
-    </plugins>
-  </build>
+     </plugin>
+   </plugins>
+ </build>
 </project>
 ```
 
-- **id**: 不言自明。它指定了所有其他执行块之间的这个执行块，该运行阶段时，将以下形式显示： <span style="color:red;font-weight:bold">[plugin:goal execution: id]</span>。在此示例中：<span style="color:red;font-weight:bold">antrun:run execution: echodir</span>
+- **id**: 不言自明。它指定了所有其他执行块之间的这个执行块，该运行阶段时，将以下形式显示：<code style="color:#b30049;background-color:#fdf5f5">[plugin:goal execution: id]</code>。在此示例中：<code style="color:#b30049;background-color:#fdf5f5">antrun:run execution: echodir</code>
 - **goals**: 它包含了一系列元素，在本例中，是该执行块指定的插件目标列表。
-- **phase**: 这是一系列<span style="color:red;font-weight:bold">goals</span>列表将执行的阶段。这是一个非常强大的选项，允许将任何目标绑定到构建生命周期中的任何阶段，从而改变 Maven 的默认行为。
+- **phase**: 这是一系列<code style="color:#b30049;background-color:#fdf5f5">goals</code>列表将执行的阶段。这是一个非常强大的选项，允许将任何目标绑定到构建生命周期中的任何阶段，从而改变 Maven 的默认行为。
 - **inherited**: 与上面的继承元素一样，将其设置为 false 将禁止 Maven 将此执行传递给其子元素。 该元素仅对父 POM 有意义。
 - **configuration**: 与上面相同，但将配置限制到这个特定的目标列表，而不是插件下的所有目标。
 
 #### Plugin Management
 
-<span style="color:red;font-weight:bold">pluginManagement</span>是一个与<span style="color:red;font-weight:bold">plugins</span>一起出现的元素。插件管理以大致相同的方式包含插件元素，不同之处在于它不是为特定项目构建配置插件信息，而是用于配置继承自此项目构建的项目。不过，这只能配置子项目或当前 POM 中插件元素实际引用的插件。子项目完全有权覆盖<span style="color:red;font-weight:bold">pluginManagement</span>定义。
+<code style="color:#b30049;background-color:#fdf5f5">pluginManagement</code>是一个与<code style="color:#b30049;background-color:#fdf5f5">plugins</code>一起出现的元素。插件管理以大致相同的方式包含插件元素，不同之处在于它不是为特定项目构建配置插件信息，而是用于配置继承自此项目构建的项目。不过，这只能配置子项目或当前 POM 中插件元素实际引用的插件。子项目完全有权覆盖<code style="color:#b30049;background-color:#fdf5f5">pluginManagement</code>定义。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <build>
+ <build>
     ...
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
-          <executions>
-            <execution>
-              <id>pre-process-classes</id>
-              <phase>compile</phase>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-              <configuration>
-                <classifier>pre-process</classifier>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+   <pluginManagement>
+     <plugins>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-jar-plugin</artifactId>
+         <version>2.6</version>
+         <executions>
+           <execution>
+             <id>pre-process-classes</id>
+             <phase>compile</phase>
+             <goals>
+               <goal>jar</goal>
+             </goals>
+             <configuration>
+               <classifier>pre-process</classifier>
+             </configuration>
+           </execution>
+         </executions>
+       </plugin>
+     </plugins>
+   </pluginManagement>
     ...
-  </build>
+ </build>
 </project>
 ```
 
-如果我们将这些规范添加到<span style="color:red;font-weight:bold">plugins</span>元素中，它们将仅适用于单个POM。但是，如果我们在<span style="color:red;font-weight:bold">pluginManagement</span>元素下应用它们，那么这个 POM 和所有在构建过程中继承 了<span style="color:red;font-weight:bold">maven-jar-plugin</span>的POM也将获得预处理类的执行。因此，与其在每个子<span style="color:red;font-weight:bold">pom.xml</span>中包含上述乱七八糟的内容，不如只需要以下内容：
+如果我们将这些规范添加到<code style="color:#b30049;background-color:#fdf5f5">plugins</code>元素中，它们将仅适用于单个POM。但是，如果我们在<code style="color:#b30049;background-color:#fdf5f5">pluginManagement</code>元素下应用它们，那么这个 POM 和所有在构建过程中继承 了<code style="color:#b30049;background-color:#fdf5f5">maven-jar-plugin</code>的POM也将获得预处理类的执行。因此，与其在每个子<code style="color:#b30049;background-color:#fdf5f5">pom.xml</code>中包含上述乱七八糟的内容，不如只需要以下内容：
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <build>
+ <build>
     ...
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-      </plugin>
-    </plugins>
+   <plugins>
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-jar-plugin</artifactId>
+     </plugin>
+   </plugins>
     ...
-  </build>
+ </build>
 </project>
 ```
 
@@ -854,7 +858,7 @@ build元素的另一个功能是指定资源文件在项目中存在的位置。
 
 ### The Build Element Set
 
-XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。尽管额外元素的数量很多（6 个），但项目构建所包含的元素中只有两组是配置文件构建所缺少的：<span style="color:red;font-weight:bold">directories</span> and <span style="color:red;font-weight:bold">extensions</span>。
+XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。尽管额外元素的数量很多（6 个），但项目构建所包含的元素中只有两组是配置文件构建所缺少的：<code style="color:#b30049;background-color:#fdf5f5">directories</code>and<code style="color:#b30049;background-color:#fdf5f5">extensions</code>。
 
 #### Directories
 
@@ -864,18 +868,18 @@ XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <build>
-    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>${basedir}/src/main/scripts</scriptSourceDirectory>
-    <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
-    <outputDirectory>${basedir}/target/classes</outputDirectory>
-    <testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
+ <build>
+   <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+   <scriptSourceDirectory>${basedir}/src/main/scripts</scriptSourceDirectory>
+   <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+   <outputDirectory>${basedir}/target/classes</outputDirectory>
+   <testOutputDirectory>${basedir}/target/test-classes</testOutputDirectory>
     ...
-  </build>
+ </build>
 </project>
 ```
 
-如果上述 <span style="color:red;font-weight:bold">*Directory</span> 元素的值被设置为绝对路径（在展开其属性时），则使用该目录。否则，它将相对于基本构建目录：<span style="color:red;font-weight:bold">${basedir}</span>。请注意，脚本源目录<span style="color:red;font-weight:bold">scriptSourceDirectory</span>在 Maven 中已不再使用，并已过时。
+如果上述<code style="color:#b30049;background-color:#fdf5f5">*Directory</code>元素的值被设置为绝对路径（在展开其属性时），则使用该目录。否则，它将相对于基本构建目录：<code style="color:#b30049;background-color:#fdf5f5">${basedir}</code>。请注意，脚本源目录<code style="color:#b30049;background-color:#fdf5f5">scriptSourceDirectory</code>在 Maven 中已不再使用，并已过时。
 
 #### Extensions
 
@@ -885,47 +889,47 @@ XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <build>
+ <build>
     ...
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ftp</artifactId>
-        <version>1.0-alpha-3</version>
-      </extension>
-    </extensions>
+   <extensions>
+     <extension>
+       <groupId>org.apache.maven.wagon</groupId>
+       <artifactId>wagon-ftp</artifactId>
+       <version>1.0-alpha-3</version>
+     </extension>
+   </extensions>
     ...
-  </build>
+ </build>
 </project>
 ```
 
 ## Reporting
 
-报告包含专门对应网站生成阶段的元素。定义和配置在<span style="color:red;font-weight:bold">reporting</span>元素下相当多的Maven 插件可以生成报告。例如：生成 Javadoc 报告。 与构建元素配置插件的能力非常相似，与构建元素配置插件的功能一样，报告元素也具有同样的功能。明显的区别在于，明显的区别在于，报告不是在执行块中对插件目标进行精细控制，而是在 reportSet 元素中配置目标。更微妙的区别在于，报告元素下的插件配置可作为构建插件配置使用，尽管相反情况并非如此（构建插件配置不会影响报告插件）。
+报告包含专门对应网站生成阶段的元素。定义和配置在<code style="color:#b30049;background-color:#fdf5f5">reporting</code>元素下相当多的Maven 插件可以生成报告。例如：生成 Javadoc 报告。 与构建元素配置插件的能力非常相似，与构建元素配置插件的功能一样，报告元素也具有同样的功能。明显的区别在于，明显的区别在于，报告不是在执行块中对插件目标进行精细控制，而是在 reportSet 元素中配置目标。更微妙的区别在于，报告元素下的插件配置可作为构建插件配置使用，尽管相反情况并非如此（构建插件配置不会影响报告插件）。
 
-对于了解构建元素的人来说，报告元素下唯一不熟悉的项目可能是可能就是布尔排除默认值元素<span style="color:red;font-weight:bold">Boolean excludeDefaults element</span>。该元素向站点生成器表示排除通常默认生成的报告。当通过站点构建周期生成站点时，项目信息部分会放置在左侧菜单中，其中充满了报告，例如项目团队报告或依赖项列表报告。这些报告目标由 maven-project-info-reports-plugin 生成。作为一个和其他插件一样的插件，它也可以通过以下更冗长的方式被抑制，从而有效地关闭项目信息报告。
+对于了解构建元素的人来说，报告元素下唯一不熟悉的项目可能是可能就是布尔排除默认值元素<code style="color:#b30049;background-color:#fdf5f5">Boolean excludeDefaults element</code>。该元素向站点生成器表示排除通常默认生成的报告。当通过站点构建周期生成站点时，项目信息部分会放置在左侧菜单中，其中充满了报告，例如项目团队报告或依赖项列表报告。这些报告目标由 maven-project-info-reports-plugin 生成。作为一个和其他插件一样的插件，它也可以通过以下更冗长的方式被抑制，从而有效地关闭项目信息报告。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <reporting>
-    <outputDirectory>${basedir}/target/site</outputDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.0.1</version>
-        <reportSets>
-          <reportSet></reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
+ <reporting>
+   <outputDirectory>${basedir}/target/site</outputDirectory>
+   <plugins>
+     <plugin>
+       <artifactId>maven-project-info-reports-plugin</artifactId>
+       <version>2.0.1</version>
+       <reportSets>
+         <reportSet></reportSet>
+       </reportSets>
+     </plugin>
+   </plugins>
+ </reporting>
   ...
 </project>
 ```
 
-另一个区别是<span style="color:red;font-weight:bold">plugin</span>下的<span style="color:red;font-weight:bold">outputDirectory</span>元素。 在报告的情况下，输出目录默认为<span style="color:red;font-weight:bold">${basedir}/target/site</span>。
+另一个区别是<code style="color:#b30049;background-color:#fdf5f5">plugin</code>下的<code style="color:#b30049;background-color:#fdf5f5">outputDirectory</code>元素。 在报告的情况下，输出目录默认为<code style="color:#b30049;background-color:#fdf5f5">${basedir}/target/site</code>。
 
 ### Report Sets
 
@@ -935,32 +939,32 @@ XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <reporting>
-    <plugins>
-      <plugin>
+ <reporting>
+   <plugins>
+     <plugin>
         ...
-        <reportSets>
-          <reportSet>
-            <id>sunlink</id>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-            <inherited>true</inherited>
-            <configuration>
-              <links>
-                <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
-              </links>
-            </configuration>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
+       <reportSets>
+         <reportSet>
+           <id>sunlink</id>
+           <reports>
+             <report>javadoc</report>
+           </reports>
+           <inherited>true</inherited>
+           <configuration>
+             <links>
+               <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+             </links>
+           </configuration>
+         </reportSet>
+       </reportSets>
+     </plugin>
+   </plugins>
+ </reporting>
   ...
 </project>
 ```
 
-在build <span style="color:red;font-weight:bold">executions</span> 和reporting <span style="color:red;font-weight:bold">reportSets</span> 之间，现在应该清楚它们存在的原因了。最简单的意义上讲，它们是对配置的深入研究。它们赋予了 POM 在控制其构建命运方面的最终粒度。
+在build<code style="color:#b30049;background-color:#fdf5f5">executions</code>和reporting<code style="color:#b30049;background-color:#fdf5f5">reportSets</code>之间，现在应该清楚它们存在的原因了。最简单的意义上讲，它们是对配置的深入研究。它们赋予了 POM 在控制其构建命运方面的最终粒度。
 
 ---------
 
@@ -968,7 +972,7 @@ XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。�
 
 有几个元素并不影响构建，而是为了方便开发人员而记录项目。在生成项目网站时，这些元素中有许多都用于填写项目细节。不过，与所有 POM 声明一样，插件也可以将它们用于任何用途。以下是最简单的元素：
 
-- **name**: 项目往往都有一个会话式的名称，而不只是<span style="color:red;font-weight:bold">artifactId</span>。Sun 公司的工程师们并没有把他们的项目称为 "java-1.5"，而是称之为 "Tiger"。这里是设置该值的位置。
+- **name**: 项目往往都有一个会话式的名称，而不只是<code style="color:#b30049;background-color:#fdf5f5">artifactId</code>。Sun 公司的工程师们并没有把他们的项目称为 "java-1.5"，而是称之为 "Tiger"。这里是设置该值的位置。
 - **description**:  简短、可读的项目描述。尽管这不应取代正式文档，但对 POM 的任何读者进行快速评语总是有帮助的。
 - **url**: 项目主页。
 - **inceptionYear**: 项目首次创建的年份。
@@ -977,12 +981,12 @@ XSD 中的 "构建 "类型表示那些只适用于 "项目构建 "的元素。�
 
 ```xml
 <licenses>
-  <license>
-    <name>Apache-2.0</name>
-    <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    <distribution>repo</distribution>
-    <comments>A business-friendly OSS license</comments>
-  </license>
+ <license>
+   <name>Apache-2.0</name>
+   <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+   <distribution>repo</distribution>
+   <comments>A business-friendly OSS license</comments>
+ </license>
 </licenses>
 ```
 
@@ -999,10 +1003,10 @@ Licenses 是法律文件定义如何以及何时使用项目，项目应列出�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <organization>
-    <name>Codehaus Mojo</name>
-    <url>http://mojo.codehaus.org</url>
-  </organization>
+ <organization>
+   <name>Codehaus Mojo</name>
+   <url>http://mojo.codehaus.org</url>
+ </organization>
 </project>
 ```
 
@@ -1014,24 +1018,24 @@ Licenses 是法律文件定义如何以及何时使用项目，项目应列出�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <developers>
-    <developer>
-      <id>jdoe</id>
-      <name>John Doe</name>
-      <email>jdoe@example.com</email>
-      <url>http://www.example.com/jdoe</url>
-      <organization>ACME</organization>
-      <organizationUrl>http://www.example.com</organizationUrl>
-      <roles>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
-      <timezone>America/New_York</timezone>
-      <properties>
-        <picUrl>http://www.example.com/jdoe/pic</picUrl>
-      </properties>
-    </developer>
-  </developers>
+ <developers>
+   <developer>
+     <id>jdoe</id>
+     <name>John Doe</name>
+     <email>jdoe@example.com</email>
+     <url>http://www.example.com/jdoe</url>
+     <organization>ACME</organization>
+     <organizationUrl>http://www.example.com</organizationUrl>
+     <roles>
+       <role>architect</role>
+       <role>developer</role>
+     </roles>
+     <timezone>America/New_York</timezone>
+     <properties>
+       <picUrl>http://www.example.com/jdoe/pic</picUrl>
+     </properties>
+   </developer>
+ </developers>
   ...
 </project>
 ```
@@ -1050,22 +1054,22 @@ Licenses 是法律文件定义如何以及何时使用项目，项目应列出�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <contributors>
-    <contributor>
-      <name>Noelle</name>
-      <email>some.name@gmail.com</email>
-      <url>http://noellemarie.com</url>
-      <organization>Noelle Marie</organization>
-      <organizationUrl>http://noellemarie.com</organizationUrl>
-      <roles>
-        <role>tester</role>
-      </roles>
-      <timezone>America/Vancouver</timezone>
-      <properties>
-        <gtalk>some.name@gmail.com</gtalk>
-      </properties>
-    </contributor>
-  </contributors>
+ <contributors>
+   <contributor>
+     <name>Noelle</name>
+     <email>some.name@gmail.com</email>
+     <url>http://noellemarie.com</url>
+     <organization>Noelle Marie</organization>
+     <organizationUrl>http://noellemarie.com</organizationUrl>
+     <roles>
+       <role>tester</role>
+     </roles>
+     <timezone>America/Vancouver</timezone>
+     <properties>
+       <gtalk>some.name@gmail.com</gtalk>
+     </properties>
+   </contributor>
+ </contributors>
   ...
 </project>
 ```
@@ -1082,36 +1086,36 @@ Licenses 是法律文件定义如何以及何时使用项目，项目应列出�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <issueManagement>
-    <system>Bugzilla</system>
-    <url>http://127.0.0.1/bugzilla/</url>
-  </issueManagement>
+ <issueManagement>
+   <system>Bugzilla</system>
+   <url>http://127.0.0.1/bugzilla/</url>
+ </issueManagement>
   ...
 </project>
 ```
 
 ## Continuous Integration Management-持续集成管理
 
-在过去几年中，基于触发器或定时（如每小时或每天）的持续集成构建系统比手动构建系统更受欢迎。随着构建系统越来越标准化，运行触发这些构建的系统也越来越标准化。虽然大部分配置取决于所使用的特定程序（Continuum、Cruise Control 等），但也有一些配置可能会在 POM 中进行。Maven 在通知器元素集中捕捉到了一些经常出现的重复设置。通知器是通知人们某些构建状态的方式。在以下示例中，此 POM 设置邮件类型的通知程序（即电子邮件），并配置要在指定触发器<span style="color:red;font-weight:bold">sendOnError</span>、<span style="color:red;font-weight:bold">sendOnFailure</span>上使用的电子邮件地址，而不是<span style="color:red;font-weight:bold">sendOnSuccess</span>或<span style="color:red;font-weight:bold">sendOnWarning</span>。
+在过去几年中，基于触发器或定时（如每小时或每天）的持续集成构建系统比手动构建系统更受欢迎。随着构建系统越来越标准化，运行触发这些构建的系统也越来越标准化。虽然大部分配置取决于所使用的特定程序（Continuum、Cruise Control 等），但也有一些配置可能会在 POM 中进行。Maven 在通知器元素集中捕捉到了一些经常出现的重复设置。通知器是通知人们某些构建状态的方式。在以下示例中，此 POM 设置邮件类型的通知程序（即电子邮件），并配置要在指定触发器<code style="color:#b30049;background-color:#fdf5f5">sendOnError</code>、<code style="color:#b30049;background-color:#fdf5f5">sendOnFailure</code>上使用的电子邮件地址，而不是<code style="color:#b30049;background-color:#fdf5f5">sendOnSuccess</code>或<code style="color:#b30049;background-color:#fdf5f5">sendOnWarning</code>。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <ciManagement>
-    <system>continuum</system>
-    <url>http://127.0.0.1:8080/continuum</url>
-    <notifiers>
-      <notifier>
-        <type>mail</type>
-        <sendOnError>true</sendOnError>
-        <sendOnFailure>true</sendOnFailure>
-        <sendOnSuccess>false</sendOnSuccess>
-        <sendOnWarning>false</sendOnWarning>
-        <configuration><address>continuum@127.0.0.1</address></configuration>
-      </notifier>
-    </notifiers>
-  </ciManagement>
+ <ciManagement>
+   <system>continuum</system>
+   <url>http://127.0.0.1:8080/continuum</url>
+   <notifiers>
+     <notifier>
+       <type>mail</type>
+       <sendOnError>true</sendOnError>
+       <sendOnFailure>true</sendOnFailure>
+       <sendOnSuccess>false</sendOnSuccess>
+       <sendOnWarning>false</sendOnWarning>
+       <configuration><address>continuum@127.0.0.1</address></configuration>
+     </notifier>
+   </notifiers>
+ </ciManagement>
   ...
 </project>
 ```
@@ -1124,18 +1128,18 @@ Licenses 是法律文件定义如何以及何时使用项目，项目应列出�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <mailingLists>
-    <mailingList>
-      <name>User List</name>
-      <subscribe>user-subscribe@127.0.0.1</subscribe>
-      <unsubscribe>user-unsubscribe@127.0.0.1</unsubscribe>
-      <post>user@127.0.0.1</post>
-      <archive>http://127.0.0.1/user/</archive>
-      <otherArchives>
-        <otherArchive>http://base.google.com/base/1/127.0.0.1</otherArchive>
-      </otherArchives>
-    </mailingList>
-  </mailingLists>
+ <mailingLists>
+   <mailingList>
+     <name>User List</name>
+     <subscribe>user-subscribe@127.0.0.1</subscribe>
+     <unsubscribe>user-unsubscribe@127.0.0.1</unsubscribe>
+     <post>user@127.0.0.1</post>
+     <archive>http://127.0.0.1/user/</archive>
+     <otherArchives>
+       <otherArchive>http://base.google.com/base/1/127.0.0.1</otherArchive>
+     </otherArchives>
+   </mailingList>
+ </mailingLists>
   ...
 </project>
 ```
@@ -1152,12 +1156,12 @@ SCM（软件配置管理，也称为源代码/控制管理，或者简单地说�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <scm>
-    <connection>scm:svn:http://127.0.0.1/svn/my-project</connection>
-    <developerConnection>scm:svn:https://127.0.0.1/svn/my-project</developerConnection>
-    <tag>HEAD</tag>
-    <url>http://127.0.0.1/websvn/my-project</url>
-  </scm>
+ <scm>
+   <connection>scm:svn:http://127.0.0.1/svn/my-project</connection>
+   <developerConnection>scm:svn:https://127.0.0.1/svn/my-project</developerConnection>
+   <tag>HEAD</tag>
+   <url>http://127.0.0.1/websvn/my-project</url>
+ </scm>
   ...
 </project>
 ```
@@ -1180,24 +1184,24 @@ SCM（软件配置管理，也称为源代码/控制管理，或者简单地说�
 
 ## Prerequisites-先决条件
 
-POM 可能需要某些先决条件才能正确执行。在 POM 4.0.0 中，唯一作为先决条件存在的元素是<span style="color:red;font-weight:bold">maven</span>元素，它需要一个最低版本号。
+POM 可能需要某些先决条件才能正确执行。在 POM 4.0.0 中，唯一作为先决条件存在的元素是<code style="color:#b30049;background-color:#fdf5f5">maven</code>元素，它需要一个最低版本号。
 
-使用 Maven Enforcer Plugin 的<span style="color:red;font-weight:bold">requireMavenVersion</span>规则或其他规则作为构建时的先决条件。对于打包的<span style="color:red;font-weight:bold">maven-plugin</span>，运行时仍会使用该规则，以确保满足插件的最低 Maven 版本要求（但仅限于引用插件的 pom.xml）。
+使用 Maven Enforcer Plugin 的<code style="color:#b30049;background-color:#fdf5f5">requireMavenVersion</code>规则或其他规则作为构建时的先决条件。对于打包的<code style="color:#b30049;background-color:#fdf5f5">maven-plugin</code>，运行时仍会使用该规则，以确保满足插件的最低 Maven 版本要求（但仅限于引用插件的 pom.xml）。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <prerequisites>
-    <maven>2.0.6</maven>
-  </prerequisites>
+ <prerequisites>
+   <maven>2.0.6</maven>
+ </prerequisites>
   ...
 </project>
 ```
 
 ## Repositories-存储库
 
-存储库是遵循 Maven 存储库目录布局的工程集合。要成为 Maven 资源库工程，POM 文件必须位于 <span style="color:red;font-weight:bold">$BASE_REPO/groupId/artifactId/version/artifactId-version.pom</span>结构中。<span style="color:red;font-weight:bold">$BASE_REPO</span>可以是本地的（文件结构），也可以是远程的（基本 URL）；其余布局将保持不变。资源库是收集和存储<span style="color:red;font-weight:bold">artifacts</span>的地方。每当项目依赖于某个artifact时，Maven 将首先尝试使用指定工件的本地副本。 如果本地存储库中不存在该工件，它将尝试从远程存储库下载。POM 中的版本库元素指定了要搜索的备用版本库。
+存储库是遵循 Maven 存储库目录布局的工程集合。要成为 Maven 资源库工程，POM 文件必须位于<code style="color:#b30049;background-color:#fdf5f5">$BASE_REPO/groupId/artifactId/version/artifactId-version.pom</code>结构中。<code style="color:#b30049;background-color:#fdf5f5">$BASE_REPO</code>可以是本地的（文件结构），也可以是远程的（基本 URL）；其余布局将保持不变。资源库是收集和存储<code style="color:#b30049;background-color:#fdf5f5">artifacts</code>的地方。每当项目依赖于某个artifact时，Maven 将首先尝试使用指定工件的本地副本。 如果本地存储库中不存在该工件，它将尝试从远程存储库下载。POM 中的版本库元素指定了要搜索的备用版本库。
 
 存储库是 Maven 社区最强大的功能之一。 默认情况下，Maven 搜索 https://repo.maven.apache.org/maven2/ 的中央存储库。 可以在 pom.xml `repositories` 元素中配置其他存储库。
 
@@ -1205,35 +1209,35 @@ POM 可能需要某些先决条件才能正确执行。在 POM 4.0.0 中，唯�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <repositories>
-    <repository>
-      <releases>
-        <enabled>false</enabled>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-        <checksumPolicy>fail</checksumPolicy>
-      </snapshots>
-      <name>Nexus Snapshots</name>
-      <id>snapshots-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
-  <pluginRepositories>
+ <repositories>
+   <repository>
+     <releases>
+       <enabled>false</enabled>
+       <updatePolicy>always</updatePolicy>
+       <checksumPolicy>warn</checksumPolicy>
+     </releases>
+     <snapshots>
+       <enabled>true</enabled>
+       <updatePolicy>never</updatePolicy>
+       <checksumPolicy>fail</checksumPolicy>
+     </snapshots>
+     <name>Nexus Snapshots</name>
+     <id>snapshots-repo</id>
+     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+     <layout>default</layout>
+   </repository>
+ </repositories>
+ <pluginRepositories>
     ...
-  </pluginRepositories>
+ </pluginRepositories>
   ...
 </project>
 ```
 
-- **releases**, **snapshots**: 这些是针对每种类型的工件（<span style="color:red;font-weight:bold">Release</span>或者<span style="color:red;font-weight:bold">snapshot</span>）的策略。有了这两套策略，POM 就能在单个版本库中改变每种类型的策略，而不受另一种策略的影响。例如，可能出于开发目的，有人会决定只启用快照下载。
-- **enabled**: <span style="color:red;font-weight:bold">true</span>或<span style="color:red;font-weight:bold">false</span>，表示该版本库是否为相应类型（<span style="color:red;font-weight:bold">Release</span>或者<span style="color:red;font-weight:bold">snapshot</span>）启用。
-- **updatePolicy**: 该元素指定了尝试更新的频率。Maven 将比较本地 POM 的时间戳（存储在版本库的 maven-metadata 文件中）和远程 POM 的时间戳。可选项有：<span style="color:red;font-weight:bold">always</span>、<span style="color:red;font-weight:bold">daily</span>（默认）、<span style="color:red;font-weight:bold">interval:X</span>（X 是以分钟为单位的整数）或<span style="color:red;font-weight:bold">never</span>（仅在本地版本库中不存在时下载）。
-- **checksumPolicy**: 当Maven将文件部署到存储库时，它也会部署相应的校验和文件。当校验和缺失或者不正确您的可选项是 <span style="color:red;font-weight:bold">ignore</span>,<span style="color:red;font-weight:bold">fail</span>, or <span style="color:red;font-weight:bold">warn</span>
+- **releases**, **snapshots**: 这些是针对每种类型的工件（<code style="color:#b30049;background-color:#fdf5f5">Release</code>或者<code style="color:#b30049;background-color:#fdf5f5">snapshot</code>）的策略。有了这两套策略，POM 就能在单个版本库中改变每种类型的策略，而不受另一种策略的影响。例如，可能出于开发目的，有人会决定只启用快照下载。
+- **enabled**:<code style="color:#b30049;background-color:#fdf5f5">true</code>或<code style="color:#b30049;background-color:#fdf5f5">false</code>，表示该版本库是否为相应类型（<code style="color:#b30049;background-color:#fdf5f5">Release</code>或者<code style="color:#b30049;background-color:#fdf5f5">snapshot</code>）启用。
+- **updatePolicy**: 该元素指定了尝试更新的频率。Maven 将比较本地 POM 的时间戳（存储在版本库的 maven-metadata 文件中）和远程 POM 的时间戳。可选项有：<code style="color:#b30049;background-color:#fdf5f5">always</code>、<code style="color:#b30049;background-color:#fdf5f5">daily</code>（默认）、<code style="color:#b30049;background-color:#fdf5f5">interval:X</code>（X 是以分钟为单位的整数）或<code style="color:#b30049;background-color:#fdf5f5">never</code>（仅在本地版本库中不存在时下载）。
+- **checksumPolicy**: 当Maven将文件部署到存储库时，它也会部署相应的校验和文件。当校验和缺失或者不正确您的可选项是<code style="color:#b30049;background-color:#fdf5f5">ignore</code>,<code style="color:#b30049;background-color:#fdf5f5">fail</code>, or<code style="color:#b30049;background-color:#fdf5f5">warn</code>
 - **layout**: 在上文对资源库的描述中，提到它们都遵循一个共同的布局。这基本上是正确的。Maven 2 引入的布局是 Maven 2 和 3 使用的版本库默认布局。不过，Maven 1.x 有不同的布局。使用此元素指定它是默认的还是旧的。
 
 ## Plugin Repositories-插件存储库
@@ -1248,21 +1252,21 @@ POM 可能需要某些先决条件才能正确执行。在 POM 4.0.0 中，唯�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <distributionManagement>
+ <distributionManagement>
     ...
-    <downloadUrl>http://mojo.codehaus.org/my-project</downloadUrl>
-    <status>deployed</status>
-  </distributionManagement>
+   <downloadUrl>http://mojo.codehaus.org/my-project</downloadUrl>
+   <status>deployed</status>
+ </distributionManagement>
   ...
 </project>
 ```
 
-- **downloadUrl**: 是另一个 POM 可以指向的存储库的 URL，以便获取此 POM 的工件。 用最简单的话来说，我们告诉 POM 如何上传它（通过<span style="color:red;font-weight:bold">repository/url</span>），但是公众可以从哪里下载它呢？ 这个元素回答了这个问题。
+- **downloadUrl**: 是另一个 POM 可以指向的存储库的 URL，以便获取此 POM 的工件。 用最简单的话来说，我们告诉 POM 如何上传它（通过<code style="color:#b30049;background-color:#fdf5f5">repository/url</code>），但是公众可以从哪里下载它呢？ 这个元素回答了这个问题。
 - **status**: 警告！就像巢中的雏鸟一样，status永远不应该被人类的手触碰！这样做的原因是，当项目被传输到存储库时，Maven 会自动设置项目的状态。 其有效类型如下。
   - **none**: 没有特殊的状态。 这是 POM 的默认设置。
   - **converted**: 存储库的管理员将此 POM 从早期版本转换为 Maven 2。
   - **partner**: 该artifact已与合作伙伴资源库同步。
-  - **deployed**: ：迄今为止最常见的状态，这意味着该工件是从 Maven 2 或 3 实例部署的。 这是使用命令行<span style="color:red;font-weight:bold">deploy</span>手动部署时得到的结果。
+  - **deployed**: ：迄今为止最常见的状态，这意味着该工件是从 Maven 2 或 3 实例部署的。 这是使用命令行<code style="color:#b30049;background-color:#fdf5f5">deploy</code>手动部署时得到的结果。
   - **verified**: 该项目已经过验证，应视为已完成。
 
 ### Repository-存储库
@@ -1273,49 +1277,49 @@ repositories 元素在 POM 中指定了 Maven 下载远程工件供当前项目�
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <distributionManagement>
-    <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>corp1</id>
-      <name>Corporate Repository</name>
-      <url>scp://repo/maven2</url>
-      <layout>default</layout>
-    </repository>
-    <snapshotRepository>
-      <uniqueVersion>true</uniqueVersion>
-      <id>propSnap</id>
-      <name>Propellors Snapshots</name>
-      <url>sftp://propellers.net/maven</url>
-      <layout>legacy</layout>
-    </snapshotRepository>
+ <distributionManagement>
+   <repository>
+     <uniqueVersion>false</uniqueVersion>
+     <id>corp1</id>
+     <name>Corporate Repository</name>
+     <url>scp://repo/maven2</url>
+     <layout>default</layout>
+   </repository>
+   <snapshotRepository>
+     <uniqueVersion>true</uniqueVersion>
+     <id>propSnap</id>
+     <name>Propellors Snapshots</name>
+     <url>sftp://propellers.net/maven</url>
+     <layout>legacy</layout>
+   </snapshotRepository>
     ...
-  </distributionManagement>
+ </distributionManagement>
   ...
 </project>
 ```
 
-- **id**, **name**: <span style="color:red;font-weight:bold">id</span>用于在众多资源库中唯一标识该资源库，<span style="color:red;font-weight:bold">name</span>是人类可读的形式。
-- **uniqueVersion**: 唯一版本，取值为<span style="color:red;font-weight:bold">true</span>或<span style="color:red;font-weight:bold">false</span>，表示部署到该版本库的工件是应该获得唯一生成的版本号，还是使用定义为地址一部分的版本号。
+- **id**, **name**:<code style="color:#b30049;background-color:#fdf5f5">id</code>用于在众多资源库中唯一标识该资源库，<code style="color:#b30049;background-color:#fdf5f5">name</code>是人类可读的形式。
+- **uniqueVersion**: 唯一版本，取值为<code style="color:#b30049;background-color:#fdf5f5">true</code>或<code style="color:#b30049;background-color:#fdf5f5">false</code>，表示部署到该版本库的工件是应该获得唯一生成的版本号，还是使用定义为地址一部分的版本号。
 - **url**: 这是版本库元素的核心。它指定了用于将构建的工件（以及 POM 文件和校验和数据）传输到版本库的位置和传输协议。
 - **layout**: 这些与存储库元素中定义的布局元素具有相同的类型和用途。 
 
 ### Site Distribution-站点发布
 
-分发管理<span style="color:red;font-weight:bold">distributionManagement</span>不仅负责向资源库分发，还负责定义如何部署项目网站和文档。
+分发管理<code style="color:#b30049;background-color:#fdf5f5">distributionManagement</code>不仅负责向资源库分发，还负责定义如何部署项目网站和文档。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <distributionManagement>
+ <distributionManagement>
     ...
-    <site>
-      <id>mojo.website</id>
-      <name>Mojo Website</name>
-      <url>scp://beaver.codehaus.org/home/projects/mojo/public_html/</url>
-    </site>
+   <site>
+     <id>mojo.website</id>
+     <name>Mojo Website</name>
+     <url>scp://beaver.codehaus.org/home/projects/mojo/public_html/</url>
+   </site>
     ...
-  </distributionManagement>
+ </distributionManagement>
   ...
 </project>
 ```
@@ -1328,93 +1332,93 @@ repositories 元素在 POM 中指定了 Maven 下载远程工件供当前项目�
 <project xmlns="http://maven.apache.org/POM/4.0.0"1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <distributionManagement>
+ <distributionManagement>
     ...
-    <relocation>
-      <groupId>org.apache</groupId>
-      <artifactId>my-project</artifactId>
-      <version>1.0</version>
-      <message>We have moved the Project under Apache</message>
-    </relocation>
+   <relocation>
+     <groupId>org.apache</groupId>
+     <artifactId>my-project</artifactId>
+     <version>1.0</version>
+     <message>We have moved the Project under Apache</message>
+   </relocation>
     ...
-  </distributionManagement>
+ </distributionManagement>
   ...
 </project>
 ```
 
-项目不是一成不变的；它们是有生命的东西（或垂死的东西，视情况而定）。随着项目的发展壮大，一个常见的情况是项目被迫迁往更合适的地方。例如，当你的下一个大获成功的开源项目转移到 Apache 旗下时，最好能给用户提个醒，告诉他们项目将更名为<span style="color:red;font-weight:bold">org.apache:my-project:1.0</span>。除了指明新地址外，提供一条解释原因的信息也是很好的形式。
+项目不是一成不变的；它们是有生命的东西（或垂死的东西，视情况而定）。随着项目的发展壮大，一个常见的情况是项目被迫迁往更合适的地方。例如，当你的下一个大获成功的开源项目转移到 Apache 旗下时，最好能给用户提个醒，告诉他们项目将更名为<code style="color:#b30049;background-color:#fdf5f5">org.apache:my-project:1.0</code>。除了指明新地址外，提供一条解释原因的信息也是很好的形式。
 
 ## Profiles
 
-POM 4.0 的一个新功能是项目可以根据构建环境改变设置。一个<span style="color:red;font-weight:bold">profile</span>元素既包含可选激活（配置文件触发器），也包含激活该配置文件后对 POM 所做的一系列更改。例如，为测试环境构建的项目可能与最终部署环境有着不同的数据库。或者，根据所使用的 JDK 版本不同，依赖关系也可能来自不同的资源库。The elements of profiles are as follows:
+POM 4.0 的一个新功能是项目可以根据构建环境改变设置。一个<code style="color:#b30049;background-color:#fdf5f5">profile</code>元素既包含可选激活（配置文件触发器），也包含激活该配置文件后对 POM 所做的一系列更改。例如，为测试环境构建的项目可能与最终部署环境有着不同的数据库。或者，根据所使用的 JDK 版本不同，依赖关系也可能来自不同的资源库。The elements of profiles are as follows:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <profiles>
-    <profile>
-      <id>test</id>
-      <activation>...</activation>
-      <build>...</build>
-      <modules>...</modules>
-      <repositories>...</repositories>
-      <pluginRepositories>...</pluginRepositories>
-      <dependencies>...</dependencies>
-      <reporting>...</reporting>
-      <dependencyManagement>...</dependencyManagement>
-      <distributionManagement>...</distributionManagement>
-    </profile>
-  </profiles>
+ <profiles>
+   <profile>
+     <id>test</id>
+     <activation>...</activation>
+     <build>...</build>
+     <modules>...</modules>
+     <repositories>...</repositories>
+     <pluginRepositories>...</pluginRepositories>
+     <dependencies>...</dependencies>
+     <reporting>...</reporting>
+     <dependencyManagement>...</dependencyManagement>
+     <distributionManagement>...</distributionManagement>
+   </profile>
+ </profiles>
 </project>
 ```
 
 ### Activation
 
-<span style="color:red;font-weight:bold">Activations</span>是<span style="color:red;font-weight:bold">Profiles</span>的关键。只有在特定情况下，配置文件才能修改基本 POM。这些情况通过激活一个activation元素来指定。
+<code style="color:#b30049;background-color:#fdf5f5">Activations</code>是<code style="color:#b30049;background-color:#fdf5f5">Profiles</code>的关键。只有在特定情况下，配置文件才能修改基本 POM。这些情况通过激活一个activation元素来指定。
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   ...
-  <profiles>
-    <profile>
-      <id>test</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <jdk>1.5</jdk>
-        <os>
-          <name>Windows XP</name>
-          <family>Windows</family>
-          <arch>x86</arch>
-          <version>5.1.2600</version>
-        </os>
-        <property>
-          <name>sparrow-type</name>
-          <value>African</value>
-        </property>
-        <file>
-          <exists>${basedir}/file2.properties</exists>
-          <missing>${basedir}/file1.properties</missing>
-        </file>
-      </activation>
+ <profiles>
+   <profile>
+     <id>test</id>
+     <activation>
+       <activeByDefault>false</activeByDefault>
+       <jdk>1.5</jdk>
+       <os>
+         <name>Windows XP</name>
+         <family>Windows</family>
+         <arch>x86</arch>
+         <version>5.1.2600</version>
+       </os>
+       <property>
+         <name>sparrow-type</name>
+         <value>African</value>
+       </property>
+       <file>
+         <exists>${basedir}/file2.properties</exists>
+         <missing>${basedir}/file1.properties</missing>
+       </file>
+     </activation>
       ...
-    </profile>
-  </profiles>
+   </profile>
+ </profiles>
 </project>
 ```
 
 自 Maven 3.2.2 以来，当满足所有指定条件时才会激活。
 
-- **jdk**: <span style="color:red;font-weight:bold">activation</span>在 jdk 元素中具有内置的、以 Java 为中心的检查。 该值为以下三种类型之一:
-  - 根据 maven-enforcer-plugin 定义的版本范围，<span style="color:red;font-weight:bold">[</span>或<span style="color:red;font-weight:bold">（,</span>
-  - 如果值以<span style="color:red;font-weight:bold"> ! </span>开头，则为否定前缀
+- **jdk**:<code style="color:#b30049;background-color:#fdf5f5">activation</code>在 jdk 元素中具有内置的、以 Java 为中心的检查。 该值为以下三种类型之一:
+  - 根据 maven-enforcer-plugin 定义的版本范围，<code style="color:#b30049;background-color:#fdf5f5">[</code>或<code style="color:#b30049;background-color:#fdf5f5">（,</code>
+  - 如果值以<code style="color:#b30049;background-color:#fdf5f5">!</code>开头，则为否定前缀
   - 一个（无负数）前缀，用于所有其他情况
 
 - 如果运行 Maven 所用的 JDK 版本以给定的前缀开始/不以给定的前缀开始（不包括潜在的前导 !），则前缀（否定）值匹配。如果运行 Maven 所用的 JDK 版本介于下限和上限之间（包含或排除），则值范围匹配。
 
 - **os**: os 元素可以定义一些特定于操作系统的属性，如上图所示。有关操作系统值的更多详情，请参阅 maven-enforcer-plugins RequireOS Rule。
-- **property**: 如果 Maven 检测到相应<span style="color:red;font-weight:bold">name=value</span>对的系统属性或 CLI 用户属性（可以在 POM 中通过 ${name} 解除引用）与给定值（如果给定）匹配，则<span style="color:red;font-weight:bold">profile</span>将激活。
+- **property**: 如果 Maven 检测到相应<code style="color:#b30049;background-color:#fdf5f5">name=value</code>对的系统属性或 CLI 用户属性（可以在 POM 中通过 ${name} 解除引用）与给定值（如果给定）匹配，则<code style="color:#b30049;background-color:#fdf5f5">profile</code>将激活。
 - **file**: 最后，给定的文件名可以通过文件存在或丢失来激活配置文件。 注意：此元素的插值仅限于 ${basedir}、系统属性和请求属性。
 
 # Final

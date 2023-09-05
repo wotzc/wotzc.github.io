@@ -13,7 +13,7 @@ Categories: Mysql
 ## 常见的数据库对象
 
 | 对象                | 描述                                                         |
-| ------------------- | ------------------------------------------------------------ |
+| :------------------ | ------------------------------------------------------------ |
 | 表(TABLE)           | 表是存储数据的逻辑单元，以行和列的形式存在，列就是字段，行就是记录 |
 | 数据字典            | 就是系统表，存放数据库相关信息的表。系统表的数据通常由数据库系统维护，程序员通常不应该修改，只可查看 |
 | 约束(CONSTRAINT)    | 执行数据校验的规则，用于保证数据完整性的规则                 |
@@ -31,7 +31,7 @@ Categories: Mysql
 
 - 视图是一种`虚拟表`，本身是`不具有数据`的，占用很少的内存空间，它是 SQL 中的一个重要概念。
 - 视图的创建和删除只影响视图本身，不影响对应的基表。但是当对视图中的数据进行增加、删除和修改操作时，数据表中的数据会相应地发生变化，反之亦然。
-- 向视图提供数据内容的语句为 SELECT 语句, 可以将视图理解为**存储起来的** **SELECT** **语句** 
+- 向视图提供数据内容的语句为 SELECT 语句, 可以将视图理解为**存储起来的SELECT 语句** 
 
   - 在数据库中，视图不会保存数据，数据真正保存在数据表中。当对视图中的数据进行增加、删除和修改操作时，数据表中的数据会相应地发生变化；反之亦然。
 - 视图，是向用户提供基表数据的另一种表现形式。通常情况下，小型项目的数据库可以不使用视图，但是在大型项目中，以及数据表比较复杂的情况下，视图的价值就凸显出来了，它可以帮助我们把经常查询的结果集放到虚拟表中，提升使用效率。理解和使用起来都非常方便。
@@ -120,9 +120,9 @@ SHOW CREATE VIEW 视图名称;
 
 ### 一般情况
 
-MySQL支持使用INSERT、UPDATE和DELETE语句对视图中的数据进行插入、更新和删除操作。对视图的操作转换为对基本表的更新操作。
+MySQL支持使用<code style="color:#b30049;background-color:#fdf5f5">INSERT</code>、<code style="color:#b30049;background-color:#fdf5f5">UPDATE</code>和<code style="color:#b30049;background-color:#fdf5f5">DELETE</code>语句对视图中的数据进行插入、更新和删除操作。对视图的操作转换为对基本表的更新操作。
 
-举例：UPDATE操作
+举例：<code style="color:#b30049;background-color:#fdf5f5">UPDATE</code>操作
 
 ```sql
 UPDATE IS_Student
@@ -151,13 +151,17 @@ WHERE Sno = '202210101' AND Sdept = 'IS'
 - 视图定义基于一个`不可更新视图`；
 - 常量视图。
 
-> 虽然可以更新视图数据，但总的来说，视图作为`虚拟表`，主要用于`方便查询`，不建议更新视图的数据。**对视图数据的更改，都是通过对实际数据表里数据的操作来完成的。**
+{% note no-icon  primary %}
+
+虽然可以更新视图数据，但总的来说，视图作为虚拟表，主要用于方便查询，不建议更新视图的数据。对视图数据的更改，都是通过对实际数据表里数据的操作来完成的。
+
+{% endnote %}
 
 ## 修改、删除视图
 
 ### 修改视图
 
-方式1：使用CREATE **OR REPLACE** VIEW 子句**修改视图**
+方式1：使用CREATE OR REPLACE VIEW 子句修改视图
 
 ```mysql
 CREATE OR REPLACE VIEW empvu80
@@ -168,7 +172,11 @@ FROM employees
 WHERE department_id = 80;
 ```
 
-> 说明：CREATE VIEW 子句中各列的别名应和子查询中各列相对应。
+{% note no-icon  primary %}
+
+说明：CREATE VIEW 子句中各列的别名应和子查询中各列相对应。
+
+{% endnote %}
 
 方式2：ALTER VIEW
 
@@ -208,7 +216,7 @@ AS
 
 ## 存储过程概述
 
-**含义**：存储过程的英文是 `Stored Procedure`。它的思想很简单，就是一组经过`预先编译`的 SQL 语句的封装。
+**含义**：存储过程的英文是 <code style="color:#b30049;background-color:#fdf5f5">Stored Procedure</code>。它的思想很简单，就是一组经过<code style="color:#b30049;background-color:#fdf5f5">预先编译</code>的 SQL 语句的封装。
 
 执行过程：存储过程预先存储在 MySQL 服务器上，需要执行的时候，客户端只需要向服务器端发出调用存储过程的命令，服务器端就可以把预先存储好的这一系列 SQL 语句全部执行。
 
@@ -221,9 +229,9 @@ AS
 
 **和视图、函数的对比**：
 
-它和视图有着同样的优点，清晰、安全，还可以减少网络传输量。不过它和视图不同，视图是`虚拟表`，通常不对底层数据表直接操作，而存储过程是程序化的 SQL，可以`直接操作底层数据表`，相比于面向集合的操作方式，能够实现一些更复杂的数据处理。
+它和视图有着同样的优点，清晰、安全，还可以减少网络传输量。不过它和视图不同，视图是<code style="color:#b30049;background-color:#fdf5f5">虚拟表</code>，通常不对底层数据表直接操作，而存储过程是程序化的 SQL，可以<code style="color:#b30049;background-color:#fdf5f5">直接操作底层数据表</code>，相比于面向集合的操作方式，能够实现一些更复杂的数据处理。
 
-一旦存储过程被创建出来，使用它就像使用函数一样简单，我们直接通过调用存储过程名即可。相较于函数，存储过程是`没有返回值`的。
+一旦存储过程被创建出来，使用它就像使用函数一样简单，我们直接通过调用存储过程名即可。相较于函数，<code style="color:#b30049;background-color:#fdf5f5">存储过程是没有返回值的</code>。
 
 ### 分类
 
@@ -254,19 +262,19 @@ END
 
 1、参数前面的符号的意思
 
-- `IN`：当前参数为输入参数，也就是表示入参；
+- <code style="color:#b30049;background-color:#fdf5f5">IN</code>：当前参数为输入参数，也就是表示入参；
 
   存储过程只是读取这个参数的值。如果没有定义参数种类，`默认就是 IN`，表示输入参数。
 
-- `OUT`：当前参数为输出参数，也就是表示出参；
+- <code style="color:#b30049;background-color:#fdf5f5">OUT</code>：当前参数为输出参数，也就是表示出参；
 
   执行完成之后，调用这个存储过程的客户端或者应用程序就可以读取这个参数返回的值了。
 
-- `INOUT`：当前参数既可以为输入参数，也可以为输出参数。
+- <code style="color:#b30049;background-color:#fdf5f5">INOUT</code>：当前参数既可以为输入参数，也可以为输出参数。
 
 2、形参类型可以是 MySQL数据库中的任意类型。
 
-3、`characteristics` 表示创建存储过程时指定的对存储过程的约束条件，其取值信息如下：
+3、<code style="color:#b30049;background-color:#fdf5f5">characteristics</code> 表示创建存储过程时指定的对存储过程的约束条件，其取值信息如下：
 
 ```mysql
 LANGUAGE SQL
@@ -276,19 +284,19 @@ LANGUAGE SQL
 | COMMENT 'string'
 ```
 
-- `LANGUAGE SQL`：说明存储过程执行体是由SQL语句组成的，当前系统支持的语言为SQL。
-- `[NOT] DETERMINISTIC`：指明存储过程执行的结果是否确定。DETERMINISTIC表示结果是确定的。每次执行存储过程时，相同的输入会得到相同的输出。NOT DETERMINISTIC表示结果是不确定的，相同的输入可能得到不同的输出。如果没有指定任意一个值，默认为NOT DETERMINISTIC。
-- `{ CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }`：指明子程序使用SQL语句的限制。
+- <code style="color:#b30049;background-color:#fdf5f5">LANGUAGE SQL</code>：说明存储过程执行体是由SQL语句组成的，当前系统支持的语言为SQL。
+- <code style="color:#b30049;background-color:#fdf5f5">[NOT] DETERMINISTIC</code>：指明存储过程执行的结果是否确定。DETERMINISTIC表示结果是确定的。每次执行存储过程时，相同的输入会得到相同的输出。NOT DETERMINISTIC表示结果是不确定的，相同的输入可能得到不同的输出。如果没有指定任意一个值，默认为NOT DETERMINISTIC。
+- <code style="color:#b30049;background-color:#fdf5f5">{ CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }</code>：指明子程序使用SQL语句的限制。
   - CONTAINS SQL表示当前存储过程的子程序包含SQL语句，但是并不包含读写数据的SQL语句；
   - NO SQL表示当前存储过程的子程序中不包含任何SQL语句；
   - READS SQL DATA表示当前存储过程的子程序中包含读数据的SQL语句；
   - MODIFIES SQL DATA表示当前存储过程的子程序中包含写数据的SQL语句。
   - 默认情况下，系统会指定为CONTAINS SQL。
-- `SQL SECURITY { DEFINER | INVOKER }`：执行当前存储过程的权限，即指明哪些用户能够执行当前存储过程。
+- <code style="color:#b30049;background-color:#fdf5f5">SQL SECURITY { DEFINER | INVOKER }</code>：执行当前存储过程的权限，即指明哪些用户能够执行当前存储过程。
   - `DEFINER`表示只有当前存储过程的创建者或者定义者才能执行当前存储过程；
   - `INVOKER`表示拥有当前存储过程的访问权限的用户能够执行当前存储过程。
   - 如果没有设置相关的值，则MySQL默认指定值为DEFINER。
-- `COMMENT 'string'`：注释信息，可以用来描述存储过程。
+- <code style="color:#b30049;background-color:#fdf5f5">COMMENT 'string'</code>：注释信息，可以用来描述存储过程。
 
 4、存储过程体中可以有多条 SQL 语句，如果仅仅一条SQL 语句，则可以省略 BEGIN 和 END
 
@@ -307,11 +315,11 @@ LANGUAGE SQL
 DELIMITER 新的结束标记
 ```
 
-因为MySQL默认的语句结束符号为分号‘;’。为了避免与存储过程中SQL语句结束符相冲突，需要使用DELIMITER改变存储过程的结束符。
+因为MySQL默认的语句结束符号为分号<code style="color:#b30049;background-color:#fdf5f5">;</code>。为了避免与存储过程中SQL语句结束符相冲突，需要使用DELIMITER改变存储过程的结束符。
 
 比如：“DELIMITER //”语句的作用是将MySQL的结束符设置为//，并以“END //”结束存储过程。存储过程定义完毕之后再使用“DELIMITER ;”恢复默认结束符。DELIMITER也可以指定其他符号作为结束符。
 
-当使用DELIMITER命令时，应该避免使用反斜杠（‘\’）字符，因为反斜线是MySQL的转义字符。
+当使用DELIMITER命令时，应该避免使用反斜杠<code style="color:#b30049;background-color:#fdf5f5">\\</code>字符，因为反斜线是MySQL的转义字符。
 
 示例：
 
@@ -429,7 +437,7 @@ DELIMITER ;
 
 #### 调用格式
 
-存储过程有多种调用方法。存储过程必须使用CALL语句调用，并且存储过程和数据库相关，如果要执行其他数据库中的存储过程，需要指定数据库名称，例如CALL dbname.procname。
+存储过程有多种调用方法。存储过程必须使用<code style="color:#b30049;background-color:#fdf5f5">CALL</code>语句调用，并且存储过程和数据库相关，如果要执行其他数据库中的存储过程，需要指定数据库名称，例如CALL dbname.procname。
 
 ```mysql
 CALL 存储过程名(实参列表)
@@ -726,9 +734,11 @@ ALTER {PROCEDURE | FUNCTION} 存储过程或函数的名 [characteristic ...]
   - `INVOKER`，表示调用者可以执行。
 - `COMMENT 'string'`，表示注释信息。
 
-> 修改存储过程使用ALTER PROCEDURE语句，修改存储函数使用ALTER FUNCTION语句。但是，这两个语句的结构是一样的，语句中的所有参数也是一样的。
+{% note no-icon primary %}
 
+修改存储过程使用ALTER PROCEDURE语句，修改存储函数使用ALTER FUNCTION语句。但是，这两个语句的结构是一样的，语句中的所有参数也是一样的。
 
+{% endnote %}
 
 **举例1：**
 

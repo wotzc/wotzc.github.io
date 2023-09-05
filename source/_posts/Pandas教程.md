@@ -174,7 +174,7 @@ max    26.0
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_dataset.png)
 
-`Pandas`提供了<span style="color: red; font-weight: bold">read_csv()</span>函数将Excel文件读取为`DataFrame`对象。
+`Pandas`提供了<code style="color:#b30049;background-color:#fdf5f5">read_csv()</code>函数将Excel文件读取为`DataFrame`对象。
 
 `pandas` 支持许多不同的文件格式或开箱即用的数据源（`csv`、`excel`、`sql`、`json`、`parquet`...），读取每个文件格式或数据源都使用带有前缀`read_*`的函数。
 
@@ -189,7 +189,7 @@ Out：
 
 请确保读完数据之后总是有一个数据检查。显示 `DataFrame` 时，默认显示前 5 行和后 5 行。
 
-要查看 DataFrame 的前 N 行，请使用该 <span style="color: red; font-weight: bold">head()</span> 方法并以所需的行数作为参数。
+要查看 DataFrame 的前 N 行，请使用该 <code style="color:#b30049;background-color:#fdf5f5">head()</code> 方法并以所需的行数作为参数。
 
 我想查看 `pandas` `DataFrame` 的前 8 行。
 
@@ -211,9 +211,9 @@ Out:
 7   74  State-gov   88638  ...             20   United-States   >50K
 ```
 
-对最后 N 行感兴趣吗？pandas也提供了一种  <span style="color: red; font-weight: bold">tail() </span>方法。例如，`adult.tail(10)`将返回 `DataFrame` 的最后 10 行。
+对最后 N 行感兴趣吗？pandas也提供了一种  <code style="color:#b30049;background-color:#fdf5f5">tail() </code>方法。例如，`adult.tail(10)`将返回 `DataFrame` 的最后 10 行。
 
-可以通过请求 `pandas`  <span style="color: red; font-weight: bold">dtypes</span> 属性来检查 `pandas` 如何解释每个列数据类型：
+可以通过请求 `pandas`  <code style="color:#b30049;background-color:#fdf5f5">dtypes</code> 属性来检查 `pandas` 如何解释每个列数据类型：
 
 ```python
 print(adult.dtypes)
@@ -248,7 +248,7 @@ dtype: object
 adult.to_excel("adult.xlsx", sheet_name="person", index=False)
 ```
 
-<span style="color: red; font-weight: bold"> read_*</span>函数常用于读取函数到`Pandas`中，而`to_*`函数常用于存储数据。
+<code style="color:#b30049;background-color:#fdf5f5"> read_*</code>函数常用于读取函数到`Pandas`中，而`to_*`函数常用于存储数据。
 
 该`to_excel()`方法将数据存储为 `Excel` 文件。在此示例中，`sheet_name`名为*“person”*而不是默认的*“Sheet1”*。通过设置 `index=False`行索引标签不会保存在电子表格中。
 
@@ -391,7 +391,13 @@ Out:
 4   41  Female
 ```
 
-> 要选择多个列，请在选择括号内使用列名称列表`[]`。
+{% note success no-icon %}
+
+要选择多个列，请在选择括号内使用列名称列表`[]`。
+
+{% endnote %}
+
+
 
 返回的数据类型是 `pandas DataFrame`：
 
@@ -455,7 +461,7 @@ Out:
 Name: age, dtype: bool
 ```
 
-条件表达式（也可以是 `==`, `!=`, `<`, <=,… ）的输出实际上是一组`pandas Series`的布尔值（`True`或`False`），
+条件表达式（也可以是 `==`, `!=`, `<`, `<=`,… ）的输出实际上是一组`pandas Series`的布尔值（`True`或`False`），
 
 其行数与原始 `DataFrame` 相同 。这样的一系列布尔值可用于将其放在选择括号 [] 之间来过滤 DataFrame， 仅选择值为 `True` 的行。
 
@@ -497,7 +503,11 @@ Out:
 377   30           Private  315640  ...             40           China   >50K
 ```
 
-> 组合多个条件语句时，每个条件必须用括号 <span style="color:red;font-family:bold">()</span> 括起来。 而且，不能使用<span style="color:red;font-family:bold"> or </span>或<span style="color:red;font-family:bold"> and </span>，而需要使用或运算符<span style="color:red;font-family:bold">  | </span>以及与运算符<span style="color:red;font-family:bold">  & </span>。
+{% note success no-icon %}
+
+组合多个条件语句时，每个条件必须用括号 <code style="color:red;font-family:bold">()</code> 括起来。 而且，不能使用<code style="color:red;font-family:bold"> or </code>或<code style="color:red;font-family:bold"> and </code>，而需要使用或运算符<code style="color:red;font-family:bold">  | </code>以及与运算符<code style="color:red;font-family:bold">  & </code>。
+
+{% endnote %}
 
 假如我们只对年龄已知的用户感兴趣。
 
@@ -520,7 +530,7 @@ Out:
 [5 rows x 15 columns]
 ```
 
-<span style="color:red; font-weight: bold">notna() </span>条件函数对于值不是 `Null` 值的每一行返回 `True`。 因此，可以结合选择括号`[]`来过滤数据表。
+<code style="color:red; font-weight: bold">notna() </code>条件函数对于值不是 `Null` 值的每一行返回 `True`。 因此，可以结合选择括号`[]`来过滤数据表。
 
 ## 如何选择DataFrame的特定行和列？
 
@@ -533,7 +543,7 @@ adult_names = adult.loc[adult["age"] > 35, "sex"]
 print(adult_names.head())
 ```
 
-> 在这种情况下，行和列的子集是一次性生成的，仅使用括号选择<span style="color:red;font-weight:bold"> [] </span>已经不够了。 选择括号<span style="color:red;font-weight:bold"> [] </span>前面需要<span style="color:red;font-weight:bold"> loc/iloc </span>运算符。 使用<span style="color:red;font-weight:bold"> loc/iloc </span>时，逗号之前的部分是您想要选择的行，逗号之后的部分是您想要选择的列。
+> 在这种情况下，行和列的子集是一次性生成的，仅使用括号选择<code style="color:red;font-weight:bold"> [] </code>已经不够了。 选择括号<code style="color:red;font-weight:bold"> [] </code>前面需要<code style="color:red;font-weight:bold"> loc/iloc </code>运算符。 使用<code style="color:red;font-weight:bold"> loc/iloc </code>时，逗号之前的部分是您想要选择的行，逗号之后的部分是您想要选择的列。
 
 使用列名、行标签或条件表达式时，请在选择括号 [] 前面使用 loc 运算符。 对于逗号之前和之后的部分，您可以使用单个标签、标签列表、标签切片、条件表达式或冒号。 使用冒号指定您要选择所有行或列。
 
@@ -565,7 +575,7 @@ Out:
 24  135285       HS-grad              9
 ```
 
-同样，行和列的子集是一次性生成的，仅使用选择括号<span style="color:red;font-weight:bold"> [] </span>已经不够了。 当根据表中的位置对某些行和/或列特别感兴趣时，请在选择括号<span style="color:red;font-weight:bold"> [] </span>前面使用<span style="color:red;font-weight:bold"> iloc </span>运算符。
+同样，行和列的子集是一次性生成的，仅使用选择括号<code style="color:red;font-weight:bold"> [] </code>已经不够了。 当根据表中的位置对某些行和/或列特别感兴趣时，请在选择括号<code style="color:red;font-weight:bold"> [] </code>前面使用<code style="color:red;font-weight:bold"> iloc </code>运算符。
 
 当使用 loc 或 iloc 选择特定行和/或列时，我们对我们所选的特定行和/或列赋值。 
 
@@ -587,13 +597,13 @@ Out:
 4   41   Private  264663  ...             40   United-States  <=50K
 ```
 
-> <span style="color:red;font-weight:bold">Remember</span>:
+> <code style="color:red;font-weight:bold">Remember</code>:
 >
-> - <span style="color:green;font-weight:bold">要选择数据子集时，使用方括号[]。</span>
-> - <span style="color:green;font-weight:bold">在括号内，您可以使用单个列/行标签、列/行标签列表、标签切片、条件表达式或冒号。</span>
-> - <span style="color:green;font-weight:bold">通过 loc 使用行名和列名选择特定的行和列。</span>
-> - <span style="color:green;font-weight:bold">通过 iloc 使用坐标轴位置选择特定的行和列。</span>
-> - <span style="color:green;font-weight:bold">你可以为 loc 或 iloc 选择的行或列赋新值。</span>
+> - <code style="color:green;font-weight:bold">要选择数据子集时，使用方括号[]。</code>
+> - <code style="color:green;font-weight:bold">在括号内，您可以使用单个列/行标签、列/行标签列表、标签切片、条件表达式或冒号。</code>
+> - <code style="color:green;font-weight:bold">通过 loc 使用行名和列名选择特定的行和列。</code>
+> - <code style="color:green;font-weight:bold">通过 iloc 使用坐标轴位置选择特定的行和列。</code>
+> - <code style="color:green;font-weight:bold">你可以为 loc 或 iloc 选择的行或列赋新值。</code>
 
 --------------
 
@@ -661,14 +671,14 @@ plt.show()
 
 绘图方法允许使用除默认线图之外的多种绘图样式，可以通过`plot()`方法的`kind`参数进行设置:
 
-- <span style="color:red;font-weight:bold">"bar" </span>或<span style="color:red;font-weight:bold"> "barh" </span>绘制柱状图
-- <span style="color:red;font-weight:bold">"hist" </span>绘制直方图
-- <span style="color:red;font-weight:bold"> "box" </span>绘制箱形图
-- <span style="color:red;font-weight:bold"> "kde" </span>或<span style="color:red;font-weight:bold"> "density" </span>绘制密度图
-- <span style="color:red;font-weight:bold"> "area" </span>绘制面积图
-- <span style="color:red;font-weight:bold"> "scatter" </span>绘制散点图
-- <span style="color:red;font-weight:bold"> "hexbin" </span>绘制六边形箱图
--  <span style="color:red;font-weight:bold"> "pie" </span>绘制饼状图
+- <code style="color:red;font-weight:bold">"bar" </code>或<code style="color:red;font-weight:bold"> "barh" </code>绘制柱状图
+- <code style="color:red;font-weight:bold">"hist" </code>绘制直方图
+- <code style="color:red;font-weight:bold"> "box" </code>绘制箱形图
+- <code style="color:red;font-weight:bold"> "kde" </code>或<code style="color:red;font-weight:bold"> "density" </code>绘制密度图
+- <code style="color:red;font-weight:bold"> "area" </code>绘制面积图
+- <code style="color:red;font-weight:bold"> "scatter" </code>绘制散点图
+- <code style="color:red;font-weight:bold"> "hexbin" </code>绘制六边形箱图
+-  <code style="color:red;font-weight:bold"> "pie" </code>绘制饼状图
 
 例如，可以通过以下方式创建箱线图：
 
@@ -1434,7 +1444,7 @@ Out:
 [5 rows x 8 columns]
 ```
 
-通过使用 `Timestamp` 对象来表示日期，`pandas` 提供了许多与时间相关的属性。 例如月份`month`，还有年份`year`、季度`quarter`……所有这些属性都可以通过<span style="color:red;font-weight:bold"> dt </span>访问器访问。
+通过使用 `Timestamp` 对象来表示日期，`pandas` 提供了许多与时间相关的属性。 例如月份`month`，还有年份`year`、季度`quarter`……所有这些属性都可以通过<code style="color:red;font-weight:bold"> dt </code>访问器访问。
 
 每个测量位置一周中每一天的平均二氧化氮浓度是多少？
 

@@ -90,9 +90,9 @@ Intellij IDEA在debug模式下可以改变变量的值，下面这段代码为�
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource1.png)
 
-如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不行后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png)
+如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不想后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png)
 
-。但是点击这个按钮之后后续的操作还会执行，如下图所示
+但是点击这个按钮之后后续的操作还会执行，如下图所示
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource2.png)
 

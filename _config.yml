@@ -9,7 +9,7 @@ description: '真正的大师永远都怀着一颗学徒的心'
 keywords:
 author: wotzc
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'

@@ -43,7 +43,7 @@ IDEA中代码代码模板所在的位置(Editor – Live Templates 和 Editor �
 **Live Templates(实时代码模板)功能介绍**
 
 它的原理就是配置一些常用代码字母缩写，在输入简写时可以出现你预定义的固定模式的代码，使得开发效率大大提高，同时也可以增加个性化。最简单的例子
-就是在Java中输入sout会出现 System.out.println();
+就是在Java中输入<code style="color:#b30049;background-color:#fdf5f5">sout</code>会出现<code style="color:#b30049;background-color:#fdf5f5">System.out.println()</code>;
 
 已有的常用模板
 
@@ -55,13 +55,13 @@ IDEA中代码代码模板所在的位置(Editor – Live Templates 和 Editor �
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/livetemplates.png"  />
 
-二者的区别：Live Templates 可以自定义，而 Postfix Completion 不可以。
+二者的区别：<code style="color:#b30049;background-color:#fdf5f5">Live Templates</code>可以自定义，而<code style="color:#b30049;background-color:#fdf5f5">Postfix Completion</code>不可以。
 
 **常用模板**
 
-**psvm** : 可生成main方法
+**psvm** : 可生成<code style="color:#b30049;background-color:#fdf5f5">main</code>方法
 
-**sout** : System.out.println() 快捷输出
+**sout** : <code style="color:#b30049;background-color:#fdf5f5">System.out.println()</code>快捷输出
 
 类似的：**soutp**
 
@@ -69,25 +69,29 @@ IDEA中代码代码模板所在的位置(Editor – Live Templates 和 Editor �
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutpshow.png"  />
 
-​	**soutv**=System.out.println("变量名 = " + 变量);
+**soutv**=<code style="color:#b30049;background-color:#fdf5f5">System.out.println("变量名 = " + 变量);</code>
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutv.png"  />
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutvshow.png"  />
 
-**soutm**=System.out.println("当前类名.当前方法");
+**soutm**=<code style="color:#b30049;background-color:#fdf5f5">System.out.println("当前类名.当前方法");</code>
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutm.png"  />
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutmshow.png"  />
 
-**“abc”.sout** => System.out.println("abc");
+**“abc”.sout** =><code style="color:#b30049;background-color:#fdf5f5"> System.out.println("abc");</code>
 
  **list.for** : 可生成集合 list 的 的 for 循环
 
 输入: **list.for** 即可输出
+
+```java
 for(String s:list){
 }
+```
+
 又如：**list.fori** 或 **list.forr**
 
 ```java
@@ -105,15 +109,15 @@ for(String s:list){
 
 又如：**list.fori** 或 **list.forr**
 
-**ifn** ：可生成 if(xxx = null)
+**ifn** ：可生成 <code style="color:#b30049;background-color:#fdf5f5">if(xxx = null)</code>
         类似的：
-        inn：可生成 if(xxx != null) 或 xxx.nn 或 xxx.null
+        **inn**：可生成<code style="color:#b30049;background-color:#fdf5f5">if(xxx != null)</code>或<code style="color:#b30049;background-color:#fdf5f5">xxx.nn</code>或<code style="color:#b30049;background-color:#fdf5f5">xxx.null</code>
 
-**prsf** ：可生成 private static final
+**prsf** ：可生成<code style="color:#b30049;background-color:#fdf5f5">private static final</code>
 类似的：
-**psf**：可生成 public static final
-**psfi**：可生成 public static final int
-**psfs**：可生成 public static final String
+**psf**：可生成<code style="color:#b30049;background-color:#fdf5f5">public static final</code>
+**psfi**：可生成<code style="color:#b30049;background-color:#fdf5f5">public static final int</code>
+**psfs**：可生成<code style="color:#b30049;background-color:#fdf5f5">public static final String</code>
 
 ------------------------------------
 

@@ -55,7 +55,7 @@ settings -> Editor -> General -> Code Completion
 
 - IntelliJ IDEA 的代码提示和补充功能有一个特性：区分大小写。如上图标注所示，默认就是 First letter 区分大小写的。
 - 区分大小写的情况是这样的：比如我们在 Java 代码文件中输入 stringBuffer，IntelliJ IDEA 默认是不会帮我们提示或是代码补充的，但是如果我们输入StringBuffer 就可以进行代码提示和补充。
-- 如果想不区分大小写的话，改为 None 选项即可。
+- 如果想不区分大小写的话，取消勾选<code style="color:#b30049;background-color:#fdf5f5">Match case</code>选项即可。
 
 -----------
 
@@ -73,7 +73,7 @@ settings -> Editor Tabs -> Configure Editor Tabs...，取消勾选 Show Tabs In 
 
 # 代码块包裹功能 - Surround With
 
-**Ctrl + Alt + T** 提供的是代码块包裹功能 - Surround With。可以快速将选中的代码块，包裹到选择的语句块中。
+**Ctrl + Alt + T** 提供的是代码块包裹功能 -<code style="color:#b30049;background-color:#fdf5f5"> Surround With</code>。可以快速将选中的代码块，包裹到选择的语句块中。
 
 （mac对应的是**Command+Option+T**)
 
@@ -185,9 +185,9 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/splitvertically1.png)
 
-屏幕太多了，一直用鼠标也比较麻烦，这里我们可以直接 `Ctrl+E` 进行页面切换
+屏幕太多了，一直用鼠标也比较麻烦，这里我们可以直接 <code style="color:#b30049;background-color:#fdf5f5">Ctrl+E</code>进行页面切换
 
-除了 `Ctrl+E`(mac对应的是command+E) 还可以只用 ，`Ctrl+Alt+ 方向键进行切换视图`
+除了 `Ctrl+E`(mac对应的是<code style="color:#b30049;background-color:#fdf5f5">command+E</code>) 还可以只用 ，`Ctrl+Alt+ 方向键进行切换视图`
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/splitvertically2.png)
 
@@ -197,7 +197,7 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 ## 判空
 
-如图，通过**`字符串.null`**，然后点回车
+如图，通过<code style="color:#b30049;background-color:#fdf5f5">字符串.null</code>，然后点回车
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/ifempty.png)
 
@@ -207,7 +207,7 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 ## 循环
 
-通过`.fori`遍历集合或数组
+通过<code style="color:#b30049;background-color:#fdf5f5">.fori</code>遍历集合或数组
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/fori.png)
 
@@ -229,7 +229,7 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 **抽取方法**，很多时候，在俺们开发当中，经常会方法调用方法，有时候一段代码过于的冗余，所以需要进行抽取。
 
-选中代码，然后快捷键`Ctrl+Alt+M`（mac对应的快捷键是`command+option+M`），就会自动抽取成方法
+选中代码，然后快捷键<code style="color:#b30049;background-color:#fdf5f5">Ctrl+Alt+M</code>（mac对应的快捷键是<code style="color:#b30049;background-color:#fdf5f5">command+option+M</code>），就会自动抽取成方法
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/extractMethod.png)
 
@@ -243,7 +243,7 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 智能提示，该功能可以基于上下文环境，智能帮你过滤可以使用方法，推导出最适合的方法。该快捷键为 **Ctrl+Shift+Space**(mac对应的快捷键是**ctrl+option+space**)。
 
-快速完成语句在 IDEA 中，可以使用快捷键 `Ctrl+Shift+Enter`（mac对应的是**Command+shift+enter**）快速完成声明 if while 等语句。在下面的例子中，我们输入 while ，接着我们输入快捷键，我们可以看到 IDEA 自动帮我们完整这个结构，然后只需要输入判断条件即可。
+快速完成语句在 IDEA 中，可以使用快捷键 <code style="color:#b30049;background-color:#fdf5f5">Ctrl+Shift+Enter</code>（mac对应的是**Command+shift+enter**）快速完成声明 if while 等语句。在下面的例子中，我们输入 while ，接着我们输入快捷键，我们可以看到 IDEA 自动帮我们完整这个结构，然后只需要输入判断条件即可。
 
 -------
 
@@ -259,13 +259,13 @@ groovyScript("def returnType = \"${_1}\"; def result = '* @return: ' + returnTyp
 
 # 折叠代码
 
-折叠代码，**`ctrl+'-'`**，mac对应的快捷键是`command+'-'`
+折叠代码，<code style="color:#b30049;background-color:#fdf5f5">ctrl+'-'</code>，mac对应的快捷键是`command+'-'`
 
-展开代码，**`ctrl+'+'`**，mac对应的快捷键是`command+'+'`
+展开代码，<code style="color:#b30049;background-color:#fdf5f5">ctrl+'+'</code>，mac对应的快捷键是`command+'+'`
 
-折叠所有代码，**`ctrl+shift+'-'`**，mac对应的快捷键是`command+shift+'-'`
+折叠所有代码，<code style="color:#b30049;background-color:#fdf5f5">ctrl+shift+'-'</code>，mac对应的快捷键是`command+shift+'-'`
 
-展开所有代码，**`ctrl+shift+'+'`**，mac对应的快捷键是`command+shift+'+'`
+展开所有代码，<code style="color:#b30049;background-color:#fdf5f5">ctrl+shift+'+'</code>，mac对应的快捷键是`command+shift+'+'`
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/folding.png)
 

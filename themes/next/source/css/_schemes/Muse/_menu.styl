@@ -1,5 +1,11 @@
 .site-nav {
   +mobile() {
+    padding-top: 30px;
+  }
+}
+
+.main-menu {
+  +mobile() {
     border-bottom: 1px solid $grey-lighter;
     border-top: 1px solid $grey-lighter;
   }
@@ -16,7 +22,7 @@
     margin: 0 10px;
   }
 
-  a, span.exturl {
+  a {
     border-bottom: 1px solid transparent;
 
     +mobile() {
@@ -33,7 +39,7 @@
     }
   }
 
-  .fa, .fab, .far, .fas {
+  i[class^='fa'] {
     +tablet-desktop() {
       display: block;
       line-height: 2;

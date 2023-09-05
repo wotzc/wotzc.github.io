@@ -10,9 +10,9 @@ const LAYOUTS = {
     2: [2]
   },
   3: {
-    1: [3],
-    2: [1, 2],
-    3: [2, 1]
+    1: [1, 2],
+    2: [2, 1],
+    3: [3]
   },
   4: {
     1: [1, 2, 1],
@@ -126,7 +126,7 @@ module.exports = ctx => function(args, content) {
 
   content = ctx.render.renderSync({ text: content, engine: 'markdown' });
 
-  const pictures = content.match(/<img[\s\S]*?>/g);
+  const pictures = content.match(/(<a[^>]*>((?!<\/a)(.|\n))+<\/a>)|(<img[^>]+>)/g);
 
   return `<div class="group-picture">${templates.dispatch(pictures, group, layout)}</div>`;
 };

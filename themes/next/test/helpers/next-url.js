@@ -32,9 +32,19 @@ describe('next-url', () => {
     nextUrl('https://theme-next.js.org', 'Text').should.eql('<a href="https://theme-next.js.org/" rel="noopener" target="_blank">Text</a>');
   });
 
+  it('decodeURI', () => {
+    (() => nextUrl('https://theme-next.js.org', 'A % B')).should.not.throw();
+  });
+
   it('exturl enabled', () => {
     hexo.theme.exturl = true;
     const encoded = btoa('https://theme-next.js.org');
     nextUrl('https://theme-next.js.org', 'Text').should.eql(`<span class="exturl" data-url="${encoded}">Text</span>`);
+  });
+
+  it('class with exturl enabled', () => {
+    hexo.theme.exturl = true;
+    const encoded = btoa('https://theme-next.js.org');
+    nextUrl('https://theme-next.js.org', 'Text', { class: 'theme-link' }).should.eql(`<span class="exturl theme-link" data-url="${encoded}">Text</span>`);
   });
 });
