@@ -16,8 +16,8 @@ Spring可以让您从“plain old Java objects”（POJO）中构建应用程序
 
 ### Spring的两大核心部分：IOC和Aop
 
-1. <code style="color:#b30049;background-color:#fdf5f5">IOC</code>（Inversion of Control）控制反转，把创建对象过程交给Spring管理
-2. <code style="color:#b30049;background-color:#fdf5f5">Aop</code>（Aspect Oriented Programming）面向切面，在不修改源代码的基础上进行功能增强
+1. <code>IOC</code>（Inversion of Control）控制反转，把创建对象过程交给Spring管理
+2. <code>Aop</code>（Aspect Oriented Programming）面向切面，在不修改源代码的基础上进行功能增强
 
 ### Spring的特点
 
@@ -58,20 +58,20 @@ class UserFactory {
 }	
 ```
 
-<code style="color:#b30049;background-color:#fdf5f5">org.springframework.beans</code>和<code style="color:#b30049;background-color:#fdf5f5">org.springframework.context</code>是Spring框架中IoC容器的基础，<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>接口提供一种高级的配置机制能够管理任何类型的对象。<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>是<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>的子接口。它能更容易集成Spring的**AOP功能**、**消息资源处理（比如在国际化中使用）**、**事件发布**和**特定的上下文应用层**比如在网站应用中的<code style="color:#b30049;background-color:#fdf5f5">WebApplicationContext</code>。
+<code>org.springframework.beans</code>和<code>org.springframework.context</code>是Spring框架中IoC容器的基础，<code>BeanFactory</code>接口提供一种高级的配置机制能够管理任何类型的对象。<code>ApplicationContext</code>是<code>BeanFactory</code>的子接口。它能更容易集成Spring的**AOP功能**、**消息资源处理（比如在国际化中使用）**、**事件发布**和**特定的上下文应用层**比如在网站应用中的<code>WebApplicationContext</code>。
 
-总之，<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>提供了配置框架和基本方法，<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>添加更多的企业特定的功能。<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>是<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>的一个子接口。
+总之，<code>BeanFactory</code>提供了配置框架和基本方法，<code>ApplicationContext</code>添加更多的企业特定的功能。<code>ApplicationContext</code>是<code>BeanFactory</code>的一个子接口。
 
 ### IOC(BeanFactory)接口
 
 IOC思想基于IOC容器完成，IOC容器底层就是对象工厂。
 
-（1）<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>：IOC容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用，加载配置文件时候不会创建对象，在获取对象（使用）才去创建对象。
+（1）<code>BeanFactory</code>：IOC容器基本实现，是Spring内部的使用接口，不提供开发人员进行使用，加载配置文件时候不会创建对象，在获取对象（使用）才去创建对象。
 
-（2）<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>：BeanFactory接口的子接口，提供更多更强大的功能，一般由开发人员进行使用，加载配置文件时候就会把在配置文件对象进行创建。
+（2）<code>ApplicationContext</code>：BeanFactory接口的子接口，提供更多更强大的功能，一般由开发人员进行使用，加载配置文件时候就会把在配置文件对象进行创建。
 
-尽量使用<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>除非你有更好的理由不用它。
-因为<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>包括了<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>的所有功能，通常也优于<code style="color:#b30049;background-color:#fdf5f5">BeanFactory</code>，除非一些少数的场景，例如：在受资源约束的嵌入式设备上运行一个嵌入式应用，它的内存消耗可能至关重要，并且可能会产生字节。然而，对于大多数典型的企业级应用和系统来说，<code style="color:#b30049;background-color:#fdf5f5">ApplicationContext</code>才是你想使用的。Spring大量使用了<code style="color:#b30049;background-color:#fdf5f5">BeanPostProcessor</code>扩展点（以便使用代理等）。如果你仅仅只使用简单的BeanFactory，很多的支持功能将不会有效，例如：**事务**和**AOP**，但至少不会有额外的步骤。这可能会比较迷惑，毕竟配置又没有错。
+尽量使用<code>ApplicationContext</code>除非你有更好的理由不用它。
+因为<code>ApplicationContext</code>包括了<code>BeanFactory</code>的所有功能，通常也优于<code>BeanFactory</code>，除非一些少数的场景，例如：在受资源约束的嵌入式设备上运行一个嵌入式应用，它的内存消耗可能至关重要，并且可能会产生字节。然而，对于大多数典型的企业级应用和系统来说，<code>ApplicationContext</code>才是你想使用的。Spring大量使用了<code>BeanPostProcessor</code>扩展点（以便使用代理等）。如果你仅仅只使用简单的BeanFactory，很多的支持功能将不会有效，例如：**事务**和**AOP**，但至少不会有额外的步骤。这可能会比较迷惑，毕竟配置又没有错。
 
 ### IOC操作Bean管理(基于xml方式)
 
@@ -184,7 +184,7 @@ public class Orders {
 
 #### FactoryBean
 
- Spring有两种类型bean，一种<code style="color:#b30049;background-color:#fdf5f5">普通bean</code>，另外一种<code style="color:#b30049;background-color:#fdf5f5">工厂bean（FactoryBean）</code>
+ Spring有两种类型bean，一种<code>普通bean</code>，另外一种<code>工厂bean（FactoryBean）</code>
 
 - 普通bean：在配置文件中定义bean类型就是返回类型
 - 工厂bean：在配置文件定义bean类型可以和返回类型不一样
@@ -224,15 +224,15 @@ public class MyBean implements FactoryBean<Course> {
 
 **如何设置单实例还是多实例？**
 
-（1）在spring配置文件bean标签里面有属性（<code style="color:#b30049;background-color:#fdf5f5">scope</code>）用于设置单实例还是多实例
+（1）在spring配置文件bean标签里面有属性（<code>scope</code>）用于设置单实例还是多实例
 
-第一个值 默认值，<code style="color:#b30049;background-color:#fdf5f5">singleton</code>，表示是单实例对象
-第二个值<code style="color:#b30049;background-color:#fdf5f5">prototype</code>，表示是多实例对象
+第一个值 默认值，<code>singleton</code>，表示是单实例对象
+第二个值<code>prototype</code>，表示是多实例对象
 
 **singleton和prototype区别**
 
-设置<code style="color:#b30049;background-color:#fdf5f5">scope</code>值是<code style="color:#b30049;background-color:#fdf5f5">singleton</code>时候，加载spring配置文件时候就会创建单实例对象
-设置<code style="color:#b30049;background-color:#fdf5f5">scope</code>值是<code style="color:#b30049;background-color:#fdf5f5">prototype</code>时候，不是在加载spring配置文件时候创建对象，在调用getBean方法时候创建多实例对象
+设置<code>scope</code>值是<code>singleton</code>时候，加载spring配置文件时候就会创建单实例对象
+设置<code>scope</code>值是<code>prototype</code>时候，不是在加载spring配置文件时候创建对象，在调用getBean方法时候创建多实例对象
 
 #### Bean生命周期
 
@@ -410,7 +410,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 注解，可以看作是对 一个 类/方法 的一个扩展的模版，每个 类/方法 按照注解类中的规则，来为 类/方法 注解不同的参数，在用到的地方可以得到不同的 类/方法 中注解的各种参数与值
 
-注解也就是<code style="color:#b30049;background-color:#fdf5f5">Annotation</code>，相信不少人也和我之前一样以为和注释和doc一样，是一段辅助性的文字，其实注解不是这样的。
+注解也就是<code>Annotation</code>，相信不少人也和我之前一样以为和注释和doc一样，是一段辅助性的文字，其实注解不是这样的。
 
 从JDK5开始，java增加了对元数据（描述数据属性的信息）的支持。其实说白就是代码里的特殊标志，这些标志可以在编译，类加载，运行时被读取，并执行相应的处理，以便于其他工具补充信息或者进行部署。
 
@@ -451,13 +451,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 #### 基于注解方式实现属性注入
 
-（1）<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>：根据属性类型进行自动装配
+（1）<code>@Autowired</code>：根据属性类型进行自动装配
 第一步 把service 和dao 对象创建，在service 和dao 类添加创建对象注解
 第二步 在service 注入dao 对象，在service 类添加dao 类型属性，在属性上面使用注解
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring5/service.png)
 
-（2）<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>：根据名称进行注入
-这个<code style="color:#b30049;background-color:#fdf5f5">@Qualifier</code>注解的使用，和上面<code style="color:#b30049;background-color:#fdf5f5">@Autowired</code>一起使用
+（2）<code>@Qualifier</code>：根据名称进行注入
+这个<code>@Qualifier</code>注解的使用，和上面<code>@Autowired</code>一起使用
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring5/annomation.png)
 
@@ -657,8 +657,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 ```
 
-3、在<code style="color:#b30049;background-color:#fdf5f5">service</code>类上面（或者<code style="color:#b30049;background-color:#fdf5f5">service</code>类里面方法上面）添加事务注解
-（1）<code style="color:#b30049;background-color:#fdf5f5">@Transactional</code>，这个注解添加到类上面，也可以添加方法上面
+3、在<code>service</code>类上面（或者<code>service</code>类里面方法上面）添加事务注解
+（1）<code>@Transactional</code>，这个注解添加到类上面，也可以添加方法上面
 （2）如果把这个注解添加类上面，这个类里面所有的方法都添加事务
 （3）如果把这个注解添加方法上面，为这个方法添加事务
 
@@ -669,7 +669,7 @@ public class UserService {
 }
 ```
 
-1、在<code style="color:#b30049;background-color:#fdf5f5">service</code>类上面添加注解<code style="color:#b30049;background-color:#fdf5f5">@Transactional</code>，在这个注解里面可以配置事务相关参数
+1、在<code>service</code>类上面添加注解<code>@Transactional</code>，在这个注解里面可以配置事务相关参数
 
 ##### propagation：事务传播行为
 
@@ -722,7 +722,7 @@ public class UserService {
 ##### readOnly：是否只读
 
 （1）读：查询操作，写：添加修改删除操作
-（2）<code style="color:#b30049;background-color:#fdf5f5">readOnly</code>默认值false，表示可以查询，可以添加修改删除操作
+（2）<code>readOnly</code>默认值false，表示可以查询，可以添加修改删除操作
 （3）设置readOnly值是true，设置成true之后，只能查询
 
 ##### rollbackFor：回滚
@@ -818,7 +818,7 @@ public DataSourceTransactionManager getDataSourceTransactionManager(DataSource d
 
 #### Spring5框架核心容器支持@Nullable注解
 
-（1）<code style="color:#b30049;background-color:#fdf5f5">@Nullable</code>注解可以使用在方法上面，属性上面，参数上面，表示方法返回可以为空，属性值可以为空，参数值可以为空
+（1）<code>@Nullable</code>注解可以使用在方法上面，属性上面，参数上面，表示方法返回可以为空，属性值可以为空，参数值可以为空
 （2）注解用在方法上面，方法返回值可以为空
 
 （3）注解使用在方法参数里面，方法参数可以为空

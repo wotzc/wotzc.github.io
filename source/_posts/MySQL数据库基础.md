@@ -64,8 +64,8 @@ SQL语言在功能上主要分为如下3大类:
 
 ## **命名规则**
 
-- 数据库、表名不得超过<code style="color:#b30049;background-color:#fdf5f5">30</code>个字符，变量名限制为29个
--  必须只能包含<code style="color:#b30049;background-color:#fdf5f5">A–Z</code>, <code style="color:#b30049;background-color:#fdf5f5">a–z</code>, <code style="color:#b30049;background-color:#fdf5f5">0–9</code>, <code style="color:#b30049;background-color:#fdf5f5">_</code>共<code style="color:#b30049;background-color:#fdf5f5">63</code>个字符
+- 数据库、表名不得超过<code>30</code>个字符，变量名限制为29个
+-  必须只能包含<code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>_</code>共<code>63</code>个字符
 - 数据库名、表名、字段名等对象名中间不要包含空格 
 - 同一个MySQL软件中，数据库不能同名;同一个库中，表不能重名;同一个表中，字段不能重名 
 - 必须保证你的字段没有和保留字、数据库系统或常用方法冲突。如果坚持使用，请在SQL语句中使 用`(着重号)引起来 
@@ -115,7 +115,7 @@ FROM   employees;
 
 方式三 
 
-列的别名可以使用一对<code style="color:#b30049;background-color:#fdf5f5">""</code>引起来，不要使用<code style="color:#b30049;background-color:#fdf5f5">''</code>
+列的别名可以使用一对<code>""</code>引起来，不要使用<code>''</code>
 
 ```sql
 SELECT last_name "lname"
@@ -145,7 +145,7 @@ FROM employees;
 
 ### 显示表结构
 
-使用<code style="color:#b30049;background-color:#fdf5f5">DESCRIBE</code>或<code style="color:#b30049;background-color:#fdf5f5">DESC</code>命令，表示表结构。
+使用<code>DESCRIBE</code>或<code>DESC</code>命令，表示表结构。
 
 ```sql
 DESCRIBE employees;
@@ -163,15 +163,15 @@ DESC employees;
 
 ## 比较运算符
 
-比较运算符用来对表达式左边的操作数和右边的操作数进行比较，比较的结果为真则返回<code style="color:#b30049;background-color:#fdf5f5">1</code>，比较的结果为假则返回<code style="color:#b30049;background-color:#fdf5f5">0</code>，其他情况则返回<code style="color:#b30049;background-color:#fdf5f5">NULL</code>。
+比较运算符用来对表达式左边的操作数和右边的操作数进行比较，比较的结果为真则返回<code>1</code>，比较的结果为假则返回<code>0</code>，其他情况则返回<code>NULL</code>。
 
-比较运算符经常被用来作为<code style="color:#b30049;background-color:#fdf5f5">SELECT</code>查询语句的条件来使用，返回符合条件的结果记录。
+比较运算符经常被用来作为<code>SELECT</code>查询语句的条件来使用，返回符合条件的结果记录。
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/mysql%E5%9F%BA%E7%A1%80/compareCpmputer.png" style="zoom:67%;" />
 
 ### 安全等于运算符
 
-安全等于运算符<code style="color:#b30049;background-color:#fdf5f5"><=></code>与等于运算符<code style="color:#b30049;background-color:#fdf5f5">=</code>的作用是相似的，唯一的区别是<code style="color:#b30049;background-color:#fdf5f5"><=></code>可以用来对NULL进行判断。在两个操作数均为NULL时，其返回值为1，而不为NULL；当一个操作数为NULL时，其返回值为0，而不为NULL。
+安全等于运算符<code><=></code>与等于运算符<code>=</code>的作用是相似的，唯一的区别是<code><=></code>可以用来对NULL进行判断。在两个操作数均为NULL时，其返回值为1，而不为NULL；当一个操作数为NULL时，其返回值为0，而不为NULL。
 
 此外，还有非符号类型的运算符：
 
@@ -183,7 +183,7 @@ DESC employees;
 
 ## 逻辑运算符
 
-逻辑运算符主要用来判断表达式的真假，在MySQL中，逻辑运算符的返回结果为<code style="color:#b30049;background-color:#fdf5f5">1</code>、<code style="color:#b30049;background-color:#fdf5f5">0</code>或者<code style="color:#b30049;background-color:#fdf5f5">NULL</code>。
+逻辑运算符主要用来判断表达式的真假，在MySQL中，逻辑运算符的返回结果为<code>1</code>、<code>0</code>或者<code>NULL</code>。
 
 MySQL中支持4种逻辑运算符如下：
 
@@ -191,21 +191,21 @@ MySQL中支持4种逻辑运算符如下：
 
 ### 逻辑非运算符
 
-逻辑非（<code style="color:#b30049;background-color:#fdf5f5">NOT</code>或<code style="color:#b30049;background-color:#fdf5f5">!</code>）运算符表示当给定的值为0时返回1；当给定的值为非0值时返回0；当给定的值为NULL时，返回NULL。
+逻辑非（<code>NOT</code>或<code>!</code>）运算符表示当给定的值为0时返回1；当给定的值为非0值时返回0；当给定的值为NULL时，返回NULL。
 
 ### 逻辑与运算符
 
-逻辑与（<code style="color:#b30049;background-color:#fdf5f5">AND</code>或<code style="color:#b30049;background-color:#fdf5f5">&&</code>）运算符是当给定的所有值均为非0值，并且都不为NULL时，返回1；当给定的一个值或者多个值为0时则返回0；否则返回NULL。
+逻辑与（<code>AND</code>或<code>&&</code>）运算符是当给定的所有值均为非0值，并且都不为NULL时，返回1；当给定的一个值或者多个值为0时则返回0；否则返回NULL。
 
 ### 逻辑或运算符
 
-逻辑或（<code style="color:#b30049;background-color:#fdf5f5">OR</code>或<code style="color:#b30049;background-color:#fdf5f5">||</code>）运算符是当给定的值都不为NULL，并且任何一个值为非0值时，则返回1，否则返回0；当一个值为NULL，并且另一个值为非0值时，返回1，否则返回NULL；当两个值都为NULL时，返回NULL。
+逻辑或（<code>OR</code>或<code>||</code>）运算符是当给定的值都不为NULL，并且任何一个值为非0值时，则返回1，否则返回0；当一个值为NULL，并且另一个值为非0值时，返回1，否则返回NULL；当两个值都为NULL时，返回NULL。
 
 > **<span style="color: #e15307">注意：OR可以和AND一起使用，但是在使用时要注意两者的优先级，由于AND的优先级高于OR，因此先对AND两边的操作数进行操作，再与OR中的操作数结合。</span>**
 
 ### 逻辑异或运算符
 
-逻辑异或（<code style="color:#b30049;background-color:#fdf5f5">XOR</code>）运算符是当给定的值中任意一个值为NULL时，则返回NULL；如果两个非NULL的值都是0或者都不等于0时，则返回0；如果一个值为0，另一个值不为0时，则返回1。
+逻辑异或（<code>XOR</code>）运算符是当给定的值中任意一个值为NULL时，则返回NULL；如果两个非NULL的值都是0或者都不等于0时，则返回0；如果一个值为0，另一个值不为0时，则返回1。
 
 ## 位运算符
 
@@ -215,29 +215,29 @@ MySQL支持的位运算符如下：
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/mysql%E5%9F%BA%E7%A1%80/bitwise.png)
 
-1. **按位与运算符** 按位与(<code style="color:#b30049;background-color:#fdf5f5">&</code>)运算符将给定值对应的二进制数逐位进行逻辑与运算。当给定值对应的二 进制位的数值都为1时，则该位返回1，否则返回0。
+1. **按位与运算符** 按位与(<code>&</code>)运算符将给定值对应的二进制数逐位进行逻辑与运算。当给定值对应的二 进制位的数值都为1时，则该位返回1，否则返回0。
 
    例子：
 
    ​	1的二进制数为0001，10的二进制数为1010，所以1 & 10的结果为0000，对应的十进制数为0。20的二进制 数为10100，30的二进制数为11110，所以20 & 30的结果为10100，对应的十进制数为20。
 
-2. **按位或运算符** 按位或(<code style="color:#b30049;background-color:#fdf5f5">|</code>)运算符将给定的值对应的二进制数逐位进行逻辑或运算。当给定值对应的 二进制位的数值有一个或两个为1时，则该位返回1，否则返回0。
+2. **按位或运算符** 按位或(<code>|</code>)运算符将给定的值对应的二进制数逐位进行逻辑或运算。当给定值对应的 二进制位的数值有一个或两个为1时，则该位返回1，否则返回0。
 
    例子：
 
    ​	1的二进制数为0001，10的二进制数为1010，所以1 | 10的结果为1011，对应的十进制数为11。20的二进 制数为10100，30的二进制数为11110，所以20 | 30的结果为11110，对应的十进制数为30。
 
-3. **按位异或运算符**“<code style="color:#b30049;background-color:#fdf5f5">^</code>”是双目运算符。 其功能是参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。
+3. **按位异或运算符**“<code>^</code>”是双目运算符。 其功能是参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。
 
-4. **按位取反运算符** 按位取反(<code style="color:#b30049;background-color:#fdf5f5">~</code>)运算符将给定的值的二进制数逐位进行取反操作，即将1变为0，将0变 为1。
+4. **按位取反运算符** 按位取反(<code>~</code>)运算符将给定的值的二进制数逐位进行取反操作，即将1变为0，将0变 为1。
 
-5. **按位右移运算符** 按位右移(<code style="color:#b30049;background-color:#fdf5f5">>></code>)运算符将给定的值的二进制数的所有位右移指定的位数。右移指定的 位数后，右边低位的数值被移出并丢弃，左边高位空出的位置用0补齐。
+5. **按位右移运算符** 按位右移(<code>>></code>)运算符将给定的值的二进制数的所有位右移指定的位数。右移指定的 位数后，右边低位的数值被移出并丢弃，左边高位空出的位置用0补齐。
 
    例子：
 
    ​	1的二进制数为0000 0001，右移2位为0000 0000，对应的十进制数为0。4的二进制数为0000 0100，右移2 位为0000 0001，对应的十进制数为1。
 
-6. **按位左移运算符** 按位左移(<code style="color:#b30049;background-color:#fdf5f5"><<</code>)运算符将给定的值的二进制数的所有位左移指定的位数。左移指定的 位数后，左边高位的数值被移出并丢弃，右边低位空出的位置用0补齐。
+6. **按位左移运算符** 按位左移(<code><<</code>)运算符将给定的值的二进制数的所有位左移指定的位数。左移指定的 位数后，左边高位的数值被移出并丢弃，右边低位空出的位置用0补齐。
 
    例子：
 
@@ -315,7 +315,7 @@ LIMIT(PageNo - 1)*PageSize,PageSize;
 
 前提条件：这些一起查询的表之间是有关系的（一对一、一对多），它们之间一定是有关联字段，这个关联字段可能建立了外键，也可能没有建立外键。比如：员工表和部门表，这两个表依靠“部门编号”进行关联。
 
-SQL92中，笛卡尔积也称为交叉连接，英文是 <code style="color:#b30049;background-color:#fdf5f5">CROSS JOIN</code>。在 SQL99 中也是使用<code style="color:#b30049;background-color:#fdf5f5">CROSS JOIN</code>表示交叉连接。它的作用就是可以把任意表进行连接，即使这两张表不相关。在MySQL中如下情况会出现笛卡尔积：
+SQL92中，笛卡尔积也称为交叉连接，英文是 <code>CROSS JOIN</code>。在 SQL99 中也是使用<code>CROSS JOIN</code>表示交叉连接。它的作用就是可以把任意表进行连接，即使这两张表不相关。在MySQL中如下情况会出现笛卡尔积：
 
 ```mysql
 #查询员工姓名和所在部门名称
@@ -467,7 +467,7 @@ ON    (e.department_id = d.department_id) ;
 ### UNION的使用
 
 **合并查询结果**
-利用<code style="color:#b30049;background-color:#fdf5f5">UNION</code>关键字，可以给出多条SELECT语句，并将它们的结果组合成单个结果集。合并时，两个表对应的列数和数据类型必须相同，并且相互对应。各个SELECT语句之间使用UNION或UNION ALL关键字分隔。
+利用<code>UNION</code>关键字，可以给出多条SELECT语句，并将它们的结果组合成单个结果集。合并时，两个表对应的列数和数据类型必须相同，并且相互对应。各个SELECT语句之间使用UNION或UNION ALL关键字分隔。
 
 语法格式：
 
@@ -477,9 +477,9 @@ UNION [ALL]
 SELECT column,... FROM table2
 ```
 
-<code style="color:#b30049;background-color:#fdf5f5">UNION</code>操作符返回两个查询的结果集的并集，去除重复记录。
+<code>UNION</code>操作符返回两个查询的结果集的并集，去除重复记录。
 
-<code style="color:#b30049;background-color:#fdf5f5">UNION ALL</code>操作符返回两个查询的结果集的并集。对于两个结果集的重复部分，不去重。
+<code>UNION ALL</code>操作符返回两个查询的结果集的并集。对于两个结果集的重复部分，不去重。
 
 {% note no-icon danger %}
 
@@ -489,7 +489,7 @@ SELECT column,... FROM table2
 
 ### SQL99语法新特性
 
-SQL99 在 SQL92 的基础上提供了一些特殊语法，比如<code style="color:#b30049;background-color:#fdf5f5">NATURAL JOIN</code>用来表示自然连接。
+SQL99 在 SQL92 的基础上提供了一些特殊语法，比如<code>NATURAL JOIN</code>用来表示自然连接。
 
 我们可以把自然连接理解为 SQL92 中的等值连接。它会帮你自动查询两张连接表中所有相同的字段，然后进行等值连接。
 
@@ -519,7 +519,7 @@ FROM employees e JOIN departments d
 USING (department_id);
 ```
 
-你能看出与自然连接<code style="color:#b30049;background-color:#fdf5f5">NATURAL JOIN</code>不同的是，<code style="color:#b30049;background-color:#fdf5f5">USING</code>指定了具体的相同的字段名称，你需要在<code style="color:#b30049;background-color:#fdf5f5">USING</code>的括号<code style="color:#b30049;background-color:#fdf5f5">()</code>中填入要指定的同名字段。同时使用<code style="color:#b30049;background-color:#fdf5f5">JOIN...USING</code>可以简化<code style="color:#b30049;background-color:#fdf5f5">JOIN ON</code>的等值连接。它与下面的 SQL 查询结果是相同的：
+你能看出与自然连接<code>NATURAL JOIN</code>不同的是，<code>USING</code>指定了具体的相同的字段名称，你需要在<code>USING</code>的括号<code>()</code>中填入要指定的同名字段。同时使用<code>JOIN...USING</code>可以简化<code>JOIN ON</code>的等值连接。它与下面的 SQL 查询结果是相同的：
 
 ```mysql
 SELECT employee_id,last_name,department_name
@@ -539,22 +539,22 @@ MySQL提供的内置函数从`实现的功能角度`可以分为数值函数、�
 
 ### 基本函数
 
-| 函数                                                         | 用法                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <code style="color:#b30049;background-color:#fdf5f5">ABS(x)</code> | 返回x的绝对值                                                |
-| <code style="color:#b30049;background-color:#fdf5f5">SIGN(X)</code> | 返回X的符号。正数返回1，负数返回-1，0返回0                   |
-| <code style="color:#b30049;background-color:#fdf5f5">PI()</code> | 返回圆周率的值                                               |
-| <code style="color:#b30049;background-color:#fdf5f5">CEIL(x)</code>，<code style="color:#b30049;background-color:#fdf5f5">CEILING(x)</code> | 返回大于或等于某个值的最小整数                               |
-| <code style="color:#b30049;background-color:#fdf5f5">FLOOR(x)</code> | 返回小于或等于某个值的最大整数                               |
-| <code style="color:#b30049;background-color:#fdf5f5">LEAST(e1,e2,e3…)</code> | 返回列表中的最小值                                           |
-| <code style="color:#b30049;background-color:#fdf5f5">GREATEST(e1,e2,e3…)</code> | 返回列表中的最大值                                           |
-| <code style="color:#b30049;background-color:#fdf5f5">MOD(x,y)</code> | 返回X除以Y后的余数                                           |
-| <code style="color:#b30049;background-color:#fdf5f5">RAND()</code> | 返回0~1的随机值                                              |
-| <code style="color:#b30049;background-color:#fdf5f5">RAND(x)</code> | 返回0~1的随机值，其中x的值用作种子值，相同的X值会产生相同的随机数 |
-| <code style="color:#b30049;background-color:#fdf5f5">ROUND(x)</code> | 返回一个对x的值进行四舍五入后，最接近于X的整数               |
-| <code style="color:#b30049;background-color:#fdf5f5">ROUND(x,y)</code> | 返回一个对x的值进行四舍五入后最接近X的值，并保留到小数点后面Y位 |
-| <code style="color:#b30049;background-color:#fdf5f5">TRUNCATE(x,y)</code> | 返回数字x截断为y位小数的结果                                 |
-| <code style="color:#b30049;background-color:#fdf5f5">SQRT(x)</code> | 返回x的平方根。当X的值为负数时，返回NULL                     |
+| 函数                                          | 用法                                                         |
+| --------------------------------------------- | ------------------------------------------------------------ |
+| <code>ABS(x)</code>                           | 返回x的绝对值                                                |
+| <code>SIGN(X)</code>                          | 返回X的符号。正数返回1，负数返回-1，0返回0                   |
+| <code>PI()</code>                             | 返回圆周率的值                                               |
+| <code>CEIL(x)</code>，<code>CEILING(x)</code> | 返回大于或等于某个值的最小整数                               |
+| <code>FLOOR(x)</code>                         | 返回小于或等于某个值的最大整数                               |
+| <code>LEAST(e1,e2,e3…)</code>                 | 返回列表中的最小值                                           |
+| <code>GREATEST(e1,e2,e3…)</code>              | 返回列表中的最大值                                           |
+| <code>MOD(x,y)</code>                         | 返回X除以Y后的余数                                           |
+| <code>RAND()</code>                           | 返回0~1的随机值                                              |
+| <code>RAND(x)</code>                          | 返回0~1的随机值，其中x的值用作种子值，相同的X值会产生相同的随机数 |
+| <code>ROUND(x)</code>                         | 返回一个对x的值进行四舍五入后，最接近于X的整数               |
+| <code>ROUND(x,y)</code>                       | 返回一个对x的值进行四舍五入后最接近X的值，并保留到小数点后面Y位 |
+| <code>TRUNCATE(x,y)</code>                    | 返回数字x截断为y位小数的结果                                 |
+| <code>SQRT(x)</code>                          | 返回x的平方根。当X的值为负数时，返回NULL                     |
 
 举例：
 
@@ -1016,12 +1016,12 @@ mysql> SELECT STR_TO_DATE('2020-01-01 00:00:00','%Y-%m-%d');
 
 ## 流程控制函数
 
-流程处理函数可以根据不同的条件，执行不同的处理流程，可以在SQL语句中实现不同的条件选择。MySQL中的流程处理函数主要包括<code style="color:#b30049;background-color:#fdf5f5">IF()</code>、<code style="color:#b30049;background-color:#fdf5f5">IFNULL()</code>和<code style="color:#b30049;background-color:#fdf5f5">CASE()</code>函数。
+流程处理函数可以根据不同的条件，执行不同的处理流程，可以在SQL语句中实现不同的条件选择。MySQL中的流程处理函数主要包括<code>IF()</code>、<code>IFNULL()</code>和<code>CASE()</code>函数。
 
 | 函数                                                         | 用法                                            |
 | ------------------------------------------------------------ | ----------------------------------------------- |
-| <code style="color:#b30049;background-color:#fdf5f5">IF(value,value1,value2)</code> | 如果value的值为TRUE，返回value1，否则返回value2 |
-| <code style="color:#b30049;background-color:#fdf5f5">IFNULL(value1, value2)</code> | 如果value1不为NULL，返回value1，否则返回value2  |
+| <code>IF(value,value1,value2)</code>                         | 如果value的值为TRUE，返回value1，否则返回value2 |
+| <code>IFNULL(value1, value2)</code>                          | 如果value1不为NULL，返回value1，否则返回value2  |
 | CASE WHEN 条件1 THEN 结果1 WHEN 条件2 THEN 结果2 .... [ELSE resultn] END | 相当于Java的if...else if...else...              |
 | CASE  expr WHEN 常量值1 THEN 值1 WHEN 常量值1 THEN 值1 .... [ELSE 值n] END | 相当于Java的switch...case...                    |
 

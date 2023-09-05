@@ -174,7 +174,7 @@ max    26.0
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_dataset.png)
 
-`Pandas`提供了<code style="color:#b30049;background-color:#fdf5f5">read_csv()</code>函数将Excel文件读取为`DataFrame`对象。
+`Pandas`提供了<code>read_csv()</code>函数将Excel文件读取为`DataFrame`对象。
 
 `pandas` 支持许多不同的文件格式或开箱即用的数据源（`csv`、`excel`、`sql`、`json`、`parquet`...），读取每个文件格式或数据源都使用带有前缀`read_*`的函数。
 
@@ -189,7 +189,7 @@ Out：
 
 请确保读完数据之后总是有一个数据检查。显示 `DataFrame` 时，默认显示前 5 行和后 5 行。
 
-要查看 DataFrame 的前 N 行，请使用该 <code style="color:#b30049;background-color:#fdf5f5">head()</code> 方法并以所需的行数作为参数。
+要查看 DataFrame 的前 N 行，请使用该 <code>head()</code> 方法并以所需的行数作为参数。
 
 我想查看 `pandas` `DataFrame` 的前 8 行。
 
@@ -211,9 +211,9 @@ Out:
 7   74  State-gov   88638  ...             20   United-States   >50K
 ```
 
-对最后 N 行感兴趣吗？pandas也提供了一种  <code style="color:#b30049;background-color:#fdf5f5">tail() </code>方法。例如，`adult.tail(10)`将返回 `DataFrame` 的最后 10 行。
+对最后 N 行感兴趣吗？pandas也提供了一种  <code>tail() </code>方法。例如，`adult.tail(10)`将返回 `DataFrame` 的最后 10 行。
 
-可以通过请求 `pandas`  <code style="color:#b30049;background-color:#fdf5f5">dtypes</code> 属性来检查 `pandas` 如何解释每个列数据类型：
+可以通过请求 `pandas`  <code>dtypes</code> 属性来检查 `pandas` 如何解释每个列数据类型：
 
 ```python
 print(adult.dtypes)
@@ -248,7 +248,7 @@ dtype: object
 adult.to_excel("adult.xlsx", sheet_name="person", index=False)
 ```
 
-<code style="color:#b30049;background-color:#fdf5f5"> read_*</code>函数常用于读取函数到`Pandas`中，而`to_*`函数常用于存储数据。
+<code> read_*</code>函数常用于读取函数到`Pandas`中，而`to_*`函数常用于存储数据。
 
 该`to_excel()`方法将数据存储为 `Excel` 文件。在此示例中，`sheet_name`名为*“person”*而不是默认的*“Sheet1”*。通过设置 `index=False`行索引标签不会保存在电子表格中。
 

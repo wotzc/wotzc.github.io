@@ -9,10 +9,10 @@ categories: SpringBoot
 
 ## properties
 
-- SpringBoot自动加载特地目录下的<code style="color:#b30049;background-color:#fdf5f5">application.properties</code>配置文件，在实际的使用中，一般放在<code style="color:#b30049;background-color:#fdf5f5">resources</code>文件夹下。
-- <code style="color:#b30049;background-color:#fdf5f5">application.properties</code>采用<code style="color:#b30049;background-color:#fdf5f5">key=value</code>配置形式
+- SpringBoot自动加载特地目录下的<code>application.properties</code>配置文件，在实际的使用中，一般放在<code>resources</code>文件夹下。
+- <code>application.properties</code>采用<code>key=value</code>配置形式
 
-SpringBoot的设计思想是**约定大于配置**，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Config。<code style="color:#b30049;background-color:#fdf5f5">properties</code>和<code style="color:#b30049;background-color:#fdf5f5">yml</code>是SpringBoot项目常用的两种文件配置方式。SpringBoot项目默认加载以下目录下的application.properties文件。在实际的使用中，一般放在resources文件夹下。
+SpringBoot的设计思想是**约定大于配置**，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Config。<code>properties</code>和<code>yml</code>是SpringBoot项目常用的两种文件配置方式。SpringBoot项目默认加载以下目录下的application.properties文件。在实际的使用中，一般放在resources文件夹下。
 
 {% note no-icon default %}
 
@@ -30,13 +30,13 @@ YAML 是 "YAML Ain't Markup Language"（YAML 不是一种标记语言）的递�
 
 ### 基本语法
 
-- <code style="color:#b30049;background-color:#fdf5f5">key: value</code>；**kv之间有空格**
+- <code>key: value</code>；**kv之间有空格**
 - **大小写敏感**
 - **使用缩进表示层级关系**
 - **缩进不允许使用tab，只允许空格**
 - **缩进的空格数不重要，只要相同层级的元素左对齐即可**
-- <code style="color:#b30049;background-color:#fdf5f5">#</code>**表示注释**
-- **字符串无需加引号，如果要加**，<code style="color:#b30049;background-color:#fdf5f5">''</code>与<code style="color:#b30049;background-color:#fdf5f5">""</code>表示字符串内容会被转义/不转义
+- <code>#</code>**表示注释**
+- **字符串无需加引号，如果要加**，<code>''</code>与<code>""</code>表示字符串内容会被转义/不转义
 
 ### 数据类型
 
@@ -266,15 +266,15 @@ favicon.ico 放在静态资源目录下即可。
 ### 普通参数与基本注解
 
 注解：
-<code style="color:#b30049;background-color:#fdf5f5">@PathVariable</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestHeader</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code>、<code style="color:#b30049;background-color:#fdf5f5">@CookieValue</code>、<code style="color:#b30049;background-color:#fdf5f5">@RequestBody</code>
+<code>@PathVariable</code>、<code>@RequestHeader</code>、<code>@RequestParam</code>、<code>@CookieValue</code>、<code>@RequestBody</code>
 
-| 注解                                                         | 作用                                                         |
-| :----------------------------------------------------------- | :----------------------------------------------------------- |
-| <code style="color:#b30049;background-color:#fdf5f5">@PathVariable</code> | 通过 @PathVariable 可以将URL中占位符参数{xxx}绑定到处理器类的方法形参中@PathVariable(“xxx“) |
-| <code style="color:#b30049;background-color:#fdf5f5">@RequestHeader</code> | 是获取请求头中的数据，通过指定参数 value 的值来获取请求头中指定的参数值。** |
-| <code style="color:#b30049;background-color:#fdf5f5">@RequestParam</code> | @RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上 |
-| <code style="color:#b30049;background-color:#fdf5f5">@CookieValue</code> | @CookieValue注解主要是将请求的Cookie数据，映射到功能处理方法的参数上。 |
-| <code style="color:#b30049;background-color:#fdf5f5">@RequestBody</code> | 主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)；GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。 |
+| 注解                        | 作用                                                         |
+| :-------------------------- | :----------------------------------------------------------- |
+| <code>@PathVariable</code>  | 通过 @PathVariable 可以将URL中占位符参数{xxx}绑定到处理器类的方法形参中@PathVariable(“xxx“) |
+| <code>@RequestHeader</code> | 是获取请求头中的数据，通过指定参数 value 的值来获取请求头中指定的参数值。** |
+| <code>@RequestParam</code>  | @RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上 |
+| <code>@CookieValue</code>   | @CookieValue注解主要是将请求的Cookie数据，映射到功能处理方法的参数上。 |
+| <code>@RequestBody</code>   | 主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)；GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。 |
 
 #### @PathVariable
 

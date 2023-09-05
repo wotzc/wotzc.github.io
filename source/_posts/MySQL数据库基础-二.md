@@ -21,11 +21,11 @@ Categories: Mysql
   - **MIN()** 
   - **COUNT()**
 
-- 聚合函数不能嵌套调用。比如不能出现类似<code style="color:#b30049;background-color:#fdf5f5">AVG(SUM(字段名称))</code>形式的调用。
+- 聚合函数不能嵌套调用。比如不能出现类似<code>AVG(SUM(字段名称))</code>形式的调用。
 
 ## AVG和SUM函数
 
-可以对**数值型数据**使用<code style="color:#b30049;background-color:#fdf5f5">AVG</code>和<code style="color:#b30049;background-color:#fdf5f5">SUM</code>函数。
+可以对**数值型数据**使用<code>AVG</code>和<code>SUM</code>函数。
 
 ```sql
 SELECT AVG(salary), MAX(salary),MIN(salary), SUM(salary)
@@ -39,7 +39,7 @@ AVg(salary)  MAx(salary)  min(salary)  Sum(salary)
 
 ## MIN和MAX函数
 
-可以对**任意数据类型**的数据使用<code style="color:#b30049;background-color:#fdf5f5">MIN</code>和<code style="color:#b30049;background-color:#fdf5f5">MAX</code>函数。
+可以对**任意数据类型**的数据使用<code>MIN</code>和<code>MAX</code>函数。
 
 ```sql
 SELECT MIN(hire_date), MAX(hire_date)
@@ -52,7 +52,7 @@ min(hire_date)  max(hire_date)
 
 ##  COUNT函数
 
-- <code style="color:#b30049;background-color:#fdf5f5">COUNT(*)</code>返回表中记录总数，适用于**任意数据类型**。
+- <code>COUNT(*)</code>返回表中记录总数，适用于**任意数据类型**。
 
 
 ```sql
@@ -61,7 +61,7 @@ FROM	  employees
 WHERE  department_id = 50;
 ```
 
-- <code style="color:#b30049;background-color:#fdf5f5">COUNT(expr)</code>返回**expr不为空**的记录总数。
+- <code>COUNT(expr)</code>返回**expr不为空**的记录总数。
 
 
 ```sql
@@ -78,7 +78,7 @@ Innodb引擎的表用count(*),count(1)直接读行数，复杂度是O(n)，因�
 
 ## GROUP BY
 
-<code style="color:#b30049;background-color:#fdf5f5">GROUP BY</code>子句将查询结果按某一列或多列的值分组，值相等的为一组。对查询结果分组的目的是为了细化聚合函数的作用对象。如果未对查询结果分组，聚合函数将作用于整个查询结果。
+<code>GROUP BY</code>子句将查询结果按某一列或多列的值分组，值相等的为一组。对查询结果分组的目的是为了细化聚合函数的作用对象。如果未对查询结果分组，聚合函数将作用于整个查询结果。
 
 **在SELECT列表中所有未包含在组函数中的列都应该包含在 GROUP BY子句中**
 
@@ -114,12 +114,12 @@ GROUP BY department_id WITH ROLLUP;
 
 ## HAVING
 
-**过滤分组**：<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>子句
+**过滤分组**：<code>HAVING</code>子句
 
 1. 行已经被分组。
 2. 使用了聚合函数。
 3. 满足HAVING 子句中条件的分组将被显示。
-4. <code style="color:#b30049;background-color:#fdf5f5">HAVING</code>不能单独使用，必须要跟<code style="color:#b30049;background-color:#fdf5f5">GROUP BY</code>一起使用。
+4. <code>HAVING</code>不能单独使用，必须要跟<code>GROUP BY</code>一起使用。
 
 ```sql
 SELECT   department_id, MAX(salary)
@@ -152,9 +152,9 @@ GROUP BY department_id;
 
 **区别1：WHERE 可以直接使用表中的字段作为筛选条件，但不能使用分组中的计算函数作为筛选条件；HAVING 必须要与 GROUP BY 配合使用，可以把分组计算的函数和分组字段作为筛选条件。** 
 
-这决定了，在需要对数据进行分组统计的时候，<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>可以完成<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>不能完成的任务。这是因为，在查询语法结构中，<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>在<code style="color:#b30049;background-color:#fdf5f5">GROUP BY</code>之前，所以无法对分组结果进行筛选。<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>在<code style="color:#b30049;background-color:#fdf5f5">GROUP BY</code>之后，可以使用分组字段和分组中的计算函数，对分组的结果集进行筛选，这个功能是<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>无法完成的。另外，<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>排除的记录不再包括在分组中。
+这决定了，在需要对数据进行分组统计的时候，<code>HAVING</code>可以完成<code>WHERE</code>不能完成的任务。这是因为，在查询语法结构中，<code>WHERE</code>在<code>GROUP BY</code>之前，所以无法对分组结果进行筛选。<code>HAVING</code>在<code>GROUP BY</code>之后，可以使用分组字段和分组中的计算函数，对分组的结果集进行筛选，这个功能是<code>WHERE</code>无法完成的。另外，<code>WHERE</code>排除的记录不再包括在分组中。
 
-**区别2：如果需要通过连接从关联表中获取需要的数据，WHERE 是先筛选后连接，而 HAVING 是先连接后筛选。** 这一点，就决定了在关联查询中，<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>比<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>更高效。因为<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>可以先筛选，用一个筛选后的较小数据集和关联表进行连接，这样占用的资源比较少，执行效率也比较高。HAVING 则需要先把结果集准备好，也就是用未被筛选的数据集进行关联，然后对这个大的数据集进行筛选，这样占用的资源就比较多，执行效率也较低。 
+**区别2：如果需要通过连接从关联表中获取需要的数据，WHERE 是先筛选后连接，而 HAVING 是先连接后筛选。** 这一点，就决定了在关联查询中，<code>WHERE</code>比<code>HAVING</code>更高效。因为<code>WHERE</code>可以先筛选，用一个筛选后的较小数据集和关联表进行连接，这样占用的资源比较少，执行效率也比较高。HAVING 则需要先把结果集准备好，也就是用未被筛选的数据集进行关联，然后对这个大的数据集进行筛选，这样占用的资源就比较多，执行效率也较低。 
 
 小结如下：
 
@@ -165,7 +165,7 @@ GROUP BY department_id;
 
 **开发中的选择：**
 
-<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>和<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>也不是互相排斥的，我们可以在一个查询里面同时使用<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>和<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>。包含分组统计函数的条件用<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>，普通条件用<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>。这样，我们就既利用了<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>条件的高效快速，又发挥了<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>可以使用包含分组统计函数的查询条件的优点。当数据量特别大的时候，运行效率会有很大的差别。
+<code>WHERE</code>和<code>HAVING</code>也不是互相排斥的，我们可以在一个查询里面同时使用<code>WHERE</code>和<code>HAVING</code>。包含分组统计函数的条件用<code>HAVING</code>，普通条件用<code>WHERE</code>。这样，我们就既利用了<code>WHERE</code>条件的高效快速，又发挥了<code>HAVING</code>可以使用包含分组统计函数的查询条件的优点。当数据量特别大的时候，运行效率会有很大的差别。
 
 -----
 
@@ -223,25 +223,25 @@ LIMIT 2 # 顺序 7
 
 ### SQL 的执行原理
 
-<code style="color:#b30049;background-color:#fdf5f5">SELECT</code>是先执行<code style="color:#b30049;background-color:#fdf5f5">FROM</code>这一步的。在这个阶段，如果是多张表联查，还会经历下面的几个步骤：
+<code>SELECT</code>是先执行<code>FROM</code>这一步的。在这个阶段，如果是多张表联查，还会经历下面的几个步骤：
 
-1. 首先先通过<code style="color:#b30049;background-color:#fdf5f5">CROSS JOIN</code>求笛卡尔积，相当于得到虚拟表 vt（virtual table）1-1；
-2. 通过<code style="color:#b30049;background-color:#fdf5f5">ON</code>进行筛选，在虚拟表 vt1-1 的基础上进行筛选，得到虚拟表 vt1-2；
+1. 首先先通过<code>CROSS JOIN</code>求笛卡尔积，相当于得到虚拟表 vt（virtual table）1-1；
+2. 通过<code>ON</code>进行筛选，在虚拟表 vt1-1 的基础上进行筛选，得到虚拟表 vt1-2；
 3. 添加外部行。如果我们使用的是左连接、右链接或者全连接，就会涉及到外部行，也就是在虚拟表 vt1-2 的基础上增加外部行，得到虚拟表 vt1-3。
 
 当然如果我们操作的是两张以上的表，还会重复上面的步骤，直到所有表都被处理完为止。这个过程得到是我们的原始数据。
 
-当我们拿到了查询数据表的原始数据，也就是最终的虚拟表 `vt1`，就可以在此基础上再进行 <code style="color:#b30049;background-color:#fdf5f5">WHERE 阶段</code>。在这个阶段中，会根据 vt1 表的结果进行筛选过滤，得到虚拟表 `vt2`。
+当我们拿到了查询数据表的原始数据，也就是最终的虚拟表 `vt1`，就可以在此基础上再进行 <code>WHERE 阶段</code>。在这个阶段中，会根据 vt1 表的结果进行筛选过滤，得到虚拟表 `vt2`。
 
-然后进入第三步和第四步，也就是 <code style="color:#b30049;background-color:#fdf5f5">GROUP</code>和<code style="color:#b30049;background-color:#fdf5f5">HAVING</code>阶段。在这个阶段中，实际上是在虚拟表 vt2 的基础上进行分组和分组过滤，得到中间的虚拟表 `vt3` 和 `vt4`。
+然后进入第三步和第四步，也就是 <code>GROUP</code>和<code>HAVING</code>阶段。在这个阶段中，实际上是在虚拟表 vt2 的基础上进行分组和分组过滤，得到中间的虚拟表 `vt3` 和 `vt4`。
 
-当我们完成了条件筛选部分之后，就可以筛选表中提取的字段，也就是进入到 <code style="color:#b30049;background-color:#fdf5f5">SELECT</code>和<code style="color:#b30049;background-color:#fdf5f5">DISTINCT</code> 阶段。
+当我们完成了条件筛选部分之后，就可以筛选表中提取的字段，也就是进入到 <code>SELECT</code>和<code>DISTINCT</code> 阶段。
 
-首先在<code style="color:#b30049;background-color:#fdf5f5">SELECT</code>阶段会提取想要的字段，然后在<code style="color:#b30049;background-color:#fdf5f5">DISTINCT</code>阶段过滤掉重复的行，分别得到中间的虚拟表 `vt5-1` 和 `vt5-2`。
+首先在<code>SELECT</code>阶段会提取想要的字段，然后在<code>DISTINCT</code>阶段过滤掉重复的行，分别得到中间的虚拟表 `vt5-1` 和 `vt5-2`。
 
-当我们提取了想要的字段数据之后，就可以按照指定的字段进行排序，也就是 <code style="color:#b30049;background-color:#fdf5f5">ORDER BY</code>阶段，得到虚拟表 `vt6`。
+当我们提取了想要的字段数据之后，就可以按照指定的字段进行排序，也就是 <code>ORDER BY</code>阶段，得到虚拟表 `vt6`。
 
-最后在 vt6 的基础上，取出指定行的记录，也就是<code style="color:#b30049;background-color:#fdf5f5">LIMIT</code>阶段，得到最终的结果，对应的是虚拟表 `vt7`。
+最后在 vt6 的基础上，取出指定行的记录，也就是<code>LIMIT</code>阶段，得到最终的结果，对应的是虚拟表 `vt7`。
 
 当然我们在写 SELECT 语句的时候，不一定存在所有的关键字，相应的阶段就会省略。
 
@@ -264,14 +264,14 @@ LIMIT 2 # 顺序 7
 
 ### 单行比较操作符
 
-| 操作符                                                       | 含义                     |
-| ------------------------------------------------------------ | ------------------------ |
-| <code style="color:#b30049;background-color:#fdf5f5">=</code> | equal to                 |
-| <code style="color:#b30049;background-color:#fdf5f5">></code> | greater than             |
-| <code style="color:#b30049;background-color:#fdf5f5">>=</code> | greater than or equal to |
-| <code style="color:#b30049;background-color:#fdf5f5"><</code> | less than                |
-| <code style="color:#b30049;background-color:#fdf5f5"><=</code> | less than or equal to    |
-| <code style="color:#b30049;background-color:#fdf5f5"><></code> | not equal to             |
+| 操作符          | 含义                     |
+| --------------- | ------------------------ |
+| <code>=</code>  | equal to                 |
+| <code>></code>  | greater than             |
+| <code>>=</code> | greater than or equal to |
+| <code><</code>  | less than                |
+| <code><=</code> | less than or equal to    |
+| <code><></code> | not equal to             |
 
 ### **题目：查询工资大于149号员工工资的员工的信息**
 
@@ -293,12 +293,12 @@ WHERE salary > (
 
 ### 多行比较操作符
 
-| 操作符                                                       | 含义                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <code style="color:#b30049;background-color:#fdf5f5">IN</code> | 等于列表中的**任意一个**                                     |
-| <code style="color:#b30049;background-color:#fdf5f5">ANY</code> | 需要和单行比较操作符一起使用，和子查询返回的**某一个**值比较 |
-| <code style="color:#b30049;background-color:#fdf5f5">ALL</code> | 需要和单行比较操作符一起使用，和子查询返回的**所有**值比较   |
-| <code style="color:#b30049;background-color:#fdf5f5">SOME</code> | 实际上是ANY的别名，作用相同，一般常使用ANY                   |
+| 操作符            | 含义                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| <code>IN</code>   | 等于列表中的**任意一个**                                     |
+| <code>ANY</code>  | 需要和单行比较操作符一起使用，和子查询返回的**某一个**值比较 |
+| <code>ALL</code>  | 需要和单行比较操作符一起使用，和子查询返回的**所有**值比较   |
+| <code>SOME</code> | 实际上是ANY的别名，作用相同，一般常使用ANY                   |
 
 **题目：查询平均工资最低的部门id**
 
@@ -335,11 +335,11 @@ WHERE Grade >= (
 
 ### EXISTS 与 NOT EXISTS关键字
 
-<code style="color:#b30049;background-color:#fdf5f5">EXISTS</code>代表存在量词。带有<code style="color:#b30049;background-color:#fdf5f5">EXISTS</code>谓词的子查询不返回任何数据，只产生逻辑真值<code style="color:#b30049;background-color:#fdf5f5">true</code>或逻辑假值<code style="color:#b30049;background-color:#fdf5f5">false</code>。
+<code>EXISTS</code>代表存在量词。带有<code>EXISTS</code>谓词的子查询不返回任何数据，只产生逻辑真值<code>true</code>或逻辑假值<code>false</code>。
 
-使用存在量词<code style="color:#b30049;background-color:#fdf5f5">EXISTS</code>后，若内存查询结果非空，则外层的<code style="color:#b30049;background-color:#fdf5f5">WHERE子</code>句返回真值，否则返回假值。
+使用存在量词<code>EXISTS</code>后，若内存查询结果非空，则外层的<code>WHERE子</code>句返回真值，否则返回假值。
 
-<code style="color:#b30049;background-color:#fdf5f5">NOT EXISTS</code>关键字表示如果不存在某种条件，则返回<code style="color:#b30049;background-color:#fdf5f5">TRUE</code>，否则返回<code style="color:#b30049;background-color:#fdf5f5">FALSE</code>。
+<code>NOT EXISTS</code>关键字表示如果不存在某种条件，则返回<code>TRUE</code>，否则返回<code>FALSE</code>。
 
 **题目：查询departments表中，不存在于employees表中的部门的department_id和department_name**
 
@@ -357,11 +357,11 @@ WHERE NOT EXISTS (SELECT 'X'
 
 ## 标识符命名规则
 
-- 数据库名、表名不得超过<code style="color:#b30049;background-color:#fdf5f5">30</code>个字符，变量名限制为29个
-- 必须只能包含<code style="color:#b30049;background-color:#fdf5f5"> A–Z</code>, <code style="color:#b30049;background-color:#fdf5f5">a–z</code>, <code style="color:#b30049;background-color:#fdf5f5">0–9</code>, <code style="color:#b30049;background-color:#fdf5f5">_</code>共63个字符
+- 数据库名、表名不得超过<code>30</code>个字符，变量名限制为29个
+- 必须只能包含<code> A–Z</code>, <code>a–z</code>, <code>0–9</code>, <code>_</code>共63个字符
 - 数据库名、表名、字段名等对象名中间不要包含空格
 - 同一个MySQL软件中，数据库不能同名；同一个库中，表不能重名；同一个表中，字段不能重名
-- 必须保证你的字段没有和保留字、数据库系统或常用方法冲突。如果坚持使用，请在SQL语句中使用<code style="color:#b30049;background-color:#fdf5f5">`</code>（着重号）引起来
+- 必须保证你的字段没有和保留字、数据库系统或常用方法冲突。如果坚持使用，请在SQL语句中使用<code>`</code>（着重号）引起来
 - 保持字段名和类型的一致性：在命名字段并为其指定数据类型的时候一定要保证一致性，假如数据类型在一个表里是整数，那在另一个表里可就别变成字符型了
 
 ## MySQL中的数据类型
@@ -501,7 +501,7 @@ WHERE   department_id = 80;
 
 ### 查看数据表结构
 
-在MySQL中创建好数据表之后，可以查看数据表的结构。MySQL支持使用<code style="color:#b30049;background-color:#fdf5f5">DESCRIBE/DESC</code>语句查看数据表结构，也支持使用<code style="color:#b30049;background-color:#fdf5f5">SHOW CREATE TABLE</code>语句查看数据表结构。
+在MySQL中创建好数据表之后，可以查看数据表的结构。MySQL支持使用<code>DESCRIBE/DESC</code>语句查看数据表结构，也支持使用<code>SHOW CREATE TABLE</code>语句查看数据表结构。
 
 语法格式如下：
 
@@ -509,7 +509,7 @@ WHERE   department_id = 80;
 SHOW CREATE TABLE 表名\G
 ```
 
-使用<code style="color:#b30049;background-color:#fdf5f5">SHOW CREATE TABLE</code>语句不仅可以查看表创建时的详细语句，还可以查看存储引擎和字符编码。
+使用<code>SHOW CREATE TABLE</code>语句不仅可以查看表创建时的详细语句，还可以查看存储引擎和字符编码。
 
 ## 修改表
 
@@ -566,7 +566,7 @@ MODIFY salary double(9,2) default 1000;
 
 ### 重命名一个列
 
-使用<code style="color:#b30049;background-color:#fdf5f5"> CHANGE old_column  new_column  dataType</code>子句重命名列。语法格式如下：
+使用<code> CHANGE old_column  new_column  dataType</code>子句重命名列。语法格式如下：
 
 ```mysql
 ALTER TABLE 表名 CHANGE 【column】 列名 新列名 新数据类型;
@@ -596,7 +596,7 @@ DROP COLUMN  job_id;
 
 ## 重命名表
 
-- 方式一：使用<code style="color:#b30049;background-color:#fdf5f5">RENAME</code>
+- 方式一：使用<code>RENAME</code>
 
 ```mysql
 RENAME TABLE emp
@@ -625,7 +625,7 @@ RENAME [TO] detail_dept;  -- [TO]可以省略
 DROP TABLE [IF EXISTS] 数据表1 [, 数据表2, …, 数据表n];
 ```
 
-<code style="color:#b30049;background-color:#fdf5f5">IF EXISTS</code>的含义为：如果当前数据库中存在相应的数据表，则删除数据表；如果当前数据库中不存在相应的数据表，则忽略删除语句，不再执行删除数据表的操作。
+<code>IF EXISTS</code>的含义为：如果当前数据库中存在相应的数据表，则删除数据表；如果当前数据库中不存在相应的数据表，则忽略删除语句，不再执行删除数据表的操作。
 
 - 举例：
 
@@ -633,11 +633,11 @@ DROP TABLE [IF EXISTS] 数据表1 [, 数据表2, …, 数据表n];
 DROP TABLE dept80;
 ```
 
-- <code style="color:#b30049;background-color:#fdf5f5">DROP TABLE</code>语句不能回滚
+- <code>DROP TABLE</code>语句不能回滚
 
 ## 清空表
 
-- <code style="color:#b30049;background-color:#fdf5f5">TRUNCATE TABLE</code>语句：
+- <code>TRUNCATE TABLE</code>语句：
   - 删除表中所有的数据
   - 释放表的存储空间
 
@@ -647,7 +647,7 @@ DROP TABLE dept80;
 TRUNCATE TABLE detail_dept;
 ```
 
-- <code style="color:#b30049;background-color:#fdf5f5">TRUNCATE</code>语句**不能回滚**，而使用<code style="color:#b30049;background-color:#fdf5f5">DELETE</code>语句删除数据，**可以回滚**
+- <code>TRUNCATE</code>语句**不能回滚**，而使用<code>DELETE</code>语句删除数据，**可以回滚**
 
 - 对比：
 
@@ -798,7 +798,7 @@ INSERT INTO 表名(column1 [, column2, …, columnn])
 VALUES (value1 [,value2, …, valuen]);
 ```
 
-为表的指定字段插入数据，就是在<code style="color:#b30049;background-color:#fdf5f5">INSERT</code>语句中只向部分字段中插入值，而其他字段的值为表定义时的默认值。
+为表的指定字段插入数据，就是在<code>INSERT</code>语句中只向部分字段中插入值，而其他字段的值为表定义时的默认值。
 
 举例：
 
@@ -809,7 +809,7 @@ VALUES (80, 'IT');
 
 **情况3：同时插入多条记录**
 
-<code style="color:#b30049;background-color:#fdf5f5">INSERT</code>语句可以同时向数据表中插入多条记录，插入时指定多个值列表，每个值列表之间用逗号分隔开，基本语法格式如下：
+<code>INSERT</code>语句可以同时向数据表中插入多条记录，插入时指定多个值列表，每个值列表之间用逗号分隔开，基本语法格式如下：
 
 ```mysql
 INSERT INTO table_name 
@@ -851,7 +851,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 
 **小结：**
 
-- <code style="color:#b30049;background-color:#fdf5f5">VALUES</code>也可以写成<code style="color:#b30049;background-color:#fdf5f5">VALUE</code>，但是<code style="color:#b30049;background-color:#fdf5f5">VALUES</code>是标准写法。
+- <code>VALUES</code>也可以写成<code>VALUE</code>，但是<code>VALUES</code>是标准写法。
 
 
 - 字符和日期型数据应包含在单引号中。
@@ -871,9 +871,9 @@ FROM 源表名
 [WHERE condition]
 ```
 
-- 在<code style="color:#b30049;background-color:#fdf5f5">INSERT</code>语句中加入子查询。 
+- 在<code>INSERT</code>语句中加入子查询。 
 - **不必书写** **VALUES** **子句。** 
-- 子查询中的值列表应与<code style="color:#b30049;background-color:#fdf5f5">INSERT</code>子句中的列名对应。
+- 子查询中的值列表应与<code>INSERT</code>子句中的列名对应。
 
 举例：
 
@@ -886,7 +886,7 @@ WHERE  job_id LIKE '%REP%';
 
 ## 更新数据
 
-- 使用<code style="color:#b30049;background-color:#fdf5f5">UPDATE</code>语句更新数据。语法如下：
+- 使用<code>UPDATE</code>语句更新数据。语法如下：
 
 ```
 UPDATE table_name
@@ -906,7 +906,7 @@ SET    department_id = 70
 WHERE  employee_id = 113;
 ```
 
-- 如果省略<code style="color:#b30049;background-color:#fdf5f5">WHERE</code>子句，则表中的所有数据都将被更新。
+- 如果省略<code>WHERE</code>子句，则表中的所有数据都将被更新。
 
 ```sql
 UPDATE 	copy_emp
@@ -915,13 +915,13 @@ SET    	department_id = 110;
 
 ## 删除数据
 
-- 使用<code style="color:#b30049;background-color:#fdf5f5">DELETE</code>语句从表中删除数据
+- 使用<code>DELETE</code>语句从表中删除数据
 
 ```mysql
 DELETE FROM table_name [WHERE <condition>];
 ```
 
-table_name指定要执行删除操作的表；<code style="color:#b30049;background-color:#fdf5f5">[WHERE \<condition>]</code>为可选参数，指定删除条件，如果没有WHERE子句，DELETE语句将删除表中的所有记录。
+table_name指定要执行删除操作的表；<code>[WHERE \<condition>]</code>为可选参数，指定删除条件，如果没有WHERE子句，DELETE语句将删除表中的所有记录。
 
 - 使用 WHERE 子句删除指定的记录。
 
@@ -984,23 +984,23 @@ DELETE FROM  copy_emp;
 
 ### 适用场景
 
-<code style="color:#b30049;background-color:#fdf5f5">TINYINT</code>：一般用于枚举数据，比如系统设定取值范围很小且固定的场景。
+<code>TINYINT</code>：一般用于枚举数据，比如系统设定取值范围很小且固定的场景。
 
-<code style="color:#b30049;background-color:#fdf5f5">SMALLINT</code>：可以用于较小范围的统计数据，比如统计工厂的固定资产库存数量等。
+<code>SMALLINT</code>：可以用于较小范围的统计数据，比如统计工厂的固定资产库存数量等。
 
-<code style="color:#b30049;background-color:#fdf5f5">MEDIUMINT</code>：用于较大整数的计算，比如车站每日的客流量等。
+<code>MEDIUMINT</code>：用于较大整数的计算，比如车站每日的客流量等。
 
-<code style="color:#b30049;background-color:#fdf5f5">INT</code>、<code style="color:#b30049;background-color:#fdf5f5">INTEGER</code>：取值范围足够大，一般情况下不用考虑超限问题，用得最多。比如商品编号。
+<code>INT</code>、<code>INTEGER</code>：取值范围足够大，一般情况下不用考虑超限问题，用得最多。比如商品编号。
 
-<code style="color:#b30049;background-color:#fdf5f5">BIGINT</code>：只有当你处理特别巨大的整数时才会用到。比如双十一的交易量、大型门户网站点击量、证券公司衍生产品持仓等。
+<code>BIGINT</code>：只有当你处理特别巨大的整数时才会用到。比如双十一的交易量、大型门户网站点击量、证券公司衍生产品持仓等。
 
 ### 如何选择？
 
 在评估用哪种整数类型的时候，你需要考虑`存储空间`和`可靠性`的平衡问题：一方 面，用占用字节数少的整数类型可以节省存储空间；另一方面，要是为了节省存储空间， 使用的整数类型取值范围太小，一旦遇到超出取值范围的情况，就可能引起`系统错误`，影响可靠性。 
 
-举个例子，商品编号采用的数据类型是<code style="color:#b30049;background-color:#fdf5f5">INT</code>。原因就在于，客户门店中流通的商品种类较多，而且，每天都有旧商品下架，新商品上架，这样不断迭代，日积月累。
+举个例子，商品编号采用的数据类型是<code>INT</code>。原因就在于，客户门店中流通的商品种类较多，而且，每天都有旧商品下架，新商品上架，这样不断迭代，日积月累。
 
-如果使用<code style="color:#b30049;background-color:#fdf5f5">SMALLINT</code>类型，虽然占用字节数比<code style="color:#b30049;background-color:#fdf5f5">INT</code>类型的整数少，但是却不能保证数据不会超出范围 65535。相反，使用 INT，就能确保有足够大的取值范围，不用担心数据超出范围影响可靠性的问题。 
+如果使用<code>SMALLINT</code>类型，虽然占用字节数比<code>INT</code>类型的整数少，但是却不能保证数据不会超出范围 65535。相反，使用 INT，就能确保有足够大的取值范围，不用担心数据超出范围影响可靠性的问题。 
 
 你要注意的是，在实际工作中，**系统故障产生的成本远远超过增加几个字段存储空间所产生的成本**。因此，我建议你首先确保数据不会超过取值范围，在这个前提之下，再去考虑如何节省存储空间。
 
@@ -1008,12 +1008,12 @@ DELETE FROM  copy_emp;
 
 ### 类型介绍
 
-浮点数和定点数类型的特点是可以`处理小数`，你可以把整数看成小数的一个特例。因此，浮点数和定点数的使用场景，比整数大多了。 MySQL支持的浮点数类型，分别是<code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>、<code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>、<code style="color:#b30049;background-color:#fdf5f5">REAL</code>。
+浮点数和定点数类型的特点是可以`处理小数`，你可以把整数看成小数的一个特例。因此，浮点数和定点数的使用场景，比整数大多了。 MySQL支持的浮点数类型，分别是<code>FLOAT</code>、<code>DOUBLE</code>、<code>REAL</code>。
 
-- <code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>表示单精度浮点数；
-- <code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>表示双精度浮点数；
+- <code>FLOAT</code>表示单精度浮点数；
+- <code>DOUBLE</code>表示双精度浮点数；
 
-- <code style="color:#b30049;background-color:#fdf5f5">REAL</code>默认就是<code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>。如果你把 SQL 模式设定为启用“`REAL_AS_FLOAT`”，那 么，MySQL 就认为 REAL 是 FLOAT。如果要启用“REAL_AS_FLOAT”，可以通过以下 SQL 语句实现：
+- <code>REAL</code>默认就是<code>DOUBLE</code>。如果你把 SQL 模式设定为启用“`REAL_AS_FLOAT`”，那 么，MySQL 就认为 REAL 是 FLOAT。如果要启用“REAL_AS_FLOAT”，可以通过以下 SQL 语句实现：
 
   ```mysql
   SET sql_mode = “REAL_AS_FLOAT”;
@@ -1021,7 +1021,7 @@ DELETE FROM  copy_emp;
 
 **问题1：**FLOAT 和 DOUBLE 这两种数据类型的区别是啥呢？
 
-<code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>占用字节数少，取值范围小；<code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>占用字节数多，取值范围也大。
+<code>FLOAT</code>占用字节数少，取值范围小；<code>DOUBLE</code>占用字节数多，取值范围也大。
 
 **问题2：**为什么浮点数类型的无符号数取值范围，只相当于有符号数取值范围的一半，也就是只相当于有符号数取值范围大于等于零的部分呢？ 
 
@@ -1080,13 +1080,13 @@ MySQL 用 4 个字节存储 FLOAT 类型数据，用 8 个字节来存储 DOUBLE
   | ------------------------ | ------- | ------------------ |
   | DECIMAL(M,D),DEC,NUMERIC | M+2字节 | 有效范围由M和D决定 |
 
-  使用<code style="color:#b30049;background-color:#fdf5f5">DECIMAL(M,D)</code>的方式表示高精度小数。其中，M被称为精度，D被称为标度。0<=M<=65，0<=D<=30，D<M。例如，定义<code style="color:#b30049;background-color:#fdf5f5">DECIMAL(5, 2)</code>的类型，表示该列取值范围是-999.99~999.99。
+  使用<code>DECIMAL(M,D)</code>的方式表示高精度小数。其中，M被称为精度，D被称为标度。0<=M<=65，0<=D<=30，D<M。例如，定义<code>DECIMAL(5, 2)</code>的类型，表示该列取值范围是-999.99~999.99。
 
 - **DECIMAL(M,D)的最大取值范围与DOUBLE类型一样**，但是有效的数据范围是由M和D决定的。DECIMAL 的存储空间并不是固定的，由精度值M决定，总共占用的存储空间为M+2个字节。也就是说，在一些对精度要求不高的场景下，比起占用同样字节长度的定点数，浮点数表达的数值范围可以更大一些。
 
 - 定点数在MySQL内部是以`字符串`的形式进行存储，这就决定了它一定是精准的。
 
-- 当DECIMAL类型不指定精度和标度时，其默认为<code style="color:#b30049;background-color:#fdf5f5">DECIMAL(10,0)</code>。当数据的精度超出了定点数类型的精度范围时，则MySQL同样会进行四舍五入处理。
+- 当DECIMAL类型不指定精度和标度时，其默认为<code>DECIMAL(10,0)</code>。当数据的精度超出了定点数类型的精度范围时，则MySQL同样会进行四舍五入处理。
 
 - **浮点数 vs 定点数**
 
@@ -1176,13 +1176,13 @@ BIT类型，如果没有指定(M)，默认是1位。这个1位，表示只能存
 
 日期与时间是重要的信息，在我们的系统中，几乎所有的数据表都用得到。原因是客户需要知道数据的时间标签，从而进行数据查询、统计和处理。 
 
-MySQL有多种表示日期和时间的数据类型，不同的版本可能有所差异，MySQL8.0版本支持的日期和时间类型主要有：<code style="color:#b30049;background-color:#fdf5f5">YEAR</code>类型、<code style="color:#b30049;background-color:#fdf5f5">TIME</code>类型、<code style="color:#b30049;background-color:#fdf5f5">DATE</code>类型、<code style="color:#b30049;background-color:#fdf5f5">DATETIME</code>类型和<code style="color:#b30049;background-color:#fdf5f5">TIMESTAMP</code>类型。
+MySQL有多种表示日期和时间的数据类型，不同的版本可能有所差异，MySQL8.0版本支持的日期和时间类型主要有：<code>YEAR</code>类型、<code>TIME</code>类型、<code>DATE</code>类型、<code>DATETIME</code>类型和<code>TIMESTAMP</code>类型。
 
-- <code style="color:#b30049;background-color:#fdf5f5">YEAR</code>类型通常用来表示年
-- <code style="color:#b30049;background-color:#fdf5f5">DATE</code>类型通常用来表示年、月、日
-- <code style="color:#b30049;background-color:#fdf5f5">TIME</code>类型通常用来表示时、分、秒
-- <code style="color:#b30049;background-color:#fdf5f5">DATETIME</code>类型通常用来表示年、月、日、时、分、秒
-- <code style="color:#b30049;background-color:#fdf5f5">TIMESTAMP</code>类型通常用来表示带时区的年、月、日、时、分、秒
+- <code>YEAR</code>类型通常用来表示年
+- <code>DATE</code>类型通常用来表示年、月、日
+- <code>TIME</code>类型通常用来表示时、分、秒
+- <code>DATETIME</code>类型通常用来表示年、月、日、时、分、秒
+- <code>TIMESTAMP</code>类型通常用来表示带时区的年、月、日、时、分、秒
 
 | 类型      | 名称     | 字节 | 日期格式            | 最小值                  | 最大值                 |
 | --------- | -------- | ---- | ------------------- | ----------------------- | ---------------------- |
@@ -1198,9 +1198,9 @@ MySQL有多种表示日期和时间的数据类型，不同的版本可能有所
 
 ### 开发中经验
 
-用得最多的日期时间类型，就是<code style="color:#b30049;background-color:#fdf5f5">DATETIME</code>。虽然 MySQL 也支持 YEAR（年）、 TIME（时间）、DATE（日期），以及 TIMESTAMP 类型，但是在实际项目中，尽量用<code style="color:#b30049;background-color:#fdf5f5">DATETIME</code>类型。因为这个数据类型包括了完整的日期和时间信息，取值范围也最大，使用起来比较方便。毕竟，如果日期时间信息分散在好几个字段，很不容易记，而且查询的时候，SQL 语句也会更加复杂。 
+用得最多的日期时间类型，就是<code>DATETIME</code>。虽然 MySQL 也支持 YEAR（年）、 TIME（时间）、DATE（日期），以及 TIMESTAMP 类型，但是在实际项目中，尽量用<code>DATETIME</code>类型。因为这个数据类型包括了完整的日期和时间信息，取值范围也最大，使用起来比较方便。毕竟，如果日期时间信息分散在好几个字段，很不容易记，而且查询的时候，SQL 语句也会更加复杂。 
 
-此外，一般存注册时间、商品发布时间等，不建议使用DATETIME存储，而是使用<code style="color:#b30049;background-color:#fdf5f5">时间戳</code>，因为DATETIME虽然直观，但不便于计算。
+此外，一般存注册时间、商品发布时间等，不建议使用DATETIME存储，而是使用<code>时间戳</code>，因为DATETIME虽然直观，但不便于计算。
 
 ```mysql
 mysql> SELECT UNIX_TIMESTAMP();
@@ -1218,7 +1218,7 @@ mysql> SELECT UNIX_TIMESTAMP();
 
 在实际的项目中，我们还经常遇到一种数据，就是字符串数据。
 
-MySQL中，文本字符串总体上分为<code style="color:#b30049;background-color:#fdf5f5">CHAR</code>、<code style="color:#b30049;background-color:#fdf5f5">VARCHAR</code>、<code style="color:#b30049;background-color:#fdf5f5">TINYTEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">TEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">MEDIUMTEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">LONGTEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">ENUM</code>、<code style="color:#b30049;background-color:#fdf5f5">SET</code>等类型。
+MySQL中，文本字符串总体上分为<code>CHAR</code>、<code>VARCHAR</code>、<code>TINYTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>、<code>ENUM</code>、<code>SET</code>等类型。
 
 | 文本字符串类型 | 值的长度 | 长度范围             | 占用的存储空间   |
 | -------------- | -------- | -------------------- | ---------------- |
@@ -1233,7 +1233,7 @@ MySQL中，文本字符串总体上分为<code style="color:#b30049;background-c
 
 ### CHAR与VARCHAR类型
 
-<code style="color:#b30049;background-color:#fdf5f5">CHAR</code>和<code style="color:#b30049;background-color:#fdf5f5">VARCHAR</code>类型都可以存储比较短的字符串。
+<code>CHAR</code>和<code>VARCHAR</code>类型都可以存储比较短的字符串。
 
 | 字符串(文本)类型 | 特点     | 长度 | 长度范围        | 占用的存储空间        |
 | ---------------- | -------- | ---- | --------------- | --------------------- |
@@ -1242,13 +1242,13 @@ MySQL中，文本字符串总体上分为<code style="color:#b30049;background-c
 
 **CHAR类型：**
 
-- <code style="color:#b30049;background-color:#fdf5f5">CHAR(M)</code>类型一般需要预先定义字符串长度。如果不指定(M)，则表示长度默认是<code style="color:#b30049;background-color:#fdf5f5">1个字符</code>。
+- <code>CHAR(M)</code>类型一般需要预先定义字符串长度。如果不指定(M)，则表示长度默认是<code>1个字符</code>。
 - 如果保存时，数据的实际长度比CHAR类型声明的长度小，则会在`右侧填充`空格以达到指定的长度。当MySQL检索CHAR类型的数据时，CHAR类型的字段会去除尾部的空格。
 - 定义CHAR类型字段时，声明的字段长度即为CHAR类型字段所占的存储空间的字节数。
 
 **VARCHAR类型：**
 
-- <code style="color:#b30049;background-color:#fdf5f5">VARCHAR(M) </code>定义时，`必须指定`长度M，否则报错。
+- <code>VARCHAR(M) </code>定义时，`必须指定`长度M，否则报错。
 - MySQL4.0版本以下，varchar(20)：指的是20字节，如果存放UTF8汉字时，只能存6个（每个汉字3字节） ；MySQL5.0版本以上，varchar(20)：指的是20字符。
 - 检索VARCHAR类型的字段数据时，会保留数据尾部的空格。VARCHAR类型的字段所占用的存储空间为字符串实际长度加1个字节。
 
@@ -1267,14 +1267,14 @@ MySQL中，文本字符串总体上分为<code style="color:#b30049;background-c
 
 情况4：具体存储引擎中的情况：
 
-- <code style="color:#b30049;background-color:#fdf5f5">MyISAM</code> 数据存储引擎和数据列：MyISAM数据表，最好使用固定长度(CHAR)的数据列代替可变长度(VARCHAR)的数据列。这样使得整个表静态化，从而使`数据检索更快`，用空间换时间。
+- <code>MyISAM</code> 数据存储引擎和数据列：MyISAM数据表，最好使用固定长度(CHAR)的数据列代替可变长度(VARCHAR)的数据列。这样使得整个表静态化，从而使`数据检索更快`，用空间换时间。
 
-- <code style="color:#b30049;background-color:#fdf5f5">MEMORY</code> 存储引擎和数据列：MEMORY数据表目前都使用固定长度的数据行存储，因此无论使用CHAR或VARCHAR列都没有关系，两者都是作为CHAR类型处理的。
-- <code style="color:#b30049;background-color:#fdf5f5">InnoDB</code>存储引擎，建议使用VARCHAR类型。因为对于InnoDB数据表，内部的行存储格式并没有区分固定长度和可变长度列（所有数据行都使用指向数据列值的头指针），而且**主要影响性能的因素是数据行使用的存储总量**，由于char平均占用的空间多于varchar，所以除了简短并且固定长度的，其他考虑varchar。这样节省空间，对磁盘I/O和数据存储总量比较好。
+- <code>MEMORY</code> 存储引擎和数据列：MEMORY数据表目前都使用固定长度的数据行存储，因此无论使用CHAR或VARCHAR列都没有关系，两者都是作为CHAR类型处理的。
+- <code>InnoDB</code>存储引擎，建议使用VARCHAR类型。因为对于InnoDB数据表，内部的行存储格式并没有区分固定长度和可变长度列（所有数据行都使用指向数据列值的头指针），而且**主要影响性能的因素是数据行使用的存储总量**，由于char平均占用的空间多于varchar，所以除了简短并且固定长度的，其他考虑varchar。这样节省空间，对磁盘I/O和数据存储总量比较好。
 
 ### TEXT类型
 
-在MySQL中，<code style="color:#b30049;background-color:#fdf5f5">TEXT</code>用来保存文本类型的字符串，总共包含4种类型，分别为<code style="color:#b30049;background-color:#fdf5f5">TINYTEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">TEXT</code>、<code style="color:#b30049;background-color:#fdf5f5">MEDIUMTEXT</code>和<code style="color:#b30049;background-color:#fdf5f5">LONGTEXT</code>类型。
+在MySQL中，<code>TEXT</code>用来保存文本类型的字符串，总共包含4种类型，分别为<code>TINYTEXT</code>、<code>TEXT</code>、<code>MEDIUMTEXT</code>和<code>LONGTEXT</code>类型。
 
 在向TEXT类型的字段保存和查询数据时，系统自动按照实际长度存储，不需要预先定义长度。这一点和 VARCHAR类型相同。
 
@@ -1295,7 +1295,7 @@ TEXT文本类型，可以存比较大的文本段，搜索速度稍慢，因此�
 
 ## ENUM类型
 
-<code style="color:#b30049;background-color:#fdf5f5">ENUM</code>类型也叫作枚举类型，ENUM类型的取值范围需要在定义字段时进行指定。设置字段值时，ENUM类型只允许从成员中选取单个值，不能一次选取多个值。
+<code>ENUM</code>类型也叫作枚举类型，ENUM类型的取值范围需要在定义字段时进行指定。设置字段值时，ENUM类型只允许从成员中选取单个值，不能一次选取多个值。
 
 其所需要的存储空间由定义ENUM类型时指定的成员个数决定。
 
@@ -1320,7 +1320,7 @@ season ENUM('春','夏','秋','冬','unknow')
 
 ## SET类型
 
-<code style="color:#b30049;background-color:#fdf5f5">SET</code>表示一个字符串对象，可以包含0个或多个成员，但成员个数的上限为`64`。设置字段值时，可以取取值范围内的 0 个或多个值。
+<code>SET</code>表示一个字符串对象，可以包含0个或多个成员，但成员个数的上限为`64`。设置字段值时，可以取取值范围内的 0 个或多个值。
 
 当SET类型包含的成员个数不同时，其所占用的存储空间也是不同的，具体如下：
 
@@ -1363,15 +1363,15 @@ FROM test_set;
 
 MySQL中的二进制字符串类型主要存储一些二进制数据，比如可以存储图片、音频和视频等二进制数据。
 
-MySQL中支持的二进制字符串类型主要包括<code style="color:#b30049;background-color:#fdf5f5">BINARY</code>、<code style="color:#b30049;background-color:#fdf5f5">VARBINARY</code>、<code style="color:#b30049;background-color:#fdf5f5">TINYBLOB</code>、<code style="color:#b30049;background-color:#fdf5f5">BLOB</code>、<code style="color:#b30049;background-color:#fdf5f5">MEDIUMBLOB</code>和<code style="color:#b30049;background-color:#fdf5f5">LONGBLOB</code>类型。
+MySQL中支持的二进制字符串类型主要包括<code>BINARY</code>、<code>VARBINARY</code>、<code>TINYBLOB</code>、<code>BLOB</code>、<code>MEDIUMBLOB</code>和<code>LONGBLOB</code>类型。
 
 #### BINARY与VARBINARY类型
 
-<code style="color:#b30049;background-color:#fdf5f5">BINARY</code>和<code style="color:#b30049;background-color:#fdf5f5">VARBINARY</code>类似于CHAR和VARCHAR，只是它们存储的是二进制字符串。
+<code>BINARY</code>和<code>VARBINARY</code>类似于CHAR和VARCHAR，只是它们存储的是二进制字符串。
 
-<code style="color:#b30049;background-color:#fdf5f5">BINARY (M)</code>为固定长度的二进制字符串，M表示最多能存储的字节数，取值范围是0~255个字符。如果未指定(M)，表示只能存储`1个字节`。例如BINARY (8)，表示最多能存储8个字节，如果字段值不足(M)个字节，将在右边填充'\0'以补齐指定长度。
+<code>BINARY (M)</code>为固定长度的二进制字符串，M表示最多能存储的字节数，取值范围是0~255个字符。如果未指定(M)，表示只能存储`1个字节`。例如BINARY (8)，表示最多能存储8个字节，如果字段值不足(M)个字节，将在右边填充'\0'以补齐指定长度。
 
-<code style="color:#b30049;background-color:#fdf5f5">VARBINARY (M)</code>为可变长度的二进制字符串，M表示最多能存储的字节数，总字节数不能超过行的字节长度限制65535，另外还要考虑额外字节开销，VARBINARY类型的数据除了存储数据本身外，还需要1或2个字节来存储数据的字节数。VARBINARY类型必须指定(M)，否则报错。
+<code>VARBINARY (M)</code>为可变长度的二进制字符串，M表示最多能存储的字节数，总字节数不能超过行的字节长度限制65535，另外还要考虑额外字节开销，VARBINARY类型的数据除了存储数据本身外，还需要1或2个字节来存储数据的字节数。VARBINARY类型必须指定(M)，否则报错。
 
 | 二进制字符串类型 | 特点     | 值的长度             | 占用空间  |
 | ---------------- | -------- | -------------------- | --------- |
@@ -1380,7 +1380,7 @@ MySQL中支持的二进制字符串类型主要包括<code style="color:#b30049;
 
 #### BLOB类型
 
-<code style="color:#b30049;background-color:#fdf5f5">BLOB</code>是一个**二进制大对象**，可以容纳可变数量的数据。
+<code>BLOB</code>是一个**二进制大对象**，可以容纳可变数量的数据。
 
 MySQL中的BLOB类型包括TINYBLOB、BLOB、MEDIUMBLOB和LONGBLOB 4种类型，它们可容纳值的最大长度不同。可以存储一个二进制的大对象，比如`图片`、`音频`和`视频`等。
 
@@ -1404,7 +1404,7 @@ img MEDIUMBLOB
 
 **TEXT和BLOB的使用注意事项：**
 
-在使用<code style="color:#b30049;background-color:#fdf5f5">text</code>和<code style="color:#b30049;background-color:#fdf5f5">blob</code>字段类型时要注意以下几点，以便更好的发挥数据库的性能。
+在使用<code>text</code>和<code>blob</code>字段类型时要注意以下几点，以便更好的发挥数据库的性能。
 
 ① BLOB和TEXT值也会引起自己的一些问题，特别是执行了大量的删除或更新操作的时候。删除这种值会在数据表中留下很大的"`空洞`"，以后填入这些"空洞"的记录可能长度不同。为了提高性能，建议定期使用 OPTIMIZE TABLE 功能对这类表进行`碎片整理`。
 
@@ -1414,7 +1414,7 @@ img MEDIUMBLOB
 
 ##  JSON 类型
 
-<code style="color:#b30049;background-color:#fdf5f5">JSON（JavaScript Object Notation）</code>是一种轻量级的**数据交换格式**。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。它易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。**JSON 可以将 JavaScript 对象中表示的一组数据转换为字符串，然后就可以在网络或者程序之间轻松地传递这个字符串，并在需要的时候将它还原为各编程语言所支持的数据格式。**
+<code>JSON（JavaScript Object Notation）</code>是一种轻量级的**数据交换格式**。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。它易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。**JSON 可以将 JavaScript 对象中表示的一组数据转换为字符串，然后就可以在网络或者程序之间轻松地传递这个字符串，并在需要的时候将它还原为各编程语言所支持的数据格式。**
 
 在MySQL 5.7中，就已经支持JSON数据类型。在MySQL 8.x版本中，JSON类型提供了可以进行自动验证的JSON文档和优化的存储结构，使得在MySQL中存储和读取JSON类型的数据更加方便和高效。
 创建数据表，表中包含一个JSON类型的字段 js 。
@@ -1450,7 +1450,7 @@ mysql> SELECT js -> '$.name' AS NAME,js -> '$.age' AS age ,js -> '$.address.prov
 
 ## 数据类型选择建议
 
-在定义数据类型时，如果确定是<code style="color:#b30049;background-color:#fdf5f5">整数</code>，就用<code style="color:#b30049;background-color:#fdf5f5">INT</code>； 如果是<code style="color:#b30049;background-color:#fdf5f5">小数</code>，一定用定点数类型 <code style="color:#b30049;background-color:#fdf5f5">DECIMAL(M,D)</code>； 如果是<code style="color:#b30049;background-color:#fdf5f5">日期与时间</code>，就用<code style="color:#b30049;background-color:#fdf5f5">DATETIME</code>。 
+在定义数据类型时，如果确定是<code>整数</code>，就用<code>INT</code>； 如果是<code>小数</code>，一定用定点数类型 <code>DECIMAL(M,D)</code>； 如果是<code>日期与时间</code>，就用<code>DATETIME</code>。 
 
 这样做的好处是，首先确保你的系统不会因为数据类型定义出错。不过，凡事都是有两面的，可靠性好，并不意味着高效。比如，TEXT 虽然使用方便，但是效率不如 CHAR(M) 和 VARCHAR(M)。
 
@@ -1458,11 +1458,11 @@ mysql> SELECT js -> '$.name' AS NAME,js -> '$.age' AS age ,js -> '$.address.prov
 
 **阿里巴巴《Java开发手册》之MySQL数据库：**
 
-- 任何字段如果为<code style="color:#b30049;background-color:#fdf5f5">非负数</code>，必须是<code style="color:#b30049;background-color:#fdf5f5">UNSIGNED</code>
-- 【`强制`】小数类型为<code style="color:#b30049;background-color:#fdf5f5">DECIMAL</code>，禁止使用<code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>和<code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>。 
-  - 说明：在存储的时候，<code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>和<code style="color:#b30049;background-color:#fdf5f5">DOUBLE</code>都存在精度损失的问题，很可能在比较值的时候，得到不正确的结果。如果存储的数据范围超过<code style="color:#b30049;background-color:#fdf5f5">DECIMAL</code>的范围，建议将数据拆成整数和小数并分开存储。
-- 【`强制`】如果存储的字符串长度几乎相等，使用<code style="color:#b30049;background-color:#fdf5f5">CHAR</code>定长字符串类型。 
-- 【`强制`】<code style="color:#b30049;background-color:#fdf5f5">VARCHAR</code>是可变长字符串，不预先分配存储空间，长度不要超过 5000。如果存储长度大于此值，定义字段类型为<code style="color:#b30049;background-color:#fdf5f5">TEXT</code>，独立出来一张表，用主键来对应，避免影响其它字段索引效率。
+- 任何字段如果为<code>非负数</code>，必须是<code>UNSIGNED</code>
+- 【`强制`】小数类型为<code>DECIMAL</code>，禁止使用<code>FLOAT</code>和<code>DOUBLE</code>。 
+  - 说明：在存储的时候，<code>FLOAT</code>和<code>DOUBLE</code>都存在精度损失的问题，很可能在比较值的时候，得到不正确的结果。如果存储的数据范围超过<code>DECIMAL</code>的范围，建议将数据拆成整数和小数并分开存储。
+- 【`强制`】如果存储的字符串长度几乎相等，使用<code>CHAR</code>定长字符串类型。 
+- 【`强制`】<code>VARCHAR</code>是可变长字符串，不预先分配存储空间，长度不要超过 5000。如果存储长度大于此值，定义字段类型为<code>TEXT</code>，独立出来一张表，用主键来对应，避免影响其它字段索引效率。
 
 -------------
 
@@ -1530,12 +1530,12 @@ WHERE table_name = '表名称';
 
 ### 特点
 
-- 默认，所有的类型的值都可以是<code style="color:#b30049;background-color:#fdf5f5">NULL</code>，包括<code style="color:#b30049;background-color:#fdf5f5">INT</code>、<code style="color:#b30049;background-color:#fdf5f5">FLOAT</code>等数据类型
+- 默认，所有的类型的值都可以是<code>NULL</code>，包括<code>INT</code>、<code>FLOAT</code>等数据类型
 - 非空约束只能出现在表对象的列上，只能某个列单独限定非空，不能组合非空
 
 - 一个表可以有很多列都分别限定了非空
 
-- 空字符串<code style="color:#b30049;background-color:#fdf5f5">''</code>不等于<code style="color:#b30049;background-color:#fdf5f5">NULL</code>，<code style="color:#b30049;background-color:#fdf5f5">0</code>也不等于<code style="color:#b30049;background-color:#fdf5f5">NULL</code>
+- 空字符串<code>''</code>不等于<code>NULL</code>，<code>0</code>也不等于<code>NULL</code>
 
 ### 添加非空约束
 
@@ -2082,19 +2082,19 @@ alter table emp add foreign key (deptid) references dept(did);
 
 ### 约束等级
 
-* <code style="color:#b30049;background-color:#fdf5f5">Cascade</code>方式：在父表上update/delete记录时，同步update/delete掉子表的匹配记录 
+* <code>Cascade</code>方式：在父表上update/delete记录时，同步update/delete掉子表的匹配记录 
 
-* <code style="color:#b30049;background-color:#fdf5f5">Set null</code>方式：在父表上update/delete记录时，将子表上匹配记录的列设为null，但是要注意子表的外键列不能为not null  
+* <code>Set null</code>方式：在父表上update/delete记录时，将子表上匹配记录的列设为null，但是要注意子表的外键列不能为not null  
 
-* <code style="color:#b30049;background-color:#fdf5f5">No action</code>方式：如果子表中有匹配的记录，则不允许对父表对应候选键进行update/delete操作  
+* <code>No action</code>方式：如果子表中有匹配的记录，则不允许对父表对应候选键进行update/delete操作  
 
-* <code style="color:#b30049;background-color:#fdf5f5">Restrict</code>方式：同no action， 都是立即检查外键约束
+* <code>Restrict</code>方式：同no action， 都是立即检查外键约束
 
-* <code style="color:#b30049;background-color:#fdf5f5">Set default</code>方式（在可视化工具SQLyog中可能显示空白）：父表有变更时，子表将外键列设置成一个默认的值，但Innodb不能识别
+* <code>Set default</code>方式（在可视化工具SQLyog中可能显示空白）：父表有变更时，子表将外键列设置成一个默认的值，但Innodb不能识别
 
-如果没有指定等级，就相当于<code style="color:#b30049;background-color:#fdf5f5">Restrict</code>方式。
+如果没有指定等级，就相当于<code>Restrict</code>方式。
 
-对于外键约束，最好是采用: <code style="color:#b30049;background-color:#fdf5f5">ON UPDATE CASCADE ON DELETE RESTRICT</code> 的方式。
+对于外键约束，最好是采用: <code>ON UPDATE CASCADE ON DELETE RESTRICT</code> 的方式。
 
 ```sql
 create table emp(

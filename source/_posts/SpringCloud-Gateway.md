@@ -83,10 +83,10 @@ spring:
 
 各字段含义如下：
 
-- <code style="color:#b30049;background-color:#fdf5f5">id</code>：我们自定义的路由 ID，保持唯一
-- <code style="color:#b30049;background-color:#fdf5f5">uri</code>：目标服务地址
-- <code style="color:#b30049;background-color:#fdf5f5">predicates</code>：路由条件，Predicate 接受一个输入参数，返回一个布尔值结果。该接口包含多种默认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）。
-- <code style="color:#b30049;background-color:#fdf5f5">filters</code>：过滤规则。
+- <code>id</code>：我们自定义的路由 ID，保持唯一
+- <code>uri</code>：目标服务地址
+- <code>predicates</code>：路由条件，Predicate 接受一个输入参数，返回一个布尔值结果。该接口包含多种默认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）。
+- <code>filters</code>：过滤规则。
 
 {% note no-icon info %}
 
@@ -210,7 +210,7 @@ spring:
         - Header=X-Request-Id, \d+
 ```
 
-如果请求具有名为 X-Request-Id 的标头，其值与 <code style="color:#b30049;background-color:#fdf5f5">\d+</code>正则表达式匹配（即，它具有一个或多个数字的值），则此路由匹配。 
+如果请求具有名为 X-Request-Id 的标头，其值与 <code>\d+</code>正则表达式匹配（即，它具有一个或多个数字的值），则此路由匹配。 
 
 ---
 
@@ -237,7 +237,7 @@ spring:
 
 如果请求具有值为 www.somehost.org 或 beta.somehost.org 或 www.anotherhost.org 的 Host 标头，则此路由匹配。
 
- 此谓词提取 URI 模板变量（例如 sub，在前面的示例中定义）作为名称和值的映射，并将其放置在<code style="color:#b30049;background-color:#fdf5f5">ServerWebExchange.getAttributes()</code>中，并使用 <code style="color:#b30049;background-color:#fdf5f5">ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE</code>中定义的键。 然后这些值可供<code style="color:#b30049;background-color:#fdf5f5">GatewayFilter</code>工厂使用 
+ 此谓词提取 URI 模板变量（例如 sub，在前面的示例中定义）作为名称和值的映射，并将其放置在<code>ServerWebExchange.getAttributes()</code>中，并使用 <code>ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE</code>中定义的键。 然后这些值可供<code>GatewayFilter</code>工厂使用 
 
 -----
 
@@ -283,11 +283,11 @@ spring:
         - Path=/red/{segment},/blue/{segment}
 ```
 
-如果请求路径是例如：<code style="color:#b30049;background-color:#fdf5f5">/red/1</code>或<code style="color:#b30049;background-color:#fdf5f5">/red/1/</code>或<code style="color:#b30049;background-color:#fdf5f5">/red/blue</code>或<code style="color:#b30049;background-color:#fdf5f5">/blue/green</code>，则此路由匹配。 
+如果请求路径是例如：<code>/red/1</code>或<code>/red/1/</code>或<code>/red/blue</code>或<code>/blue/green</code>，则此路由匹配。 
 
-如果<code style="color:#b30049;background-color:#fdf5f5">matchTrailingSlash</code>（匹配反斜杠）设置为<code style="color:#b30049;background-color:#fdf5f5">false</code>，则不会匹配请求路径<code style="color:#b30049;background-color:#fdf5f5">/red/1/</code>。
+如果<code>matchTrailingSlash</code>（匹配反斜杠）设置为<code>false</code>，则不会匹配请求路径<code>/red/1/</code>。
 
-此谓词提取 URI 模板变量（例如在前面的示例中定义的段）作为名称和值的映射，并将其放置在 <code style="color:#b30049;background-color:#fdf5f5">ServerWebExchange.getAttributes()</code>中，键是在 <code style="color:#b30049;background-color:#fdf5f5">ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE</code>中定义的。
+此谓词提取 URI 模板变量（例如在前面的示例中定义的段）作为名称和值的映射，并将其放置在 <code>ServerWebExchange.getAttributes()</code>中，键是在 <code>ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE</code>中定义的。
 
  然后这些值可供 GatewayFilter 工厂使用 可以使用实用方法（称为 get）来更轻松地访问这些变量。 以下示例显示了如何使用 get 方法： 
 
@@ -341,7 +341,7 @@ spring:
 
 ### RemoteAddr Route Predicate Factory
 
-RemoteAddr 路由谓词工厂采用源列表（最小大小 1），这些源是 CIDR 表示法（IPv4 或 IPv6）字符串，例如 192.168.0.1/16（其中 192.168.0.1 是 IP 地址，16 是子网掩码 ）。 以下示例配置<code style="color:#b30049;background-color:#fdf5f5">RemoteAddr</code>路由谓词： 
+RemoteAddr 路由谓词工厂采用源列表（最小大小 1），这些源是 CIDR 表示法（IPv4 或 IPv6）字符串，例如 192.168.0.1/16（其中 192.168.0.1 是 IP 地址，16 是子网掩码 ）。 以下示例配置<code>RemoteAddr</code>路由谓词： 
 
 Example 10. application.yml
 
@@ -362,7 +362,7 @@ spring:
 
 #  过滤器规则（Filter）
 
-路由过滤器允许以某种方式修改传入的 HTTP 请求或传出的 HTTP 响应。 路由过滤器的范围是特定的路由。 Spring Cloud Gateway 包括许多内置的<code style="color:#b30049;background-color:#fdf5f5">GatewayFilter</code>工厂。 
+路由过滤器允许以某种方式修改传入的 HTTP 请求或传出的 HTTP 响应。 路由过滤器的范围是特定的路由。 Spring Cloud Gateway 包括许多内置的<code>GatewayFilter</code>工厂。 
 
 ![](https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/gateway/GatewayFilterFactories.png)
 
@@ -425,7 +425,7 @@ spring:
 
 ## PrefixPath GatewayFilter Factory
 
-The `PrefixPath` `GatewayFilter` factory takes a single <code style="color:#b30049;background-color:#fdf5f5">prefix</code> parameter. The following example configures a `PrefixPath` `GatewayFilter`:
+The `PrefixPath` `GatewayFilter` factory takes a single <code>prefix</code> parameter. The following example configures a `PrefixPath` `GatewayFilter`:
 
 Example 28. application.yml
 
@@ -482,7 +482,7 @@ spring:
 
 ## RemoveRequestHeader GatewayFilter Factory
 
-RemoveRequestHeader GatewayFilter 工厂只有一个 <code style="color:#b30049;background-color:#fdf5f5">name</code>参数。 它是要删除的header的名称。 以下清单配置了 RemoveRequestHeader GatewayFilter： 
+RemoveRequestHeader GatewayFilter 工厂只有一个 <code>name</code>参数。 它是要删除的header的名称。 以下清单配置了 RemoveRequestHeader GatewayFilter： 
 
 Example 36. application.yml
 
@@ -501,7 +501,7 @@ spring:
 
 ## RemoveResponseHeader GatewayFilter Factory
 
-RemoveResponseHeader GatewayFilter工厂只有一个 <code style="color:#b30049;background-color:#fdf5f5">name</code>参数。 它是要删除的header的名称。 以下清单配置了 RemoveResponseHeader GatewayFilter：
+RemoveResponseHeader GatewayFilter工厂只有一个 <code>name</code>参数。 它是要删除的header的名称。 以下清单配置了 RemoveResponseHeader GatewayFilter：
 
 The following listing configures a `RemoveResponseHeader` `GatewayFilter`:
 
@@ -524,7 +524,7 @@ spring:
 
 ## RemoveRequestParameter GatewayFilter Factory
 
-RemoveRequestParameter GatewayFilter 只有一个<code style="color:#b30049;background-color:#fdf5f5">name</code>参数。 它是要删除的查询参数的名称。 以下示例配置 RemoveRequestParameter GatewayFilter：
+RemoveRequestParameter GatewayFilter 只有一个<code>name</code>参数。 它是要删除的查询参数的名称。 以下示例配置 RemoveRequestParameter GatewayFilter：
 
 Example 38. application.yml
 
@@ -585,7 +585,7 @@ spring:
 
 ## SetStatus GatewayFilter Factory
 
-SetStatus GatewayFilter 工厂只有一个参数 <code style="color:#b30049;background-color:#fdf5f5">status</code>。 它必须是有效的 Spring `HttpStatus`。 它可能是整数值 `404` 或枚举的字符串表示形式：`NOT_FOUND`。 以下清单配置了 SetStatus GatewayFilter： 
+SetStatus GatewayFilter 工厂只有一个参数 status。 它必须是有效的 Spring `HttpStatus`。 它可能是整数值 `404` 或枚举的字符串表示形式：`NOT_FOUND`。 以下清单配置了 SetStatus GatewayFilter： 
 
 Example 48. application.yml
 

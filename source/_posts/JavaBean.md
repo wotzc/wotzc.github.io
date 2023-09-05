@@ -26,8 +26,8 @@ categories: Java
 
 ​	由于Java bean是Java公共的类，所以为了使编译工具或集成开发环境识别这种规范，那么我们需要在设计实体类的时候至少应该满足三个条件：
 
-​	1、类中有一个<code style="color:#b30049;background-color:#fdf5f5">public</code>无参构造器，默认即可。
-​	2、属性使用public 的<code style="color:#b30049;background-color:#fdf5f5">get</code>，<code style="color:#b30049;background-color:#fdf5f5">set</code>方法访问，也就是说设置成<code style="color:#b30049;background-color:#fdf5f5">private</code>，同时get，set方法与属性名的大小也需要对应。例如年龄属性age，get方法就要写成，`public int getAge(){return this.age}`，其中很明显A要大写。同理，set方法就要写成`public void setAge(int age){this.age = age ;}`。
+​	1、类中有一个<code>public</code>无参构造器，默认即可。
+​	2、属性使用public 的<code>get</code>，<code>set</code>方法访问，也就是说设置成<code>private</code>，同时get，set方法与属性名的大小也需要对应。例如年龄属性age，get方法就要写成，`public int getAge(){return this.age}`，其中很明显A要大写。同理，set方法就要写成`public void setAge(int age){this.age = age ;}`。
 ​	3、继承序列化接口，能够实现序列化功能。当然不一定需要直接实现序列化接口，简介继承了实现序列化接口的类也可以。这个是框架，工具跨平台反映状态必须具备的。
 ​	如下图设计原则所示。
 
