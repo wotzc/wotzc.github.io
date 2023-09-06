@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基础知识Maven 基于构建生命周期的中心概念。 这意味着构建和分发特定项的过程是明确定义的。 对于构建项目的人来说，这意味着只需要学习一小部分命令即可构建任何 Maven 项目，POM 将确保他们获得所需的结果。 共有三个内置构建生命周期：default, clean and  site。 default生命周期处理项目部署，clean生命周期处理项目清理，而 site生命周期处理项目网站的创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven 构建生命周期">
+<meta property="og:url" content="http://example.com/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/index.html">
+<meta property="og:site_name" content="Cai">
+<meta property="og:description" content="基础知识Maven 基于构建生命周期的中心概念。 这意味着构建和分发特定项的过程是明确定义的。 对于构建项目的人来说，这意味着只需要学习一小部分命令即可构建任何 Maven 项目，POM 将确保他们获得所需的结果。 共有三个内置构建生命周期：default, clean and  site。 default生命周期处理项目部署，clean生命周期处理项目清理，而 site生命周期处理项目网站的创建">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-05T11:34:57.000Z">
+<meta property="article:modified_time" content="2023-09-06T01:16:02.863Z">
+<meta property="article:author" content="wotzc">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/","path":"2023/09/05/Maven-构建生命周期/","title":"Maven 构建生命周期"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Maven 构建生命周期 | Cai</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cai</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%94%B1%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">构建生命周期由多个阶段组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%B0%83%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">命令行调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%98%B6%E6%AE%B5%E7%94%B1%E6%8F%92%E4%BB%B6%E7%9B%AE%E6%A0%87%E7%BB%84%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">构建阶段由插件目标组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E4%BB%A5%E4%BD%BF%E7%94%A8%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.</span> <span class="nav-text">设置项目以使用构建生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Packaging-%E6%89%93%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">Packaging-打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugins-%E6%8F%92%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">Plugins-插件</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wotzc"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wotzc</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Maven 构建生命周期 | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maven 构建生命周期
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-05 19:34:57" itemprop="dateCreated datePublished" datetime="2023-09-05T19:34:57+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-06 09:16:02" itemprop="dateModified" datetime="2023-09-06T09:16:02+08:00">2023-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>Maven 基于构建生命周期的中心概念。 这意味着构建和分发特定项的过程是明确定义的。</p>
+<p>对于构建项目的人来说，这意味着只需要学习一小部分命令即可构建任何 Maven 项目，POM 将确保他们获得所需的结果。</p>
+<p>共有三个内置构建生命周期：<code>default</code>, <code>clean</code> and  <code>site</code>。 <code>default</code>生命周期处理项目部署，<code>clean</code>生命周期处理项目清理，而 <code>site</code>生命周期处理项目网站的创建。</p>
+<h1 id="构建生命周期由多个阶段组成"><a href="#构建生命周期由多个阶段组成" class="headerlink" title="构建生命周期由多个阶段组成"></a>构建生命周期由多个阶段组成</h1><p>每个构建生命周期都由不同的构建阶段列表定义，其中一个构建阶段代表生命周期中的一个阶段。</p>
+<p>例如，默认生命周期包括以下阶段（有关生命周期阶段的完整列表，请参阅生命周期参考）：</p>
+<ul>
+<li><code>validate</code>- 验证项目是否正确并且所有必要的信息均可用</li>
+<li><code>compile</code>- 编译项目的源代码，编译后的类被放置在 中<code>$&#123;basedir&#125;/target/classes</code></li>
+<li><code>test</code>- 使用合适的单元测试框架测试编译后的源代码。这些测试不应要求打包或部署代码</li>
+<li><code>package</code>- 将编译后的代码打包为可发布的格式，如 JAR</li>
+<li><code>verify</code>- 对集成测试的结果进行检查，确保符合质量标准</li>
+<li><code>install</code>- 将软件包（例如JAR包）安装到本地存储库（本地Repository）中，作为本地其他项目的依赖项使用</li>
+<li><code>deploy</code>- 将最终包复制到远程存储库以与其他开发人员和项目共享</li>
+</ul>
+<p>这些生命周期阶段<strong>按顺序执行</strong>以完成默认生命周期。 考虑到上面的生命周期阶段，这意味着当使用默认生命周期时，Maven 将首先验证项目，然后尝试编译源代码，针对测试运行这些源代码，打包二进制文件（例如 jar），针对该项目运行集成测试 包，验证集成测试，将验证的包安装到本地存储库，然后将安装的包部署到远程存储库。</p>
+<hr>
+<h1 id="命令行调用"><a href="#命令行调用" class="headerlink" title="命令行调用"></a>命令行调用</h1><p>您应该选择与您的结果相匹配的阶段。 如果你想要你的<code>jar</code>，运行<code>package</code>。如果您想运行单元测试，请运行<code>test</code>。</p>
+<p>如果您不确定自己想要什么，首选调用的阶段是:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn verify</span><br></pre></td></tr></table></figure>
+
+<p>在执行<code>verify</code>之前，该命令会依次执行每个默认生命周期阶段（<code>validate</code>, <code>compile</code>, <code>package</code>等）。在大多数情况下，效果与打包相同。不过，如果有集成测试，这些测试也会被执行。在验证阶段，还可以进行一些额外的检查，例如，如果代码是按照预定义的检查样式规则编写的。</p>
+<p>在构建环境中，使用下面的调用即可将工程干净利落地构建并部署到共享存储库中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean deploy</span><br></pre></td></tr></table></figure>
+
+<p>同一命令可用于多模块场景（即具有一个或多个子项目的项目）。 Maven遍历每个子项目并执行<code>clean</code>，然后执行<code>deploy</code>（包括之前的所有构建阶段步骤）。</p>
+<h1 id="构建阶段由插件目标组成"><a href="#构建阶段由插件目标组成" class="headerlink" title="构建阶段由插件目标组成"></a>构建阶段由插件目标组成</h1><p>不过，尽管构建阶段负责构建生命周期中的特定步骤，但其履行职责的方式可能会有所不同。这可以通过声明与这些构建阶段绑定的插件目标来实现。</p>
+<p>一个插件目标代表一个特定的任务（比构建阶段更细），有助于项目的构建和管理。它可以与零个或多个构建阶段绑定。未与任何构建阶段绑定的目标可通过直接调用在构建生命周期之外执行。执行顺序取决于目标和构建阶段的调用顺序。</p>
+<p>例如，考虑下面的命令。<code>clean</code>和<code>package</code>是构建阶段，而<code>dependency:copy-dependencies</code>是（插件的）目标。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean dependency:copy-dependencies package</span><br></pre></td></tr></table></figure>
+
+<p>如果要执行此操作，则将首先执行<code>clean</code>阶段（这意味着它将运行<code>clean</code>生命周期的所有前置阶段，加上<code>clean</code>阶段本身），然后是<code>dependency:copy-dependencies</code>目标，最后执行<code>package</code>阶段（以及<code>package</code>默认生命周期的所有先前构建阶段）。</p>
+<p>此外，如果一个目标与一个或多个构建阶段绑定，那么该目标将在所有这些阶段中被调用。</p>
+<h1 id="设置项目以使用构建生命周期"><a href="#设置项目以使用构建生命周期" class="headerlink" title="设置项目以使用构建生命周期"></a>设置项目以使用构建生命周期</h1><p>构建生命周期简单易用，但在为项目构建 Maven 构建时，如何为每个构建阶段分配任务？</p>
+<h2 id="Packaging-打包"><a href="#Packaging-打包" class="headerlink" title="Packaging-打包"></a>Packaging-打包</h2><p>第一种，也是最常见的一种方法，是通过POM 元素<code>&lt;packaging></code>为项目设置打包。一些有效的<code>&lt;packaging></code>值包括 <code>jar</code>、<code>war</code>、<code>ear</code>和<code>pom</code>。如果没有指定包装值，则默认为<code>jar</code>。</p>
+<p>每个<code>packaging</code>都包含一个目标列表，用于绑定到特定阶段。例如，<code>jar</code> <code>packaging</code>将把以下目标绑定到默认生命周期的构建阶段。</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>jar  packagin的插件目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>process-resources</code></td>
+<td><code>resources:resources</code></td>
+</tr>
+<tr>
+<td><code>compile</code></td>
+<td><code>compiler:compile</code></td>
+</tr>
+<tr>
+<td><code>process-test-resources</code></td>
+<td><code>resources:testResources</code></td>
+</tr>
+<tr>
+<td><code>test-compile</code></td>
+<td><code>compiler:testCompile</code></td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td><code>surefire:test</code></td>
+</tr>
+<tr>
+<td><code>package</code></td>
+<td><code>jar:jar</code></td>
+</tr>
+<tr>
+<td><code>install</code></td>
+<td><code>install:install</code></td>
+</tr>
+<tr>
+<td><code>deploy</code></td>
+<td><code>deploy:deploy</code></td>
+</tr>
+</tbody></table>
+<p>这几乎是一套标准的绑定。</p>
+<h2 id="Plugins-插件"><a href="#Plugins-插件" class="headerlink" title="Plugins-插件"></a>Plugins-插件</h2><p>将目标添加到生命周期阶段的第二种方法是在项目中配置插件。插件是为 Maven 提供目标的工程。此外，一个插件可能有一个或多个目标，其中每个目标代表该插件的一种能力。例如，编译器插件有两个目标：<code>compile</code>和<code>testCompile</code>。前者编译你的主代码的源代码，而后者编译你的测试代码的源代码。</p>
+<p>在后面的章节中您将看到，插件可以包含指示将目标绑定到哪个生命周期阶段的信息。请注意，仅添加插件本身的信息是不够的，还必须指定要在构建过程中运行的目标。</p>
+<p>配置的目标将添加到已绑定到所选包的生命周期的目标中。 如果多个目标绑定到特定阶段，则使用的顺序是首先执行打包中的目标，然后执行 POM 中配置的目标。 请注意，您可以使用<code>&lt;executions></code>元素来更好地控制特定目标的顺序。</p>
+<p>为阶段添加目标的第二种方法是在项目中配置插件。插件是向 Maven 提供目标的工件。此外，一个插件可能有一个或多个目标，其中每个目标代表该插件的一种能力。例如，编译器插件有两个目标：<code>compile</code>和<code>testCompile</code>。前者编译主代码的源代码，后者编译测试代码的源代码。</p>
+<p>在后面的章节中您将看到，插件可以包含指示将目标绑定到哪个生命周期阶段的信息。请注意，仅添加插件本身的信息是不够的，还必须指定要在构建过程中运行的目标。</p>
+<p>配置的目标将添加到已绑定到所选包装生命周期的目标中。如果一个特定阶段绑定了多个目标，则使用的顺序是先执行包装中的目标，然后再执行 POM 中配置的目标。请注意，您可以使用<code>&lt;executions></code>元素对特定目标的顺序进行更多控制。</p>
+<p>例如，<code>Modello</code>插件默认将其目标<code>modello:java</code>绑定到<code>generate-sources</code>阶段（注：<code>modello:java</code>目标生成 Java 源代码）。因此，要使用 Modello 插件并让它从模型生成源代码并将其纳入构建，您需要在<code>&lt;build></code>的<code>&lt;plugins></code>部分的 POM 中添加以下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.modello<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>modello-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">models</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">model</span>&gt;</span>src/main/mdo/maven.mdo<span class="tag">&lt;/<span class="name">model</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">models</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goal</span>&gt;</span>java<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>您可能想知道为什么<code>&lt;executions></code>元素在那里。 这样您就可以根据需要使用不同的配置多次运行相同的目标。还可以根据一个给定 ID单独的执行，以便在继承或应用配置文件期间，您可以控制是否合并目标配置或将其转变为附加执行。</p>
+<p>当多个执行与特定阶段相匹配时，它们将按照 POM 中指定的顺序执行，先执行继承的执行。</p>
+<p>现在，就<code>modello:java</code>而言，只有在生成源代码阶段才有意义。但有些目标可以在多个阶段中使用，因此可能没有合理的默认值。对于这些目标，你可以自己指定阶段。例如，假设有一个目标<code>display:time</code>，它能在命令行中回声显示当前时间，你希望它在<code>process-test-resources</code>阶段运行，以显示测试何时开始。可以这样配置:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.mycompany.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>display-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-test-resources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goal</span>&gt;</span>time<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/25/Maven-POM/" rel="prev" title="Maven POM">
+                  <i class="fa fa-angle-left"></i> Maven POM
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
