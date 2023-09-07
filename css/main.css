@@ -2903,6 +2903,12 @@ header.header {
   }
 }
 code {
-  color: #f00;
-  background-color: #282828;
+  color: #e34949;
+  background-color: #333;
+}
+quote {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+  color: #f2f2f2;
+  background-color: #333;
 }
