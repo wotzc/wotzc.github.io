@@ -1421,6 +1421,28 @@ POM 4.0 的一个新功能是项目可以根据构建环境改变设置。一个
 - **property**: 如果 Maven 检测到相应<code>name=value</code>对的系统属性或 CLI 用户属性（可以在 POM 中通过 ${name} 解除引用）与给定值（如果给定）匹配，则<code>profile</code>将激活。
 - **file**: 最后，给定的文件名可以通过文件存在或丢失来激活配置文件。 注意：此元素的插值仅限于 ${basedir}、系统属性和请求属性。
 
+--------
+
+# Maven依赖的优先原则
+
+使用<code>Maven</code>的程序员都会遇到一个问题，那就是<code>Maven</code>依赖冲突的问题，这会导致<code>ClassNotFound</code>或者<code>MethodNotFound</code>这样的异常。其实只要明白<code>Maven</code>依赖的根本性的原则就不怕这样的问题了。
+
+## 依赖路径最短优先
+
+一个Demo项目依赖了两个<code>jar</code>包，其中<code>A-B-C-X(1.0)</code>，<code>A-D-X(2.0)</code>。由于<code>X(2.0)</code>路径最短，所以项目使用的是<code>X(2.0)</code>。
+
+## 申明顺序优先
+
+如果<code>A-B-X(1.0)</code>，<code>A-C-X(2.0)</code> 这样的路径长度一样怎么办呢？这样的情况下，<code>maven</code>会根据<code>pom</code>文件声明的顺序加载，如果先声明了<code>B</code>，后声明了<code>C</code>，那就最后的依赖就会是<code>X(1.0)</code>。
+
+{% note no-icon success%}
+
+所以maven依赖原则总结起来就两条：<code>路径最短，申明顺序其次。</code>
+
+{% endnote %}
+
+-------
+
 # Final
 
 Maven POM 体积庞大。不过，它的大小也证明了它的多功能性。
