@@ -20,17 +20,21 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="真正的大师永远都怀着一颗学徒的心">
+    <meta name="description" content="概述“Null sucks.” - Doug Lea   Doug Lea 是一位美国的计算机科学家，他是 Java 平台的并发和集合框架的主要设计者之一。他在 2014 年的一篇文章中说过：“Null sucks.”，意思是 null 很糟糕。他认为 null 是一种不明确的表示，它既可以表示一个值不存在，也可以表示一个值未知，也可以表示一个值无效。这样就会导致很多逻辑错误和空指针异常，给程序员">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Optional">
 <meta property="og:url" content="http://example.com/2023/09/25/Optional/index.html">
 <meta property="og:site_name" content="Cai">
-<meta property="og:description" content="真正的大师永远都怀着一颗学徒的心">
+<meta property="og:description" content="概述“Null sucks.” - Doug Lea   Doug Lea 是一位美国的计算机科学家，他是 Java 平台的并发和集合框架的主要设计者之一。他在 2014 年的一篇文章中说过：“Null sucks.”，意思是 null 很糟糕。他认为 null 是一种不明确的表示，它既可以表示一个值不存在，也可以表示一个值未知，也可以表示一个值无效。这样就会导致很多逻辑错误和空指针异常，给程序员">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/optional/java_optional.png">
 <meta property="article:published_time" content="2023-09-25T02:29:54.000Z">
-<meta property="article:modified_time" content="2023-09-25T02:29:54.980Z">
+<meta property="article:modified_time" content="2023-11-28T13:01:13.038Z">
 <meta property="article:author" content="wotzc">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="Java8">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/optional/java_optional.png">
 
 
 <link rel="canonical" href="http://example.com/2023/09/25/Optional/">
@@ -126,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional-%E7%B1%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Optional 类是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional-%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">Optional 类的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-empty"><span class="nav-number">3.1.</span> <span class="nav-text">Optional.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-of-T-value"><span class="nav-number">3.2.</span> <span class="nav-text">Optional.of(T value)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optional-ofNullable-T-value"><span class="nav-number">3.3.</span> <span class="nav-text">Optional.ofNullable(T value)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional-%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">Optional 对象的使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#isPresent"><span class="nav-number">4.1.</span> <span class="nav-text">isPresent()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-number">4.2.</span> <span class="nav-text">get()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ifPresent-Consumer-lt-super-T-gt-action"><span class="nav-number">4.3.</span> <span class="nav-text">ifPresent(Consumer&lt;? super T&gt; action)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orElse-T-other"><span class="nav-number">4.4.</span> <span class="nav-text">orElse(T other)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orElseGet-Supplier-lt-extends-T-gt-supplier"><span class="nav-number">4.5.</span> <span class="nav-text">orElseGet(Supplier&lt;? extends T&gt; supplier)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map-Function-lt-super-T-extends-U-gt-mapper"><span class="nav-number">4.6.</span> <span class="nav-text">map(Function&lt;? super T,? extends U&gt; mapper)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flatMap-Function-lt-super-T-Optional-lt-U-gt-gt-mapper"><span class="nav-number">4.7.</span> <span class="nav-text">flatMap(Function&lt;? super T,Optional&lt;U&gt;&gt; mapper)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#map%E5%92%8CflatMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.7.1.</span> <span class="nav-text">map和flatMap的区别:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter-Predicate-lt-super-T-gt-predicate"><span class="nav-number">4.8.</span> <span class="nav-text">filter(Predicate&lt;? super T&gt; predicate)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -159,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -222,6 +227,22 @@
 
       <time title="创建时间：2023-09-25 10:29:54" itemprop="dateCreated datePublished" datetime="2023-09-25T10:29:54+08:00">2023-09-25</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-28 21:01:13" itemprop="dateModified" datetime="2023-11-28T21:01:13+08:00">2023-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java8/" itemprop="url" rel="index"><span itemprop="name">Java8</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -232,7 +253,68 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><div class="note info no-icon"><p>“Null sucks.” - Doug Lea</p>
+</div>
+
+<p>Doug Lea 是一位美国的计算机科学家，他是 Java 平台的并发和集合框架的主要设计者之一。他在 2014 年的一篇文章中说过：“Null sucks.”，意思是 null 很糟糕。他认为 null 是一种不明确的表示，它既可以表示一个值不存在，也可以表示一个值未知，也可以表示一个值无效。这样就会导致很多逻辑错误和空指针异常，给程序员带来很多麻烦。他建议使用 Optional 类来封装可能为空的值，从而提高代码的可读性和健壮性。</p>
+<p>null 引用是一种表示一个对象变量没有指向任何对象的方式，它是 Java 语言中的一个特殊值，也是导致空指针异常（NullPointerException）的主要原因。虽然 null 引用可以用来表示一个值不存在或未知，也可以用来节省内存空间。但是它也不符合面向对象的思想，因为它不是一个对象，不能调用任何方法或属性。</p>
+<p>可以看到，null 引用并不好，我们应该尽量避免使用 null，那么我们该怎么避免 null 引用引起的逻辑错误和运行时异常嘞？</p>
+<p>其实这个问题 Java 的设计者也知道，于是他们在 Java8 之后设计引入了 Optional 类解决这个问题，本文将给大家详细介绍下 Optional 类的设计目的以及使用方法。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/optional/java_optional.png"></p>
+<hr>
+<h1 id="Optional-类是什么？"><a href="#Optional-类是什么？" class="headerlink" title="Optional 类是什么？"></a>Optional 类是什么？</h1><p><code>Optional</code> 类是 java 8 中引入的一个新的类，它的作用是封装一个可能为空的值，从而避免空指针异常（<code>NullPointerException</code>）。<code>Optional</code> 类可以看作是一个容器，它可以包含一个非空的值，也可以为空。<code>Optional</code> 类提供了一些方法，让我们可以更方便地处理可能为空的值，而不需要显式地进行空值检查或者使用 null。</p>
+<h1 id="Optional-类的设计"><a href="#Optional-类的设计" class="headerlink" title="Optional 类的设计"></a>Optional 类的设计</h1><p>Optional 类的设计是基于函数式编程的思想，它借鉴了 Scala 和 Haskell 等语言中的 Option 类型。Optional 类实现了 java.util.function 包中的 Supplier、Consumer、Predicate、Function 等接口，这使得它可以和 lambda 表达式或者方法引用一起使用，形成更简洁和优雅的代码。</p>
+<p>Optional 类被 final 修饰，因此它是一个不可变的类，它有两个静态方法用于创建 Optional 对象。</p>
+<h2 id="Optional-empty"><a href="#Optional-empty" class="headerlink" title="Optional.empty()"></a><code>Optional.empty()</code></h2><p><code>Optional.empty</code> 表示一个空的 <code>Optional</code> 对象，它不包含任何值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; empty = Optional.empty();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Optional-of-T-value"><a href="#Optional-of-T-value" class="headerlink" title="Optional.of(T value)"></a><code>Optional.of(T value)</code></h2><p><code>Optional.of</code> 表示一个非空的 <code>Optional</code> 对象，它包含一个非空的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个非空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; hello = Optional.of(<span class="string">&quot;Hello&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Optional-ofNullable-T-value"><a href="#Optional-ofNullable-T-value" class="headerlink" title="Optional.ofNullable(T value)"></a><code>Optional.ofNullable(T value)</code></h2><p>注意，如果我们使用 <code>Optional.of</code> 方法传入一个 <code>null</code> 值，会抛出 <code>NullPointerException</code>。如果我们不确定一个值是否为空，可以使用 <code>Optional.ofNullable</code> 方法，它会根据值是否为空，返回一个相应的 <code>Optional</code> 对象。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个可能为空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; name = Optional.ofNullable(<span class="string">&quot;Hello&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="Optional-对象的使用方法"><a href="#Optional-对象的使用方法" class="headerlink" title="Optional 对象的使用方法"></a>Optional 对象的使用方法</h1><p><code>Optional</code> 对象提供了一些方法，让我们可以更方便地处理可能为空的值，而不需要显式地进行空值检查或者使用 <code>null</code>。以下是一些常用的方法。</p>
+<h2 id="isPresent"><a href="#isPresent" class="headerlink" title="isPresent()"></a><code>isPresent()</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line"><span class="keyword">if</span> (personOptional.isPresent()) &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;查询不为空&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;查询为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="get"><a href="#get" class="headerlink" title="get()"></a><code>get()</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则抛出 <code>NoSuchElementException</code> 异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line"><span class="keyword">if</span> (personOptional.isPresent()) &#123;</span><br><span class="line">  Person person = personOptional.get();</span><br><span class="line">  System.out.println(person);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;查询为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ifPresent-Consumer-lt-super-T-gt-action"><a href="#ifPresent-Consumer-lt-super-T-gt-action" class="headerlink" title="ifPresent(Consumer&lt;? super T&gt; action)"></a><code>ifPresent(Consumer&lt;? super T&gt; action)</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line">personOptional.ifPresent(person -&gt; System.out.println(person.getName()));</span><br></pre></td></tr></table></figure>
+
+<h2 id="orElse-T-other"><a href="#orElse-T-other" class="headerlink" title="orElse(T other)"></a><code>orElse(T other)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则返回给定的默认值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line">Person person = personOptional.orElse(<span class="keyword">new</span> Person());</span><br></pre></td></tr></table></figure>
+
+<h2 id="orElseGet-Supplier-lt-extends-T-gt-supplier"><a href="#orElseGet-Supplier-lt-extends-T-gt-supplier" class="headerlink" title="orElseGet(Supplier&lt;? extends T&gt; supplier)"></a><code>orElseGet(Supplier&lt;? extends T&gt; supplier)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则返回由给定的供应者操作生成的值。</p>
+<p>当<code>orElse</code>的参数是间接计算得来的时候，使用<code>orElse</code>可能导致<code>NullPointerException</code>，当<code>orElse</code>的参数是间接计算得来的时候。虽然这种说法有点牵强（因为并不是<code>orElse</code>导致了空指针异常），但是使用<code>orElseGet</code>确实可以避免这种情况。</p>
+<p>两者的明显（也是唯一）区别是前者需要传递的参数是一个值（通常是为空时的默认值），后者传递的是一个函数。我们看一下源代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the value if present, otherwise return &#123;<span class="doctag">@code</span> other&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">orElse</span><span class="params">(T other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value != <span class="keyword">null</span> ? value : other;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the value if present, otherwise invoke &#123;<span class="doctag">@code</span> other&#125; and return</span></span><br><span class="line"><span class="comment"> * the result of that invocation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">orElseGet</span><span class="params">(Supplier&lt;? extends T&gt; other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value != <span class="keyword">null</span> ? value : other.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单解释为，我们使用<code>Optional</code>包装的变量如果不为空，返回它本身，否则返回我们传递进去的值。<code>orElseGet</code>参数为<code>Supplier</code>接口，它是一个函数式接口，它的形式是这样的：<code>() -&gt; &#123; return computedResult &#125;</code>，即<em>入参为空，有返回值（任意类型的）</em>。</p>
+<p>我们可能考虑的问题是：何时使用<code>orElse</code>和何时使用<code>orElseGet</code>？看起来可以使用<code>orElseGet</code>的时候，使用<code>orElse</code>也可以代替（因为<code>Supplier</code>接口没有入参），而且使用<code>orElseGet</code>还需要将计算过程额外包装成一个 lambda 表达式。</p>
+<p>一个关键的点是，使用<code>Supplier</code>能够做到<em>懒计算</em>，即使用<code>orElseGet</code>时。它的好处是，<strong>只有在需要的时候才会计算结果</strong>。具体到我们的场景，使用<code>orElse</code>的时候，每次它都会执行计算结果的过程，而对于<code>orElseGet</code>，只有<code>Optional</code>中的值为空时，它才会计算备选结果。这样做的好处是可以<strong>避免提前计算结果的风险</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Person person2 = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">String orElse = Optional.ofNullable(person1.getName()).orElse(person2.getName()); <span class="comment">// 报错，空指针</span></span><br><span class="line"></span><br><span class="line">String orElseGet = Optional.ofNullable(person1.getName()).orElseGet(() -&gt; person2.getName()); <span class="comment">// 不报错</span></span><br><span class="line"></span><br><span class="line">System.out.println(orElseGet);</span><br></pre></td></tr></table></figure>
+
+<h2 id="map-Function-lt-super-T-extends-U-gt-mapper"><a href="#map-Function-lt-super-T-extends-U-gt-mapper" class="headerlink" title="map(Function&lt;? super T,? extends U&gt; mapper)"></a><code>map(Function&lt;? super T,? extends U&gt; mapper)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，对该值应用给定的映射函数，返回一个包含映射结果的 Optional 对象，否则返回一个空的 <code>Optional</code> 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Optional&lt;Person&gt; person = Optional.ofNullable(person1);</span><br><span class="line">Optional&lt;String&gt; optionalS = person.map(p -&gt; p.getName().toUpperCase());</span><br><span class="line"><span class="keyword">if</span> (optionalS.isPresent()) &#123;</span><br><span class="line">  String upperName = optionalS.get();</span><br><span class="line">  System.out.println(upperName);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ZHANGSAN</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="flatMap-Function-lt-super-T-Optional-lt-U-gt-gt-mapper"><a href="#flatMap-Function-lt-super-T-Optional-lt-U-gt-gt-mapper" class="headerlink" title="flatMap(Function&lt;? super T,Optional&lt;U&gt;&gt; mapper)"></a><code>flatMap(Function&lt;? super T,Optional&lt;U&gt;&gt; mapper)</code></h2><h3 id="map和flatMap的区别"><a href="#map和flatMap的区别" class="headerlink" title="map和flatMap的区别:"></a>map和flatMap的区别:</h3><p><code>map</code>会将传入的<code>Function</code>函数的结果进行封装，先看源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, ? extends U&gt; mapper)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(mapper);</span><br><span class="line">    <span class="keyword">if</span> (!isPresent())</span><br><span class="line">        <span class="keyword">return</span> empty();</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(mapper.apply(value));<span class="comment">//会使用Optional的ofNullable方法包装Function函数返回的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>flatMap</code>会直接返回<code>Function</code>函数执行的结果，看源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">flatMap</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, Optional&lt;U&gt;&gt; mapper)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(mapper);</span><br><span class="line">    <span class="keyword">if</span> (!isPresent())</span><br><span class="line">        <span class="keyword">return</span> empty();</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.requireNonNull(mapper.apply(value));<span class="comment">//直接返回Function执行的结果</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以在使用的时候，下面这段代码会报错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStudentName</span><span class="params">(School school)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(school)</span><br><span class="line">                .map(School::getTearch)</span><br><span class="line">                .map(Tearch::getStudent)</span><br><span class="line">                .map(Student::getName)</span><br><span class="line">                .orElse(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而下面这段代码不会报错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStudentName</span><span class="params">(School school)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(school)</span><br><span class="line">                .flatMap(School::getTearch)</span><br><span class="line">                .flatMap(Tearch::getStudent)</span><br><span class="line">                .map(Student::getName).orElse(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="filter-Predicate-lt-super-T-gt-predicate"><a href="#filter-Predicate-lt-super-T-gt-predicate" class="headerlink" title="filter(Predicate&lt;? super T&gt; predicate)"></a><code>filter(Predicate&lt;? super T&gt; predicate)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，并且该值满足给定的谓词条件，返回包含该值的 <code>Optional</code> 对象，否则返回一个空的 <code>Optional</code> 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Optional&lt;Person&gt; optionalPerson = Optional.of(person1);</span><br><span class="line">Optional&lt;Person&gt; optional = optionalPerson.filter(person -&gt; <span class="string">&quot;ZHANGSAN&quot;</span>.equals(person.getName()));)</span><br><span class="line"><span class="keyword">if</span> (optional.isPresent())&#123;</span><br><span class="line">	System.out.println(optional);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;optional为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -240,6 +322,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+              <a href="/tags/Java8/" rel="tag"># Java8</a>
+          </div>
 
         
 
