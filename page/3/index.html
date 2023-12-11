@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -162,7 +162,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,129 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/%E8%A7%A3%E5%86%B3Mysql5-7%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AFRestarting-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/22/%E8%A7%A3%E5%86%B3Mysql5-7%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AFRestarting-1/" class="post-title-link" itemprop="url">解决Mysql5.7一直重启Restarting(1)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-22 16:16:44" itemprop="dateCreated datePublished" datetime="2021-09-22T16:16:44+08:00">2021-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>优于长时间没进Linux连接mysql，今天进入Linux连接mysql，使用<code>docker ps</code>，mysql的状态一直是Restarting (1) x seconds ago，mysql一直在重启无法连接</p>
+<p>查看日志</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs mysql</span><br></pre></td></tr></table></figure>
+
+<p>发现是内存不足</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">2021-06-14T11:41:26.576589Z 0 [ERROR] InnoDB: Error number 28 means &#39;No space left on device&#39;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>使用 df -h 查看 发现是 /var/docker/overlay2里面的东西占了很大的空间</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/linuxdfh.png"></p>
+<p>检查内存占用情况，发现vagrant占用36G，一路找下去，发现到application data目录无线循环，上网搜索发现了问题所在。</p>
+<p><strong>ls查看发现里的东西很多和我本机C盘里的文件一模一样 AppData之类的 为什么这些东西会在虚拟机里 虚拟机同步了C盘里的内容 百度发现 vagrant提供了将本机</strong></p>
+<p><strong>目录挂载到虚拟机目录下的功能，默认是将vagrant配置文件所在目录挂载到虚拟机/vagrant目录下。</strong></p>
+<p><strong>也就是说 我的VagrantFile 是 C/user/username/VagrantFile 那么所有和VagrantFile同级的 C/user/username/里面的内容会全部同步到vagrant中 导致虚拟机内存爆满</strong></p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
+<li><p>在和Vagrantfile同级目录（C:\Users\Administrator\）创建一个自己的文件夹,我的叫VagrantSyncFolder</p>
+</li>
+<li><p>然后打开目录到C:\Users\Administrator.vagrant.d\boxes\centos-VAGRANTSLASH-7\2004.01\virtualbox</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/vagrantfile.png"></p>
+</li>
+<li><p>打开Vagrantfile，</p>
+<p>config.vm.synced_folder “.”, “/vagrant”, type: “rsync”</p>
+<p>修改为</p>
+<p>config.vm.synced_folder “./vagrantCache”, “/vagrant”, type: “rsync”</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/changevagrantfile.png"></p>
+</li>
+<li><p>修改完这个之后,vagrant reload发现还是不行,猜测可能只有vagrant成功重启之后修改的这个映射才能生效,但是已经占用100%不能成功重启,没办法,只能删东</p>
+<p>西了</p>
+<p>查看了一下vagrant目录里文件的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh *</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/cdvagrant.png"></p>
+<p>其中AppData很大</p>
+<p>试着删了一下3D Objects文件里的一些东西,发现文件里的文件并没有影响,ok,直接将AppData删了,释放了很大的空间，然后exit退出</p>
+<p>vagrant reload重启，大功告成！</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/vagrantreload.png"></p>
+</li>
+</ol>
+<p>其实这种情况，可能在使用vagrant  up命令的时候就会报Rsync 错误，可以参考这篇文章，其问题和上方的一样</p>
+<p><a target="_blank" rel="noopener" href="https://www.dissmeyer.com/2020/02/11/issue-with-centos-7-vagrant-boxes-on-windows-10/">Windows 10 上的 CentOS 7 Vagrant 框出现 Rsync 错误</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3006,189 +3129,6 @@
 
 <p>然后在 <code>dependencies</code> 中添加自己所需使用的依赖即可使用。</p>
 <hr>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/" class="post-title-link" itemprop="url">IntelliJ-IDEA使用技巧之Debug</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-20 20:51:30" itemprop="dateCreated datePublished" datetime="2021-08-20T20:51:30+08:00">2021-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 15:58:02" itemprop="dateModified" datetime="2023-09-05T15:58:02+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">IDEA使用技巧</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Debug常用断点调试快捷键"><a href="#Debug常用断点调试快捷键" class="headerlink" title="Debug常用断点调试快捷键"></a>Debug常用断点调试快捷键</h1><table>
-<thead>
-<tr>
-<th align="center">图标</th>
-<th align="center">快捷键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png"></td>
-<td align="center"><strong>F8</strong></td>
-<td><strong>Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png"></td>
-<td align="center"><strong>F7</strong></td>
-<td><strong>Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/forceStepInto.png"></td>
-<td align="center"><strong>Alt+Shift+F7</strong></td>
-<td><strong>Force Step Into：强制步入，能进入任何方法，查看底层源码的时候可以用这个进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png"></td>
-<td align="center"><strong>Shift+F8</strong></td>
-<td><strong>Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png"></td>
-<td align="center"><strong>Alt+F9</strong></td>
-<td><strong>Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></td>
-<td align="center"><strong>Ctrl+F2</strong></td>
-<td><strong>Stop ‘xxx’：停止运行</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></td>
-<td align="center"><strong>Ctrl+Shift+F8</strong></td>
-<td><strong>View Breakpoints：查看所有断点</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/mutebreakpoints.png"></td>
-<td align="center"></td>
-<td><strong>Mute Breakpoints：选择这个后，所有断点变为灰色，断点失效，按F9则可以直接运行完程序。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></td>
-<td align="center"><strong>F9</strong></td>
-<td><strong>Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/dropframe.png"></td>
-<td align="center"></td>
-<td><strong>Drop Frame：断点回退，断点会回退到我们打断点的位置。</strong></td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h1><p>在我们打断点的地方鼠标右击，然后在condition输入框里面输入条件</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/conditionbreakpoint1.png"></p>
-<hr>
-<h1 id="求值表达式Evaluate-Expression"><a href="#求值表达式Evaluate-Expression" class="headerlink" title="求值表达式Evaluate Expression"></a>求值表达式Evaluate Expression</h1><p>在断点调试过程中，我们想查看某些变量或某些对象的属性值，我们可以通过快捷键<strong>Alt+F8</strong>打开<strong>表达式求值</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression2.png"></p>
-<hr>
-<h1 id="setValue"><a href="#setValue" class="headerlink" title="setValue"></a>setValue</h1><p>Intellij IDEA在debug模式下可以改变变量的值，下面这段代码为例，比如我们想看看i=12时会输出什么</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue1.png"></p>
-<p>此时<strong>i==5</strong>，我们把<strong>i</strong>设置成12</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue3.png"></p>
-<p>按快捷键<strong>F8</strong>看看i是否会进入<strong>if条件</strong>里面</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue4.png"></p>
-<hr>
-<hr>
-<h1 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h1><p><strong>Java Exception Breakpoints可以使当程序遇见被选择的异常时，自动停在相应异常的位置处。</strong></p>
-<p>如下面这段代码</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint1.png"></p>
-<p>加上条件断点，使用快捷键<strong>Ctrl+Shift+F8</strong>或者点击图标<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint3.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint4.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint5.png"></p>
-<p>再使用Debug模式来运行程序，当程序出现异常，会之间停留在我们出现异常的代码处</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint6.png"></p>
-<hr>
-<h1 id="避免操作资源"><a href="#避免操作资源" class="headerlink" title="避免操作资源"></a>避免操作资源</h1><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource1.png"></p>
-<p>如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不想后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></p>
-<p>但是点击这个按钮之后后续的操作还会执行，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource2.png"></p>
-<hr>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource3.png"></p>
-<p>Debug调试界面，选择正在运行的Stack，鼠标右键选择Force Return，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource4.png"></p>
-<p>上面的操作完成之后，代码会跑到<strong>Thread.java</strong>类中的<strong>exit（）</strong>方法里。再点击<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></p>
-<p>程序就运行结束。我们就会看到后续的操作并没有执行</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource5.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource6.png"></p>
 
       
     </div>
