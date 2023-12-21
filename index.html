@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -162,7 +162,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">69</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,189 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/19/%E7%94%9F%E6%88%90%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/19/%E7%94%9F%E6%88%90%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">生成器模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-19 10:02:54" itemprop="dateCreated datePublished" datetime="2023-12-19T10:02:54+08:00">2023-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-20 17:43:10" itemprop="dateModified" datetime="2023-12-20T17:43:10+08:00">2023-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/builder-zh-2x.png" style="zoom:50%;" />
+
+<p><strong>生成器模式</strong>是一种创建型设计模式， 使你能够分步骤创建复杂对象。 该模式允许你使用相同的创建代码生成不同类型和形式的对象。</p>
+<p>使用建造者模式，用户就只需要指定需要建造的类型，具体的建造过程和细节并不需要知道。</p>
+<p>建造者模式允许修改一个产品的内部表示。</p>
+<p>它将构造和表示两块代码隔离开来。</p>
+<p>它很好的控制了构建过程。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/builder_seq1.png" style="zoom:50%;" />
+
+<p>建造者模式流程说明：</p>
+<ol>
+<li>创建大型产品建造者</li>
+<li>客户端创建指挥者 <code>Director</code> 对象并配置它所需要的建造者 <code>Builder</code> 对象</li>
+<li><code>Director</code> 负责通知 <code>builder</code> 何时建造 <code>product</code> 的部件</li>
+<li><code>Builder</code> 处理 <code>director</code> 的请求并添加 <code>product</code> 的部件</li>
+<li>客户端从 <code>builder</code> 处获得 <code>product</code></li>
+</ol>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>假设有这样一个复杂对象， 在对其进行构造时需要对诸多成员变量和嵌套对象进行繁复的初始化工作。 这些初始化代码通常深藏于一个包含众多参数且让人基本看不懂的构造函数中； 甚至还有更糟糕的情况， 那就是这些代码散落在客户端代码的多个位置。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/problem1229-2x.png" style="zoom:50%;" />
+
+<p>例如， 我们来思考如何创建一个房屋<code>House</code>对象。 建造一栋简单的房屋， 首先你需要建造四面墙和地板， 安装房门和一套窗户， 然后再建造一个屋顶。 但是如果你想要一栋更宽敞更明亮的房屋， 还要有院子和其他设施 （例如暖气、 排水和供电设备）， 那又该怎么办呢？</p>
+<p>最简单的方法是扩展房屋基类， 然后创建一系列涵盖所有参数组合的子类。 但最终你将面对相当数量的子类。 任何新增的参数 （例如门廊类型） 都会让这个层次结构更加复杂。</p>
+<p>另一种方法则无需生成子类。 你可以在房屋基类中创建一个包括所有可能参数的超级构造函数， 并用它来控制房屋对象。 这种方法确实可以避免生成子类， 但它却会造成另外一个问题。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/problem2023-2x.png" style="zoom:50%;" />
+
+<p>通常情况下， 绝大部分的参数都没有使用， 这使得对于构造函数的调用十分不简洁。 例如， 只有很少的房子有游泳池， 因此与游泳池相关的参数十之八九是毫无用处的。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>生成器模式建议将对象构造代码从产品类中抽取出来， 并将其放在一个名为<em>生成器</em>的独立对象中。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/solution111-2x.png" style="zoom:50%;" />
+
+<p>该模式会将对象构造过程划分为一组步骤， 比如 <code>build­Walls</code>创建墙壁和 <code>build­Door</code>创建房门创建房门等。 每次创建对象时， 你都需要通过生成器对象执行一系列步骤。 重点在于你无需调用所有步骤， 而只需调用创建特定对象配置所需的那些步骤即可。</p>
+<p>当你需要创建不同形式的产品时， 其中的一些构造步骤可能需要不同的实现。 例如， 木屋的房门可能需要使用木头制造， 而城堡的房门则必须使用石头制造。</p>
+<p>在这种情况下， 你可以创建多个不同的生成器， 用不同方式实现一组相同的创建步骤。 然后你就可以在创建过程中使用这些生成器 （例如按顺序调用多个构造步骤） 来生成不同类型的对象。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/builder-comic-1-zh-2x.png" style="zoom:50%;" />
+
+<p>例如， 假设第一个建造者使用木头和玻璃制造房屋， 第二个建造者使用石头和钢铁， 而第三个建造者使用黄金和钻石。 在调用同一组步骤后， 第一个建造者会给你一栋普通房屋， 第二个会给你一座小城堡， 而第三个则会给你一座宫殿。 但是， 只有在调用构造步骤的客户端代码可以通过通用接口与建造者进行交互时， 这样的调用才能返回需要的房屋。</p>
+<h4 id="指挥者"><a href="#指挥者" class="headerlink" title="指挥者"></a>指挥者</h4><p>你可以进一步将用于创建产品的一系列生成器步骤调用抽取成为单独的指挥类。 指挥类可定义创建步骤的执行顺序， 而生成器则提供这些步骤的实现。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/builder-comic-2-zh-2x.png" style="zoom:50%;" />
+
+<p>严格来说， 你的程序中并不一定需要指挥类。 客户端代码可直接以特定顺序调用创建步骤。 不过， 指挥类中非常适合放入各种例行构造流程， 以便在程序中反复使用。</p>
+<p>此外， 对于客户端代码来说， 指挥类完全隐藏了产品构造细节。 客户端只需要将一个生成器与主管类关联， 然后使用主管类来构造产品， 就能从生成器处获得构造结果了。</p>
+<h4 id="生成器模式结构"><a href="#生成器模式结构" class="headerlink" title="生成器模式结构"></a>生成器模式结构</h4><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/structure-1229-2x.png" style="zoom:67%;" />
+
+<ol>
+<li><strong>建造者</strong> （Builder） 接口声明在所有类型建造者中通用的产品构造步骤。</li>
+<li><strong>具体建造者</strong> （Concrete Builders） 提供构造过程的不同实现。 具体建造者也可以构造不遵循通用接口的产品。</li>
+<li><strong>产品</strong> （Products） 是最终生成的对象。 由不同建造者构造的产品无需属于同一类层次结构或接口。</li>
+<li><strong>主管</strong> （Director） 类定义调用构造步骤的顺序， 这样你就可以创建和复用特定的产品配置。</li>
+<li><strong>客户端</strong> （Client） 必须将某个建造者对象与主管类关联。 一般情况下， 你只需通过主管类构造函数的参数进行一次性关联即可。 此后主管类就能使用建造者对象完成后续所有的构造任务。 但在客户端将建造者对象传递给主管类制造方法时还有另一种方式。 在这种情况下， 你在使用主管类生产产品时每次都可以使用不同的建造者。</li>
+</ol>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例:"></a>代码示例:</h4><p>下面关于<strong>生成器</strong>模式的例子演示了你可以如何复用相同的对象构造代码来生成不同类型的产品——例如汽车 （Car）。</p>
+<p>汽车是一个复杂对象， 有数百种不同的制造方法。 我们没有在 <code>汽车</code>类中塞入一个巨型构造函数， 而是将汽车组装代码抽取到单独的汽车生成器类中。 该类中有一组方法可用来配置汽车的各种部件。</p>
+<p>如果客户端代码需要组装一辆与众不同、 精心调教的汽车， 它可以直接调用生成器。 或者， 客户端可以将组装工作委托给主管类， 因为主管类知道如何使用生成器制造最受欢迎的几种型号汽车。</p>
+<p>比如说我是个老司机，但是除了开车还想造车，但是车的构造实在是太复杂了，那么我们就可以将车拆分…</p>
+<p>4个轮子、1个底盘、1个发动机，1个驾驶位</p>
+<p>好了，为了简便，就造这四个吧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> CarType carType;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WheelType wheels;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ChassisType chassis;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> EngineType engine;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seats;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(CarType carType, WheelType wheels, ChassisType chassis, EngineType engine, <span class="keyword">int</span> seat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.carType = carType;</span><br><span class="line">        <span class="keyword">this</span>.wheels = wheels;</span><br><span class="line">        <span class="keyword">this</span>.chassis = chassis;</span><br><span class="line">        <span class="keyword">this</span>.engine = engine;</span><br><span class="line">        <span class="keyword">this</span>.seats = seat;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CarType <span class="title">getCarType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> carType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WheelType <span class="title">getWheels</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> wheels;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ChassisType <span class="title">getChassis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> chassis;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EngineType <span class="title">getEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> engine;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSeat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> seats;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Car&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;carType=&quot;</span> + carType +</span><br><span class="line">                <span class="string">&quot;, wheels=&quot;</span> + wheels +</span><br><span class="line">                <span class="string">&quot;, chassis=&quot;</span> + chassis +</span><br><span class="line">                <span class="string">&quot;, engine=&quot;</span> + engine +</span><br><span class="line">                <span class="string">&quot;, seats=&quot;</span> + seats +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们有汽车零部件的各种枚举类:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">CarType</span> </span>&#123;</span><br><span class="line">    CITY_CAR,</span><br><span class="line">    SPORT_CAR,</span><br><span class="line">    SUV</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">WheelType</span> </span>&#123;</span><br><span class="line">    CITY_CAR_WHEEL,</span><br><span class="line">    SPORT_CAR_WHEEL,</span><br><span class="line">    SUV_CAR_WHEEL</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">ChassisType</span> </span>&#123;</span><br><span class="line">    CITY_CAR_CHASSIS,</span><br><span class="line">    SPORT_CAR_CHASSIS,</span><br><span class="line">    SUV_CAR_CHASSIS</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">EngineType</span> </span>&#123;</span><br><span class="line">    CITY_CAR_ENGINE,</span><br><span class="line">    SPORT_CAR_ENGINE,</span><br><span class="line">    SUV_CAR_ENGINE</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后我需要一些具体的汽车构造者，这里我们有三种具体的汽车构建者：城市轿车构建者<code>CityCarBuilder</code>、运动跑车构建者<code>SportCarBuilder</code>、SUV汽车构建者<code>SUVCarBuilder</code>。</p>
+<p><code>CityCarBuilder.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CityCarBuilder</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> CarType carType;</span><br><span class="line">    <span class="keyword">private</span> WheelType wheels;</span><br><span class="line">    <span class="keyword">private</span> ChassisType chassis;</span><br><span class="line">    <span class="keyword">private</span> EngineType engine;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seat;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.carType = CarType.CITY_CAR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildWheels</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wheels = WheelType.CITY_CAR_WHEEL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildChassis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.chassis = ChassisType.CITY_CAR_CHASSIS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = EngineType.CITY_CAR_ENGINE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildSeat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.seat = <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Car(carType, wheels, chassis, engine, seat);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>SportCarBuilder.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SportCarBuilder</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> CarType carType;</span><br><span class="line">    <span class="keyword">private</span> WheelType wheels;</span><br><span class="line">    <span class="keyword">private</span> ChassisType chassis;</span><br><span class="line">    <span class="keyword">private</span> EngineType engine;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seat;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.carType = CarType.SPORT_CAR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildWheels</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wheels = WheelType.SPORT_CAR_WHEEL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildChassis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.chassis = ChassisType.SPORT_CAR_CHASSIS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = EngineType.SPORT_CAR_ENGINE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildSeat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.seat = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Car(carType, wheels, chassis, engine, seat);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>SUVCarBuilder.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SUVCarBuilder</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> CarType carType;</span><br><span class="line">    <span class="keyword">private</span> WheelType wheels;</span><br><span class="line">    <span class="keyword">private</span> ChassisType chassis;</span><br><span class="line">    <span class="keyword">private</span> EngineType engine;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seat;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.carType = CarType.SUV;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildWheels</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.wheels = WheelType.SUV_CAR_WHEEL;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildChassis</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.chassis = ChassisType.SUV_CAR_CHASSIS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = EngineType.SUV_CAR_ENGINE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildSeat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.seat = <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Car(carType, wheels, chassis, engine, seat);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些建造者都实现了<code>Builder</code>接口:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个汽车对象</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">createCar</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建造汽车车轮</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildWheels</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建造汽车地盘</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildChassis</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建造发动机</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildEngine</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建造驾驶位</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildSeat</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Car <span class="title">getCar</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们需要一个<code>Director</code>类负责按照特定顺序执行生成步骤。其在根据特定步骤或配置来生成产品时<br>会很有帮助。由于客户端可以直接控制生成器，我们可以调用<code>Director</code>类的<code>setBuilder</code>来切换产品的具体建造者。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  Builder builder;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">constructCar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        builder.createCar();</span><br><span class="line">        builder.buildWheels();</span><br><span class="line">        builder.buildChassis();</span><br><span class="line">        builder.buildEngine();</span><br><span class="line">        builder.buildSeat();</span><br><span class="line">        <span class="keyword">return</span> builder.getCar();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Director</span><span class="params">(Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.builder = builder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBuilder</span><span class="params">(Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.builder = builder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Builder <span class="title">getBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> builder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在指挥者和建造者都已经准备好了，可以进行建造了，调用指挥者的<code>constructCar()</code> 方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wotzc</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 生产城市汽车</span></span><br><span class="line">        CityCarBuilder cityCarBuilder = <span class="keyword">new</span> CityCarBuilder();</span><br><span class="line">        Director director = <span class="keyword">new</span> Director(cityCarBuilder);</span><br><span class="line">        Car cityCar = director.constructCar();</span><br><span class="line">        System.out.println(cityCar.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生产运动汽车</span></span><br><span class="line">        SportCarBuilder sportCarBuilder = <span class="keyword">new</span> SportCarBuilder();</span><br><span class="line">        director.setBuilder(sportCarBuilder);</span><br><span class="line">        Car sportCar = director.constructCar();</span><br><span class="line">        System.out.println(sportCar.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生产SUV</span></span><br><span class="line">        SUVCarBuilder suvCarBuilder = <span class="keyword">new</span> SUVCarBuilder();</span><br><span class="line">        director.setBuilder(suvCarBuilder);</span><br><span class="line">        Car suv = director.constructCar();</span><br><span class="line">        System.out.println(suv.toString());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Car&#123;carType&#x3D;CITY_CAR, wheels&#x3D;CITY_CAR_WHEEL, chassis&#x3D;CITY_CAR_CHASSIS, engine&#x3D;CITY_CAR_ENGINE, seats&#x3D;5&#125;</span><br><span class="line">Car&#123;carType&#x3D;SPORT_CAR, wheels&#x3D;SPORT_CAR_WHEEL, chassis&#x3D;SPORT_CAR_CHASSIS, engine&#x3D;SPORT_CAR_ENGINE, seats&#x3D;2&#125;</span><br><span class="line">Car&#123;carType&#x3D;SUV, wheels&#x3D;SUV_CAR_WHEEL, chassis&#x3D;SUV_CAR_CHASSIS, engine&#x3D;SUV_CAR_ENGINE, seats&#x3D;7&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成器模式适合应用场景："><a href="#生成器模式适合应用场景：" class="headerlink" title="生成器模式适合应用场景："></a>生成器模式适合应用场景：</h4><p><strong>使用生成器模式可避免 “重叠构造函数 （telescoping constructor）” 的出现。</strong></p>
+<p> 假设你的构造函数中有十个可选参数， 那么调用该函数会非常不方便； 因此， 你需要重载这个构造函数， 新建几个只有较少参数的简化版。 但这些构造函数仍需调用主构造函数， 传递一些默认数值来替代省略掉的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Pizza &#123;</span><br><span class="line">    Pizza(int size) &#123; …… &#125;</span><br><span class="line">    Pizza(int size, boolean cheese) &#123; …… &#125;</span><br><span class="line">    Pizza(int size, boolean cheese, boolean pepperoni) &#123; …… &#125;</span><br><span class="line">    &#x2F;&#x2F; ……</span><br></pre></td></tr></table></figure>
+
+<p>只有在 C# 或 Java 等支持方法重载的编程语言中才能写出如此复杂的构造函数。</p>
+<p>生成器模式让你可以分步骤生成对象， 而且允许你仅使用必须的步骤。 应用该模式后， 你再也不需要将几十个参数塞进构造函数里了。</p>
+<p><strong>当你希望使用代码创建不同形式的产品 （例如石头或木头房屋） 时， 可使用生成器模式。</strong></p>
+<p> 如果你需要创建的各种形式的产品， 它们的制造过程相似且仅有细节上的差异， 此时可使用生成器模式。</p>
+<p>基本生成器接口中定义了所有可能的制造步骤， 具体生成器将实现这些步骤来制造特定形式的产品。 同时， 主管类将负责管理制造步骤的顺序。</p>
+<h4 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用:"></a>已知使用:</h4><ul>
+<li><code>java.lang.StringBuilder</code></li>
+<li><code>java.nio.ByteBuffer</code> as well as similar buffers such as FloatBuffer, IntBuffer and so on.</li>
+<li><code>java.lang.StringBuffer</code></li>
+<li><code>All implementations of java.lang.Appendable</code></li>
+<li><code>Apache Camel builders</code></li>
+<li><code>Apache Commons Option.Builder</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1463,180 +1646,6 @@
 <p>总的来说：</p>
 <p>从上面查看的源码，可以知道<code>Spring Boot</code>自动配置主要是<code>@EnableAutoConfiguration</code>实现的，<code>@EnableAutoConfiguration</code>注解导入<code>AutoConfigurationImportSelector</code>类,通过<code>selectImports</code>方法调用<code>SpringFactoriesLoader.loadFactoryNames()</code>扫描所有含有<code>META-INF/spring.factories</code>文件的<code>jar</code>包，将所有<code>jar</code>包里面的<code>spring.factories</code>文件中<code>@EnableAutoConfiguration</code>对应的类注入到<code>IOC</code>容器中。</p>
 <p><code>Spring Boot</code>基于<strong>约定大于配置</strong>的理念，配置如果没有额外的配置的话，就给按照默认的配置使用约定的默认值，按照约定配置到<code>IOC</code>容器中，无需开发人员手动添加配置，加快开发效率。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/05/Maven-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">Maven 构建生命周期</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-09-05 19:34:57" itemprop="dateCreated datePublished" datetime="2023-09-05T19:34:57+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-06 09:16:02" itemprop="dateModified" datetime="2023-09-06T09:16:02+08:00">2023-09-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>Maven 基于构建生命周期的中心概念。 这意味着构建和分发特定项的过程是明确定义的。</p>
-<p>对于构建项目的人来说，这意味着只需要学习一小部分命令即可构建任何 Maven 项目，POM 将确保他们获得所需的结果。</p>
-<p>共有三个内置构建生命周期：<code>default</code>, <code>clean</code> and  <code>site</code>。 <code>default</code>生命周期处理项目部署，<code>clean</code>生命周期处理项目清理，而 <code>site</code>生命周期处理项目网站的创建。</p>
-<h1 id="构建生命周期由多个阶段组成"><a href="#构建生命周期由多个阶段组成" class="headerlink" title="构建生命周期由多个阶段组成"></a>构建生命周期由多个阶段组成</h1><p>每个构建生命周期都由不同的构建阶段列表定义，其中一个构建阶段代表生命周期中的一个阶段。</p>
-<p>例如，默认生命周期包括以下阶段（有关生命周期阶段的完整列表，请参阅生命周期参考）：</p>
-<ul>
-<li><code>validate</code>- 验证项目是否正确并且所有必要的信息均可用</li>
-<li><code>compile</code>- 编译项目的源代码，编译后的类被放置在 中<code>$&#123;basedir&#125;/target/classes</code></li>
-<li><code>test</code>- 使用合适的单元测试框架测试编译后的源代码。这些测试不应要求打包或部署代码</li>
-<li><code>package</code>- 将编译后的代码打包为可发布的格式，如 JAR</li>
-<li><code>verify</code>- 对集成测试的结果进行检查，确保符合质量标准</li>
-<li><code>install</code>- 将软件包（例如JAR包）安装到本地存储库（本地Repository）中，作为本地其他项目的依赖项使用</li>
-<li><code>deploy</code>- 将最终包复制到远程存储库以与其他开发人员和项目共享</li>
-</ul>
-<p>这些生命周期阶段<strong>按顺序执行</strong>以完成默认生命周期。 考虑到上面的生命周期阶段，这意味着当使用默认生命周期时，Maven 将首先验证项目，然后尝试编译源代码，针对测试运行这些源代码，打包二进制文件（例如 jar），针对该项目运行集成测试 包，验证集成测试，将验证的包安装到本地存储库，然后将安装的包部署到远程存储库。</p>
-<hr>
-<h1 id="命令行调用"><a href="#命令行调用" class="headerlink" title="命令行调用"></a>命令行调用</h1><p>您应该选择与您的结果相匹配的阶段。 如果你想要你的<code>jar</code>，运行<code>package</code>。如果您想运行单元测试，请运行<code>test</code>。</p>
-<p>如果您不确定自己想要什么，首选调用的阶段是:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn verify</span><br></pre></td></tr></table></figure>
-
-<p>在执行<code>verify</code>之前，该命令会依次执行每个默认生命周期阶段（<code>validate</code>, <code>compile</code>, <code>package</code>等）。在大多数情况下，效果与打包相同。不过，如果有集成测试，这些测试也会被执行。在验证阶段，还可以进行一些额外的检查，例如，如果代码是按照预定义的检查样式规则编写的。</p>
-<p>在构建环境中，使用下面的调用即可将工程干净利落地构建并部署到共享存储库中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean deploy</span><br></pre></td></tr></table></figure>
-
-<p>同一命令可用于多模块场景（即具有一个或多个子项目的项目）。 Maven遍历每个子项目并执行<code>clean</code>，然后执行<code>deploy</code>（包括之前的所有构建阶段步骤）。</p>
-<h1 id="构建阶段由插件目标组成"><a href="#构建阶段由插件目标组成" class="headerlink" title="构建阶段由插件目标组成"></a>构建阶段由插件目标组成</h1><p>不过，尽管构建阶段负责构建生命周期中的特定步骤，但其履行职责的方式可能会有所不同。这可以通过声明与这些构建阶段绑定的插件目标来实现。</p>
-<p>一个插件目标代表一个特定的任务（比构建阶段更细），有助于项目的构建和管理。它可以与零个或多个构建阶段绑定。未与任何构建阶段绑定的目标可通过直接调用在构建生命周期之外执行。执行顺序取决于目标和构建阶段的调用顺序。</p>
-<p>例如，考虑下面的命令。<code>clean</code>和<code>package</code>是构建阶段，而<code>dependency:copy-dependencies</code>是（插件的）目标。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean dependency:copy-dependencies package</span><br></pre></td></tr></table></figure>
-
-<p>如果要执行此操作，则将首先执行<code>clean</code>阶段（这意味着它将运行<code>clean</code>生命周期的所有前置阶段，加上<code>clean</code>阶段本身），然后是<code>dependency:copy-dependencies</code>目标，最后执行<code>package</code>阶段（以及<code>package</code>默认生命周期的所有先前构建阶段）。</p>
-<p>此外，如果一个目标与一个或多个构建阶段绑定，那么该目标将在所有这些阶段中被调用。</p>
-<h1 id="设置项目以使用构建生命周期"><a href="#设置项目以使用构建生命周期" class="headerlink" title="设置项目以使用构建生命周期"></a>设置项目以使用构建生命周期</h1><p>构建生命周期简单易用，但在为项目构建 Maven 构建时，如何为每个构建阶段分配任务？</p>
-<h2 id="Packaging-打包"><a href="#Packaging-打包" class="headerlink" title="Packaging-打包"></a>Packaging-打包</h2><p>第一种，也是最常见的一种方法，是通过POM 元素<code>&lt;packaging></code>为项目设置打包。一些有效的<code>&lt;packaging></code>值包括 <code>jar</code>、<code>war</code>、<code>ear</code>和<code>pom</code>。如果没有指定包装值，则默认为<code>jar</code>。</p>
-<p>每个<code>packaging</code>都包含一个目标列表，用于绑定到特定阶段。例如，<code>jar</code> <code>packaging</code>将把以下目标绑定到默认生命周期的构建阶段。</p>
-<table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>jar  packagin的插件目标</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>process-resources</code></td>
-<td><code>resources:resources</code></td>
-</tr>
-<tr>
-<td><code>compile</code></td>
-<td><code>compiler:compile</code></td>
-</tr>
-<tr>
-<td><code>process-test-resources</code></td>
-<td><code>resources:testResources</code></td>
-</tr>
-<tr>
-<td><code>test-compile</code></td>
-<td><code>compiler:testCompile</code></td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td><code>surefire:test</code></td>
-</tr>
-<tr>
-<td><code>package</code></td>
-<td><code>jar:jar</code></td>
-</tr>
-<tr>
-<td><code>install</code></td>
-<td><code>install:install</code></td>
-</tr>
-<tr>
-<td><code>deploy</code></td>
-<td><code>deploy:deploy</code></td>
-</tr>
-</tbody></table>
-<p>这几乎是一套标准的绑定。</p>
-<h2 id="Plugins-插件"><a href="#Plugins-插件" class="headerlink" title="Plugins-插件"></a>Plugins-插件</h2><p>将目标添加到生命周期阶段的第二种方法是在项目中配置插件。插件是为 Maven 提供目标的工程。此外，一个插件可能有一个或多个目标，其中每个目标代表该插件的一种能力。例如，编译器插件有两个目标：<code>compile</code>和<code>testCompile</code>。前者编译你的主代码的源代码，而后者编译你的测试代码的源代码。</p>
-<p>在后面的章节中您将看到，插件可以包含指示将目标绑定到哪个生命周期阶段的信息。请注意，仅添加插件本身的信息是不够的，还必须指定要在构建过程中运行的目标。</p>
-<p>配置的目标将添加到已绑定到所选包的生命周期的目标中。 如果多个目标绑定到特定阶段，则使用的顺序是首先执行打包中的目标，然后执行 POM 中配置的目标。 请注意，您可以使用<code>&lt;executions></code>元素来更好地控制特定目标的顺序。</p>
-<p>为阶段添加目标的第二种方法是在项目中配置插件。插件是向 Maven 提供目标的工件。此外，一个插件可能有一个或多个目标，其中每个目标代表该插件的一种能力。例如，编译器插件有两个目标：<code>compile</code>和<code>testCompile</code>。前者编译主代码的源代码，后者编译测试代码的源代码。</p>
-<p>在后面的章节中您将看到，插件可以包含指示将目标绑定到哪个生命周期阶段的信息。请注意，仅添加插件本身的信息是不够的，还必须指定要在构建过程中运行的目标。</p>
-<p>配置的目标将添加到已绑定到所选包装生命周期的目标中。如果一个特定阶段绑定了多个目标，则使用的顺序是先执行包装中的目标，然后再执行 POM 中配置的目标。请注意，您可以使用<code>&lt;executions></code>元素对特定目标的顺序进行更多控制。</p>
-<p>例如，<code>Modello</code>插件默认将其目标<code>modello:java</code>绑定到<code>generate-sources</code>阶段（注：<code>modello:java</code>目标生成 Java 源代码）。因此，要使用 Modello 插件并让它从模型生成源代码并将其纳入构建，您需要在<code>&lt;build></code>的<code>&lt;plugins></code>部分的 POM 中添加以下内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.modello<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>modello-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">models</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">model</span>&gt;</span>src/main/mdo/maven.mdo<span class="tag">&lt;/<span class="name">model</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">models</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goal</span>&gt;</span>java<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>您可能想知道为什么<code>&lt;executions></code>元素在那里。 这样您就可以根据需要使用不同的配置多次运行相同的目标。还可以根据一个给定 ID单独的执行，以便在继承或应用配置文件期间，您可以控制是否合并目标配置或将其转变为附加执行。</p>
-<p>当多个执行与特定阶段相匹配时，它们将按照 POM 中指定的顺序执行，先执行继承的执行。</p>
-<p>现在，就<code>modello:java</code>而言，只有在生成源代码阶段才有意义。但有些目标可以在多个阶段中使用，因此可能没有合理的默认值。对于这些目标，你可以自己指定阶段。例如，假设有一个目标<code>display:time</code>，它能在命令行中回声显示当前时间，你希望它在<code>process-test-resources</code>阶段运行，以显示测试何时开始。可以这样配置:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.mycompany.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>display-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-test-resources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goal</span>&gt;</span>time<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 
       
     </div>
