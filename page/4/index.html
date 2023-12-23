@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -162,7 +162,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,598 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/08/Vuex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/08/Vuex/" class="post-title-link" itemprop="url">Vuex</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-08 09:38:03" itemprop="dateCreated datePublished" datetime="2021-09-08T09:38:03+08:00">2021-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 17:05:37" itemprop="dateModified" datetime="2023-09-05T17:05:37+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="什么是Vuex"><a href="#什么是Vuex" class="headerlink" title="什么是Vuex?"></a>什么是Vuex?</h1><p>Vuex是专门在Vue 中实现集中式状态（数据）管理的一个Vue 插件，对vue 应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
+<p>当我们的应用遇到<strong>多个组件共享状态</strong>时，单向数据流的简洁性很容易被破坏：</p>
+<ul>
+<li>多个视图依赖于同一状态。</li>
+<li>来自不同视图的行为需要变更同一状态。</li>
+</ul>
+<p>对于问题一，传参的方法对于多层嵌套的组件将会非常繁琐，并且对于兄弟组件间的状态传递无能为力。对于问题二，我们经常会采用父子组件直接引用或者通过事件来变更和同步状态的多份拷贝。以上的这些模式非常脆弱，通常会导致无法维护的代码。</p>
+<p>因此，我们为什么不把组件的共享状态抽取出来，以一个全局单例模式管理呢？在这种模式下，我们的组件树构成了一个巨大的“视图”，不管在树的哪个位置，任何组件都能获取状态或者触发行为！</p>
+<p>通过定义和隔离状态管理中的各种概念并通过强制规则维持视图和状态间的独立性，我们的代码将会变得更结构化且易维护。这就是 Vuex 背后的基本思想.</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/vuex.png"></p>
+<h1 id="什么情况下我应该使用-Vuex？"><a href="#什么情况下我应该使用-Vuex？" class="headerlink" title="什么情况下我应该使用 Vuex？"></a>什么情况下我应该使用 Vuex？</h1><p>Vuex 可以帮助我们管理共享状态，并附带了更多的概念和框架。这需要对短期和长期效益进行权衡。</p>
+<p>如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。确实是如此——如果您的应用够简单，您最好不要使用 Vuex。但是，如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。引用 Redux 的作者 Dan Abramov 的话说就是：</p>
+<blockquote>
+<p>Flux 架构就像眼镜：您自会知道什么时候需要它。</p>
+</blockquote>
+<hr>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="安装vuex"><a href="#安装vuex" class="headerlink" title="安装vuex"></a>安装vuex</h2><p><code>NPM</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex </span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Store"><a href="#使用Store" class="headerlink" title="使用Store"></a>使用Store</h2><p>每一个 Vuex 应用的核心就是 store（仓库）。“store”基本上就是一个容器，它包含着你的应用中大部分的**状态 (state)**。Vuex 和单纯的全局对象有以下两点不同：</p>
+<ol>
+<li><p>Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</p>
+</li>
+<li><p>你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地<strong>提交 (commit) mutation</strong>。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用</p>
+</li>
+<li><p>创建文件：<code>src/store/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    actions: &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        <span class="function"><span class="title">increment</span>(<span class="params">state</span>)</span> &#123;</span><br><span class="line">            state.count++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>main.js</code>中创建vm时传入<code>store</code>配置项</p>
+<p>为了在 Vue 组件中访问 <code>this.$store</code> property，你需要为 Vue 实例提供创建好的 store。Vuex 提供了一个从根组件向所有子组件，以 <code>store</code> 选项的方式“注入”该 store 的机制：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  store: store,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果使用 ES6，你也可以以 ES6 对象的 property 简写 (用在对象某个 property 的 key 和被传入的变量同名时)：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  store</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在子组件<span style="color:red">HelloWorld</span>中绑定一个方法，用来改变store中的数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">h1</span>&gt;</span>当前的值是:&#123;&#123;$store.state.count&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;increase&quot;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在组件中使用 <code>this.$store.dispatch(&#39;xxx&#39;)</code> 分发 action</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">increase</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.$store.dispatch(<span class="string">&#x27;increment&#x27;</span>,<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完善<code>src/store/index.js</code>中的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    actions: &#123;</span><br><span class="line">        <span class="comment">//  Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 context.commit 提交一个 mutation，或者通过 		   			context.state 和 context.getters 来获取 state 和 getters。</span></span><br><span class="line">        <span class="comment">// 参数value值是通过dispatch方法传过来的参数</span></span><br><span class="line">        <span class="function"><span class="title">increment</span>(<span class="params">context, value</span>)</span> &#123;</span><br><span class="line">            context.commit(<span class="string">&quot;increment&quot;</span>,value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        <span class="function"><span class="title">increment</span>(<span class="params">state,value</span>)</span> &#123;</span><br><span class="line">            state.count += value</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>效果</p>
+<p>点击按钮前：</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/vuexchangebefore.png"></p>
+<p>点击按钮5下后</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/vuexchangeafter.png"></p>
+</li>
+</ol>
+<hr>
+<h2 id="Getter"><a href="#Getter" class="headerlink" title="Getter"></a>Getter</h2><p>Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。</p>
+<p>Getter 接受 state 作为其第一个参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    actions: &#123;</span><br><span class="line">        <span class="function"><span class="title">increase</span>(<span class="params">context, value</span>)</span> &#123;</span><br><span class="line">            context.commit(<span class="string">&quot;increase&quot;</span>,value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    state: &#123;</span><br><span class="line">        dollar: <span class="number">0</span>,</span><br><span class="line">        rate: <span class="number">7</span></span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;</span><br><span class="line">        <span class="function"><span class="title">rmb</span>(<span class="params">state</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> state.dollar * state.rate</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        <span class="function"><span class="title">increase</span>(<span class="params">state,value</span>)</span> &#123;</span><br><span class="line">            state.dollar += value</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+
+<p>Getter 会暴露为 <code>store.getters</code> 对象，你可以以属性的形式访问这些值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$store.getters.rmb </span><br></pre></td></tr></table></figure>
+
+<h2 id="mapGetters-辅助函数"><a href="#mapGetters-辅助函数" class="headerlink" title="mapGetters 辅助函数"></a>mapGetters 辅助函数</h2><p>先引入mapGetters </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapGetters &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>数组写法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  <span class="comment">// 使用对象展开运算符将 getter 混入 computed 对象中</span></span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">&#x27;doneTodosCount&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;anotherGetter&#x27;</span>,</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你想将一个 getter 属性另取一个名字，使用对象形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...mapGetters(&#123;</span><br><span class="line">  <span class="comment">// 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`</span></span><br><span class="line">  doneCount: <span class="string">&#x27;doneTodosCount&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="mapState-辅助函数"><a href="#mapState-辅助函数" class="headerlink" title="mapState 辅助函数"></a>mapState 辅助函数</h2><p>先引入mapState </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余。为了解决这个问题，我们可以使用 <code>mapState</code> 辅助函数帮助我们生成计算属性，让你少按几次键：</p>
+<p>当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 <code>mapState</code> 传一个字符串数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">computed: mapState([</span><br><span class="line">  <span class="comment">// 映射 this.count 为 store.state.count</span></span><br><span class="line">  <span class="string">&#x27;count&#x27;</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>对象写法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">computed: mapState([</span><br><span class="line">  <span class="comment">// 映射 this.count 为 store.state.count</span></span><br><span class="line">  count:<span class="string">&#x27;count&#x27;</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h2 id="mapActions-辅助函数"><a href="#mapActions-辅助函数" class="headerlink" title="mapActions 辅助函数"></a>mapActions 辅助函数</h2><p>先导入mapActions </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>数组写法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">   ...mapActions([</span><br><span class="line">     <span class="string">&#x27;increment&#x27;</span>, <span class="comment">// 将 `this.increment()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line"></span><br><span class="line">     <span class="comment">// `mapActions` 也支持载荷：</span></span><br><span class="line">     <span class="string">&#x27;incrementBy&#x27;</span> <span class="comment">// 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch(&#x27;incrementBy&#x27;, amount)`</span></span><br><span class="line">   ]),</span><br><span class="line">   ...mapActions(&#123;</span><br><span class="line">     add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 将 `this.add()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象写法:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...mapActions(&#123;</span><br><span class="line">  add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 将 `this.add()` 映射为 `this.$store.dispatch(&#x27;increment&#x27;)`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="mapMutations-辅助函数"><a href="#mapMutations-辅助函数" class="headerlink" title="mapMutations 辅助函数"></a>mapMutations 辅助函数</h2><p>先导入mapActions </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapMutations &#125; <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>数组写法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    ...mapMutations([</span><br><span class="line">      <span class="string">&#x27;increment&#x27;</span>, <span class="comment">// 将 `this.increment()` 映射为 `this.$store.commit(&#x27;increment&#x27;)`</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// `mapMutations` 也支持载荷：</span></span><br><span class="line">      <span class="string">&#x27;incrementBy&#x27;</span> <span class="comment">// 将 `this.incrementBy(amount)` 映射为 `this.$store.commit(&#x27;incrementBy&#x27;, amount)`</span></span><br><span class="line">]),</span><br></pre></td></tr></table></figure>
+
+<p>对象写法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...mapMutations(&#123;</span><br><span class="line">  add: <span class="string">&#x27;increment&#x27;</span> <span class="comment">// 将 `this.add()` 映射为 `this.$store.commit(&#x27;increment&#x27;)`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Module模块化"><a href="#Module模块化" class="headerlink" title="Module模块化"></a>Module模块化</h1><p>由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。</p>
+<p>为了解决以上问题，Vuex 允许我们将 store 分割成<strong>模块（module）</strong>。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割。</p>
+<p>默认情况下，模块内部的 action、mutation 和 getter 是注册在<strong>全局命名空间</strong>的——这样使得多个模块能够对同一 mutation 或 action 作出响应。</p>
+<p>如果希望你的模块具有更高的封装度和复用性，你可以通过添加 <code>namespaced: true</code> 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> moduleA = &#123;</span><br><span class="line">  namespaced:<span class="literal">true</span>,<span class="comment">//开启命名空间</span></span><br><span class="line">  state: <span class="function">() =&gt;</span> (&#123; ... &#125;),</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;,</span><br><span class="line">  getters: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> moduleB = &#123;</span><br><span class="line">  namespaced:<span class="literal">true</span>,<span class="comment">//开启命名空间</span></span><br><span class="line">  state: <span class="function">() =&gt;</span> (&#123; ... &#125;),</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    a: moduleA,</span><br><span class="line">    b: moduleB</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>在组件中对数据进行读取:</strong></p>
+<p>读取<span style="color:red"><code>state</code></span>数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数空间名称字符串，第二个参数是空间名称字符串的中的参数</span></span><br><span class="line">computed: &#123;</span><br><span class="line">    ...mapState(<span class="string">&#x27;currency&#x27;</span>,[<span class="string">&#x27;dollar&#x27;</span>,<span class="string">&#x27;rate&#x27;</span>])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>读取<span style="color:red"><code>getters</code></span>数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数空间名称字符串</span></span><br><span class="line">computed: &#123;</span><br><span class="line">    ...mapGetters(<span class="string">&#x27;currency&#x27;</span>,[<span class="string">&#x27;rmb&#x27;</span>])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件中调用<span style="color:red"><code>dispatch</code></span>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    <span class="comment">//方式一：自己直接dispatch</span></span><br><span class="line">    <span class="built_in">this</span>.$store.dispatch(<span class="string">&#x27;currency/increase&#x27;</span>,<span class="number">1</span>),</span><br><span class="line">    <span class="comment">//方式二：借助mapGetters读取：</span></span><br><span class="line">    ...mapActions(<span class="string">&#x27;currency&#x27;</span>,[<span class="string">&#x27;increase&#x27;</span>])</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>组件中调用<span style="color:red"><code>commit</code></span>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    <span class="function"><span class="title">addOnePerson</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    	<span class="comment">//方式一：自己直接dispatch</span></span><br><span class="line">        <span class="built_in">this</span>.$store.commit(<span class="string">&#x27;person/addOnePerson&#x27;</span>,newPerson)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//方式二：借助mapGetters读取：</span></span><br><span class="line">    ...mapActions(<span class="string">&#x27;person&#x27;</span>,[<span class="string">&#x27;addOnePerson&#x27;</span>])</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/03/Vue-CLI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/03/Vue-CLI/" class="post-title-link" itemprop="url">Vue CLI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-03 19:05:48" itemprop="dateCreated datePublished" datetime="2021-09-03T19:05:48+08:00">2021-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Vue-CLI的使用"><a href="#Vue-CLI的使用" class="headerlink" title="Vue-CLI的使用"></a>Vue-CLI的使用</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>vue脚手架的作用是用来自动一键生成vue+webpack的项目模版，包括依赖库，免去你手动安装各种插件，寻找各种cdn并一个个引入的麻烦。</p>
+<p>vue脚手架指的是vue-cli，它是一个专门为单页面应用快速搭建繁杂的脚手架，它可以轻松的创建新的应用程序而且可用于自动生成vue和webpack的项目模板。</p>
+<p>vue-cli是有Vue提供的一个官方cli，专门为单页面应用快速搭建繁杂的脚手架。它是用于自动生成vue.js+webpack的项目模板，是为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载，保存时 lint 校验，以及生产环境可用的构建版本</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Node 版本要求</p>
+<p>Vue CLI 4.x 需要 <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a> v8.9 或更高版本 (推荐 v10 以上)。你可以使用 <a target="_blank" rel="noopener" href="https://github.com/tj/n">n</a>，<a target="_blank" rel="noopener" href="https://github.com/creationix/nvm">nvm</a> 或 <a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> 在同一台电脑中管理多个 Node 版本。</p>
+<p>可以使用下列任一命令安装这个新的包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">yarn global add @vue/cli</span><br></pre></td></tr></table></figure>
+
+<p>安装之后，你就可以在命令行中访问 <code>vue</code> 命令。你可以通过简单运行 <code>vue</code>，看看是否展示出了一份所有可用命令的帮助信息，来验证它是否安装成功。</p>
+<p>你还可以用这个命令来检查其版本是否正确：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><p>如需升级全局的 Vue CLI 包，请运行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm update -g @vue/cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">yarn global upgrade --latest @vue/cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>切换到你要创建项目的目录，然后运行以下命令来创建一个新项目：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create hello-world</span><br></pre></td></tr></table></figure>
+
+<p>你会被提示选取一个 preset。你可以选默认的包含了基本的 Babel + ESLint 设置的 Vue2或者Vue3，也可以选“手动选择特性”来选取需要的特性。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/vueprojectinit.png"></p>
+<p><strong>使用图形化界面</strong></p>
+<p>你也可以通过 <code>vue ui</code> 命令以图形化界面创建和管理项目：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
+<p>上述命令会打开一个浏览器窗口，并以图形化界面将你引导至项目创建的流程。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/initprojectinweb.png"></p>
+<h2 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如出现下载缓慢请配置npm 淘宝镜像：npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue 脚手架隐藏了所有webpack 相关的配置，若想查看具体的webpakc 配置，请执行：vue inspect &gt; output.js</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="vue-config-js"><a href="#vue-config-js" class="headerlink" title="vue.config.js"></a>vue.config.js</h2><p><code>vue.config.js</code> 是一个可选的配置文件，如果项目的 (和 <code>package.json</code> 同级的) 根目录中存在这个文件，那么它会被 <code>@vue/cli-service</code> 自动加载。你也可以使用 <code>package.json</code> 中的 <code>vue</code> 字段，但是注意这种写法需要你严格遵照 JSON 的格式来写。</p>
+<p>这个文件应该导出一个包含了选项的对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@type <span class="type">&#123;import(&#x27;@vue/cli-service&#x27;).ProjectOptions&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 选项...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模板项目的结构"><a href="#模板项目的结构" class="headerlink" title="模板项目的结构"></a>模板项目的结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├── node_modules </span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico: 页签图标</span><br><span class="line">│   └── index.html: 主页面</span><br><span class="line">├── src</span><br><span class="line">│   ├── assets: 存放静态资源</span><br><span class="line">│   │   └── logo.png</span><br><span class="line">│   │── component: 存放组件</span><br><span class="line">│   │   └── HelloWorld.vue</span><br><span class="line">│   │── App.vue: 汇总所有组件</span><br><span class="line">│   │── main.js: 入口文件</span><br><span class="line">├── .gitignore: git版本管制忽略的配置</span><br><span class="line">├── babel.config.js: babel的配置文件</span><br><span class="line">├── package.json: 应用包配置文件 </span><br><span class="line">├── README.md: 应用描述文件</span><br><span class="line">├── package-lock.json：包版本控制文件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="ref属性"><a href="#ref属性" class="headerlink" title="ref属性"></a>ref属性</h1><p><code>ref</code> 被用来给元素或子组件注册引用信息。</p>
+<ul>
+<li>引用信息将会注册在父组件的 <code>$refs</code> 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素（id的替代者）；</li>
+<li>如果用在子组件上，引用就指向组件实例<code>VueComponent</code>：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- `vm.$refs.p` will be the DOM node --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">ref</span>=<span class="string">&quot;p&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- `vm.$refs.child` will be the child component instance --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">child-component</span> <span class="attr">ref</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">child-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当 <code>v-for</code> 用于元素或组件的时候，引用信息将是包含 DOM 节点或组件实例的数组。</p>
+<p>获取：<code>this.$refs.xxx</code></p>
+<hr>
+<h1 id="props"><a href="#props" class="headerlink" title="props"></a>props</h1><p>props 可以是数组或对象，用于接收来自父组件的数据。</p>
+<p><strong>三种读取方式</strong></p>
+<ul>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单语法</span></span><br><span class="line">Vue.component(<span class="string">&#x27;props-demo-simple&#x27;</span>, &#123;</span><br><span class="line">  props: [<span class="string">&#x27;size&#x27;</span>, <span class="string">&#x27;myMessage&#x27;</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定名称和类型</span></span><br><span class="line">Vue.component(<span class="string">&#x27;props-demo-simple&#x27;</span>, &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    title: <span class="built_in">String</span>,</span><br><span class="line">    likes: <span class="built_in">Number</span>,</span><br><span class="line">    isPublished: <span class="built_in">Boolean</span>,</span><br><span class="line">    commentIds: <span class="built_in">Array</span>,</span><br><span class="line">    author: <span class="built_in">Object</span>,</span><br><span class="line">    callback: <span class="built_in">Function</span>,</span><br><span class="line">    contactsPromise: <span class="built_in">Promise</span> <span class="comment">// or any other constructor</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象语法，提供验证</span></span><br><span class="line">Vue.component(<span class="string">&#x27;props-demo-advanced&#x27;</span>, &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    <span class="comment">// 检测类型</span></span><br><span class="line">    height: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="comment">// 检测类型 + 其他验证</span></span><br><span class="line">    age: &#123;</span><br><span class="line">      type: <span class="built_in">Number</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="number">0</span>, <span class="comment">// 默认值</span></span><br><span class="line">      required: <span class="literal">true</span>,</span><br><span class="line">      validator: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value &gt;= <span class="number">0</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">备注：props是只读的，Vue底层会监测你对props的修改，如果进行了修改，就会发出警告，若业务需求确实需要修改，那么请复制props的内容到data中一份，然后去修改data中的数据。</span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
+<h1 id="mixin"><a href="#mixin" class="headerlink" title="mixin"></a>mixin</h1><p>混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。</p>
+<p>当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个混入对象</span></span><br><span class="line"><span class="keyword">var</span> mixin = &#123;</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">1</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>混入对象的局部使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个使用混入对象的组件</span></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="number">2</span>) &#125;,</span><br><span class="line">  mixins: [mixin]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// =&gt; 1</span></span><br><span class="line"><span class="comment">// =&gt; 2</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你的混入包含一个 created 钩子，而创建组件本身也有一个，那么两个函数都会被调用。</p>
+<p>Mixin 钩子按照传入顺序依次调用，并在调用组件自身的钩子之前被调用。</p>
+<p>全局使用</p>
+<p>全局混入：<code>Vue.mixin(xxx)</code></p>
+<p>全局注册一个混入，影响注册之后所有创建的每个 Vue 实例。插件作者可以使用混入，向组件注入自定义的行为。<strong>不推荐在应用代码中使用</strong>。</p>
+<hr>
+<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>插件通常用来为 Vue 添加全局功能。插件的功能范围没有严格的限制——一般有下面几种：</p>
+<ol>
+<li>添加全局方法或者 property。如：vue-custom-element</li>
+<li>添加全局资源：指令/过滤器/过渡等。如 vue-touch</li>
+<li>通过全局混入来添加一些组件选项。如 vue-router</li>
+<li>添加 Vue 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现。</li>
+<li>一个库，提供自己的 API，同时提供上面提到的一个或多个功能。如 vue-router</li>
+</ol>
+<h2 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h2><p>Vue.js 的插件应该暴露一个 <code>install</code> 方法。这个方法的第一个参数是 <code>Vue</code> 构造器，第二个参数是一个可选的选项对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 添加全局方法或 property</span></span><br><span class="line">  Vue.myGlobalMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 添加全局资源</span></span><br><span class="line">  Vue.directive(<span class="string">&#x27;my-directive&#x27;</span>, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 注入组件选项</span></span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 添加实例方法</span></span><br><span class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span> (<span class="params">methodOptions</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>通过全局方法 <code>Vue.use()</code> 使用插件。它需要在你调用 <code>new Vue()</code> 启动应用之前完成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用 `MyPlugin.install(Vue)`</span></span><br><span class="line">Vue.use(MyPlugin)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...组件选项</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="scoped样式"><a href="#scoped样式" class="headerlink" title="scoped样式"></a>scoped样式</h1><ol>
+<li><p>作用：让样式在局部生效，防止冲突。</p>
+</li>
+<li><p>写法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="keyword">@media</span> (<span class="attribute">min-width:</span> <span class="number">250px</span>) &#123;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.list-container</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line">      background: orange;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这个可选 <code>scoped</code> attribute 会自动添加一个唯一的 attribute (比如 <code>data-v-21e5b78</code>) 为组件内 CSS 指定作用域，编译的时候 <code>.list-container:hover</code> 会被编译成类似 <code>.list-container[data-v-21e5b78]:hover</code>。</p>
+<hr>
+<h1 id="组件的自定义事件"><a href="#组件的自定义事件" class="headerlink" title="组件的自定义事件"></a>组件的自定义事件</h1><p>组件的自定义事件是一种组件间通信方式，适用于：子组件给父组件传递数据。</p>
+<p>不同于组件和 prop，事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。</p>
+<p>不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 <code>v-on</code> 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 <code>v-on:myEvent</code> 将会变成 <code>v-on:myevent</code>——导致 <code>myEvent</code> 不可能被监听到。</p>
+<p>因此，我们推荐你<strong>始终使用 kebab-case 的事件名</strong>。</p>
+<p><strong>步骤：</strong></p>
+<p>先在父组件中给子组件<code>TodoFooter</code>绑定事件:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TodoFooter</span> @<span class="attr">custom-event</span>=<span class="string">&quot;doSomething&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">TodoFooter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>并在<code>methods</code>中定义doSomething回调方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">doSomething</span>(<span class="params">msg</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(msg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在子组件中绑定一个按钮来触发自定义事件:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;triggerCustomEvent&quot;</span>&gt;</span>触发自定义事件<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>触发自定义事件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">triggerCustomEvent</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.$emit(<span class="string">&quot;custom-event&quot;</span>,<span class="string">&quot;doSomething...&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面绑定自定义事件还有第二种方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;TodoFooter ref=<span class="string">&quot;todofooter&quot;</span>&gt;&lt;/TodoFooter&gt;</span><br><span class="line">......</span><br><span class="line"><span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="built_in">this</span>.$refs.todofooter.$on(<span class="string">&quot;custom-event&quot;</span>,<span class="built_in">this</span>.doSomething)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>解绑自定义事件：</strong></p>
+<p><strong>vm.$off( [event, callback] )</strong></p>
+<ul>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><code>&#123;string | Array&lt;string&gt;&#125; event</code> (只在 2.2.2+ 支持数组)</li>
+<li><code>&#123;Function&#125; [callback]</code></li>
+</ul>
+</li>
+<li><p><strong>用法</strong>：</p>
+<p>移除自定义事件监听器。</p>
+<ul>
+<li>如果没有提供参数，则移除所有的事件监听器；</li>
+<li>如果只提供了事件，则移除该事件所有的监听器；</li>
+<li>如果同时提供了事件与回调，则只移除这个回调的监听器。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$off(<span class="string">&quot;custom-event&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>将原生事件绑定到组件</strong></p>
+<p>你可能有很多次想要在一个组件的根元素上直接监听一个原生事件。这时，你可以使用 <code>v-on</code> 的 <code>.native</code> 修饰符：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TodoFooter</span> @<span class="attr">click.native</span>=<span class="string">&quot;show&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">TodoFooter</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h1><p>vue组件中的数据传递最最常见的就是父子组件之间的传递。父传子通过props向下传递数据给子组件；子传父通过$emit发送事件，并携带数据给父组件。而有时两个组件之间毫无关系，或者他们之间的结构复杂，如何传递数据呢？这时就要用到 vue 中的事件总线 EventBus的概念。</p>
+<h2 id="使用-EventBus"><a href="#使用-EventBus" class="headerlink" title="使用 EventBus"></a>使用 EventBus</h2><ul>
+<li>第一种方式: 可以在 main.js中，初始化 EventBus</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">  <span class="function"><span class="title">beforeCreate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    Vue.prototype.$bus = <span class="built_in">this</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>X组件想接收数据，则在X组件中给<code>$bus</code>绑定自定义事件，事件的<span style="color:red">回调留在A组件自身。</span></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">methods</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="function"><span class="title">demo</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">......</span><br><span class="line"><span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.$bus.$on(<span class="string">&#x27;xxxx&#x27;</span>,<span class="built_in">this</span>.demo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Y组件想要给X组件传递数据，则在Y组件中发送事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$bus.$emit(<span class="string">&#x27;xxxx&#x27;</span>,param)</span><br></pre></td></tr></table></figure>
+
+<p>在beforeDestroy钩子中，用$off去解绑<span style="color:red">当前组件所用到的</span>事件</p>
+<p>语法：<code>this.$EventBus.$off(要移除监听的事件名)</code></p>
+<hr>
+<h1 id="nextTick"><a href="#nextTick" class="headerlink" title="$nextTick"></a>$nextTick</h1><h3 id="vm-nextTick-callback"><a href="#vm-nextTick-callback" class="headerlink" title="vm.$nextTick( [callback] )"></a>vm.$nextTick( [callback] )</h3><ul>
+<li><p><strong>参数</strong>：</p>
+<ul>
+<li><code>&#123;Function&#125; [callback]</code></li>
+</ul>
+</li>
+<li><p><strong>用法</strong>：</p>
+<p>将回调延迟到下次 DOM 更新循环之后执行。</p>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    example: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 修改数据</span></span><br><span class="line">      <span class="built_in">this</span>.message = <span class="string">&#x27;changed&#x27;</span></span><br><span class="line">      <span class="comment">// DOM 还没有更新</span></span><br><span class="line">      <span class="built_in">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// DOM 现在更新了</span></span><br><span class="line">        <span class="comment">// `this` 绑定到当前实例</span></span><br><span class="line">        <span class="built_in">this</span>.doSomethingElse()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h1 id="过渡-amp-动画"><a href="#过渡-amp-动画" class="headerlink" title="过渡&amp;动画"></a>过渡&amp;动画</h1><h2 id="单元素-组件的过渡"><a href="#单元素-组件的过渡" class="headerlink" title="单元素/组件的过渡"></a>单元素/组件的过渡</h2><p>Vue 提供了 <code>transition</code> 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡</p>
+<ul>
+<li>条件渲染 (使用 <code>v-if</code>)</li>
+<li>条件展示 (使用 <code>v-show</code>)</li>
+<li>动态组件</li>
+<li>组件根节点</li>
+</ul>
+<p>这里是一个典型的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;show = !show&quot;</span>&gt;</span></span><br><span class="line">    Toggle</span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">&quot;fade&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#demo&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fade-enter-active</span>, <span class="selector-class">.fade-leave-active</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fade-enter</span>, <span class="selector-class">.fade-leave-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在进入/离开的过渡中，会有 6 个 class 切换。</p>
+<ol>
+<li><code>v-enter</code>：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。</li>
+<li><code>v-enter-active</code>：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-enter-to</code>：定义进入过渡的结束状态。在元素被插入之后下一帧生效 (与此同时 <code>v-enter</code> 被移除)，在过渡/动画完成之后移除。</li>
+<li><code>v-leave</code>：定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。</li>
+<li><code>v-leave-active</code>：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。</li>
+<li><code>v-leave-to</code>：定义离开过渡的结束状态。在离开过渡被触发之后下一帧生效 (与此同时 <code>v-leave</code> 被删除)，在过渡/动画完成之后移除。</li>
+</ol>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/transition.png"></p>
+<p>对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 <code>&lt;transition&gt;</code>，则 <code>v-</code> 是这些类名的默认前缀。如果你使用了 <code>&lt;transition name=&quot;my-transition&quot;&gt;</code>，那么 <code>v-enter</code> 会替换为 <code>my-transition-enter</code>。</p>
+<p><code>v-enter-active</code> 和 <code>v-leave-active</code> 可以控制进入/离开过渡的不同的缓和曲线。</p>
+<h2 id="CSS-过渡"><a href="#CSS-过渡" class="headerlink" title="CSS 过渡"></a>CSS 过渡</h2><p>常用的过渡都是使用 CSS 过渡。</p>
+<p>下面是一个简单例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;example-1&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;show = !show&quot;</span>&gt;</span></span><br><span class="line">    Toggle render</span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">&quot;slide-fade&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#example-1&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 可以设置不同的进入和离开动画 */</span></span><br><span class="line"><span class="comment">/* 设置持续时间和动画函数 */</span></span><br><span class="line"><span class="selector-class">.slide-fade-enter-active</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: all .<span class="number">3s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.slide-fade-leave-active</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: all .<span class="number">8s</span> <span class="built_in">cubic-bezier</span>(<span class="number">1.0</span>, <span class="number">0.5</span>, <span class="number">0.8</span>, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.slide-fade-enter</span>, <span class="selector-class">.slide-fade-leave-to</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">10px</span>);</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三方-CSS-动画库"><a href="#第三方-CSS-动画库" class="headerlink" title="第三方 CSS 动画库"></a>第三方 CSS 动画库</h2><p>我们可以通过以下 attribute 来自定义过渡类名：</p>
+<ul>
+<li><code>enter-class</code></li>
+<li><code>enter-active-class</code></li>
+<li><code>enter-to-class</code></li>
+<li><code>leave-class</code></li>
+<li><code>leave-active-class</code></li>
+<li><code>leave-to-class</code></li>
+</ul>
+<p>他们的优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 <a target="_blank" rel="noopener" href="https://daneden.github.io/animate.css/">Animate.css</a> 结合使用十分有用。</p>
+<p>Install with npm:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install animate.css</span></span><br></pre></td></tr></table></figure>
+
+<p>Import it into your file:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;animate.css&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;show = !show&quot;</span>&gt;</span>Toggle render<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span></span></span><br><span class="line"><span class="tag">      <span class="attr">name</span>=<span class="string">&quot;animate__animated animate__bounce&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">enter-active-class</span>=<span class="string">&quot;animate__bounce&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">leave-active-class</span>=<span class="string">&quot;animate__backOutDown&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;show&quot;</span>&gt;</span>An animated element<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>那么怎么同时渲染整个列表，比如使用 <code>v-for</code>？在这种场景中，使用 <code>&lt;transition-group&gt;</code> 组件。在我们深入例子之前，先了解关于这个组件的几个特点：</p>
+<ul>
+<li>不同于 <code>&lt;transition&gt;</code>，它会以一个真实元素呈现：默认为一个 <code>&lt;span&gt;</code>。你也可以通过 <code>tag</code> attribute 更换为其他元素。</li>
+<li>过渡模式不可用，因为我们不再相互切换特有的元素。</li>
+<li>内部元素<strong>总是需要</strong>提供唯一的 <code>key</code> attribute 值。</li>
+<li>CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。</li>
+</ul>
+<hr>
+<h1 id="Vue-CLI配置代理"><a href="#Vue-CLI配置代理" class="headerlink" title="Vue-CLI配置代理"></a>Vue-CLI配置代理</h1><p>如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。这个问题可以通过 <code>vue.config.js</code> 中的 <code>devServer.proxy</code> 选项来配置。</p>
+<p>resolve <code>CORS policy</code> <code>Access-Control-Allow-Origin</code></p>
+<ul>
+<li><code>devServer.proxy</code> 可以是一个指向开发环境 API 服务器的字符串：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    proxy: <span class="string">&#x27;http://localhost:4000&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这会告诉开发服务器将任何未知请求 (没有匹配到静态文件的请求) 代理到<code>http://localhost:4000</code>。</p>
+<p>说明：</p>
+<ol>
+<li>优点：配置简单，请求资源时直接发给前端（8080）即可。</li>
+<li>缺点：不能配置多个代理，不能灵活的控制请求是否走代理。</li>
+<li>工作方式：若按照上述配置代理，当请求了前端不存在的资源时，那么该请求会转发给服务器 （优先匹配前端资源）</li>
+</ol>
+<p><strong>配置多个代理</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	devServer: &#123;</span><br><span class="line">      proxy: &#123;</span><br><span class="line">      <span class="string">&#x27;/api1&#x27;</span>: &#123;<span class="comment">// 匹配所有以 &#x27;/api1&#x27;开头的请求路径</span></span><br><span class="line">        target: <span class="string">&#x27;http://localhost:5000&#x27;</span>,<span class="comment">// 代理目标的基础路径</span></span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;<span class="string">&#x27;^/api1&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;/api2&#x27;</span>: &#123;<span class="comment">// 匹配所有以 &#x27;/api2&#x27;开头的请求路径</span></span><br><span class="line">        target: <span class="string">&#x27;http://localhost:5001&#x27;</span>,<span class="comment">// 代理目标的基础路径</span></span><br><span class="line">        changeOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;<span class="string">&#x27;^/api2&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   changeOrigin设置为true时，服务器收到的请求头中的host为：localhost:5000</span></span><br><span class="line"><span class="comment">   changeOrigin设置为false时，服务器收到的请求头中的host为：localhost:8080</span></span><br><span class="line"><span class="comment">   changeOrigin默认值为true</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ol>
+<li>优点：可以配置多个代理，且可以灵活的控制请求是否走代理。</li>
+<li>缺点：配置略微繁琐，请求资源时必须加前缀。</li>
+</ol>
+<hr>
+<h1 id="插槽-slot"><a href="#插槽-slot" class="headerlink" title="插槽(slot)"></a>插槽(slot)</h1><p>Slot 通俗的理解就是“占坑”，在组件模板中占好了位置，当使用该组件标签时候，组件标签里面的内容就会自动填坑（替换组件模板中<span style="color:red"><code>slot</code></span>位置）<br>并且可以作为承载分发内容的出口</p>
+<p>因为在2.6.0中，<strong>具名插槽</strong> 和 <strong>作用域插槽</strong> 引入了一个新的统一的语法 (即<span style="color:red"><code>v-slot</code></span> 指令)。它取代了 <span style="color:red"><code>slot</code></span> 和 <span style="color:red"><code>slot-scope</code></span></p>
+<h2 id="插槽内容"><a href="#插槽内容" class="headerlink" title="插槽内容"></a>插槽内容</h2><p>Vue 实现了一套内容分发的 API，这套 API 的设计灵感源自 <a target="_blank" rel="noopener" href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md">Web Components 规范草案</a>，将 <code>&lt;slot&gt;</code> 元素作为承载分发内容的出口。</p>
+<p>它允许你像这样合成组件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span>&gt;</span></span><br><span class="line">  Hello World</span><br><span class="line"><span class="tag">&lt;/<span class="name">HelloWorld</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后你在 <code>HelloWorld</code> 组件中可能会写为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当组件渲染的时候，<code>&lt;slot&gt;&lt;/slot&gt;</code> 将会被替换为“Hello World”。插槽内可以包含任何模板代码，包括 HTML。</p>
+<p>如果<code>HelloWorld</code> 组件 的 <code>template</code> 中<strong>没有</strong>包含一个 <code>&lt;slot&gt;</code> 元素，则该组件起始标签<span style="color:red"><code>&lt;HelloWorld&gt;</code></span>和结束标签 <span style="color:red"><code>&lt;/HelloWorld&gt;</code></span>之间的任何内容都会被抛弃。</p>
+<h2 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h2><p>对于这样的情况，<code>&lt;slot&gt;</code> 元素有一个特殊的 attribute：<code>name</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;header&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个不带 <code>name</code> 的 <code>&lt;slot&gt;</code> 出口会带有隐含的名字“default”。</p>
+<p>在向具名插槽提供内容的时候，我们可以在一个 <code>&lt;template&gt;</code> 元素上使用 <code>v-slot</code> 指令，并以 <code>v-slot</code> 的参数的形式提供其名称：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>A paragraph for the main content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>And another one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here&#x27;s some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HelloWorld</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在 <span style="color:red"><code>&lt;template&gt;</code></span>元素中的所有内容都将会被传入相应的插槽。任何没有被包裹在带有<span style="color:red"><code>v-solt</code></span>的 <span style="color:red"><code>&lt;template&gt;</code></span> 中的内容都会被视为默认插槽的内容。</p>
+<p>然而，如果你希望更明确一些，仍然可以在一个 <span style="color:red"><code>&lt;template&gt;</code></span> 中包裹默认插槽的内容：<span style="color:red"><code>&lt;template&gt;</code></span></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>A paragraph for the main content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>And another one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here&#x27;s some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HelloWorld</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>任何一种写法都会渲染出：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>A paragraph for the main content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>And another one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here&#x27;s some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意 v-slot 只能添加在 &lt;template&gt; 上</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="具名插槽的缩写"><a href="#具名插槽的缩写" class="headerlink" title="具名插槽的缩写"></a>具名插槽的缩写</h2><p>跟 <code>v-on</code> 和 <code>v-bind</code> 一样，<code>v-slot</code> 也有缩写，即把参数之前的所有内容 (<code>v-slot:</code>) 替换为字符 <code>#</code>。例如 <code>v-slot:header</code> 可以被重写为 <code>#header</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> #<span class="attr">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>A paragraph for the main content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>And another one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> #<span class="attr">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here&#x27;s some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HelloWorld</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h2><p>有时让插槽内容能够访问子组件中才有的数据是很有用的。例如，父组件访问子组件中才有的数据</p>
+<p>在子组件<span style="color:red"><code>HelloWorld</code></span>中先定义数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      user: &#123;</span><br><span class="line">        firstName : <span class="string">&#x27;张&#x27;</span>,</span><br><span class="line">        lastName : <span class="string">&#x27;三&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了让 <code>user</code> 在父级的插槽内容中可用，我们可以将 <code>user</code> 作为 <code>&lt;slot&gt;</code> 元素的一个 attribute 绑定上去：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">:user</span>=<span class="string">&quot;user&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在父组件中使用子组件的数据：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HelloWorld</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot-scope</span>=<span class="string">&quot;&#123;user&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>法外狂徒&#123;&#123; user.firstName &#125;&#125;&#123;&#123; user.lastName &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HelloWorld</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/Vue%E5%9F%BA%E7%A1%80/slotshow.png"></p>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2093,930 +2685,6 @@
 <p>折叠所有代码，<code>ctrl+shift+'-'</code>，mac对应的快捷键是<code>command+shift+&#39;-&#39;</code></p>
 <p>展开所有代码，<code>ctrl+shift+'+'</code>，mac对应的快捷键是<code>command+shift+&#39;+&#39;</code></p>
 <p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/folding.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/16/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/" class="post-title-link" itemprop="url">IntelliJ-IDEA使用技巧二</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-16 09:38:46" itemprop="dateCreated datePublished" datetime="2021-08-16T09:38:46+08:00">2021-08-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 16:50:20" itemprop="dateModified" datetime="2023-09-05T16:50:20+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">IDEA使用技巧</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="IDEA设置鼠标悬浮提示"><a href="#IDEA设置鼠标悬浮提示" class="headerlink" title="IDEA设置鼠标悬浮提示"></a>IDEA设置鼠标悬浮提示</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/mousemovepng.png"  />
-
-<p>效果如下：</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/mousemoveshow.png"  />
-
-<hr>
-<h1 id="设置行号与方法的分隔符"><a href="#设置行号与方法的分隔符" class="headerlink" title="设置行号与方法的分隔符"></a>设置行号与方法的分隔符</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/appearanceset.png"  />
-
-<p>效果如下：</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/appearancesetshow.png"  />
-
-<hr>
-<h1 id="设置自动编译"><a href="#设置自动编译" class="headerlink" title="设置自动编译"></a>设置自动编译</h1><p>Intellij Idea 默认状态为不自动编译状态，Eclipse 默认为自动编译。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/compileauto.png"  />
-
-<hr>
-<h1 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h1><p>IDEA中代码代码模板所在的位置(Editor – Live Templates 和 Editor – General – Postfix Completion)</p>
-<p><strong>Live Templates(实时代码模板)功能介绍</strong></p>
-<p>它的原理就是配置一些常用代码字母缩写，在输入简写时可以出现你预定义的固定模式的代码，使得开发效率大大提高，同时也可以增加个性化。最简单的例子<br>就是在Java中输入<code>sout</code>会出现<code>System.out.println()</code>;</p>
-<p>已有的常用模板</p>
-<p><strong>Postfix Completion 默认如下</strong></p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/postfixCompletion.png"  />
-
-<p><strong>Live Templates默认如下</strong></p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/livetemplates.png"  />
-
-<p>二者的区别：<code>Live Templates</code>可以自定义，而<code>Postfix Completion</code>不可以。</p>
-<p><strong>常用模板</strong></p>
-<p><strong>psvm</strong> : 可生成<code>main</code>方法</p>
-<p><strong>sout</strong> : <code>System.out.println()</code>快捷输出</p>
-<p>类似的：<strong>soutp</strong></p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutp.png"  />
-
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutpshow.png"  />
-
-<p><strong>soutv</strong>=<code>System.out.println("变量名 = " + 变量);</code></p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutv.png"  />
-
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutvshow.png"  />
-
-<p><strong>soutm</strong>=<code>System.out.println("当前类名.当前方法");</code></p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutm.png"  />
-
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutmshow.png"  />
-
-<p><strong>“abc”.sout</strong> =&gt;<code> System.out.println("abc");</code></p>
-<p> <strong>list.for</strong> : 可生成集合 list 的 的 for 循环</p>
-<p>输入: <strong>list.for</strong> 即可输出</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String s:list)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>输入: <strong>list.for</strong> 即可输出</p>
-<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String s:list)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
-<p><strong>ifn</strong> ：可生成 <code>if(xxx = null)</code><br>        类似的：<br>        <strong>inn</strong>：可生成<code>if(xxx != null)</code>或<code>xxx.nn</code>或<code>xxx.null</code></p>
-<p><strong>prsf</strong> ：可生成<code>private static final</code><br>类似的：<br><strong>psf</strong>：可生成<code>public static final</code><br><strong>psfi</strong>：可生成<code>public static final int</code><br><strong>psfs</strong>：可生成<code>public static final String</code></p>
-<hr>
-<p><strong>自定义模板</strong></p>
-<p>IDEA 提供了很多现成的 Templates。但你也可以根据自己的需要创建新的Template</p>
-<ol>
-<li><p>自定义模板组，并命名为CustomDefine</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newtemplateGroup1.png"  />
-
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newtemplateGroup2.png"  />
-</li>
-<li><p>在自定义的模板组里点“+”号新建自定义模板</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive1.png"  />
-
-</li>
-</ol>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive2.png"  />
-
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive3.png"  />
-
-<ol>
-<li>Abbreviation:模板的缩略名称</li>
-<li>Description:模板的描述</li>
-<li>Template text:模板的代码片段</li>
-<li>应用范围。Define</li>
-</ol>
-<hr>
-<h1 id="生成-javadoc"><a href="#生成-javadoc" class="headerlink" title="生成 javadoc"></a>生成 javadoc</h1><p><strong>Tools</strong>—&gt;<strong>Generate JavaDoc…</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/generatejavadoc1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/generatejavadoc2.png"></p>
-<p>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Locale：输入语言类型：zh_CN</span><br><span class="line">Other command line arguments：-encoding UTF-8 -charset UTF-8</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="IDEA常用快捷键Windows版"><a href="#IDEA常用快捷键Windows版" class="headerlink" title="IDEA常用快捷键Windows版"></a>IDEA常用快捷键Windows版</h1><table>
-<thead>
-<tr>
-<th align="left"><strong>作用</strong></th>
-<th align="left"><strong>快捷键</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>返回上次编辑位置（Last Edit Location)</strong></td>
-<td align="left"><strong>Ctrl+Shift+Backspace</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>Back返回上次光标所在位置</strong></td>
-<td align="left"><strong>Ctrl+Alt+向左箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>Forward前进到下次光标所在位置</strong></td>
-<td align="left"><strong>Ctrl+Alt+向右箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索类Class</strong></td>
-<td align="left"><strong>Ctrl+N</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索文件File</strong></td>
-<td align="left"><strong>Ctrl+Shift+N</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索符号Symbol</strong></td>
-<td align="left"><strong>Ctrl+Alt+Shift+N</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>全局搜索</strong></td>
-<td align="left"><strong>Ctrl+Shift+F</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>当前文件搜索</strong></td>
-<td align="left"><strong>Ctrl+F</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>执行（run)</strong></td>
-<td align="left"><strong>Shift+F10</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>提示补全、导包、万能快捷键</strong></td>
-<td align="left"><strong>Alt+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>单行注释</strong></td>
-<td align="left"><strong>Ctrl+/</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>多行注释</strong></td>
-<td align="left"><strong>Ctrl+Shift+/</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下复制一行(Duplicate Entire Lines）</strong></td>
-<td align="left"><strong>Ctrl+D</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>删除一行或选中行</strong></td>
-<td align="left"><strong>Ctrl+Y</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下移动行（move statement down）</strong></td>
-<td align="left"><strong>Ctrl+Shift+向下箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向上移动行（move statement up）</strong></td>
-<td align="left"><strong>Ctrl+Shift+向上箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下开始新的一行</strong></td>
-<td align="left"><strong>Shift+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向上开始新的一行 (Start New Line before current)</strong></td>
-<td align="left"><strong>Ctrl+Alt+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看继承关系(type hierarchy)</strong></td>
-<td align="left"><strong>Ctrl+H</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>格式化代码(reformat code)</strong></td>
-<td align="left"><strong>Ctrl+Alt+L</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>提示方法参数类型(Parameter Info)</strong></td>
-<td align="left"><strong>Ctrl+P</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>反撤销</strong></td>
-<td align="left"><strong>Ctrl+Shift+Z</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选中数行，整体往后移动</strong></td>
-<td align="left"><strong>Tab</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选中数行，整体往前移动</strong></td>
-<td align="left"><strong>Shift+Tab</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看类的结构：类的方法与变量</strong></td>
-<td align="left"><strong>Alt+7</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>大写转小写/ 小写转大写(toggle case)</strong></td>
-<td align="left"><strong>Ctrl+Shift+U</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>生成构造 器/get/set/toString</strong></td>
-<td align="left"><strong>Alt+Insert</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>收起所有的方法(collapse all)</strong></td>
-<td align="left"><strong>Ctrl+Shift+减号</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开所有方法(expand all)</strong></td>
-<td align="left"><strong>Ctrl+Shift+加号</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开代码所在硬盘文件夹(show in explorer)</strong></td>
-<td align="left"><strong>Ctrl+Shift+X（需要自己设置）</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>生成 try-catch 等(surround with)</strong></td>
-<td align="left"><strong>Ctrl+Alt+T</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看方法的多层重写结构(method hierarchy)</strong></td>
-<td align="left"><strong>Ctrl+Shift+H</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>抽取方法(Extract Method)</strong></td>
-<td align="left"><strong>Ctrl+Alt+M</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开 最近 修改的文件(Recently Files)</strong></td>
-<td align="left"><strong>Ctrl+E</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>关闭当前打开的代码栏(close)</strong></td>
-<td align="left"><strong>Ctrl+F4</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>关闭其他所有代码栏(close others)</strong></td>
-<td align="left"><strong>Ctrl+Shift+O（需要自己设置）</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>快速搜索类中的错误(next highlighted error)</strong></td>
-<td align="left"><strong>F2</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选择要粘贴的内容(Show in Explorer)</strong></td>
-<td align="left"><strong>Ctrl+Shift+V</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查找方法在哪里被调用(Call Hierarchy)</strong></td>
-<td align="left"><strong>Ctrl+Alt+H</strong></td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="IDEA常用快捷键Mac版"><a href="#IDEA常用快捷键Mac版" class="headerlink" title="IDEA常用快捷键Mac版"></a>IDEA常用快捷键Mac版</h1><table>
-<thead>
-<tr>
-<th align="left"><strong>作用</strong></th>
-<th align="left"><strong>快捷键</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>返回上次编辑位置（Last Edit Location)</strong></td>
-<td align="left"><strong>command+Shift+Delete</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>Back返回上次光标所在位置</strong></td>
-<td align="left"><strong>Command+[</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>Forward前进到下次光标所在位置</strong></td>
-<td align="left"><strong>Command+]</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索类Class</strong></td>
-<td align="left"><strong>Command+O</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索文件File</strong></td>
-<td align="left"><strong>Command+shift+O</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>搜索符号Symbol</strong></td>
-<td align="left"><strong>Command+option+O</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>全局搜索</strong></td>
-<td align="left"><strong>Command+option+F</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>当前文件搜索</strong></td>
-<td align="left"><strong>Command+F</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>执行（run)</strong></td>
-<td align="left"><strong>option+R</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>提示补全、导包、万能快捷键</strong></td>
-<td align="left"><strong>option+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>单行注释</strong></td>
-<td align="left"><strong>Command+/</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>多行注释</strong></td>
-<td align="left"><strong>Command+Option+/</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下复制一行(Duplicate Entire Lines）</strong></td>
-<td align="left"><strong>Command+D</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>删除一行或选中行</strong></td>
-<td align="left"><strong>Ctrl+Y</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下移动行（move statement down）</strong></td>
-<td align="left"><strong>Command+option+向下箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向上移动行（move statement up）</strong></td>
-<td align="left"><strong>command+option+向上箭头</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向下开始新的一行</strong></td>
-<td align="left"><strong>Shift+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>向上开始新的一行 (Start New Line before current)</strong></td>
-<td align="left"><strong>Command+option+Enter</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看继承关系(type hierarchy)</strong></td>
-<td align="left"><strong>Ctrl+H</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>格式化代码(reformat code)</strong></td>
-<td align="left"><strong>Command+option+L</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>提示方法参数类型(Parameter Info)</strong></td>
-<td align="left"><strong>Command+P</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>反撤销</strong></td>
-<td align="left"><strong>Command+Shift+Z</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选中数行，整体往后移动</strong></td>
-<td align="left"><strong>Tab</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选中数行，整体往前移动</strong></td>
-<td align="left"><strong>Shift+Tab</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看类的结构：类的方法与变量</strong></td>
-<td align="left"><strong>command+7</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>大写转小写/ 小写转大写(toggle case)</strong></td>
-<td align="left"><strong>Command+Shift+U</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>生成构造 器/get/set/toString</strong></td>
-<td align="left"><strong>Command+N</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>收起所有的方法(collapse all)</strong></td>
-<td align="left"><strong>Command+Shift+减号</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开所有方法(expand all)</strong></td>
-<td align="left"><strong>Command+Shift+加号</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开代码所在硬盘文件夹(show in explorer)</strong></td>
-<td align="left"><strong>Command+Shift+X（需要自己设置）</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>生成 try-catch 等(surround with)</strong></td>
-<td align="left"><strong>Command+option+T</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查看方法的多层重写结构(method hierarchy)</strong></td>
-<td align="left"><strong>Command+Shift+H</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>抽取方法(Extract Method)</strong></td>
-<td align="left"><strong>Command+option+M</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>打开 最近 修改的文件(Recently Files)</strong></td>
-<td align="left"><strong>Ctrl+E</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>关闭当前打开的代码栏(close)</strong></td>
-<td align="left"><strong>Command+W</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>关闭其他所有代码栏(close others)</strong></td>
-<td align="left"><strong>Ctrl+Shift+O（需要自己设置）</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>快速搜索类中的错误(next highlighted error)</strong></td>
-<td align="left"><strong>F2</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>选择要粘贴的内容(Show in Explorer)</strong></td>
-<td align="left"><strong>Ctrl+Shift+V</strong></td>
-</tr>
-<tr>
-<td align="left"><strong>查找方法在哪里被调用(Call Hierarchy)</strong></td>
-<td align="left"><strong>Ctrl+Alt+H</strong></td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="Alt-Enter快捷键功能"><a href="#Alt-Enter快捷键功能" class="headerlink" title="Alt+Enter快捷键功能"></a>Alt+Enter快捷键功能</h1><h2 id="自动创建函数"><a href="#自动创建函数" class="headerlink" title="自动创建函数"></a>自动创建函数</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter2.png"></p>
-<hr>
-<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter3.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter4.png"></p>
-<hr>
-<h2 id="为接口创建实现类和方法"><a href="#为接口创建实现类和方法" class="headerlink" title="为接口创建实现类和方法"></a>为接口创建实现类和方法</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter5.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter6.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter7.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter8.png"></p>
-<hr>
-<h2 id="单词拼写"><a href="#单词拼写" class="headerlink" title="单词拼写"></a>单词拼写</h2><p>如果idea检查到我们的单词拼错了会有下波浪线的提示，使用alt+enter的快捷键可以帮我们进行修正</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnterWord1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnterWord2.png"></p>
-<hr>
-<h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altenterImport1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altenterImport2.png"></p>
-<hr>
-<h1 id="寻找代码修改轨迹"><a href="#寻找代码修改轨迹" class="headerlink" title="寻找代码修改轨迹"></a>寻找代码修改轨迹</h1><h2 id="annotate"><a href="#annotate" class="headerlink" title="annotate"></a>annotate</h2><p>使用annotate，可以在某个文件内部查看哪一行代码是谁提交的，而且还有提交时间、提交备注信息、提交人姓名、提交的版本号、第几次提交等</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/annotate1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/annotate2.png"></p>
-<hr>
-<h2 id="Revert-Changes撤销修改"><a href="#Revert-Changes撤销修改" class="headerlink" title="Revert  Changes撤销修改"></a>Revert  Changes撤销修改</h2><p>想撤销对当前文件的修改，在空白处使用快捷键<strong>Ctrl+alt+Z</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/revert.png"></p>
-<hr>
-<h2 id="Local-History"><a href="#Local-History" class="headerlink" title="Local History"></a>Local History</h2><p>在IntelliJ IDEA中一不小心将你本地代码给覆盖了，或者忘记了修改某些地方，出现了一些无法修复的异常，这个时候可以通过历史记录回到以前未修改前，并且记录的机制是修改文件会触发记录的时间点，所以很多天以前的记录也能找到</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory3.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/23/Spring%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/23/Spring%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Spring注解驱动开发</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-07-23 18:44:28" itemprop="dateCreated datePublished" datetime="2021-07-23T18:44:28+08:00">2021-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 17:01:23" itemprop="dateModified" datetime="2023-09-05T17:01:23+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Spring%E6%B3%A8%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">Spring注解</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><h2 id="组件添加"><a href="#组件添加" class="headerlink" title="组件添加"></a>组件添加</h2><h3 id="ComponentScan"><a href="#ComponentScan" class="headerlink" title="@ComponentScan"></a>@ComponentScan</h3><p>在配置类上添加<code>@ComponentScan</code>注解。该注解默认会扫描该类所在的包下所有的配置类，相当于之前的 <a href="context:component-scan">context:component-scan</a>。<code>@ComponentScan</code>注解默认就会装配标识了<code>@Controller</code>，<code>@Service</code>，<code>@Repository</code>，<code>@Component</code>注解的类到spring容器中。</p>
-<p>basePackages与value: 用于指定包的路径，进行扫描</p>
-<p>basePackageClasses：指定扫描类</p>
-<p><code>includeFilters</code>：指定某些定义Filter满足条件的组件 FilterType有5种类型如：</p>
-<ul>
-<li><code>ANNOTATION</code>，注解类型(默认)</li>
-<li><code>ASSIGNABLE_TYPE</code>，指定固定类</li>
-<li><code>ASPECTJ</code>， ASPECTJ类型</li>
-<li><code>REGEX</code>，正则表达式</li>
-<li><code>CUSTOM</code>，自定义类型</li>
-</ul>
-<p><code>excludeFilters</code>：过滤器，和includeFilters作用刚好相反，用来对扫描的类进行排除的，被排除的类不会被注册到容器中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(value=&quot;com.wotzc&quot;,useDefaultFilters=true,</span></span><br><span class="line"><span class="meta">    includeFilters=&#123;</span></span><br><span class="line"><span class="meta">        @Filter(type=FilterType.ANNOTATION,classes=&#123;Controller.class&#125;),</span></span><br><span class="line"><span class="meta">        @Filter(type=FilterType.ASSIGNABLE_TYPE,classes=&#123;UserService2.class&#125;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainScanConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Scope"><a href="#Scope" class="headerlink" title="@Scope"></a>@Scope</h3><p><code>@Scope</code>注解是springIoc容器中的一个作用域，在 Spring IoC 容器中具有以下几种作用域：基本作用域<code>singleton</code>（单例）默认值、<code>prototype</code>(多例)，<code>Web 作用域</code>（reqeust、session、globalsession），<code>自定义作用域</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span><span class="comment">//多实例，IOC容器启动创建的时候，并不会创建对象放在容器在容器当中，当你需要的时候，需要从容器当中取该对象的时候，就会创建。@Scope(&quot;singleton&quot;)//单实例 IOC容器启动的时候就会调用方法创建对象，以后每次获取都是从容器当中拿同一个对象（map当中）。</span></span><br><span class="line"><span class="meta">@Scope(&quot;request&quot;)</span><span class="comment">//同一个请求创建一个实例</span></span><br><span class="line"><span class="meta">@Scope(&quot;session&quot;)</span><span class="comment">//同一个session创建一个实例</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Lazy"><a href="#Lazy" class="headerlink" title="@Lazy"></a>@Lazy</h3><p>Spring IoC （ApplicationContext） 容器一般都会在启动的时候实例化所有单实例 bean 。如果我们想要 Spring 在启动的时候延迟加载 bean，即在调用某个 bean 的时候再去初始化，那么就可以使用<code>@Lazy</code>注解。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Lazy</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Person <span class="title">person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">&quot;李四&quot;</span>, <span class="number">55</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a>@Conditional</h3><p><code>@Conditional</code>是Spring4新提供的注解，它的作用是按照一定的条件进行判断，满足条件就给容器注册bean。</p>
-<p><code>@Conditional</code>的定义：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此注解可以标注在类和方法上</span></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> </span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Conditional &#123;</span><br><span class="line">    </span><br><span class="line">    Class&lt;? extends Condition&gt;[] value();</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从代码中可以看到，需要传入一个Class数组，并且需要继承Condition接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext var1, AnnotatedTypeMetadata var2)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Condition是个接口，需要实现<code>matches</code>方法，返回true则注入bean，false则不注入。</p>
-<p>首先，创建一个WindowsCondition类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WindowsCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> conditionContext:判断条件能使用的上下文环境</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> annotatedTypeMetadata:注解所在位置的注释信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取ioc使用的beanFactory</span></span><br><span class="line">        ConfigurableListableBeanFactory beanFactory = conditionContext.getBeanFactory();</span><br><span class="line">        <span class="comment">//获取类加载器</span></span><br><span class="line">        ClassLoader classLoader = conditionContext.getClassLoader();</span><br><span class="line">        <span class="comment">//获取当前环境信息</span></span><br><span class="line">        Environment environment = conditionContext.getEnvironment();</span><br><span class="line">        <span class="comment">//获取bean定义的注册类</span></span><br><span class="line">        BeanDefinitionRegistry registry = conditionContext.getRegistry();</span><br><span class="line">        <span class="comment">//获得当前系统名</span></span><br><span class="line">        String property = environment.getProperty(<span class="string">&quot;os.name&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//包含Windows则说明是windows系统，返回true</span></span><br><span class="line">        <span class="keyword">if</span> (property.contains(<span class="string">&quot;Windows&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>matches方法的两个参数的意思在注释中讲述了，值得一提的是，conditionContext提供了多种方法，方便获取各种信息，也是SpringBoot中<code>@ConditonalOnXX</code>注解多样扩展的基础。</p>
-<p>接着，创建LinuxCondition类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinuxCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Environment environment = conditionContext.getEnvironment();</span><br><span class="line">        String property = environment.getProperty(<span class="string">&quot;os.name&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (property.contains(<span class="string">&quot;Linux&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接着就是使用这两个类了，因为此注解可以标注在方法上和类上，</p>
-<p>修改BeanConfig</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//只有一个类时，大括号可以省略</span></span><br><span class="line">    <span class="comment">//如果WindowsCondition的实现方法返回true，则注入这个bean    </span></span><br><span class="line">    <span class="meta">@Conditional(&#123;WindowsCondition.class&#125;)</span></span><br><span class="line">    <span class="meta">@Bean(name = &quot;bill&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">&quot;Bill Gates&quot;</span>,<span class="number">62</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果LinuxCondition的实现方法返回true，则注入这个bean</span></span><br><span class="line">    <span class="meta">@Conditional(&#123;LinuxCondition.class&#125;)</span></span><br><span class="line">    <span class="meta">@Bean(&quot;linus&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Person <span class="title">person2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person(<span class="string">&quot;Linus&quot;</span>,<span class="number">48</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Bean"><a href="#Bean" class="headerlink" title="@Bean"></a>@Bean</h3><div class="note no-icon primary"><p>Spring的@Bean注解用于告诉方法，产生一个Bean对象，然后这个Bean对象交给Spring管理。 产生这个Bean对象的方法Spring只会调用一次，随后这个Spring将会将这个Bean对象放在自己的IOC容器中。@Bean明确地指示了一种方法，什么方法呢？产生一个bean的方法，并且交给Spring容器管理；从这我们就明白了为啥@Bean是放在方法的注释上了，因为它很明确地告诉被注释的方法，你给我产生一个Bean，然后交给Spring容器，剩下的你就别管了。记住，@Bean就放在方法上，就是让方法去产生一个Bean，然后交给Spring容器。</p>
-</div>
-
-<p><strong>为什么要有@Bean注解？</strong></p>
-<p>不知道大家有没有想过，用于注册Bean的注解的有那么多个，为何还要出现@Bean注解？</p>
-<p>原因很简单：类似<code>@Component</code> , <code>@Repository</code> , <code>@ Controller</code> ,<code> @Service</code> 这些注册Bean的注解存在局限性，只能局限作用于自己编写的类，如果是一个jar包第三方库要加入<code>IOC容器</code>的话，这些注解就手无缚鸡之力了，是的，<code>@Bean</code>注解就可以做到这一点！当然除了@Bean注解能做到还有<code>@Import</code>也能把第三方库中的类实例交给spring管理，而且<code>@Import</code>更加方便快捷</p>
-<p>@Bean 基本构成：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.METHOD, ElementType.ANNOTATION_TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Bean &#123;</span><br><span class="line"> </span><br><span class="line">	<span class="meta">@AliasFor(&quot;name&quot;)</span></span><br><span class="line">	String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"> </span><br><span class="line">	<span class="meta">@AliasFor(&quot;value&quot;)</span></span><br><span class="line">	String[] name() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"> </span><br><span class="line">	<span class="function">Autowire <span class="title">autowire</span><span class="params">()</span> <span class="keyword">default</span> Autowire.NO</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="function">String <span class="title">initMethod</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="function">String <span class="title">destroyMethod</span><span class="params">()</span> <span class="keyword">default</span> AbstractBeanDefinition.INFER_METHOD</span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>value</strong>： name属性的别名，在不需要其他属性时使用，也就是说value 就是默认值</p>
-<p><strong>name</strong>： 此bean 的名称，或多个名称，主要的bean的名称加别名。如果未指定，则bean的名称是带注解方法的名称。如果指定了，方法的名称就会忽略，如果没有其他属性声明的话，bean的名称和别名可能通过value属性配置</p>
-<p><strong>autowire</strong> ： 此注解的方法表示自动装配的类型，返回一个<code>Autowire</code>类型的枚举，装配方式 有三个选项<br><code>Autowire.NO</code>(默认设置)<br><code>Autowire.BY_NAME</code><br><code>Autowire.BY_TYPE</code><br>指定 bean 的装配方式， 根据<strong>名称</strong>和<strong>根据类型</strong>装配， 一般不设置，采用默认即可。autowire的默认值为<code>No</code>，默认表示不通过自动装配。</p>
-<p><strong>bean</strong> 的初始化方法， 直接指定方法名称即可，不用带括号</p>
-<p><strong>destroyMethod</strong>: bean 的销毁方法， 在调用 IoC 容器的<code>close()</code>方法时，会执行到该属性指定的方法。不过，只是单实例的 bean 才会调用该方法，如果是多实例的情况下，不会调用该方法</p>
-<hr>
-<h3 id="Import"><a href="#Import" class="headerlink" title="@Import"></a>@Import</h3><p><strong>@Import只能用在类上</strong> ，<code>@Import</code>通过快速导入的方式实现把实例加入spring的IOC容器中</p>
-<p>@Import的三种用法主要包括：</p>
-<div class="note no-icon primary"><p>1、直接填class数组方式<br>2、ImportSelector方式【重点】<br>3、ImportBeanDefinitionRegistrar方式</p>
-</div>
-
-<p><strong>第一种用法：直接填class数组</strong></p>
-<p>语法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import(&#123; 类名.class , 类名.class... &#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对应的import的bean都将加入到spring容器中，这些在容器中bean名称是该类的<strong>全类名</strong> </p>
-<p><strong>第二种用法：ImportSelector方式</strong></p>
-<p>这种方式的前提就是一个类要实现ImportSelector接口，假如我要用这种方法，目标对象是Myclass这个类，分析具体如下：</p>
-<p>创建Myclass类并实现ImportSelector接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Myclass</span> <span class="keyword">implements</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">    	<span class="comment">// 方法不要返回null，否则会报空指针异常！</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>分析实现接口的selectImports方法：</p>
-<div class="note success"><ul>
-<li>1、返回值： 就是我们实际上要导入到容器中的组件全类名</li>
-<li>2、参数： AnnotationMetadata表示当前被@Import注解给标注的所有注解信息</li>
-</ul>
-</div>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Myclass</span> <span class="keyword">implements</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">&quot;com.wotzc.Test.TestDemo3&quot;</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第三种用法：ImportBeanDefinitionRegistrar方式</strong></p>
-<p>同样是一个接口，类似于第二种ImportSelector用法，相似度80%，只不过这种用法比较自定义化注册，具体如下：</p>
-<p>第一步：创建Myclass2类并实现ImportBeanDefinitionRegistrar接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Myclass2</span> <span class="keyword">implements</span> <span class="title">ImportBeanDefinitionRegistrar</span> </span>&#123;</span><br><span class="line"><span class="comment">//该实现方法默认为空</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinitions</span><span class="params">(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry)</span> </span>&#123;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>参数分析：</p>
-<ul>
-<li>第一个参数：annotationMetadata 和之前的ImportSelector参数一样都是表示当前被@Import注解给标注的所有注解信息</li>
-<li>第二个参数表示用于注册定义一个bean</li>
-</ul>
-<hr>
-<h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="@FactoryBean"></a>@FactoryBean</h3><div class="note no-icon info"><p>该类是SpringIOC容器是创建Bean的一种形式，这种方式创建Bean会有加成方式，融合了简单的工厂设计模式于装饰器模式<br>Interface to be implemented by objects used within a {@link BeanFactory} which  are themselves factories for individual objects. If a bean implements this  interface, it is used as a factory for an object to expose, not directly as a  bean instance that will be exposed itself.</p>
-</div>
-
-<p>在某些情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在<code>&lt;bean></code>中提供大量的配置信息。配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个<code>org.springframework.bean.factory.FactoryBean</code>的工厂类接口，用户可以通过实现该接口定制实例化Bean的逻辑。<code>FactoryBean</code>接口对于Spring框架来说占有重要的地位。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FactoryBean</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回的对象实例</span></span><br><span class="line">    <span class="function">T <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">    <span class="comment">//Bean的类型</span></span><br><span class="line">    Class&lt;?&gt; getObjectType();</span><br><span class="line">    <span class="comment">//true是单例，false是非单例  在Spring5.0中此方法利用了JDK1.8的新特性变成了default方法，返回true</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="PostConstruct"><a href="#PostConstruct" class="headerlink" title="@PostConstruct"></a>@PostConstruct</h3><p>在bean创建完成并且属性赋值完成，来执行初始化方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">someMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="PreDestroy"><a href="#PreDestroy" class="headerlink" title="@PreDestroy"></a>@PreDestroy</h3><p>容器移除对象之前调用，<code>@PostConstruct</code>和<code>@PreDestroy</code>都只能用在方法上</p>
-<h3 id="BeanPostProcessor"><a href="#BeanPostProcessor" class="headerlink" title="BeanPostProcessor"></a>BeanPostProcessor</h3><ul>
-<li><code>BeanPostProcessor</code>也称为Bean后置处理器，它是Spring中定义的接口，在Spring容器的创建过程中（具体为Bean初始化前后）会回调<code>BeanPostProcessor</code>中定义的两个方法。BeanPostProcessor的源码如下</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanPostProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function">Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Object <span class="title">postProcessAfterInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>其中<code>postProcessBeforeInitialization</code>方法会在每一个bean对象的初始化方法调用之前回调；<code>postProcessAfterInitialization</code>方法会在每个bean对象的初始化方法调用之后被回调。</li>
-</ul>
-<h2 id="组件赋值"><a href="#组件赋值" class="headerlink" title="组件赋值"></a>组件赋值</h2><h3 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h3><p>不通过配置文件的注入属性的情况，通过<code>@Value</code>将外部的值动态注入到Bean中</p>
-<p>使用的情况有：</p>
-<ol>
-<li><p>基本数值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;normal&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String normal; <span class="comment">// 注入普通字符串</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>可以写SpEL获取某个bean的属性：#{}</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;#&#123;20-2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> Integer age; </span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以写${}注入配置文件的值</p>
-</li>
-</ol>
-<p>通过@Value将外部配置文件的值动态注入到Bean中。配置文件主要有两类：</p>
-<ul>
-<li><code>application.properties</code>。application.properties在spring boot启动时默认加载此文件</li>
-<li>自定义属性文件。自定义属性文件通过<code>@PropertySource</code>加载。@PropertySource可以同时加载多个文件，也可以加载单个文件。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 自己配置的参数</span><br><span class="line">savePath : &#x2F;Users&#x2F;a&#x2F;Desktop&#x2F;test998&#x2F;</span><br><span class="line">libraryPath : &#x2F;opt&#x2F;local&#x2F;share&#x2F;OpenCV&#x2F;java&#x2F;libopencv_java347.dylib</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TesseractOrcServiceImpl</span> <span class="keyword">implements</span> <span class="title">TesseractOrcService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;savePath&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span>  String savePath ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h3><p><code>@autowired</code>注释来源于英文单词 autowire,这个单词的意思是自动装配的意思。自动装配又是什么意思？这个词语本来的意思是指的一些工业上的用机器代替人口，自动将一些需要完成的组装任务，或者别的一些任务完成。而在 Spring 的世界当中，自动装配指的就是使用将 Spring 容器中的 bean 自动的和我们需要这个 bean 的类组装在一起。</p>
-<p><code>@Autowired</code>是用在JavaBean中的注解，通过byType形式，用来给指定的字段或方法注入所需的外部资源</p>
-<p>自动装备一定要将属性赋值好，没有就会报错。</p>
-<p>默认情况下，<code>@Autowired</code>注释意味着依赖是必须的，它类似于<code>@Required</code>注释，然而，你可以使用<code>@Autowired</code>的 <strong>（required=false）</strong> 选项关闭默认行为。</p>
-<p>即使你不为 age 属性传递任何参数，下面的示例也会成功运行，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tutorialspoint;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Integer age;</span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line">   <span class="meta">@Autowired(required=false)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.age = age;</span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> age;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="meta">@Autowired</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">   &#125;   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> name;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>@Autowired</strong>可以标注在方法、参数、构造器、属性上，都是从容器中获取参数组件的值</p>
-<p>标在构造器上，如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略</p>
-<p>@Bean标注的方法创建对象的时候，方法参数的值从容器中获取</p>
-<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h3><p>可能会有这样一种情况，当你创建多个具有相同类型的 bean 时，并且想要用一个属性只为它们其中的一个进行装配，在这种情况下，你可以使用 <strong>@Qualifier</strong> 注释和 <strong>@Autowired</strong> 注释通过指定哪一个真正的 bean 将会被装配来消除混乱。</p>
-<h3 id="Primary"><a href="#Primary" class="headerlink" title="@Primary"></a>@Primary</h3><p>当一个接口有2个不同实现时,使用@Autowired注解时会报<code>org.springframework.beans.factory.NoUniqueBeanDefinitionException</code>异常信息。</p>
-<p>Primary可以理解为默认优先选择,不可以同时设置多个,内部实质是设置BeanDefinition的primary属性</p>
-<table>
-<thead>
-<tr>
-<th align="left">注解</th>
-<th align="left">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>@Primary</code></td>
-<td align="left">优先方案，被注解的实现，优先被注入</td>
-</tr>
-<tr>
-<td align="left"><code>@Qualifier</code></td>
-<td align="left">先声明后使用，相当于多个实现起多个不同的名字，注入时候告诉我你要注入哪个</td>
-</tr>
-</tbody></table>
-<h3 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h3><p>可以和@Autowired一样实现自动装配，默认是按组件名称进行装配的</p>
-<p>@Resource 注释使用一个 ‘name’ 属性，该属性以一个 bean 名称的形式被注入。你可以说，它遵循 <strong>by-name</strong> 自动连接语义</p>
-<p>如果没有明确地指定一个 ‘name’，默认名称源于字段名或者 setter 方法。在字段的情况下，它使用的是字段名；在一个 setter 方法情况下，它使用的是 bean 属性名称。</p>
-<h3 id="Inject"><a href="#Inject" class="headerlink" title="@Inject"></a>@Inject</h3><ul>
-<li>@Inject是JSR330 (Dependency Injection for Java)中的规范，需要导入<code>javax.inject.Inject</code>;实现注入。</li>
-<li>@Inject是根据<strong>类型</strong>进行自动装配的，如果需要按名称进行装配，则需要配合@Named；</li>
-<li>@Inject可以作用在变量、setter方法、构造函数上。</li>
-</ul>
-<p><code>@Resource</code>,<code>@Autowired</code>,<code>@Inject</code>这3种都是用来注入bean的，它们属于不同的程序中。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/spring%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8/autowiredpng.png" alt="img"></p>
-<p>JSR是Java Specification Requests的缩写，意思是Java 规范提案。是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准。</p>
-<p><strong>@Resource</strong> 没有支持@Primary功能；没有支持@Autowired(required = false)；</p>
-<p><strong>@Inject</strong> 需要导入javax.inject的包；没有支持@Autowired(required = false)；</p>
-<h3 id="Profile"><a href="#Profile" class="headerlink" title="@Profile"></a>@Profile</h3><p>指定组件在哪个环境的情况下才能被注册到容器中，不指定，任何环境下都能注册这个组件</p>
-<ol>
-<li><p>加了环境标识的bean，只有这个环境被激活的时候才能注册到容器中。默认是default环境</p>
-</li>
-<li><p>写在配置类上，只有是指定的环境的时候，整个配置类里面的所有配置才能开始生效</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;db.user&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String user;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> String driverClass;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&quot;default&quot;)</span></span><br><span class="line"><span class="meta">@Bean(&quot;test&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">testDataSource</span><span class="params">(<span class="meta">@Value(&quot;$&#123;db.password&#125;&quot;)</span>String password)</span> <span class="keyword">throws</span> PropertyVetoException </span>&#123;</span><br><span class="line">	ComboPooledDataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">	dataSource.setUser(user);</span><br><span class="line">	dataSource.setPassword(password);</span><br><span class="line">	dataSource.setDriverClass(driverClass);</span><br><span class="line">	<span class="keyword">return</span> dataSource;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&quot;dev&quot;)</span></span><br><span class="line"><span class="meta">@Bean(&quot;dev&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">devDataSource</span><span class="params">(<span class="meta">@Value(&quot;$&#123;db.password&#125;&quot;)</span>String password)</span> <span class="keyword">throws</span> PropertyVetoException </span>&#123;</span><br><span class="line">	ComboPooledDataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">	dataSource.setUser(user);</span><br><span class="line">	dataSource.setPassword(password);</span><br><span class="line">	dataSource.setDriverClass(driverClass);</span><br><span class="line">	<span class="keyword">return</span> dataSource;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Profile(&quot;master&quot;)</span></span><br><span class="line"><span class="meta">@Bean(&quot;master&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">masterDataSource</span><span class="params">(<span class="meta">@Value(&quot;$&#123;db.password&#125;&quot;)</span>String password)</span> <span class="keyword">throws</span> PropertyVetoException </span>&#123;</span><br><span class="line">	ComboPooledDataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">	dataSource.setUser(user);</span><br><span class="line">	dataSource.setPassword(password);</span><br><span class="line">	dataSource.setDriverClass(driverClass);</span><br><span class="line">	<span class="keyword">return</span> dataSource;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>切换运行环境的方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOCTestProfile</span> </span>&#123;</span><br><span class="line">	<span class="comment">//1. 使用命令行动态参数：在虚拟机参数位置加载 -Dspring.profiles.active=test</span></span><br><span class="line">	<span class="comment">//2. 使用代码的方式激活某种环境；</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		AnnotationConfigApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(MainConfigOfProfile.class);</span><br><span class="line">		<span class="comment">//1. 创建一个applicationContext</span></span><br><span class="line">		<span class="comment">//2. 设置需要激活的环境</span></span><br><span class="line">		applicationContext.getEnvironment().setActiveProfiles(<span class="string">&quot;dev&quot;</span>,<span class="string">&quot;master&quot;</span>);</span><br><span class="line">		<span class="comment">//3. 注册主配置类</span></span><br><span class="line">		applicationContext.register(MainConfigOfProfile.class);</span><br><span class="line">		<span class="comment">//4. 启动刷新容器</span></span><br><span class="line">		applicationContext.refresh();</span><br><span class="line">		</span><br><span class="line">		String[] beanNamesForType = applicationContext.getBeanNamesForType(DataSource.class);</span><br><span class="line">		System.out.println(Arrays.toString(beanNamesForType));</span><br><span class="line">		</span><br><span class="line">		applicationContext.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><h3 id="EnableAspectJAutoProxy"><a href="#EnableAspectJAutoProxy" class="headerlink" title="@EnableAspectJAutoProxy"></a>@EnableAspectJAutoProxy</h3><p>开启AOP功能</p>
-<h3 id="Pointcut"><a href="#Pointcut" class="headerlink" title="@Pointcut"></a>@Pointcut</h3><p>通过<code>@Pointcut</code>定义切入点</p>
-<p>格式：<code>@Pointcut(value=“表达标签(表达式格式) ”)</code><br>如：<code>@Pointcut (value=“execution(* com.cn.spring.aspectj.NotVeryUsefulAspectService.*(…))”)</code></p>
-<p><strong>表达式标签</strong></p>
-<ul>
-<li><code>execution()</code>：用于匹配方法执行的连接点</li>
-<li><code>args()</code>: 用于匹配当前执行的方法传入的参数为指定类型的执行方法</li>
-<li><code>this()</code>: 用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；</li>
-<li><code>target()</code>: 用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；</li>
-<li><code>within()</code>: 用于匹配指定类型内的方法执行；</li>
-<li><code>@args()</code>:于匹配当前执行的方法传入的参数持有指定注解的执行；</li>
-<li><code>@target()</code>:用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；</li>
-<li><code>@within()</code>:用于匹配所以持有指定注解类型内的方法；</li>
-<li><code>@annotation</code>:用于匹配当前执行方法持有指定注解的方法；</li>
-</ul>
-<p>其中<code>execution</code>是用的最多的，<code>execution</code>格式：</p>
-<p><code>execution(modifier-pattern?  ret-type-pattern  declaring-type-pattern?  name-pattern(param-pattern)  throws-pattern?)</code><br>其中带<code>?</code>号的<code>modifiers-pattern?</code>，<code>declaring-type-pattern?</code>，<code>hrows-pattern?</code>是可选项<br><code>ret-type-pattern</code>，<code>name-pattern</code>， <code>parameters-pattern</code>是必选项；</p>
-<ul>
-<li><code>modifier-pattern?</code> <strong>修饰符匹配</strong>，如public 表示匹配公有方法</li>
-<li><code>ret-type-pattern</code> <strong>返回值匹配</strong>，<code>*</code> 表示任何返回值，全路径的类名等</li>
-<li><code>declaring-type-pattern?</code> 类路径匹配</li>
-<li><code>name-pattern</code> 方法名匹配，<code>*</code>代表所有,<code>set*</code>代表以set开头的所有方法</li>
-<li><code>(param-pattern)</code>参数匹配，指定方法参数(声明的类型),<br><code>(..)</code>代表所有参数,<br><code>(*)</code>代表一个参数,<br><code>(*,String)</code>代表第一个参数为任何值,第二个为String类型.</li>
-<li><code>throws-pattern?</code> 异常类型匹配</li>
-</ul>
-<p><strong>例子</strong></p>
-<ul>
-<li>execution(public * *(..)) 定义任意公共方法的执行</li>
-<li>execution(* set*(..)) 定义任何一个以”set”开始的方法的执行</li>
-<li>execution(* com.xyz.service.AccountService.*(..)) 定义AccountService 接口的任意方法的执行</li>
-<li>execution(* com.xyz.service.<em>.</em>(..)) 定义在service包里的任意方法的执行</li>
-<li>execution(* com.xyz.service ..<em>.</em>(..)) 定义在service包和所有子包里的任意类的任意方法的执行</li>
-<li>execution(* com.test.spring.aop.pointcutexp…JoinPointObjP2.*(…)) 定义在pointcutexp包和所有子包里的JoinPointObjP2类的任意方法的执行：</li>
-</ul>
-<p><strong>AspectJ类型匹配的通配符：</strong></p>
-<ul>
-<li><code>*</code>匹配任何数量字符； </li>
-<li><code>..</code>匹配任何数量字符的重复，如在类型模式中匹配任何数量子包；而在方法参数模式中匹配任何数量参数。</li>
-<li><code>+</code>匹配指定类型的子类型；仅能作为后缀放在类型模式后边 。</li>
-</ul>
-<p>如：</p>
-<ul>
-<li><code>java.lang.String</code>匹配String类型；</li>
-<li><code>java.*.String</code>匹配java包下的任何“一级子包”下的String类型；如匹配<code>java.lang.String</code>，但不匹配<code>java.lang.ss.String</code></li>
-<li><code>java..*</code> 匹配java包及任何子包下的任何类型; 如匹配<code>java.lang.String</code>、<code>java.lang.annotation.Annotation</code></li>
-<li><code>java.lang.*ing</code>匹配任何java.lang包下的以ing结尾的类型；</li>
-<li><code>java.lang.Number+</code>匹配java.lang包下的任何Number的自类型；如匹配java.lang.Integer，也匹配java.math.BigIntege</li>
-</ul>
-<h3 id="Aspect"><a href="#Aspect" class="headerlink" title="@Aspect"></a>@Aspect</h3><p> 定义切面类</p>
-<h3 id="Before"><a href="#Before" class="headerlink" title="@Before"></a>@Before</h3><p>用@Before标识的方法为前置方法，在目标方法的执行之前执行，即在连接点之前进行执行。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(value = &quot;pointcut1()&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(JoinPoint joinPoint)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//输出连接点的信息</span></span><br><span class="line">    System.out.println(<span class="string">&quot;前置通知，&quot;</span> + joinPoint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="After"><a href="#After" class="headerlink" title="@After"></a>@After</h3><p>后置方法在连接点方法完成之后执行，无论连接点方法执行成功还是出现异常，都将执行后置方法。</p>
-<h3 id="AfterReturning"><a href="#AfterReturning" class="headerlink" title="@AfterReturning"></a>@AfterReturning</h3><p>当连接点方法成功执行后，返回通知方法才会执行，如果连接点方法出现异常，则返回通知方法不执行。返回通知方法在目标方法执行成功后才会执行，所以，返回通知方法可以拿到目标方法(连接点方法)执行后的结果。</p>
-<h3 id="AfterThrowing"><a href="#AfterThrowing" class="headerlink" title="@AfterThrowing"></a>@AfterThrowing</h3><p>异常通知方法只在连接点方法出现异常后才会执行，否则不执行。在异常通知方法中可以获取连接点方法出现的异常。在切面类中异常通知方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing(value = &quot;pointcut1()&quot;, throwing = &quot;e&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(JoinPoint joinPoint, Exception e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//发生异常之后输出异常信息</span></span><br><span class="line">    System.out.println(joinPoint + <span class="string">&quot;,发生异常：&quot;</span> + e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Around"><a href="#Around" class="headerlink" title="@Around"></a>@Around</h3><p>环绕通知方法可以包含上面四种通知方法，环绕通知的功能最全面。环绕通知需要携带<code>ProceedingJoinPoint</code>类型的参数，且环绕通知必须有返回值, 返回值即为目标方法的返回值。在切面类中创建环绕通知方法，示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;execution(public int lzj.com.spring.aop.ArithmeticCalculator.*(int, int))&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">aroundMethod</span><span class="params">(ProceedingJoinPoint pdj)</span></span>&#123;</span><br><span class="line">        <span class="comment">/*result为连接点的放回结果*/</span></span><br><span class="line">        Object result = <span class="keyword">null</span>;</span><br><span class="line">        String methodName = pdj.getSignature().getName();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*前置通知方法*/</span></span><br><span class="line">        System.out.println(<span class="string">&quot;前置通知方法&gt;目标方法名：&quot;</span> + methodName + <span class="string">&quot;,参数为：&quot;</span> + Arrays.asList(pdj.getArgs()));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*执行目标方法*/</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            result = pdj.proceed();</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*返回通知方法*/</span></span><br><span class="line">            System.out.println(<span class="string">&quot;返回通知方法&gt;目标方法名&quot;</span> + methodName + <span class="string">&quot;,返回结果为：&quot;</span> + result);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="comment">/*异常通知方法*/</span></span><br><span class="line">            System.out.println(<span class="string">&quot;异常通知方法&gt;目标方法名&quot;</span> + methodName + <span class="string">&quot;,异常为：&quot;</span> + e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*后置通知*/</span></span><br><span class="line">        System.out.println(<span class="string">&quot;后置通知方法&gt;目标方法名&quot;</span> + methodName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h2><h3 id="EnableTransactionManagement"><a href="#EnableTransactionManagement" class="headerlink" title="@EnableTransactionManagement"></a>@EnableTransactionManagement</h3><p>开启基于注解的事务管理功能</p>
-<p>注解原理：</p>
-<p><code>@EnableXXX</code>原理：注解上有个<code>XXXRegistrar</code>，或通过<code>XXXSelector</code>引入<code>XXXRegistrar</code>，<code>XXXRegistrar</code>实现了<br><code>ImportBeanDefinitionRegistrar</code>的<code>registerBeanDefinitions</code>方法，给容器注册<code>XXXCreator</code>。这个Creator实现了后置处理器， 后置处理器在对象创建以后，包装对象，返回一个代理对象，代理对象执行方法利用拦截器链进行调用。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">* <span class="number">1</span>）、@EnableTransactionManagement</span><br><span class="line">*        利用TransactionManagementConfigurationSelector给容器中会导入组件</span><br><span class="line">*        导入两个组件</span><br><span class="line">*        AutoProxyRegistrar</span><br><span class="line">*        ProxyTransactionManagementConfiguration</span><br><span class="line">* <span class="number">2</span>）、AutoProxyRegistrar：</span><br><span class="line">*        给容器中注册一个 InfrastructureAdvisorAutoProxyCreator 组件；</span><br><span class="line">*        利用后置处理器机制在对象创建以后，包装对象，返回一个代理对象（增强器），代理对象执行方法利用拦截器链进行调用；</span><br><span class="line">* <span class="number">3</span>）、ProxyTransactionManagementConfiguration是个@Configuration</span><br><span class="line">*        <span class="number">1</span>、给容器中注册事务增强器transactionAdvisor；</span><br><span class="line">*           <span class="number">1</span>）、事务增强器要用事务注解的信息，AnnotationTransactionAttributeSource解析事务注解</span><br><span class="line">*           <span class="number">2</span>）、事务拦截器transactionInterceptor：</span><br><span class="line">*              TransactionInterceptor；保存了事务属性信息，事务管理器；</span><br><span class="line">*              TransactionInterceptor是一个 MethodInterceptor；</span><br><span class="line">*              在目标方法执行的时候；</span><br><span class="line">*                 执行拦截器链；</span><br><span class="line">*                 只有事务拦截器：</span><br><span class="line">*                    <span class="number">1</span>）、先获取事务相关的属性</span><br><span class="line">*                    <span class="number">2</span>）、再获取PlatformTransactionManager，如果事先没有添加指定任何transactionmanger</span><br><span class="line">*                       最终会从容器中按照类型获取一个PlatformTransactionManager；</span><br><span class="line">*                    <span class="number">3</span>）、执行目标方法</span><br><span class="line">*                       如果异常，获取到事务管理器，利用事务管理回滚操作；</span><br><span class="line">*                       如果正常，利用事务管理器，提交事务</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Transactional"><a href="#Transactional" class="headerlink" title="@Transactional"></a>@Transactional</h3><p><code>@Target(&#123; ElementType.METHOD, ElementType.TYPE &#125;)</code>可以标注在类上，以及方法上</p>
-<p><code>@Transactional</code>注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。<br>系统设计：将标签放置在需要进行事务管理的方法上，而不是放在所有接口实现类上：只读的接口就不需要事务管理，由于配置了<code>@Transactional</code>就需要AOP拦截及事务的处理，可能影响系统性能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Transactional &#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@AliasFor(&quot;transactionManager&quot;)</span></span><br><span class="line">	<span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@AliasFor(&quot;value&quot;)</span></span><br><span class="line">	<span class="function">String <span class="title">transactionManager</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function">Propagation <span class="title">propagation</span><span class="params">()</span> <span class="keyword">default</span> Propagation.REQUIRED</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function">Isolation <span class="title">isolation</span><span class="params">()</span> <span class="keyword">default</span> Isolation.DEFAULT</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">timeout</span><span class="params">()</span> <span class="keyword">default</span> TransactionDefinition.TIMEOUT_DEFAULT</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">readOnly</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line"></span><br><span class="line">	Class&lt;? extends Throwable&gt;[] rollbackFor() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	String[] rollbackForClassName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	Class&lt;? extends Throwable&gt;[] noRollbackFor() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	String[] noRollbackForClassName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>propagation属性</strong>：事务的传播行为，一个事务方法被另外一个事务方法调用时，当前的事务如何使用事务.，属性的内容主要先择在一下的Propagation的枚举类中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. TransactionDefinition.PROPAGATION_REQUIRED：</span><br><span class="line">   如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。这是默认值。</span><br><span class="line"> </span><br><span class="line">2. TransactionDefinition.PROPAGATION_REQUIRES_NEW：</span><br><span class="line">   创建一个新的事务，如果当前存在事务，则把当前事务挂起。</span><br><span class="line"> </span><br><span class="line">3. TransactionDefinition.PROPAGATION_SUPPORTS：</span><br><span class="line">   如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。</span><br><span class="line"> </span><br><span class="line">4. TransactionDefinition.PROPAGATION_NOT_SUPPORTED：</span><br><span class="line">   以非事务方式运行，如果当前存在事务，则把当前事务挂起。</span><br><span class="line"> </span><br><span class="line">5. TransactionDefinition.PROPAGATION_NEVER：</span><br><span class="line">   以非事务方式运行，如果当前存在事务，则抛出异常。</span><br><span class="line"> </span><br><span class="line">6. TransactionDefinition.PROPAGATION_MANDATORY：</span><br><span class="line">   如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。</span><br><span class="line"> </span><br><span class="line">7. TransactionDefinition.PROPAGATION_NESTED：</span><br><span class="line">   如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；</span><br><span class="line">   如果当前没有事务，则该取值等价于TransactionDefinition.PROPAGATION_REQUIRED。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>isolation属性</strong>：事务的隔离级别，也在<code>org.springframework.transaction.annotation.Isolation</code>枚举类中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Isolation</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**数据库的默认级别*/</span></span><br><span class="line">	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**读未提交      脏读*/</span></span><br><span class="line">	READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**读已提交  不可重复读（update）*/</span></span><br><span class="line">	READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**可重复读      幻读（插入操作）*/</span></span><br><span class="line">	REPEATABLE_READ(TransactionDefinition.ISOLATION_REPEATABLE_READ),</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/** 串行化         效率低*/</span></span><br><span class="line">	SERIALIZABLE(TransactionDefinition.ISOLATION_SERIALIZABLE);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> value;</span><br><span class="line"> </span><br><span class="line">	Isolation(<span class="keyword">int</span> value) &#123; <span class="keyword">this</span>.value = value; &#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.value; &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>timeout：事物的超时时间，设置事务在强制回滚之前可以占用的时间，默认为-1，不超时，单位为s（测试为单位s）</strong></p>
-<p><strong>readOnly：是否只读</strong></p>
-<ol>
-<li><code>true</code>:  只读 ；代表着只会对数据库进行读取操作， 不会有修改的操作，如果确保当前的事务只有读取操作，就有必要设置为只读，可以帮助数据库，引擎优化事务</li>
-<li><code>false</code>: 非只读  不仅会读取数据还会有修改操作</li>
-</ol>
-<h2 id="扩展原理"><a href="#扩展原理" class="headerlink" title="扩展原理"></a>扩展原理</h2><p><code>BeanFactoryPostProcessor</code>是<code>beanFactory</code>的后置处理器，在BeanFactory标准初始化之后调用，所有的bean定义已经保存加载到beanFactory，但是bean实例还未创建。</p>
-<h3 id="BeanFactoryPostProcessor原理"><a href="#BeanFactoryPostProcessor原理" class="headerlink" title="BeanFactoryPostProcessor原理"></a>BeanFactoryPostProcessor原理</h3><ol>
-<li><p>ioc容器创建对象</p>
-</li>
-<li><p>invokeBeanFactoryPostProcessors(beanFactory)</p>
-<p>如何找到所有的<code>BeanFactoryPostProcessor</code>并执行他们的方法：</p>
-</li>
-</ol>
-<p>1）直接在BeanFactory中找到所有类型是BeanFactoryPostProcessor的组件，并执行他们的方法</p>
-<p>2）在初始化创建其他组件前面执行</p>
-<h3 id="BeanDefinitionRegistryPostProcessor"><a href="#BeanDefinitionRegistryPostProcessor" class="headerlink" title="BeanDefinitionRegistryPostProcessor"></a>BeanDefinitionRegistryPostProcessor</h3><p>BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanDefinitionRegistryPostProcessor</span> <span class="keyword">extends</span> <span class="title">BeanFactoryPostProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Modify the application context&#x27;s internal bean definition registry after its</span></span><br><span class="line"><span class="comment">	 * standard initialization. All regular bean definitions will have been loaded,</span></span><br><span class="line"><span class="comment">	 * but no beans will have been instantiated yet. This allows for adding further</span></span><br><span class="line"><span class="comment">	 * bean definitions before the next post-processing phase kicks in.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> registry the bean definition registry used by the application context</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> org.springframework.beans.BeansException in case of errors</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">postProcessBeanDefinitionRegistry</span><span class="params">(BeanDefinitionRegistry registry)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>postProcessBeanDefinitionRegistry()</code>；在所有bean定义信息将要被加载，bean实例还未创建的时候调用</p>
-<p>优于<code>BeanFactoryPostProcessor</code>执行</p>
-<p>利用<code>BeanDefinitionRegistryPostProcessor</code>给容器再额外添加一些组件</p>
-<p>原理：</p>
-<p>1）ioc创建对象</p>
-<p>2）refresh() -》invokeBeanFactoryPostProcessors(beanFactory)</p>
-<p>3）从容器或获取到所有的BeanDefinitionRegistryPostProcessor组件。依次触发所有的postProcessBeanDefinitionRegistry()方法 ，再触发postProcessBeanFactory方法BeanFactoryPostProcessor</p>
-<p>4）再从容器中找到BeanFactoryPostProcessor组件，然后依次触发postProcessBeanFactory()方法</p>
-<h3 id="ApplicationListener"><a href="#ApplicationListener" class="headerlink" title="ApplicationListener"></a>ApplicationListener</h3><p><code>ApplicationListener</code>：监听容器中发布的事件。事件驱动模型开发</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplicationListener</span>&lt;<span class="title">E</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>监听ApplicationEvent及其下面的子事件</p>
-<p>步骤：</p>
-<p>1）写一个监听器来监听某个事件（ApplicationEvent及其子类）</p>
-<p>2）把监听器加入到容器中</p>
-<p>3）只要容器中有相关的事件发布，我们就能监听到这个事件</p>
-<p>​        <code>ContextRefreshedEvent</code>：容器刷新完成（所有Bean都完全创建）会发布这个事件</p>
-<p>​        <code>ContextClosedEvent</code>：关闭容器会发布这个事件</p>
-<p>4）发布一个事件：</p>
-<p>​        <code>applicationContext.publishEvent();</code></p>
 
       
     </div>
