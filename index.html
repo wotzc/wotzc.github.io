@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -162,7 +162,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,153 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/23/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">策略模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 16:11:57" itemprop="dateCreated datePublished" datetime="2023-12-23T16:11:57+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-25 08:59:33" itemprop="dateModified" datetime="2023-12-25T08:59:33+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="模式动机"><a href="#模式动机" class="headerlink" title="模式动机"></a>模式动机</h2><p>在策略模式中定义了一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式。策略模式是一种对象行为型模式。</p>
+<p>在软件开发中也常常遇到类似的情况，实现某一个功能有多个途径，此时可以使用一种设计模式来使得系统可以灵活地选择解决途径，也能够方便地增加新的解决途径。</p>
+<p>在软件系统中，有许多算法可以实现某一功能，如查找、排序等，一种常用的方法是硬编码(Hard Coding)在一个类中，如需要提供多种查找算法，可以将这些算法写到一个类中，在该类中提供多个方法，每一个方法对应一个具体的查找算法；当然也可以将这些查找算法封装在一个统一的方法中，通过if…else…等条件判断语句来进行选择。这两种实现方法我们都可以称之为硬编码，如果需要增加一种新的查找算法，需要修改封装算法类的源代码；更换查找算法，也需要修改客户端调用代码。在这个算法类中封装了大量查找算法，该类代码将较复杂，维护较为困难。</p>
+<p>除了提供专门的查找算法类之外，还可以在客户端程序中直接包含算法代码，这种做法更不可取，将导致客户端程序庞大而且难以维护，如果存在大量可供选择的算法时问题将变得更加严重。</p>
+<p>为了解决这些问题，可以定义一些独立的类来封装不同的算法，每一个类封装一个具体的算法，在这里，每一个封装算法的类我们都可以称之为策略(<code>Strategy</code>)，为了保证这些策略的一致性，一般会用一个抽象的策略类来做算法的定义，而具体每种算法则对应于一个具体策略类。</p>
+<h2 id="真实世界类比"><a href="#真实世界类比" class="headerlink" title="真实世界类比"></a>真实世界类比</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/strategy-comic-1-zh-2x.png" style="zoom:50%;" />
+
+<p>假如你需要前往机场。 你可以选择乘坐公共汽车、 预约出租车或骑自行车。 这些就是你的出行策略。 你可以根据预算或时间等因素来选择其中一种策略。</p>
+<h2 id="策略模式结构"><a href="#策略模式结构" class="headerlink" title="策略模式结构"></a>策略模式结构</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/strategy-pattern-struct.png" style="zoom: 50%;" />
+
+<ol>
+<li><strong>上下文</strong> （Context） 维护指向具体策略的引用， 且仅通过策略接口与该对象进行交流。</li>
+<li><strong>策略</strong> （Strategy） 接口是所有具体策略的通用接口， 它声明了一个上下文用于执行策略的方法。</li>
+<li><strong>具体策略</strong> （Concrete Strategies） 实现了上下文所用算法的各种不同变体。</li>
+<li>当上下文需要运行算法时， 它会在其已连接的策略对象上调用执行方法。 上下文不清楚其所涉及的策略类型与算法的执行方式。</li>
+<li><strong>客户端</strong> （Client） 会创建一个特定策略对象并将其传递给上下文。 上下文则会提供一个设置器以便客户端在运行时替换相关联的策略。</li>
+</ol>
+<h2 id="现实中的例子"><a href="#现实中的例子" class="headerlink" title="现实中的例子"></a>现实中的例子</h2><div class="note info no-icon"><p>某商场在618期间推出多种促销活动，在618活动前期使用立减促销的策略，在618活动中期采用满减促销的策略，在618活动后期采用返现促销的策略。</p>
+</div>
+
+<h2 id="程序化示例"><a href="#程序化示例" class="headerlink" title="程序化示例"></a>程序化示例</h2><p>我们先介绍一下促销策略接口及其实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 促销</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doPromotion</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FanXianStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPromotion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;返现促销！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LiJianStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPromotion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;立减促销！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManJianStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPromotion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;满减促销！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是强大的活动类，他可以根据618时间节点选择促销策略。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Strategy strategy;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Activity</span><span class="params">(Strategy strategy)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">executeStrategy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        strategy.doPromotion();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        LiJianStrategy liJianStrategy = <span class="keyword">new</span> LiJianStrategy();</span><br><span class="line">        Activity activity618 = <span class="keyword">new</span> Activity(liJianStrategy);</span><br><span class="line">        activity618.executeStrategy();</span><br><span class="line"></span><br><span class="line">        ManJianStrategy manJianStrategy = <span class="keyword">new</span> ManJianStrategy();</span><br><span class="line">        activity618.setStrategy(manJianStrategy);</span><br><span class="line">        activity618.executeStrategy();</span><br><span class="line"></span><br><span class="line">        FanXianStrategy fanXianStrategy = <span class="keyword">new</span> FanXianStrategy();</span><br><span class="line">        activity618.setStrategy(fanXianStrategy);</span><br><span class="line">        activity618.executeStrategy();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">立减促销！</span><br><span class="line">满减促销！</span><br><span class="line">返现促销！</span><br></pre></td></tr></table></figure>
+
+<p>UML：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/assets_-LWJYTjaWpc4_WfP8Kq__-LdZ9gEHvPQcz52n4K7B_-LdZ9hFdGXFide-o-RzQ_strategy-pattern.webp" style="zoom:50%;" />
+
+<h2 id="策略模式适合应用场景"><a href="#策略模式适合应用场景" class="headerlink" title="策略模式适合应用场景"></a>策略模式适合应用场景</h2><ul>
+<li>当你想使用对象中各种不同的算法变体，并希望能在运行时切换算法时，可使用策略模式。（策略模式让你能够将对象关联至可以不同方式执行特定子任务的不同子对象， 从而以间接方式在运行时更改对象行为。）</li>
+<li>当你有许多仅在执行某些行为时略有不同的相似类时， 可使用策略模式。（策略模式让你能将不同行为抽取到一个独立类层次结构中， 并将原始类组合成同一个， 从而减少重复代码。）</li>
+<li>如果算法在上下文的逻辑中不是特别重要，使用该模式能将类的业务逻辑与其算法实现细节隔离开来。（策略模式让你能将各种算法的代码、 内部数据和依赖关系与其他代码隔离开来。 不同客户端可通过一个简单接口执行算法， 并能在运行时进行切换。）</li>
+<li>当类中使用了复杂条件运算符以在同一算法的不同变体中切换时， 可使用该模式。（策略模式将所有继承自同样接口的算法抽取到独立类中， 因此不再需要条件语句。 原始对象并不实现所有算法的变体， 而是将执行工作委派给其中的一个独立算法对象。）</li>
+</ul>
+<h2 id="模式分析"><a href="#模式分析" class="headerlink" title="模式分析"></a>模式分析</h2><ul>
+<li>策略模式是一个比较容易理解和使用的设计模式，策略模式是对算法的封装，它把算法的责任和算法本身分割开，委派给不同的对象管理。策略模式通常把一个系列的算法封装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是“准备一组算法，并将每一个算法封装起来，使得它们可以互换”。</li>
+<li>在策略模式中，应当由客户端自己决定在什么情况下使用什么具体策略角色。</li>
+<li>策略模式仅仅封装算法，提供新算法插入到已有系统中，以及老算法从系统中“退休”的方便，策略模式并不决定在何时使用何种算法，算法的选择由客户端来决定。这在一定程度上提高了系统的灵活性，但是客户端需要理解所有具体策略类之间的区别，以便选择合适的算法，这也是策略模式的缺点之一，在一定程度上增加了客户端的使用难度。</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>策略模式提供了对“开闭原则”的完美支持，用户可以在不修改原有系统的基础上选择算法或行为，也可以灵活地增加新的算法或行为。</li>
+<li>策略模式提供了管理相关的算法族的办法。</li>
+<li>策略模式提供了可以替换继承关系的办法。</li>
+<li>使用策略模式可以避免使用多重条件转移语句。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。</li>
+<li>策略模式将造成产生很多策略类，可以通过使用享元模式在一定程度上减少对象的数量。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>在策略模式中定义了一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式。策略模式是一种对象行为型模式。</li>
+<li>策略模式包含三个角色：环境类在解决某个问题时可以采用多种策略，在环境类中维护一个对抽象策略类的引用实例；抽象策略类为所支持的算法声明了抽象方法，是所有策略类的父类；具体策略类实现了在抽象策略类中定义的算法。</li>
+<li>策略模式是对算法的封装，它把算法的责任和算法本身分割开，委派给不同的对象管理。策略模式通常把一个系列的算法封装到一系列的策略类里面，作为一个抽象策略类的子类。</li>
+<li>策略模式主要优点在于对“开闭原则”的完美支持，在不修改原有系统的基础上可以更换算法或者增加新的算法，它很好地管理算法族，提高了代码的复用性，是一种替换继承，避免多重条件转移语句的实现方式；其缺点在于客户端必须知道所有的策略类，并理解其区别，同时在一定程度上增加了系统中类的个数，可能会存在很多策略类。</li>
+<li>策略模式适用情况包括：在一个系统里面有许多类，它们之间的区别仅在于它们的行为，使用策略模式可以动态地让一个对象在许多行为中选择一种行为；一个系统需要动态地在几种算法中选择一种；避免使用难以维护的多重条件选择语句；希望在具体策略类中封装算法和与相关的数据结构。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -218,7 +365,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-12-23 09:46:51 / 修改时间：15:23:41" itemprop="dateCreated datePublished" datetime="2023-12-23T09:46:51+08:00">2023-12-23</time>
+      <time title="创建时间：2023-12-23 09:46:51 / 修改时间：17:30:34" itemprop="dateCreated datePublished" datetime="2023-12-23T09:46:51+08:00">2023-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,7 +422,7 @@
 <li>虚拟代理按需创建昂贵的对象。</li>
 <li>保护代理控制对原始对象的访问。当对象应具有不同访问权限时，保护代理非常有用。</li>
 </ul>
-<h3 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用"></a>已知使用</h3><ul>
+<h4 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用"></a>已知使用</h4><ul>
 <li><code>java.lang.reflect.Proxyopen in new window</code></li>
 <li><code>Apache Commons Proxy</code></li>
 </ul>
@@ -1443,153 +1590,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/25/Optional/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/25/Optional/" class="post-title-link" itemprop="url">Optional</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-09-25 10:29:54" itemprop="dateCreated datePublished" datetime="2023-09-25T10:29:54+08:00">2023-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-29 09:12:18" itemprop="dateModified" datetime="2023-11-29T09:12:18+08:00">2023-11-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java8/" itemprop="url" rel="index"><span itemprop="name">Java8</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><div class="note info no-icon"><p>“Null sucks.” - Doug Lea</p>
-</div>
-
-<p>Doug Lea 是一位美国的计算机科学家，他是 Java 平台的并发和集合框架的主要设计者之一。他在 2014 年的一篇文章中说过：“Null sucks.”，意思是 null 很糟糕。他认为 null 是一种不明确的表示，它既可以表示一个值不存在，也可以表示一个值未知，也可以表示一个值无效。这样就会导致很多逻辑错误和空指针异常，给程序员带来很多麻烦。他建议使用 Optional 类来封装可能为空的值，从而提高代码的可读性和健壮性。</p>
-<p>null 引用是一种表示一个对象变量没有指向任何对象的方式，它是 Java 语言中的一个特殊值，也是导致空指针异常（NullPointerException）的主要原因。虽然 null 引用可以用来表示一个值不存在或未知，也可以用来节省内存空间。但是它也不符合面向对象的思想，因为它不是一个对象，不能调用任何方法或属性。</p>
-<p>可以看到，null 引用并不好，我们应该尽量避免使用 null，那么我们该怎么避免 null 引用引起的逻辑错误和运行时异常嘞？</p>
-<p>其实这个问题 Java 的设计者也知道，于是他们在 Java8 之后设计引入了 Optional 类解决这个问题，本文将给大家详细介绍下 Optional 类的设计目的以及使用方法。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/optional/java_optional.png"></p>
-<hr>
-<h1 id="Optional-类是什么？"><a href="#Optional-类是什么？" class="headerlink" title="Optional 类是什么？"></a>Optional 类是什么？</h1><p><code>Optional</code> 类是 java 8 中引入的一个新的类，它的作用是封装一个可能为空的值，从而避免空指针异常（<code>NullPointerException</code>）。<code>Optional</code> 类可以看作是一个容器，它可以包含一个非空的值，也可以为空。<code>Optional</code> 类提供了一些方法，让我们可以更方便地处理可能为空的值，而不需要显式地进行空值检查或者使用 null。</p>
-<h1 id="Optional-类的设计"><a href="#Optional-类的设计" class="headerlink" title="Optional 类的设计"></a>Optional 类的设计</h1><p>Optional 类的设计是基于函数式编程的思想，它借鉴了 Scala 和 Haskell 等语言中的 Option 类型。Optional 类实现了 java.util.function 包中的 Supplier、Consumer、Predicate、Function 等接口，这使得它可以和 lambda 表达式或者方法引用一起使用，形成更简洁和优雅的代码。</p>
-<p>Optional 类被 final 修饰，因此它是一个不可变的类，它有两个静态方法用于创建 Optional 对象。</p>
-<h2 id="Optional-empty"><a href="#Optional-empty" class="headerlink" title="Optional.empty()"></a><code>Optional.empty()</code></h2><p><code>Optional.empty</code> 表示一个空的 <code>Optional</code> 对象，它不包含任何值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; empty = Optional.empty();</span><br></pre></td></tr></table></figure>
-
-<h2 id="Optional-of-T-value"><a href="#Optional-of-T-value" class="headerlink" title="Optional.of(T value)"></a><code>Optional.of(T value)</code></h2><p><code>Optional.of</code> 表示一个非空的 <code>Optional</code> 对象，它包含一个非空的值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个非空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; hello = Optional.of(<span class="string">&quot;Hello&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Optional-ofNullable-T-value"><a href="#Optional-ofNullable-T-value" class="headerlink" title="Optional.ofNullable(T value)"></a><code>Optional.ofNullable(T value)</code></h2><p>注意，如果我们使用 <code>Optional.of</code> 方法传入一个 <code>null</code> 值，会抛出 <code>NullPointerException</code>。如果我们不确定一个值是否为空，可以使用 <code>Optional.ofNullable</code> 方法，它会根据值是否为空，返回一个相应的 <code>Optional</code> 对象。例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个可能为空的 Optional 对象</span></span><br><span class="line">Optional&lt;String&gt; name = Optional.ofNullable(<span class="string">&quot;Hello&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="Optional-对象的使用方法"><a href="#Optional-对象的使用方法" class="headerlink" title="Optional 对象的使用方法"></a>Optional 对象的使用方法</h1><p><code>Optional</code> 对象提供了一些方法，让我们可以更方便地处理可能为空的值，而不需要显式地进行空值检查或者使用 <code>null</code>。以下是一些常用的方法。</p>
-<h2 id="isPresent"><a href="#isPresent" class="headerlink" title="isPresent()"></a><code>isPresent()</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line"><span class="keyword">if</span> (personOptional.isPresent()) &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;查询不为空&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;查询为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="get"><a href="#get" class="headerlink" title="get()"></a><code>get()</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则抛出 <code>NoSuchElementException</code> 异常。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line"><span class="keyword">if</span> (personOptional.isPresent()) &#123;</span><br><span class="line">  Person person = personOptional.get();</span><br><span class="line">  System.out.println(person);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;查询为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ifPresent-Consumer-lt-super-T-gt-action"><a href="#ifPresent-Consumer-lt-super-T-gt-action" class="headerlink" title="ifPresent(Consumer&lt;? super T&gt; action)"></a><code>ifPresent(Consumer&lt;? super T&gt; action)</code></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line">personOptional.ifPresent(person -&gt; System.out.println(person.getName()));</span><br></pre></td></tr></table></figure>
-
-<h2 id="orElse-T-other"><a href="#orElse-T-other" class="headerlink" title="orElse(T other)"></a><code>orElse(T other)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则返回给定的默认值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Person&gt; personOptional = daoService.selectOne(person1);</span><br><span class="line">Person person = personOptional.orElse(<span class="keyword">new</span> Person());</span><br></pre></td></tr></table></figure>
-
-<h2 id="orElseGet-Supplier-lt-extends-T-gt-supplier"><a href="#orElseGet-Supplier-lt-extends-T-gt-supplier" class="headerlink" title="orElseGet(Supplier&lt;? extends T&gt; supplier)"></a><code>orElseGet(Supplier&lt;? extends T&gt; supplier)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，返回该值，否则返回由给定的供应者操作生成的值。</p>
-<p>当<code>orElse</code>的参数是间接计算得来的时候，使用<code>orElse</code>可能导致<code>NullPointerException</code>，当<code>orElse</code>的参数是间接计算得来的时候。虽然这种说法有点牵强（因为并不是<code>orElse</code>导致了空指针异常），但是使用<code>orElseGet</code>确实可以避免这种情况。</p>
-<p>两者的明显（也是唯一）区别是前者需要传递的参数是一个值（通常是为空时的默认值），后者传递的是一个函数。我们看一下源代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the value if present, otherwise return &#123;<span class="doctag">@code</span> other&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">orElse</span><span class="params">(T other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value != <span class="keyword">null</span> ? value : other;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the value if present, otherwise invoke &#123;<span class="doctag">@code</span> other&#125; and return</span></span><br><span class="line"><span class="comment"> * the result of that invocation.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">orElseGet</span><span class="params">(Supplier&lt;? extends T&gt; other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value != <span class="keyword">null</span> ? value : other.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>简单解释为，我们使用<code>Optional</code>包装的变量如果不为空，返回它本身，否则返回我们传递进去的值。<code>orElseGet</code>参数为<code>Supplier</code>接口，它是一个函数式接口，它的形式是这样的：<code>() -&gt; &#123; return computedResult &#125;</code>，即<em>入参为空，有返回值（任意类型的）</em>。</p>
-<p>我们可能考虑的问题是：何时使用<code>orElse</code>和何时使用<code>orElseGet</code>？看起来可以使用<code>orElseGet</code>的时候，使用<code>orElse</code>也可以代替（因为<code>Supplier</code>接口没有入参），而且使用<code>orElseGet</code>还需要将计算过程额外包装成一个 lambda 表达式。</p>
-<p>一个关键的点是，使用<code>Supplier</code>能够做到<em>懒计算</em>，即使用<code>orElseGet</code>时。它的好处是，<strong>只有在需要的时候才会计算结果</strong>。具体到我们的场景，使用<code>orElse</code>的时候，每次它都会执行计算结果的过程，而对于<code>orElseGet</code>，只有<code>Optional</code>中的值为空时，它才会计算备选结果。这样做的好处是可以<strong>避免提前计算结果的风险</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Person person2 = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">String orElse = Optional.ofNullable(person1.getName()).orElse(person2.getName()); <span class="comment">// 报错，空指针</span></span><br><span class="line"></span><br><span class="line">String orElseGet = Optional.ofNullable(person1.getName()).orElseGet(() -&gt; person2.getName()); <span class="comment">// 不报错</span></span><br><span class="line"></span><br><span class="line">System.out.println(orElseGet);</span><br></pre></td></tr></table></figure>
-
-<h2 id="map-Function-lt-super-T-extends-U-gt-mapper"><a href="#map-Function-lt-super-T-extends-U-gt-mapper" class="headerlink" title="map(Function&lt;? super T,? extends U&gt; mapper)"></a><code>map(Function&lt;? super T,? extends U&gt; mapper)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，对该值应用给定的映射函数，返回一个包含映射结果的 Optional 对象，否则返回一个空的 <code>Optional</code> 对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Optional&lt;Person&gt; person = Optional.ofNullable(person1);</span><br><span class="line">Optional&lt;String&gt; optionalS = person.map(p -&gt; p.getName().toUpperCase());</span><br><span class="line"><span class="keyword">if</span> (optionalS.isPresent()) &#123;</span><br><span class="line">  String upperName = optionalS.get();</span><br><span class="line">  System.out.println(upperName);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ZHANGSAN</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="flatMap-Function-lt-super-T-Optional-lt-U-gt-gt-mapper"><a href="#flatMap-Function-lt-super-T-Optional-lt-U-gt-gt-mapper" class="headerlink" title="flatMap(Function&lt;? super T,Optional&lt;U&gt;&gt; mapper)"></a><code>flatMap(Function&lt;? super T,Optional&lt;U&gt;&gt; mapper)</code></h2><h3 id="map和flatMap的区别"><a href="#map和flatMap的区别" class="headerlink" title="map和flatMap的区别:"></a>map和flatMap的区别:</h3><p><code>map</code>会将传入的<code>Function</code>函数的结果进行封装，先看源码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, ? extends U&gt; mapper)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(mapper);</span><br><span class="line">    <span class="keyword">if</span> (!isPresent())</span><br><span class="line">        <span class="keyword">return</span> empty();</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(mapper.apply(value));<span class="comment">//会使用Optional的ofNullable方法包装Function函数返回的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>flatMap</code>会直接返回<code>Function</code>函数执行的结果，看源码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">flatMap</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, Optional&lt;U&gt;&gt; mapper)</span> </span>&#123;</span><br><span class="line">    Objects.requireNonNull(mapper);</span><br><span class="line">    <span class="keyword">if</span> (!isPresent())</span><br><span class="line">        <span class="keyword">return</span> empty();</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.requireNonNull(mapper.apply(value));<span class="comment">//直接返回Function执行的结果</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以在使用的时候，下面这段代码会报错。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStudentName</span><span class="params">(School school)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(school)</span><br><span class="line">                .map(School::getTearch)</span><br><span class="line">                .map(Tearch::getStudent)</span><br><span class="line">                .map(Student::getName)</span><br><span class="line">                .orElse(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而下面这段代码不会报错。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStudentName</span><span class="params">(School school)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(school)</span><br><span class="line">                .flatMap(School::getTearch)</span><br><span class="line">                .flatMap(Tearch::getStudent)</span><br><span class="line">                .map(Student::getName).orElse(<span class="string">&quot;false&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="filter-Predicate-lt-super-T-gt-predicate"><a href="#filter-Predicate-lt-super-T-gt-predicate" class="headerlink" title="filter(Predicate&lt;? super T&gt; predicate)"></a><code>filter(Predicate&lt;? super T&gt; predicate)</code></h2><p>如果 <code>Optional</code> 对象包含一个非空的值，并且该值满足给定的谓词条件，返回包含该值的 <code>Optional</code> 对象，否则返回一个空的 <code>Optional</code> 对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.setName(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">Optional&lt;Person&gt; optionalPerson = Optional.of(person1);</span><br><span class="line">Optional&lt;Person&gt; optional = optionalPerson.filter(person -&gt; <span class="string">&quot;ZHANGSAN&quot;</span>.equals(person.getName()));)</span><br><span class="line"><span class="keyword">if</span> (optional.isPresent())&#123;</span><br><span class="line">	System.out.println(optional);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;optional为空&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
