@@ -151,18 +151,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,760 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/03/Java%E5%BA%94%E7%94%A8%E8%AF%8A%E6%96%AD%E5%88%A9%E5%99%A8Arthas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/03/Java%E5%BA%94%E7%94%A8%E8%AF%8A%E6%96%AD%E5%88%A9%E5%99%A8Arthas/" class="post-title-link" itemprop="url">Arthas基础教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-03 16:18:54" itemprop="dateCreated datePublished" datetime="2024-01-03T16:18:54+08:00">2024-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-05 09:20:52" itemprop="dateModified" datetime="2024-01-05T09:20:52+08:00">2024-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">Java诊断工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Arthas 是一款线上监控诊断产品，通过全局视角实时查看应用 load、内存、gc、线程的状态信息，并能在不修改应用代码的情况下，对业务问题进行诊断，包括查看方法调用的出入参、异常，监测方法执行耗时，类加载信息等，大大提升线上问题排查效率。</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>通常，本地开发环境无法访问生产环境。如果在生产环境中遇到问题，则无法使用 IDE 远程调试。更糟糕的是，在生产环境中调试是不可接受的，因为它会暂停所有线程，导致服务暂停。</p>
+<p>开发人员可以尝试在测试环境或者预发环境中复现生产环境中的问题。但是，某些问题无法在不同的环境中轻松复现，甚至在重新启动后就消失了。</p>
+<p>如果您正在考虑在代码中添加一些日志以帮助解决问题，您将必须经历以下阶段：测试、预发，然后生产。这种方法效率低下，更糟糕的是，该问题可能无法解决，因为一旦 JVM 重新启动，它可能无法复现，如上文所述。</p>
+<p>Arthas 旨在解决这些问题。开发人员可以在线解决生产问题。无需 JVM 重启，无需代码更改。 Arthas 作为观察者永远不会暂停正在运行的线程。</p>
+<h1 id="Arthas（阿尔萨斯）能为你做什么？"><a href="#Arthas（阿尔萨斯）能为你做什么？" class="headerlink" title="Arthas（阿尔萨斯）能为你做什么？"></a>Arthas（阿尔萨斯）能为你做什么？</h1><p><code>Arthas</code> 是 Alibaba 开源的 Java 诊断工具，深受开发者喜爱。</p>
+<p>当你遇到以下类似问题而束手无策时，<code>Arthas</code>可以帮助你解决：</p>
+<ol>
+<li>这个类从哪个 jar 包加载的？为什么会报各种类相关的 Exception？</li>
+<li>我改的代码为什么没有执行到？难道是我没 commit？分支搞错了？</li>
+<li>遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？</li>
+<li>线上遇到某个用户的数据处理有问题，但线上同样无法 debug，线下无法重现！</li>
+<li>是否有一个全局视角来查看系统的运行状况？</li>
+<li>有什么办法可以监控到 JVM 的实时运行状态？</li>
+<li>怎么快速定位应用的热点，生成火焰图？</li>
+<li>怎样直接从 JVM 内查找某个类的实例？</li>
+</ol>
+<p><code>Arthas</code> 支持 JDK 6+，支持 Linux/Mac/Windows，采用命令行交互模式，同时提供丰富的 <code>Tab</code> 自动补全功能，进一步方便进行问题的定位和诊断。</p>
+<h1 id="安装启动Arthas"><a href="#安装启动Arthas" class="headerlink" title="安装启动Arthas"></a>安装启动Arthas</h1><p>在命令行下面执行（使用和目标进程一致的用户启动，否则可能 attach 失败）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://arthas.aliyun.com/arthas-boot.jar</span><br><span class="line">java -jar arthas-boot.jar</span><br></pre></td></tr></table></figure>
+
+<p>如果下载速度比较慢，可以使用 aliyun 的镜像：<code>java -jar arthas-boot.jar --repo-mirror aliyun --use-http</code></p>
+<p>选择应用 java 进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ $ java -jar arthas-boot.jar</span><br><span class="line">* [1]: 35542</span><br><span class="line">  [2]: 71560 math-game.jar</span><br></pre></td></tr></table></figure>
+
+<p><code>math-game</code>进程是第 2 个，则输入 2，再输入<code>回车/enter</code>。Arthas 会 attach 到目标进程上，并输出日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[INFO] Try to attach process 71560</span><br><span class="line">[INFO] Attach process 71560 success.</span><br><span class="line">[INFO] arthas-client connect 127.0.0.1 3658</span><br><span class="line">  ,---.  ,------. ,--------.,--.  ,--.  ,---.   ,---.</span><br><span class="line"> /  O  \ |  .--. <span class="string">&#x27;&#x27;</span>--.  .--<span class="string">&#x27;|  &#x27;</span>--<span class="string">&#x27;  | /  O  \ &#x27;</span>   .-<span class="string">&#x27;</span></span><br><span class="line"><span class="string">|  .-.  ||  &#x27;</span>--<span class="string">&#x27;.&#x27;</span>   |  |   |  .--.  ||  .-.  |`.  `-.</span><br><span class="line">|  | |  ||  |\  \    |  |   |  |  |  ||  | |  |.-<span class="string">&#x27;    |</span></span><br><span class="line"><span class="string">`--&#x27;</span> `--<span class="string">&#x27;`--&#x27;</span> <span class="string">&#x27;--&#x27;</span>   `--<span class="string">&#x27;   `--&#x27;</span>  `--<span class="string">&#x27;`--&#x27;</span> `--<span class="string">&#x27;`-----&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wiki: https://arthas.aliyun.com/doc</span><br><span class="line">version: 3.0.5.20181127201536</span><br><span class="line">pid: 71560</span><br><span class="line">time: 2018-11-28 19:16:24</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="表达式核心变量"><a href="#表达式核心变量" class="headerlink" title="表达式核心变量"></a>表达式核心变量</h1><p>无论是匹配表达式也好、观察表达式也罢，他们核心判断变量都是围绕着一个 Arthas 中的通用通知对象 <code>Advice</code> 进行。</p>
+<p>它的简略代码结构如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Advice</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ClassLoader loader;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Class&lt;?&gt; clazz;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ArthasMethod method;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object[] params;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object returnObj;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Throwable throwExp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> isBefore;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> isThrow;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> isReturn;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getter/setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里列一个表格来说明不同变量的含义</p>
+<table>
+<thead>
+<tr>
+<th align="right">变量名</th>
+<th align="left">变量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"><code>loader</code></td>
+<td align="left">本次调用类所在的 <code>ClassLoader</code></td>
+</tr>
+<tr>
+<td align="right"><code>clazz</code></td>
+<td align="left">本次调用类的 <code>Class</code> 引用</td>
+</tr>
+<tr>
+<td align="right"><code>method</code></td>
+<td align="left">本次调用方法反射引用</td>
+</tr>
+<tr>
+<td align="right"><code>target</code></td>
+<td align="left">本次调用类的实例</td>
+</tr>
+<tr>
+<td align="right"><code>params</code></td>
+<td align="left">本次调用参数列表，这是一个数组，如果方法是无参方法则为空数组</td>
+</tr>
+<tr>
+<td align="right"><code>returnObj</code></td>
+<td align="left">本次调用返回的对象。当且仅当 <code>isReturn==true</code> 成立时候有效，表明方法调用是以正常返回的方式结束。如果当前方法无返回值 <code>void</code>，则值为 null</td>
+</tr>
+<tr>
+<td align="right"><code>throwExp</code></td>
+<td align="left">本次调用抛出的异常。当且仅当 <code>isThrow==true</code> 成立时有效，表明方法调用是以抛出异常的方式结束。</td>
+</tr>
+<tr>
+<td align="right"><code>isBefore</code></td>
+<td align="left">辅助判断标记，当前的通知节点有可能是在方法一开始就通知，此时 <code>isBefore==true</code> 成立，同时 <code>isThrow==false</code> 和 <code>isReturn==false</code>，因为在方法刚开始时，还无法确定方法调用将会如何结束。</td>
+</tr>
+<tr>
+<td align="right"><code>isThrow</code></td>
+<td align="left">辅助判断标记，当前的方法调用以抛异常的形式结束。</td>
+</tr>
+<tr>
+<td align="right"><code>isReturn</code></td>
+<td align="left">辅助判断标记，当前的方法调用以正常返回的形式结束。</td>
+</tr>
+</tbody></table>
+<p>所有变量都可以在表达式中直接使用，如果在表达式中编写了不符合 OGNL 脚本语法或者引入了不在表格中的变量，则退出命令的执行；用户可以根据当前的异常信息修正<code>条件表达式</code>或<code>观察表达式</code>。</p>
+<ul>
+<li>特殊用法请参考：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71在新窗口打开</a></li>
+<li>OGNL 表达式官网：<a target="_blank" rel="noopener" href="https://commons.apache.org/proper/commons-ognl/language-guide.html">https://commons.apache.org/proper/commons-ognl/language-guide.html</a></li>
+</ul>
+<h1 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h1><h2 id="jvm-相关"><a href="#jvm-相关" class="headerlink" title="jvm 相关"></a>jvm 相关</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/dashboard.html"><code>dashboard</code></a> - 当前系统的实时数据面板</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/getstatic.html"><code>getstatic</code></a> - 查看类的静态属性</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/heapdump.html"><code>heapdump</code></a> - dump java heap, 类似 jmap 命令的 heap dump 功能</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/jvm.html"><code>jvm</code></a> - 查看当前 JVM 的信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/logger.html"><code>logger</code></a> - 查看和修改 logger</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/mbean.html"><code>mbean</code></a> - 查看 Mbean 的信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/memory.html"><code>memory</code></a> - 查看 JVM 的内存信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/ognl.html"><code>ognl</code></a> - 执行 ognl 表达式</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/perfcounter.html"><code>perfcounter</code></a> - 查看当前 JVM 的 Perf Counter 信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/sysenv.html"><code>sysenv</code></a> - 查看 JVM 的环境变量</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/sysprop.html"><code>sysprop</code></a> - 查看和修改 JVM 的系统属性</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/thread.html"><code>thread</code></a> - 查看当前 JVM 的线程堆栈信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/vmoption.html"><code>vmoption</code></a> - 查看和修改 JVM 里诊断相关的 option</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/vmtool.html"><code>vmtool</code></a> - 从 jvm 里查询对象，执行 forceGc</li>
+</ul>
+<h2 id="class-classloader-相关"><a href="#class-classloader-相关" class="headerlink" title="class/classloader 相关"></a>class/classloader 相关</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/classloader.html"><code>classloader</code></a> - 查看 classloader 的继承树，urls，类加载信息，使用 classloader 去 getResource</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/dump.html"><code>dump</code></a> - dump 已加载类的 byte code 到特定目录</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/jad.html"><code>jad</code></a> - 反编译指定已加载类的源码</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/mc.html"><code>mc</code></a> - 内存编译器，内存编译<code>.java</code>文件为<code>.class</code>文件</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/redefine.html"><code>redefine</code></a> - 加载外部的<code>.class</code>文件，redefine 到 JVM 里</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/retransform.html"><code>retransform</code></a> - 加载外部的<code>.class</code>文件，retransform 到 JVM 里</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/sc.html"><code>sc</code></a> - 查看 JVM 已加载的类信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/sm.html"><code>sm</code></a> - 查看已加载类的方法信息</li>
+</ul>
+<h2 id="monitor-watch-trace-相关"><a href="#monitor-watch-trace-相关" class="headerlink" title="monitor/watch/trace 相关"></a>monitor/watch/trace 相关</h2><details class="note warning no-icon"><summary><p>注意</p>
+</summary>
+<p>请注意，这些命令，都通过字节码增强技术来实现的，会在指定类的方法中插入一些切面来实现数据统计和观测，因此在线上、预发使用时，请尽量明确需要观测的类、方法以及条件，诊断结束要执行 <code>stop</code> 或将增强过的类执行 <code>reset</code> 命令。</p>
+
+</details>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/monitor.html"><code>monitor</code></a> - 方法执行监控</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/stack.html"><code>stack</code></a> - 输出当前方法被调用的调用路径</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/trace.html"><code>trace</code></a> - 方法内部调用路径，并输出方法路径上的每个节点上耗时</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/tt.html"><code>tt</code></a> - 方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/watch.html"><code>watch</code></a> - 方法执行数据观测</li>
+</ul>
+<h2 id="profiler-火焰图"><a href="#profiler-火焰图" class="headerlink" title="profiler/火焰图"></a>profiler/火焰图</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/profiler.html"><code>profiler</code></a> - 使用<a target="_blank" rel="noopener" href="https://github.com/jvm-profiling-tools/async-profiler">async-profiler在新窗口打开</a>对应用采样，生成火焰图</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/jfr.html"><code>jfr</code></a> - 动态开启关闭 JFR 记录</li>
+</ul>
+<h2 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/auth.html"><code>auth</code></a> - 鉴权</li>
+</ul>
+<h2 id="options"><a href="#options" class="headerlink" title="options"></a>options</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/options.html"><code>options</code></a> - 查看或设置 Arthas 全局开关</li>
+</ul>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>Arthas 支持使用管道对上述命令的结果进行进一步的处理，如<code>sm java.lang.String * | grep &#39;index&#39;</code></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/grep.html"><code>grep</code></a> - 搜索满足条件的结果</li>
+<li>plaintext - 将命令的结果去除 ANSI 颜色</li>
+<li>wc - 按行统计输出结果</li>
+</ul>
+<h2 id="后台异步任务"><a href="#后台异步任务" class="headerlink" title="后台异步任务"></a>后台异步任务</h2><p>当线上出现偶发的问题，比如需要 watch 某个条件，而这个条件一天可能才会出现一次时，异步后台任务就派上用场了，详情请参考<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/async.html">这里</a></p>
+<ul>
+<li>使用 <code>&gt;</code> 将结果重写向到日志文件，使用 <code>&amp;</code> 指定命令是后台运行，session 断开不影响任务执行（生命周期默认为 1 天）</li>
+<li><code>jobs</code> - 列出所有 job</li>
+<li><code>kill</code> - 强制终止任务</li>
+<li><code>fg</code> - 将暂停的任务拉到前台执行</li>
+<li><code>bg</code> - 将暂停的任务放到后台执行</li>
+</ul>
+<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/base64.html"><code>base64</code></a> - base64 编码转换，和 linux 里的 base64 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/cat.html"><code>cat</code></a> - 打印文件内容，和 linux 里的 cat 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/cls.html"><code>cls</code></a> - 清空当前屏幕区域</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/echo.html"><code>echo</code></a> - 打印参数，和 linux 里的 echo 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/grep.html"><code>grep</code></a> - 匹配查找，和 linux 里的 grep 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/help.html"><code>help</code></a> - 查看命令帮助信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/history.html"><code>history</code></a> - 打印命令历史</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/keymap.html"><code>keymap</code></a> - Arthas 快捷键列表及自定义快捷键</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/pwd.html"><code>pwd</code></a> - 返回当前的工作目录，和 linux 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/quit.html"><code>quit</code></a> - 退出当前 Arthas 客户端，其他 Arthas 客户端不受影响</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/reset.html"><code>reset</code></a> - 重置增强类，将被 Arthas 增强过的类全部还原，Arthas 服务端关闭时会重置所有增强过的类</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/session.html"><code>session</code></a> - 查看当前会话的信息</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/stop.html"><code>stop</code></a> - 关闭 Arthas 服务端，所有 Arthas 客户端全部退出</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/tee.html"><code>tee</code></a> - 复制标准输入到标准输出和指定的文件，和 linux 里的 tee 命令类似</li>
+<li><a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/version.html"><code>version</code></a> - 输出当前目标 Java 进程所加载的 Arthas 版本号</li>
+</ul>
+<hr>
+<h1 id="Arthas-基础教程"><a href="#Arthas-基础教程" class="headerlink" title="Arthas 基础教程"></a>Arthas 基础教程</h1><h2 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h2><p><code>dashboard</code> 命令可以查看当前系统的实时数据面板，<code>dashboard</code> 命令可以查看当前系统的实时数据面板。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ dashboard</span><br><span class="line">ID   NAME                           GROUP           PRIORITY   STATE     %CPU      DELTA_TIME TIME      INTERRUPTE DAEMON</span><br><span class="line">-1   C2 CompilerThread0             -               -1         -         1.55      0.077      0:8.684   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">53   Timer-for-arthas-dashboard-07b system          5          RUNNABLE  0.08      0.004      0:0.004   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">22   scheduling-1                   main            5          TIMED_WAI 0.06      0.003      0:0.287   <span class="literal">false</span>      <span class="literal">false</span></span><br><span class="line">-1   C1 CompilerThread0             -               -1         -         0.06      0.003      0:2.171   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">-1   VM Periodic Task Thread        -               -1         -         0.03      0.001      0:0.092   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">49   arthas-NettyHttpTelnetBootstra system          5          RUNNABLE  0.02      0.001      0:0.156   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">16   Catalina-utility-1             main            1          TIMED_WAI 0.0       0.000      0:0.029   <span class="literal">false</span>      <span class="literal">false</span></span><br><span class="line">-1   G1 Young RemSet Sampling       -               -1         -         0.0       0.000      0:0.019   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">17   Catalina-utility-2             main            1          WAITING   0.0       0.000      0:0.025   <span class="literal">false</span>      <span class="literal">false</span></span><br><span class="line">34   http-nio-8080-ClientPoller     main            5          RUNNABLE  0.0       0.000      0:0.016   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">23   http-nio-8080-BlockPoller      main            5          RUNNABLE  0.0       0.000      0:0.011   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">-1   VM Thread                      -               -1         -         0.0       0.000      0:0.032   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">-1   Service Thread                 -               -1         -         0.0       0.000      0:0.006   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">-1   GC Thread<span class="comment">#5                    -               -1         -         0.0       0.000      0:0.043   false      true</span></span><br><span class="line">Memory                     used     total    max      usage    GC</span><br><span class="line">heap                       36M      70M      4096M    0.90%    gc.g1_young_generation.count   12</span><br><span class="line">g1_eden_space              6M       18M      -1       33.33%                                  86</span><br><span class="line">g1_old_gen                 30M      50M      4096M    0.74%    gc.g1_old_generation.count     0</span><br><span class="line">g1_survivor_space          491K     2048K    -1       24.01%   gc.g1_old_generation.time(ms)  0</span><br><span class="line">nonheap                    66M      69M      -1       96.56%</span><br><span class="line">codeheap_<span class="string">&#x27;non-nmethods&#x27;</span>    1M       2M       5M       22.39%</span><br><span class="line">metaspace                  46M      47M      -1       98.01%</span><br><span class="line">Runtime</span><br><span class="line">os.name                                                        Mac OS X</span><br><span class="line">os.version                                                     10.15.4</span><br><span class="line">java.version                                                   15</span><br><span class="line">java.home                                                      /Library/Java/JavaVirtualMachines/jdk-15.jdk/Contents/Home</span><br><span class="line">systemload.average                                             10.68</span><br><span class="line">processors                                                     8</span><br><span class="line">uptime                                                         272s </span><br></pre></td></tr></table></figure>
+
+<p>当运行在 Ali-tomcat 时，会显示当前 tomcat 的实时信息，如 HTTP 请求的 qps, rt, 错误数, 线程池信息等等。</p>
+<h3 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h3><ul>
+<li><code>ID</code>: Java 级别的线程 ID，注意这个 ID 不能跟 jstack 中的 nativeID 一一对应。</li>
+<li><code>NAME</code>: 线程名</li>
+<li><code>GROUP</code>: 线程组名</li>
+<li><code>PRIORITY</code>: 线程优先级，1~10 之间的数字，越大表示优先级越高</li>
+<li><code>STATE</code>: 线程的状态</li>
+<li><code>CPU%</code>: 线程的 cpu 使用率。比如采样间隔 1000ms，某个线程的增量 cpu 时间为 100ms，则 cpu 使用率=100/1000=10%</li>
+<li><code>DELTA_TIME</code>: 上次采样之后线程运行增量 CPU 时间，数据格式为<code>秒</code></li>
+<li><code>TIME</code>: 线程运行总 CPU 时间，数据格式为<code>分:秒</code></li>
+<li><code>INTERRUPTED</code>: 线程当前的中断位状态</li>
+<li><code>DAEMON</code>: 是否是 daemon 线程</li>
+</ul>
+<h3 id="JVM-内部线程"><a href="#JVM-内部线程" class="headerlink" title="JVM 内部线程"></a>JVM 内部线程</h3><p>Java 8 之后支持获取 JVM 内部线程 CPU 时间，这些线程只有名称和 CPU 时间，没有 ID 及状态等信息（显示 ID 为 -1）。 通过内部线程可以观测到 JVM 活动，如 GC、JIT 编译等占用 CPU 情况，方便了解 JVM 整体运行状况。</p>
+<ul>
+<li>当 JVM 堆 (heap)/元数据 (metaspace) 空间不足或 OOM 时，可以看到 GC 线程的 CPU 占用率明显高于其他的线程。</li>
+<li>当执行<code>trace/watch/tt/redefine</code> 等命令后，可以看到 JIT 线程活动变得更频繁。因为 JVM 热更新 class 字节码时清除了此 class 相关的 JIT 编译结果，需要重新编译。</li>
+</ul>
+<p>JVM 内部线程包括下面几种：</p>
+<ul>
+<li>JIT 编译线程：如 <code>C1 CompilerThread0</code> , <code>C2 CompilerThread0</code></li>
+<li>GC 线程：如<code>GC Thread0</code> , <code>G1 Young RemSet Sampling</code></li>
+<li>其它内部线程：如<code>VM Periodic Task Thread</code> , <code>VM Thread</code> , <code>Service Thread</code></li>
+</ul>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">[i:]</td>
+<td align="left">刷新实时数据的时间间隔 (ms)，默认 5000ms</td>
+</tr>
+<tr>
+<td align="right">[n:]</td>
+<td align="left">刷新实时数据的次数</td>
+</tr>
+</tbody></table>
+<h4 id="使用参考"><a href="#使用参考" class="headerlink" title="使用参考:"></a>使用参考:</h4><p>每隔5000毫秒进行刷新一次，总共刷新3次</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dashboard -i 5000 -n 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="截图展示"><a href="#截图展示" class="headerlink" title="截图展示"></a>截图展示</h3><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/arthas/dashboard.png"></p>
+<hr>
+<h2 id="help"><a href="#help" class="headerlink" title="help"></a>help</h2><div class="note info no-icon"><p>提示</p>
+<p>[help 指令]的等同于[指令 -help]，都是查看具体指令的使用说明。</p>
+</div>
+
+<h3 id="参数说明-1"><a href="#参数说明-1" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">不接参数</td>
+<td align="left">查询当前 arthas 版本支持的指令以及指令描述</td>
+</tr>
+<tr>
+<td align="right">[name:]</td>
+<td align="left">查询具体指令的使用说明</td>
+</tr>
+</tbody></table>
+<h3 id="使用参考-1"><a href="#使用参考-1" class="headerlink" title="使用参考"></a>使用参考</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$ help</span><br><span class="line"> NAME         DESCRIPTION</span><br><span class="line"> help         Display Arthas Help</span><br><span class="line"> auth         Authenticates the current session</span><br><span class="line"> keymap       Display all the available keymap for the specified connection.</span><br><span class="line"> sc           Search all the classes loaded by JVM</span><br><span class="line"> sm           Search the method of classes loaded by JVM</span><br><span class="line"> classloader  Show classloader info</span><br><span class="line"> jad          Decompile class</span><br><span class="line"> getstatic    Show the static field of a class</span><br><span class="line"> monitor      Monitor method execution statistics, e.g. total/success/failure count, average rt, fail rate, etc.</span><br><span class="line"> stack        Display the stack trace for the specified class and method</span><br><span class="line"> thread       Display thread info, thread stack</span><br><span class="line"> trace        Trace the execution time of specified method invocation.</span><br><span class="line"> watch        Display the input/output parameter, return object, and thrown exception of specified method invocation</span><br><span class="line"> tt           Time Tunnel</span><br><span class="line"> jvm          Display the target JVM information</span><br><span class="line"> perfcounter  Display the perf counter information.</span><br><span class="line"> ognl         Execute ognl expression.</span><br><span class="line"> mc           Memory compiler, compiles java files into bytecode and class files in memory.</span><br><span class="line"> redefine     Redefine classes. @see Instrumentation#redefineClasses(ClassDefinition...)</span><br><span class="line"> retransform  Retransform classes. @see Instrumentation#retransformClasses(Class...)</span><br><span class="line"> dashboard    Overview of target jvm&#x27;s thread, memory, gc, vm, tomcat info.</span><br><span class="line"> dump         Dump class byte array from JVM</span><br><span class="line"> heapdump     Heap dump</span><br><span class="line"> options      View and change various Arthas options</span><br><span class="line"> cls          Clear the screen</span><br><span class="line"> reset        Reset all the enhanced classes</span><br><span class="line"> version      Display Arthas version</span><br><span class="line"> session      Display current session information</span><br><span class="line"> sysprop      Display, and change the system properties.</span><br><span class="line"> sysenv       Display the system env.</span><br><span class="line"> vmoption     Display, and update the vm diagnostic options.</span><br><span class="line"> logger       Print logger info, and update the logger level</span><br><span class="line"> history      Display command history</span><br><span class="line"> cat          Concatenate and print files</span><br><span class="line"> base64       Encode and decode using Base64 representation</span><br><span class="line"> echo         write arguments to the standard output</span><br><span class="line"> pwd          Return working directory name</span><br><span class="line"> mbean        Display the mbean information</span><br><span class="line"> grep         grep command for pipes.</span><br><span class="line"> tee          tee command for pipes.</span><br><span class="line"> profiler     Async Profiler. https://github.com/jvm-profiling-tools/async-profiler</span><br><span class="line"> stop         Stop/Shutdown Arthas server and exit the console.</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ help dashboard</span><br><span class="line"> USAGE:</span><br><span class="line">  dashboard [-h] [-i &lt;value&gt;] [-n &lt;value&gt;]</span><br><span class="line"></span><br><span class="line">SUMMARY:</span><br><span class="line">  Overview of target jvm&#x27;s thread, memory, gc, vm, tomcat info.</span><br><span class="line"></span><br><span class="line">EXAMPLES:</span><br><span class="line">  dashboard</span><br><span class="line">  dashboard -n 10</span><br><span class="line">  dashboard -i 2000</span><br><span class="line"></span><br><span class="line">WIKI:</span><br><span class="line">  https://arthas.aliyun.com/doc/dashboard</span><br><span class="line"></span><br><span class="line">OPTIONS:</span><br><span class="line">-h, --help                              this help</span><br><span class="line">-i, --interval &lt;value&gt;                  The interval (in ms) between two executions, default is 5000 ms.</span><br><span class="line">-n, --number-of-execution &lt;value&gt;       The number of times this command will be executed.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h2><p><code>thread 1</code> 命令会打印线程 ID 1 的栈。</p>
+<p>Arthas 支持管道，可以用 <code>thread 1 | grep &#39;main(&#39;</code> 查找到<code>main class</code> 。</p>
+<p>可以看到<code>main class</code> 是<code>demo.MathGame</code> ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> thread 1 | grep <span class="string">&#x27;main(&#x27;</span></span></span><br><span class="line">    at demo.MathGame.main(MathGame.java:17)</span><br></pre></td></tr></table></figure>
+
+<div class="note info no-icon"><p>提示</p>
+<p>查看当前线程信息，查看线程的堆栈。</p>
+</div>
+
+<h3 id="参数说明-2"><a href="#参数说明-2" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"><em>id</em></td>
+<td align="left">线程 id</td>
+</tr>
+<tr>
+<td align="right">[n:]</td>
+<td align="left">指定最忙的前 N 个线程并打印堆栈</td>
+</tr>
+<tr>
+<td align="right">[b]</td>
+<td align="left">找出当前阻塞其他线程的线程</td>
+</tr>
+<tr>
+<td align="right">[i <code>&lt;value&gt;</code>]</td>
+<td align="left">指定 cpu 使用率统计的采样间隔，单位为毫秒，默认值为 200</td>
+</tr>
+<tr>
+<td align="right">[–all]</td>
+<td align="left">显示所有匹配的线程</td>
+</tr>
+</tbody></table>
+<h3 id="使用参考-2"><a href="#使用参考-2" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="支持一键展示当前最忙的前-N-个线程并打印堆栈："><a href="#支持一键展示当前最忙的前-N-个线程并打印堆栈：" class="headerlink" title="支持一键展示当前最忙的前 N 个线程并打印堆栈："></a>支持一键展示当前最忙的前 N 个线程并打印堆栈：</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Reference Handler&quot;</span> Id=2 cpuUsage=0.0% deltaTime=0ms time=0ms WAITING on java.lang.ref.Reference<span class="variable">$Lock</span>@2718d45c</span><br><span class="line">    at java.lang.Object.wait(Native Method)</span><br><span class="line">    -  waiting on java.lang.ref.Reference<span class="variable">$Lock</span>@2718d45c</span><br><span class="line">    at java.lang.Object.wait(Unknown Source)</span><br><span class="line">    at java.lang.ref.Reference.tryHandlePending(Unknown Source)</span><br><span class="line">    at java.lang.ref.Reference<span class="variable">$ReferenceHandler</span>.run(Unknown Source)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;Finalizer&quot;</span> Id=3 cpuUsage=0.0% deltaTime=0ms time=0ms WAITING on java.lang.ref.ReferenceQueue<span class="variable">$Lock</span>@6ce75d0d</span><br><span class="line">    at java.lang.Object.wait(Native Method)</span><br><span class="line">    -  waiting on java.lang.ref.ReferenceQueue<span class="variable">$Lock</span>@6ce75d0d</span><br><span class="line">    at java.lang.ref.ReferenceQueue.remove(Unknown Source)</span><br><span class="line">    at java.lang.ref.ReferenceQueue.remove(Unknown Source)</span><br><span class="line">    at java.lang.ref.Finalizer<span class="variable">$FinalizerThread</span>.run(Unknown Source)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;Signal Dispatcher&quot;</span> Id=4 cpuUsage=0.0% deltaTime=0ms time=0ms RUNNABLE</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>没有线程 ID，包含<code>[Internal]</code>表示为 JVM 内部线程，参考dashboard命令的介绍。</li>
+<li><code>cpuUsage</code>为采样间隔时间内线程的 CPU 使用率，与dashboard命令的数据一致。</li>
+<li><code>deltaTime</code>为采样间隔时间内线程的增量 CPU 时间，小于 1ms 时被取整显示为 0ms。</li>
+<li><code>time</code> 线程运行总 CPU 时间。</li>
+</ul>
+<p>注意：线程栈为第二采样结束时获取，不能表明采样间隔时间内该线程都是在处理相同的任务。建议间隔时间不要太长，可能间隔时间越大越不准确。 可以根据具体情况尝试指定不同的间隔时间，观察输出结果。</p>
+<h4 id="当没有参数时，显示第一页线程的信息"><a href="#当没有参数时，显示第一页线程的信息" class="headerlink" title="当没有参数时，显示第一页线程的信息"></a>当没有参数时，显示第一页线程的信息</h4><p>默认按照 CPU 增量时间降序排列，只显示第一页数据。</p>
+<h4 id="thread-–all-显示所有匹配的线程"><a href="#thread-–all-显示所有匹配的线程" class="headerlink" title="thread –all, 显示所有匹配的线程"></a>thread –all, 显示所有匹配的线程</h4><p>显示所有匹配线程信息，有时需要获取全部 JVM 的线程数据进行分析。</p>
+<h4 id="thread-id-显示指定线程的运行堆栈"><a href="#thread-id-显示指定线程的运行堆栈" class="headerlink" title="thread id, 显示指定线程的运行堆栈"></a>thread id, 显示指定线程的运行堆栈</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ thread 1</span><br><span class="line"><span class="string">&quot;main&quot;</span> Id=1 TIMED_WAITING</span><br><span class="line">    at java.lang.Thread.sleep(Native Method)</span><br><span class="line">    at java.lang.Thread.sleep(Unknown Source)</span><br><span class="line">    at java.util.concurrent.TimeUnit.sleep(Unknown Source)</span><br><span class="line">    at demo.MathGame.main(MathGame.java:17)</span><br></pre></td></tr></table></figure>
+
+<h4 id="thread-b-找出当前阻塞其他线程的线程"><a href="#thread-b-找出当前阻塞其他线程的线程" class="headerlink" title="thread -b, 找出当前阻塞其他线程的线程"></a>thread -b, 找出当前阻塞其他线程的线程</h4><p>有时候我们发现应用卡住了， 通常是由于某个线程拿住了某个锁， 并且其他线程都在等待这把锁造成的。 为了排查这类问题， arthas 提供了<code>thread -b</code>， 一键找出那个罪魁祸首。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$ thread -b</span><br><span class="line"><span class="string">&quot;http-bio-8080-exec-4&quot;</span> Id=27 TIMED_WAITING</span><br><span class="line">    at java.lang.Thread.sleep(Native Method)</span><br><span class="line">    at test.arthas.TestThreadBlocking.doGet(TestThreadBlocking.java:22)</span><br><span class="line">    -  locked java.lang.Object@725be470 &lt;---- but blocks 4 other threads!</span><br><span class="line">    at javax.servlet.http.HttpServlet.service(HttpServlet.java:624)</span><br><span class="line">    at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">    at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">    at test.filter.TestDurexFilter.doFilter(TestDurexFilter.java:46)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">    at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">    at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:220)</span><br><span class="line">    at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)</span><br><span class="line">    at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:505)</span><br><span class="line">    at com.taobao.tomcat.valves.ContextLoadFilterValve<span class="variable">$FilterChainAdapter</span>.doFilter(ContextLoadFilterValve.java:191)</span><br><span class="line">    at com.taobao.eagleeye.EagleEyeFilter.doFilter(EagleEyeFilter.java:81)</span><br><span class="line">    at com.taobao.tomcat.valves.ContextLoadFilterValve.invoke(ContextLoadFilterValve.java:150)</span><br><span class="line">    at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:170)</span><br><span class="line">    at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)</span><br><span class="line">    at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)</span><br><span class="line">    at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:429)</span><br><span class="line">    at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)</span><br><span class="line">    at org.apache.coyote.AbstractProtocol<span class="variable">$AbstractConnectionHandler</span>.process(AbstractProtocol.java:625)</span><br><span class="line">    at org.apache.tomcat.util.net.JIoEndpoint<span class="variable">$SocketProcessor</span>.run(JIoEndpoint.java:318)</span><br><span class="line">    -  locked org.apache.tomcat.util.net.SocketWrapper@7127ee12</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor<span class="variable">$Worker</span>.run(ThreadPoolExecutor.java:617)</span><br><span class="line">    at org.apache.tomcat.util.threads.TaskThread<span class="variable">$WrappingRunnable</span>.run(TaskThread.java:61)</span><br><span class="line">    at java.lang.Thread.run(Thread.java:745)</span><br><span class="line"></span><br><span class="line">    Number of locked synchronizers = 1</span><br><span class="line">    - java.util.concurrent.ThreadPoolExecutor<span class="variable">$Worker</span>@31a6493e</span><br></pre></td></tr></table></figure>
+
+<details class="note "><summary><p>warn no-icon</p>
+</summary>
+<p>注意</p>
+<p>注意， 目前只支持找出 synchronized 关键字阻塞住的线程， 如果是<code>java.util.concurrent.Lock</code>， 目前还不支持。</p>
+
+</details>
+
+<h4 id="thread-i-指定采样时间间隔"><a href="#thread-i-指定采样时间间隔" class="headerlink" title="thread -i, 指定采样时间间隔"></a>thread -i, 指定采样时间间隔</h4><ul>
+<li><code>thread -i 1000</code> : 统计最近 1000ms 内的线程 CPU 时间。</li>
+<li><code>thread -n 3 -i 1000</code> : 列出 1000ms 内最忙的 3 个线程栈</li>
+</ul>
+<h4 id="thread-–state-，查看指定状态的线程"><a href="#thread-–state-，查看指定状态的线程" class="headerlink" title="thread –state ，查看指定状态的线程"></a>thread –state ，查看指定状态的线程</h4><h3 id="thread-–state-，查看指定状态的线程-1"><a href="#thread-–state-，查看指定状态的线程-1" class="headerlink" title="thread –state ，查看指定状态的线程"></a>thread –state ，查看指定状态的线程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[arthas@28114]$ thread --state WAITING</span><br><span class="line">Threads Total: 16, NEW: 0, RUNNABLE: 9, BLOCKED: 0, WAITING: 3, TIMED_WAITING: 4, TERMINATED: 0</span><br><span class="line">ID   NAME                           GROUP           PRIORITY   STATE     %CPU      DELTA_TIME TIME      INTERRUPTE DAEMON</span><br><span class="line">3    Finalizer                      system          8          WAITING   0.0       0.000      0:0.000   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">20   arthas-UserStat                system          9          WAITING   0.0       0.000      0:0.001   <span class="literal">false</span>      <span class="literal">true</span></span><br><span class="line">14   arthas-timer                   system          9          WAITING   0.0       0.000      0:0.000   <span class="literal">false</span>      <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Sc"><a href="#Sc" class="headerlink" title="Sc"></a>Sc</h2><p>可以通过 <code>sc</code> 命令 来查找 JVM 里已加载的类：</p>
+<p>“Search-Class” 的简写，这个命令能搜索出所有已经加载到 JVM 中的 Class 信息，这个命令支持的参数有 <code>[d]</code>、<code>[E]</code>、<code>[f]</code> 和 <code>[x:]</code>。</p>
+<h3 id="参数说明-3"><a href="#参数说明-3" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"><em>class-pattern</em></td>
+<td align="left">类名表达式匹配</td>
+</tr>
+<tr>
+<td align="right"><em>method-pattern</em></td>
+<td align="left">方法名表达式匹配</td>
+</tr>
+<tr>
+<td align="right"><code>[d]</code></td>
+<td align="left">输出当前类的详细信息，包括这个类所加载的原始文件来源、类的声明、加载的 ClassLoader 等详细信息。 如果一个类被多个 ClassLoader 所加载，则会出现多次</td>
+</tr>
+<tr>
+<td align="right"><code>[E]</code></td>
+<td align="left">开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+<tr>
+<td align="right"><code>[f]</code></td>
+<td align="left">输出当前类的成员变量信息（需要配合参数-d 一起使用）</td>
+</tr>
+<tr>
+<td align="right"><code>[x:]</code></td>
+<td align="left">指定输出静态变量时属性的遍历深度，默认为 0，即直接使用 <code>toString</code> 输出</td>
+</tr>
+<tr>
+<td align="right"><code>[c:]</code></td>
+<td align="left">指定 class 的 ClassLoader 的 hashcode</td>
+</tr>
+<tr>
+<td align="right"><code>[classLoaderClass:]</code></td>
+<td align="left">指定执行表达式的 ClassLoader 的 class name</td>
+</tr>
+<tr>
+<td align="right"><code>[n:]</code></td>
+<td align="left">具有详细信息的匹配类的最大数量（默认为 100）</td>
+</tr>
+<tr>
+<td align="right"><code>[cs &lt;arg&gt;]</code></td>
+<td align="left">指定 class 的 ClassLoader#toString() 返回值。长格式<code>[classLoaderStr &lt;arg&gt;]</code></td>
+</tr>
+</tbody></table>
+<div class="note primary no-icon"><p><strong>提示</strong></p>
+<p>class-pattern 支持全限定名，如 com.taobao.test.AAA，也支持 com/taobao/test/AAA 这样的格式，这样，我们从异常堆栈里面把类名拷贝过来的时候，不需要在手动把/替换为.啦。</p>
+</div>
+
+<div class="note primary no-icon"><p><strong>提示</strong></p>
+<p>sc 默认开启了子类匹配功能，也就是说所有当前类的子类也会被搜索出来，想要精确的匹配，请打开options disable-sub-class true开关</p>
+</div>
+
+<h3 id="使用参考-3"><a href="#使用参考-3" class="headerlink" title="使用参考"></a>使用参考</h3><ul>
+<li><p>模糊搜索</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sc demo.*</span><br><span class="line">demo.MathGame</span><br><span class="line">Affect(row-cnt:1) cost <span class="keyword">in</span> 55 ms.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打印类的详细信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ sc -d demo.MathGame</span><br><span class="line">class-info        demo.MathGame</span><br><span class="line">code-source       /private/tmp/math-game.jar</span><br><span class="line">name              demo.MathGame</span><br><span class="line">isInterface       <span class="literal">false</span></span><br><span class="line">isAnnotation      <span class="literal">false</span></span><br><span class="line">isEnum            <span class="literal">false</span></span><br><span class="line">isAnonymousClass  <span class="literal">false</span></span><br><span class="line">isArray           <span class="literal">false</span></span><br><span class="line">isLocalClass      <span class="literal">false</span></span><br><span class="line">isMemberClass     <span class="literal">false</span></span><br><span class="line">isPrimitive       <span class="literal">false</span></span><br><span class="line">isSynthetic       <span class="literal">false</span></span><br><span class="line">simple-name       MathGame</span><br><span class="line">modifier          public</span><br><span class="line">annotation</span><br><span class="line">interfaces</span><br><span class="line">super-class       +-java.lang.Object</span><br><span class="line">class-loader      +-sun.misc.Launcher<span class="variable">$AppClassLoader</span>@3d4eac69</span><br><span class="line">                    +-sun.misc.Launcher<span class="variable">$ExtClassLoader</span>@66350f69</span><br><span class="line">classLoaderHash   3d4eac69</span><br><span class="line"></span><br><span class="line">Affect(row-cnt:1) cost <span class="keyword">in</span> 875 ms.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打印出类的 Field 信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ sc -d -f demo.MathGame</span><br><span class="line">class-info        demo.MathGame</span><br><span class="line">code-source       /private/tmp/math-game.jar</span><br><span class="line">name              demo.MathGame</span><br><span class="line">isInterface       <span class="literal">false</span></span><br><span class="line">isAnnotation      <span class="literal">false</span></span><br><span class="line">isEnum            <span class="literal">false</span></span><br><span class="line">isAnonymousClass  <span class="literal">false</span></span><br><span class="line">isArray           <span class="literal">false</span></span><br><span class="line">isLocalClass      <span class="literal">false</span></span><br><span class="line">isMemberClass     <span class="literal">false</span></span><br><span class="line">isPrimitive       <span class="literal">false</span></span><br><span class="line">isSynthetic       <span class="literal">false</span></span><br><span class="line">simple-name       MathGame</span><br><span class="line">modifier          public</span><br><span class="line">annotation</span><br><span class="line">interfaces</span><br><span class="line">super-class       +-java.lang.Object</span><br><span class="line">class-loader      +-sun.misc.Launcher<span class="variable">$AppClassLoader</span>@3d4eac69</span><br><span class="line">                    +-sun.misc.Launcher<span class="variable">$ExtClassLoader</span>@66350f69</span><br><span class="line">classLoaderHash   3d4eac69</span><br><span class="line">fields            modifierprivate,static</span><br><span class="line">                  <span class="built_in">type</span>    java.util.Random</span><br><span class="line">                  name    random</span><br><span class="line">                  value   java.util.Random@522b4</span><br><span class="line">                          08a</span><br><span class="line"></span><br><span class="line">                  modifierprivate</span><br><span class="line">                  <span class="built_in">type</span>    int</span><br><span class="line">                  name    illegalArgumentCount</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Affect(row-cnt:1) cost <span class="keyword">in</span> 19 ms.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过 ClassLoader#toString 查找类（前提：有一个 toString()返回值是<code>apo</code>的类加载器，加载的类中包含<code>demo.MathGame</code>, <code>demo.MyBar</code>,<code> demo.MyFoo</code>3 个类）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sc -cs apo *demo*</span><br><span class="line">demo.MathGame</span><br><span class="line">demo.MyBar</span><br><span class="line">demo.MyFoo</span><br><span class="line">Affect(row-cnt:3) cost <span class="keyword">in</span> 56 ms.</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Jad"><a href="#Jad" class="headerlink" title="Jad"></a>Jad</h2><p>可以通过 <code>jad</code> 命令来反编译代码：</p>
+<div class="note info no-icon"><p><strong>提示</strong></p>
+<p>反编译指定已加载类的源码</p>
+</div>
+
+<p><code>jad</code> 命令将 JVM 中实际运行的 class 的 byte code 反编译成 java 代码，便于你理解业务逻辑；如需批量下载指定包的目录的 class 字节码可以参考 <a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/dump.html">dump</a>。</p>
+<ul>
+<li>在 Arthas Console 上，反编译出来的源码是带语法高亮的，阅读更方便</li>
+<li>当然，反编译出来的 java 代码可能会存在语法错误，但不影响你进行阅读理解</li>
+</ul>
+<h3 id="参数说明-4"><a href="#参数说明-4" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"><em>class-pattern</em></td>
+<td align="left">类名表达式匹配</td>
+</tr>
+<tr>
+<td align="right"><code>[c:]</code></td>
+<td align="left">类所属 ClassLoader 的 hashcode</td>
+</tr>
+<tr>
+<td align="right"><code>[classLoaderClass:]</code></td>
+<td align="left">指定执行表达式的 ClassLoader 的 class name</td>
+</tr>
+<tr>
+<td align="right">[E]</td>
+<td align="left">开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+</tbody></table>
+<h3 id="使用参考-4"><a href="#使用参考-4" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="反编译java-lang-String"><a href="#反编译java-lang-String" class="headerlink" title="反编译java.lang.String"></a>反编译<code>java.lang.String</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ jad java.lang.String</span><br><span class="line"></span><br><span class="line">ClassLoader:</span><br><span class="line"></span><br><span class="line">Location:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Decompiled with CFR.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">import</span> java.io.ObjectStreamField;</span><br><span class="line">        <span class="keyword">import</span> java.io.Serializable;</span><br><span class="line">...</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">Serializable</span>,</span></span><br><span class="line"><span class="class">        <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;,</span></span><br><span class="line"><span class="class">        <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span>[] value;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">int</span> hash;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">6849794470754667710L</span>;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ObjectStreamField[] serialPersistentFields = <span class="keyword">new</span> ObjectStreamField[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Comparator&lt;String&gt; CASE_INSENSITIVE_ORDER = <span class="keyword">new</span> CaseInsensitiveComparator();</span><br><span class="line">...</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">byte</span>[] byArray, <span class="keyword">int</span> n, <span class="keyword">int</span> n2, Charset charset)</span> </span>&#123;</span><br><span class="line"><span class="comment">/*460*/</span>         <span class="keyword">if</span> (charset == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">&quot;charset&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">/*462*/</span>         String.checkBounds(byArray, n, n2);</span><br><span class="line"><span class="comment">/*463*/</span>         <span class="keyword">this</span>.value = StringCoding.decode(charset, byArray, n, n2);</span><br><span class="line">            &#125;</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="反编译时只显示源代码"><a href="#反编译时只显示源代码" class="headerlink" title="反编译时只显示源代码"></a>反编译时只显示源代码</h4><p>默认情况下，反编译结果里会带有<code>ClassLoader</code>信息，通过<code>--source-only</code>选项，可以只打印源代码。方便和<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/mc.html">mc</a>/<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/retransform.html">retransform</a>命令结合使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ jad --source-only demo.MathGame</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Decompiled with CFR 0_132.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MathGame</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> illegalArgumentCount = <span class="number">0</span>;</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="反编译指定的函数"><a href="#反编译指定的函数" class="headerlink" title="反编译指定的函数"></a>反编译指定的函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ jad demo.MathGame main</span><br><span class="line"></span><br><span class="line">ClassLoader:</span><br><span class="line">+-sun.misc.Launcher$AppClassLoader@<span class="number">232204</span>a1</span><br><span class="line">  +-sun.misc.Launcher$ExtClassLoader@<span class="number">7f</span>31245a</span><br><span class="line"></span><br><span class="line">Location:</span><br><span class="line">/<span class="keyword">private</span>/tmp/math-game.jar</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">           MathGame game = <span class="keyword">new</span> MathGame();</span><br><span class="line">           <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line"><span class="comment">/*16*/</span>         game.run();</span><br><span class="line"><span class="comment">/*17*/</span>         TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="反编译时不显示行号"><a href="#反编译时不显示行号" class="headerlink" title="反编译时不显示行号"></a>反编译时不显示行号</h4><p><code>--lineNumber</code> 参数默认值为 true，显示指定为 false 则不打印行号。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ jad demo.MathGame main --lineNumber <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">ClassLoader:</span><br><span class="line">+-sun.misc.Launcher$AppClassLoader@<span class="number">232204</span>a1</span><br><span class="line">  +-sun.misc.Launcher$ExtClassLoader@<span class="number">7f</span>31245a</span><br><span class="line"></span><br><span class="line">Location:</span><br><span class="line">/<span class="keyword">private</span>/tmp/math-game.jar</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    MathGame game = <span class="keyword">new</span> MathGame();</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        game.run();</span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="反编译时指定-ClassLoader"><a href="#反编译时指定-ClassLoader" class="headerlink" title="反编译时指定 ClassLoader"></a>反编译时指定 ClassLoader</h4><div class="note info no-icon"><p><strong>提示</strong></p>
+<p>当有多个 <code>ClassLoader</code> 都加载了这个类时，<code>jad</code> 命令会输出对应 <code>ClassLoader</code> 实例的 <code>hashcode</code>，然后你只需要重新执行 <code>jad</code> 命令，并使用参数 <code>-c &lt;hashcode&gt;</code> 就可以反编译指定 ClassLoader 加载的那个类了；</p>
+</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">$ jad org.apache.log4j.Logger</span><br><span class="line"></span><br><span class="line">Found more than one class for: org.apache.log4j.Logger, Please use jad -c hashcode org.apache.log4j.Logger</span><br><span class="line">HASHCODE  CLASSLOADER</span><br><span class="line"><span class="number">69d</span>caba4  +-monitor<span class="string">&#x27;s ModuleClassLoader</span></span><br><span class="line"><span class="string">6e51ad67  +-java.net.URLClassLoader@6e51ad67</span></span><br><span class="line"><span class="string">            +-sun.misc.Launcher$AppClassLoader@6951a712</span></span><br><span class="line"><span class="string">            +-sun.misc.Launcher$ExtClassLoader@6fafc4c2</span></span><br><span class="line"><span class="string">2bdd9114  +-pandora-qos-service&#x27;</span>s ModuleClassLoader</span><br><span class="line"><span class="number">4</span>c0df5f8  +-pandora-framework<span class="string">&#x27;s ModuleClassLoader</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Affect(row-cnt:0) cost in 38 ms.</span></span><br><span class="line"><span class="string">$ jad org.apache.log4j.Logger -c 69dcaba4</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ClassLoader:</span></span><br><span class="line"><span class="string">+-monitor&#x27;</span>s ModuleClassLoader</span><br><span class="line"></span><br><span class="line">Location:</span><br><span class="line">/Users/admin/app/log4j-<span class="number">1.2</span>.<span class="number">14.</span>jar</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> org.apache.log4j;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.spi.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Logger</span> <span class="keyword">extends</span> <span class="title">Category</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String FQCN;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">Logger</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">Affect(row-cnt:<span class="number">1</span>) cost in <span class="number">190</span> ms.</span><br></pre></td></tr></table></figure>
+
+<p>对于只有唯一实例的 ClassLoader 还可以通过<code>--classLoaderClass</code>指定 class name，使用起来更加方便：</p>
+<p><code>--classLoaderClass</code> 的值是 ClassLoader 的类名，只有匹配到唯一的 ClassLoader 实例时才能工作，目的是方便输入通用命令，而<code>-c &lt;hashcode&gt;</code>是动态变化的。</p>
+<hr>
+<h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>通过 <code>watch</code> 命令可以查看函数的参数/返回值/异常信息。</p>
+<div class="note info no-icon"><p>提示</p>
+<p>函数执行数据观测</p>
+</div>
+
+<p>让你能方便的观察到指定函数的调用情况。能观察到的范围为：<code>返回值</code>、<code>抛出异常</code>、<code>入参</code>，通过编写 OGNL 表达式进行对应变量的查看。</p>
+<h3 id="参数说明-5"><a href="#参数说明-5" class="headerlink" title="参数说明"></a>参数说明</h3><p>watch 的参数比较多，主要是因为它能在 4 个不同的场景观察对象</p>
+<table>
+<thead>
+<tr>
+<th align="right">参数名称</th>
+<th align="left">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right"><em>class-pattern</em></td>
+<td align="left">类名表达式匹配</td>
+</tr>
+<tr>
+<td align="right"><em>method-pattern</em></td>
+<td align="left">函数名表达式匹配</td>
+</tr>
+<tr>
+<td align="right"><em>express</em></td>
+<td align="left">观察表达式，默认值：<code>&#123;params, target, returnObj&#125;</code></td>
+</tr>
+<tr>
+<td align="right"><em>condition-express</em></td>
+<td align="left">条件表达式</td>
+</tr>
+<tr>
+<td align="right">[b]</td>
+<td align="left">在<strong>函数调用之前</strong>观察</td>
+</tr>
+<tr>
+<td align="right">[e]</td>
+<td align="left">在<strong>函数异常之后</strong>观察</td>
+</tr>
+<tr>
+<td align="right">[s]</td>
+<td align="left">在<strong>函数返回之后</strong>观察</td>
+</tr>
+<tr>
+<td align="right">[f]</td>
+<td align="left">在<strong>函数结束之后</strong>(正常返回和异常返回)观察</td>
+</tr>
+<tr>
+<td align="right">[E]</td>
+<td align="left">开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+<tr>
+<td align="right">[x:]</td>
+<td align="left">指定输出结果的属性遍历深度，默认为 1，最大值是 4</td>
+</tr>
+<tr>
+<td align="right"><code>[m &lt;arg&gt;]</code></td>
+<td align="left">指定 Class 最大匹配数量，默认值为 50。长格式为<code>[maxMatch &lt;arg&gt;]</code>。</td>
+</tr>
+</tbody></table>
+<p>这里重点要说明的是观察表达式，观察表达式的构成主要由 ognl 表达式组成，所以你可以这样写<code>&quot;&#123;params,returnObj&#125;&quot;</code>，只要是一个合法的 ognl 表达式，都能被正常支持。</p>
+<p>观察的维度也比较多，主要体现在参数 <code>advice</code> 的数据结构上。<code>Advice</code> 参数最主要是封装了通知节点的所有信息。</p>
+<ul>
+<li>特殊用法请参考：<a target="_blank" rel="noopener" href="https://github.com/alibaba/arthas/issues/71">https://github.com/alibaba/arthas/issues/71在新窗口打开</a></li>
+<li>OGNL 表达式官网：<a target="_blank" rel="noopener" href="https://commons.apache.org/proper/commons-ognl/language-guide.html">https://commons.apache.org/proper/commons-ognl/language-guide.html在新窗口打开</a></li>
+</ul>
+<p><strong>特别说明</strong>：</p>
+<ul>
+<li>watch 命令定义了 4 个观察事件点，即 <code>-b</code> 函数调用前，<code>-e</code> 函数异常后，<code>-s</code> 函数返回后，<code>-f</code> 函数结束后</li>
+<li>4 个观察事件点 <code>-b</code>、<code>-e</code>、<code>-s</code> 默认关闭，<code>-f</code> 默认打开，当指定观察点被打开后，在相应事件点会对观察表达式进行求值并输出</li>
+<li>这里要注意<code>函数入参</code>和<code>函数出参</code>的区别，有可能在中间被修改导致前后不一致，除了 <code>-b</code> 事件点 <code>params</code> 代表函数入参外，其余事件都代表函数出参</li>
+<li>当使用 <code>-b</code> 时，由于观察事件点是在函数调用前，此时返回值或异常均不存在</li>
+<li>在 watch 命令的结果里，会打印出<code>location</code>信息。<code>location</code>有三种可能值：<code>AtEnter</code>，<code>AtExit</code>，<code>AtExceptionExit</code>。对应函数入口，函数正常 return，函数抛出异常。</li>
+</ul>
+<h3 id="使用参考-5"><a href="#使用参考-5" class="headerlink" title="使用参考"></a>使用参考</h3><h4 id="观察函数调用返回时的参数、this-对象和返回值"><a href="#观察函数调用返回时的参数、this-对象和返回值" class="headerlink" title="观察函数调用返回时的参数、this 对象和返回值"></a>观察函数调用返回时的参数、this 对象和返回值</h4><div class="note info no-icon"><p>提示</p>
+<p>观察表达式，默认值是 {params, target, returnObj}</p>
+</div>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ watch demo.MathGame primeFactors -x 2</span><br><span class="line">Press Q or Ctrl+C to abort.</span><br><span class="line">Affect(class count: 1 , method count: 1) cost <span class="keyword">in</span> 32 ms, listenerId: 5</span><br><span class="line">method=demo.MathGame.primeFactors location=AtExceptionExit</span><br><span class="line">ts=2021-08-31 15:22:57; [cost=0.220625ms] result=@ArrayList[</span><br><span class="line">    @Object[][</span><br><span class="line">        @Integer[-179173],</span><br><span class="line">    ],</span><br><span class="line">    @MathGame[</span><br><span class="line">        random=@Random[java.util.Random@31cefde0],</span><br><span class="line">        illegalArgumentCount=@Integer[44],</span><br><span class="line">    ],</span><br><span class="line">    null,</span><br><span class="line">]</span><br><span class="line">method=demo.MathGame.primeFactors location=AtExit</span><br><span class="line">ts=2021-08-31 15:22:58; [cost=1.020982ms] result=@ArrayList[</span><br><span class="line">    @Object[][</span><br><span class="line">        @Integer[1],</span><br><span class="line">    ],</span><br><span class="line">    @MathGame[</span><br><span class="line">        random=@Random[java.util.Random@31cefde0],</span><br><span class="line">        illegalArgumentCount=@Integer[44],</span><br><span class="line">    ],</span><br><span class="line">    @ArrayList[</span><br><span class="line">        @Integer[2],</span><br><span class="line">        @Integer[2],</span><br><span class="line">        @Integer[26947],</span><br><span class="line">    ],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的结果里，说明函数被执行了两次，第一次结果是<code>location=AtExceptionExit</code>，说明函数抛出异常了，因此<code>returnObj</code>是 null</li>
+<li>在第二次结果里是<code>location=AtExit</code>，说明函数正常返回，因此可以看到<code>returnObj</code>结果是一个 ArrayList</li>
+</ul>
+<h4 id="指定-Class最大匹配数量"><a href="#指定-Class最大匹配数量" class="headerlink" title="指定 Class最大匹配数量"></a>指定 Class最大匹配数量</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ watch demo.MathGame primeFactors -m 1</span><br><span class="line">Press Q or Ctrl+C to abort.</span><br><span class="line">Affect(class count: 1 , method count: 1) cost <span class="keyword">in</span> 302 ms, listenerId: 3</span><br><span class="line">method=demo.MathGame.primeFactors location=AtExceptionExit</span><br><span class="line">ts=2022-12-25 19:58:41; [cost=0.222419ms] result=@ArrayList[</span><br><span class="line">    @Object[][isEmpty=<span class="literal">false</span>;size=1],</span><br><span class="line">    @MathGame[demo.MathGame@3bf400],</span><br><span class="line">    null,</span><br><span class="line">]</span><br><span class="line">method=demo.MathGame.primeFactors location=AtExceptionExit</span><br><span class="line">ts=2022-12-25 19:58:51; [cost=0.046928ms] result=@ArrayList[</span><br><span class="line">    @Object[][isEmpty=<span class="literal">false</span>;size=1],</span><br><span class="line">    @MathGame[demo.MathGame@3bf400],</span><br><span class="line">    null,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h4 id="观察函数调用入口的参数和返回值"><a href="#观察函数调用入口的参数和返回值" class="headerlink" title="观察函数调用入口的参数和返回值"></a>观察函数调用入口的参数和返回值</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ watch demo.MathGame primeFactors <span class="string">&quot;&#123;params,returnObj&#125;&quot;</span> -x 2 -b</span><br><span class="line">Press Ctrl+C to abort.</span><br><span class="line">Affect(class-cnt:1 , method-cnt:1) cost <span class="keyword">in</span> 50 ms.</span><br><span class="line">ts=2018-12-03 19:23:23; [cost=0.0353ms] result=@ArrayList[</span><br><span class="line">    @Object[][</span><br><span class="line">        @Integer[-1077465243],</span><br><span class="line">    ],</span><br><span class="line">    null,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对比前一个例子，返回值为空（事件点为函数执行前，因此获取不到返回值）</li>
+</ul>
+<h2 id="Vmtool"><a href="#Vmtool" class="headerlink" title="Vmtool"></a>Vmtool</h2><p>通过 <code>vmtool</code> 命令，可以搜索内存对象。</p>
+<h3 id="获取-class-实例"><a href="#获取-class-实例" class="headerlink" title="获取 class 实例"></a>获取 class 实例</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ vmtool --action getInstances --className java.lang.String --<span class="built_in">limit</span> 10</span><br><span class="line">@String[][</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session],</span><br><span class="line">    @String[com.taobao.arthas.core.shell.session.Session],</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session],</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session],</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session.class],</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session.class],</span><br><span class="line">    @String[com/taobao/arthas/core/shell/session/Session.class],</span><br><span class="line">    @String[com/],</span><br><span class="line">    @String[java/util/concurrent/ConcurrentHashMap<span class="variable">$ValueIterator</span>],</span><br><span class="line">    @String[java/util/concurrent/locks/LockSupport],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<div class="note info no-icon"><p>提示</p>
+<p>通过 –limit 参数，可以限制返回值数量，避免获取超大数据时对 JVM 造成压力。默认值是 10。</p>
+</div>
+
+<h4 id="调用实例方法"><a href="#调用实例方法" class="headerlink" title="调用实例方法"></a>调用实例方法</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[arthas@13416]$ vmtool --action  getInstances  --className demo.MathGame --express <span class="string">&#x27;instances[0].primeFactors(3)&#x27;</span> -x 3</span><br><span class="line">@ArrayList[</span><br><span class="line">    @Integer[3],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="退出-Arthas"><a href="#退出-Arthas" class="headerlink" title="退出 Arthas"></a>退出 Arthas</h2><p>用 <code>exit</code> 或者 <code>quit</code> 命令可以退出 Arthas。</p>
+<p>退出 Arthas 之后，还可以再次用 <code>java -jar arthas-boot.jar</code> 来连接。</p>
+<h2 id="彻底退出-Arthas"><a href="#彻底退出-Arthas" class="headerlink" title="彻底退出 Arthas"></a>彻底退出 Arthas</h2><p><code>exit/quit</code> 命令只是退出当前 session，arthas server 还在目标进程中运行。</p>
+<p>想完全退出 Arthas，可以执行 <code>stop</code> 命令。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/25/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">适配器模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-25 14:26:59 / 修改时间：16:32:17" itemprop="dateCreated datePublished" datetime="2023-12-25T14:26:59+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>适配器模式(Adapter Pattern) ：将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</p>
+<p>现实世界的例子</p>
+<blockquote>
+<p>假设您的存储卡上有一些照片，并且需要将它们传输到计算机上。要传输它们，您需要某种与计算机端口兼容的适配器，以便可以将存储卡连接到计算机。在这种情况下，读卡器是一个适配器。<br>另一个例子是著名的电源适配器；三脚插头不能连接两脚插座，需要使用兼容两脚插座的电源适配器。<br>另一个例子是翻译人员将一个人所说的单词翻译成另一个人所说的单词</p>
+</blockquote>
+<p>用简单的话来说</p>
+<blockquote>
+<p>适配器模式允许您将不兼容的对象包装在适配器中，以使其与另一个类兼容。</p>
+</blockquote>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>假如你正在开发一款股票市场监测程序， 它会从不同来源下载 XML 格式的股票数据， 然后向用户呈现出美观的图表。</p>
+<p>在开发过程中， 你决定在程序中整合一个第三方智能分析函数库。 但是遇到了一个问题， 那就是分析函数库只兼容 JSON 格式的数据。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/adaptor_problem-zh-2x%281%29.png" style="zoom: 50%;" />
+
+<p>你可以修改程序库来支持 XML。 但是， 这可能需要修改部分依赖该程序库的现有代码。 甚至还有更糟糕的情况， 你可能根本没有程序库的源代码， 从而无法对其进行修改。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>你可以创建一个<em>适配器</em>。 这是一个特殊的对象， 能够转换对象接口， 使其能与其他对象进行交互。</p>
+<p>适配器模式通过封装对象将复杂的转换过程隐藏于幕后。 被封装的对象甚至察觉不到适配器的存在。 例如， 你可以使用一个将所有数据转换为英制单位 （如英尺和英里） 的适配器封装运行于米和千米单位制中的对象。</p>
+<p>适配器不仅可以转换不同格式的数据， 其还有助于采用不同接口的对象之间的合作。 它的运作方式如下：</p>
+<ol>
+<li>适配器实现与其中一个现有对象兼容的接口。</li>
+<li>现有对象可以使用该接口安全地调用适配器方法。</li>
+<li>适配器方法被调用后将以另一个对象兼容的格式和顺序将请求传递给该对象。</li>
+</ol>
+<p>有时你甚至可以创建一个双向适配器来实现双向转换调用。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/adaptor_solution-zh-2x.png" style="zoom: 50%;" />
+
+<p>让我们回到股票市场程序。 为了解决数据格式不兼容的问题， 你可以为分析函数库中的每个类创建将 XML 转换为 JSON 格式的适配器， 然后让客户端仅通过这些适配器来与函数库进行交流。 当某个适配器被调用时， 它会将传入的 XML 数据转换为 JSON 结构， 并将其传递给被封装分析对象的相应方法。</p>
+<h4 id="适配器模式结构"><a href="#适配器模式结构" class="headerlink" title="适配器模式结构"></a>适配器模式结构</h4><p>实现时使用了构成原则： 适配器实现了其中一个对象的接口， 并对另一个对象进行封装。 所有流行的编程语言都可以实现适配器。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/structure-object-adapter-2x.png" style="zoom:50%;" />
+
+<p>程序示例：</p>
+<p>对象适配器模式，是通过组合的形式来完成适配，在实际开发中，如果能够适用组合的形式，就尽量不用要继承。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adapteeRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;被适配者的方法&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteTarget</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;concreteTarget目标方法&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Adaptee adaptee = <span class="keyword">new</span> Adaptee();</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    adaptee.adapteeRequest();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.design.patterns.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Target target = <span class="keyword">new</span> ConcreteTarget();</span><br><span class="line">    target.request();</span><br><span class="line"></span><br><span class="line">    Target adapterTarget = <span class="keyword">new</span> Adapter();</span><br><span class="line">    adapterTarget.request();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>将目标类和适配者类解耦，通过引入一个适配器类来重用现有的适配者类，而无须修改原有代码。</li>
+<li>增加了类的透明性和复用性，将具体的实现封装在适配者类中，对于客户端类来说是透明的，而且提高了适配者的复用性。</li>
+<li>开闭原则。 只要客户端代码通过客户端接口与适配器进行交互， 你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>过多地使用适配器，会让系统非常零乱，不易整体进行把握。比如，明明看到调用的是 A 接口，其实内部被适配成了 B 接口的实现，一个系统如果太多出现这种情况，无异于一场灾难。因此如果不是很有必要，可以不使用适配器，而是直接对系统进行重构</li>
+<li> 代码整体复杂度增加， 因为你需要新增一系列接口和类。 有时直接更改服务类使其与其他代码兼容会更简单。</li>
+</ul>
+<h4 id="已知使用："><a href="#已知使用：" class="headerlink" title="已知使用："></a>已知使用：</h4><ul>
+<li><code>java.util.Arrays#asList()</code></li>
+<li><code>java.util.Collections#list()</code></li>
+<li><code>java.util.Collections#enumeration()</code></li>
+<li><code>javax.xml.bind.annotation.adapters.XMLAdapter</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -224,7 +978,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-25 08:59:33" itemprop="dateModified" datetime="2023-12-25T08:59:33+08:00">2023-12-25</time>
+      <time title="修改时间：2023-12-25 10:15:26" itemprop="dateModified" datetime="2023-12-25T10:15:26+08:00">2023-12-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1307,289 +2061,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/06/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-06 09:56:38" itemprop="dateCreated datePublished" datetime="2023-12-06T09:56:38+08:00">2023-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-11 09:23:29" itemprop="dateModified" datetime="2023-12-11T09:23:29+08:00">2023-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="意图"><a href="#意图" class="headerlink" title="意图:"></a>意图:</h3><p><strong>单例模式</strong>是一种创建型设计模式， 让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题:"></a>问题:</h3><ol>
-<li><p><strong>保证一个类只有一个实例</strong>。 为什么会有人想要控制一个类所拥有的实例数量？ 最常见的原因是控制某些共享资源 （例如数据库或文件） 的访问权限。</p>
-<p>它的运作方式是这样的： 如果你创建了一个对象， 同时过一会儿后你决定再创建一个新对象， 此时你会获得之前已创建的对象， 而不是一个新对象。</p>
-<p>注意， 普通构造函数无法实现上述行为， 因为构造函数的设计决定了它<strong>必须</strong>总是返回一个新对象。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/singleton-comic-1-zh-2x.png"></p>
-</li>
-<li><p><strong>为该实例提供一个全局访问节点</strong>。 还记得你 （好吧， 其实是我自己） 用过的那些存储重要对象的全局变量吗？ 它们在使用上十分方便， 但同时也非常不安全， 因为任何代码都有可能覆盖掉那些变量的内容， 从而引发程序崩溃。</p>
-<p>和全局变量一样， 单例模式也允许在程序的任何地方访问特定对象。 但是它可以保护该实例不被其他代码覆盖。</p>
-<p>还有一点： 你不会希望解决同一个问题的代码分散在程序各处的。 因此更好的方式是将其放在同一个类中， 特别是当其他代码已经依赖这个类时更应该如此。</p>
-</li>
-</ol>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h3><p>所有单例的实现都包含以下两个相同的步骤：</p>
-<ul>
-<li>将默认构造函数设为私有， 防止其他对象使用单例类的 <code>new</code>运算符。</li>
-<li>新建一个静态构建方法作为构造函数。 该函数会 “偷偷” 调用私有构造函数来创建对象， 并将其保存在一个静态成员变量中。 此后所有对于该函数的调用都将返回这一缓存对象。</li>
-</ul>
-<p>如果你的代码能够访问单例类， 那它就能调用单例类的静态方法。 无论何时调用该方法， 它总是会返回相同的对象。</p>
-<h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性:"></a>适用性:</h3><p>当满足以下情况时，使用单例模式：</p>
-<ul>
-<li>确保一个类只有一个实例，并且客户端能够通过一个众所周知的访问点访问该实例。</li>
-<li>唯一的实例能够被子类扩展, 同时客户端不需要修改代码就能使用扩展后的实例。</li>
-</ul>
-<p>一些典型的单例模式用例包括：</p>
-<ul>
-<li><code>logging</code>类</li>
-<li>管理与数据库的链接</li>
-<li>文件管理器（<code>File manager</code>）</li>
-</ul>
-<h3 id="已知使用："><a href="#已知使用：" class="headerlink" title="已知使用："></a>已知使用：</h3><ul>
-<li><code>java.lang.Runtime#getRuntime()</code></li>
-<li><code>java.awt.Desktop#getDesktop()</code></li>
-<li><code>java.lang.System#getSecurityManager()</code></li>
-</ul>
-<h3 id="代码示例："><a href="#代码示例：" class="headerlink" title="代码示例："></a>代码示例：</h3><h4 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h4><p><strong>饿汉式</strong>的单例实现比较简单，其在类加载的时候，静态实例<code>instance</code> 就已创建并初始化好了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Singleton singleton1 = Singleton.getInstance();</span><br><span class="line">    Singleton singleton2 = Singleton.getInstance();</span><br><span class="line">    System.out.println(<span class="string">&quot;singleton1=&quot;</span> + singleton1);</span><br><span class="line">    System.out.println(<span class="string">&quot;singleton2=&quot;</span> + singleton2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">singleton1&#x3D;com.design.patterns.Singleton@74a14482</span><br><span class="line">singleton2&#x3D;com.design.patterns.Singleton@74a14482</span><br></pre></td></tr></table></figure>
-
-<h4 id="懒汉式-线程安全的懒加载方式"><a href="#懒汉式-线程安全的懒加载方式" class="headerlink" title="懒汉式(线程安全的懒加载方式):"></a>懒汉式(线程安全的懒加载方式):</h4><p>与饿汉式对应的是懒汉式，懒汉式为了支持延时加载，将对象的创建延迟到了获取对象的时候，但为了线程安全，不得不为获取对象的操作加锁，这就导致了低性能。</p>
-<p>并且这把锁只有在第一次创建对象时有用，而之后每次获取对象，这把锁都是一个累赘。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeLazyLoadedSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  declared as volatile to ensure atomic access by multiple threads.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> ThreadSafeLazyLoadedSingleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Private constructor to prevent instantiation from outside the class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeLazyLoadedSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Protect against instantiation via reflection</span></span><br><span class="line">        <span class="keyword">if</span> (instance != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;Already initialized.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The instance doesn&#x27;t get created until the method is called for the first time.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ThreadSafeLazyLoadedSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            instance = <span class="keyword">new</span> ThreadSafeLazyLoadedSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ThreadSafeLazyLoadedSingleton instance1 = ThreadSafeLazyLoadedSingleton.getInstance();</span><br><span class="line">ThreadSafeLazyLoadedSingleton instance2 = ThreadSafeLazyLoadedSingleton.getInstance();</span><br><span class="line">System.out.println(<span class="string">&quot;instance1=&quot;</span> + instance1);</span><br><span class="line">System.out.println(<span class="string">&quot;instance2=&quot;</span> + instance2);</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">instance1&#x3D;com.design.patterns.singleton.ThreadSafeLazyLoadedSingleton@74a14482</span><br><span class="line">instance2&#x3D;com.design.patterns.singleton.ThreadSafeLazyLoadedSingleton@74a14482</span><br></pre></td></tr></table></figure>
-
-<h4 id="双重检测："><a href="#双重检测：" class="headerlink" title="双重检测："></a>双重检测：</h4><p>饿汉式和懒汉式的单例都有缺点，双重检测的实现方式解决了这两者的缺点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadSafeDoubleCheckSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  declared as volatile to ensure atomic access by multiple threads.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> ThreadSafeDoubleCheckSingleton instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Private constructor to prevent instantiation from outside the class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ThreadSafeDoubleCheckSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Protect against instantiation via reflection</span></span><br><span class="line">        <span class="keyword">if</span> (instance != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;Already initialized.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * To be called by user to obtain instance of the class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ThreadSafeDoubleCheckSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// local variable increases performance by 25 percent</span></span><br><span class="line">        ThreadSafeDoubleCheckSingleton result = instance;</span><br><span class="line">        <span class="comment">// Check if singleton instance is initialized.</span></span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (ThreadSafeDoubleCheckSingleton.class) &#123;</span><br><span class="line">                result = instance;</span><br><span class="line">                <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    result = <span class="keyword">new</span> ThreadSafeDoubleCheckSingleton();</span><br><span class="line">                    instance = result;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ThreadSafeDoubleCheckSingleton instance1 = ThreadSafeDoubleCheckSingleton.getInstance();</span><br><span class="line">    ThreadSafeDoubleCheckSingleton instance2 = ThreadSafeDoubleCheckSingleton.getInstance();</span><br><span class="line">    System.out.println(instance1);</span><br><span class="line">    System.out.println(instance2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.design.patterns.singleton.ThreadSafeDoubleCheckSingleton@74a14482</span><br><span class="line">com.design.patterns.singleton.ThreadSafeDoubleCheckSingleton@74a14482</span><br></pre></td></tr></table></figure>
-
-<h4 id="静态内部类："><a href="#静态内部类：" class="headerlink" title="静态内部类："></a>静态内部类：</h4><p> 这种方式能达到双检锁方式一样的功效，但实现更简单。</p>
-<p>这种方式是 <code>Singleton</code> 类被装载了，<code>instance</code> 不一定被初始化。因为 <code>SingletonHolder</code> 类没有被主动使用，只有通过显式调用 <code>getInstance</code> 方法时，才会显式装载 <code>SingletonHolder</code> 类，从而实例化 <code>instance</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInnerClassSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Private constructor to prevent instantiation from outside the class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">StaticInnerClassSingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The InstanceHolder is a static inner class, and it holds the Singleton instance.</span></span><br><span class="line"><span class="comment">     * It is not loaded into memory until the getInstance() method is called.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> StaticInnerClassSingleton INSTANCE = <span class="keyword">new</span> StaticInnerClassSingleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * When this method is called, the InstanceHolder is loaded into memory</span></span><br><span class="line"><span class="comment">     * and creates the Singleton instance. This method provides a global access point</span></span><br><span class="line"><span class="comment">     * for the singleton instance.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StaticInnerClassSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> InstanceHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="枚举："><a href="#枚举：" class="headerlink" title="枚举："></a>枚举：</h4><p>一个只有一个元素的枚举类型是实现单例模式的最佳方式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">EnumSingleton</span> </span>&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getDeclaringClass().getCanonicalName() + <span class="string">&quot;@&quot;</span> + hashCode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    EnumSingleton instance1 = EnumSingleton.INSTANCE;</span><br><span class="line">    EnumSingleton instance2 = EnumSingleton.INSTANCE;</span><br><span class="line">    System.out.println(instance1);</span><br><span class="line">    System.out.println(instance2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>结果：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.design.patterns.singleton.EnumSingleton@1956725890</span><br><span class="line">com.design.patterns.singleton.EnumSingleton@1956725890</span><br></pre></td></tr></table></figure>
-
-<h3 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h3><ul>
-<li>通过控制实例的创建和生命周期，违反了单一职责原则（SRP）。</li>
-<li>鼓励使用全局共享实例，组织了对象及其使用的资源被释放。</li>
-<li>代码变得耦合，给客户端的测试带来难度。</li>
-<li>单例模式的设计可能会使得子类化（继承）单例变得几乎不可能</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">设计模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-12-05 16:27:06 / 修改时间：21:01:35" itemprop="dateCreated datePublished" datetime="2023-12-05T16:27:06+08:00">2023-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="note info no-icon"><p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。<br>设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理地运用设计模式可以完美地解决很多问题，每种模式在现实中都有相应的原理来与之对应，每种模式都描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是设计模式能被广泛应用的原因。</p>
-</div>
-
-<p>共有 23 种设计模式。这些模式可以分为三大类：</p>
-<ul>
-<li><p><strong>创建型模式（Creational Patterns）- 这些设计模式提供了一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</strong></p>
-<ul>
-<li>工厂模式（Factory Pattern）</li>
-<li>抽象工厂模式（Abstract Factory Pattern）</li>
-<li>单例模式（Singleton Pattern）</li>
-<li>建造者模式（Builder Pattern）</li>
-<li>原型模式（Prototype Pattern）</li>
-</ul>
-</li>
-<li><p><strong>结构型模式（Structural Patterns）- 这些设计模式关注类和对象的组合。继承的概念被用来组合接口和定义组合对象获得新功能的方式。</strong>    </p>
-<ul>
-<li>适配器模式（Adapter Pattern）</li>
-<li>桥接模式（Bridge Pattern）</li>
-<li>组合模式（Composite Pattern）</li>
-<li>装饰器模式（Decorator Pattern）</li>
-<li>外观模式（Facade Pattern）</li>
-<li>享元模式（Flyweight Pattern）</li>
-<li>代理模式（Proxy Pattern）</li>
-</ul>
-</li>
-<li><p><strong>行为型模式（Behavioral Patterns）- 这些设计模式特别关注对象之间的通信。</strong></p>
-<ul>
-<li>责任链模式（Chain of Responsibility Pattern）</li>
-<li>命令模式（Command Pattern）</li>
-<li>迭代器模式（Iterator Pattern）</li>
-<li>中介者模式（Mediator Pattern）</li>
-<li>备忘录模式（Memento Pattern）</li>
-<li>观察者模式（Observer Pattern）</li>
-<li>状态模式（State Pattern）</li>
-<li>策略模式（Strategy Pattern）</li>
-<li>模板模式（Template Pattern）</li>
-<li>访问者模式（Visitor Pattern）</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1602,7 +2073,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>

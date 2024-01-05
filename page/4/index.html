@@ -151,18 +151,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,650 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/%E8%A7%A3%E5%86%B3Mysql5-7%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AFRestarting-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/22/%E8%A7%A3%E5%86%B3Mysql5-7%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AFRestarting-1/" class="post-title-link" itemprop="url">解决Mysql5.7一直重启Restarting(1)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-22 16:16:44" itemprop="dateCreated datePublished" datetime="2021-09-22T16:16:44+08:00">2021-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>优于长时间没进Linux连接mysql，今天进入Linux连接mysql，使用<code>docker ps</code>，mysql的状态一直是Restarting (1) x seconds ago，mysql一直在重启无法连接</p>
+<p>查看日志</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs mysql</span><br></pre></td></tr></table></figure>
+
+<p>发现是内存不足</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">2021-06-14T11:41:26.576589Z 0 [ERROR] InnoDB: Error number 28 means &#39;No space left on device&#39;</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>使用 df -h 查看 发现是 /var/docker/overlay2里面的东西占了很大的空间</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/linuxdfh.png"></p>
+<p>检查内存占用情况，发现vagrant占用36G，一路找下去，发现到application data目录无线循环，上网搜索发现了问题所在。</p>
+<p><strong>ls查看发现里的东西很多和我本机C盘里的文件一模一样 AppData之类的 为什么这些东西会在虚拟机里 虚拟机同步了C盘里的内容 百度发现 vagrant提供了将本机</strong></p>
+<p><strong>目录挂载到虚拟机目录下的功能，默认是将vagrant配置文件所在目录挂载到虚拟机/vagrant目录下。</strong></p>
+<p><strong>也就是说 我的VagrantFile 是 C/user/username/VagrantFile 那么所有和VagrantFile同级的 C/user/username/里面的内容会全部同步到vagrant中 导致虚拟机内存爆满</strong></p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
+<li><p>在和Vagrantfile同级目录（C:\Users\Administrator\）创建一个自己的文件夹,我的叫VagrantSyncFolder</p>
+</li>
+<li><p>然后打开目录到C:\Users\Administrator.vagrant.d\boxes\centos-VAGRANTSLASH-7\2004.01\virtualbox</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/vagrantfile.png"></p>
+</li>
+<li><p>打开Vagrantfile，</p>
+<p>config.vm.synced_folder “.”, “/vagrant”, type: “rsync”</p>
+<p>修改为</p>
+<p>config.vm.synced_folder “./vagrantCache”, “/vagrant”, type: “rsync”</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/changevagrantfile.png"></p>
+</li>
+<li><p>修改完这个之后,vagrant reload发现还是不行,猜测可能只有vagrant成功重启之后修改的这个映射才能生效,但是已经占用100%不能成功重启,没办法,只能删东</p>
+<p>西了</p>
+<p>查看了一下vagrant目录里文件的大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh *</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/cdvagrant.png"></p>
+<p>其中AppData很大</p>
+<p>试着删了一下3D Objects文件里的一些东西,发现文件里的文件并没有影响,ok,直接将AppData删了,释放了很大的空间，然后exit退出</p>
+<p>vagrant reload重启，大功告成！</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3mysql%E4%B8%80%E7%9B%B4%E9%87%8D%E5%90%AF/vagrantreload.png"></p>
+</li>
+</ol>
+<p>其实这种情况，可能在使用vagrant  up命令的时候就会报Rsync 错误，可以参考这篇文章，其问题和上方的一样</p>
+<p><a target="_blank" rel="noopener" href="https://www.dissmeyer.com/2020/02/11/issue-with-centos-7-vagrant-boxes-on-windows-10/">Windows 10 上的 CentOS 7 Vagrant 框出现 Rsync 错误</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/11/Vue3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/11/Vue3/" class="post-title-link" itemprop="url">Vue3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-11 19:52:10" itemprop="dateCreated datePublished" datetime="2021-09-11T19:52:10+08:00">2021-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>2020年9月18日Vue.js 3.0“海贼王”正式发布。该框架的这个新主要版本提供了改进的性能、更小的包大小、更好的 TypeScript 集成、用于处理大规模用例的新 API，以及该框架未来长期迭代的坚实基础。</p>
+<p>特点：</p>
+<ul>
+<li>随着时间的推移，它演变成我们所说的“渐进式框架”：一个可以逐渐学习和采用的框架，同时随着用户处理越来越多的要求的场景提供持续的支持。</li>
+<li>Vue 3.0 核心仍然可以通过一个简单的<code>&lt;script&gt;</code>标签使用，但它的内部已经从头开始重写为<a target="_blank" rel="noopener" href="https://github.com/vuejs/vue-next/tree/master/packages">一组解耦模块</a>。新架构提供了更好的可维护性，并允许最终用户通过 tree-shaking 将运行时大小减少一半。</li>
+<li>2.x 基于对象的 API 在 Vue 3 中基本保持不变。但是，3.0 还引入了<a target="_blank" rel="noopener" href="https://v3.vuejs.org/guide/composition-api-introduction.html">Composition API——</a>一组新的 API，旨在解决 Vue 在大规模应用程序中使用的痛点。</li>
+<li>性能改进</li>
+<li>Vue 3 的代码库是用 TypeScript 编写的，具有自动生成、测试和捆绑的类型定义，因此它们始终是最新的</li>
+</ul>
+<h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><h2 id="使用-vue-cli-创建Vue3-0工程"><a href="#使用-vue-cli-创建Vue3-0工程" class="headerlink" title="使用 vue-cli 创建Vue3.0工程"></a>使用 vue-cli 创建Vue3.0工程</h2><p>先查看@vue/cli版本，确保@vue/cli版本在4.5.0以上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue --version</span><br></pre></td></tr></table></figure>
+
+<p>如果版本过低，就需要安装或者升级你的@vue/cli</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
+
+<p>运行以下命令来创建一个新项目：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create hello-world</span><br></pre></td></tr></table></figure>
+
+<p>启动项目</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> hello-world</span><br><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
+
+<h1 id="常用-Composition-API"><a href="#常用-Composition-API" class="headerlink" title="常用 Composition API"></a>常用 Composition API</h1><h2 id="setup"><a href="#setup" class="headerlink" title="setup"></a><code>setup</code></h2><p>使用 (<code>data</code>、<code>computed</code>、<code>methods</code>、<code>watch</code>) 组件选项来组织逻辑通常都很有效。然而，当我们的组件开始变得更大时，<strong>逻辑关注点</strong>的列表也会增长。尤其对于那些一开始没有编写这些组件的人来说，这会导致组件难以阅读和理解。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/options-api.png"></p>
+<p>这是一个大型组件的示例，其中<strong>逻辑关注点</strong>按颜色进行分组。</p>
+<p>这种碎片化使得理解和维护复杂组件变得困难。选项的分离掩盖了潜在的逻辑问题。此外，在处理单个逻辑关注点时，我们必须不断地“跳转”相关代码的选项块。</p>
+<p>如果能够将同一个逻辑关注点相关代码收集在一起会更好。</p>
+<p><span style="color:red"><strong>setup的设计是为了使用组合式api，使相关逻辑的代码集中在一起.</strong></span></p>
+<h3 id="setup-组件选项"><a href="#setup-组件选项" class="headerlink" title="setup 组件选项"></a><code>setup</code> 组件选项</h3><p>新的 <code>setup</code> 选项在<strong>组件创建之前</strong>执行，一旦 <code>props</code> 被解析，就将作为组合式 API 的入口。</p>
+<blockquote>
+<p><span style="color:orange">在 <code>setup</code> 中你应该避免使用 <code>this</code>，因为它不会找到组件实例。<code>setup</code> 的调用发生在 <code>data</code> property、<code>computed</code> property 或 <code>methods</code> 被解析之前，所以它们无法在 <code>setup</code> 中被获取。</span></p>
+</blockquote>
+<p><code>setup</code> 选项是一个接收 <code>props</code> 和 <code>context</code> 的函数，此外，我们将 <code>setup</code> 返回的所有内容都暴露给组件的其余部分 (计算属性、方法、生命周期钩子等等) 以及组件的模板。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;HelloWorld&#x27;</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    msg: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">prop,context</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;prop:&quot;</span>,prop)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;context:&quot;</span>,context)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> &#123;&#125; <span class="comment">// 这里返回的任何内容都可以用于组件的其余部分</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>setup</code> 函数时，它将接收两个参数：</p>
+<ol>
+<li><code>props</code></li>
+<li><code>context</code></li>
+</ol>
+<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p><code>setup</code> 函数中的第一个参数是 <code>props</code>。正如在一个标准组件中所期望的那样，<code>setup</code> 函数中的 <code>props</code> 是响应式的，当传入新的 prop 时，它将被更新。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBook.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    title: <span class="built_in">String</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(props.title)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><span style="color:orange">但是，因为 <code>props</code> 是响应式的，你<strong>不能使用 ES6 解构</strong>，它会消除 prop 的响应性。</span></p>
+</blockquote>
+<p>如果需要解构 prop，可以在 <code>setup</code> 函数中使用 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/reactivity-fundamentals.html#%E5%93%8D%E5%BA%94%E5%BC%8F%E7%8A%B6%E6%80%81%E8%A7%A3%E6%9E%84"><code>toRefs</code></a> 函数来完成此操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBook.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; toRefs &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; title &#125; = toRefs(props)</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(title.value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果 <code>title</code> 是可选的 prop，则传入的 <code>props</code> 中可能没有 <code>title</code> 。在这种情况下，<code>toRefs</code> 将不会为 <code>title</code> 创建一个 ref 。你需要使用 <code>toRef</code> 替代它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBook.vue</span></span><br><span class="line"><span class="keyword">import</span> &#123; toRef &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="function"><span class="title">setup</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> title = toRef(props, <span class="string">&#x27;title&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(title.value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>props</code>在浏览器的控制台输出如下图：</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/vue3props.png"></p>
+<h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><p>传递给 <code>setup</code> 函数的第二个参数是 <code>context</code>。<code>context</code> 是一个普通的 JavaScript 对象，它暴露组件的三个 property：</p>
+<p>的三个 property：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBook.vue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, context</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// Attribute (非响应式对象)</span></span><br><span class="line">    <span class="built_in">console</span>.log(context.attrs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插槽 (非响应式对象)</span></span><br><span class="line">    <span class="built_in">console</span>.log(context.slots)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 触发事件 (方法)</span></span><br><span class="line">    <span class="built_in">console</span>.log(context.emit)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>context</code> 是一个普通的 JavaScript 对象，也就是说，它不是响应式的，这意味着你可以安全地对 <code>context</code> 使用 ES6 解构。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBook.vue</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params">props, &#123; attrs, slots, emit &#125;</span>)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>attrs</code> 和 <code>slots</code> 是有状态的对象，它们总是会随组件本身的更新而更新。这意味着你应该避免对它们进行解构，并始终以 <code>attrs.x</code> 或 <code>slots.x</code> 的方式引用 property。</p>
+<p><code>context</code>在浏览器的控制台输出如下图：</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/vue3context.png"></p>
+<p><code>setup</code>注意点：</p>
+<ol>
+<li>尽量不要与Vue2.x配置混用<ul>
+<li>Vue2.x配置（data、methos、computed…）中<strong style="color:#DD5145">可以访问到</strong>setup中的属性、方法。</li>
+<li>但在setup中<strong style="color:#DD5145">不能访问到</strong>Vue2.x配置（data、methos、computed…）。</li>
+<li>如果有重名, setup优先。</li>
+</ul>
+</li>
+<li>setup不能是一个async函数，因为返回值不再是return的对象, 而是promise, 模板看不到return对象中的属性。（后期也可以返回一个Promise实例，但需要Suspense和异步组件的配合）</li>
+<li><strong>在 <code>setup()</code> 内部，<code>this</code> 不是该活跃实例的引用</strong></li>
+</ol>
+<p>执行 <code>setup</code> 时，组件实例尚未被创建。因此，你只能访问以下 property：</p>
+<ul>
+<li><code>props</code></li>
+<li><code>attrs</code></li>
+<li><code>slots</code></li>
+<li><code>emit</code></li>
+</ul>
+<p>换句话说，你<strong>将无法访问</strong>以下组件选项：</p>
+<ul>
+<li><code>data</code></li>
+<li><code>computed</code></li>
+<li><code>methods</code></li>
+</ul>
+<hr>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p>接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property <code>.value</code>。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">countAdd</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count.value++</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    count,</span><br><span class="line">    countAdd</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果将对象分配为 ref 值，则通过 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/basic-reactivity.html#reactive">reactive</a> 方法使该对象具有高度的响应式。</p>
+<p>使用数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>count: &#123;&#123;count&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;countAdd&quot;</span>&gt;</span>count++<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>接收的数据可以是：基本类型、也可以是对象类型。</li>
+<li>基本类型的数据：响应式依然是靠<code>Object.defineProperty()</code>的<code>get</code>与<code>set</code>完成的。</li>
+<li>对象类型的数据：内部 使用了Vue3.0中的一个新函数—— <code>reactive</code>函数。</li>
+</ul>
+<hr>
+<h2 id="reactive函数"><a href="#reactive函数" class="headerlink" title="reactive函数"></a>reactive函数</h2><p>返回对象的响应式副本，Proxy的实例对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = reactive(&#123; <span class="attr">count</span>: <span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><span style="color:green"><code>reactive</code> 将解包所有深层的 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/refs-api.html#ref">refs</a>，同时维持 ref 的响应性。</span></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> count = ref(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">const</span> obj = reactive(&#123; count &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ref 会被解包</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.count === count.value) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 它会更新 `obj.count`</span></span><br><span class="line">count.value++</span><br><span class="line"><span class="built_in">console</span>.log(count.value) <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.count) <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 它也会更新 `count` ref</span></span><br><span class="line">obj.count++</span><br><span class="line"><span class="built_in">console</span>.log(obj.count) <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(count.value) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Vue3-0中的响应式原理"><a href="#Vue3-0中的响应式原理" class="headerlink" title="Vue3.0中的响应式原理"></a>Vue3.0中的响应式原理</h2><h3 id="vue2-x的响应式"><a href="#vue2-x的响应式" class="headerlink" title="vue2.x的响应式"></a>vue2.x的响应式</h3><ul>
+<li><p>实现原理：</p>
+<ul>
+<li><p>对象类型：通过<code>Object.defineProperty()</code>对属性的读取、修改进行拦截（数据劫持）。</p>
+</li>
+<li><p>数组类型：通过重写更新数组的一系列方法来实现拦截。（对数组的变更方法进行了包裹）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(data, <span class="string">&#x27;count&#x27;</span>, &#123;</span><br><span class="line">    get () &#123;&#125;, </span><br><span class="line">    set () &#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>存在问题：</p>
+<ul>
+<li>新增属性、删除属性, 界面不会更新。</li>
+<li>直接通过下标修改数组, 界面不会自动更新。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Vue3-0的响应式"><a href="#Vue3-0的响应式" class="headerlink" title="Vue3.0的响应式"></a>Vue3.0的响应式</h3><ul>
+<li><p>实现原理: </p>
+<ul>
+<li><p>通过Proxy（代理）:  <strong>Proxy 是一个对象，它包装了另一个对象，并允许你拦截对该对象的任何交互。</strong></p>
+</li>
+<li><p>通过Reflect（反射）:  使用 Proxy 的一个难点是 <code>this</code> 绑定。我们希望任何方法都绑定到这个 Proxy，而不是目标对象，这样我们也可以拦截它们。值得庆幸的是，ES6 引入了另一个名为 <code>Reflect</code> 的新特性，它允许我们以最小的代价消除了这个问题：</p>
+</li>
+<li><p>MDN文档中描述的Proxy与Reflect：</p>
+<ul>
+<li><p>Proxy：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy</a></p>
+</li>
+<li><p>Reflect：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">	<span class="comment">// 拦截读取属性值</span></span><br><span class="line">    get (target, prop) &#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, prop)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 拦截设置属性值或添加新属性</span></span><br><span class="line">    set (target, prop, value) &#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, prop, value)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 拦截删除属性</span></span><br><span class="line">    deleteProperty (target, prop) &#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">Reflect</span>.deleteProperty(target, prop)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">proxy.name = <span class="string">&#x27;tom&#x27;</span>   </span><br></pre></td></tr></table></figure>
+
+<h2 id="计算属性和侦听器"><a href="#计算属性和侦听器" class="headerlink" title="计算属性和侦听器"></a>计算属性和侦听器</h2><h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><p>有时我们需要依赖于其他状态的状态——在 Vue 中，这是用组件<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E4%BE%A6%E5%90%AC%E5%99%A8">计算属性</a>处理的，以直接创建计算值，我们可以使用 <code>computed</code> 方法：它接受 getter 函数并为 getter 返回的值返回一个不可变的响应式 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/reactivity-fundamentals.html#%E5%88%9B%E5%BB%BA%E7%8B%AC%E7%AB%8B%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%80%BC%E4%BD%9C%E4%B8%BA-refs">ref</a> 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> person = reactive(&#123;</span><br><span class="line">    firstName: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    lastName: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  person.fullName = computed(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> person.firstName + <span class="string">&#x27; &#x27;</span> + person.lastName</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">   person</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>请输入姓名<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>firstName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;person.firstName&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>lastName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;person.lastName&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>fullName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; person.fullName &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/vue3computed.png" style="zoom: 80%;" />
+
+<p>或者，它可以使用一个带有 <code>get</code> 和 <code>set</code> 函数的对象来创建一个可写的 ref 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> person = reactive(&#123;</span><br><span class="line">      firstName: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      lastName: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    person.fullName = computed(&#123;</span><br><span class="line">      <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> person.firstName + <span class="string">&quot; &quot;</span> + person.lastName;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function"><span class="title">set</span>(<span class="params">newValue</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> names = newValue.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        person.firstName = names[<span class="number">0</span>];</span><br><span class="line">        person.lastName = names[names.length - <span class="number">1</span>];</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      person,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>使用数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>请输入姓名<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>fullName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;person.fullName&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>firstName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; person.firstName &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>lastName<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; person.lastName &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/vue3computed1.png" style="zoom:80%;" />
+
+<hr>
+<h3 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h3><p><code>watch</code> 需要侦听特定的数据源，并在回调函数中执行副作用。默认情况下，它也是惰性的，即只有当被侦听的源发生变化时才执行回调。</p>
+<h4 id="侦听单个数据源"><a href="#侦听单个数据源" class="headerlink" title="侦听单个数据源"></a>侦听单个数据源</h4><p>侦听器数据源可以是返回值的 getter 函数，也可以直接是 <code>ref</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 侦听一个 getter</span></span><br><span class="line"><span class="keyword">const</span> state = reactive(&#123; <span class="attr">count</span>: <span class="number">0</span> &#125;)</span><br><span class="line">watch(</span><br><span class="line">  () =&gt; state.count,</span><br><span class="line">  (count, prevCount) =&gt; &#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接侦听ref</span></span><br><span class="line"><span class="keyword">const</span> count = ref(<span class="number">0</span>)</span><br><span class="line">watch(count, <span class="function">(<span class="params">count, prevCount</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="侦听多个数据源"><a href="#侦听多个数据源" class="headerlink" title="侦听多个数据源"></a>侦听多个数据源</h4><p>侦听器还可以使用数组同时侦听多个源：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> firstName = ref(<span class="string">&quot;zhang&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> lastName = ref(<span class="string">&quot;san&quot;</span>);</span><br><span class="line"></span><br><span class="line">watch([firstName, lastName], <span class="function">(<span class="params">newValues, prevValues</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(newValues, prevValues);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeFirstName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  firstName.value = <span class="string">&quot;Steve&quot;</span>; <span class="comment">// logs: [&quot;Steve&quot;, &quot;san&quot;] [&quot;zhang&quot;, &quot;san&quot;]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeLastName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  lastName.value = <span class="string">&quot;Jobs&quot;</span>;  <span class="comment">// logs: [&quot;zhang&quot;, &quot;Jobs&quot;] [&quot;zhang&quot;, &quot;san&quot;]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>尽管如此，如果你在同一个方法里同时改变这些被侦听的来源，侦听器仍只会执行一次：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeFullName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  firstName.value = <span class="string">&quot;Steve&quot;</span>;</span><br><span class="line">  lastName.value = <span class="string">&quot;Jobs&quot;</span>;</span><br><span class="line">  <span class="comment">// 打印 [&quot;Steve&quot;, &quot;Jobs&quot;] [&quot;zhang&quot;, &quot;san&quot;]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意多个同步更改只会触发一次侦听器。</p>
+<p>两个小“坑”：</p>
+<ul>
+<li>监视reactive定义的响应式数据时：oldValue无法正确获取、默认已经强制开启了深度监视（deep配置失效）。</li>
+<li>监视reactive定义的响应式数据中某个属性时：deep配置有效。</li>
+</ul>
+<hr>
+<h2 id="watchEffect"><a href="#watchEffect" class="headerlink" title="watchEffect"></a>watchEffect</h2><ul>
+<li><p>watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，那就监视哪个属性。</p>
+</li>
+<li><p>watchEffect有点像computed：</p>
+<ul>
+<li><p>但computed注重的计算出来的值（回调函数的返回值），所以必须要写返回值。</p>
+</li>
+<li><p>而watchEffect更注重的是过程（回调函数的函数体），所以不用写返回值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//watchEffect所指定的回调中用到的数据只要发生变化，则直接重新执行回调。</span></span><br><span class="line">watchEffect(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x1 = sum.value</span><br><span class="line">    <span class="keyword">const</span> x2 = person.age</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;watchEffect配置的回调执行了&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/lifecycle.svg"  />
+
+<p>下表包含如何在 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/composition-api-setup.html">setup ()</a> 内部调用生命周期钩子：</p>
+<table>
+<thead>
+<tr>
+<th>选项式 API</th>
+<th>Hook inside <code>setup</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>beforeCreate</code></td>
+<td>Not needed*</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>Not needed*</td>
+</tr>
+<tr>
+<td><code>beforeMount</code></td>
+<td><code>onBeforeMount</code></td>
+</tr>
+<tr>
+<td><code>mounted</code></td>
+<td><code>onMounted</code></td>
+</tr>
+<tr>
+<td><code>beforeUpdate</code></td>
+<td><code>onBeforeUpdate</code></td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td><code>onUpdated</code></td>
+</tr>
+<tr>
+<td><code>beforeUnmount</code></td>
+<td><code>onBeforeUnmount</code></td>
+</tr>
+<tr>
+<td><code>unmounted</code></td>
+<td><code>onUnmounted</code></td>
+</tr>
+<tr>
+<td><code>errorCaptured</code></td>
+<td><code>onErrorCaptured</code></td>
+</tr>
+<tr>
+<td><code>renderTracked</code></td>
+<td><code>onRenderTracked</code></td>
+</tr>
+<tr>
+<td><code>renderTriggered</code></td>
+<td><code>onRenderTriggered</code></td>
+</tr>
+<tr>
+<td><code>activated</code></td>
+<td><code>onActivated</code></td>
+</tr>
+<tr>
+<td><code>deactivated</code></td>
+<td><code>onDeactivated</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><span style="color:green">因为 <code>setup</code> 是围绕 <code>beforeCreate</code> 和 <code>created</code> 生命周期钩子运行的，所以不需要显式地定义它们。换句话说，在这些钩子中编写的任何代码都应该直接在 <code>setup</code> 函数中编写。</span></p>
+</blockquote>
+<h2 id="toRef"><a href="#toRef" class="headerlink" title="toRef"></a><code>toRef</code></h2><p>可以用来为源响应式对象上的某个 property 新创建一个 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/refs-api.html#ref"><code>ref</code></a>。然后，ref 可以被传递，它会保持对其源 property 的响应式连接。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  bar: <span class="number">2</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fooRef = toRef(state, <span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fooRef.value++</span><br><span class="line"><span class="built_in">console</span>.log(state.foo) <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">state.foo++</span><br><span class="line"><span class="built_in">console</span>.log(fooRef.value) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="toRefs"><a href="#toRefs" class="headerlink" title="toRefs"></a><code>toRefs</code></h2><p>将响应式对象转换为普通对象，其中结果对象的每个 property 都是指向原始对象相应 property 的 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/refs-api.html#ref"><code>ref</code></a>。</p>
+<p>当从组合式函数返回响应式对象时，<code>toRefs</code> 非常有用，这样消费组件就可以在不丢失响应性的情况下对返回的对象进行分解/扩散：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useFeatureX</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> state = reactive(&#123;</span><br><span class="line">    foo: <span class="number">1</span>,</span><br><span class="line">    bar: <span class="number">2</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 操作 state 的逻辑</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回时转换为ref</span></span><br><span class="line">  <span class="keyword">return</span> toRefs(state)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 可以在不失去响应性的情况下解构</span></span><br><span class="line">    <span class="keyword">const</span> &#123; foo, bar &#125; = useFeatureX()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      foo,</span><br><span class="line">      bar</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>toRefs</code> 只会为源对象中包含的 property 生成 ref。如果要为特定的 property 创建 ref，则应当使用 <code>toRef</code></p>
+<hr>
+<h1 id="其他-Composition-API"><a href="#其他-Composition-API" class="headerlink" title="其他 Composition API"></a>其他 Composition API</h1><h2 id="shallowReactive-与-shallowRef"><a href="#shallowReactive-与-shallowRef" class="headerlink" title="shallowReactive 与 shallowRef"></a>shallowReactive 与 shallowRef</h2><ul>
+<li><p><code>shallowReactive</code>：创建一个响应式代理，它跟踪其自身 property 的响应性，但不执行嵌套对象的深层响应式转换</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = shallowReactive(&#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  nested: &#123;</span><br><span class="line">    bar: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改变 state 本身的性质是响应式的</span></span><br><span class="line">state.foo++</span><br><span class="line"><span class="comment">// ...但是不转换嵌套对象</span></span><br><span class="line">isReactive(state.nested) <span class="comment">// false</span></span><br><span class="line">state.nested.bar++ <span class="comment">// 非响应式</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><code>shallowRef</code>：只处理基本数据类型的响应式, 不进行对象的响应式处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = shallowRef(&#123;&#125;)</span><br><span class="line"><span class="comment">// 改变 ref 的值是响应式的</span></span><br><span class="line">foo.value = &#123;&#125;</span><br><span class="line"><span class="comment">// 但是这个值不会被转换。</span></span><br><span class="line">isReactive(foo.value) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>什么时候使用?</p>
+<ul>
+<li> 如果有一个对象数据，结构比较深, 但变化时只是外层属性变化 ===&gt; <code>shallowReactive</code>。</li>
+<li> 如果有一个对象数据，后续功能不会修改该对象中的属性，而是生新的对象来替换 ===&gt; <code>shallowRef</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="readonly-与-shallowReadonly"><a href="#readonly-与-shallowReadonly" class="headerlink" title="readonly 与 shallowReadonly"></a>readonly 与 shallowReadonly</h2><ul>
+<li><p><code>readonly</code>: 接受一个对象 (响应式或纯对象) 或 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/api/refs-api.html#ref">ref</a> 并返回原始对象的只读代理。只读代理是深层的：任何被访问的嵌套 property 也是只读的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> original = reactive(&#123; <span class="attr">count</span>: <span class="number">0</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> copy = readonly(original)</span><br><span class="line"></span><br><span class="line">watchEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 用于响应性追踪</span></span><br><span class="line">  <span class="built_in">console</span>.log(copy.count)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 变更 original 会触发依赖于副本的侦听器</span></span><br><span class="line">original.count++</span><br><span class="line"></span><br><span class="line"><span class="comment">// 变更副本将失败并导致警告</span></span><br><span class="line">copy.count++ <span class="comment">// 警告!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>shallowReadonly</code>：创建一个 proxy，使其自身的 property 为只读，但不执行嵌套对象的深度只读转换 (暴露原始值)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = shallowReadonly(&#123;</span><br><span class="line">  foo: <span class="number">1</span>,</span><br><span class="line">  nested: &#123;</span><br><span class="line">    bar: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改变 state 本身的 property 将失败</span></span><br><span class="line">state.foo++</span><br><span class="line"><span class="comment">// ...但适用于嵌套对象</span></span><br><span class="line">isReadonly(state.nested) <span class="comment">// false</span></span><br><span class="line">state.nested.bar++ <span class="comment">// 适用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用场景: 不希望数据被修改时。</p>
+</li>
+</ul>
+<h2 id="toRaw-与-markRaw"><a href="#toRaw-与-markRaw" class="headerlink" title="toRaw 与 markRaw"></a>toRaw 与 markRaw</h2><ul>
+<li><p>toRaw：</p>
+<ul>
+<li>作用：将一个由<code>reactive</code>生成的<strong style="color:orange">响应式对象</strong>转为<strong style="color:orange">普通对象</strong>。</li>
+<li>使用场景：用于读取响应式对象对应的普通对象，对这个普通对象的所有操作，不会引起页面更新。</li>
+</ul>
+</li>
+<li><p>markRaw：</p>
+<ul>
+<li><p>作用：标记一个对象，使其永远不会再成为响应式对象。返回对象本身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = markRaw(&#123;&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(isReactive(reactive(foo))) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 嵌套在其他响应式对象中时也可以使用</span></span><br><span class="line"><span class="keyword">const</span> bar = reactive(&#123; foo &#125;)</span><br><span class="line"><span class="built_in">console</span>.log(isReactive(bar.foo)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><span style="color:red">有些值不应该是响应式的，例如复杂的第三方类实例或 Vue 组件对象</span></p>
+<p><span style="color:red">当渲染具有不可变数据源的大列表时，跳过 proxy 转换可以提高性能。</span></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="customRef"><a href="#customRef" class="headerlink" title="customRef"></a>customRef</h2><p>创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 <code>track</code> 和 <code>trigger</code> 函数作为参数，并且应该返回一个带有 <code>get</code> 和 <code>set</code> 的对象。</p>
+<p>自定义customRef配合自定义hook函数使用。</p>
+<p>什么是hook？—— 本质是一个函数，把setup函数中使用的Composition API进行了封装。类似于vue2.x中的mixin。自定义hook的优势: 复用代码, 让setup中的逻辑更清楚易懂。</p>
+<p>在项目中新建hooks文件夹，在hooks文件夹下新建useDebounce.js文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; customRef &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">value, delay = <span class="number">1000</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timeout</span><br><span class="line">    <span class="keyword">return</span> customRef(<span class="function">(<span class="params">track, trigger</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">          track()</span><br><span class="line">          <span class="keyword">return</span> value</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">set</span>(<span class="params">newValue</span>)</span> &#123;</span><br><span class="line">          <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">          timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            value = newValue</span><br><span class="line">            trigger()</span><br><span class="line">          &#125;, delay)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用自定义 ref 通过 <code>v-model</code> 实现 debounce 的示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">&quot;text&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> useDebouncedRef <span class="keyword">from</span> <span class="string">&#x27;../hooks/useDebounce&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      text: useDebouncedRef(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h2><p>通常，当我们需要从父组件向子组件传递数据时，我们使用 <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/component-props.html">props</a>。想象一下这样的结构：有一些深度嵌套的组件，而深层的子组件只需要父组件的部分内容。在这种情况下，如果仍然将 prop 沿着组件链逐级传递下去，可能会很麻烦。</p>
+<p>对于这种情况，我们可以使用一对 <code>provide</code> 和 <code>inject</code>。无论组件层次结构有多深，父组件都可以作为其所有子组件的依赖提供者。这个特性有两个部分：父组件有一个 <code>provide</code> 选项来提供数据，子组件有一个 <code>inject</code> 选项来开始使用这些数据。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/vue3/components_provide.png"></p>
+<p>用法:</p>
+<p>父组件中提供：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	......</span><br><span class="line">    <span class="keyword">let</span> car = reactive(&#123;<span class="attr">name</span>:<span class="string">&#x27;奔驰&#x27;</span>,<span class="attr">price</span>:<span class="string">&#x27;40万&#x27;</span>&#125;)</span><br><span class="line">    provide(<span class="string">&#x27;car&#x27;</span>,car)</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>子组件中使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setup</span>(<span class="params">props,context</span>)</span>&#123;</span><br><span class="line">	......</span><br><span class="line">    <span class="keyword">const</span> car = inject(<span class="string">&#x27;car&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> &#123;car&#125;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应式数据的判断"><a href="#响应式数据的判断" class="headerlink" title="响应式数据的判断"></a>响应式数据的判断</h2><ul>
+<li>isRef: 检查一个值是否为一个 ref 对象</li>
+<li>isReactive: 检查一个对象是否是由 <code>reactive</code> 创建的响应式代理</li>
+<li>isReadonly: 检查一个对象是否是由 <code>readonly</code> 创建的只读代理</li>
+<li>isProxy: 检查一个对象是否是由 <code>reactive</code> 或者 <code>readonly</code> 方法创建的代理</li>
+</ul>
+<hr>
+<h1 id="新的组件"><a href="#新的组件" class="headerlink" title="新的组件"></a>新的组件</h1><p>Teleport 提供了一种干净的方法，允许我们控制在 DOM 中哪个父节点下渲染了 HTML，而不必求助于全局状态或将其拆分为两个组件。</p>
+<p>让我们修改 <code>modal-button</code> 以使用 <code>&lt;teleport&gt;</code>，并告诉 Vue “<strong>Teleport</strong> 这个 HTML <strong>到</strong>该‘<strong>body</strong>’标签”。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">&#x27;modal-button&#x27;</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;button @click=&quot;modalOpen = true&quot;&gt;</span></span><br><span class="line"><span class="string">        Open full screen modal! (With teleport!)</span></span><br><span class="line"><span class="string">    &lt;/button&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;teleport to=&quot;body&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;div v-if=&quot;modalOpen&quot; class=&quot;modal&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          I&#x27;m a teleported modal! </span></span><br><span class="line"><span class="string">          (My parent is &quot;body&quot;)</span></span><br><span class="line"><span class="string">          &lt;button @click=&quot;modalOpen = false&quot;&gt;</span></span><br><span class="line"><span class="string">            Close</span></span><br><span class="line"><span class="string">          &lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/teleport&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; </span><br><span class="line">      modalOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="全局API的转移"><a href="#全局API的转移" class="headerlink" title="全局API的转移"></a>全局API的转移</h2><ul>
+<li><p>Vue 2.x 有许多全局 API 和配置。</p>
+<ul>
+<li><p>例如：注册全局组件、注册全局指令等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注册全局组件</span></span><br><span class="line">Vue.component(<span class="string">&#x27;MyButton&#x27;</span>, &#123;</span><br><span class="line">  data: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;),</span><br><span class="line">  template: <span class="string">&#x27;&lt;button @click=&quot;count++&quot;&gt;Clicked &#123;&#123; count &#125;&#125; times.&lt;/button&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//注册全局指令</span></span><br><span class="line">Vue.directive(<span class="string">&#x27;focus&#x27;</span>, &#123;</span><br><span class="line">  inserted: <span class="function"><span class="params">el</span> =&gt;</span> el.focus()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Vue3.0中对这些API做出了调整：</p>
+<ul>
+<li><p>将全局的API，即：<code>Vue.xxx</code>调整到应用实例（<code>app</code>）上</p>
+<table>
+<thead>
+<tr>
+<th>2.x 全局 API（<code>Vue</code>）</th>
+<th>3.x 实例 API (<code>app</code>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vue.config.xxxx</td>
+<td>app.config.xxxx</td>
+</tr>
+<tr>
+<td>Vue.config.productionTip</td>
+<td><strong style="color:#DD5145">移除</strong></td>
+</tr>
+<tr>
+<td>Vue.component</td>
+<td>app.component</td>
+</tr>
+<tr>
+<td>Vue.directive</td>
+<td>app.directive</td>
+</tr>
+<tr>
+<td>Vue.mixin</td>
+<td>app.mixin</td>
+</tr>
+<tr>
+<td>Vue.use</td>
+<td>app.use</td>
+</tr>
+<tr>
+<td>Vue.prototype</td>
+<td>app.config.globalProperties</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他改变"><a href="#其他改变" class="headerlink" title="其他改变"></a>其他改变</h2><ul>
+<li><p>data选项应始终被声明为一个函数。</p>
+</li>
+<li><p>过度类名的更改：</p>
+<ul>
+<li><p>Vue2.x写法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.v-enter</span>,</span><br><span class="line"><span class="selector-class">.v-leave-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.v-leave</span>,</span><br><span class="line"><span class="selector-class">.v-enter-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Vue3.x写法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.v-enter-from</span>,</span><br><span class="line"><span class="selector-class">.v-leave-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.v-leave-from</span>,</span><br><span class="line"><span class="selector-class">.v-enter-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong style="color:#DD5145">移除</strong>keyCode作为 v-on 的修饰符，同时也不再支持<code>config.keyCodes</code></p>
+</li>
+<li><p><strong style="color:#DD5145">移除</strong><code>v-on.native</code>修饰符</p>
+<ul>
+<li><p>父组件中绑定事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component</span><br><span class="line">  v-on:close&#x3D;&quot;handleComponentEvent&quot;</span><br><span class="line">  v-on:click&#x3D;&quot;handleNativeClickEvent&quot;</span><br><span class="line">&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子组件中声明自定义事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    emits: [&#39;close&#39;]</span><br><span class="line">  &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong style="color:#DD5145">移除</strong>过滤器（filter）</p>
+<blockquote>
+<p>过滤器虽然这看起来很方便，但它需要一个自定义语法，打破大括号内表达式是 “只是 JavaScript” 的假设，这不仅有学习成本，而且有实现成本！建议用方法调用或计算属性去替换过滤器。</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2503,314 +3147,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/20/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%B9%8BDebug/" class="post-title-link" itemprop="url">IntelliJ-IDEA使用技巧之Debug</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-20 20:51:30" itemprop="dateCreated datePublished" datetime="2021-08-20T20:51:30+08:00">2021-08-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 15:58:02" itemprop="dateModified" datetime="2023-09-05T15:58:02+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">IDEA使用技巧</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Debug常用断点调试快捷键"><a href="#Debug常用断点调试快捷键" class="headerlink" title="Debug常用断点调试快捷键"></a>Debug常用断点调试快捷键</h1><table>
-<thead>
-<tr>
-<th align="center">图标</th>
-<th align="center">快捷键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOver.png"></td>
-<td align="center"><strong>F8</strong></td>
-<td><strong>Step Over：步过，一行一行地往下走，如果这一行上有方法不会进入方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepInto.png"></td>
-<td align="center"><strong>F7</strong></td>
-<td><strong>Step Into：步入，如果当前行有方法，可以进入方法内部，一般用于进入自定义方法内，不会进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/forceStepInto.png"></td>
-<td align="center"><strong>Alt+Shift+F7</strong></td>
-<td><strong>Force Step Into：强制步入，能进入任何方法，查看底层源码的时候可以用这个进入官方类库的方法。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/stepOut.png"></td>
-<td align="center"><strong>Shift+F8</strong></td>
-<td><strong>Step Out：步出，从步入的方法内退出到方法调用处，此时方法已执行完毕，只是还没有完成赋值。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/runtoCursor.png"></td>
-<td align="center"><strong>Alt+F9</strong></td>
-<td><strong>Run to Cursor：运行到光标处，你可以将光标定位到你需要查看的那一行，然后使用这个功能，代码会运行至光标行，而不需要打断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></td>
-<td align="center"><strong>Ctrl+F2</strong></td>
-<td><strong>Stop ‘xxx’：停止运行</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></td>
-<td align="center"><strong>Ctrl+Shift+F8</strong></td>
-<td><strong>View Breakpoints：查看所有断点</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/mutebreakpoints.png"></td>
-<td align="center"></td>
-<td><strong>Mute Breakpoints：选择这个后，所有断点变为灰色，断点失效，按F9则可以直接运行完程序。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></td>
-<td align="center"><strong>F9</strong></td>
-<td><strong>Resume Program：恢复程序，如果下面还有断点则运行到下一个断点。</strong></td>
-</tr>
-<tr>
-<td align="center"><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/dropframe.png"></td>
-<td align="center"></td>
-<td><strong>Drop Frame：断点回退，断点会回退到我们打断点的位置。</strong></td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h1><p>在我们打断点的地方鼠标右击，然后在condition输入框里面输入条件</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/conditionbreakpoint1.png"></p>
-<hr>
-<h1 id="求值表达式Evaluate-Expression"><a href="#求值表达式Evaluate-Expression" class="headerlink" title="求值表达式Evaluate Expression"></a>求值表达式Evaluate Expression</h1><p>在断点调试过程中，我们想查看某些变量或某些对象的属性值，我们可以通过快捷键<strong>Alt+F8</strong>打开<strong>表达式求值</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/evaluateExpression2.png"></p>
-<hr>
-<h1 id="setValue"><a href="#setValue" class="headerlink" title="setValue"></a>setValue</h1><p>Intellij IDEA在debug模式下可以改变变量的值，下面这段代码为例，比如我们想看看i=12时会输出什么</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue1.png"></p>
-<p>此时<strong>i==5</strong>，我们把<strong>i</strong>设置成12</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue3.png"></p>
-<p>按快捷键<strong>F8</strong>看看i是否会进入<strong>if条件</strong>里面</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/debugsetvalue4.png"></p>
-<hr>
-<hr>
-<h1 id="异常断点"><a href="#异常断点" class="headerlink" title="异常断点"></a>异常断点</h1><p><strong>Java Exception Breakpoints可以使当程序遇见被选择的异常时，自动停在相应异常的位置处。</strong></p>
-<p>如下面这段代码</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint1.png"></p>
-<p>加上条件断点，使用快捷键<strong>Ctrl+Shift+F8</strong>或者点击图标<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/viewbreakpoints.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint2.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint3.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint4.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint5.png"></p>
-<p>再使用Debug模式来运行程序，当程序出现异常，会之间停留在我们出现异常的代码处</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/exceptionBreakpoint6.png"></p>
-<hr>
-<h1 id="避免操作资源"><a href="#避免操作资源" class="headerlink" title="避免操作资源"></a>避免操作资源</h1><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource1.png"></p>
-<p>如上图所示，我们在断点调试时，后续的一些操作可能会涉及操作一些资源，我们又不想后面的代码执行，直接让代码终止。通常我们想到的是点击终止按钮<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/cursorstop.png"></p>
-<p>但是点击这个按钮之后后续的操作还会执行，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource2.png"></p>
-<hr>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource3.png"></p>
-<p>Debug调试界面，选择正在运行的Stack，鼠标右键选择Force Return，如下图所示</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource4.png"></p>
-<p>上面的操作完成之后，代码会跑到<strong>Thread.java</strong>类中的<strong>exit（）</strong>方法里。再点击<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/resume.png"></p>
-<p>程序就运行结束。我们就会看到后续的操作并没有执行</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource5.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%B9%8Bdebug%E8%B0%83%E8%AF%95/releaseSource6.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/18/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/18/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决git连接超时问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-18 18:17:05" itemprop="dateCreated datePublished" datetime="2021-08-18T18:17:05+08:00">2021-08-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p> 最近使用git连接github时一直报下面这个错：</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/gitpushproblem.png"></p>
-<p>git 连接远程仓库有两种协议：<strong>ssh协议</strong>和<strong>https协议</strong>。</p>
-<p>根据英文可以看出，<strong>ssh协议</strong>连接超时，我们切换成 https协议连接github。</p>
-<p>移除掉远程仓库的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rm origin</span><br></pre></td></tr></table></figure>
-
-<p>重新添加新的远程仓库，以https的形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;wotzc&#x2F;wotzc.github.io.git</span><br></pre></td></tr></table></figure>
-
-<p>https的地址其实就是github上项目对应的地址，如下图：</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/githubaddress.png"></p>
-<p>再次尝试push代码，可以看到已经成功。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/gitpushsuccess.png"></p>
-<p>但是我们在部署<code>hexo d</code>的时候输入账号密码后还是会报错，错误如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Password authentication is temporarily disabled as part of a brownout. Please use a personal access token instead [duplicate]</span><br></pre></td></tr></table></figure>
-
-<p>因为<strong>2021年8月13日之后密码身份验证由 GitHub 禁用，不再支持。创建并使用个人访问令牌PAT而不是密码。</strong></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/gitauthentication.png"></p>
-<p>此消息意味着您使用密码而不是个人访问令牌通过 HTTPS 访问 GitHub，这已不再允许。GitHub 禁用了密码身份验证，因为人们经常会意外泄露密码，虽然个人访问令牌可以限制损坏，但密码不能。</p>
-<p>如果您没有在提示时明确输入密码，那么您很可能有一个凭据管理器来保存您的密码，并在不提示您的情况下发送密码。</p>
-<p>所以我们需要使用个人访问令牌进行身份验证，步骤如下：</p>
-<ol>
-<li><p>在 Github 上创建个人访问令牌</p>
-<p>From your Github account, go to <strong>Settings</strong> =&gt; <strong>Developer Settings</strong> =&gt; <strong>Personal Access Token</strong> =&gt; <strong>Generate New Token</strong>  (Give your password) =&gt; <strong>Fillup the form</strong> =&gt; click <strong>Generate token</strong> =&gt; <strong>Copy the generated Token</strong>, it will be something like <code>ghp_sFhFsSHhTzMDreGRLjmks4Tzuzgthdvfsrta</code></p>
-</li>
-<li><p>对于Windows操作系统</p>
-<p>从<strong>控制面板</strong>中访问<strong>凭证管理器</strong>，选择<strong>Windows凭据</strong>，找到<strong>git:<a target="_blank" rel="noopener" href="https://github.com/">https://github.com</a></strong>，点击<strong>编辑</strong>，把上一步复制的密码粘贴到密码处。</p>
-</li>
-<li><p>对于Mac操作系统</p>
-</li>
-</ol>
-<p>Click on the Spotlight icon (magnifying glass) on the right side of the menu bar. Type <strong>Keychain access</strong> then press the Enter key to launch the app =&gt; In Keychain Access, search for =&gt; Find the <strong>internet password</strong> entry for =&gt; Edit or delete the entry accordingly =&gt; You are done<code>github.com</code></p>
-<p>现在将给定记录存入计算机以记住令牌：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global credential.helper cache</span><br></pre></td></tr></table></figure>
-
-<p>如果在进行<code>hexo d</code>操作时，还是提示下面这种错误：</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/hexoderror.png"></p>
-<p>我们就修改根目录的_config.yml文件，把repo修改为https连接的地址</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/%E8%A7%A3%E5%86%B3git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98/configyml.png"></p>
-<p>再次hexo d成功！</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -2823,7 +3159,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
