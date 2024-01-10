@@ -14,7 +14,7 @@ categories: Java诊断工具
 
 ## jvm 相关
 
-- [dashboard](https://arthas.aliyun.com/doc/dashboard.html) - 当前系统的实时数据面板
+- [dashboard](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Dashboard-%E5%91%BD%E4%BB%A4) - 当前系统的实时数据面板
 - [getstatic](https://arthas.aliyun.com/doc/getstatic.html) - 查看类的静态属性
 - [heapdump](https://arthas.aliyun.com/doc/heapdump.html) - dump java heap, 类似 jmap 命令的 heap dump 功能
 - [jvm](https://arthas.aliyun.com/doc/jvm.html) - 查看当前 JVM 的信息
