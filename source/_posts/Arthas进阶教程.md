@@ -1808,6 +1808,59 @@ thread -n 3 -i 5000
 thread -b
 ```
 
+# 案例：获取 Spring 应用运行时配置值
+
+众所周之，Spring 应用的配置注入方式非常多。除了我们熟悉的方式，比如
+
+- System Properties/System Env
+- application.properties/application.yaml
+- spring profiles
+- spring cloud config
+
+还有很多配置注入的方式，令人眼花缭乱。
+
+## 获取运行时具体配置
+
+对于开发人员来说，在运行时怎样确定某个配置是否生效？它的具体值是什么？
+
+用Arthas可以一行命令获取。
+
+比如获取`server.port`的具体值：
+
+```bash
+$ vmtool --action getInstances --className org.springframework.context.ConfigurableApplicationContext --express 'instances[0].getEnvironment().getProperty("server.port")'
+@String[8810]
+```
+
+## 获取具体的配置来源
+
+但是怎样具体是从哪个配置源来的？
+
+1.  对于 spring boot应用，可以打开一个新的 terminal 窗口，执行 `telnet 127.0.0.1 3658`连接上Arthas。
+
+2. 执行下面的 watch 命令
+
+   ```
+   org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource findConfigurationProperty
+   ```
+
+   
+
+3.  在原来窗口用上面的`vmtool`命令来获取`server.port`的值
+
+可以看到 watch 返回结果里有具体的配置来源`application.yml`：
+
+```bash
+$ watch org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource findConfigurationProperty
+Press Q or Ctrl+C to abort.
+Affect(class count: 1 , method count: 2) cost in 217 ms, listenerId: 5
+method=org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource.findConfigurationProperty location=AtExit
+ts=2023-11-27 16:08:07.696; [cost=0.327042ms] result=@ArrayList[
+    @Object[][isEmpty=false;size=1],
+    @ConfigurationPropertySourcesPropertySource[ConfigurationPropertySourcesPropertySource {name='configurationProperties'}],
+    @ConfigurationProperty[[ConfigurationProperty@18fb3ec9 name = server.port, value = 7001, origin = class path resource [application.yml] - 2:9]],
+```
+
 # Exit/Stop
 
 ## reset
