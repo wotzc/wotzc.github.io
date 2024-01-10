@@ -15,30 +15,30 @@ categories: Java诊断工具
 ## jvm 相关
 
 - [dashboard](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Dashboard-%E5%91%BD%E4%BB%A4) - 当前系统的实时数据面板
-- [getstatic](https://arthas.aliyun.com/doc/getstatic.html) - 查看类的静态属性
-- [heapdump](https://arthas.aliyun.com/doc/heapdump.html) - dump java heap, 类似 jmap 命令的 heap dump 功能
-- [jvm](https://arthas.aliyun.com/doc/jvm.html) - 查看当前 JVM 的信息
-- [logger](https://arthas.aliyun.com/doc/logger.html) - 查看和修改 logger
-- [mbean](https://arthas.aliyun.com/doc/mbean.html) - 查看 Mbean 的信息
-- [memory](https://arthas.aliyun.com/doc/memory.html) - 查看 JVM 的内存信息
-- [ognl](https://arthas.aliyun.com/doc/ognl.html) - 执行 ognl 表达式
-- [perfcounter](https://arthas.aliyun.com/doc/perfcounter.html) - 查看当前 JVM 的 Perf Counter 信息
-- [sysenv](https://arthas.aliyun.com/doc/sysenv.html) - 查看 JVM 的环境变量
-- [sysprop](https://arthas.aliyun.com/doc/sysprop.html) - 查看和修改 JVM 的系统属性
-- [thread](https://arthas.aliyun.com/doc/thread.html) - 查看当前 JVM 的线程堆栈信息
-- [vmoption](https://arthas.aliyun.com/doc/vmoption.html) - 查看和修改 JVM 里诊断相关的 option
-- [vmtool](https://arthas.aliyun.com/doc/vmtool.html) - 从 jvm 里查询对象，执行 forceGc
+- [getstatic](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Getstatic-%E5%91%BD%E4%BB%A4) - 查看类的静态属性
+- [heapdump](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#dump-%E5%91%BD%E4%BB%A4) - dump java heap, 类似 jmap 命令的 heap dump 功能
+- [jvm](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Jvm-%E5%91%BD%E4%BB%A4) - 查看当前 JVM 的信息
+- [logger](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Logger-%E5%91%BD%E4%BB%A4) - 查看和修改 logger
+- [mbean](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Mbean-%E5%91%BD%E4%BB%A4) - 查看 Mbean 的信息
+- [memory](http://localhost:4000/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#memory-%E5%91%BD%E4%BB%A4) - 查看 JVM 的内存信息
+- [ognl](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#ognl-%E5%91%BD%E4%BB%A4) - 执行 ognl 表达式
+- [perfcounter](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Perfcounter-%E5%91%BD%E4%BB%A4) - 查看当前 JVM 的 Perf Counter 信息
+- [sysenv](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Sysenv-%E5%91%BD%E4%BB%A4) - 查看 JVM 的环境变量
+- [sysprop](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#sysprop-%E5%91%BD%E4%BB%A4) - 查看和修改 JVM 的系统属性
+- [thread](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#thread-%E5%91%BD%E4%BB%A4) - 查看当前 JVM 的线程堆栈信息
+- [vmoption](http://localhost:4000/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Vmoption-%E5%91%BD%E4%BB%A4) - 查看和修改 JVM 里诊断相关的 option
+- [vmtool](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Vmoption-%E5%91%BD%E4%BB%A4) - 从 jvm 里查询对象，执行 forceGc
 
 ## class/classloader 相关
 
-- [classloader](https://arthas.aliyun.com/doc/classloader.html) - 查看 classloader 的继承树，urls，类加载信息，使用 classloader 去 getResource
-- [dump](https://arthas.aliyun.com/doc/dump.html) - dump 已加载类的 byte code 到特定目录
-- [jad](https://arthas.aliyun.com/doc/jad.html) - 反编译指定已加载类的源码
-- [mc](https://arthas.aliyun.com/doc/mc.html) - 内存编译器，内存编译`.java`文件为`.class`文件
-- [redefine](https://arthas.aliyun.com/doc/redefine.html) - 加载外部的`.class`文件，redefine 到 JVM 里
-- [retransform](https://arthas.aliyun.com/doc/retransform.html) - 加载外部的`.class`文件，retransform 到 JVM 里
-- [sc](https://arthas.aliyun.com/doc/sc.html) - 查看 JVM 已加载的类信息
-- [sm](https://arthas.aliyun.com/doc/sm.html) - 查看已加载类的方法信息
+- [classloader](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Classloader-%E5%91%BD%E4%BB%A4) - 查看 classloader 的继承树，urls，类加载信息，使用 classloader 去 getResource
+- [dump](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#dump-%E5%91%BD%E4%BB%A4) - dump 已加载类的 byte code 到特定目录
+- [jad](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Jad-%E5%91%BD%E4%BB%A4) - 反编译指定已加载类的源码
+- [mc](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#mc) - 内存编译器，内存编译`.java`文件为`.class`文件
+- [redefine](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#redefine) - 加载外部的`.class`文件，redefine 到 JVM 里
+- [retransform](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#retransform-%E5%91%BD%E4%BB%A4) - 加载外部的`.class`文件，retransform 到 JVM 里
+- [sc](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Sc-%E5%91%BD%E4%BB%A4) - 查看 JVM 已加载的类信息
+- [sm](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Sm-%E5%91%BD%E4%BB%A4) - 查看已加载类的方法信息
 
 ## monitor/watch/trace 相关
 
@@ -46,16 +46,16 @@ categories: Java诊断工具
 
 请注意，这些命令，都通过字节码增强技术来实现的，会在指定类的方法中插入一些切面来实现数据统计和观测，因此在线上、预发使用时，请尽量明确需要观测的类、方法以及条件，诊断结束要执行 `stop` 或将增强过的类执行 `reset` 命令。
 
-- [monitor](https://arthas.aliyun.com/doc/monitor.html) - 方法执行监控
-- [stack](https://arthas.aliyun.com/doc/stack.html) - 输出当前方法被调用的调用路径
-- [trace](https://arthas.aliyun.com/doc/trace.html) - 方法内部调用路径，并输出方法路径上的每个节点上耗时
-- [tt](https://arthas.aliyun.com/doc/tt.html) - 方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测
-- [watch](https://arthas.aliyun.com/doc/watch.html) - 方法执行数据观测
+- [monitor](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Monitor-%E5%91%BD%E4%BB%A4) - 方法执行监控
+- [stack](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Stack-%E5%91%BD%E4%BB%A4) - 输出当前方法被调用的调用路径
+- [trace](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#trace-%E5%91%BD%E4%BB%A4) - 方法内部调用路径，并输出方法路径上的每个节点上耗时
+- [tt](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#tt-%E5%91%BD%E4%BB%A4) - 方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测
+- [watch](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#watch-%E5%91%BD%E4%BB%A4) - 方法执行数据观测
 
 ## profiler/火焰图
 
-- [profiler](https://arthas.aliyun.com/doc/profiler.html) - 使用[async-profiler在新窗口打开](https://github.com/jvm-profiling-tools/async-profiler)对应用采样，生成火焰图
-- [jfr](https://arthas.aliyun.com/doc/jfr.html) - 动态开启关闭 JFR 记录
+- [profiler](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Profiler-%E5%91%BD%E4%BB%A4) - 使用[async-profiler在新窗口打开](https://github.com/jvm-profiling-tools/async-profiler)对应用采样，生成火焰图
+- [jfr](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#jfr-%E5%91%BD%E4%BB%A4) - 动态开启关闭 JFR 记录
 
 ## 鉴权
 
@@ -63,13 +63,13 @@ categories: Java诊断工具
 
 ## options
 
-- [options](https://arthas.aliyun.com/doc/options.html) - 查看或设置 Arthas 全局开关
+- [options](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Options-%E5%91%BD%E4%BB%A4) - 查看或设置 Arthas 全局开关
 
 ## 管道
 
 Arthas 支持使用管道对上述命令的结果进行进一步的处理，如`sm java.lang.String * | grep 'index'`
 
-- [grep](https://arthas.aliyun.com/doc/grep.html) - 搜索满足条件的结果
+- [grep](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Grep-%E5%91%BD%E4%BB%A4) - 搜索满足条件的结果
 - plaintext - 将命令的结果去除 ANSI 颜色
 - wc - 按行统计输出结果
 
@@ -86,20 +86,20 @@ Arthas 支持使用管道对上述命令的结果进行进一步的处理，如`
 ## 基础命令
 
 - [base64](https://arthas.aliyun.com/doc/base64.html) - base64 编码转换，和 linux 里的 base64 命令类似
-- [cat](https://arthas.aliyun.com/doc/cat.html) - 打印文件内容，和 linux 里的 cat 命令类似
-- [cls](https://arthas.aliyun.com/doc/cls.html) - 清空当前屏幕区域
-- [echo](https://arthas.aliyun.com/doc/echo.html) - 打印参数，和 linux 里的 echo 命令类似
-- [grep](https://arthas.aliyun.com/doc/grep.html) - 匹配查找，和 linux 里的 grep 命令类似
-- [help](https://arthas.aliyun.com/doc/help.html) - 查看命令帮助信息
-- [history](https://arthas.aliyun.com/doc/history.html) - 打印命令历史
-- [keymap](https://arthas.aliyun.com/doc/keymap.html) - Arthas 快捷键列表及自定义快捷键
-- [pwd](https://arthas.aliyun.com/doc/pwd.html) - 返回当前的工作目录，和 linux 命令类似
-- [quit](https://arthas.aliyun.com/doc/quit.html) - 退出当前 Arthas 客户端，其他 Arthas 客户端不受影响
-- [reset](https://arthas.aliyun.com/doc/reset.html) - 重置增强类，将被 Arthas 增强过的类全部还原，Arthas 服务端关闭时会重置所有增强过的类
-- [session](https://arthas.aliyun.com/doc/session.html) - 查看当前会话的信息
-- [stop](https://arthas.aliyun.com/doc/stop.html) - 关闭 Arthas 服务端，所有 Arthas 客户端全部退出
-- [tee](https://arthas.aliyun.com/doc/tee.html) - 复制标准输入到标准输出和指定的文件，和 linux 里的 tee 命令类似
-- [version](https://arthas.aliyun.com/doc/version.html) - 输出当前目标 Java 进程所加载的 Arthas 版本号
+- [cat](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Cat-%E5%91%BD%E4%BB%A4) - 打印文件内容，和 linux 里的 cat 命令类似
+- [cls](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Cls-%E5%91%BD%E4%BB%A4) - 清空当前屏幕区域
+- [echo](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#echo-%E5%91%BD%E4%BB%A4) - 打印参数，和 linux 里的 echo 命令类似
+- [grep](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Grep-%E5%91%BD%E4%BB%A4) - 匹配查找，和 linux 里的 grep 命令类似
+- [help](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Help-%E5%91%BD%E4%BB%A4) - 查看命令帮助信息
+- [history](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#history-%E5%91%BD%E4%BB%A4) - 打印命令历史
+- [keymap](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Keymap-%E5%91%BD%E4%BB%A4) - Arthas 快捷键列表及自定义快捷键
+- [pwd](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Pwd-%E5%91%BD%E4%BB%A4) - 返回当前的工作目录，和 linux 命令类似
+- [quit](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Quit-stop-%E5%91%BD%E4%BB%A4) - 退出当前 Arthas 客户端，其他 Arthas 客户端不受影响
+- [reset](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Reset-%E5%91%BD%E4%BB%A4) - 重置增强类，将被 Arthas 增强过的类全部还原，Arthas 服务端关闭时会重置所有增强过的类
+- [session](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#session-%E5%91%BD%E4%BB%A4) - 查看当前会话的信息
+- [stop](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#Quit-stop-%E5%91%BD%E4%BB%A4) - 关闭 Arthas 服务端，所有 Arthas 客户端全部退出
+- [tee](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#tee-%E5%91%BD%E4%BB%A4) - 复制标准输入到标准输出和指定的文件，和 linux 里的 tee 命令类似
+- [version](https://tianzhencai.xyz/2024/01/08/Arthas-%E5%91%BD%E4%BB%A4/#version-%E5%91%BD%E4%BB%A4) - 输出当前目标 Java 进程所加载的 Arthas 版本号
 
 ---------------
 
@@ -289,6 +289,78 @@ sysenv | grep JAVA -A2 -B3
 # Dashboard 命令
 
 dashboard 命令可以查看当前系统的实时数据面板。
+
+当运行在 Ali-tomcat 时，会显示当前 tomcat 的实时信息，如 HTTP 请求的 qps, rt, 错误数, 线程池信息等等。
+
+## 参数说明
+
+| 参数名称 | 参数说明                                 |
+| -------: | :--------------------------------------- |
+|     [i:] | 刷新实时数据的时间间隔 (ms)，默认 5000ms |
+|     [n:] | 刷新实时数据的次数                       |
+
+## 使用参考
+
+```text
+$ dashboard
+ID   NAME                           GROUP           PRIORITY   STATE     %CPU      DELTA_TIME TIME      INTERRUPTE DAEMON
+-1   C2 CompilerThread0             -               -1         -         1.55      0.077      0:8.684   false      true
+53   Timer-for-arthas-dashboard-07b system          5          RUNNABLE  0.08      0.004      0:0.004   false      true
+22   scheduling-1                   main            5          TIMED_WAI 0.06      0.003      0:0.287   false      false
+-1   C1 CompilerThread0             -               -1         -         0.06      0.003      0:2.171   false      true
+-1   VM Periodic Task Thread        -               -1         -         0.03      0.001      0:0.092   false      true
+49   arthas-NettyHttpTelnetBootstra system          5          RUNNABLE  0.02      0.001      0:0.156   false      true
+16   Catalina-utility-1             main            1          TIMED_WAI 0.0       0.000      0:0.029   false      false
+-1   G1 Young RemSet Sampling       -               -1         -         0.0       0.000      0:0.019   false      true
+17   Catalina-utility-2             main            1          WAITING   0.0       0.000      0:0.025   false      false
+34   http-nio-8080-ClientPoller     main            5          RUNNABLE  0.0       0.000      0:0.016   false      true
+23   http-nio-8080-BlockPoller      main            5          RUNNABLE  0.0       0.000      0:0.011   false      true
+-1   VM Thread                      -               -1         -         0.0       0.000      0:0.032   false      true
+-1   Service Thread                 -               -1         -         0.0       0.000      0:0.006   false      true
+-1   GC Thread#5                    -               -1         -         0.0       0.000      0:0.043   false      true
+Memory                     used     total    max      usage    GC
+heap                       36M      70M      4096M    0.90%    gc.g1_young_generation.count   12
+g1_eden_space              6M       18M      -1       33.33%                                  86
+g1_old_gen                 30M      50M      4096M    0.74%    gc.g1_old_generation.count     0
+g1_survivor_space          491K     2048K    -1       24.01%   gc.g1_old_generation.time(ms)  0
+nonheap                    66M      69M      -1       96.56%
+codeheap_'non-nmethods'    1M       2M       5M       22.39%
+metaspace                  46M      47M      -1       98.01%
+Runtime
+os.name                                                        Mac OS X
+os.version                                                     10.15.4
+java.version                                                   15
+java.home                                                      /Library/Java/JavaVirtualMachines/jdk-15.jdk/Contents/Home
+systemload.average                                             10.68
+processors                                                     8
+uptime                                                         272s
+```
+
+## 数据说明
+
+- ID: Java 级别的线程 ID，注意这个 ID 不能跟 jstack 中的 nativeID 一一对应。
+- NAME: 线程名
+- GROUP: 线程组名
+- PRIORITY: 线程优先级, 1~10 之间的数字，越大表示优先级越高
+- STATE: 线程的状态
+- CPU%: 线程的 cpu 使用率。比如采样间隔 1000ms，某个线程的增量 cpu 时间为 100ms，则 cpu 使用率=100/1000=10%
+- DELTA_TIME: 上次采样之后线程运行增量 CPU 时间，数据格式为`秒`
+- TIME: 线程运行总 CPU 时间，数据格式为`分:秒`
+- INTERRUPTED: 线程当前的中断位状态
+- DAEMON: 是否是 daemon 线程
+
+### JVM 内部线程
+
+Java 8 之后支持获取 JVM 内部线程 CPU 时间，这些线程只有名称和 CPU 时间，没有 ID 及状态等信息（显示 ID 为-1）。 通过内部线程可以观测到 JVM 活动，如 GC、JIT 编译等占用 CPU 情况，方便了解 JVM 整体运行状况。
+
+- 当 JVM 堆(heap)/元数据(metaspace)空间不足或 OOM 时，可以看到 GC 线程的 CPU 占用率明显高于其他的线程。
+- 当执行`trace/watch/tt/redefine`等命令后，可以看到 JIT 线程活动变得更频繁。因为 JVM 热更新 class 字节码时清除了此 class 相关的 JIT 编译结果，需要重新编译。
+
+JVM 内部线程包括下面几种：
+
+- JIT 编译线程: 如 `C1 CompilerThread0`, `C2 CompilerThread0`
+- GC 线程: 如`GC Thread0`, `G1 Young RemSet Sampling`
+- 其它内部线程: 如`VM Periodic Task Thread`, `VM Thread`, `Service Thread`
 
 ---------
 
@@ -1741,13 +1813,13 @@ $ ognl '#value1=@System@getProperty("java.home"), #value2=@System@getProperty("j
 | job-timeout            | 1d     | 异步后台任务的默认超时时间，超过这个时间，任务自动停止；比如设置 1d, 2h, 3m, 25s，分别代表天、小时、分、秒 |
 | print-parent-fields    | true   | 是否打印在 parent class 里的 filed                           |
 
-### 查看所有的 options
+## 查看所有的 options
 
 ```
 options
 ```
 
-### 获取 option 的值
+## 获取 option 的值
 
 ```
 options json-format
@@ -1755,7 +1827,7 @@ options json-format
 
 > 默认情况下`json-format` 为 false，如果希望`watch` /`tt` 等命令结果以 json 格式输出，则可以设置`json-format` 为 true。
 
-### 设置指定的 option
+## 设置指定的 option
 
 例如，想打开执行结果存日志功能首先查看日志，发现无记录：
 
@@ -1774,8 +1846,6 @@ options save-result true
 ```
 cat /root/logs/arthas-cache/result.log
 ```
-
--------------
 
 # Perfcounter 命令
 
@@ -2133,7 +2203,7 @@ Affect(class-cnt:1 , method-cnt:0) cost in 9 ms.
 
 “Search-Class”的简写，这个命令能搜索出所有已经加载到 JVM 中的 Class 信息，这个命令支持的参数有 `[d]` 、`[E]` 、`[f]` 和 `[x:]` 。
 
-### 参数说明
+## 参数说明
 
 | 参数名称              | 参数说明                                                     |
 | --------------------- | ------------------------------------------------------------ |
@@ -2153,12 +2223,12 @@ Affect(class-cnt:1 , method-cnt:0) cost in 9 ms.
 
 > sc 默认开启了子类匹配功能，也就是说所有当前类的子类也会被搜索出来，想要精确的匹配，请打开`options disable-sub-class true` 开关
 
-### 使用参考
+## 使用参考
 
 - 模糊搜索 `sc demo.*`
 - 打印类的详细信息 `sc -d demo.MathGame`
 
-#### 指定 classLoader
+## 指定 classLoader
 
 注意 hashcode 是变化的，需要先查看当前的 ClassLoader 信息，提取对应 ClassLoader 的 hashcode。
 如果你使用`-c` ，你需要手动输入 hashcode：`-c <hashcode>`
@@ -3443,7 +3513,7 @@ vmtool --action interruptThread -t 1
 
 让你能方便的观察到指定方法的调用情况。能观察到的范围为：`返回值` 、`抛出异常` 、`入参` ，通过编写 OGNL 表达式进行对应变量的查看。
 
-### 参数说明
+## 参数说明
 
 watch 的参数比较多，主要是因为它能在 4 个不同的场景观察对象
 
@@ -3474,9 +3544,9 @@ watch 的参数比较多，主要是因为它能在 4 个不同的场景观察�
 - 这里要注意`方法入参` 和`方法出参` 的区别，有可能在中间被修改导致前后不一致，除了 `-b` 事件点 `params` 代表方法入参外，其余事件都代表方法出参
 - 当使用 `-b` 时，由于观察事件点是在方法调用前，此时返回值或异常均不存在
 
-### 使用参考
+## 使用参考
 
-#### 观察方法出参、this 对象和返回值
+### 观察方法出参、this 对象和返回值
 
 > 观察表达式，默认值是`{params, target, returnObj}` 。
 
@@ -3489,7 +3559,7 @@ watch demo.MathGame primeFactors -x 2
 - 从运行结果里，说明函数被执行了两次，第一次结果是`location=AtExceptionExit` ，说明函数抛出异常了，因此`returnObj` 是 null
 - 在第二次结果里是`location=AtExit` ，说明函数正常返回，因此可以看到`returnObj` 结果是一个 ArrayList
 
-#### 观察方法入参
+### 观察方法入参
 
 ```
 watch demo.MathGame primeFactors "{params,returnObj}" -x 2 -b
@@ -3499,7 +3569,7 @@ watch demo.MathGame primeFactors "{params,returnObj}" -x 2 -b
 
 - 对比前一个例子，返回值为空（事件点为方法执行前，因此获取不到返回值）
 
-#### 同时观察方法调用前和方法返回后
+### 同时观察方法调用前和方法返回后
 
 ```
 watch demo.MathGame primeFactors "{params,target,returnObj}" -x 2 -b -s -n 2
@@ -3509,7 +3579,7 @@ watch demo.MathGame primeFactors "{params,target,returnObj}" -x 2 -b -s -n 2
 - 这里输出结果中，第一次输出的是方法调用前的观察表达式的结果，第二次输出的是方法返回后的表达式的结果
 - 结果的输出顺序和事件发生的先后顺序一致，和命令中 `-s -b` 的顺序无关
 
-#### 调整`-x` 的值，观察具体的方法参数值
+### 调整`-x` 的值，观察具体的方法参数值
 
 ```
 watch demo.MathGame primeFactors "{params,target}" -x 3
@@ -3519,7 +3589,7 @@ watch demo.MathGame primeFactors "{params,target}" -x 3
 
 - `-x` 表示遍历深度，可以调整来打印具体的参数和结果内容，默认值是 1。
 
-#### 条件表达式的例子
+### 条件表达式的例子
 
 ```
 watch demo.MathGame primeFactors "{params[0],target}" "params[0]<0"
@@ -3547,7 +3617,7 @@ watch demo.MathGame primeFactors '{params, params.length}' 'params.length==1'
 
 按 `Q` 或者 `Ctrl+c` 退出
 
-#### 观察异常信息的例子
+### 观察异常信息的例子
 
 ```
 watch demo.MathGame primeFactors "{params[0],throwExp}" -e -x 2
@@ -3566,7 +3636,7 @@ watch demo.MathGame primeFactors '{params, throwExp}' '#msg=throwExp.toString(),
 
 按 `Q` 或者 `Ctrl+c` 退出
 
-#### 按照耗时进行过滤
+### 按照耗时进行过滤
 
 ```
 watch demo.MathGame primeFactors '{params, returnObj}' '#cost>200' -x 2
@@ -3576,7 +3646,7 @@ watch demo.MathGame primeFactors '{params, returnObj}' '#cost>200' -x 2
 
 - `#cost>200` (单位是`ms` ) 表示只有当耗时大于 200ms 时才会输出，过滤掉执行时间小于 200ms 的调用
 
-#### 观察当前对象中的属性
+### 观察当前对象中的属性
 
 ```
 watch demo.MathGame primeFactors 'target'
@@ -3600,3 +3670,111 @@ watch demo.MathGame primeFactors 'target.illegalArgumentCount'
 通过 `jad demo.MathGame main` 输出 `demo.MathGame` 类的 `main` 方法
 
 计算输出结果行数 `jad demo.MathGame main | wc -l`
+
+# memory 命令
+
+查看 JVM 内存信息。
+
+## 使用参考
+
+```text
+$ memory
+Memory                           used      total      max        usage
+heap                             32M       256M       4096M      0.79%
+g1_eden_space                    11M       68M        -1         16.18%
+g1_old_gen                       17M       184M       4096M      0.43%
+g1_survivor_space                4M        4M         -1         100.00%
+nonheap                          35M       39M        -1         89.55%
+codeheap_'non-nmethods'          1M        2M         5M         20.53%
+metaspace                        26M       27M        -1         96.88%
+codeheap_'profiled_nmethods'     4M        4M         117M       3.57%
+compressed_class_space           2M        3M         1024M      0.29%
+codeheap_'non-profiled_nmethods' 685K      2496K      120032K    0.57%
+mapped                           0K        0K         -          0.00%
+direct                           48M       48M        -          100.00%
+```
+
+------
+
+# auth 命令
+
+> 提示
+>
+> 验证当前会话
+
+## 配置用户名和密码
+
+在 attach 时，可以在命令行指定密码。比如：
+
+```text
+java -jar arthas-boot.jar --password ppp
+```
+
+- 可以通过 `--username` 选项来指定用户，默认值是`arthas`。
+
+- 也可以在 `arthas.properties` 里中配置 username/password。命令行的优先级大于配置文件。
+
+- 如果只配置`username`，没有配置`password`，则会生成随机密码，打印在`~/logs/arthas/arthas.log`中
+
+  ```text
+  Using generated security password: 0vUBJpRIppkKuZ7dYzYqOKtranj4unGh
+  ```
+
+## 本地连接不鉴权
+
+默认情况下，在`arthas.properties`文件里有配置：
+
+```text
+arthas.localConnectionNonAuth=true
+```
+
+当配置密码时，使用本地连接，也不需要鉴权。默认配置值是 true，方便本地连接使用。只有远程连接时，才需要鉴权。
+
+## 在 telnet console 里鉴权
+
+连接到 arthas 后，直接执行命令会提示需要鉴权：
+
+```bash
+[arthas@37430]$ help
+Error! command not permitted, try to use 'auth' command to authenticates.
+```
+
+使用`auth`命令来鉴权，成功之后可以执行其它命令。
+
+```text
+[arthas@37430]$ auth ppp
+Authentication result: true
+```
+
+- 可以通过 `--username` 选项来指定用户，默认值是`arthas`。
+
+## Web console 密码验证
+
+打开浏览器，会有弹窗提示需要输入 用户名 和 密码。
+
+成功之后，则可以直接连接上 web console。
+
+## HTTP API 验证
+
+### Authorization Header 方式（推荐）
+
+Arthas 采用的是 HTTP 标准的 Basic Authorization，客户端请求时增加对应的 header 即可。
+
+- 参考：[https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication在新窗口打开](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+
+例如，用户名是：`admin`，密码是 `admin`，则组合为字符串： `admin:admin`，base64 结果是： `YWRtaW46YWRtaW4=`，则 HTTP 请求增加`Authorization` header：
+
+```bash
+curl 'http://localhost:8563/api' \
+  -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
+  --data-raw '{"action":"exec","command":"version"}'
+```
+
+### URL 参数传递方式
+
+为了方便各种特殊情况，支持了以 parameters 方式传递 username 和 password。比如：
+
+```bash
+curl 'http://localhost:8563/api?password=admin' \
+  --data-raw '{"action":"exec","command":"version"}'
+```

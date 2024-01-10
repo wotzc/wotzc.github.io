@@ -515,7 +515,7 @@ Affect(row-cnt:1) cost in 3 ms.
 
 # Jad
 
-可以通过 [jad 命令](https://arthas.aliyun.com/doc/jad.html) 来反编译代码：
+可以通过 `jad` 命令来反编译代码：
 
 ```sh
 jad com.example.demo.arthas.user.UserController
@@ -1181,7 +1181,7 @@ com.example.demo.arthas.user.UserController
 
 ### 热修改代码结果
 
-`redefine` 成功之后，再次访问 [/user/0](https://8cdd3eb6-7433-4af4-9145-7457a12aa079-10-244-4-241-80.papa.r.killercoda.com/user/0) ，结果是：
+`redefine` 成功之后，再次访问 `/user/0`，结果是：
 
 ```json
 {
@@ -1584,7 +1584,7 @@ trace javax.servlet.Filter *
 
 输入 `Q` 或者 `Ctrl+C` 退出 watch 命令。
 
-### 通过 [stack](https://arthas.aliyun.com/doc/stack.html) 获取调用栈
+### 通过 stack 获取调用栈
 
 上面是通过`trace` 命令来获取信息，从结果里，我们可以知道通过`stack` 跟踪`HttpServletResponse:sendError()` ，同样可以知道是哪个`Filter` 返回了`401`
 
