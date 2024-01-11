@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,6 +179,740 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Pandas%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/21/Pandas%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">Pandas教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-21 11:00:04" itemprop="dateCreated datePublished" datetime="2023-08-21T11:00:04+08:00">2023-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 16:57:12" itemprop="dateModified" datetime="2023-09-05T16:57:12+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>pandas 是一个 Python 包，它提供快速、灵活且富有表现力的数据结构，旨在使“关系”或“标记”数据的处理变得简单直观。 它的目标是成为用 Python 进行实际、真实世界数据分析的基本高级构建块。 此外，它还有更广泛的目标，即成为任何语言中最强大、最灵活的开源数据分析/操作工具。 它已经在朝着这个目标前进。</p>
+<p>pandas 非常适合下列这些类型的数据：</p>
+<ul>
+<li>具有异构类型列的表格数据，如 SQL 表或 Excel 电子表格</li>
+<li>有序和无序（不一定是固定频率）时间序列数据</li>
+<li>带有行和列标签的任意矩阵数据（同质类型或异构）</li>
+<li>任何其他形式的观察/统计数据集。数据根本不需要被标记就可以放入 pandas 数据结构中</li>
+</ul>
+<h1 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h1><p>pandas 的两种主要数据结构<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html#pandas.Series"><code>Series</code></a>（一维）和<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a>（二维）处理金融、统计、社会科学和许多工程领域的绝大多数典型用例。对于 R 用户，<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a>提供 R <code>data.frame</code>提供的一切以及更多。<a target="_blank" rel="noopener" href="https://numpy.org/">pandas 构建在NumPy</a>之上，旨在与许多其他第三方库在科学计算环境中良好集成。</p>
+<p>以下是 <code>pandas</code> 擅长的一些事情：</p>
+<ul>
+<li>轻松处理浮点和非浮点数据中的缺失数据（表示为 <code>NaN</code>、<code>NA</code>或<code>NaT</code>）</li>
+<li>大小可变性：可以从 <code>DataFrame</code> 和更高维对象中插入和删除列</li>
+<li>自动和精确的数据对齐：对象可以准确地与一组数据对齐，或者用户可以简单地忽略数据并让<code>Series</code>、<code>DataFrame</code>等在计算中自动为您对齐数据</li>
+<li>强大、灵活的分组功能，可对数据集执行拆分-应用-组合操作，以聚合和转换数据</li>
+<li>可以轻松地将其他 <code>Python</code> 和 <code>NumPy</code> 数据结构中的不规则、不同索引的数据转换为 <code>DataFrame</code> 对象</li>
+<li>基于智能标签的切片、高级索引和大数据集的子集</li>
+<li>直观的合并和连接数据集</li>
+<li>灵活的重塑和翻转数据集</li>
+<li>坐标轴的分层标签（每个刻度可能有多个标签）</li>
+<li>强大的<code>IO</code>工具，用于从平面文件<code>(CSV and delimited</code>)、<code>Excel</code>文件、数据集以及从超快<code>HDF5</code>格式保存或加载的数据</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>pandas 可以通过<a target="_blank" rel="noopener" href="https://pypi.org/project/pandas">PyPI</a>中的 pip 安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pandas</span><br></pre></td></tr></table></figure>
+
+<h1 id="pandas-处理什么样的数据？"><a href="#pandas-处理什么样的数据？" class="headerlink" title="pandas 处理什么样的数据？"></a>pandas 处理什么样的数据？</h1><h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+<h2 id="pandas-数据表表示"><a href="#pandas-数据表表示" class="headerlink" title="pandas 数据表表示"></a>pandas 数据表表示</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/table_dataframe.png" style="zoom: 50%;" />
+
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame(</span><br><span class="line">    &#123;<span class="string">&quot;Name&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">            <span class="string">&quot;李四&quot;</span>,</span><br><span class="line">            <span class="string">&quot;王五&quot;</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;Age&quot;</span>: [<span class="number">22</span>, <span class="number">24</span>, <span class="number">26</span>],</span><br><span class="line">        <span class="string">&quot;Sex&quot;</span>: [<span class="string">&quot;男&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;女&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print(df)</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_print.png" style="zoom:50%;" />
+
+<p>在电子表格软件中，我们数据的表格表示看起来非常相似：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/df_excel.png" style="zoom:50%;" />
+
+<h2 id="DataFrame中每一列都是一个-Series"><a href="#DataFrame中每一列都是一个-Series" class="headerlink" title="DataFrame中每一列都是一个 Series"></a>DataFrame中每一列都是一个 Series</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/01_table_series.png" style="zoom:50%;" />
+
+<p>如果只对<code>Name</code>这一列的数据感兴趣：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pring(df[<span class="string">&quot;Age&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0    22</span><br><span class="line">1    24</span><br><span class="line">2    26</span><br><span class="line">Name: Age, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>当选择<code>DataFrame</code>中的单列时，结果是 <code>Series</code>。要选择列，请使用方括号之间的列标签<code>[]</code>。</p>
+<p>创建<code>Series</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ages = pd.Series([<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>], name=<span class="string">&quot;Age&quot;</span>)</span><br><span class="line">print(ages)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0    20</span><br><span class="line">1    30</span><br><span class="line">2    40</span><br><span class="line">Name: Age, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-DataFrame-或-Series-做一些事情"><a href="#使用-DataFrame-或-Series-做一些事情" class="headerlink" title="使用 DataFrame 或 Series 做一些事情"></a>使用 DataFrame 或 Series 做一些事情</h2><p>我想知道谁的年龄最大？</p>
+<p><code>DataFrame</code>我们可以通过选择<code>Age</code>列并应用<code>max()</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ages = pd.Series([<span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>], name=<span class="string">&quot;Age&quot;</span>)</span><br><span class="line">print(ages.<span class="built_in">max</span>())</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">40</span><br></pre></td></tr></table></figure>
+
+<p><code>DataFrame</code>和<code>Series</code>还有许多其他函数供我们使用，可以通过下面链接进行查看。</p>
+<p><a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/reference/series.html">Series</a></p>
+<p><a target="_blank" rel="noopener" href="https://pandas.pydata.org/docs/reference/frame.html">DataFrame</a></p>
+<p>假如我们只对数据表的数值数据的一些基本统计感兴趣：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(df.describe())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        Age</span><br><span class="line">count   3.0</span><br><span class="line">mean   24.0</span><br><span class="line">std     2.0</span><br><span class="line">min    22.0</span><br><span class="line">25%    23.0</span><br><span class="line">50%    24.0</span><br><span class="line">75%    25.0</span><br><span class="line">max    26.0</span><br></pre></td></tr></table></figure>
+
+<p><code>describe()</code> 方法可快速浏览 <code>DataFrame</code> 中的数字数据。由于<code>Name</code>和<code>Sex</code>列是文本数据，因此 <code>describe()</code> 方法默认不考虑这两列。</p>
+<hr>
+<h1 id="如何读写表格数据？"><a href="#如何读写表格数据？" class="headerlink" title="如何读写表格数据？"></a>如何读写表格数据？</h1><p>数据集：</p>
+<p>本教程使用<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download">成人人口普查收入</a>数据集，存储为 <code>csv 文件</code>。如下所示:</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/dataframe_dataset.png"></p>
+<p><code>Pandas</code>提供了<code>read_csv()</code>函数将Excel文件读取为<code>DataFrame</code>对象。</p>
+<p><code>pandas</code> 支持许多不同的文件格式或开箱即用的数据源（<code>csv</code>、<code>excel</code>、<code>sql</code>、<code>json</code>、<code>parquet</code>…），读取每个文件格式或数据源都使用带有前缀<code>read_*</code>的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_csv(<span class="string">&quot;data/adult.csv&quot;</span>)</span><br><span class="line">print(adult)</span><br></pre></td></tr></table></figure>
+
+<p>Out：</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/read_excel.png"></p>
+<p>请确保读完数据之后总是有一个数据检查。显示 <code>DataFrame</code> 时，默认显示前 5 行和后 5 行。</p>
+<p>要查看 DataFrame 的前 N 行，请使用该 <code>head()</code> 方法并以所需的行数作为参数。</p>
+<p>我想查看 <code>pandas</code> <code>DataFrame</code> 的前 8 行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.head(<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   age  workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   90          ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   82    Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   66          ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54    Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41    Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">5   34    Private  216864  ...             45   United-States  &lt;&#x3D;50K</span><br><span class="line">6   38    Private  150601  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">7   74  State-gov   88638  ...             20   United-States   &gt;50K</span><br></pre></td></tr></table></figure>
+
+<p>对最后 N 行感兴趣吗？pandas也提供了一种  <code>tail() </code>方法。例如，<code>adult.tail(10)</code>将返回 <code>DataFrame</code> 的最后 10 行。</p>
+<p>可以通过请求 <code>pandas</code>  <code>dtypes</code> 属性来检查 <code>pandas</code> 如何解释每个列数据类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.dtypes)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">age                int64</span><br><span class="line">workclass         object</span><br><span class="line">fnlwgt             int64</span><br><span class="line">education         object</span><br><span class="line">education.num      int64</span><br><span class="line">marital.status    object</span><br><span class="line">occupation        object</span><br><span class="line">relationship      object</span><br><span class="line">race              object</span><br><span class="line">sex               object</span><br><span class="line">capital.gain       int64</span><br><span class="line">capital.loss       int64</span><br><span class="line">hours.per.week     int64</span><br><span class="line">native.country    object</span><br><span class="line">income            object</span><br><span class="line">dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>对于每一列，都会列出所使用的数据类型。其中的数据类型<code>DataFrame</code>为整数 ( <code>int64</code>)和字符串 ( <code>object</code>)。</p>
+<p>将<code>DataFrame</code>保存为Excel文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adult.to_excel(&quot;adult.xlsx&quot;, sheet_name&#x3D;&quot;person&quot;, index&#x3D;False)</span><br></pre></td></tr></table></figure>
+
+<p><code> read_*</code>函数常用于读取函数到<code>Pandas</code>中，而<code>to_*</code>函数常用于存储数据。</p>
+<p>该<code>to_excel()</code>方法将数据存储为 <code>Excel</code> 文件。在此示例中，<code>sheet_name</code>名为<em>“person”</em>而不是默认的<em>“Sheet1”</em>。通过设置 <code>index=False</code>行索引标签不会保存在电子表格中。</p>
+<p>读取函数<code>read_excel()</code>会将数据重新加载到 <code>DataFrame</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;adult.xlsx&quot;</span>)</span><br><span class="line">print(adult)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">       age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0       90         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1       82   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2       66         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3       54   Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4       41   Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">...    ...       ...     ...  ...            ...             ...    ...</span><br><span class="line">32556   22   Private  310152  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">32557   27   Private  257302  ...             38   United-States  &lt;&#x3D;50K</span><br><span class="line">32558   40   Private  154374  ...             40   United-States   &gt;50K</span><br><span class="line">32559   58   Private  151910  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">32560   22   Private  201490  ...             20   United-States  &lt;&#x3D;50K</span><br></pre></td></tr></table></figure>
+
+<p>我对 <code>DataFrame</code> 的技术摘要感兴趣</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.info())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span><br><span class="line">RangeIndex: 32561 entries, 0 to 32560</span><br><span class="line">Data columns (total 15 columns):</span><br><span class="line"> #   Column          Non-Null Count  Dtype </span><br><span class="line">---  ------          --------------  ----- </span><br><span class="line"> 0   age             32561 non-null  int64 </span><br><span class="line"> 1   workclass       32561 non-null  object</span><br><span class="line"> 2   fnlwgt          32561 non-null  int64 </span><br><span class="line"> 3   education       32561 non-null  object</span><br><span class="line"> 4   education.num   32561 non-null  int64 </span><br><span class="line"> 5   marital.status  32561 non-null  object</span><br><span class="line"> 6   occupation      32561 non-null  object</span><br><span class="line"> 7   relationship    32561 non-null  object</span><br><span class="line"> 8   race            32561 non-null  object</span><br><span class="line"> 9   sex             32561 non-null  object</span><br><span class="line"> 10  capital.gain    32561 non-null  int64 </span><br><span class="line"> 11  capital.loss    32561 non-null  int64 </span><br><span class="line"> 12  hours.per.week  32561 non-null  int64 </span><br><span class="line"> 13  native.country  32561 non-null  object</span><br><span class="line"> 14  income          32561 non-null  object</span><br><span class="line">dtypes: int64(6), object(9)</span><br><span class="line">memory usage: 3.7+ MB</span><br></pre></td></tr></table></figure>
+
+<p><code>info()</code>方法提供了有关 <code>DataFrame</code> 的技术信息 ，因此让我们对输出作出更详细地解释：</p>
+<ul>
+<li>它确实是一个<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a></li>
+<li>有 32561 个<code>entries</code>，即 32561 行</li>
+<li>每行都有一个行标签（也称为<code>index</code>），其值范围为 0 到 32560</li>
+<li>该表有 15列。大多数列的每一行都有一个值（所有 32561 个值都是<code>non-null</code>）</li>
+<li><code>workclass</code> <code>education</code> <code>marital.status</code> <code>occupation</code> <code>relationship</code>  <code>race</code> <code>sex</code> <code>native.country</code> <code>income</code>列都是由文本数据组成（String 又称 Object）</li>
+<li>其他列是数值数据，其中一些是整数（又名<code>integer</code>）</li>
+<li>不同列中的数据类型（字符、整数……）通过<code>dtypes</code>列出</li>
+<li>还提供了用于保存 DataFrame 的大致 RAM </li>
+</ul>
+<hr>
+<h1 id="选择DataFrame的子集"><a href="#选择DataFrame的子集" class="headerlink" title="选择DataFrame的子集"></a>选择DataFrame的子集</h1><h2 id="如何选择DataFrame的特定列？"><a href="#如何选择DataFrame的特定列？" class="headerlink" title="如何选择DataFrame的特定列？"></a>如何选择DataFrame的特定列？</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/03_subset_columns.png" style="zoom:50%;" />
+
+<p>假如我们只对<code>Age</code>感兴趣:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;adult.xlsx&quot;</span>)</span><br><span class="line">adult_subset = adult.head()</span><br><span class="line">print(adult_subset[<span class="string">&quot;age&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0    90</span><br><span class="line">1    82</span><br><span class="line">2    66</span><br><span class="line">3    54</span><br><span class="line">4    41</span><br><span class="line">Name: age, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p><code>DataFrame</code> 中的每一列都是一个<code>Series</code>。当选择单个列时，返回的对象是 <code>pandas Series</code>。我们可以通过检查输出的类型来验证这一点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">type</span>(adult[<span class="string">&quot;age&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;pandas.core.series.Series&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>看看<code>shape</code>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult[<span class="string">&quot;age&quot;</span>].shape)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(5,)</span><br></pre></td></tr></table></figure>
+
+<p><code>DataFrame.shape</code>是 <code>Series</code>、<code>DataFram</code> 的一个属性。<code>DataFrame</code>包含行数和列数：(nrows, ncolumns)。pandas <code>Series</code> 是一维的，仅返回行数。</p>
+<p>假如对年龄和性别感兴趣：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age_sex = adult[[<span class="string">&quot;age&quot;</span>, <span class="string">&quot;sex&quot;</span>]]</span><br><span class="line">print(age_sex)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   age     sex</span><br><span class="line">0   90  Female</span><br><span class="line">1   82  Female</span><br><span class="line">2   66  Female</span><br><span class="line">3   54  Female</span><br><span class="line">4   41  Female</span><br></pre></td></tr></table></figure>
+
+<div class="note success no-icon"><p>要选择多个列，请在选择括号内使用列名称列表<code>[]</code>。</p>
+</div>
+
+
+
+<p>返回的数据类型是 <code>pandas DataFrame</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">type</span>(age_sex))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>In:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(age_sex.shape)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(5, 2)</span><br></pre></td></tr></table></figure>
+
+<p>返回的<code>DataFrame</code>具有5 行 2 列。</p>
+<hr>
+<h2 id="如何选择DataFrame的特定行？"><a href="#如何选择DataFrame的特定行？" class="headerlink" title="如何选择DataFrame的特定行？"></a>如何选择DataFrame的特定行？</h2><p>假如对 60岁以上的客户感兴趣。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult[adult[<span class="string">&quot;age&quot;</span>] &gt; <span class="number">60</span>])</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   90         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   82   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   66         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br></pre></td></tr></table></figure>
+
+<p>括号内的条件 <code>adult[&quot;age&quot;] &gt; 60</code> 检查哪些行 <code>Age</code> 列的值大于 60：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult[<span class="string">&quot;age&quot;</span>] &gt; <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1     True</span><br><span class="line">2     True</span><br><span class="line">3    False</span><br><span class="line">4    False</span><br><span class="line">Name: age, dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>条件表达式（也可以是 <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>,… ）的输出实际上是一组<code>pandas Series</code>的布尔值（<code>True</code>或<code>False</code>），</p>
+<p>其行数与原始 <code>DataFrame</code> 相同 。这样的一系列布尔值可用于将其放在选择括号 [] 之间来过滤 DataFrame， 仅选择值为 <code>True</code> 的行。</p>
+<p>假如我们只对<code>native.country</code>是<code>China</code>和<code>India</code>的用户感兴趣。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">country = adult[adult[<span class="string">&quot;native.country&quot;</span>].isin([<span class="string">&quot;China&quot;</span>, <span class="string">&quot;India&quot;</span>])]</span><br><span class="line">print(country.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     age         workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">63    51  Self-emp-not-inc  160724  ...             40           China   &gt;50K</span><br><span class="line">90    39           Private  198654  ...             67           India   &gt;50K</span><br><span class="line">214   42      Self-emp-inc   23510  ...             60           India   &gt;50K</span><br><span class="line">244   64           Private  149044  ...             60           China  &lt;&#x3D;50K</span><br><span class="line">377   30           Private  315640  ...             40           China   &gt;50K</span><br></pre></td></tr></table></figure>
+
+<p>与条件表达式类似，<code>isin()</code> 条件函数为匹配条件列表中的每一行返回 <code>True</code>。要根据此类函数过滤行，请使用括号内的条件函数，括号内的条件函数检查<code>native.country</code>是<code>China</code>或<code>India</code>的行。</p>
+<p>与下列等价:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">country = adult[(adult[<span class="string">&quot;native.country&quot;</span>] == <span class="string">&quot;China&quot;</span>) | (adult[<span class="string">&quot;native.country&quot;</span>] == <span class="string">&quot;India&quot;</span>)]</span><br><span class="line">print(country.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     age         workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">63    51  Self-emp-not-inc  160724  ...             40           China   &gt;50K</span><br><span class="line">90    39           Private  198654  ...             67           India   &gt;50K</span><br><span class="line">214   42      Self-emp-inc   23510  ...             60           India   &gt;50K</span><br><span class="line">244   64           Private  149044  ...             60           China  &lt;&#x3D;50K</span><br><span class="line">377   30           Private  315640  ...             40           China   &gt;50K</span><br></pre></td></tr></table></figure>
+
+<div class="note success no-icon"><p>组合多个条件语句时，每个条件必须用括号 <code style="color:red;font-family:bold">()</code> 括起来。 而且，不能使用<code style="color:red;font-family:bold"> or </code>或<code style="color:red;font-family:bold"> and </code>，而需要使用或运算符<code style="color:red;font-family:bold">  | </code>以及与运算符<code style="color:red;font-family:bold">  & </code>。</p>
+</div>
+
+<p>假如我们只对年龄已知的用户感兴趣。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adult &#x3D; pd.read_excel(&quot;adult.xlsx&quot;)</span><br><span class="line">age_not_no &#x3D; adult[adult[&quot;age&quot;].notna()]</span><br><span class="line">print(age_not_no.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   90         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   82   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   66         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54   Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41   Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line"></span><br><span class="line">[5 rows x 15 columns]</span><br></pre></td></tr></table></figure>
+
+<p><code style="color:red; font-weight: bold">notna() </code>条件函数对于值不是 <code>Null</code> 值的每一行返回 <code>True</code>。 因此，可以结合选择括号<code>[]</code>来过滤数据表。</p>
+<h2 id="如何选择DataFrame的特定行和列？"><a href="#如何选择DataFrame的特定行和列？" class="headerlink" title="如何选择DataFrame的特定行和列？"></a>如何选择DataFrame的特定行和列？</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/03_subset_columns_rows.png"></p>
+<p>假如对35 岁以上人员的性别感兴趣。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult_names = adult.loc[adult[<span class="string">&quot;age&quot;</span>] &gt; <span class="number">35</span>, <span class="string">&quot;sex&quot;</span>]</span><br><span class="line">print(adult_names.head())</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在这种情况下，行和列的子集是一次性生成的，仅使用括号选择<code style="color:red;font-weight:bold"> [] </code>已经不够了。 选择括号<code style="color:red;font-weight:bold"> [] </code>前面需要<code style="color:red;font-weight:bold"> loc/iloc </code>运算符。 使用<code style="color:red;font-weight:bold"> loc/iloc </code>时，逗号之前的部分是您想要选择的行，逗号之后的部分是您想要选择的列。</p>
+</blockquote>
+<p>使用列名、行标签或条件表达式时，请在选择括号 [] 前面使用 loc 运算符。 对于逗号之前和之后的部分，您可以使用单个标签、标签列表、标签切片、条件表达式或冒号。 使用冒号指定您要选择所有行或列。</p>
+<p>假如对第 10 行到第 25 行和第 3 到第 5 列感兴趣。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.iloc[9:25, 2:5])</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    fnlwgt     education  education.num</span><br><span class="line">9    70037  Some-college             10</span><br><span class="line">10  172274     Doctorate             16</span><br><span class="line">11  164526   Prof-school             15</span><br><span class="line">12  129177     Bachelors             13</span><br><span class="line">13  136204       Masters             14</span><br><span class="line">14  172175     Doctorate             16</span><br><span class="line">15   45363   Prof-school             15</span><br><span class="line">16  172822          11th              7</span><br><span class="line">17  317847       Masters             14</span><br><span class="line">18  119592    Assoc-acdm             12</span><br><span class="line">19  203034     Bachelors             13</span><br><span class="line">20  188774     Bachelors             13</span><br><span class="line">21   77009          11th              7</span><br><span class="line">22   29059       HS-grad              9</span><br><span class="line">23  153870  Some-college             10</span><br><span class="line">24  135285       HS-grad              9</span><br></pre></td></tr></table></figure>
+
+<p>同样，行和列的子集是一次性生成的，仅使用选择括号<code style="color:red;font-weight:bold"> [] </code>已经不够了。 当根据表中的位置对某些行和/或列特别感兴趣时，请在选择括号<code style="color:red;font-weight:bold"> [] </code>前面使用<code style="color:red;font-weight:bold"> iloc </code>运算符。</p>
+<p>当使用 loc 或 iloc 选择特定行和/或列时，我们对我们所选的特定行和/或列赋值。 </p>
+<p>例如，要将前三行人员的年龄统一改成20：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult.iloc[<span class="number">0</span>:<span class="number">3</span>, <span class="number">0</span>] = <span class="number">20</span></span><br><span class="line">print(adult.head(<span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">0   20         ?   77053  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">1   20   Private  132870  ...             18   United-States  &lt;&#x3D;50K</span><br><span class="line">2   20         ?  186061  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">3   54   Private  140359  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">4   41   Private  264663  ...             40   United-States  &lt;&#x3D;50K</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code style="color:red;font-weight:bold">Remember</code>:</p>
+<ul>
+<li><code style="color:green;font-weight:bold">要选择数据子集时，使用方括号[]。</code></li>
+<li><code style="color:green;font-weight:bold">在括号内，您可以使用单个列/行标签、列/行标签列表、标签切片、条件表达式或冒号。</code></li>
+<li><code style="color:green;font-weight:bold">通过 loc 使用行名和列名选择特定的行和列。</code></li>
+<li><code style="color:green;font-weight:bold">通过 iloc 使用坐标轴位置选择特定的行和列。</code></li>
+<li><code style="color:green;font-weight:bold">你可以为 loc 或 iloc 选择的行或列赋新值。</code></li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="如何在-pandas-中创建绘图？"><a href="#如何在-pandas-中创建绘图？" class="headerlink" title="如何在 pandas 中创建绘图？"></a>如何在 pandas 中创建绘图？</h1><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/04_plot_overview.png"></p>
+<p>导入相关类库：</p>
+<p>本教程使用的数据：<a target="_blank" rel="noopener" href="https://github.com/pandas-dev/pandas/blob/main/doc/data/air_quality_no2.csv">空气质量数据</a></p>
+<p>在本教程中，使用了有关的空气质量数据，这些数据由 <code>OpenAQ</code> 提供并使用 py-openaq 包。 <code>air_quality_no2.csv</code> 数据集提供了分别位于巴黎、安特卫普和伦敦的测量站 FR04014、BETR801 和伦敦威斯敏斯特的值。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/air_quilty_data.png" style="zoom:50%;" />
+
+<p>读取数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">air_quality = pd.read_csv(<span class="string">&quot;data/air_quality_no2.csv&quot;</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br><span class="line">print(air_quality.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                     station_antwerp  station_paris  station_london</span><br><span class="line">datetime                                                           </span><br><span class="line">2019-05-07 02:00:00              NaN            NaN            23.0</span><br><span class="line">2019-05-07 03:00:00             50.5           25.0            19.0</span><br><span class="line">2019-05-07 04:00:00             45.0           27.7            19.0</span><br><span class="line">2019-05-07 05:00:00              NaN           50.4            16.0</span><br><span class="line">2019-05-07 06:00:00              NaN           61.9             NaN</span><br></pre></td></tr></table></figure>
+
+<p><code>read_csv</code> 函数的 <code>index_col</code>参数表示将第一（第 0）列定义为结果 <code>DataFrame</code> 的索引。</p>
+<p><code>read_csv</code> 函数的 <code>parse_dates</code>参数表示将列中的日期转换为 <code>Timestamp</code> 对象。</p>
+<p>通过视图快速的检查数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">air_quality = pd.read_csv(<span class="string">&quot;data/air_quality_no2.csv&quot;</span>, index_col=<span class="number">0</span>, parse_dates=<span class="literal">True</span>)</span><br><span class="line">air_quality.plot()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/matplot_air.png"></p>
+<p><code>pandas</code> 默认为<code>DataFrame</code>包含数字的每一列数创建一个线图。</p>
+<p>我只想用巴黎的数据列绘制图形。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/station_pairs_draw.png" style="zoom:50%;" />
+
+<p>我想直观地比较NO2在伦敦和巴黎测量的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">air_quality.plot.scatter(x=<span class="string">&quot;station_london&quot;</span>, y=<span class="string">&quot;station_paris&quot;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/matlab_scatter_plot.png" style="zoom:50%;" />
+
+<p>除了使用绘图功能时的默认线图之外，还可以使用许多其他图形来绘制数据。</p>
+<p>绘图方法允许使用除默认线图之外的多种绘图样式，可以通过<code>plot()</code>方法的<code>kind</code>参数进行设置:</p>
+<ul>
+<li><code style="color:red;font-weight:bold">"bar" </code>或<code style="color:red;font-weight:bold"> "barh" </code>绘制柱状图</li>
+<li><code style="color:red;font-weight:bold">"hist" </code>绘制直方图</li>
+<li><code style="color:red;font-weight:bold"> "box" </code>绘制箱形图</li>
+<li><code style="color:red;font-weight:bold"> "kde" </code>或<code style="color:red;font-weight:bold"> "density" </code>绘制密度图</li>
+<li><code style="color:red;font-weight:bold"> "area" </code>绘制面积图</li>
+<li><code style="color:red;font-weight:bold"> "scatter" </code>绘制散点图</li>
+<li><code style="color:red;font-weight:bold"> "hexbin" </code>绘制六边形箱图</li>
+<li> <code style="color:red;font-weight:bold"> "pie" </code>绘制饼状图</li>
+</ul>
+<p>例如，可以通过以下方式创建箱线图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">air_quality.plot.box()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/air_quality_plot_box.png" style="zoom:50%;" />
+
+<p>我希望每一列都在一个单独的子图中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">axs = air_quality.plot.area(figsize=(<span class="number">12</span>, <span class="number">4</span>), subplots=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/air_quality_subplots.png" style="zoom:50%;" />
+
+<p>我想进一步定制、扩展或保存结果图。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/plt_subplots.png" style="zoom:50%;" />
+
+<p><code>pandas</code> 创建的每个绘图对象都是 <a target="_blank" rel="noopener" href="https://matplotlib.org/">Matplotlib</a>对象。由于 <code>Matplotlib</code> 提供了大量的选项来自定义绘图，因此使 <code>pandas</code> 和 <code>Matplotlib</code> 之间的关联显式化，从而可以将 Matplotlib 的所有功能发挥到绘图上。</p>
+<hr>
+<h1 id="如何从现有列创建新列"><a href="#如何从现有列创建新列" class="headerlink" title="如何从现有列创建新列"></a>如何从现有列创建新列</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/05_newcolumn_1.png" style="zoom:50%;" />
+
+<p>教程数据如下：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/market_sales_excel.png" style="zoom:50%;" />
+
+<p>假设我们想在表格中新增一列表示所有商场第一季度的收入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">market_sales[<span class="string">&quot;first_season_sales&quot;</span>] = market_sales.iloc[:, <span class="number">0</span>:<span class="number">4</span>].<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br><span class="line">print(market_sales)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">        sales_01  sales_02  sales_03  sales_04  first_season_sales</span><br><span class="line">market                                                            </span><br><span class="line">沃尔玛        10000     30000     80000     60000              180000</span><br><span class="line">家乐福        20000     20000     20000     20000               80000</span><br><span class="line">好又多        30000     50000     10000     10000              100000</span><br><span class="line">大润发        40000     60000     50000     30000              180000</span><br><span class="line">华润万家       50000     40000     60000     20000              170000</span><br><span class="line">永辉         60000     10000     20000     10000              100000</span><br></pre></td></tr></table></figure>
+
+<p>其他数学运算符（+、-、*、/、…）或逻辑运算符（&lt;、&gt;、==、…）也按此逻辑工作。</p>
+<p>如果您需要更高级的逻辑，您可以通过<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply"><code>apply()</code></a>.</p>
+<p>如果你想对某些列名进行重命名操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">renamed_market_sales = market_sales.rename(</span><br><span class="line">        columns=&#123;</span><br><span class="line">          </span><br><span class="line">            <span class="string">&quot;sales_01&quot;</span>: <span class="string">&quot;SALES_FIRST_MONTH&quot;</span>,</span><br><span class="line">            <span class="string">&quot;sales_02&quot;</span>: <span class="string">&quot;SALES_SECOND_MONTH&quot;</span>,</span><br><span class="line">            <span class="string">&quot;sales_03&quot;</span>: <span class="string">&quot;SALES_THIRD_MONTH&quot;</span>,</span><br><span class="line">            <span class="string">&quot;sales_04&quot;</span>: <span class="string">&quot;SALES_FOURTH_MONTH&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">print(renamed_market_sales)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">        SALES_FIRST_MONTH  ...  SALES_FOURTH_MONTH</span><br><span class="line">market                     ...                    </span><br><span class="line">沃尔玛                 10000  ...               60000</span><br><span class="line">家乐福                 20000  ...               20000</span><br><span class="line">好又多                 30000  ...               10000</span><br><span class="line">大润发                 40000  ...               30000</span><br><span class="line">华润万家                50000  ...               20000</span><br><span class="line">永辉                  60000  ...               10000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>rename()</code> 函数可用于行和列。 你需要提供一个字典，其中包含当前名称的键和新名称的值，以更新相应的名称。</p>
+</blockquote>
+<p>映射不应仅限于固定名称，也可以是映射函数。 例如，也可以使用函数将列名转换为小写字母：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">renamed_market_sales = renamed_market_sales.rename(columns=<span class="built_in">str</span>.lower)</span><br><span class="line">print(renamed_market_sales)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">        sales_first_month  ...  sales_fourth_month</span><br><span class="line">market                     ...                    </span><br><span class="line">沃尔玛                 10000  ...               60000</span><br><span class="line">家乐福                 20000  ...               20000</span><br><span class="line">好又多                 30000  ...               10000</span><br><span class="line">大润发                 40000  ...               30000</span><br><span class="line">华润万家                50000  ...               20000</span><br><span class="line">永辉                  60000  ...               10000</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="如何计算汇总统计数据"><a href="#如何计算汇总统计数据" class="headerlink" title="如何计算汇总统计数据"></a>如何计算汇总统计数据</h1><p>数据集：本教程使用<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/uciml/adult-census-income?resource=download">成人人口普查收入</a>数据集。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/06_aggregate.png" style="zoom:50%;" />
+
+<h2 id="汇总统计数据"><a href="#汇总统计数据" class="headerlink" title="汇总统计数据"></a>汇总统计数据</h2><p>所有人员的平均年龄是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;data/adult.xlsx&quot;</span>)</span><br><span class="line">print(adult[<span class="string">&quot;age&quot;</span>].mean())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">38.58164675532078</span><br></pre></td></tr></table></figure>
+
+<p>可以使用不同的统计数据，并将其应用于具有数值数据的列。 一般情况下，操作会排除缺失数据并默认跨行(按列)操作。</p>
+<p>我们可以使用<code>median</code>函数来计算一系列数值的中位数。这个函数可以用于计算 <code>Series</code> 或 <code>DataFrame</code> 对象中的中位数。：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;data/adult.xlsx&quot;</span>)</span><br><span class="line">print(adult[[<span class="string">&quot;age&quot;</span>, <span class="string">&quot;hours.per.week&quot;</span>]].median())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">age               37.0</span><br><span class="line">hours.per.week    40.0</span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>DataFrame.agg()</code> 方法定义给定列的聚合统计信息的特定组合，而不是预定义的统计信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">              age  hours.per.week</span><br><span class="line"><span class="built_in">min</span>     <span class="number">17.000000</span>        <span class="number">1.000000</span></span><br><span class="line"><span class="built_in">max</span>     <span class="number">90.000000</span>       <span class="number">99.000000</span></span><br><span class="line">median  <span class="number">37.000000</span>       <span class="number">40.000000</span></span><br><span class="line">skew     <span class="number">0.558743</span>        <span class="number">0.227643</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="聚合统计数据并按类别分组"><a href="#聚合统计数据并按类别分组" class="headerlink" title="聚合统计数据并按类别分组"></a>聚合统计数据并按类别分组</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/06_groupby.png" style="zoom:50%;" />
+
+<p>统计所有男性和女性的平均年龄是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult[[<span class="string">&quot;age&quot;</span>, <span class="string">&quot;sex&quot;</span>]].groupby(<span class="string">&quot;sex&quot;</span>).mean())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">              age</span><br><span class="line">sex              </span><br><span class="line">Female  36.858230</span><br><span class="line">Male    39.433547</span><br></pre></td></tr></table></figure>
+
+<p>由于我们感兴趣的是每个性别的平均年龄，因此首先对这两列进行子选择：<code>titanic[[&quot;Sex&quot;, &quot;Age&quot;]]</code>。 接下来，对 “Sex” 列应用 <code>groupby()</code> 方法，为每个类别创建一个组。 计算并返回每个性别组的平均年龄。</p>
+<p>如果我们只对每个性别的平均年龄感兴趣，则分组数据也支持列的选择（像往常一样的矩形括号 []）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.groupby(<span class="string">&quot;sex&quot;</span>)[<span class="string">&quot;age&quot;</span>].mean())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sex</span><br><span class="line">Female    36.858230</span><br><span class="line">Male      39.433547</span><br><span class="line">Name: age, dtype: float64</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/06_groupby_select_detail.png" style="zoom:50%;" />
+
+<h2 id="按类别统计记录数"><a href="#按类别统计记录数" class="headerlink" title="按类别统计记录数"></a>按类别统计记录数</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/06_valuecounts.png" style="zoom:50%;" />
+
+<p>统计每个性别的人数是多少：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult[<span class="string">&quot;sex&quot;</span>].value_counts())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sex</span><br><span class="line">Female    10771</span><br><span class="line">Male      21790</span><br><span class="line">Name: count, dtype: int64</span><br></pre></td></tr></table></figure>
+
+<p>该函数是一个快捷方式，因为它实际上是一个 groupby 操作，并结合了每组内记录数的计数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(adult.groupby(<span class="string">&quot;sex&quot;</span>)[<span class="string">&quot;sex&quot;</span>].count())</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>size</code>和两者都<code>count</code>可以与 结合使用 <code>groupby</code>。而<code>size</code>包含<code>NaN</code>值并仅提供行数（表的大小），<code>count</code>排除缺失值。在该<code>value_counts</code>方法中，使用<code>dropna</code>参数来包含或排除<code>NaN</code>值。</p>
+</blockquote>
+<hr>
+<h1 id="如何重塑表格布局"><a href="#如何重塑表格布局" class="headerlink" title="如何重塑表格布局"></a>如何重塑表格布局</h1><p>让我们使用<a target="_blank" rel="noopener" href="https://github.com/pandas-dev/pandas/blob/main/doc/data/air_quality_long.csv">空气质量数据集</a>的一小部分。我们专注于 <code>NO2</code>数据并仅使用每个位置的前两个测量值。数据子集将被称为<code>no2_subset</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">air_quality = pd.read_csv(</span><br><span class="line">	<span class="string">&quot;data/air_quality_long.csv&quot;</span>, index_col=<span class="string">&quot;date.utc&quot;</span>, parse_dates=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">print(air_quality.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">                                city country location parameter  value   unit</span><br><span class="line">date.utc                                                                     </span><br><span class="line"><span class="number">2019</span><span class="number">-06</span><span class="number">-18</span> <span class="number">06</span>:<span class="number">00</span>:<span class="number">00</span>+<span class="number">00</span>:<span class="number">00</span>  Antwerpen      BE  BETR801      pm25   <span class="number">18.0</span>  µg/m³</span><br><span class="line"><span class="number">2019</span><span class="number">-06</span><span class="number">-17</span> <span class="number">08</span>:<span class="number">00</span>:<span class="number">00</span>+<span class="number">00</span>:<span class="number">00</span>  Antwerpen      BE  BETR801      pm25    <span class="number">6.5</span>  µg/m³</span><br><span class="line"><span class="number">2019</span><span class="number">-06</span><span class="number">-17</span> <span class="number">07</span>:<span class="number">00</span>:<span class="number">00</span>+<span class="number">00</span>:<span class="number">00</span>  Antwerpen      BE  BETR801      pm25   <span class="number">18.5</span>  µg/m³</span><br><span class="line"><span class="number">2019</span><span class="number">-06</span><span class="number">-17</span> <span class="number">06</span>:<span class="number">00</span>:<span class="number">00</span>+<span class="number">00</span>:<span class="number">00</span>  Antwerpen      BE  BETR801      pm25   <span class="number">16.0</span>  µg/m³</span><br><span class="line"><span class="number">2019</span><span class="number">-06</span><span class="number">-17</span> <span class="number">05</span>:<span class="number">00</span>:<span class="number">00</span>+<span class="number">00</span>:<span class="number">00</span>  Antwerpen      BE  BETR801      pm25    <span class="number">7.5</span>  µg/m³</span><br></pre></td></tr></table></figure>
+
+<p>空气质量数据集包含以下列：</p>
+<ul>
+<li>city：使用传感器的城市，巴黎、安特卫普或伦敦</li>
+<li>国家：使用传感器的国家，FR、BE 或 GB</li>
+<li>location：传感器的 ID，<em>FR04014</em>、<em>BETR801</em>或 <em>伦敦威斯敏斯特</em></li>
+<li>参数：传感器测量的参数，或者NO2 或颗粒物</li>
+<li>value：测量值</li>
+<li>单位：测量参数的单位，在本例中为“μg/m³”</li>
+</ul>
+<p><code>DataFrame</code>的索引是<code>datetime</code>测量的日期时间。</p>
+<h2 id="对表行进行排序"><a href="#对表行进行排序" class="headerlink" title="对表行进行排序"></a>对表行进行排序</h2><p>根据年龄对表格数据进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult = pd.read_excel(<span class="string">&quot;adult.xlsx&quot;</span>)</span><br><span class="line">print(adult.sort_values(<span class="string">&quot;age&quot;</span>).head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       age workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">4159    17   Private  130125  ...             20   United-States  &lt;&#x3D;50K</span><br><span class="line">18810   17   Private  187308  ...             15   United-States  &lt;&#x3D;50K</span><br><span class="line">25709   17   Private  153021  ...             20   United-States  &lt;&#x3D;50K</span><br><span class="line">6046    17         ?  103810  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">8682    17         ?  127003  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line"></span><br><span class="line">[5 rows x 15 columns]</span><br></pre></td></tr></table></figure>
+
+<p>根据年龄和受教育等级对所有人员进行排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adult_sorted = adult.sort_values(by=[<span class="string">&quot;age&quot;</span>, <span class="string">&quot;education.num&quot;</span>], ascending=<span class="literal">False</span>).head()</span><br><span class="line">print(adult_sorted)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       age  workclass  fnlwgt  ... hours.per.week  native.country income</span><br><span class="line">1742    90    Private   87372  ...             72   United-States   &gt;50K</span><br><span class="line">1739    90  Local-gov  227796  ...             60   United-States   &gt;50K</span><br><span class="line">8914    90    Private   51744  ...             50   United-States   &gt;50K</span><br><span class="line">20621   90    Private  115306  ...             40   United-States  &lt;&#x3D;50K</span><br><span class="line">22166   90    Private  206667  ...             40   United-States   &gt;50K</span><br><span class="line"></span><br><span class="line">[5 rows x 15 columns]</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>DataFrame.sort_values()</code>，表中的行根据定义的列进行排序。 索引将遵循行顺序。</p>
+<h2 id="从长到宽的表格格式"><a href="#从长到宽的表格格式" class="headerlink" title="从长到宽的表格格式"></a>从长到宽的表格格式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">air_quality = pd.read_csv(</span><br><span class="line">	<span class="string">&quot;data/air_quality_long.csv&quot;</span>, index_col=<span class="string">&quot;date.utc&quot;</span>, parse_dates=<span class="literal">True</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># filter for no2 data only</span></span><br><span class="line">no2 = air_quality[air_quality[<span class="string">&quot;parameter&quot;</span>] == <span class="string">&quot;no2&quot;</span>]</span><br><span class="line"><span class="comment"># use 2 measurements (head) for each location (groupby)</span></span><br><span class="line">no2_subset = no2.sort_index().groupby([<span class="string">&quot;location&quot;</span>]).head(<span class="number">2</span>)</span><br><span class="line">print(no2_subset)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                                city country  ... value   unit</span><br><span class="line">date.utc                                      ...             </span><br><span class="line">2019-04-09 01:00:00+00:00  Antwerpen      BE  ...  22.5  µg&#x2F;m³</span><br><span class="line">2019-04-09 01:00:00+00:00      Paris      FR  ...  24.4  µg&#x2F;m³</span><br><span class="line">2019-04-09 02:00:00+00:00     London      GB  ...  67.0  µg&#x2F;m³</span><br><span class="line">2019-04-09 02:00:00+00:00  Antwerpen      BE  ...  53.5  µg&#x2F;m³</span><br><span class="line">2019-04-09 02:00:00+00:00      Paris      FR  ...  27.4  µg&#x2F;m³</span><br><span class="line"></span><br><span class="line">[5 rows x 6 columns]</span><br></pre></td></tr></table></figure>
+
+<p>我希望三个站点的值作为彼此相邻的单独列。（即将某些行转换成列）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(no2_subset.pivot(columns=<span class="string">&quot;location&quot;</span>, values=<span class="string">&quot;value&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location                   BETR801  FR04014  London Westminster</span><br><span class="line">date.utc                                                       </span><br><span class="line">2019-04-09 01:00:00+00:00     22.5     24.4                 NaN</span><br><span class="line">2019-04-09 02:00:00+00:00     53.5     27.4                67.0</span><br><span class="line">2019-04-09 03:00:00+00:00      NaN      NaN                67.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据透视表"><a href="#数据透视表" class="headerlink" title="数据透视表"></a>数据透视表</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/07_pivot_table.png" style="zoom:50%;" />
+
+<p>我想要以表格形式获取每个站<code>NO2</code>和<code>PM2.5</code>的平均浓度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">air_quality_mean = air_quality.pivot_table(</span><br><span class="line">	values=<span class="string">&quot;value&quot;</span>, index=<span class="string">&quot;location&quot;</span>, columns=<span class="string">&quot;parameter&quot;</span>, aggfunc=<span class="string">&quot;mean&quot;</span></span><br><span class="line">)</span><br><span class="line">print(air_quality_mean)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parameter                 no2       pm25</span><br><span class="line">location                                </span><br><span class="line">BETR801             26.950920  23.169492</span><br><span class="line">FR04014             29.374284        NaN</span><br><span class="line">London Westminster  29.740050  13.443568</span><br></pre></td></tr></table></figure>
+
+<p>数据透视表是电子表格软件中众所周知的概念。当对每个变量的行/列边距（小计）感兴趣时，请将参数<code>margins</code>设置为<code>True</code>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">air_quality_mean = air_quality.pivot_table(</span><br><span class="line">      values=<span class="string">&quot;value&quot;</span>,</span><br><span class="line">      index=<span class="string">&quot;location&quot;</span>,</span><br><span class="line">      columns=<span class="string">&quot;parameter&quot;</span>,</span><br><span class="line">      aggfunc=<span class="string">&quot;mean&quot;</span>,</span><br><span class="line">      margins=<span class="literal">True</span></span><br><span class="line">  )</span><br><span class="line">  print(air_quality_mean)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parameter                 no2       pm25        All</span><br><span class="line">location                                           </span><br><span class="line">BETR801             26.950920  23.169492  24.982353</span><br><span class="line">FR04014             29.374284        NaN  29.374284</span><br><span class="line">London Westminster  29.740050  13.443568  21.491708</span><br><span class="line">All                 29.430316  14.386849  24.222743</span><br></pre></td></tr></table></figure>
+
+<h2 id="从宽到长的表格格式"><a href="#从宽到长的表格格式" class="headerlink" title="从宽到长的表格格式"></a>从宽到长的表格格式</h2><p>我们向<code>DataFrame</code> 加一个新索引<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index"><code>reset_index()</code></a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no2_pivoted = no2.pivot(columns=<span class="string">&quot;location&quot;</span>, values=<span class="string">&quot;value&quot;</span>).reset_index()</span><br><span class="line">print(no2_pivoted.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location                  date.utc  BETR801  FR04014  London Westminster</span><br><span class="line">0        2019-04-09 01:00:00+00:00     22.5     24.4                 NaN</span><br><span class="line">1        2019-04-09 02:00:00+00:00     53.5     27.4                67.0</span><br><span class="line">2        2019-04-09 03:00:00+00:00     54.5     34.2                67.0</span><br><span class="line">3        2019-04-09 04:00:00+00:00     34.5     48.5                41.0</span><br><span class="line">4        2019-04-09 05:00:00+00:00     46.5     59.5                41.0</span><br></pre></td></tr></table></figure>
+
+<p>我想在单列（长格式）中收集所有空气质量二氧化氮测量值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no_2 = no2_pivoted.melt(id_vars=<span class="string">&quot;date.utc&quot;</span>)</span><br><span class="line">print(no_2)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">                      date.utc            location  value</span><br><span class="line">0    2019-04-09 01:00:00+00:00             BETR801   22.5</span><br><span class="line">1    2019-04-09 02:00:00+00:00             BETR801   53.5</span><br><span class="line">2    2019-04-09 03:00:00+00:00             BETR801   54.5</span><br><span class="line">3    2019-04-09 04:00:00+00:00             BETR801   34.5</span><br><span class="line">4    2019-04-09 05:00:00+00:00             BETR801   46.5</span><br><span class="line">...                        ...                 ...    ...</span><br><span class="line">5110 2019-06-20 20:00:00+00:00  London Westminster    NaN</span><br><span class="line">5111 2019-06-20 21:00:00+00:00  London Westminster    NaN</span><br><span class="line">5112 2019-06-20 22:00:00+00:00  London Westminster    NaN</span><br><span class="line">5113 2019-06-20 23:00:00+00:00  London Westminster    NaN</span><br><span class="line">5114 2019-06-21 00:00:00+00:00  London Westminster    NaN</span><br><span class="line"></span><br><span class="line">[5115 rows x 3 columns]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>DataFrame</code> 上的 <code>pandas.melt()</code> 方法将数据表从宽格式转换为长格式。 列标题成为新创建的列中的变量名称。</p>
+<p>换句话说，也就是将多列合并成一列。</p>
+</blockquote>
+<p><code>pandas.melt()</code>可以更详细地定义传递给的参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">no_2 = no2_pivoted.melt(</span><br><span class="line">    id_vars=<span class="string">&quot;date.utc&quot;</span>,</span><br><span class="line">    value_vars=[<span class="string">&quot;BETR801&quot;</span>, <span class="string">&quot;FR04014&quot;</span>, <span class="string">&quot;London Westminster&quot;</span>],</span><br><span class="line">    value_name=<span class="string">&quot;NO_2&quot;</span>,</span><br><span class="line">    var_name=<span class="string">&quot;id_location&quot;</span>,</span><br><span class="line">)</span><br><span class="line">print(no_2)</span><br></pre></td></tr></table></figure>
+
+<p>上述参数的解释：</p>
+<ul>
+<li><code>value_vars</code>定义将哪些列<em>融合</em>在一起</li>
+<li><code>value_name</code>为列值提供自定义列名，而不是默认列名<code>value</code></li>
+<li><code>var_name</code>为融合的列提供自定义列名称。否则它采用索引名称或默认值<code>variable</code></li>
+<li><code>id_vars</code>中声明的列将不会被融合</li>
+<li><code>id_vars</code>声明的列不会被融合</li>
+</ul>
+<p>因此，参数 <code>value_name</code> 和 <code>var_name</code> 只是两个生成列的用户定义名称。 要融合的列由 <code>id_vars</code> 和 <code>value_vars</code> 定义。</p>
+<hr>
+<h1 id="如何合并多个表的数据"><a href="#如何合并多个表的数据" class="headerlink" title="如何合并多个表的数据"></a>如何合并多个表的数据</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/08_concat_row.png" style="zoom:50%;" />
+
+<p>现有两个班的学生数据 <code>class_01_students.xlsx</code> <code>class_02_students.xlsx</code> 如下:</p>
+<p> <code>class_01_students.xlsx</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">print(class_01_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   name   age  sex   height blood</span><br><span class="line">0   张三   20   男     175     O</span><br><span class="line">1   李四   21   女     160     A</span><br><span class="line">2   王五   50   男     170     B</span><br><span class="line">3   赵六   30   男     173    AB</span><br><span class="line">4   田七   40   男     180     A</span><br></pre></td></tr></table></figure>
+
+<p><code>class_02_students.xlsx</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_02_students = pd.read_excel(<span class="string">&quot;data/class_02_students.xlsx&quot;</span>)</span><br><span class="line">print(class_02_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   name   age sex  height blood</span><br><span class="line">0   小明   18   男     181     O</span><br><span class="line">1   小黄   24   男     177     A</span><br><span class="line">2   小红   17   女     170     B</span><br><span class="line">3   小李   32   男     157    AB</span><br><span class="line">4   小花   29   女     168     A</span><br></pre></td></tr></table></figure>
+
+<p>将两个具有相似结构的表合并成一个表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">class_02_students = pd.read_excel(<span class="string">&quot;data/class_02_students.xlsx&quot;</span>)</span><br><span class="line">students = pd.concat([class_01_students, class_02_students], axis=<span class="number">0</span>)</span><br><span class="line">print(students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    name  age sex  height blood</span><br><span class="line">0   张三   20   男     175     O</span><br><span class="line">1   李四   21   女     160     A</span><br><span class="line">2   王五   50   男     170     B</span><br><span class="line">3   赵六   30   男     173    AB</span><br><span class="line">4   田七   40   男     180     A</span><br><span class="line">0   小明   18   男     181     O</span><br><span class="line">1   小黄   24   男     177     A</span><br><span class="line">2   小红   17   女     170     B</span><br><span class="line">3   小李   32   男     157    AB</span><br><span class="line">4   小花   29   女     168     A</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>concat() 函数沿其中一个轴（按行或按列）执行多个表的串联操作。</p>
+</blockquote>
+<p>默认情况下，串联是沿着轴 0 进行的，因此生成的表组合了输入表的行。 让我们检查原始表和串联表的形状来验证操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&quot;shape of class_01_students:&quot;</span>, class_01_students.shape)</span><br><span class="line"><span class="comment"># shape of class_01_students: (5, 5)</span></span><br><span class="line">print(<span class="string">&quot;shape of class_02_students:&quot;</span>, class_02_students.shape)</span><br><span class="line"><span class="comment"># shape of class_02_students: (5, 5)</span></span><br><span class="line">print(<span class="string">&quot;shape of students:&quot;</span>, students.shape)</span><br><span class="line"><span class="comment"># shape of students: (10, 5)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>axis 参数出现在许多可沿轴应用的 pandas 方法中。 DataFrame 有两个相应的轴：第一个轴垂直向下跨行（轴 0），第二个轴水平跨列（轴 1）。 默认情况下，大多数操作（如串联或汇总统计）是跨行（轴 0）的，但也可以跨列应用。</p>
+</blockquote>
+<p>根据年龄对表进行排序（正序）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sorted_students = students.sort_values(<span class="string">&quot;age&quot;</span>)</span><br><span class="line">print(sorted_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    name  age sex  height blood</span><br><span class="line">2   小红   17   女     170     B</span><br><span class="line">0   小明   18   男     181     O</span><br><span class="line">0   张三   20   男     175     O</span><br><span class="line">1   李四   21   女     160     A</span><br><span class="line">1   小黄   24   男     177     A</span><br><span class="line">4   小花   29   女     168     A</span><br><span class="line">3   赵六   30   男     173    AB</span><br><span class="line">3   小李   32   男     157    AB</span><br><span class="line">4   田七   40   男     180     A</span><br><span class="line">2   王五   50   男     170     B</span><br></pre></td></tr></table></figure>
+
+<p>倒序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sorted_students = students.sort_values(<span class="string">&quot;age&quot;</span>, ascending=<span class="literal">False</span>)</span><br><span class="line">print(sorted_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    name  age sex  height blood</span><br><span class="line">2   王五   50   男     170     B</span><br><span class="line">4   田七   40   男     180     A</span><br><span class="line">3   小李   32   男     157    AB</span><br><span class="line">3   赵六   30   男     173    AB</span><br><span class="line">4   小花   29   女     168     A</span><br><span class="line">1   小黄   24   男     177     A</span><br><span class="line">1   李四   21   女     160     A</span><br><span class="line">0   张三   20   男     175     O</span><br><span class="line">0   小明   18   男     181     O</span><br><span class="line">2   小红   17   女     170     B</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这些教程中没有提到同时存在多个行/列索引。 分层索引或 MultiIndex 是一种先进且强大的 pandas 功能，用于分析更高维度的数据。</p>
+<p>多重索引超出了 pandas 介绍的范围。 目前，请记住函数reset_index可用于将任何级别的索引转换为列。</p>
+</blockquote>
+<h2 id="使用通用标识符连接表"><a href="#使用通用标识符连接表" class="headerlink" title="使用通用标识符连接表"></a>使用通用标识符连接表</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/08_merge_left.png" style="zoom:50%;" />
+
+<p>现有学生基本信息表 <code>class_01_students.xlsx</code> 和学生成绩表 <code>student_score.xlsx</code> 如下:</p>
+<p>基本信息表 <code>class_01_students.xlsx</code> :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">print(class_01_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  	name  age sex  height blood  student_id</span><br><span class="line">0   张三   20   男     175     O           1</span><br><span class="line">1   李四   21   女     160     A           2</span><br><span class="line">2   王五   50   男     170     B           3</span><br><span class="line">3   赵六   30   男     173    AB           4</span><br><span class="line">4   田七   40   男     180     A           5</span><br></pre></td></tr></table></figure>
+
+<p>学生成绩表 <code>student_score.xlsx</code> :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">student_score = pd.read_excel(<span class="string">&quot;data/student_score.xlsx&quot;</span>)</span><br><span class="line">print(student_score)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   student_id  chinese  math  english  physics</span><br><span class="line">0           1       89    76       88       90</span><br><span class="line">1           2       76    67       50       89</span><br><span class="line">2           3       57    82       91       88</span><br><span class="line">3           4       23    43       54       76</span><br></pre></td></tr></table></figure>
+
+<p>根据<code>student_id</code>合并两个表格：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">student_score = pd.read_excel(<span class="string">&quot;data/student_score.xlsx&quot;</span>)</span><br><span class="line">merged_table = pd.merge(class_01_students, student_score, how=<span class="string">&quot;left&quot;</span>, on=<span class="string">&quot;student_id&quot;</span>)</span><br><span class="line">print(merged_table)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    name  age sex  height blood  student_id  chinese  math  english  physics</span><br><span class="line">0   张三   20   男     175     O           1     89.0  76.0     88.0     90.0</span><br><span class="line">1   李四   21   女     160     A           2     76.0  67.0     50.0     89.0</span><br><span class="line">2   王五   50   男     170     B           3     57.0  82.0     91.0     88.0</span><br><span class="line">3   赵六   30   男     173    AB           4     23.0  43.0     54.0     76.0</span><br><span class="line">4   田七   40   男     180     A           5      NaN   NaN      NaN      NaN</span><br></pre></td></tr></table></figure>
+
+<p><code>mege</code>操作类似于数据库的<code>join</code>操作</p>
+<p>现学生成绩表 <code>student_score.xlsx</code> 和学生基本信息表 <code>class_01_students.xlsx</code> 没有相同的key。</p>
+<p>学生基本信息表 <code>class_01_students.xlsx</code> 的数据如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    name  age sex  student_id</span><br><span class="line">0   张三   20   男           1</span><br><span class="line">1   李四   21   女           2</span><br><span class="line">2   王五   50   男           3</span><br><span class="line">3   赵六   30   男           4</span><br><span class="line">4   田七   40   男           5</span><br></pre></td></tr></table></figure>
+
+<p>学生成绩表 <code>student_score.xlsx</code> 的数据如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   stuid  chinese  math  english  physics</span><br><span class="line">0      1       89    76       88       90</span><br><span class="line">1      2       76    67       50       89</span><br><span class="line">2      3       57    82       91       88</span><br><span class="line">3      4       23    43       54       76</span><br></pre></td></tr></table></figure>
+
+<p>连接两个表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">student_score = pd.read_excel(<span class="string">&quot;data/student_score.xlsx&quot;</span>)</span><br><span class="line">merged_table = pd.merge(class_01_students, student_score, how=<span class="string">&quot;left&quot;</span>, left_on=<span class="string">&quot;student_id&quot;</span>,      right_on=<span class="string">&quot;stuid&quot;</span>)</span><br><span class="line">print(merged_table)</span><br></pre></td></tr></table></figure>
+
+<p>与前面的示例相比，没有公共列名。然而，表  <code>class_01_students.xlsx</code> 中的<code>student_id</code>列和表<code>student_score.xlsx</code> 中的<code>stuid</code>字段以通用格式提供了学生Id信息，此处使用参数<code>left_on</code> 和参数<code>right_on</code> （而不仅仅是<code>on</code>）来建立两个表之间的链接。</p>
+<hr>
+<h1 id="如何轻松处理时间序列数据"><a href="#如何轻松处理时间序列数据" class="headerlink" title="如何轻松处理时间序列数据"></a>如何轻松处理时间序列数据</h1><p>本教程使用的数据：<a target="_blank" rel="noopener" href="https://github.com/pandas-dev/pandas/blob/main/doc/data/air_quality_no2_long.csv">空气质量数据</a></p>
+<h2 id="使用-pandas-日期时间属性"><a href="#使用-pandas-日期时间属性" class="headerlink" title="使用 pandas 日期时间属性"></a>使用 pandas 日期时间属性</h2><p>将纯文本转换成日期时间对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">air_quality = pd.read_csv(<span class="string">&quot;data/air_quality_no2_long.csv&quot;</span>)</span><br><span class="line">air_quality[<span class="string">&quot;date.utc&quot;</span>] = pd.to_datetime(air_quality[<span class="string">&quot;date.utc&quot;</span>])</span><br><span class="line">print(air_quality[<span class="string">&quot;date.utc&quot;</span>].head())</span><br></pre></td></tr></table></figure>
+
+<p>最初，日期时间中的值是字符串，不提供任何日期时间操作（例如提取年份、星期几等）。 通过应用 <code>to_datetime</code> 函数，<code>pandas</code> 解释字符串并将其转换为日期时间（即 <code>datetime64[ns, UTC]</code>）对象。 在 <code>pandas</code> 中，我们将这些类似于标准库中的 <code>datetime.datetime</code> 的日期时间对象称为 <code>pandas.Timestamp</code>。</p>
+<p>由于许多数据集的其中一列中确实包含日期时间信息，因此 <code>pandas.read_csv()</code> 和 <code>pandas.read_json()</code> 等 <code>pandas</code> 输入函数可以在使用 <code>parse_dates</code> 参数在读取数据时将一些列日期列转换成时间戳对象。</p>
+<p>为什么这些<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Timestamp.html#pandas.Timestamp"><code>pandas.Timestamp</code></a>对象有用？让我们通过一些示例来说明附加值。</p>
+<p>我们正在使用的时间序列数据集的开始日期和结束日期是哪天？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(air_quality[<span class="string">&quot;date.utc&quot;</span>].<span class="built_in">min</span>())</span><br><span class="line">print(air_quality[<span class="string">&quot;date.utc&quot;</span>].<span class="built_in">max</span>())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2019-05-07 01:00:00+00:00</span><br><span class="line">2019-06-21 00:00:00+00:00</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>pandas.Timestamp</code> 作为日期时间使我们能够使用日期信息进行计算并使它们具有可比性。 因此，我们可以用它来获取时间序列的长度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(air_quality[<span class="string">&quot;date.utc&quot;</span>].<span class="built_in">max</span>() - air_quality[<span class="string">&quot;date.utc&quot;</span>].<span class="built_in">min</span>())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">44 days 23:00:00</span><br></pre></td></tr></table></figure>
+
+<p>结果是一个 <code>pandas.Timedelta</code> 对象，类似于标准 <code>Python</code> 库中的 <code>datetime.timedelta</code> 并定义持续时间。</p>
+<p>我想向 DataFrame 添加一个新列，仅包含月份</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">air_quality[<span class="string">&quot;month&quot;</span>] = air_quality[<span class="string">&quot;date.utc&quot;</span>].dt.month</span><br><span class="line">print(air_quality.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    city country                  date.utc  ... value   unit  month</span><br><span class="line">0  Paris      FR 2019-06-21 00:00:00+00:00  ...  20.0  µg&#x2F;m³      6</span><br><span class="line">1  Paris      FR 2019-06-20 23:00:00+00:00  ...  21.8  µg&#x2F;m³      6</span><br><span class="line">2  Paris      FR 2019-06-20 22:00:00+00:00  ...  26.5  µg&#x2F;m³      6</span><br><span class="line">3  Paris      FR 2019-06-20 21:00:00+00:00  ...  24.9  µg&#x2F;m³      6</span><br><span class="line">4  Paris      FR 2019-06-20 20:00:00+00:00  ...  21.4  µg&#x2F;m³      6</span><br><span class="line"></span><br><span class="line">[5 rows x 8 columns]</span><br></pre></td></tr></table></figure>
+
+<p>通过使用 <code>Timestamp</code> 对象来表示日期，<code>pandas</code> 提供了许多与时间相关的属性。 例如月份<code>month</code>，还有年份<code>year</code>、季度<code>quarter</code>……所有这些属性都可以通过<code style="color:red;font-weight:bold"> dt </code>访问器访问。</p>
+<p>每个测量位置一周中每一天的平均二氧化氮浓度是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(air_quality.groupby(</span><br><span class="line">        [air_quality[<span class="string">&quot;date.utc&quot;</span>].dt.weekday, <span class="string">&quot;location&quot;</span>])[<span class="string">&quot;value&quot;</span>].mean())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">date.utc  location          </span><br><span class="line">0         BETR801               27.875000</span><br><span class="line">          FR04014               24.856250</span><br><span class="line">          London Westminster    23.969697</span><br><span class="line">1         BETR801               22.214286</span><br><span class="line">          FR04014               30.999359</span><br><span class="line">          London Westminster    24.885714</span><br><span class="line">2         BETR801               21.125000</span><br><span class="line">          FR04014               29.165753</span><br><span class="line">          London Westminster    23.460432</span><br><span class="line">3         BETR801               27.500000</span><br><span class="line">          FR04014               28.600690</span><br><span class="line">          London Westminster    24.780142</span><br><span class="line">4         BETR801               28.400000</span><br><span class="line">          FR04014               31.617986</span><br><span class="line">          London Westminster    26.446809</span><br><span class="line">5         BETR801               33.500000</span><br><span class="line">          FR04014               25.266154</span><br><span class="line">          London Westminster    24.977612</span><br><span class="line">6         BETR801               21.896552</span><br><span class="line">          FR04014               23.274306</span><br><span class="line">          London Westminster    24.859155</span><br><span class="line">Name: value, dtype: float64</span><br></pre></td></tr></table></figure>
+
+<p>还记得统计计算教程中 <code>groupby</code> 提供的分割-应用-组合模式吗？在这里，我们想要计算给定的统计数据（例如每周每个测量地的二氧化碳的平均浓度)。为了按工作日进行分组，我们使用 <code>pandas Timestamp</code> 的 <code>datetime</code> 属性 <code>weekday</code>（星期一 = 0 和星期日 = 6），也可以通过 <code>dt</code> 访问器访问。 可以对地点和工作日进行分组，以拆分每个组合的平均值计算。</p>
+<p>将所有站点的时间序列中一天中典型的 NO2 模式绘制在一起。 换句话说，一天中每个小时的平均值是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, axs = plt.subplots(figsize=(<span class="number">12</span>, <span class="number">4</span>))</span><br><span class="line">air_quality.groupby(air_quality[<span class="string">&quot;date.utc&quot;</span>].dt.hour)[<span class="string">&quot;value&quot;</span>].mean().plot(</span><br><span class="line">    kind=<span class="string">&#x27;bar&#x27;</span>, rot=<span class="number">0</span>, ax=axs</span><br><span class="line">)</span><br><span class="line">plt.xlabel(<span class="string">&quot;Hour of the day&quot;</span>)  <span class="comment"># custom x label using Matplotlib</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;$NO_2 (µg/m^3)$&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/hour_of_the_day.png" style="zoom:50%;" />
+
+<h2 id="日期时间作为索引"><a href="#日期时间作为索引" class="headerlink" title="日期时间作为索引"></a>日期时间作为索引</h2><p>在重塑教程中， <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot.html#pandas.pivot"><code>pivot()</code></a>介绍了如何重塑数据表，将每个测量位置作为单独的列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no_2 = air_quality.pivot(index=<span class="string">&quot;date.utc&quot;</span>, columns=<span class="string">&quot;location&quot;</span>, values=<span class="string">&quot;value&quot;</span>)</span><br><span class="line">print(no_2.head())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location                   BETR801  FR04014  London Westminster</span><br><span class="line">date.utc                                                       </span><br><span class="line">2019-05-07 01:00:00+00:00     50.5     25.0                23.0</span><br><span class="line">2019-05-07 02:00:00+00:00     45.0     27.7                19.0</span><br><span class="line">2019-05-07 03:00:00+00:00      NaN     50.4                19.0</span><br><span class="line">2019-05-07 04:00:00+00:00      NaN     61.9                16.0</span><br><span class="line">2019-05-07 05:00:00+00:00      NaN     72.4                 NaN</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过旋转数据，日期时间信息成为表的索引。一般来说，将某列设置为索引可以通过该<code>set_index</code>函数来实现。</p>
+</blockquote>
+<p>使用日期时间索引（即<code>DatetimeIndex</code>）提供了强大的功能。例如，我们不需要<code>dt</code>访问器来获取时间序列属性，而是直接在索引上使用这些属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(no_2.index.year)</span><br><span class="line">print(no_2.index.month)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Index([2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019,</span><br><span class="line">       ...</span><br><span class="line">       2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019],</span><br><span class="line">      dtype&#x3D;&#39;int32&#39;, name&#x3D;&#39;date.utc&#39;, length&#x3D;1033)</span><br><span class="line">Index([5, 5, 5, 5, 5, 5, 5, 5, 5, 5,</span><br><span class="line">       ...</span><br><span class="line">       6, 6, 6, 6, 6, 6, 6, 6, 6, 6],</span><br><span class="line">      dtype&#x3D;&#39;int32&#39;, name&#x3D;&#39;date.utc&#39;, length&#x3D;1033)</span><br></pre></td></tr></table></figure>
+
+<p>绘制5 月 20 日至 5 月 21 月底不同站点的 NO2 值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">no_2 = air_quality.pivot(index=<span class="string">&quot;date.utc&quot;</span>, columns=<span class="string">&quot;location&quot;</span>, values=<span class="string">&quot;value&quot;</span>)</span><br><span class="line">no_2[<span class="string">&quot;2019-05-20&quot;</span>:<span class="string">&quot;2019-05-21&quot;</span>].plot()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/pandas/09_time_section.png" style="zoom:50%;" />
+
+<hr>
+<h1 id="如何操作文本数据"><a href="#如何操作文本数据" class="headerlink" title="如何操作文本数据"></a>如何操作文本数据</h1><p>本教程数据<code>class_01_students.xlsx</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">print(class_01_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        name  age  sex  student_id</span><br><span class="line">0  San Zhang   20   男           1</span><br><span class="line">1      Si Li   21   女           2</span><br><span class="line">2    Wu Wang   50   男           3</span><br><span class="line">3   Liu Zhao   30   男           4</span><br><span class="line">4    Qi Tian   40   男           5</span><br></pre></td></tr></table></figure>
+
+<p>将<code>name</code>设为小写。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_01_students = pd.read_excel(<span class="string">&quot;data/class_01_students.xlsx&quot;</span>)</span><br><span class="line">print(class_01_students[<span class="string">&quot;name&quot;</span>].<span class="built_in">str</span>.lower())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0    san zhang</span><br><span class="line">1        si li</span><br><span class="line">2      wu wang</span><br><span class="line">3     liu zhao</span><br><span class="line">4      qi tian</span><br><span class="line">Name: name, dtype: object</span><br></pre></td></tr></table></figure>
+
+<p>与时间序列教程中具有 <code>dt</code> 访问器的日期时间对象类似，使用 <code>str</code> 访问器时可以使用许多专用字符串方法。 这些方法通常具有与单个元素的等效内置字符串方法匹配的名称，但按元素应用到列的每个值。</p>
+<p>通过提取逗号之前的部分来创建一个新列“姓氏”，其中包含乘客的姓氏。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class_01_students[<span class="string">&quot;surname&quot;</span>] = class_01_students[<span class="string">&quot;name&quot;</span>].<span class="built_in">str</span>.split(<span class="string">&quot; &quot;</span>).<span class="built_in">str</span>.get(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">print(class_01_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        name  age sex  student_id surname</span><br><span class="line">0  San Zhang   20   男           1   Zhang</span><br><span class="line">1      Si Li   21   女           2      Li</span><br><span class="line">2    Wu Wang   50   男           3    Wang</span><br><span class="line">3   Liu Zhao   30   男           4    Zhao</span><br><span class="line">4    Qi Tian   40   男           5    Tian</span><br></pre></td></tr></table></figure>
+
+<p>使用该<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html#pandas.Series.str.split"><code>Series.str.split()</code></a>方法，每个值都作为 2 个元素的列表返回。第一个元素是空格之前的部分，第二个元素是空格之后的部分。</p>
+<p>假如我们只对姓名中带有”Tian”字的用户感兴趣：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(class_01_students[<span class="string">&quot;name&quot;</span>].<span class="built_in">str</span>.contains(<span class="string">&quot;Tian&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0    False</span><br><span class="line">1    False</span><br><span class="line">2    False</span><br><span class="line">3    False</span><br><span class="line">4     True</span><br><span class="line">Name: name, dtype: bool</span><br></pre></td></tr></table></figure>
+
+<p>方法<code>Series.str.contains()</code>检查列中的每个值（<code>Name</code>如果字符串包含单词<code>Tian</code>，并返回每个值<code>True</code>（<code>Tian</code>是<code>name</code>的一部分）或 <code>False</code>（<code>Tian</code>不是<code>name</code>的一部分）。</p>
+<blockquote>
+<p>支持更强大的字符串提取，因为 <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.contains.html#pandas.Series.str.contains"><code>Series.str.contains()</code></a>和<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.extract.html#pandas.Series.str.extract"><code>Series.str.extract()</code></a>方法接受<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/re.html">正则表达式</a>，但超出了本教程的范围。</p>
+</blockquote>
+<p>哪位用户的名字最长？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(class_01_students[<span class="string">&quot;name&quot;</span>].<span class="built_in">str</span>.<span class="built_in">len</span>().idxmax())</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>为了获得最长的名称，我们首先必须获得列中每个名称的长度<code>Name</code>。通过使用 <code>pandas</code> 字符串方法，该 <a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.len.html#pandas.Series.str.len"><code>Series.str.len()</code></a>函数将单独应用于每个名称（按元素）。</p>
+<p>接下来，我们需要获取表中名称长度最大的对应位置，最好是索引标签。 <code>idxmax()</code> 方法正是这样做的。 它不是字符串方法，适用于整数，因此不使用 <code>str</code>。</p>
+<p>根据行 ( <code>0</code>) 和列 ( <code>name</code>) 的索引名称，我们可以使用运算符进行选择<code>loc</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(class_01_students.loc[class_01_students[<span class="string">&quot;name&quot;</span>].<span class="built_in">str</span>.<span class="built_in">len</span>().idxmax(), <span class="string">&quot;name&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">San Zhang</span><br></pre></td></tr></table></figure>
+
+<p>在“sex”列中，将“男”的值替换为“M”，将“女”的值替换为“F”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_01_students[<span class="string">&quot;sex&quot;</span>] = class_01_students[<span class="string">&quot;sex&quot;</span>].replace(&#123;<span class="string">&quot;男&quot;</span>:<span class="string">&quot;M&quot;</span>, <span class="string">&quot;女&quot;</span>:<span class="string">&quot;F&quot;</span>&#125;)</span><br><span class="line">print(class_01_students)</span><br></pre></td></tr></table></figure>
+
+<p>Out:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        name  age sex  student_id</span><br><span class="line">0  San Zhang   20   M           1</span><br><span class="line">1      Si Li   21   F           2</span><br><span class="line">2    Wu Wang   50   M           3</span><br><span class="line">3   Liu Zhao   30   M           4</span><br><span class="line">4    Qi Tian   40   M           5</span><br></pre></td></tr></table></figure>
+
+<p>虽然<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html#pandas.Series.replace"><code>replace()</code></a>它不是字符串方法，但它提供了一种使用映射或词汇表来转换某些值的便捷方法。它需要<code>dictionary</code>来定义映射。<code>&#123;from : to&#125;</code></p>
+<hr>
+<p>关于Pandas的更多教程请访问：<a target="_blank" rel="noopener" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/tutorials.html%E3%80%82">https://pandas.pydata.org/pandas-docs/stable/getting_started/tutorials.html。</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -7867,165 +8601,6 @@
 <p>还值得一提的是，YAML 文件不支持*@PropertySource*注解，所以如果我们需要使用这个注解，它会限制我们使用属性文件。</p>
 <p>另一个值得注意的地方是，在 2.4.0 版本中，Spring Boot 改变了从多文档 YAML 文件加载属性的方式。以前，它们的添加顺序基于配置文件激活顺序。然而，在新版本中，框架遵循我们之前为*.properties*文件指出的相同排序规则；在文件中声明较低的属性将简单地覆盖那些较高的属性。</p>
 <p>此外，在此版本中，配置文件无法再从配置文件特定文档中激活，从而使结果更清晰、更可预测。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/19/Macbook%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">Macbook使用技巧</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-10-19 16:34:26 / 修改时间：20:13:06" itemprop="dateCreated datePublished" datetime="2021-10-19T16:34:26+08:00">2021-10-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="批量更改文件名称"><a href="#批量更改文件名称" class="headerlink" title="批量更改文件名称"></a>批量更改文件名称</h1><p>对我而言这个功能最好用的是批量更改时替换功能，在截了一堆图需要改名字的时候就可以派上用场。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename1.png"></p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/batchRename2.png"></p>
-<h1 id="聚焦Spotlight"><a href="#聚焦Spotlight" class="headerlink" title="聚焦Spotlight"></a>聚焦<strong>Spotlight</strong></h1><p>“聚焦”可以帮助您快速找到 Mac 上的 App、文稿和其他文件。借助 Siri 建议，您还可以获取最新新闻、体育赛事比分、天气状况等信息。“聚焦”甚至可以为您进行计算和转换。</p>
-<h2 id="搜索内容"><a href="#搜索内容" class="headerlink" title="搜索内容"></a>搜索内容</h2><ol>
-<li><p>在 Mac 上，点按<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/aside/glos33eb8abd/11.0/mac/11.0">菜单栏</a>中的“聚焦”图标 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="img" style="zoom:25%;" />（如果显示），或者按下 Command-空格键或按下键盘上功能键行中的 <img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/bb4de0babc81c7fedb3e9663d00d7a3a.png" alt="聚焦键" style="zoom:25%;" />（如果可用）。</p>
-<p>您可以将“聚焦”窗口拖到桌面上的任意位置。</p>
-<p><strong>【提示】</strong>如果“聚焦”图标未显示在菜单栏中，请<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/guide/mac-help/mchlp1119/11.0/mac/11.0">使用“程序坞与菜单栏”偏好设置</a>进行添加。</p>
-</li>
-<li><p>在搜索栏中，键入要查找的内容，键入时结果会随之出现。</p>
-<p>“聚焦”首先列出最常点选，点按一个最常点选以进行预览或打开。“聚焦”还会建议搜索的各种变体；您可以在“聚焦”或网上查看这些结果。</p>
-<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/5026e0adf32c51825c1daf163ec73501.png" alt="“聚焦”窗口顶部显示了搜索栏中的搜索文本，下方是结果。"></p>
-</li>
-<li><p>在结果中，执行以下任一项操作：</p>
-<ul>
-<li><em>显示预览：</em>按下 Tab 键。根据结果中所选的项目类型，您可以与之交互。例如，选择 App 以查看最近打开文件的列表，然后点按以打开文件。或者点按“播放”按钮来聆听歌曲。</li>
-</ul>
-</li>
-</ol>
-<h2 id="在“聚焦”中进行计算和转换"><a href="#在“聚焦”中进行计算和转换" class="headerlink" title="在“聚焦”中进行计算和转换"></a>在“聚焦”中进行计算和转换</h2><p>您可以在“聚焦”搜索栏中输入数学表达式、金额、温度或单位，搜索栏中会立即显示转换或计算结果。</p>
-<p><img src="https://help.apple.com/assets/605932B4A1B7A93F492858E8/605932C0A1B7A93F492858FF/zh_CN/6136d2d5c08bb8b6ebf10fc3c3248f48.png" alt="“聚焦”窗口，显示搜索栏中从码到米的转换。左侧是搜索结果列表。右侧预览中显示更多转换。"></p>
-<ul>
-<li><em>计算：</em>输入数学表达式，如 956*23.94 或 2020/15。</li>
-<li><em>货币转换：</em>输入金额，如 100 美元、100 日元或“300 克朗转换成欧元”。</li>
-<li><em>温度转换：</em>输入温度，如 98.8F、32C 或“340K 转换成华氏度”。</li>
-<li><em>单位转换：</em>输入度量单位，例如 25 磅、54 码、23 英石或“32 英尺转换成米”。</li>
-</ul>
-<p><strong>【提示】</strong>按下 Tab 键以在预览区域中显示更多转换。</p>
-<h1 id="快速添加emoji表情"><a href="#快速添加emoji表情" class="headerlink" title="快速添加emoji表情"></a>快速添加emoji表情</h1><p>按住键盘Control+Command+空格键，此时你的输入栏中，就会跳出所有表情了。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/emoji.png"></p>
-<p>​                </p>
-<h1 id="快速锁屏"><a href="#快速锁屏" class="headerlink" title="快速锁屏"></a>快速锁屏</h1><p>只需按住control+command+Q，此时你的MacBook就会马上锁屏</p>
-<hr>
-<h1 id="向后删除"><a href="#向后删除" class="headerlink" title="向后删除"></a>向后删除</h1><p>文本编辑时按 Fn + Delete 键可向后删除内容</p>
-<hr>
-<h1 id="切换应用程序"><a href="#切换应用程序" class="headerlink" title="切换应用程序"></a>切换应用程序</h1><p>按住command键再按tab键，可从左往右切换已打开的应用程序；command+shift+tab，可从右往左切换</p>
-<hr>
-<h1 id="触控板手势"><a href="#触控板手势" class="headerlink" title="触控板手势"></a>触控板手势</h1><p>Mac触控板强大无比，掌握触控板使用技能，对提高学习工作效率大有帮助，打开Mac系统偏好设置中的触控板，选择相应手势，右边会有动画教程。</p>
-<p>还有一个比较特殊的手势，三指拖动，需在系统偏好设置下的辅助功能中设置。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/split.png"></p>
-<hr>
-<h1 id="设置文件默认打开方式"><a href="#设置文件默认打开方式" class="headerlink" title="设置文件默认打开方式"></a>设置文件默认打开方式</h1><p>不同格式的文件有不同的默认打开方式，比如视频文件会默认用QuickTime Player打开，如果你想更改系统默认的打开方式，按照如下步骤设置即可，</p>
-<p>单击你想要改变默认打开方式的文件，右键单击选择显示简介，或者按快捷键Command+i 显示简介；</p>
-<p>在打开方式的下拉菜单中选择你需要的默认打开方式，点击全部更改，在弹出的窗口中选择继续即可。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/softopentype.png" style="zoom: 50%;" />
-
-<hr>
-<h1 id="自带截屏"><a href="#自带截屏" class="headerlink" title="自带截屏"></a>自带截屏</h1><ul>
-<li><p>cmd+shift+3：对整个屏幕进行截图；</p>
-</li>
-<li><p>cmd+shift+4：对自行选择的区域进行截图；</p>
-</li>
-<li><p>cmd+shift+4+space（空格键）：对选定的某个应用程序界面窗口进行截图。</p>
-</li>
-</ul>
-<hr>
-<h1 id="Command（或-Cmd）⌘键"><a href="#Command（或-Cmd）⌘键" class="headerlink" title="Command（或 Cmd）⌘键"></a>Command（或 Cmd）⌘键</h1><p>以下是常用的12个快捷键：</p>
-<ul>
-<li>Command + X: 剪切</li>
-<li>Command + C: 拷贝</li>
-<li>Command + V: 原格式粘贴</li>
-<li>Command + Shift +Option +V: 合并格式粘贴</li>
-<li>Command + Z: 撤销上一个操作（Shift + Command + Z: 反向执行撤销命令）</li>
-<li>Command + W: 关闭但不退出应用</li>
-<li>Command + Q: 退出应用</li>
-<li>Command + Option + Esc: 强制退出应用</li>
-<li>Command + Tab: 切换应用</li>
-<li>Command + 空格: “聚焦”查找</li>
-<li>Command + Shift + 5（MacOS Mojave系统）: 截屏或录屏（其他MacOS: Command + Shift +3: 捕捉整个屏幕；Command + Shift +4: 自选截屏区域）</li>
-<li>Command + Control + 空格: 添加emoji</li>
-</ul>
-<p>Command键除了上面 提到的常用组合快捷键外，还有很多其他功能，这里介绍四个关于Command的隐藏功能</p>
-<ul>
-<li>按住Command，可以选择并移动菜单栏图标</li>
-</ul>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/top.png"></p>
-<ul>
-<li>在“聚焦”中搜索文件，按住Command就可以显示文件路径，按住Command打开文件可以打开所在的文件夹</li>
-</ul>
-<h1 id="Option（或-Alt）⌥键"><a href="#Option（或-Alt）⌥键" class="headerlink" title="Option（或 Alt）⌥键"></a>Option（或 Alt）⌥键</h1><ul>
-<li><p>按住Option，可以同时关闭同个程序的多个窗口</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/MacBook/optioncloaseall.png" style="zoom:67%;" />
-</li>
-<li><p>按住Option，单击右侧翻页条任何位置，就可以快速跳到指定位置</p>
-</li>
-<li><p>『移动文件』CMD+C 复制文件，在目标目录 CMD+Option+V，就把原文件移动过来了，相当于剪切粘贴。</p>
-</li>
-<li><p>按住Option+拖到文件，可快速复制一份原文件</p>
-</li>
-</ul>
 
       
     </div>
