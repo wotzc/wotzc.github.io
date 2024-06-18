@@ -129,11 +129,11 @@ git clone --branch
 
 #### - GIT
 
-`git` 独有的协议。Git 自带一个守护进程，运行端口为 (9418)。该协议与 SSH 类似，但没有身份验证。
+`git` 独有的协议。Git 自带一个守护进程，运行端口为 (9418)。该协议与`SSH`类似，但没有身份验证。
 
 #### - HTTP
 
-超文本传输协议。Web 协议，最常用于通过 Internet 传输网页 HTML 数据。Git 可以配置为通过 HTTP 进行通信
+超文本传输协议。Web 协议，最常用于通过 Internet 传输网页 HTML 数据。Git 可以配置为通过`HTTP`进行通信
 
 ------
 
@@ -275,7 +275,7 @@ git config --global alias.ci commit
 
 -------
 
-## Git alias
+## git alias
 
 本节将重点讨论 Git 别名。要更好地理解 Git 别名的价值，我们必须先讨论一下什么是别名。别名是快捷方式的同义词。
 
@@ -321,7 +321,7 @@ $ git config --global alias.st status
 
 2. #### 使用 git config 创建别名
 
-   如前所述，`git config` 命令是快速创建别名的便捷工具。git config 命令实际上是一个辅助工具，用于写入全局和本地 Git 配置文件。
+   如前所述，`git config` 命令是快速创建别名的便捷工具。`git config`命令实际上是一个辅助工具，用于写入全局和本地 Git 配置文件。
 
    ```bash
    git config --global alias.co checkout
@@ -398,9 +398,9 @@ git commit
 
 ---
 
-## Git diff
+## git diff
 
-Diffing 是一个接收两个输入数据集并输出它们之间差异的函数。`git diff`是一条多用途 Git 命令，执行时会在 Git 数据源上运行差异函数。这些数据源可以是提交、分支、文件等。本文将讨论 git diff 的常见调用方式和差异化工作流程模式。`git diff`命令通常与`git status`和`git log`一起用于分析 Git 仓库的当前状态。
+Diffing 是一个接收两个输入数据集并输出它们之间差异的函数。`git diff`是一条多用途 Git 命令，执行时会在 Git 数据源上运行差异函数。这些数据源可以是提交、分支、文件等。本文将讨论`git diff`的常见调用方式和差异化工作流程模式。`git diff`命令通常与`git status`和`git log`一起用于分析 Git 仓库的当前状态。
 
 ### 读取差异：输出
 
@@ -501,7 +501,7 @@ git diff main new_branch ./diff_test.txt
 
 ---------
 
-## Git stash
+## git stash
 
 `git stash`可以暂时搁置（或储藏）您对工作副本所做的修改，这样您就可以处理其他事情，稍后再回来重新应用。如果您需要快速切换上下文并处理其他工作，但代码改动进行到一半还没准备好提交，那么`stash`就很方便了。
 
@@ -791,7 +791,7 @@ $ git stash clear
 
 ### How git stash works
 
-如果你只想知道如何使用 `git stash`，那就别读了。但如果你想知道 Git（和 git stash）在底层是如何工作的，请继续往下读！
+如果你只想知道如何使用 `git stash`，那就别读了。但如果你想知道 Git（和`git stash`）在底层是如何工作的，请继续往下读！
 
 储藏库实际上是以提交对象的形式在版本库中编码的。`.git/refs/stash` 中的特殊 ref 指向最近创建的 `stash`，而之前创建的 stash 则由 stash ref 的 reflog 引用。这就是为什么你会用 `stash@{n}` 来引用 `stash`：你实际上是在引用 `stash` 引用 的第 n 个 `reflog` 条目。因为 `stash` 只是一个提交，所以可以用 `git log` 来检查它。
 
@@ -799,7 +799,7 @@ $ git stash clear
 
 - `stash@{0}`，一个新提交，用于存储运行 `git stash` 时工作副本中的跟踪文件
 - `stash@{0}`的第一个父级，也就是运行 `git stash` 时位于 HEAD 的已有提交
-- `stash@{0}`的第二个父级，一个新的提交代表您运行 git stash时的索引
+- `stash@{0}`的第二个父级，一个新的提交代表您运行`git stash`时的索引
 - `stash@{0}`的第三个父级，一个新的提交，代表您运行`git stash`时工作副本中未跟踪的文件。该第三个父级仅在以下情况下创建：
   - 您的工作副本实际上包含了未跟踪文件；并且
   - 您在调用 `git stash` 时指定了 `--include-untracked` 或 `--all` 选项。
@@ -996,7 +996,7 @@ git status
 
 列出暂存、未暂存和未跟踪的文件。
 
-`git status` 命令是一个相对简单的命令。它只需显示 `git add` 和 git commit 的状态。状态信息还包括文件暂存/未暂存的相关说明。下面的示例输出显示了 git 状态调用的三个主要类别：
+`git status` 命令是一个相对简单的命令。它只需显示 `git add` 和`git commit`的状态。状态信息还包括文件暂存/未暂存的相关说明。下面的示例输出显示了 git 状态调用的三个主要类别：
 
 ```
 # On branch main
@@ -1021,7 +1021,7 @@ git status
 
 未跟踪文件通常分为两类。它们要么是刚添加到项目中但尚未提交的文件，要么是编译过的二进制文件，如 .pyc、.obj、.exe 等。在 git 状态输出中包含前者肯定是有好处的，但后者会让人很难看出仓库里到底发生了什么。
 
-因此，Git 可以让你完全忽略文件，方法是把路径放在一个叫做 `.gitignore` 的特殊文件中。任何你想忽略的文件都应该单独列一行，*符号可以用作通配符。例如，在项目根目录下的 `.gitignore` 文件中添加以下内容，就能阻止编译后的 Python 文件出现在 `git status` 中：
+因此，Git 可以让你完全忽略文件，方法是把路径放在一个叫做 `.gitignore` 的特殊文件中。任何你想忽略的文件都应该单独列一行，`*`符号可以用作通配符。例如，在项目根目录下的 `.gitignore` 文件中添加以下内容，就能阻止编译后的 Python 文件出现在 `git status` 中：
 
 ```
 *.pyc
@@ -1122,7 +1122,7 @@ Author: John Smith
 
 这个 ID 可以在 `git log ..` 等命令中用来指代特定的提交。例如，`git log 3157e..5ab91`  将显示 ID 为 3157e 和 5ab91 的提交之间的所有内容。除了校验和之外，分支名（分支模块中有讨论）和 HEAD 关键字也是引用单个提交的常用方法。HEAD 总是指当前提交，无论是分支还是特定提交。
 
-`~` 字符用于相对引用提交的父提交。例如，3157e~1 指的是 3157e 之前的提交，而 HEAD~3 则是当前提交的曾祖父。
+`~` 字符用于相对引用提交的父提交。例如，3157e\~1 指的是 3157e 之前的提交，而 HEAD\~3 则是当前提交的曾祖父。
 
 前面提供了许多 `git log` 的示例，但请记住，多个选项可以合并为一条命令：
 
@@ -1132,7 +1132,7 @@ git log --author="John Smith" -p hello.py
 
 这将显示约翰-史密斯对文件 hello.py 所做更改的完整差异。
 
-`..`语法是比较分支的一个非常有用的工具。下一个示例将简要显示所有在 some-feature 中但不在 main 中的提交。
+`..`语法是比较分支的一个非常有用的工具。下一个示例将简要显示所有在`some-feature`中但不在`main`中的提交。
 
 ```bash
 git log --oneline main..some-feature
@@ -1142,7 +1142,7 @@ git log --oneline main..some-feature
 
 ## git tag
 
-本文将讨论 Git 标签概念和 git 标签命令。`tag`是指向 Git 历史中特定点的 ref。标签一般用于捕捉历史中的某一点，该点用于标记版本发布（如 v1.0.1）。
+本文将讨论 Git 标签概念和 git 标签命令。`tag`是指向 Git 历史中特定点的 ref。标签一般用于捕捉历史中的某一点，该点用于标记版本发布（如`v1.0.1`）。
 
 标签就像一个不会改变的分支。与分支不同的是，标签在创建后就不会再有提交历史。有关分支的更多信息，请访问 git 分支页面。
 
@@ -1306,25 +1306,25 @@ $ git tag
     v3
 ```
 
-在本例中，执行 git tag 会显示一个标签列表，其中显示 v1、v2、v3，然后执行 `git tag -d v1` 会删除 v1 标签。
+在本例中，执行`git tag`会显示一个标签列表，其中显示 `v1`、`v2`、`v3`，然后执行 `git tag -d v1` 会删除`v1`标签。
 
 -------
 
-## Git blame
+## git blame
 
 `git blame` 命令是一个多功能的故障诊断工具，有大量的使用选项。`git blame` 的高级功能是显示附加在文件的特定提交行上的作者元数据。这可以用来检查文件历史中的特定点，了解修改该行的最后一个作者是谁。`git blame` 还可以用来探索特定代码的历史，回答代码是什么、如何以及为什么被添加到版本库中的问题。
 
-Git blame 通常与 GUI 显示屏一起使用。在线 Git 托管网站（如 Bitbucket）提供的`blame`视图是 Git blame 的 UI 包装。这些视图在围绕拉取请求和提交的协作讨论中被引用。此外，大多数集成了 Git 的集成开发环境也有动态 blame 视图。
+`Git blame`通常与 GUI 显示屏一起使用。在线 Git 托管网站（如 Bitbucket）提供的`blame`视图是 Git blame 的 UI 包装。这些视图在围绕拉取请求和提交的协作讨论中被引用。此外，大多数集成了 Git 的集成开发环境也有动态 blame 视图。
 
 ### How it works
 
-为了演示 `git blame`，我们需要一个有一定历史的版本库。我们将使用开源项目 [git-blame-example](https://bitbucket.org/kevzettler/git-blame-example)。这个开源项目是一个简单的版本库，包含一个 README.md 文件，其中有一些来自不同作者的提交。git blame使用示例的第一步是`git clone` 该示例仓库。
+为了演示 `git blame`，我们需要一个有一定历史的版本库。我们将使用开源项目 [git-blame-example](https://bitbucket.org/kevzettler/git-blame-example)。这个开源项目是一个简单的版本库，包含一个 README.md 文件，其中有一些来自不同作者的提交。`git blame`使用示例的第一步是`git clone` 该示例仓库。
 
 ```bash
 git clone https://kevzettler@bitbucket.org/kevzettler/git-blame-example.git && cd git-blame-example
 ```
 
-现在我们有了示例代码的副本，可以用 git blame 开始探索它了。使用 git log 可以查看示例仓库的状态。提交历史应该如下所示：
+现在我们有了示例代码的副本，可以用`git blame`开始探索它了。使用`git log`可以查看示例仓库的状态。提交历史应该如下所示：
 
 ```bash
 $ git log
@@ -1452,7 +1452,7 @@ $ git log -S"CSS3D and WebGL renderers." --pretty=format:'%h %an %ad %s'
 
 ## 查找丢失的内容：Reviewing old commits
 
-任何版本控制系统背后的理念都是存储项目的 "安全 "副本，这样你就不必担心会不可挽回地破坏你的代码库。一旦建立了项目提交历史，就可以查看和重温历史中的任何提交。git log 命令是查看 Git 仓库历史记录的最佳工具之一。在下面的例子中，我们使用 git log 获取了一个流行的开源图形库的最新提交列表。
+任何版本控制系统背后的理念都是存储项目的 "安全 "副本，这样你就不必担心会不可挽回地破坏你的代码库。一旦建立了项目提交历史，就可以查看和重温历史中的任何提交。`git log`命令是查看 Git 仓库历史记录的最佳工具之一。在下面的例子中，我们使用`git log`获取了一个流行的开源图形库的最新提交列表。
 
 ```bash
 git log --oneline
@@ -1476,9 +1476,9 @@ b5c1b5c70 Merge pull request #12799 from dhritzkiv/patch-21
 881b25b58 Update ProjectionMatrix on change aspect
 ```
 
-每个提交（`commit`）都有一个唯一的 SHA-1 哈希值。这些 ID 用于浏览提交时间线和重访提交。默认情况下，`git log` 只显示当前选定分支的提交。您要找的提交完全有可能在另一个分支上。您可以执行 `git log --branches=*`，查看所有其他分支的所有提交。`git branch` 命令用于查看和访问其他分支。调用 `git branch -a` 命令将返回所有已知分支名称的列表。然后可以使用 git log .
+每个提交（`commit`）都有一个唯一的`SHA-1`哈希值。这些 ID 用于浏览提交时间线和重访提交。默认情况下，`git log` 只显示当前选定分支的提交。您要找的提交完全有可能在另一个分支上。您可以执行 `git log --branches=*`，查看所有其他分支的所有提交。`git branch` 命令用于查看和访问其他分支。调用 `git branch -a` 命令将返回所有已知分支名称的列表。然后可以使用`git log`.
 
-当找到要访问的历史节点的某个提交引用时，就可以使用 git checkout 命令访问该提交。Git 签出是将这些保存的快照 "加载 "到开发机器上的简单方法。在正常开发过程中，HEAD 通常指向主分支或其他本地分支，但当你签出之前的提交时，HEAD 不再指向分支，而是直接指向某个提交。这就是所谓的 "分离 HEAD "状态，可视化如下：
+当找到要访问的历史节点的某个提交引用时，就可以使用`git checkout`命令访问该提交。Git 签出是将这些保存的快照 "加载 "到开发机器上的简单方法。在正常开发过程中，`HEAD`通常指向主分支或其他本地分支，但当你签出之前的提交时，`HEAD`不再指向分支，而是直接指向某个提交。这就是所谓的 "分离 HEAD "状态，可视化如下：
 
 <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-detached-head.png" style="zoom:50%;" />
 
@@ -1551,7 +1551,7 @@ a1e8fb5 Make some important changes to hello.txt
 
 ### 如何使用 git reset 撤消提交
 
-`git reset` 是一个用途广泛、功能多样的命令。如果我们调用 `git reset --hard a1e8fb5`，提交历史将重置为指定的提交。现在用 git log 查看提交历史会如下所示
+`git reset` 是一个用途广泛、功能多样的命令。如果我们调用 `git reset --hard a1e8fb5`，提交历史将重置为指定的提交。现在用`git log`查看提交历史会如下所示
 
 ```bash
 git log --oneline
