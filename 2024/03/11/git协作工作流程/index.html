@@ -65,7 +65,7 @@
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/release-banches.png">
 <meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/hotfix-banches-2x.png">
 <meta property="article:published_time" content="2024-03-11T06:59:38.000Z">
-<meta property="article:modified_time" content="2024-03-21T07:34:34.277Z">
+<meta property="article:modified_time" content="2024-03-25T12:16:47.850Z">
 <meta property="article:author" content="wotzc">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="版本控制">
@@ -194,18 +194,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -268,7 +268,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-21 15:34:34" itemprop="dateModified" datetime="2024-03-21T15:34:34+08:00">2024-03-21</time>
+      <time title="修改时间：2024-03-25 20:16:47" itemprop="dateModified" datetime="2024-03-25T20:16:47+08:00">2024-03-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="git-远程"><a href="#git-远程" class="headerlink" title="git 远程"></a>git 远程</h1><p>SVN 使用单一的集中式版本库作为开发人员的通信中心，通过在开发人员的工作副本和中心版本库之间传递变更集来实现协作。这与 Git 的分布式协作模式不同，后者为每个开发人员提供了自己的版本库副本，并拥有自己的本地历史记录和分支结构。用户通常需要共享一系列提交，而不是单个变更集。Git 可让你在不同版本库之间共享整个分支，而不是将工作副本中的变更集提交到中央版本库。</p>
-<p><code>git remote</code>命令是更广泛系统中负责同步变更的一个部分。通过 <code>git remote</code>命令注册的记录会与 git fetch、git push 和 git pull 命令结合使用。这些命令都有各自的同步职责，可以在相应的链接中查看。</p>
+<p><code>git remote</code>命令是更广泛系统中负责同步变更的一个部分。通过 <code>git remote</code>命令注册的记录会与 <code>git fetch</code>、<code>git push</code> 和 <code>git pull</code> 命令结合使用。这些命令都有各自的同步职责，可以在相应的链接中查看。</p>
 <h2 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h2><p>使用 <code>git remote</code> 命令可以创建、查看和删除与其他版本库的连接。远程连接更像是书签，而不是其他版本库的直接链接。与其说它们提供了对另一个版本库的实时访问，不如说它们是一个方便的名字，可以用来引用一个不太方便的 URL。</p>
 <p>例如，下图显示了从你的版本库到中央版本库和另一个开发者版本库的两个远程连接。与其用完整的 URL 来引用它们，你可以把 origin 和 john 的快捷方式传递给其他 Git 命令。</p>
 <h3 id="git-remote使用概述"><a href="#git-remote使用概述" class="headerlink" title="git remote使用概述"></a>git remote使用概述</h3><p><code>git remote</code> 命令本质上是一个界面，用于管理存储在版本库 <code>./.git/config</code> 文件中的远程条目列表。以下命令用于查看远程列表的当前状态。</p>
@@ -1162,6 +1162,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/05/13/Linux%E6%95%99%E7%A8%8B/" rel="next" title="Linux教程(一)">
+                  Linux教程(一) <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
