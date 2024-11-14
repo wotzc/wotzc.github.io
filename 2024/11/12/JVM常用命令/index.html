@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Java 应用程序通常在复杂且动态的环境中运行，因此监控其性能并有效诊断问题至关重要。幸运的是，Java 开发工具包 (JDK) 附带了一套强大的工具来实现此目的。在本指南中，我们将探索四个基本工具：jps、jstat、jcmd、jmap和jstack。我们将讨论它们的功能、示例用法以及如何有效地解释它们的输出。 jpsjps(Java Process Status) 工具列出本地计算机上的 Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 监控和诊断工具：jps、jstat、jcmd、jmap和jstack">
+<meta property="og:url" content="http://example.com/2024/11/12/JVM%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Cai">
+<meta property="og:description" content="Java 应用程序通常在复杂且动态的环境中运行，因此监控其性能并有效诊断问题至关重要。幸运的是，Java 开发工具包 (JDK) 附带了一套强大的工具来实现此目的。在本指南中，我们将探索四个基本工具：jps、jstat、jcmd、jmap和jstack。我们将讨论它们的功能、示例用法以及如何有效地解释它们的输出。 jpsjps(Java Process Status) 工具列出本地计算机上的 Ja">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/jvm/threadstatus.jpg">
+<meta property="article:published_time" content="2024-11-12T02:59:28.000Z">
+<meta property="article:modified_time" content="2024-11-14T06:45:13.960Z">
+<meta property="article:author" content="wotzc">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/jvm/threadstatus.jpg">
+
+
+<link rel="canonical" href="http://example.com/2024/11/12/JVM%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/11/12/JVM%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/","path":"2024/11/12/JVM常用命令/","title":"Java 监控和诊断工具：jps、jstat、jcmd、jmap和jstack"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java 监控和诊断工具：jps、jstat、jcmd、jmap和jstack | Cai</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cai</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jps"><span class="nav-number">1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jstat"><span class="nav-number">2.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jcmd"><span class="nav-number">3.</span> <span class="nav-text">jcmd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jmap"><span class="nav-number">4.</span> <span class="nav-text">jmap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jstack"><span class="nav-number">5.</span> <span class="nav-text">jstack</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wotzc"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wotzc</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/12/JVM%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java 监控和诊断工具：jps、jstat、jcmd、jmap和jstack | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 监控和诊断工具：jps、jstat、jcmd、jmap和jstack
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-12 10:59:28" itemprop="dateCreated datePublished" datetime="2024-11-12T10:59:28+08:00">2024-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-11-14 14:45:13" itemprop="dateModified" datetime="2024-11-14T14:45:13+08:00">2024-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>Java</strong> 应用程序通常在复杂且动态的环境中运行，因此监控其性能并有效诊断问题至关重要。幸运的是，<strong>Java</strong> 开发工具包 (<strong>JDK</strong>) 附带了一套强大的工具来实现此目的。在本指南中，我们将探索四个基本工具：<strong>jps</strong>、<strong>jstat</strong>、<strong>jcmd</strong>、<strong>jmap</strong>和<strong>jstack</strong>。我们将讨论它们的功能、示例用法以及如何有效地解释它们的输出。</p>
+<h1 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h1><p><code>jps(Java Process Status)</code> 工具列出本地计算机上的 <strong>Java</strong> 虚拟机 (<strong>JVM</strong>) 进程。它提供进程 ID (<strong>PID</strong>) 和正在执行的主类或 <strong>JAR</strong> 文件等信息。</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps [options]</span><br></pre></td></tr></table></figure>
+
+<p>Sample Usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ jps -l</span><br><span class="line">12345 com.example.MainApp</span><br></pre></td></tr></table></figure>
+
+<p>理解输出：</p>
+<ul>
+<li>第一列表示 <strong>PID</strong></li>
+<li>第二列显示主类的完全限定类名或 <strong>JAR</strong> 文件名</li>
+</ul>
+<h1 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h1><p><code>jstat (JVM Statistics Monitoring Tool)</code> 是一个命令行工具，提供有关 <strong>JVM</strong> 内部统计信息，例如垃圾收集、类加载、编译器活动等。</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstat [options] &lt;vmid&gt; [&lt;interval&gt; [&lt;count&gt;]]</span><br></pre></td></tr></table></figure>
+
+<p>Sample Usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jstat -gcutil 12345 1000 10</span><br></pre></td></tr></table></figure>
+
+<p><code>-gcutil</code> 提供垃圾收集统计数据，每秒统计1次，共统计两次</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(base) mac7@TZC-Mac ~ % jstat -options</span><br><span class="line">-class</span><br><span class="line">-compiler</span><br><span class="line">-gc</span><br><span class="line">-gccapacity</span><br><span class="line">-gccause</span><br><span class="line">-gcmetacapacity</span><br><span class="line">-gcnew</span><br><span class="line">-gcnewcapacity</span><br><span class="line">-gcold</span><br><span class="line">-gcoldcapacity</span><br><span class="line">-gcutil</span><br><span class="line">-printcompilation</span><br></pre></td></tr></table></figure>
+
+<p><code>option</code> 选项详解</p>
+<ul>
+<li><code>-class</code>  用于查看类加载情况的统计 </li>
+<li><code>-compiler</code> 用于查看<strong>HotSpot</strong>中即时编译器编译情况的统计 </li>
+<li><code>-gc</code> 用于查看<strong>JVM</strong>中堆的垃圾收集情况的统计 </li>
+<li><code>-gccapacity</code> 用于查看新生代、老生代及持久代的存储容量情况 </li>
+<li><code>-gccause</code> 显示[垃圾回收]的相关信息（同<code>-gcutil</code>）,同时显示最后一次仅当前正在发生的垃圾收集的原因 </li>
+<li><code>-gcmetacapacity</code> 用于查看新生代垃圾收集的情况 </li>
+<li><code>-gcnew</code> 用于查看新生代存储容量的情况 </li>
+<li><code>-gcnewcapacity</code> 用于查看老生代及持久代垃圾收集的情况 </li>
+<li><code>-gcold</code>  用于查看老生代及持久代垃圾收集的情况 </li>
+<li><code>-gcoldcapacity</code>  用于查看老生代的容量 </li>
+<li><code>-gcutil</code> 显示垃圾收集信息 </li>
+<li><code>-printcompilation</code> 输出<strong>JIT</strong>编译的方法信息</li>
+</ul>
+<p><code>interval</code> 参数详解</p>
+<ul>
+<li>指定输出统计数据的周期，单位毫秒</li>
+</ul>
+<p><code>count</code> 参数详解</p>
+<ul>
+<li>一共输出多少次数据</li>
+</ul>
+<p>Usage:</p>
+<p><code>-class</code>命令，每秒统一次<strong>classloader</strong>信息，一共输出 2 次</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -class 21074 1000 2</span><br><span class="line">Loaded  Bytes  Unloaded  Bytes     Time   </span><br><span class="line">  3198  6281.9        0     0.0       0.99</span><br><span class="line">  3198  6281.9        0     0.0       0.99</span><br></pre></td></tr></table></figure>
+
+<p>装载了3198个类，大小6281.9个字节，卸载了0个类，大小0个字节，装载和卸载耗费时间总时间0.99秒</p>
+<p><code>-compiler</code>命令，显示<strong>JVM</strong>实时编译的数量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -compiler 21074</span><br><span class="line">Compiled Failed Invalid   Time   FailedType FailedMethod</span><br><span class="line">    3920      2       0    10.55          1 com/mysql/jdbc/AbandonedConnectionCleanupThread run</span><br></pre></td></tr></table></figure>
+
+<p>编译任务执行了3920个，失败了2个，失效了0个，编译耗费10.55秒，最后一个编译失败任务的类型为1 ，最后一个编译失败任务所在的方法</p>
+<p><code>-gc</code>命令，显示<strong>GC</strong>堆相关信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gc 21074</span><br><span class="line"> S0C    	S1C    	S0U    S1U   EC        EU       OC         OU       MC     	MU    	CCSC   CCSU   	YGC   YGCT    FGC    FGCT     GCT   </span><br><span class="line">12800.0 	12288.0 288.0  0.0   3120640.0 360814.7 1048576.0  17050.0  20608.0 20235.5 2432.0 2280.5 	26    0.129   0      0.000    0.129</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li><p>S0C 年轻代中第一个S区容量（千字节）</p>
+</li>
+<li><p>S1C 年轻代中第二个S区容量（千字节）</p>
+</li>
+<li><p>S0U 年轻代中第一个S区已使用的空间（千字节）</p>
+</li>
+<li><p>S1U 年轻代中第二个S区已使用的空间（千字节）</p>
+</li>
+<li><p>EC 年轻代中E区容量（千字节）</p>
+</li>
+<li><p>EU 年轻代中E区使用空间（千字节）</p>
+</li>
+<li><p>OC old代的容量（千字节）</p>
+</li>
+<li><p>OU old代已使用空间（千字节）</p>
+</li>
+<li><p>MC metaspace元空间容量（千字节）</p>
+</li>
+<li><p>MU metaspace元空间已使用容量（千字节）</p>
+</li>
+<li><p>CCSC：当前压缩类空间的容量 (千字节)</p>
+</li>
+<li><p>CCSU：当前压缩类空间目前已使用空间 (千字节)</p>
+</li>
+<li><p>YGC 应用程序启动到采样时年轻代中GC次数</p>
+</li>
+<li><p>YGCT 应用程序启动到采样时年轻代中GC所用时间</p>
+</li>
+<li><p>FGC 应用程序启动到采样老年代GC次数（秒）</p>
+</li>
+<li><p>FGCT 应用程序启动到采样老年代GC所用时间（秒）</p>
+</li>
+<li><p>GCT 应用程序从启动到采样GC所用总时间（秒）</p>
+</li>
+</ul>
+<p><code>-gcmetacapacity</code>命令，查看<code>metaspace</code>中对象的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcmetacapacity 21074</span><br><span class="line">   MCMN       MCMX        MC       CCSMN      CCSMX       CCSC     YGC   FGC    FGCT     GCT   </span><br><span class="line">     0.0  1067008.0    20608.0        0.0  1048576.0     2432.0    31     0    0.000    0.134</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li>MCMN 最小元数据容量</li>
+<li>MCMX 最大元数据容量</li>
+<li>MC 当前元数据空间大小</li>
+<li>CCSMN 最小压缩类空间大小</li>
+<li>CCSMX 最大压缩类空间大小</li>
+<li>CCSC 当前压缩类空间大小</li>
+<li>YGC 从应用程序启动到采样YGC次数</li>
+<li>FGC 从应用程序启动到采样FULL GC次数</li>
+<li>FGCT 从应用程序到采样FULL GC所用时间</li>
+<li>GCT 从应用程序到采样GC总时间</li>
+</ul>
+<p><code>-gcnew</code>命令，年轻代对象信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcnew 21074</span><br><span class="line"> S0C    S1C    S0U   S1U   TT MTT	DSS      EC       EU     	YGC     YGCT  </span><br><span class="line">8704.0 9728.0  0.0  288.0  1  15	8704.0 3125760.0 3067072.3  31    0.134</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li><p>S0C 年轻代中第一个S区容量</p>
+</li>
+<li><p>S1C 年轻代中第二个S区容量</p>
+</li>
+<li><p>S0U 年轻代中第一个S区已使用容量</p>
+</li>
+<li><p>S1U 年轻代中第二个S区已使用容量</p>
+</li>
+<li><p>TT 持有次数限制</p>
+</li>
+<li><p>MTT 最大持有次数限制</p>
+</li>
+<li><p>DSS 期望的S区大小</p>
+</li>
+<li><p>EC 年轻代中E区大小</p>
+</li>
+<li><p>EU 年轻代中E区已使用大小</p>
+</li>
+<li><p>YGC 从应用程序启动到采样YGC次数</p>
+</li>
+<li><p>YGCT 从应用程序启动到采样YGC所用时间</p>
+</li>
+</ul>
+<p><code>-gcnewcapacity</code>命令，年轻代对象信息以及占用量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcnewcapacity 21074</span><br><span class="line">  NGCMN      NGCMX       NGC      S0CMX     S0C     S1CMX     S1C       ECMX        EC      YGC   FGC </span><br><span class="line"> 3145728.0  3145728.0  3145728.0 1048576.0   8704.0 1048576.0   8192.0  3144704.0  3128832.0    32     0</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li><p>NGCMN 年轻代初始化大小</p>
+</li>
+<li><p>NGCMX 年轻代最大容量</p>
+</li>
+<li><p>NGC 年轻代中当前容量</p>
+</li>
+<li><p>S0CMX S0最大的容量</p>
+</li>
+<li><p>S0C 当前S0大小</p>
+</li>
+<li><p>S1CM S1最大容量</p>
+</li>
+<li><p>S1C 当前S1大小</p>
+</li>
+<li><p>ECMX E区最大容量</p>
+</li>
+<li><p>EC E区当前大小</p>
+</li>
+<li><p>YGC 从应用程序启动到采样YGC次数</p>
+</li>
+<li><p>FGC 从应用程序启动到采样FGC次数</p>
+</li>
+</ul>
+<p><code>-gcold</code>命令，老年代对象信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcold 21074</span><br><span class="line">   MC       MU      CCSC     CCSU       OC          OU       YGC    FGC    FGCT     GCT   </span><br><span class="line"> 20608.0  20235.5   2432.0   2280.5   1048576.0     17234.0     32     0    0.000    0.135</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li><p>MC metaspace 元空间最大容量</p>
+</li>
+<li><p>MU metaspace 元空间当前大小</p>
+</li>
+<li><p>CCSC 压缩类空间大小</p>
+</li>
+<li><p>CCSU 压缩类空间当前使用大小</p>
+</li>
+<li><p>OC 老年代容量</p>
+</li>
+<li><p>OU 老年代已使用大小</p>
+</li>
+<li><p>YGC 从应用程序启动到采样YGC次数</p>
+</li>
+<li><p>FGC 从应用程序启动到采样FGC次数</p>
+</li>
+<li><p>FGCT 从应用程序启动到采样FGC耗费总时间</p>
+</li>
+<li><p>GCT 从应用程序启动到采样GC耗费总时间</p>
+</li>
+</ul>
+<p><code>-gcoldcapacity</code>命令，老年代对象占用情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcoldcapacity 21074</span><br><span class="line">   OGCMN       OGCMX        OGC         OC       YGC   FGC    FGCT     GCT   </span><br><span class="line">  1048576.0   1048576.0   1048576.0   1048576.0    32     0    0.000    0.135</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li>OGCMN 老年代初始化大小</li>
+<li>OGCMX 老年代最大容量</li>
+<li>OGC 老年代当前使用大小</li>
+<li>OC 老年代容量</li>
+</ul>
+<p><code>-gcutil</code>命令，统计<strong>GC</strong>情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gcutil 21074</span><br><span class="line">  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   </span><br><span class="line">  2.21   0.00  54.97   1.64  98.19  93.77     32    0.135     0    0.000    0.135</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li>S0 S0区占用比</li>
+<li>S1 S1区占用比</li>
+<li>E 伊甸园区占用比</li>
+<li>O 老年代占用比</li>
+<li>M 元空间占用比</li>
+<li>CCS 压缩类占用比</li>
+<li>YGC YGC发生的次数</li>
+<li>YGCT 所有YGC的总共耗时</li>
+<li>FGC FGC发生的次数</li>
+<li>FGCT 所有FGC的共耗时</li>
+<li>GCT 所有GC的总耗时</li>
+</ul>
+<p><code>-gccause</code>命令，显示<strong>GC</strong>导致的原因</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -gccause 21074</span><br><span class="line">  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT    LGCC                 GCC                 </span><br><span class="line">  2.21   0.00  68.95   1.64  98.19  93.77     32    0.135     0    0.000    0.135 Allocation Failure   No GC</span><br></pre></td></tr></table></figure>
+
+<p>大部分字段同<code>-gcutil</code>命令</p>
+<p>字段解释：</p>
+<ul>
+<li>LGCC 上一次GC原因</li>
+<li>GCC 当前GC原因</li>
+</ul>
+<p><code>-printcompilation</code>命令，VM执行的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jstat -printcompilation 21074</span><br><span class="line">Compiled  Size  Type Method</span><br><span class="line">    3964    311    1 com/alibaba/druid/sql/visitor/SchemaStatVisitor visit</span><br></pre></td></tr></table></figure>
+
+<p>字段解释：</p>
+<ul>
+<li>compiled 编译任务的数目</li>
+<li>size 方法生成的字节码大小</li>
+<li>type 编译类型</li>
+<li>method 类名和方法名</li>
+</ul>
+<hr>
+<h1 id="jcmd"><a href="#jcmd" class="headerlink" title="jcmd"></a>jcmd</h1><p><code>jcmd</code> - 向正在运行的 Java 虚拟机 (<code>JVM</code>) 发送诊断命令请求</p>
+<p><code>jcmd</code> [<em>pid</em> | <em>main-class</em> ] <em>command</em> … | <code>PerfCounter.print</code> | <code>-f</code> <em>filename</em></p>
+<p><code>jcmd</code> [<code>-l</code> ]</p>
+<p><code>jcmd -h</code></p>
+<p>查看帮助</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd -h</span><br><span class="line">Usage: jcmd &lt;pid | main class&gt; &lt;<span class="built_in">command</span> ...|PerfCounter.print|-f file&gt;</span><br><span class="line">   or: jcmd -l</span><br><span class="line">   or: jcmd -h</span><br><span class="line"></span><br><span class="line">  <span class="built_in">command</span> must be a valid jcmd <span class="built_in">command</span> <span class="keyword">for</span> the selected jvm.</span><br><span class="line">  Use the <span class="built_in">command</span> <span class="string">&quot;help&quot;</span> to see <span class="built_in">which</span> commands are available.</span><br><span class="line">  If the pid is 0, commands will be sent to all Java processes.</span><br><span class="line">  The main class argument will be used to match (either partially</span><br><span class="line">  or fully) the class used to start Java.</span><br><span class="line">  If no options are given, lists Java processes (same as -p).</span><br><span class="line"></span><br><span class="line">  PerfCounter.print display the counters exposed by this process</span><br><span class="line">  -f  <span class="built_in">read</span> and execute commands from the file</span><br><span class="line">  -l  list JVM processes on the <span class="built_in">local</span> machine</span><br><span class="line">  -h  this <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<p>查看正在运行的 <strong>Java</strong> 进程<strong>ID</strong>、名称和 <strong>main</strong> 函数参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd</span><br><span class="line">7200 sun.tools.jcmd.JCmd</span><br><span class="line">10614 com.install4j.runtime.launcher.MacLauncher</span><br><span class="line">88348 org.gradle.launcher.daemon.bootstrap.GradleDaemon 2.14</span><br></pre></td></tr></table></figure>
+
+<p>注意，<strong>7200</strong> 进程是<code>jcmd</code>本身。执行完<code>jcmd</code>后，该进程已经结束了。</p>
+<p>查看某个进程支持的命令</p>
+<p>在<code>jcmd</code> 后加上进程 <strong>ID</strong>，然后加上 <strong>help</strong> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 <span class="built_in">help</span></span><br><span class="line">10614:</span><br><span class="line">The following commands are available:</span><br><span class="line">JFR.configure</span><br><span class="line">JFR.stop</span><br><span class="line">JFR.start</span><br><span class="line">JFR.dump</span><br><span class="line">JFR.check</span><br><span class="line">VM.log</span><br><span class="line">VM.native_memory</span><br><span class="line">VM.check_commercial_features</span><br><span class="line">VM.unlock_commercial_features</span><br><span class="line">ManagementAgent.status</span><br><span class="line">ManagementAgent.stop</span><br><span class="line">ManagementAgent.start_local</span><br><span class="line">ManagementAgent.start</span><br><span class="line">Compiler.directives_clear</span><br><span class="line">Compiler.directives_remove</span><br><span class="line">Compiler.directives_add</span><br><span class="line">Compiler.directives_print</span><br><span class="line">VM.print_touched_methods</span><br><span class="line">Compiler.codecache</span><br><span class="line">Compiler.codelist</span><br><span class="line">Compiler.queue</span><br><span class="line">VM.classloader_stats</span><br><span class="line">Thread.print</span><br><span class="line">JVMTI.data_dump</span><br><span class="line">JVMTI.agent_load</span><br><span class="line">VM.stringtable</span><br><span class="line">VM.symboltable</span><br><span class="line">VM.class_hierarchy</span><br><span class="line">GC.class_stats</span><br><span class="line">GC.class_histogram</span><br><span class="line">GC.heap_dump</span><br><span class="line">GC.finalizer_info</span><br><span class="line">GC.heap_info</span><br><span class="line">GC.run_finalization</span><br><span class="line">GC.run</span><br><span class="line">VM.info</span><br><span class="line">VM.uptime</span><br><span class="line">VM.dynlibs</span><br><span class="line">VM.set_flag</span><br><span class="line">VM.flags</span><br><span class="line">VM.system_properties</span><br><span class="line">VM.command_line</span><br><span class="line">VM.version</span><br><span class="line"><span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">For more information about a specific <span class="built_in">command</span> use <span class="string">&#x27;help &lt;command&gt;&#x27;</span>.</span><br></pre></td></tr></table></figure>
+
+<p><code>jcmd</code> 后也可以跟上进程名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd MacLauncher <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果和 <code>jcmd 10614 help</code> 相同。</p>
+<p>查看某个进程的 JVM 版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 VM.version</span><br><span class="line">10614:</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM version 9.0.1+11</span><br><span class="line">JDK 9.0.1</span><br></pre></td></tr></table></figure>
+
+<p>查看 JVM 进程信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 VM.info</span><br></pre></td></tr></table></figure>
+
+<p>建议进程进行垃圾回收</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 GC.run</span><br></pre></td></tr></table></figure>
+
+<p>获取类的统计信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 GC.class_histogram | more</span><br></pre></td></tr></table></figure>
+
+<p>可以看到类名、对象数量、占用空间等。</p>
+<p>获取启动参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 VM.flags</span><br></pre></td></tr></table></figure>
+
+<p>获取进程到现在运行了多长时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 VM.uptime</span><br></pre></td></tr></table></figure>
+
+<p>查看线程信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 Thread.print</span><br></pre></td></tr></table></figure>
+
+<p>获取性能相关数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 PerfCounter.print</span><br></pre></td></tr></table></figure>
+
+<p>导出堆快照到当前目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jcmd 10614 GC.heap_dump <span class="variable">$PWD</span>/heap.dump</span><br></pre></td></tr></table></figure>
+
+<p>堆快照可以使用 <a target="_blank" rel="noopener" href="https://visualvm.github.io/">VisualVM</a> 等工具打开分析。</p>
+<hr>
+<h1 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h1><p><code>jmap (Memory Map for Java)</code> 为给定的 Java 进程生成与内存相关的信息，包括堆<code>dump</code>和内存使用情况统计信息。</p>
+<p>Usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmap [option] &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看一下<code>jmap</code>命令的帮助信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jmap -<span class="built_in">help</span></span><br><span class="line">Usage:</span><br><span class="line">    jmap [option] &lt;pid&gt;</span><br><span class="line">        (to connect to running process)</span><br><span class="line">    jmap [option] &lt;executable &lt;core&gt;</span><br><span class="line">        (to connect to a core file)</span><br><span class="line">    jmap [option] [server_id@]&lt;remote server IP or hostname&gt;</span><br><span class="line">        (to connect to remote debug server)</span><br><span class="line"></span><br><span class="line"><span class="built_in">where</span> &lt;option&gt; is one of:</span><br><span class="line">    &lt;none&gt;               to <span class="built_in">print</span> same info as Solaris pmap</span><br><span class="line">    -heap                to <span class="built_in">print</span> java heap summary</span><br><span class="line">    -histo[:live]        to <span class="built_in">print</span> histogram of java object heap; <span class="keyword">if</span> the <span class="string">&quot;live&quot;</span></span><br><span class="line">                         suboption is specified, only count live objects</span><br><span class="line">    -clstats             to <span class="built_in">print</span> class loader statistics</span><br><span class="line">    -finalizerinfo       to <span class="built_in">print</span> information on objects awaiting finalization</span><br><span class="line">    -dump:&lt;dump-options&gt; to dump java heap <span class="keyword">in</span> hprof binary format</span><br><span class="line">                         dump-options:</span><br><span class="line">                           live         dump only live objects; <span class="keyword">if</span> not specified,</span><br><span class="line">                                        all objects <span class="keyword">in</span> the heap are dumped.</span><br><span class="line">                           format=b     binary format</span><br><span class="line">                           file=&lt;file&gt;  dump heap to &lt;file&gt;</span><br><span class="line">                         Example: jmap -dump:live,format=b,file=heap.bin &lt;pid&gt;</span><br><span class="line">    -F                   force. Use with -dump:&lt;dump-options&gt; &lt;pid&gt; or -histo</span><br><span class="line">                         to force a heap dump or histogram when &lt;pid&gt; does not</span><br><span class="line">                         respond. The <span class="string">&quot;live&quot;</span> suboption is not supported</span><br><span class="line">                         <span class="keyword">in</span> this mode.</span><br><span class="line">    -h | -<span class="built_in">help</span>           to <span class="built_in">print</span> this <span class="built_in">help</span> message</span><br><span class="line">    -J&lt;flag&gt;             to pass &lt;flag&gt; directly to the runtime system</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li><code>option</code>： 选项参数</li>
+<li><code>pid</code>： 需要打印配置信息的进程<strong>ID</strong></li>
+<li><code>executable</code>： 产生核心<strong>dump</strong>的Java可执行文件</li>
+<li><code>core</code>： 需要打印配置信息的核心文件</li>
+<li><code>server-id</code> 可选的唯一<strong>id</strong>，如果相同的远程主机上运行了多台调试服务器，用此选项参数标识服务器</li>
+<li><code>remote server IP or hostname</code> 远程调试服务器的IP地址或主机名</li>
+</ul>
+<p>这些参数里面一般使用option和pid即可</p>
+<ul>
+<li><code>no option</code>： 查看进程的内存映像信息，类似Solaris pmap命令</li>
+<li><code>heap</code>： 显示Java堆详细信息</li>
+<li><code>histo[:live]</code>： 显示堆中对象的统计信息</li>
+<li><code>clstats</code>：打印类加载器信息</li>
+<li><code>finalizerinfo</code>： 显示在<code>F-Queue</code>队列等待<code>Finalizer</code>线程执行<code>finalizer</code>方法的对象</li>
+<li><code>dump</code>:：生成堆转储快照</li>
+<li><code>F</code>： 当<code>-dump</code>没有响应时，使用<code>-dump</code>或者<code>-histo</code>参数。在这个模式下，<code>live</code>子参数无效</li>
+<li><code>help</code>：打印帮助信息</li>
+<li><code>J</code>：指定传递给运行<code>jmap</code>的<code>JVM</code>的参数</li>
+</ul>
+<p><strong>示例</strong></p>
+<ol>
+<li><code>jmap -heap pid</code>命令，打印堆内存详细信息</li>
+</ol>
+<p>打印一个堆的摘要信息，包括使用的<strong>GC</strong>算法、堆配置信息和各内存区域内存使用信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jmap -heap 21074</span><br><span class="line">Attaching to process ID 21074, please <span class="built_in">wait</span>...</span><br><span class="line">Debugger attached successfully.</span><br><span class="line">Server compiler detected.</span><br><span class="line">JVM version is 25.131-b11</span><br><span class="line"></span><br><span class="line">using thread-local object allocation.</span><br><span class="line">Parallel GC with 4 thread(s)	</span><br><span class="line"></span><br><span class="line">Heap Configuration:										<span class="comment">##堆配置情况，也就是JVM参数配置的结果</span></span><br><span class="line">   MinHeapFreeRatio         = 0							<span class="comment">##最小堆使用比例</span></span><br><span class="line">   MaxHeapFreeRatio         = 100						<span class="comment">##最大堆可用比例</span></span><br><span class="line">   MaxHeapSize              = 4294967296 (4096.0MB)		<span class="comment">##最大堆空间大小</span></span><br><span class="line">   NewSize                  = 3221225472 (3072.0MB)		<span class="comment">##新生代分配大小</span></span><br><span class="line">   MaxNewSize               = 3221225472 (3072.0MB)		<span class="comment">##最大可新生代分配大小</span></span><br><span class="line">   OldSize                  = 1073741824 (1024.0MB)		<span class="comment">##老年代大小</span></span><br><span class="line">   NewRatio                 = 2							<span class="comment">##新生代比例</span></span><br><span class="line">   SurvivorRatio            = 8							<span class="comment">##新生代与suvivor的比例</span></span><br><span class="line">   MetaspaceSize            = 21807104 (20.796875MB)	<span class="comment">##元空间大小</span></span><br><span class="line">   CompressedClassSpaceSize = 1073741824 (1024.0MB)		<span class="comment">##压缩类空间大小</span></span><br><span class="line">   MaxMetaspaceSize         = 17592186044415 MB			<span class="comment">##最大元空间大小</span></span><br><span class="line">   G1HeapRegionSize         = 0 (0.0MB)					<span class="comment">##G1的region大小</span></span><br><span class="line"></span><br><span class="line">Heap Usage:												<span class="comment">##堆使用情况</span></span><br><span class="line">PS Young Generation										<span class="comment">##新生代（伊甸Eden区 + 幸存者survior（from + to）区）</span></span><br><span class="line">Eden Space:												<span class="comment">##伊甸区</span></span><br><span class="line">   capacity = 3206021120 (3057.5MB)						<span class="comment">##伊甸区容量</span></span><br><span class="line">   used     = 1334298032 (1272.4857635498047MB)			<span class="comment">##已经使用大小</span></span><br><span class="line">   free     = 1871723088 (1785.0142364501953MB)			<span class="comment">##剩余容量</span></span><br><span class="line">   41.61850412264283% used								<span class="comment">##使用比例</span></span><br><span class="line">From Space:												<span class="comment">##survior1区</span></span><br><span class="line">   capacity = 7340032 (7.0MB)							<span class="comment">##survior1区容量</span></span><br><span class="line">   used     = 229376 (0.21875MB)						<span class="comment">##surviror1区已使用情况</span></span><br><span class="line">   free     = 7110656 (6.78125MB)						<span class="comment">##surviror1区剩余容量</span></span><br><span class="line">   3.125% used											<span class="comment">##survior1区使用比例</span></span><br><span class="line">To Space:												<span class="comment">##survior2 区</span></span><br><span class="line">   capacity = 6815744 (6.5MB)							<span class="comment">##survior2区容量</span></span><br><span class="line">   used     = 0 (0.0MB)									<span class="comment">##survior2区已使用情况</span></span><br><span class="line">   free     = 6815744 (6.5MB)							<span class="comment">##survior2区剩余容量</span></span><br><span class="line">   0.0% used											<span class="comment">##survior2区使用比例</span></span><br><span class="line">PS Old Generation										<span class="comment">##老年代使用情况</span></span><br><span class="line">   capacity = 1073741824 (1024.0MB)						<span class="comment">##老年代容量</span></span><br><span class="line">   used     = 17754144 (16.931671142578125MB)			<span class="comment">##老年代已使用容量</span></span><br><span class="line">   free     = 1055987680 (1007.0683288574219MB)			<span class="comment">##老年代剩余容量</span></span><br><span class="line">   1.653483510017395% used								<span class="comment">##老年代使用比例</span></span><br><span class="line"></span><br><span class="line">7111 interned Strings occupying 559016 bytes.			<span class="comment">##系统中使用的字符串总大小</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><code>jmap -histo:live pid</code>命令，显示堆中对象的统计信息</li>
+</ol>
+<p>其中包括每个Java类、对象数量、内存大小(单位：字节)、完全限定的类名。打印的虚拟机内部的类名称将会带有一个<code>*</code>前缀。如果指定了live子选项，则只计算活动的对象。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]$ jmap -histo:live 21074</span><br><span class="line"><span class="comment">#编号	#实例个数		#实例总大小 #全限定类名</span></span><br><span class="line">num     <span class="comment">#instances         #bytes  class name</span></span><br><span class="line">----------------------------------------------</span><br><span class="line">   1:        262144        6291456  org.apache.logging.log4j.core.async.AsyncLoggerConfigDisruptor<span class="variable">$Log4jEventWrapper</span></span><br><span class="line">   2:         16536        2830928  [C</span><br><span class="line">   3:          2622        1197536  [Ljava.lang.Object;</span><br><span class="line">   4:          1547        1122888  [I</span><br><span class="line">   5:           896         675144  [B</span><br><span class="line">   6:         16462         395088  java.lang.String</span><br><span class="line">   7:          3483         393304  java.lang.Class</span><br><span class="line">   8:         20149         322384  java.lang.Integer</span><br><span class="line">   9:          8820         282240  io.mycat.statistic.HeartbeatRecorder<span class="variable">$Record</span></span><br><span class="line">  10:          8954         214896  java.util.concurrent.ConcurrentLinkedQueue<span class="variable">$Node</span></span><br><span class="line">  11:          2007         211264  [Ljava.util.HashMap<span class="variable">$Node</span>;</span><br><span class="line">  12:          5444         174208  java.util.HashMap<span class="variable">$Node</span></span><br><span class="line">  13:          4183         133856  java.util.concurrent.ConcurrentHashMap<span class="variable">$Node</span></span><br><span class="line">  14:          1493         119440  io.mycat.route.RouteResultsetNode</span><br><span class="line">  15:          1959          94032  java.util.HashMap</span><br><span class="line">  16:             2          80560  [Ljava.lang.Integer;</span><br><span class="line">  17:            93          67352  [Ljava.util.concurrent.ConcurrentHashMap<span class="variable">$Node</span>;</span><br><span class="line">  18:          3713          59408  java.lang.Object</span><br><span class="line">  ......</span><br></pre></td></tr></table></figure>
+
+<p>类名解释如下</p>
+<ul>
+<li><code>B</code> <code>byte</code></li>
+<li><code>C</code> <code>char</code></li>
+<li><code>D</code> <code>double</code></li>
+<li><code>F</code> <code>float</code></li>
+<li><code>I</code> <code>int</code></li>
+<li><code>J</code> <code>long</code></li>
+<li><code>Z</code> <code>boolean</code></li>
+<li>[ 数组，如<code>[I</code>表示<code>int[]</code></li>
+<li><code>[L</code>+类名 其他对象</li>
+</ul>
+<ol start="3">
+<li><code>jmap -dump:format=b,file=heapdump.hprof pid</code>命令，<code>dump</code>当前内存快照</li>
+</ol>
+<p>以<code>hprof</code>二进制格式转储<code>Java</code>堆到指定<code>filename</code>的文件中。<code>live</code>子选项是可选的。如果指定了<code>live</code>子选项，堆中只有活动的对象会被转储。想要浏览heap dump，你可以使用jhat（Java堆分析工具）或者MAT等工具读取生成的文件。</p>
+<hr>
+<h1 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h1><p><code>jstack</code>（Java Virtual Machine Stack Trace）是JDK提供的一个可以生成Java虚拟机当前时刻的线程快照信息的命令行工具。线程快照一般被称为<strong>threaddump</strong>或者<strong>javacore</strong>文件，是当前Java虚拟机中每个线程正在执行的Java线程、虚拟机内部线程和可选的本地方法堆栈帧的集合。对于每个方法栈帧，将会显示完整的类名、方法名、字节码索引(<strong>bytecode index</strong>，<strong>BCI</strong>)和行号。生成的线程快照可以用于定位线程出现长时间停顿的原因，比如：线程间死锁、死循环、请求外部资源被长时间挂起等等。</p>
+<blockquote>
+<p>jstack prints Java stack traces of Java threads <strong>for</strong> a given Java process or core file or a remote debug server. </p>
+</blockquote>
+<ul>
+<li><code>jstack</code>命令用于生成虚拟机当前时刻的线程快照。</li>
+<li>线程快照是当前虚拟机内每一条线程正在执行的方法堆栈的集合，生成线程快照的主要目的是定位线程出现长时间停顿的原因， 如线程间死锁、死循环、请求外部资源导致的长时间等待等问题。</li>
+<li>线程出现停顿的时候通过<code>jstack</code>来查看各个线程的调用堆栈，就可以知道没有响应的线程到底在后台做什么事情，或者等待什么资源。</li>
+<li>如果<strong>java</strong>程序崩溃生成<strong>core</strong>文件，<code>jstack</code>工具可以用来获得<strong>core</strong>文件的<strong>java stack</strong>和<strong>native stack</strong>的信息，从而可以轻松地知道java程序是如何崩溃和在程序何处发生问题。</li>
+<li>另外，<code>jstack</code>工具还可以附属到正在运行的<strong>java</strong>程序中，看到当时运行的<strong>java</strong>程序的<strong>java stack</strong>和<strong>native stack</strong>的信息, 如果现在运行的java程序呈现hung的状态，<code>jstack</code>是非常有用的。</li>
+</ul>
+<p>命令语法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstack [options] pid</span><br></pre></td></tr></table></figure>
+
+<p>命令参数说明：</p>
+<ul>
+<li><code>option</code>：<code>jstack</code>命令的可选参数。如果没有指定这个参数，<code>jstack</code>命令会显示<strong>Java</strong>虚拟机当前时刻的线程快照信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">D:\Desktop&gt;jstack 9348</span><br><span class="line">Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.281-b09 mixed mode):</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;DestroyJavaVM&quot;</span> <span class="comment">#13 prio=5 os_prio=0 tid=0x0000018da5881000 nid=0x34c8 waiting on condition [0x0000000000000000]</span></span><br><span class="line">   java.lang.Thread.State: RUNNABLE</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;mythread2&quot;</span> <span class="comment">#12 prio=5 os_prio=0 tid=0x0000018dc2547000 nid=0x2580 waiting on condition [0x000000468cdff000]</span></span><br><span class="line">   java.lang.Thread.State: WAITING (parking)</span><br><span class="line">        at sun.misc.Unsafe.park(Native Method)</span><br><span class="line">        - parking to <span class="built_in">wait</span> <span class="keyword">for</span>  &lt;0x000000076b8dbf28&gt; (a java.util.concurrent.locks.ReentrantLock<span class="variable">$NonfairSync</span>)</span><br><span class="line">        at java.util.concurrent.locks.LockSupport.park(Unknown Source)</span><br><span class="line">        at java.util.concurrent.locks.AbstractQueuedSynchronizer.parkAndCheckInterrupt(Unknown Source)</span><br><span class="line">        at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireQueued(Unknown Source)</span><br><span class="line">        at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(Unknown Source)</span><br><span class="line">        at java.util.concurrent.locks.ReentrantLock<span class="variable">$NonfairSync</span>.lock(Unknown Source)</span><br><span class="line">        at java.util.concurrent.locks.ReentrantLock.lock(Unknown Source)</span><br><span class="line">        at DeathLock.lambda<span class="variable">$deathLock</span><span class="variable">$1</span>(DeathLock.java:24)</span><br><span class="line">        at DeathLock$<span class="variable">$Lambda</span><span class="variable">$2</span>/1044036744.run(Unknown Source)</span><br><span class="line">        at java.lang.Thread.run(Unknown Source)</span><br></pre></td></tr></table></figure>
+
+<p>查看帮助信息</p>
+<p>可以通过执行<code>jstack</code> 或者 <code>jstack -h</code>来查看帮助信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ jstack</span><br><span class="line">Usage:</span><br><span class="line">    jstack [-l] &lt;pid&gt;</span><br><span class="line">        (to connect to running process)</span><br><span class="line">    jstack -F [-m] [-l] &lt;pid&gt;</span><br><span class="line">        (to connect to a hung process)</span><br><span class="line">    jstack [-m] [-l] &lt;executable&gt; &lt;core&gt;</span><br><span class="line">        (to connect to a core file)</span><br><span class="line">    jstack [-m] [-l] [server_id@]&lt;remote server IP or hostname&gt;</span><br><span class="line">        (to connect to a remote debug server)</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">    -F  to force a thread dump. Use when jstack &lt;pid&gt; does not respond (process is hung)</span><br><span class="line">    -m  to <span class="built_in">print</span> both java and native frames (mixed mode)</span><br><span class="line">    -l  long listing. Prints additional information about locks</span><br><span class="line">    -h or -<span class="built_in">help</span> to <span class="built_in">print</span> this <span class="built_in">help</span> message</span><br></pre></td></tr></table></figure>
+
+<p><strong>option参数说明如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-F 当’jstack [-l] pid’没有相应的时候强制打印栈信息</span><br><span class="line">-l 长列表. 打印关于锁的附加信息,例如属于java.util.concurrent的ownable synchronizers列表.</span><br><span class="line">-m 打印java和native c/c++框架的所有栈信息.</span><br><span class="line">-h | -<span class="built_in">help</span> 打印帮助信息</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>pid 需要被打印配置信息的java进程id,可以用jps查询</strong></p>
+</blockquote>
+<p><strong>线程状态简介</strong></p>
+<p><strong>jstack</strong>用于生成线程快照的，我们分析线程的情况，需要复习一下线程状态</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/jvm/threadstatus.jpg" style="zoom:67%;" />
+
+<p><strong>Java语言定义了6种线程池状态：</strong></p>
+<ul>
+<li><code>New</code>：创建后尚未启动的线程处于这种状态，不会出现在<strong>Dump</strong>中。</li>
+<li><code>RUNNABLE</code>：包括<strong>Running</strong>和<strong>Ready</strong>。线程开启<code>start（）</code>方法，会进入该状态，在虚拟机内执行的。</li>
+<li><code>Waiting</code>：无限的等待另一个线程的特定操作。</li>
+<li><code>Timed Waiting</code>：有时限的等待另一个线程的特定操作。</li>
+<li>阻塞（<code>Blocked</code>）：在程序等待进入同步区域的时候，线程将进入这种状态，在等待监视器锁。</li>
+<li>结束（<code>Terminated</code>）：已终止线程的线程状态，线程已经结束执行。</li>
+</ul>
+<p><strong>Dump文件的线程状态一般其实就以下3种：</strong></p>
+<ul>
+<li><code>RUNNABLE</code>，线程处于执行中</li>
+<li><code>BLOCKED</code>，线程被阻塞</li>
+<li><code>WAITING</code>，线程正在等待</li>
+</ul>
+<p><strong>Dump 文件分析关注重点</strong></p>
+<ul>
+<li><code>runnable</code>，线程处于执行中</li>
+<li><code>deadlock</code>，死锁（重点关注）</li>
+<li><code>blocked</code>，线程被阻塞 （重点关注）</li>
+<li><code>Parked</code>，停止</li>
+<li><code>locked</code>，对象加锁</li>
+<li><code>waiting</code>，线程正在等待</li>
+<li><code>waiting to lock</code> 等待上锁</li>
+<li><code>Object.wait()</code>，对象等待中</li>
+<li><code>waiting for monitor entry</code> 等待获取监视器（重点关注）</li>
+<li><code>Waiting on condition</code>，等待资源（重点关注），最常见的情况是线程在等待网络的读写</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/18/Linux%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B-%E4%BA%8C/" rel="prev" title="Linux基础教程(二)">
+                  <i class="fa fa-angle-left"></i> Linux基础教程(二)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
