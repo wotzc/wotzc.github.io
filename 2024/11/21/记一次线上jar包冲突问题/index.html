@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一次在项目开发过程中需要用到加密相关的功能，然后公司就给了一个jar包，我们上传私服就通过pom引入在项目中。并基于这个新依赖开发相关的功能，我们在本地IDEA编译测试都没问题，然后我们打包上传到虚拟机上运行时，调用加密方法的时候会报错，并且错误信息给不了我们任何提示，然后在本地测试却是正常的。 Linux虚拟机上我们服务的运行方式如下：  我们通过本地的IDEA把项目打成zip包上传到虚拟机上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次线上jar包冲突问题">
+<meta property="og:url" content="http://example.com/2024/11/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8Ajar%E5%8C%85%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Cai">
+<meta property="og:description" content="一次在项目开发过程中需要用到加密相关的功能，然后公司就给了一个jar包，我们上传私服就通过pom引入在项目中。并基于这个新依赖开发相关的功能，我们在本地IDEA编译测试都没问题，然后我们打包上传到虚拟机上运行时，调用加密方法的时候会报错，并且错误信息给不了我们任何提示，然后在本地测试却是正常的。 Linux虚拟机上我们服务的运行方式如下：  我们通过本地的IDEA把项目打成zip包上传到虚拟机上">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-21T06:40:16.000Z">
+<meta property="article:modified_time" content="2024-11-26T09:22:33.425Z">
+<meta property="article:author" content="wotzc">
+<meta property="article:tag" content="jar包冲突">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/11/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8Ajar%E5%8C%85%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/11/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8Ajar%E5%8C%85%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/","path":"2024/11/21/记一次线上jar包冲突问题/","title":"记一次线上jar包冲突问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一次线上jar包冲突问题 | Cai</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cai</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wotzc"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">wotzc</p>
+  <div class="site-description" itemprop="description">真正的大师永远都怀着一颗学徒的心</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8Ajar%E5%8C%85%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一次线上jar包冲突问题 | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次线上jar包冲突问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-21 14:40:16" itemprop="dateCreated datePublished" datetime="2024-11-21T14:40:16+08:00">2024-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-11-26 17:22:33" itemprop="dateModified" datetime="2024-11-26T17:22:33+08:00">2024-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">项目问题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>一次在项目开发过程中需要用到加密相关的功能，然后公司就给了一个<strong>jar</strong>包，我们上传私服就通过<strong>pom</strong>引入在项目中。并基于这个新依赖开发相关的功能，我们在本地<strong>IDEA</strong>编译测试都没问题，然后我们打包上传到虚拟机上运行时，调用加密方法的时候会报错，并且错误信息给不了我们任何提示，然后在本地测试却是正常的。</p>
+<p><strong>Linux</strong>虚拟机上我们服务的运行方式如下：</p>
+<ol>
+<li>我们通过本地的<strong>IDEA</strong>把项目打成zip包上传到虚拟机上</li>
+<li>我们通过运行启动脚本来启动我们的服务<ul>
+<li>启动脚步先把<strong>zip</strong>文件解压到指定的<strong>lib</strong>文件夹</li>
+<li>然后用<strong>nohup</strong>命令启动<strong>Java</strong>服务</li>
+</ul>
+</li>
+</ol>
+<p>我们通过启动脚本启动我们的服务时，服务起不起来，而且关键的错误信息没有打印。于是我们先调整了日志文件，让关键信息能够打印，调整日志文件后我们看到了关键的错误信息：<code>NoSuchMethodError</code></p>
+<p>通过这个错误信息，就很容易想到应该是jar包冲突了，但是很奇怪的就是我们在本地测试没问题，但是部署到虚拟机上就报错，应该是类的加载顺序不一致导致的。</p>
+<p><strong>复习一下类加载机制</strong></p>
+<p>我们写的 Java 应用代码，一般是通过 <code>App ClassLoader</code> 应用加载器进行加载，它不会自己先去加载它，而是通过 <code>Extension ClassLoader</code> 扩展类加载器进行加载（其中扩展类加载器又会去找 <code>Bootstrap ClassLoader</code> 启动类加载器进行加载），只有父加载器无法加载情况下，才会让下级加载器进行加载。</p>
+<blockquote>
+<p>★</p>
+<p>当一个<strong>ClassLoader</strong>实例需要加载某个类时，它会试图亲自搜索某个类之前，先把这个任务委托给它的父类加载器，这个过程是由上至下依次检查的，首先由最顶层的类加载器<strong>Bootstrap ClassLoader</strong>试图加载，如果没加载到，则把任务转交给<strong>Extension ClassLoader</strong>试图加载，如果也没加载到，则转交给<strong>App ClassLoader</strong> 进行加载，如果它也没有加载得到的话，则返回给委托的发起者，由它到指定的文件系统或网络等<strong>URL</strong>中加载该类。如果它们都没有加载到这个类时，则抛出<strong>ClassNotFoundException</strong>异常。</p>
+<p>”</p>
+</blockquote>
+<p><strong>ClassLoader</strong></p>
+<p>Java 使用的是双亲委派加载机制，通过查看 <code>ClassLoader</code> 类，可以对此有所了解。</p>
+<p>类被成功加载后，将被放入到内存中，内存中存放 <code>Class</code> 实例对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">    <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        <span class="comment">// 首先，检查 class 是否已经被加载</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 如果没有被加载</span></span><br><span class="line">            <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 寻找 parent 加载器</span></span><br><span class="line">                    c = parent.loadClass(name, <span class="keyword">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 如果父加载器不存在，则委托给启动类加载器加载</span></span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                <span class="comment">// to find the class.</span></span><br><span class="line">                <span class="comment">// 如果仍然无法加载，才会尝试自身加载</span></span><br><span class="line">                <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>类加载顺序</strong></p>
+<p>从代码中了解到，如果某个名字的类被加载后，类加载器是不会再重新加载，所以我们的问题根本原因可以是出现在：</p>
+<p>我们本地通过IDEA启动时，加载的那个class文件正好是我们需要的使用的，但是当我们在虚拟机上启动的时候，首先加载的那个类是其他jar里面的同名类，并且全类名一样，并非我们需要的。</p>
+<p>通过查阅文章：</p>
+<blockquote>
+<p>★</p>
+<p>跟JAR文件的文件名有关。按照字母的顺序加载JAR文件。有了这个类以后，后面的类则不会加载了。</p>
+<p>jvm 加载包名和类名相同的类时，先加载classpath中jar路径放在前面的，包名类名都相同，那jvm没法区分了，如果使用ide一般情况下是会提示发生冲突而报错，若不报错，只有第一个包被引入（在classpath路径下排在前面的包），第二个包会在classloader加载类时判断重复而忽略。</p>
+<p>”</p>
+</blockquote>
+<p><strong>查看加载顺序</strong></p>
+<p>在 <code>jvm</code> 启动脚本中，添加 <code>-verbose</code> 参数或者 <code>-XX:+TraceClassLoading</code></p>
+<p>按理说加载顺序按照<strong>字母顺序</strong>加载，预发环境还是能够跟本地开发一样，加载到我们需要的类。实际上，加载器加载到的是另一个类，导致应用无法启动。</p>
+<p>通过查找资料</p>
+<blockquote>
+<p>★</p>
+<p>问题就是jar的加载顺序问题，而这个顺序实际上是由文件系统决定的，linux内部是用inode来指示文件的。</p>
+<p>这种储存文件元信息的区域就叫做inode，中文译名为”索引节点”。每一个文件都有对应的inode，里面包含了与该文件有关的一些信息。</p>
+<p>Unix/linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。</p>
+<p>”</p>
+</blockquote>
+<hr>
+<p><strong>相关知识点</strong></p>
+<p><strong>maven</strong>包加载顺序和<strong>jvm</strong>类加载顺序</p>
+<p>一、<code>mvaven jar</code>包加载顺序</p>
+<p><code>Maven</code>对版本不同的相同依赖包生效优先级：</p>
+<ol>
+<li>不同依赖层级深度的遵从【最短路径优先】原则。</li>
+<li>具有相同依赖层级深度的遵从<code>pom</code>中【最先声明优先】原则。</li>
+</ol>
+<p>二、<code>JVM</code>类加载顺序</p>
+<p>相同的类指：类的全限定名一样<br>问题：怎么优先加载自己写的类</p>
+<ol>
+<li><p>解析：</p>
+<p><code>class</code>文件所在位置， 直接在<code>classpath</code>下，在<code>jar</code>包中：</p>
+</li>
+</ol>
+<ul>
+<li>a.相同的类， 一个在工程<code>src</code>路径下， 一个在<code>jar</code>包中： 此时优先加载工程<code>src</code>文件。</li>
+<li>b.相同的类， 都在<code>jar</code>包中：此时按照<code>jar</code>的装载顺序，它加载的顺序完全取决于操作系统！</li>
+</ul>
+<p><code>jar</code>包冲突的解决办法:</p>
+<ol>
+<li>如果引起冲突类的jar包可以进行排除，在引入的<code>pom</code>文件中进行<code>exclude</code></li>
+<li>如果引起冲突的<code>jar</code>包排除了会引起项目启动报错，即两个jar包必须共存<ul>
+<li>如果冲突的<code>class</code>文件数量不多，则可以将存在冲突并且我们需要的<code>class</code>文件，从<code>jar</code>中类<code>copy</code>到<code>src</code>目录下</li>
+<li>如果冲突的<code>class</code>文件数量很多，上述方式不现实则可以考虑通过<code>maven shade plugin</code>插件改包名</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jar%E5%8C%85%E5%86%B2%E7%AA%81/" rel="tag"># jar包冲突</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/15/%E8%A7%A3%E5%86%B3%E5%81%B6%E5%8F%91%E6%80%A7%E7%9A%84502-Bad-Gateway/" rel="prev" title="解决偶发性的502 Bad Gateway">
+                  <i class="fa fa-angle-left"></i> 解决偶发性的502 Bad Gateway
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">wotzc</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/wotzc" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
