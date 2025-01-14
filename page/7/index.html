@@ -151,18 +151,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,101 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/JavaBean/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/12/JavaBean/" class="post-title-link" itemprop="url">JavaBean</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-12 09:24:36" itemprop="dateCreated datePublished" datetime="2021-07-12T09:24:36+08:00">2021-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 16:53:50" itemprop="dateModified" datetime="2023-09-05T16:53:50+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>​    首先明确的是JavaBean是一种Java类，而且是一种特殊的、可重用的类。</p>
+<p>​    JavaBean的种类按照功能可以划分为可视化和不可视化两类。可视化的JavaBean就是拥有GUI图形用户界面的，对最终用户是可见的。不可视化的JavaBean不要求继承，它更多的被使用在JSP中，通常情况下用来<strong>封装业务逻辑</strong>、<strong>数据分页逻辑</strong>、<strong>数据库操作</strong>和<strong>事物逻辑</strong>等，这样可以实现业务逻辑和前台程序的分离，提高了代码的可读性和易维护性，使系统更健壮和灵活。随着JSP的发展，JavaBean更多的应用在非可视化领域，并且在服务器端应用方面表现出了越来越强的生命力。–form 百度百科</p>
+<p>　JavaBeans是Java中一种特殊的类，可以将多个对象封装到一个对象（bean）中。特点是可序列化，提供无参构造器，提供getter方法和setter方法访问对象的属性。名称中的“Bean”是用于Java的可重用软件组件的惯用叫法。 –from 维基百科</p>
+<p>​    我们都知道，Java面向对象的基本特性有一个是封装，其具体作用就是当我们在设计Java类的时候，不希望外部可以直接调用类的成员变量，这样不利于程序的安全性，所以我们定义成员函数去调用这些成员变量，即get和set方法规范诞生了。<br>​    那么根据实体类中我们想要的这些get和set相关成员函数，就可以设计一个公共类，基于Java反射机制，来使用这些函数。<br>​    这就是Java bean最初的用处。Java bean也是一种类，只不过是调用其他对象内部成员函数的类。<br>​    但是同样需要强调一点，Java bean 在概念上并不是一种技术，而是一种规范。大量的技术人员根据这种规范，开发总结了很多技巧，便于封装使用，便于开发人员快捷开发。</p>
+<h2 id="使用规范"><a href="#使用规范" class="headerlink" title="使用规范"></a>使用规范</h2><p>​    由于Java bean是Java公共的类，所以为了使编译工具或集成开发环境识别这种规范，那么我们需要在设计实体类的时候至少应该满足三个条件：</p>
+<p>​    1、类中有一个<code>public</code>无参构造器，默认即可。<br>​    2、属性使用public 的<code>get</code>，<code>set</code>方法访问，也就是说设置成<code>private</code>，同时get，set方法与属性名的大小也需要对应。例如年龄属性age，get方法就要写成，<code>public int getAge()&#123;return this.age&#125;</code>，其中很明显A要大写。同理，set方法就要写成<code>public void setAge(int age)&#123;this.age = age ;&#125;</code>。<br>​    3、继承序列化接口，能够实现序列化功能。当然不一定需要直接实现序列化接口，简介继承了实现序列化接口的类也可以。这个是框架，工具跨平台反映状态必须具备的。<br>​    如下图设计原则所示。</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/JavaBean/javabean.png"></p>
+<p>JavaBean代码示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> <span class="keyword">package</span> com.wotzc.javaBean;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsBean</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span>&#123;</span><br><span class="line"> <span class="number">4</span>    <span class="keyword">private</span> String firstName = <span class="keyword">null</span>;</span><br><span class="line"> <span class="number">5</span>    <span class="keyword">private</span> String lastName = <span class="keyword">null</span>;</span><br><span class="line"> <span class="number">6</span>    <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">0</span>;</span><br><span class="line"> <span class="number">7</span> </span><br><span class="line"> <span class="number">8</span>    <span class="function"><span class="keyword">public</span> <span class="title">StudentsBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> <span class="number">9</span>    &#125;</span><br><span class="line"><span class="number">10</span>    <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">11</span>       <span class="keyword">return</span> firstName;</span><br><span class="line"><span class="number">12</span>    &#125;</span><br><span class="line"><span class="number">13</span>    <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">14</span>       <span class="keyword">return</span> lastName;</span><br><span class="line"><span class="number">15</span>    &#125;</span><br><span class="line"><span class="number">16</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">17</span>       <span class="keyword">return</span> age;</span><br><span class="line"><span class="number">18</span>    &#125;</span><br><span class="line"><span class="number">19</span> </span><br><span class="line"><span class="number">20</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFirstName</span><span class="params">(String firstName)</span></span>&#123;</span><br><span class="line"><span class="number">21</span>       <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line"><span class="number">22</span>    &#125;</span><br><span class="line"><span class="number">23</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastName</span><span class="params">(String lastName)</span></span>&#123;</span><br><span class="line"><span class="number">24</span>       <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line"><span class="number">25</span>    &#125;</span><br><span class="line"><span class="number">26</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line"><span class="number">27</span>       <span class="keyword">this</span>.age = age;</span><br><span class="line"><span class="number">28</span>    &#125;</span><br><span class="line"><span class="number">29</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Java-bean的优点"><a href="#使用Java-bean的优点" class="headerlink" title="使用Java bean的优点"></a>使用Java bean的优点</h2><p>1、提高代码的可复用性：对于通用的事务处理逻辑，数据库操作等都可以封装在Java bean中，通过调用Java bean的属性和方法可快速进行程序设计。<br>2、程序易于开发维护：实现逻辑的封装，使事务处理和显示互不干扰。<br>3、支持分布式运用：多用Java bean，尽量减少java代码和HTML代码的混编。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1428,7 +1523,7 @@
 <h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。</p>
 <p>然后在本地的任意目录下，打开git bash：</p>
 <blockquote>
-<p>​    git clone <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:wotzc/wotzc.github.io.git    </p>
+<p>​    git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:wotzc/wotzc.github.io.git    </p>
 </blockquote>
 <p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。</p>
 <p>接下来在克隆到本地的<code>wotzc.github.io</code>中，把除了.git 文件夹外的所有文件都删掉，把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
@@ -1505,7 +1600,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>

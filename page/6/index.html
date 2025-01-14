@@ -151,18 +151,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,204 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/Spring-Cloud-Alibaba-Nacos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/25/Spring-Cloud-Alibaba-Nacos/" class="post-title-link" itemprop="url">Spring Cloud Alibaba Nacos</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-25 14:53:33" itemprop="dateCreated datePublished" datetime="2021-08-25T14:53:33+08:00">2021-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-19 15:21:00" itemprop="dateModified" datetime="2021-10-19T15:21:00+08:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Spring-Cloud-Alibaba/" itemprop="url" rel="index"><span itemprop="name">Spring Cloud Alibaba</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Nacos能做什么"><a href="#Nacos能做什么" class="headerlink" title="Nacos能做什么?"></a>Nacos能做什么?</h1><p>Nacos（官网：nacos.io）是一个易于使用的平台，专为动态服务发现和配置以及服务管理而设计。它可以帮助您轻松构建云原生应用程序和微服务平台。 服务是Nacos的关键。 Nacos 支持几乎所有类型的服务，例如，Dubbo/gRPC 服务、Spring Cloud RESTFul 服务或 Kubernetes 服务。</p>
+<p>Nacos 提供了四大主要功能。</p>
+<ul>
+<li><p><strong>服务发现和服务健康检查</strong></p>
+<p>Nacos 使服务通过 DNS 或 HTTP 接口注册自己和发现其他服务变得简单。 Nacos 还提供服务的实时健康检查，以防止向不健康的主机或服务实例发送请求。</p>
+</li>
+<li><p><strong>动态配置管理</strong></p>
+<p>动态配置服务允许您在所有环境中以集中和动态的方式管理所有服务的配置。 Nacos 无需在更新配置时重新部署应用程序和服务，这使得配置更改更加高效和敏捷。</p>
+</li>
+<li><p><strong>动态 DNS 服务</strong></p>
+<p>Nacos 支持加权路由，让您更容易在数据中心内的生产环境中实现中层负载均衡、灵活的路由策略、流量控制和简单的 DNS 解析服务。它可以帮助您轻松实现基于 DNS 的服务发现，并防止应用程序耦合到特定于供应商的服务发现 API。</p>
+</li>
+<li><p><strong>服务和元数据管理</strong></p>
+<p>Nacos 提供了一个易于使用的服务仪表板，帮助您管理您的服务元数据、配置、kubernetes DNS、服务健康和指标统计。 </p>
+</li>
+</ul>
+<p><strong>本文主要讲讲Nacos作为注册中心和Nacos作为配置中心的使用</strong></p>
+<hr>
+<h1 id="Nacos-地图"><a href="#Nacos-地图" class="headerlink" title="Nacos 地图"></a>Nacos 地图</h1><p>一图看懂 Nacos</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosMap.png"></p>
+<hr>
+<h1 id="Nacos-快速开始"><a href="#Nacos-快速开始" class="headerlink" title="Nacos 快速开始"></a>Nacos 快速开始</h1><h2 id="预备环境准备"><a href="#预备环境准备" class="headerlink" title="预备环境准备"></a>预备环境准备</h2><p>Nacos 依赖 <a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">Java</a> 环境来运行。如果您是从代码开始构建并运行Nacos，还需要为此配置 <a target="_blank" rel="noopener" href="https://maven.apache.org/index.html">Maven</a>环境，请确保是在以下版本环境中安装使用:</p>
+<ol>
+<li>64 bit OS，支持 Linux/Unix/Mac/Windows，推荐选用 Linux/Unix/Mac。</li>
+<li>64 bit JDK 1.8+；<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">下载</a> &amp; <a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">配置</a>。</li>
+<li>Maven 3.2.x+；<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">下载</a> &amp; <a target="_blank" rel="noopener" href="https://maven.apache.org/settings.html">配置</a>。</li>
+</ol>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>您可以从 <a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">最新稳定版本</a> 下载 <code>nacos-server-$version.zip</code> 包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip nacos-server-<span class="variable">$version</span>.zip 或者 tar -xvf nacos-server-<span class="variable">$version</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nacos/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h2><h3 id="Linux-Unix-Mac"><a href="#Linux-Unix-Mac" class="headerlink" title="Linux/Unix/Mac"></a>Linux/Unix/Mac</h3><p>启动命令(standalone代表着单机模式运行，非集群模式):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>启动命令(standalone代表着单机模式运行，非集群模式):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup.cmd -m standalone</span><br></pre></td></tr></table></figure>
+
+<p>或双击bin中的startup.cmd 文件</p>
+<p>访问<a target="_blank" rel="noopener" href="http://localhost:8848/nacos/">http://localhost:8848/nacos/</a><br> 账户密码使用默认的nacos/nacos 进行登录</p>
+<hr>
+<h2 id="SpringCloud-Alibaba-Nacos-作为注册中心"><a href="#SpringCloud-Alibaba-Nacos-作为注册中心" class="headerlink" title="SpringCloud Alibaba-Nacos[作为注册中心]"></a>SpringCloud Alibaba-Nacos[作为注册中心]</h2><h3 id="首先，修改pom-xml-文件，引入Nacos-Discovery-Starter。"><a href="#首先，修改pom-xml-文件，引入Nacos-Discovery-Starter。" class="headerlink" title="首先，修改pom.xml 文件，引入Nacos Discovery Starter。"></a>首先，修改pom.xml 文件，引入Nacos Discovery Starter。</h3><p>如果要在您的项目中使用 Nacos 来实现服务注册/发现，使用 group ID 为 <code>com.alibaba.cloud</code> 和 artifact ID 为 <code>spring-cloud-starter-alibaba-nacos-discovery</code> 的 starter。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改application-yml配置"><a href="#修改application-yml配置" class="headerlink" title="修改application.yml配置"></a>修改application.yml配置</h3><ul>
+<li>在应用application.yml配置文件中配置Nacos Server 地址</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nacos服务地址</span></span><br><span class="line"><span class="attr">spring</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">cloud</span>:<span class="string"></span></span><br><span class="line">	<span class="attr">nacos</span>:<span class="string"></span></span><br><span class="line">	  <span class="attr">discovery</span>:<span class="string"></span></span><br><span class="line">		<span class="meta">server-addr</span>: <span class="string">127.0.0.1:8848</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在应用application.yml配置文件中配置服务的名称</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nacos服务地址</span></span><br><span class="line"><span class="attr">spring</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">application</span>:<span class="string"></span></span><br><span class="line">  	<span class="attr">name</span>: <span class="string">product</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通过Spring-Cloud原生注解-EnableDiscoveryClient-开启服务注册发现功能"><a href="#通过Spring-Cloud原生注解-EnableDiscoveryClient-开启服务注册发现功能" class="headerlink" title="通过Spring Cloud原生注解 @EnableDiscoveryClient 开启服务注册发现功能"></a>通过Spring Cloud原生注解 <code>@EnableDiscoveryClient</code> 开启服务注册发现功能</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NacosProviderApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(NacosProviderApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动应用"><a href="#启动应用" class="headerlink" title="启动应用"></a>启动应用</h3><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/startApplication.png"></p>
+<p>启动成功后再去nacos服务列表里，观察nacos 服务列表是否已经注册上服务，如下图所示已经注册上了</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosservices.png"></p>
+<hr>
+<h2 id="SpringCloud-Alibaba-Nacos-作为配置中心"><a href="#SpringCloud-Alibaba-Nacos-作为配置中心" class="headerlink" title="SpringCloud Alibaba-Nacos[作为配置中心]"></a>SpringCloud Alibaba-Nacos[作为配置中心]</h2><p>我们先了解一下 Spring Cloud 应用如何接入 Nacos Config，步骤如下</p>
+<ol>
+<li><p>首先，修改 pom.xml 文件，引入 Nacos Config Starter。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>在应用的 /src/main/resources/bootstrap.properties 配置文件中配置 Nacos Config 元数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=nacos-config-example</span><br><span class="line">spring.cloud.nacos.config.server-addr=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8848</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要给配置中心默认添加一个叫数据集（Data Id）gulimall-coupon.properties。默认规则，应用名.properties</p>
+</li>
+<li><p>给应用名.properties中添加配置</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosconfig.png"></p>
+</li>
+<li><p>完成上述步骤后，应用会从 Nacos Config 中获取相应的配置，并添加在 Spring Environment 的 PropertySources 中。这里我们使用 @Value 注解来将对应的配置注入到 SampleController 的 userName 和 age 字段，并添加 @RefreshScope 打开动态刷新功能</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RefreshScope</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value(&quot;$&#123;user.name&#125;&quot;)</span></span><br><span class="line">	String userName;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value(&quot;$&#123;user.age&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果配置中心和当前应用的配置文件中都配置了相同的项，优先使用配置中心的配置</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="细节："><a href="#细节：" class="headerlink" title="细节："></a>细节：</h3><p><strong>1）命名空间</strong></p>
+<p>用于进行租户粒度的配置隔离。不同的命名空间下，可以存在相同的Group 或Data ID 的配置。Namespace 的常用场景之一是不同环境的配置的区分隔离，例如开发测试环境和生产环境的资源（如配置、服务）隔离等。</p>
+<p>默认：public（保留空间）；默认新增的所有配置都在public</p>
+<ul>
+<li><p>开发，测试，生产：利用命名空间来做环境隔离</p>
+</li>
+<li><p>我们需要在我们的项目的bootstrap.properties配置上我们需要使用的命名空间配置。<strong>namespace一定要写命名空间的唯一id</strong></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/bootstrapproperties1.png"></p>
+</li>
+</ul>
+<p>每一个微服务之间相互隔离配置，每一个微服务都创建自己的命名空间，只加载自己命名空间下的所有配置。</p>
+<p><strong>2）配置集</strong></p>
+<p>一组相关或不相关的配置项的集合称为配置集。在系统中一个配置文件通常就是一个配置集，包含了系统各个方面的配置。例如，一个配置集可能包含了数据源、线程池、日志级别等配置项。</p>
+<p><strong>3）配置集ID</strong></p>
+<p>Data ID：类似于文件名</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosconfigid.png"></p>
+<p><strong>4）配置分组</strong></p>
+<p>默认所有的配置集都属于：DEFAULT_GROUP</p>
+<p>我们也可以创建自己的分组例如1111,618,1212</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosconfiggroup.png"></p>
+<p>然后在项目的bootstrap.properties文件中指定分组</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosconfiggroup1.png"></p>
+<hr>
+<h3 id="实际项目中的应用"><a href="#实际项目中的应用" class="headerlink" title="实际项目中的应用"></a><strong>实际项目中的应用</strong></h3><p>每个微服务创建自己的命名空间，使用配置分组来区分开发环境，如dev，test，prod。</p>
+<hr>
+<h3 id="同时加载多个配置集"><a href="#同时加载多个配置集" class="headerlink" title="同时加载多个配置集"></a>同时加载多个配置集</h3><p>微服务的任何配置信息，任何配置文件都可以放在配置中心中</p>
+<p>例如我们要读取配置中心的datasource.yml、mybatis.yml、 others.yml三个配置文件</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosconfigfile.png"></p>
+<p>在项目中进行读取，如下图所示</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/SpringCloudAlibabaNacos/nacosreadfile.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3116,101 +3314,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/12/JavaBean/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/12/JavaBean/" class="post-title-link" itemprop="url">JavaBean</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-07-12 09:24:36" itemprop="dateCreated datePublished" datetime="2021-07-12T09:24:36+08:00">2021-07-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-05 16:53:50" itemprop="dateModified" datetime="2023-09-05T16:53:50+08:00">2023-09-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>​    首先明确的是JavaBean是一种Java类，而且是一种特殊的、可重用的类。</p>
-<p>​    JavaBean的种类按照功能可以划分为可视化和不可视化两类。可视化的JavaBean就是拥有GUI图形用户界面的，对最终用户是可见的。不可视化的JavaBean不要求继承，它更多的被使用在JSP中，通常情况下用来<strong>封装业务逻辑</strong>、<strong>数据分页逻辑</strong>、<strong>数据库操作</strong>和<strong>事物逻辑</strong>等，这样可以实现业务逻辑和前台程序的分离，提高了代码的可读性和易维护性，使系统更健壮和灵活。随着JSP的发展，JavaBean更多的应用在非可视化领域，并且在服务器端应用方面表现出了越来越强的生命力。–form 百度百科</p>
-<p>　JavaBeans是Java中一种特殊的类，可以将多个对象封装到一个对象（bean）中。特点是可序列化，提供无参构造器，提供getter方法和setter方法访问对象的属性。名称中的“Bean”是用于Java的可重用软件组件的惯用叫法。 –from 维基百科</p>
-<p>​    我们都知道，Java面向对象的基本特性有一个是封装，其具体作用就是当我们在设计Java类的时候，不希望外部可以直接调用类的成员变量，这样不利于程序的安全性，所以我们定义成员函数去调用这些成员变量，即get和set方法规范诞生了。<br>​    那么根据实体类中我们想要的这些get和set相关成员函数，就可以设计一个公共类，基于Java反射机制，来使用这些函数。<br>​    这就是Java bean最初的用处。Java bean也是一种类，只不过是调用其他对象内部成员函数的类。<br>​    但是同样需要强调一点，Java bean 在概念上并不是一种技术，而是一种规范。大量的技术人员根据这种规范，开发总结了很多技巧，便于封装使用，便于开发人员快捷开发。</p>
-<h2 id="使用规范"><a href="#使用规范" class="headerlink" title="使用规范"></a>使用规范</h2><p>​    由于Java bean是Java公共的类，所以为了使编译工具或集成开发环境识别这种规范，那么我们需要在设计实体类的时候至少应该满足三个条件：</p>
-<p>​    1、类中有一个<code>public</code>无参构造器，默认即可。<br>​    2、属性使用public 的<code>get</code>，<code>set</code>方法访问，也就是说设置成<code>private</code>，同时get，set方法与属性名的大小也需要对应。例如年龄属性age，get方法就要写成，<code>public int getAge()&#123;return this.age&#125;</code>，其中很明显A要大写。同理，set方法就要写成<code>public void setAge(int age)&#123;this.age = age ;&#125;</code>。<br>​    3、继承序列化接口，能够实现序列化功能。当然不一定需要直接实现序列化接口，简介继承了实现序列化接口的类也可以。这个是框架，工具跨平台反映状态必须具备的。<br>​    如下图设计原则所示。</p>
-<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/JavaBean/javabean.png"></p>
-<p>JavaBean代码示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> <span class="keyword">package</span> com.wotzc.javaBean;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentsBean</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span>&#123;</span><br><span class="line"> <span class="number">4</span>    <span class="keyword">private</span> String firstName = <span class="keyword">null</span>;</span><br><span class="line"> <span class="number">5</span>    <span class="keyword">private</span> String lastName = <span class="keyword">null</span>;</span><br><span class="line"> <span class="number">6</span>    <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">0</span>;</span><br><span class="line"> <span class="number">7</span> </span><br><span class="line"> <span class="number">8</span>    <span class="function"><span class="keyword">public</span> <span class="title">StudentsBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> <span class="number">9</span>    &#125;</span><br><span class="line"><span class="number">10</span>    <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">11</span>       <span class="keyword">return</span> firstName;</span><br><span class="line"><span class="number">12</span>    &#125;</span><br><span class="line"><span class="number">13</span>    <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">14</span>       <span class="keyword">return</span> lastName;</span><br><span class="line"><span class="number">15</span>    &#125;</span><br><span class="line"><span class="number">16</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="number">17</span>       <span class="keyword">return</span> age;</span><br><span class="line"><span class="number">18</span>    &#125;</span><br><span class="line"><span class="number">19</span> </span><br><span class="line"><span class="number">20</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFirstName</span><span class="params">(String firstName)</span></span>&#123;</span><br><span class="line"><span class="number">21</span>       <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line"><span class="number">22</span>    &#125;</span><br><span class="line"><span class="number">23</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastName</span><span class="params">(String lastName)</span></span>&#123;</span><br><span class="line"><span class="number">24</span>       <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line"><span class="number">25</span>    &#125;</span><br><span class="line"><span class="number">26</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line"><span class="number">27</span>       <span class="keyword">this</span>.age = age;</span><br><span class="line"><span class="number">28</span>    &#125;</span><br><span class="line"><span class="number">29</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用Java-bean的优点"><a href="#使用Java-bean的优点" class="headerlink" title="使用Java bean的优点"></a>使用Java bean的优点</h2><p>1、提高代码的可复用性：对于通用的事务处理逻辑，数据库操作等都可以封装在Java bean中，通过调用Java bean的属性和方法可快速进行程序设计。<br>2、程序易于开发维护：实现逻辑的封装，使事务处理和显示互不干扰。<br>3、支持分布式运用：多用Java bean，尽量减少java代码和HTML代码的混编。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -3223,7 +3326,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
