@@ -151,18 +151,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">86</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -179,6 +179,223 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/SpringBoot2%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/20/SpringBoot2%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%AD/" class="post-title-link" itemprop="url">SpringBoot2核心技术中</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-20 15:51:44" itemprop="dateCreated datePublished" datetime="2021-07-20T15:51:44+08:00">2021-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 17:01:57" itemprop="dateModified" datetime="2023-09-05T17:01:57+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><h2 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h2><ul>
+<li>SpringBoot自动加载特地目录下的<code>application.properties</code>配置文件，在实际的使用中，一般放在<code>resources</code>文件夹下。</li>
+<li><code>application.properties</code>采用<code>key=value</code>配置形式</li>
+</ul>
+<p>SpringBoot的设计思想是<strong>约定大于配置</strong>，让开发人员从Spring繁琐的XML配置中解放出来。当然springboot 还通过Java Config。<code>properties</code>和<code>yml</code>是SpringBoot项目常用的两种文件配置方式。SpringBoot项目默认加载以下目录下的application.properties文件。在实际的使用中，一般放在resources文件夹下。</p>
+<div class="note no-icon default"><p>参考资料<br>SpringApplication loads properties from application.properties files in the following locations and adds them to the Spring Environment:<br>A /config subdirectory of the current directory The current directory A classpath /config package The classpath root</p>
+</div>
+
+<h2 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h2><p>YAML 是 “YAML Ain’t Markup Language”（YAML 不是一种标记语言）的递归缩写。在开发的这种语言时，YAML 的意思其实是：”Yet Another Markup Language”（仍是一种标记语言）。 </p>
+<p>非常适合用来做以数据为中心的配置文件。</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><ul>
+<li><code>key: value</code>；<strong>kv之间有空格</strong></li>
+<li><strong>大小写敏感</strong></li>
+<li><strong>使用缩进表示层级关系</strong></li>
+<li><strong>缩进不允许使用tab，只允许空格</strong></li>
+<li><strong>缩进的空格数不重要，只要相同层级的元素左对齐即可</strong></li>
+<li><code>#</code><strong>表示注释</strong></li>
+<li><strong>字符串无需加引号，如果要加</strong>，<code>''</code>与<code>""</code>表示字符串内容会被转义/不转义</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>●字面量：单个的、不可再分的值。date、boolean、string、number、null</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">k:</span> <span class="string">v</span></span><br></pre></td></tr></table></figure>
+
+<p>●对象：键值对的集合。map、hash、set、object </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#行内写法：  </span></span><br><span class="line"><span class="attr">k:</span> &#123;<span class="string">k1:v1</span>,<span class="string">k2:v2</span>,<span class="string">k3:v3</span>&#125;</span><br><span class="line"><span class="comment">#或</span></span><br><span class="line"><span class="attr">k:</span> </span><br><span class="line">  <span class="attr">k1:</span> <span class="string">v1</span></span><br><span class="line">  <span class="attr">k2:</span> <span class="string">v2</span></span><br><span class="line">  <span class="attr">k3:</span> <span class="string">v3</span></span><br></pre></td></tr></table></figure>
+
+<p>●数组：一组按次序排列的值。array、list、queue</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#行内写法：</span></span><br><span class="line"><span class="attr">k:</span> [<span class="string">v1</span>,<span class="string">v2</span>,<span class="string">v3</span>]</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line"><span class="attr">k:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">v1</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">v2</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">v3</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String userName;</span><br><span class="line">  <span class="keyword">private</span> Boolean boss;</span><br><span class="line">  <span class="keyword">private</span> Date birth;</span><br><span class="line">  <span class="keyword">private</span> Integer age;</span><br><span class="line">  <span class="keyword">private</span> Pet pet;</span><br><span class="line">  <span class="keyword">private</span> String[] interests;</span><br><span class="line">  <span class="keyword">private</span> List&lt;String&gt; animal;</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, Object&gt; score;</span><br><span class="line">  <span class="keyword">private</span> Set&lt;Double&gt; salarys;</span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, List&lt;Pet&gt;&gt; allPets;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pet</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="keyword">private</span> Double weight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yaml表示以上对象</span></span><br><span class="line"><span class="attr">person:</span></span><br><span class="line">  <span class="attr">userName:</span> <span class="string">zhangsan</span></span><br><span class="line">  <span class="attr">boss:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">birth:</span> <span class="number">2019</span><span class="string">/12/12</span> <span class="number">20</span><span class="string">:12:33</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="attr">pet:</span> </span><br><span class="line">    <span class="attr">name:</span> <span class="string">tomcat</span></span><br><span class="line">    <span class="attr">weight:</span> <span class="number">23.4</span></span><br><span class="line">  <span class="attr">interests:</span> [<span class="string">篮球</span>,<span class="string">游泳</span>]</span><br><span class="line">  <span class="attr">animal:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">jerry</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">mario</span></span><br><span class="line">  <span class="attr">score:</span></span><br><span class="line">    <span class="attr">english:</span> </span><br><span class="line">      <span class="attr">first:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">second:</span> <span class="number">40</span></span><br><span class="line">      <span class="attr">third:</span> <span class="number">50</span></span><br><span class="line">    <span class="attr">math:</span> [<span class="number">131</span>,<span class="number">140</span>,<span class="number">148</span>]</span><br><span class="line">    <span class="attr">chinese:</span> &#123;<span class="attr">first:</span> <span class="number">128</span>,<span class="attr">second:</span> <span class="number">136</span>&#125;</span><br><span class="line">  <span class="attr">salarys:</span> [<span class="number">3999</span>,<span class="number">4999.98</span>,<span class="number">5999.99</span>]</span><br><span class="line">  <span class="attr">allPets:</span></span><br><span class="line">    <span class="attr">sick:</span></span><br><span class="line">      <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">tom</span>&#125;</span><br><span class="line">      <span class="bullet">-</span> &#123;<span class="attr">name:</span> <span class="string">jerry</span>,<span class="attr">weight:</span> <span class="number">47</span>&#125;</span><br><span class="line">    <span class="attr">health:</span> [&#123;<span class="attr">name:</span> <span class="string">mario</span>,<span class="attr">weight:</span> <span class="number">47</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置提示"><a href="#配置提示" class="headerlink" title="配置提示"></a>配置提示</h3><p>自定义的类和配置文件绑定一般没有提示。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="WEB开发"><a href="#WEB开发" class="headerlink" title="WEB开发"></a>WEB开发</h1><h2 id="SpringMVC自动配置概览"><a href="#SpringMVC自动配置概览" class="headerlink" title="SpringMVC自动配置概览"></a>SpringMVC自动配置概览</h2><p>Spring Boot provides auto-configuration for Spring MVC that works well with most applications.(大多场景我们都无需自定义配置)<br>The auto-configuration adds the following features on top of Spring’s defaults:</p>
+<ul>
+<li>Inclusion of ContentNegotiatingViewResolver and BeanNameViewResolver beans.</li>
+<li>内容协商视图解析器和BeanName视图解析器</li>
+<li>Support for serving static resources, including support for WebJars (covered <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spring-mvc-static-content">later in this document</a>)).<ul>
+<li>静态资源（包括webjars）</li>
+</ul>
+</li>
+<li>Automatic registration of Converter, GenericConverter, and Formatter beans.<ul>
+<li>注册 Converter，GenericConverter，Formatter </li>
+</ul>
+</li>
+<li>Support for HttpMessageConverters (covered <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spring-mvc-message-converters">later in this document</a>).<ul>
+<li>支持 HttpMessageConverters （后来我们配合内容协商理解原理）</li>
+</ul>
+</li>
+<li>Automatic registration of MessageCodesResolver (covered <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spring-message-codes">later in this document</a>).<ul>
+<li>自动注册 MessageCodesResolver （国际化用）</li>
+</ul>
+</li>
+<li>Static index.html support.<ul>
+<li>静态index.html 页支持</li>
+</ul>
+</li>
+<li>Custom Favicon support (covered <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spring-mvc-favicon">later in this document</a>).<ul>
+<li>自定义 Favicon </li>
+</ul>
+</li>
+<li>Automatic use of a ConfigurableWebBindingInitializer bean (covered <a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-spring-mvc-web-binding-initializer">later in this document</a>).<ul>
+<li>自动使用 ConfigurableWebBindingInitializer ，（DataBinder负责将请求数据绑定到JavaBean上）</li>
+</ul>
+</li>
+</ul>
+<div class="note info"><p>If you want to keep those Spring Boot MVC customizations and make more MVC customizations (interceptors, formatters, view controllers, and other features), you can add your own @Configuration class of type WebMvcConfigurer but without @EnableWebMvc.<br>不用@EnableWebMvc注解。使用 @Configuration + WebMvcConfigurer 自定义规则</p>
+</div>
+
+<div class="note info"><p>If you want to provide custom instances of RequestMappingHandlerMapping, RequestMappingHandlerAdapter, or ExceptionHandlerExceptionResolver, and still keep the Spring Boot MVC customizations, you can declare a bean of type WebMvcRegistrations and use it to provide custom instances of those components.<br>声明 WebMvcRegistrations 改变默认底层组件</p>
+</div>
+
+<div class="note info"><p>If you want to take complete control of Spring MVC, you can add your own @Configuration annotated with @EnableWebMvc, or alternatively add your own @Configuration-annotated DelegatingWebMvcConfiguration as described in the Javadoc of @EnableWebMvc.<br>使用 @EnableWebMvc+@Configuration+DelegatingWebMvcConfiguration 全面接管SpringMVC</p>
+</div>
+
+<hr>
+<h2 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a><strong>静态资源访问</strong></h2><h3 id="静态资源访问-1"><a href="#静态资源访问-1" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><div class="note no-icon primary"><p>By default, Spring Boot serves static content from a directory called /static (or /public or<br>/resources or /META-INF/resources) in the classpath.</p>
+</div>
+
+<p>只要静态资源放在类路径下： called /static (or /public or /resources or /META-INF/resources</p>
+<p>访问 ： 当前项目根路径/ + 静态资源名 </p>
+<p>原理： 静态映射/**。</p>
+<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面</p>
+<p>改变默认的静态资源路径</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"><span class="comment">#改变默认的静态资源路径</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态资源访问前缀"><a href="#静态资源访问前缀" class="headerlink" title="静态资源访问前缀"></a>静态资源访问前缀</h3><p>默认无前缀</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br></pre></td></tr></table></figure>
+
+<p>当前项目 + res + 静态资源名 = 静态资源文件夹下找</p>
+<h2 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h2><div class="note no-icon primary"><p>Spring Boot supports both static and templated welcome pages. It first looks for an index.html file in<br>the configured static content locations. If one is not found, it then looks for an index template. If<br>either is found, it is automatically used as the welcome page of the application.</p>
+</div>
+
+<p>静态资源路径下  index.html</p>
+<ul>
+<li>可以配置静态资源路径</li>
+<li>但是不可以配置静态资源的访问前缀。否则导致 index.html不能被默认访问</li>
+</ul>
+<h2 id="自定义Favicon"><a href="#自定义Favicon" class="headerlink" title="自定义Favicon"></a>自定义Favicon</h2><p>favicon.ico 放在静态资源目录下即可。</p>
+<h2 id="请求参数处理"><a href="#请求参数处理" class="headerlink" title="请求参数处理"></a>请求参数处理</h2><h3 id="普通参数与基本注解"><a href="#普通参数与基本注解" class="headerlink" title="普通参数与基本注解"></a>普通参数与基本注解</h3><p>注解：<br><code>@PathVariable</code>、<code>@RequestHeader</code>、<code>@RequestParam</code>、<code>@CookieValue</code>、<code>@RequestBody</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">注解</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>@PathVariable</code></td>
+<td align="left">通过 @PathVariable 可以将URL中占位符参数{xxx}绑定到处理器类的方法形参中@PathVariable(“xxx“)</td>
+</tr>
+<tr>
+<td align="left"><code>@RequestHeader</code></td>
+<td align="left">是获取请求头中的数据，通过指定参数 value 的值来获取请求头中指定的参数值。**</td>
+</tr>
+<tr>
+<td align="left"><code>@RequestParam</code></td>
+<td align="left">@RequestParam主要用于将请求参数区域的数据映射到控制层方法的参数上</td>
+</tr>
+<tr>
+<td align="left"><code>@CookieValue</code></td>
+<td align="left">@CookieValue注解主要是将请求的Cookie数据，映射到功能处理方法的参数上。</td>
+</tr>
+<tr>
+<td align="left"><code>@RequestBody</code></td>
+<td align="left">主要用来接收前端传递给后端的json字符串中的数据的(请求体中的数据的)；GET方式无请求体，所以使用@RequestBody接收数据时，前端不能使用GET方式提交数据，而是用POST方式进行提交。</td>
+</tr>
+</tbody></table>
+<h4 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a>@PathVariable</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/car/&#123;id&#125;/owner/&#123;username&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title">getCar</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Integer id,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@PathVariable(&quot;username&quot;)</span> String name,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@PathVariable</span> Map&lt;String,String&gt; pv,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@RequestHeader(&quot;User-Agent&quot;)</span> String userAgent,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@RequestHeader</span> Map&lt;String,String&gt; header,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@RequestParam(&quot;age&quot;)</span> Integer age,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@RequestParam(&quot;inters&quot;)</span> List&lt;String&gt; inters,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@RequestParam</span> Map&lt;String,String&gt; params,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@CookieValue(&quot;_ga&quot;)</span> String _ga,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="meta">@CookieValue(&quot;_ga&quot;)</span> Cookie cookie)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        map.put(&quot;id&quot;,id);</span></span><br><span class="line"><span class="comment">//        map.put(&quot;name&quot;,name);</span></span><br><span class="line"><span class="comment">//        map.put(&quot;pv&quot;,pv);</span></span><br><span class="line"><span class="comment">//        map.put(&quot;userAgent&quot;,userAgent);</span></span><br><span class="line"><span class="comment">//        map.put(&quot;headers&quot;,header);</span></span><br><span class="line">    map.put(<span class="string">&quot;age&quot;</span>,age);</span><br><span class="line">    map.put(<span class="string">&quot;inters&quot;</span>,inters);</span><br><span class="line">    map.put(<span class="string">&quot;params&quot;</span>,params);</span><br><span class="line">    map.put(<span class="string">&quot;_ga&quot;</span>,_ga);</span><br><span class="line">    System.out.println(cookie.getName()+<span class="string">&quot;===&gt;&quot;</span>+cookie.getValue());</span><br><span class="line">    <span class="keyword">return</span> map;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2696,7 +2913,7 @@
 <h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。</p>
 <p>然后在本地的任意目录下，打开git bash：</p>
 <blockquote>
-<p>​    git clone <a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#109;">&#103;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#109;</a>:wotzc/wotzc.github.io.git    </p>
+<p>​    git clone <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>:wotzc/wotzc.github.io.git    </p>
 </blockquote>
 <p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。</p>
 <p>接下来在克隆到本地的<code>wotzc.github.io</code>中，把除了.git 文件夹外的所有文件都删掉，把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
