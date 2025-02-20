@@ -1,6 +1,7 @@
 ---
 title: Ursa
 date: 2025-02-20 09:28:56
+tags:
 - Life
 categories: Life
 ---
