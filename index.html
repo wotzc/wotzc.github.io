@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,6 +179,123 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/Netty-%E6%A6%82%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/13/Netty-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">Netty 概述</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-13 14:42:37" itemprop="dateCreated datePublished" datetime="2025-02-13T14:42:37+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-20 09:24:13" itemprop="dateModified" datetime="2025-02-20T09:24:13+08:00">2025-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Netty/" itemprop="url" rel="index"><span itemprop="name">Netty</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Netty-官网说明"><a href="#Netty-官网说明" class="headerlink" title="Netty 官网说明"></a>Netty 官网说明</h1><p><strong>Netty</strong> 是一个异步事件驱动的网络应用程序框架，用于快速开发可维护的高性能协议服务器和客户端。</p>
+<p><strong>Netty</strong> 是一个 <strong>NIO</strong> 客户端服务器框架，可以快速轻松地开发网络应用程序（例如协议服务器和客户端）。它极大地简化和精简了 <strong>TCP</strong> 和 <strong>UDP</strong> 套接字服务器等网络编程。</p>
+<p>“快速简便”并不意味着生成的应用程序会存在可维护性或性能问题。<strong>Netty</strong> 的设计非常谨慎，它借鉴了从实施大量协议（例如 FTP、SMTP、HTTP 以及各种二进制和基于文本的旧协议）中获得的经验。因此，<strong>Netty</strong> 成功地找到了一种无需妥协即可实现易于开发、性能、稳定性和灵活性的方法。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2025/netty/netty-components.png" style="zoom: 67%;" />
+
+<h1 id="The-Problem-问题"><a href="#The-Problem-问题" class="headerlink" title="The Problem 问题"></a>The Problem 问题</h1><p>今天，我们使用通用的应用程序或者类库来实现互相通讯，比如，我们经常使用一个 HTTP 客户端库来从 web 服务器上获取信息，或者通过 web 服务来执行一个远程的调用。</p>
+<p>然而，有时候一个通用的协议或他的实现并没有很好的满足需求。比如我们无法使用一个通用的 HTTP 服务器来处理大文件、电子邮件以及近实时消息，比如金融信息和多人游戏数据。我们需要一个高度优化的协议来处理一些特殊的场景。例如你可能想实现一个优化了的 Ajax 的聊天应用、媒体流传输或者是大文件传输器，你甚至可以自己设计和实现一个全新的协议来准确地实现你的需求。</p>
+<p>另一个不可避免的情况是当你不得不处理遗留的专有协议来确保与旧系统的互操作性。在这种情况下，重要的是我们如何才能快速实现协议而不牺牲应用的稳定性和性能。</p>
+<h2 id="原生-NIO-存在的问题"><a href="#原生-NIO-存在的问题" class="headerlink" title="原生 NIO 存在的问题"></a>原生 NIO 存在的问题</h2><ol>
+<li><code>NIO</code> 的类库和 <code>API</code> 繁杂，使用麻烦：需要熟练掌握 <code>Selector</code>、<code>ServerSocketChannel</code>、<code>SocketChannel</code>、<code>ByteBuffer</code>等。</li>
+<li>需要具备其他的额外技能：要熟悉 <code>Java</code> 多线程编程，因为 <code>NIO</code> 编程涉及到 <code>Reactor</code> 模式，你必须对多线程和网络编程非常熟悉，才能编写出高质量的 <code>NIO</code> 程序。</li>
+<li>开发工作量和难度都非常大：例如客户端面临断连重连、网络闪断、半包读写、失败缓存、网络拥塞和异常流的处理等等。4. <code>JDK NIO</code> 的 <code>Bug</code>：例如臭名昭著的 <code>Epoll Bug</code>，它会导致 <code>Selector</code> 空轮询，最终导致 <code>CPU100%</code>。直到 <code>JDK1.7</code> 版本该问题仍旧存在，没有被根本解决。</li>
+</ol>
+<h1 id="The-Solution-解决"><a href="#The-Solution-解决" class="headerlink" title="The Solution 解决"></a>The Solution 解决</h1><p><a target="_blank" rel="noopener" href="http://netty.io/">Netty</a> 是一个提供 <code>asynchronous event-driven</code> （异步事件驱动）的网络应用框架，是一个用以快速开发高性能、可扩展协议的服务器和客户端。</p>
+<p>换句话说，<strong>Netty</strong> 是一个 <strong>NIO</strong> 客户端服务器框架，使用它可以快速简单地开发网络应用程序，比如服务器和客户端的协议。<strong>Netty</strong> 大大简化了网络程序的开发过程比如 <strong>TCP</strong> 和 <strong>UDP</strong> 的 <strong>socket</strong> 服务的开发。</p>
+<p>“快速和简单”并不意味着应用程序会有难维护和性能低的问题，<strong>Netty</strong> 是一个精心设计的框架，它从许多协议的实现中吸收了很多的经验比如 <strong>FTP</strong>、<strong>SMTP</strong>、<strong>HTTP</strong>、许多二进制和基于文本的传统协议.因此，<strong>Netty</strong> 已经成功地找到一个方式,在不失灵活性的前提下来实现开发的简易性，高性能，稳定性。</p>
+<p>有一些用户可能已经发现其他的一些网络框架也声称自己有同样的优势，所以你可能会问是 <strong>Netty</strong> 和它们的不同之处。答案就是 <strong>Netty</strong> 的哲学设计理念。<strong>Netty</strong> 从开始就为用户提供了用户体验最好的 API 以及实现设计。正是因为 <strong>Netty</strong> 的哲学设计理念，才让您得以轻松地阅读本指南并使用 <strong>Netty</strong>。</p>
+<h2 id="Netty-的优点"><a href="#Netty-的优点" class="headerlink" title="Netty 的优点"></a>Netty 的优点</h2><p><code>Netty</code> 对 <code>JDK</code> 自带的 <code>NIO</code> 的 <code>API</code> 进行了封装，解决了上述问题。</p>
+<ol>
+<li>设计优雅：适用于各种传输类型的统一 <code>API</code> 阻塞和非阻塞 <code>Socket</code>；基于灵活且可扩展的事件模型，可以清晰地分离关注点；高度可定制的线程模型-单线程，一个或多个线程池。</li>
+<li>使用方便：详细记录的 <code>Javadoc</code>，用户指南和示例；没有其他依赖项，<code>JDK5（Netty3.x）</code>或 <code>6（Netty4.x）</code>就足够了。</li>
+<li>高性能、吞吐量更高：延迟更低；减少资源消耗；最小化不必要的内存复制。</li>
+<li>安全：完整的 <code>SSL/TLS</code> 和 <code>StartTLS</code> 支持。</li>
+<li>社区活跃、不断更新：社区活跃，版本迭代周期短，发现的 <code>Bug</code> 可以被及时修复，同时，更多的新功能会被加入。</li>
+</ol>
+<h1 id="Netty-常见使用场景"><a href="#Netty-常见使用场景" class="headerlink" title="Netty 常见使用场景"></a>Netty 常见使用场景</h1><p><strong>Netty</strong> 常见的使用场景如下：</p>
+<p>1）互联网行业：在分布式系统中，各个节点之间需要远程服务调用，高性能的 <strong>RPC</strong> 框架必不可少，<strong>Netty</strong> 作为异步高性能的通信框架，往往作为基础通信组件被这些 RPC 框架使用。典型的应用有：阿里分布式服务框架 <strong>Dubbo</strong> 的 <strong>RPC</strong> 框架，<strong>Dubbo</strong> 协议默认使用 <strong>Netty</strong> 作为基础通信组件，用于实现各进程节点之间的内部通信。</p>
+<p>2）游戏行业：无论是手游服务端还是大型的网络游戏，<strong>Java</strong> 语言得到了越来越广泛的应用。<strong>Netty</strong> 作为高性能的基础通信组件，它本身提供了 <strong>TCP/UDP</strong> 和 <strong>HTTP</strong> 协议栈。</p>
+<p>非常方便定制和开发私有协议栈，账号登录服务器，地图服务器之间可以方便的通过 <strong>Netty</strong> 进行高性能的通信。</p>
+<p>3）大数据领域：经典的 <strong>Hadoop</strong> 的高性能通信和序列化组件 <strong>Avro</strong> 的 <strong>RPC</strong> 框架，默认采用 <strong>Netty</strong> 进行跨界点通信，它的 <strong>Netty Service</strong> 基于 <strong>Netty</strong> 框架二次封装实现。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2025/netty/Middleware-netty.jpg" style="zoom:67%;" />
+
+<p>业界常⻅的涉及到网络通信的相关中间件大部分基于<strong>Netty</strong>实现网络层。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -8731,151 +8848,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line">37656e1 HEAD@&#123;0&#125;: rebase -i (finish): returning to refs/heads/git_reflog</span><br><span class="line">37656e1 HEAD@&#123;1&#125;: rebase -i (start): checkout origin/main</span><br><span class="line">37656e1 HEAD@&#123;2&#125;: commit: some WIP changes</span><br></pre></td></tr></table></figure>
 
 <p>我们可以看到有关于<code>rebase</code>开始和结束的引用日志条目，在这些条目之前是我们的”some WIP changes”提交。我们可以将 reflog ref 传递给 git reset，然后reset到rebase之前的提交。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/15/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/15/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">责任链模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-01-15 15:07:00" itemprop="dateCreated datePublished" datetime="2024-01-15T15:07:00+08:00">2024-01-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-01-18 11:43:02" itemprop="dateModified" datetime="2024-01-18T11:43:02+08:00">2024-01-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h1><p>责任链模式（<code>Chain of Responsibility</code>）使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。</p>
-<p>将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/design-pattern/chain-of-responsibility-2x.png" style="zoom:50%;" />
-
-<p>与许多其他行为设计模式一样， <strong>责任链</strong>会将特定行为转换为被称作<em>处理者</em>的独立对象。 在上述示例中， 每个检查步骤都可被抽取为仅有单个方法的类， 并执行检查操作。 请求及其数据则会被作为参数传递给该方法。</p>
-<p>模式建议你将这些处理者连成一条链。 链上的每个处理者都有一个成员变量来保存对于下一处理者的引用。 除了处理请求外， 处理者还负责沿着链传递请求。 请求会在链上移动， 直至所有处理者都有机会对其进行处理。</p>
-<p>最重要的是： 处理者可以决定不再沿着链传递请求， 这可高效地取消所有后续处理步骤。</p>
-<h1 id="责任链模式结构"><a href="#责任链模式结构" class="headerlink" title="责任链模式结构"></a>责任链模式结构</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/design-pattern/structure-of-chain-responsibility-2x.png" style="zoom:50%;" />
-
-<h1 id="现实世界的例子"><a href="#现实世界的例子" class="headerlink" title="现实世界的例子"></a>现实世界的例子</h1><p>兽人国王向他的军队发出响亮的命令。最接近反应的是兽人指挥官<code>OrcCommander</code>，然后是兽人军官<code>OrcOfficer</code>，然后是兽人士兵<code>OrcSoldier</code>。指挥官、军官和士兵形成责任链。</p>
-<p>用上面的兽人来翻译我们的例子。首先，我们有这样的<code>Request</code>类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The type of this request, used by each item in the chain to see if they should or can handle</span></span><br><span class="line"><span class="comment">     * this particular request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RequestType requestType;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The name of the request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Indicates if the request is handled or not. A request can only switch state from unhandled to</span></span><br><span class="line"><span class="comment">     * handled, there&#x27;s no way to &#x27;unhandle&#x27; a request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> handled;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Request</span><span class="params">(RequestType requestType, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.requestType = Objects.requireNonNull(requestType);</span><br><span class="line">        <span class="keyword">this</span>.name = Objects.requireNonNull(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RequestType <span class="title">getRequestType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> requestType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Mark the request as handled.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">markHandled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.handled = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isHandled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.handled;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来，是我们请求处理程序的层次结构。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcCommander</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        <span class="keyword">this</span>.nextHandler.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc commander&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcOfficer</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        <span class="keyword">this</span>.nextHandler.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc Officer&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcSoldier</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        req.markHandled();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc Soldier&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>兽人国王下达命令并形成请求链。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcKing</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;RequestHandler&gt; handlers;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OrcKing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        buildRequestChain();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">buildRequestChain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        handlers = Arrays.asList(<span class="keyword">new</span> OrcCommander(), <span class="keyword">new</span> OrcOfficer(), <span class="keyword">new</span> OrcSoldier());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; handlers.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            handlers.get(i).setNextHandler(handlers.get(i +<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle request by the chain.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeRequest</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        handlers.get(<span class="number">0</span>).handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Request request = <span class="keyword">new</span> Request(RequestType.DEFEND_CASTLE, <span class="string">&quot;defend castle&quot;</span>);</span><br><span class="line">    OrcKing orcKing = <span class="keyword">new</span> OrcKing();</span><br><span class="line">    orcKing.makeRequest(request);</span><br><span class="line"></span><br><span class="line">    System.out.println(request.isHandled());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Orc commander handle the request defend castle</span><br><span class="line">Orc Officer handle the request defend castle</span><br><span class="line">Orc Soldier handle the request defend castle</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><p><code>Responsibility</code>链有下列优点和缺点:</p>
-<ul>
-<li><p><strong>降低耦合度</strong></p>
-<p>该模式使得一个对象无需知道是其他哪一个对象处理其请求。对象仅需知道该请求会被“正确”地处理。</p>
-<p>接收者和发送者都没有对方的明确的信息，且链中的对象不需知道链的结构。</p>
-<p>结果是，职责链可简化对象的相互连接。它们仅需保持一个指向其后继者的引用，而不需保持它所有的候选接受者的引用。</p>
-</li>
-<li><p><strong>增强了给对象指派职责(Responsibility)的灵活性</strong></p>
-<p>当在对象中分派职责时，职责链给你更多的灵活性。</p>
-<p>你可以通过在运行时刻对该链进行动态的增加或修改来增加或改变处理一个请求的那些职责。你可以将这种机制与静态的特例化处理对象的继承机制结合起来使用。</p>
-</li>
-<li><p><strong>不保证被接受</strong></p>
-<p>既然一个请求没有明确的接收者，那么就不能保证它一定会被处理—该请求可能一直到链的末端都得不到处理。</p>
-<p>一个请求也可能因该链没有被正确配置而得不到处理。</p>
-</li>
-</ul>
-<h1 id="适合应用场景"><a href="#适合应用场景" class="headerlink" title="适合应用场景"></a>适合应用场景</h1><ol>
-<li>当程序需要使用不同方式处理不同种类请求， 而且请求类型和顺序预先未知时， 可以使用责任链模式。<ul>
-<li>该模式能将多个处理者连接成一条链。 接收到请求后， 它会 “询问” 每个处理者是否能够对其进行处理。 这样所有处理者都有机会来处理请求。</li>
-</ul>
-</li>
-<li>当一个请求必须按顺序被多个处理者执行时， 可以使用该模式。<ul>
-<li>无论你以何种顺序将处理者连接成一条链， 所有请求都会严格按照顺序通过链上的处理者。</li>
-</ul>
-</li>
-<li>如果所需处理者及其顺序必须在运行时进行改变， 可以使用责任链模式。<ul>
-<li>如果在处理者类中有对引用成员变量的设定方法， 你将能动态地插入和移除处理者， 或者改变其顺序。</li>
-</ul>
-</li>
-</ol>
-<h1 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用"></a>已知使用</h1><ul>
-<li><code>java.util.logging.Logger#log()</code></li>
-<li><code>Apache Commons Chain</code></li>
-<li><code>javax.servlet.Filter#doFilter()</code> </li>
-</ul>
 
       
     </div>

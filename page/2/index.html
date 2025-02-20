@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,6 +179,151 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/15/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/15/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">责任链模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-15 15:07:00" itemprop="dateCreated datePublished" datetime="2024-01-15T15:07:00+08:00">2024-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-18 11:43:02" itemprop="dateModified" datetime="2024-01-18T11:43:02+08:00">2024-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h1><p>责任链模式（<code>Chain of Responsibility</code>）使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。</p>
+<p>将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/design-pattern/chain-of-responsibility-2x.png" style="zoom:50%;" />
+
+<p>与许多其他行为设计模式一样， <strong>责任链</strong>会将特定行为转换为被称作<em>处理者</em>的独立对象。 在上述示例中， 每个检查步骤都可被抽取为仅有单个方法的类， 并执行检查操作。 请求及其数据则会被作为参数传递给该方法。</p>
+<p>模式建议你将这些处理者连成一条链。 链上的每个处理者都有一个成员变量来保存对于下一处理者的引用。 除了处理请求外， 处理者还负责沿着链传递请求。 请求会在链上移动， 直至所有处理者都有机会对其进行处理。</p>
+<p>最重要的是： 处理者可以决定不再沿着链传递请求， 这可高效地取消所有后续处理步骤。</p>
+<h1 id="责任链模式结构"><a href="#责任链模式结构" class="headerlink" title="责任链模式结构"></a>责任链模式结构</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/design-pattern/structure-of-chain-responsibility-2x.png" style="zoom:50%;" />
+
+<h1 id="现实世界的例子"><a href="#现实世界的例子" class="headerlink" title="现实世界的例子"></a>现实世界的例子</h1><p>兽人国王向他的军队发出响亮的命令。最接近反应的是兽人指挥官<code>OrcCommander</code>，然后是兽人军官<code>OrcOfficer</code>，然后是兽人士兵<code>OrcSoldier</code>。指挥官、军官和士兵形成责任链。</p>
+<p>用上面的兽人来翻译我们的例子。首先，我们有这样的<code>Request</code>类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The type of this request, used by each item in the chain to see if they should or can handle</span></span><br><span class="line"><span class="comment">     * this particular request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RequestType requestType;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The name of the request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Indicates if the request is handled or not. A request can only switch state from unhandled to</span></span><br><span class="line"><span class="comment">     * handled, there&#x27;s no way to &#x27;unhandle&#x27; a request.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> handled;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Request</span><span class="params">(RequestType requestType, String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.requestType = Objects.requireNonNull(requestType);</span><br><span class="line">        <span class="keyword">this</span>.name = Objects.requireNonNull(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RequestType <span class="title">getRequestType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> requestType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Mark the request as handled.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">markHandled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.handled = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isHandled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.handled;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，是我们请求处理程序的层次结构。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcCommander</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        <span class="keyword">this</span>.nextHandler.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc commander&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcOfficer</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        <span class="keyword">this</span>.nextHandler.handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc Officer&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcSoldier</span> <span class="keyword">implements</span> <span class="title">RequestHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RequestHandler nextHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(RequestHandler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        System.out.println(name() + <span class="string">&quot; handle the request &quot;</span> + req);</span><br><span class="line">        req.markHandled();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Orc Soldier&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>兽人国王下达命令并形成请求链。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrcKing</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;RequestHandler&gt; handlers;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OrcKing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        buildRequestChain();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">buildRequestChain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        handlers = Arrays.asList(<span class="keyword">new</span> OrcCommander(), <span class="keyword">new</span> OrcOfficer(), <span class="keyword">new</span> OrcSoldier());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; handlers.size() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            handlers.get(i).setNextHandler(handlers.get(i +<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle request by the chain.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">makeRequest</span><span class="params">(Request req)</span> </span>&#123;</span><br><span class="line">        handlers.get(<span class="number">0</span>).handle(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Request request = <span class="keyword">new</span> Request(RequestType.DEFEND_CASTLE, <span class="string">&quot;defend castle&quot;</span>);</span><br><span class="line">    OrcKing orcKing = <span class="keyword">new</span> OrcKing();</span><br><span class="line">    orcKing.makeRequest(request);</span><br><span class="line"></span><br><span class="line">    System.out.println(request.isHandled());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Orc commander handle the request defend castle</span><br><span class="line">Orc Officer handle the request defend castle</span><br><span class="line">Orc Soldier handle the request defend castle</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><p><code>Responsibility</code>链有下列优点和缺点:</p>
+<ul>
+<li><p><strong>降低耦合度</strong></p>
+<p>该模式使得一个对象无需知道是其他哪一个对象处理其请求。对象仅需知道该请求会被“正确”地处理。</p>
+<p>接收者和发送者都没有对方的明确的信息，且链中的对象不需知道链的结构。</p>
+<p>结果是，职责链可简化对象的相互连接。它们仅需保持一个指向其后继者的引用，而不需保持它所有的候选接受者的引用。</p>
+</li>
+<li><p><strong>增强了给对象指派职责(Responsibility)的灵活性</strong></p>
+<p>当在对象中分派职责时，职责链给你更多的灵活性。</p>
+<p>你可以通过在运行时刻对该链进行动态的增加或修改来增加或改变处理一个请求的那些职责。你可以将这种机制与静态的特例化处理对象的继承机制结合起来使用。</p>
+</li>
+<li><p><strong>不保证被接受</strong></p>
+<p>既然一个请求没有明确的接收者，那么就不能保证它一定会被处理—该请求可能一直到链的末端都得不到处理。</p>
+<p>一个请求也可能因该链没有被正确配置而得不到处理。</p>
+</li>
+</ul>
+<h1 id="适合应用场景"><a href="#适合应用场景" class="headerlink" title="适合应用场景"></a>适合应用场景</h1><ol>
+<li>当程序需要使用不同方式处理不同种类请求， 而且请求类型和顺序预先未知时， 可以使用责任链模式。<ul>
+<li>该模式能将多个处理者连接成一条链。 接收到请求后， 它会 “询问” 每个处理者是否能够对其进行处理。 这样所有处理者都有机会来处理请求。</li>
+</ul>
+</li>
+<li>当一个请求必须按顺序被多个处理者执行时， 可以使用该模式。<ul>
+<li>无论你以何种顺序将处理者连接成一条链， 所有请求都会严格按照顺序通过链上的处理者。</li>
+</ul>
+</li>
+<li>如果所需处理者及其顺序必须在运行时进行改变， 可以使用责任链模式。<ul>
+<li>如果在处理者类中有对引用成员变量的设定方法， 你将能动态地插入和移除处理者， 或者改变其顺序。</li>
+</ul>
+</li>
+</ol>
+<h1 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用"></a>已知使用</h1><ul>
+<li><code>java.util.logging.Logger#log()</code></li>
+<li><code>Apache Commons Chain</code></li>
+<li><code>javax.servlet.Filter#doFilter()</code> </li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -4327,145 +4472,6 @@
 <li><code>All implementations of java.lang.Appendable</code></li>
 <li><code>Apache Camel builders</code></li>
 <li><code>Apache Commons Option.Builder</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/18/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/18/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">原型模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-18 15:31:33" itemprop="dateCreated datePublished" datetime="2023-12-18T15:31:33+08:00">2023-12-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-19 09:11:12" itemprop="dateModified" datetime="2023-12-19T09:11:12+08:00">2023-12-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/prototype-2x.png" style="zoom:50%;" />
-
-<p>原型模式的定义如下：</p>
-<blockquote>
-<p>Specify the kinds of objects to create using a prototypical instance,and create new objects by copying this prototype.</p>
-</blockquote>
-<p>使用原型实例指定要创建的对象类型，并通过复制此原型来创建新对象。</p>
-<p>还记得多莉吗？克隆羊！我们不讨论细节，但这里的关键点是这一切都与克隆有关。</p>
-<p>用简单的话来说</p>
-<blockquote>
-<p>通过克隆基于现有对象创建对象。</p>
-</blockquote>
-<p>维基百科说</p>
-<blockquote>
-<p>原型模式是软件开发中的一种创造性设计模式。当要创建的对象的类型由原型实例确定时使用，原型实例将被克隆以生成新的对象。</p>
-</blockquote>
-<p>简而言之，它允许你创建一个现有对象的副本，并根据你的需要对其进行修改，而不是费尽周折地从头开始创建一个对象并进行设置。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/1200px-Prototype_UML.png" style="zoom:67%;" />
-
-<p>原型模式的结构很简单:</p>
-<ol>
-<li><code>Prototype：</code> 这个是一个接口，里面必须含有一个可以克隆自己的方法。在Java中，我们可以使用JDK自带的<code>java.lang.Cloneable</code>接口来替代此接口。</li>
-<li><code>ConcretePrototype：</code>实现了<code>Prototype</code>接口的原型对象</li>
-</ol>
-<p>原型模式主要用于对象的复制，它的核心是就是类图中的原型类 Prototype。Prototype 类需要具备以下两个条件：</p>
-<ul>
-<li>实现 <code>Cloneable</code> 接口。在 java 语言有一个 <code>Cloneable</code> 接口，它的作用只有一个，就是在运行时通知虚拟机可以安全地在实现了此接口的类上使用 <code>clone</code> 方法。在 java 虚拟机中，只有实现了这个接口的类才可以被拷贝，否则在运行时会抛出 <code>CloneNotSupportedException</code> 异常。</li>
-<li>重写 <code>Object</code> 类中的 <code>clone</code> 方法。Java 中，所有类的父类都是 <code>Object</code> 类，<code>Object</code> 类中有一个 <code>clone</code> 方法，作用是返回对象的一个拷贝，但是其作用域 <code>protected</code> 类型的，一般的类无法调用，因此，<code>Prototype</code> 类需要将 <code>clone</code> 方法的作用域修改为 <code>public</code> 类型。</li>
-</ul>
-<p><strong>程序化示例：</strong></p>
-<p>第一步，<code>Prototype</code>抽象原型类，声明了<code>copy</code>方法，它可以是接口或基类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Prototype</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings(&#123;&quot;unchecked&quot;&#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Prototype&lt;T&gt; <span class="title">copy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Prototype&lt;T&gt;) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第二步，原型类</p>
-<p>这个类就是我们的原型类，准备被其他人克隆使用的，所以其实现<code>Prototype </code>接口，具备克隆的能力。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneSheep</span> <span class="keyword">extends</span> <span class="title">Prototype</span>&lt;<span class="title">CloneSheep</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String color;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CloneSheep</span><span class="params">(String name, <span class="keyword">int</span> age, String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第三步，创建原型类的工厂类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneSheepFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> CloneSheep cloneSheep;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CloneSheepFactory</span><span class="params">(CloneSheep cloneSheep)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cloneSheep = cloneSheep;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CloneSheep <span class="title">createCloneSheep</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (CloneSheep) cloneSheep.copy();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    CloneSheepFactory sheepFactory = <span class="keyword">new</span> CloneSheepFactory(<span class="keyword">new</span> CloneSheep(<span class="string">&quot;多莉&quot;</span>, <span class="number">7</span>, <span class="string">&quot;白色&quot;</span>));</span><br><span class="line">    CloneSheep cloneSheep1 = sheepFactory.createCloneSheep();</span><br><span class="line">    CloneSheep cloneSheep2 = sheepFactory.createCloneSheep();</span><br><span class="line">    CloneSheep cloneSheep3 = sheepFactory.createCloneSheep();</span><br><span class="line">    System.out.println(cloneSheep1);</span><br><span class="line">    System.out.println(cloneSheep2);</span><br><span class="line">    System.out.println(cloneSheep3);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序输出:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CloneSheep&#123;name&#x3D;&#39;多莉&#39;, age&#x3D;7, color&#x3D;&#39;白色&#39;&#125;</span><br><span class="line">CloneSheep&#123;name&#x3D;&#39;多莉&#39;, age&#x3D;7, color&#x3D;&#39;白色&#39;&#125;</span><br><span class="line">CloneSheep&#123;name&#x3D;&#39;多莉&#39;, age&#x3D;7, color&#x3D;&#39;白色&#39;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用场景</p>
-<ul>
-<li>当一个对象的构建代价过高时。例如某个对象里面的数据需要访问数据库才能拿到，而我们却要多次构建这样的对象。</li>
-<li>当构建的多个对象，均需要处于某种原始状态时，就可以先构建一个拥有此状态的原型对象，其他对象基于原型对象来修改。</li>
-</ul>
-<p>已知用途</p>
-<ul>
-<li><code>java.lang.Object#clone()</code></li>
 </ul>
 
       
