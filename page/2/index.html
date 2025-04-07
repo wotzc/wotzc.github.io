@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,6 +179,941 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/git%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/11/git%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">git协作工作流程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-11 14:59:38" itemprop="dateCreated datePublished" datetime="2024-03-11T14:59:38+08:00">2024-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-25 20:16:47" itemprop="dateModified" datetime="2024-03-25T20:16:47+08:00">2024-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="git-远程"><a href="#git-远程" class="headerlink" title="git 远程"></a>git 远程</h1><p>SVN 使用单一的集中式版本库作为开发人员的通信中心，通过在开发人员的工作副本和中心版本库之间传递变更集来实现协作。这与 Git 的分布式协作模式不同，后者为每个开发人员提供了自己的版本库副本，并拥有自己的本地历史记录和分支结构。用户通常需要共享一系列提交，而不是单个变更集。Git 可让你在不同版本库之间共享整个分支，而不是将工作副本中的变更集提交到中央版本库。</p>
+<p><code>git remote</code>命令是更广泛系统中负责同步变更的一个部分。通过 <code>git remote</code>命令注册的记录会与 <code>git fetch</code>、<code>git push</code> 和 <code>git pull</code> 命令结合使用。这些命令都有各自的同步职责，可以在相应的链接中查看。</p>
+<h2 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h2><p>使用 <code>git remote</code> 命令可以创建、查看和删除与其他版本库的连接。远程连接更像是书签，而不是其他版本库的直接链接。与其说它们提供了对另一个版本库的实时访问，不如说它们是一个方便的名字，可以用来引用一个不太方便的 URL。</p>
+<p>例如，下图显示了从你的版本库到中央版本库和另一个开发者版本库的两个远程连接。与其用完整的 URL 来引用它们，你可以把 origin 和 john 的快捷方式传递给其他 Git 命令。</p>
+<h3 id="git-remote使用概述"><a href="#git-remote使用概述" class="headerlink" title="git remote使用概述"></a>git remote使用概述</h3><p><code>git remote</code> 命令本质上是一个界面，用于管理存储在版本库 <code>./.git/config</code> 文件中的远程条目列表。以下命令用于查看远程列表的当前状态。</p>
+<h3 id="查看-git-远程配置"><a href="#查看-git-远程配置" class="headerlink" title="查看 git 远程配置"></a>查看 git 远程配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote</span><br></pre></td></tr></table></figure>
+
+<p>列出您与其他存储库的远程连接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<p>与上面的命令相同，但包含每个连接的 URL。</p>
+<h3 id="创建和修改-git-远程配置"><a href="#创建和修改-git-远程配置" class="headerlink" title="创建和修改 git 远程配置"></a>创建和修改 git 远程配置</h3><p><code>git remote</code> 命令也是修改软件仓库 <code>./.git/config</code> 文件的一种方便或 “辅助 “方法。下面的命令可以让你管理与其他版本库的连接。以下命令将修改版本库的 <code>./.git/config</code> 文件。使用文本编辑器直接编辑 <code>./.git/config</code> 文件也能达到以下命令的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;name&gt; &lt;url&gt;</span><br></pre></td></tr></table></figure>
+
+<p>创建与远程版本库的新连接。添加远程仓库后，你就可以在其他 Git 命令中使用<code>＜name＞</code>作为<code>＜url＞</code>的快捷方式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除与名为 <code>＜name＞</code> 的远程存储库的连接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename &lt;old-name&gt; &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将远程连接从 <code>＜old-name＞</code> 重命名为 <code>＜new-name＞</code>。</p>
+<h3 id="git-remote讨论"><a href="#git-remote讨论" class="headerlink" title="git remote讨论"></a>git remote讨论</h3><p>Git 旨在为每个开发人员提供一个完全独立的开发环境。这意味着信息不会在仓库之间自动来回传递。相反，开发者需要手动将上游提交拉入本地仓库，或手动将本地提交推回中央仓库。<code>git remote</code> 命令实际上只是为这些 “共享 “命令传递 URL 的一种更简便的方式。</p>
+<p>当你用 <code>git clone</code> 克隆一个仓库时，它会自动创建一个名为 <code>origin</code> 的远程连接，指向被克隆的仓库。这对于创建中央仓库本地副本的开发者来说非常有用，因为它提供了一种拉取上游变更或发布本地提交的简便方法。这也是大多数基于 Git 的项目将其中央仓库称为 <code>origin</code> 的原因。</p>
+<p>Git 支持多种引用远程仓库的方式。访问远程仓库最简单的两种方式是 <code>HTTP</code> 和 <code>SSH</code> 协议。<code>HTTP</code> 是一种允许匿名、只读访问仓库的简单方式。例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://host/path/to/repo.git</span><br></pre></td></tr></table></figure>
+
+<p>但是，通常无法将提交推送到 <code>HTTP</code> 地址（反正你也不想允许匿名推送）。要进行读写访问，应该使用 <code>SSH</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh:&#x2F;&#x2F;user@host&#x2F;path&#x2F;to&#x2F;repo.git</span><br></pre></td></tr></table></figure>
+
+<p>你需要在主机上有一个有效的 <code>SSH</code> 账户，除此之外，Git 本身就支持通过 <code>SSH</code> 验证访问。现代安全的第三方托管解决方案（如 Bitbucket.com）会为你提供这些 URL。</p>
+<h3 id="git-remote命令"><a href="#git-remote命令" class="headerlink" title="git remote命令"></a>git remote命令</h3><p><code>git remote</code>命令是众多 Git 命令中的一个，这些命令会附加 “子命令”。下面将介绍常用的 <code>git remote</code>子命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote ADD &lt;NAME&gt; &lt;URL&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>./.git/config</code> 中为名为<code>＜name＞</code>的远程仓库URL<code>＜url＞</code>添加一条记录。</p>
+<p>接受 <code>-f</code> 选项，该选项会在远程记录创建后立即 <code>git fetch</code>。</p>
+<p>接受 <code>--tags</code> 选项，该选项将立即 git 抓取并从远程仓库导入每个标签。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote RENAME &lt;OLD&gt; &lt;NEW&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更新 <code>./.git/config</code>，将记录<code>＜OLD＞</code>重命名为<code>＜NEW＞</code>。所有远程跟踪分支和远程配置设置都会更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote REMOVE or RM &lt;NAME&gt;</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>./.git/config</code> 并删除名为 <code>＜NAME＞</code> 的远程。所有远程跟踪分支和远程配置设置都会被删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote GET-URL &lt;NAME&gt;</span><br></pre></td></tr></table></figure>
+
+<p>输出远程记录的 URL。</p>
+<p>接受 <code>--push</code> 时，查询的是推送 URL 而不是获取 URL。</p>
+<p>使用 <code>--all</code> 时，将列出远程记录的所有 URL。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote SHOW &lt;NAME&gt;</span><br></pre></td></tr></table></figure>
+
+<p>输出远程 <code>＜NAME＞</code>的高级信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote PRUNE &lt;NAME&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除远程版本库中不存在的任何本地<code>＜NAME＞</code> 分支。</p>
+<p>接受 <code>--dry-run</code> 选项，该选项会列出要删除的分支，但不会真的删除。</p>
+<p>除了<code>origin</code>之外，与队友的仓库建立连接通常也很方便。例如，如果你的同事约翰在 dev.example.com/john.git 上维护了一个可公开访问的仓库，你可以添加如下连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add john http://dev.example.com/john.git</span><br></pre></td></tr></table></figure>
+
+<p>有了这种访问个人开发者仓库的权限，就可以在中央仓库之外进行协作。这对于开发大型项目的小团队来说非常有用。</p>
+<h3 id="查看远程存储库"><a href="#查看远程存储库" class="headerlink" title="查看远程存储库"></a>查看远程存储库</h3><p>默认情况下，<code>git remote</code> 命令会列出之前存储的与其他版本库的远程连接。这将产生单行输出，列出远程仓库的 “书签 “名称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br><span class="line">upstream</span><br><span class="line">other_users_repo</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>-v</code>选项调用<code>git remote</code>会打印书签仓库名称列表以及相应的仓库 URL。<code>-v</code>选项代表 “<code>verbose</code>“。下面是 <code>git remote</code> 的详细输出示例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br><span class="line">origin  git@bitbucket.com:origin_user&#x2F;reponame.git (fetch)</span><br><span class="line">origin  git@bitbucket.com:origin_user&#x2F;reponame.git (push)</span><br><span class="line">upstream    https:&#x2F;&#x2F;bitbucket.com&#x2F;upstream_user&#x2F;reponame.git (fetch)</span><br><span class="line">upstream    https:&#x2F;&#x2F;bitbucket.com&#x2F;upstream_user&#x2F;reponame.git (push)</span><br><span class="line">other_users_repo    https:&#x2F;&#x2F;bitbucket.com&#x2F;other_users_repo&#x2F;reponame (fetch)</span><br><span class="line">other_users_repo    https:&#x2F;&#x2F;bitbucket.com&#x2F;other_users_repo&#x2F;reponame (push)</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加远程存储库"><a href="#添加远程存储库" class="headerlink" title="添加远程存储库"></a>添加远程存储库</h3><p><code>git remote add</code> 命令将为远程仓库创建一个新的连接记录。添加远程记录后，你就可以把它作为其他 Git 命令的快捷方式。有关可接受的 URL 语法的更多信息，请参阅下面的 “版本库 URL “部分。该命令将在版本库的<code>./.git/config</code>文件中创建一条新记录。配置文件更新示例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add fake_test https:&#x2F;&#x2F;bitbucket.com&#x2F;upstream_user&#x2F;reponame.git; [remote &quot;remote_test&quot;] </span><br><span class="line">   url &#x3D; https:&#x2F;&#x2F;bitbucket.com&#x2F;upstream_user&#x2F;reponame.git </span><br><span class="line">   fetch &#x3D; +refs&#x2F;heads&#x2F;*:refs&#x2F;remotes&#x2F;remote_test&#x2F;*</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查远程存储库"><a href="#检查远程存储库" class="headerlink" title="检查远程存储库"></a>检查远程存储库</h3><p><code>show</code> 子命令可附加到 <code>git remote</code>，以提供远程配置的详细输出。该输出将包含与远程相关联的分支列表，以及用于获取和推送的端点。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git remote show upstream</span><br><span class="line">* remote upstream</span><br><span class="line">   Fetch URL: https://bitbucket.com/upstream_user/reponame.git</span><br><span class="line">   Push URL: https://bitbucket.com/upstream_user/reponame.git</span><br><span class="line">   HEAD branch: main</span><br><span class="line">   Remote branches:</span><br><span class="line">      main tracked</span><br><span class="line">      simd-deprecated tracked</span><br><span class="line">      tutorial tracked</span><br><span class="line">   Local ref configured <span class="keyword">for</span> <span class="string">&#x27;git push&#x27;</span>:</span><br><span class="line">      main pushes to main (fast-forwardable)</span><br></pre></td></tr></table></figure>
+
+<h3 id="从-Git-远程fetching和pulling"><a href="#从-Git-远程fetching和pulling" class="headerlink" title="从 Git 远程fetching和pulling"></a>从 Git 远程fetching和pulling</h3><p>使用 <code>git remote</code> 命令配置远程记录后，远程名称就可以作为参数传递给其他 Git 命令，以便与远程仓库通信。<code>git fetch</code> 和 <code>git pull</code> 都可以用来读取远程仓库。这两个命令都有不同的操作，我们将在它们各自的链接中作更深入的解释。</p>
+<h3 id="推送到-Git-远程"><a href="#推送到-Git-远程" class="headerlink" title="推送到 Git 远程"></a>推送到 Git 远程</h3><p><code>git push</code>命令用于写入远程仓库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote-name&gt; &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此示例将把<code>＜branch-name＞</code>的本地状态上传到<code>＜remote-name＞</code>指定的远程存储库。</p>
+<h3 id="重命名和删除Git-远程"><a href="#重命名和删除Git-远程" class="headerlink" title="重命名和删除Git 远程"></a>重命名和删除Git 远程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename &lt;old-name&gt; &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>git remote rename</code> 命令不言自明。执行该命令后，远程连接将从<code>&lt;old-name&gt;</code>更名为<code>&lt;new-name&gt;</code>。此外，该命令还将修改 <code>./.git/config</code> 中的内容，重新命名远程记录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>git remote rm</code>命令将删除与<code>＜name＞</code>参数指定的远程仓库的连接。为了演示，让我们 “撤销 “上一个例子中的远程添加。如果我们执行<code>git remote rm remote_test</code>，然后检查<code>./.git/config</code>的内容，就会发现 [remote “remote_test”] 记录已不复存在。</p>
+<hr>
+<h2 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h2><p><code>git fetch</code> 命令会将提交、文件和引用从远程仓库下载到本地仓库。当你想看看其他人都在做些什么时，你就会使用 <code>fetch</code> 命令。它与<code>svn update</code>类似，能让你看到中心历史的进展，但并不强制你把修改合并到自己的仓库中。Git 将获取的内容与现有的本地内容隔离开来，对本地开发工作完全没有影响。获取的内容必须使用 <code>git checkout</code> 命令明确签出。因此，在将提交内容整合到本地仓库之前，获取内容是一种安全的审查方式。</p>
+<p>从远程仓库下载内容时，可以使用<code>git pull</code>和<code>git fetch</code>命令来完成任务。<code>git fetch</code> 是这两个命令的 “安全 “版本。<code>git pull</code>是更激进的选择；它会下载本地活动分支的远程内容，并立即执行 <code>git merge</code> 为新的远程内容创建合并提交。如果您有待处理的修改正在进行中，这将导致冲突，并启动合并冲突解决流程。</p>
+<h3 id="git-fetch-如何使用远程分支"><a href="#git-fetch-如何使用远程分支" class="headerlink" title="git fetch 如何使用远程分支"></a>git fetch 如何使用远程分支</h3><p>为了更好地理解 <code>git fetch</code> 的工作原理，我们先来讨论一下 Git 是如何组织和存储提交的。在仓库的 <code>./.git/objects</code> 目录中，Git 隐藏了所有本地和远程提交。Git 通过使用分支索引将远程和本地分支的提交区分开来。本地分支的 refs 保存在 <code>./.git/refs/heads/</code> 目录中。执行 <code>git branch</code> 命令会输出本地分支 refs 的列表。下面是一个 git 分支输出示例，其中包含一些演示分支名称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">main</span><br><span class="line">feature1</span><br><span class="line">debug2</span><br></pre></td></tr></table></figure>
+
+<p>检查 <code>/.git/refs/heads/</code> 目录的内容也会发现类似的输出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls ./.git/refs/heads/</span><br><span class="line">main</span><br><span class="line">feature1</span><br><span class="line">debug2</span><br></pre></td></tr></table></figure>
+
+<p>远程分支和本地分支一样，只不过它们映射的是别人版本库中的提交。远程分支的前缀是其所属的远程仓库，这样就不会与本地分支混淆。和本地分支一样，Git 也有远程分支的 refs。远程分支参考位于 <code>./.git/refs/remotes/</code> 目录中。下一个示例代码片段展示了在获取一个名为<code>remote-repo</code>的远程仓库后可能看到的分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br><span class="line"><span class="comment"># origin/main</span></span><br><span class="line"><span class="comment"># origin/feature1</span></span><br><span class="line"><span class="comment"># origin/debug2</span></span><br><span class="line"><span class="comment"># remote-repo/main</span></span><br><span class="line"><span class="comment"># remote-repo/other-feature</span></span><br></pre></td></tr></table></figure>
+
+<p>该输出显示了我们之前检查过的本地分支，但现在显示的是以 <code>origin/</code> 为前缀的分支。此外，我们现在还能看到以 <code>remote-repo</code> 为前缀的远程分支。你可以像检出本地分支一样检出远程分支，但这将使你处于分离的 <code>HEAD</code> 状态（就像检出旧提交一样）。你可以把它们看作只读分支。要查看远程分支，只需在 <code>git branch</code> 命令中加入 <code>-r</code> 标志即可。</p>
+<p>你还可以用常用的 <code>git checkout</code> 和 <code>git log</code> 命令来检查远程分支。如果您批准了远程分支包含的改动，就可以用普通的 git 合并将其合并到本地分支中。因此，与 SVN 不同，同步本地仓库和远程仓库实际上只需两步：<code>fetch</code>，然后<code>merge</code>。<code>git pull</code> 命令是实现这一过程的便捷快捷方式。</p>
+<h3 id="git-fetch-命令和选项"><a href="#git-fetch-命令和选项" class="headerlink" title="git fetch 命令和选项"></a>git fetch 命令和选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;remote&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从版本库中获取所有分支。这也会从另一个版本库下载所有需要的提交和文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;remote&gt; &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与上述命令相同，但只获取指定的分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br></pre></td></tr></table></figure>
+
+<p>强力移动，可获取所有已注册的远程版本库及其分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch --dry-run</span><br></pre></td></tr></table></figure>
+
+<p><code>--dry-run</code> 选项将执行命令的试运行。它会输出获取过程中的操作示例，但不会真的执行这些操作。</p>
+<h3 id="git-fetch示例"><a href="#git-fetch示例" class="headerlink" title="git fetch示例"></a>git fetch示例</h3><h4 id="git-fetch远程分支"><a href="#git-fetch远程分支" class="headerlink" title="git fetch远程分支"></a>git fetch远程分支</h4><p>下面的示例将演示如何获取远程分支并将本地工作状态更新为远程内容。在这个示例中，我们假设有一个中心仓库，本地仓库是使用 <code>git clone</code> 命令从该仓库克隆的。我们还假设有一个名为<code>coworkers_repo</code>的远程仓库，其中包含一个 <code>feature_branch</code>，我们将对其进行配置和获取。有了这些假设，让我们继续举例说明。</p>
+<p>首先，我们需要使用 <code>git remote</code> 命令配置远程仓库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add coworkers_repo git@bitbucket.org:coworker/coworkers_repo.git</span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们使用 repo URL 创建了一个指向同事 repo 的引用。现在，我们将把该远程名称传递给 <code>git fetch</code> 以下载内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch coworkers_repo coworkers/feature_branch</span><br><span class="line">fetching coworkers/feature_branch</span><br></pre></td></tr></table></figure>
+
+<p>现在我们在本地拥有了<code>coworkers/feature_branch</code>的内容，我们需要将其整合到本地工作副本中。首先，我们使用 <code>git checkout</code> 命令签出新下载的远程分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git checkout coworkers/feature_branch</span><br><span class="line">Note: checking out coworkers/feature_branch<span class="string">&#x27;.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">You are in &#x27;</span>detached HEAD<span class="string">&#x27; state. You can look around, make experimental</span></span><br><span class="line"><span class="string">changes and commit them, and you can discard any commits you make in this</span></span><br><span class="line"><span class="string">state without impacting any branches by performing another checkout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">If you want to create a new branch to retain commits you create, you may</span></span><br><span class="line"><span class="string">do so (now or later) by using -b with the checkout command again. Example:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">git checkout -b &lt;new-branch-name&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>该检出操作的输出结果显示，我们处于分离的 HEAD 状态。这是意料之中的，这意味着我们的 HEAD ref 指向的 ref 与本地历史不一致。由于 HEAD 指向的是<code>coworkers/feature_branch</code> ref，我们可以从该 ref 创建一个新的本地分支。分离的 HEAD “输出向我们展示了如何使用 <code>git checkout</code> 命令来做到这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b local_feature_branch</span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们创建了一个名为 <code>local_feature_branch</code> 的新本地分支。这样，HEAD 的更新就会指向最新的远程内容，我们就可以在此基础上继续开发。</p>
+<h4 id="使用-git-fetch-同步远程分支"><a href="#使用-git-fetch-同步远程分支" class="headerlink" title="使用 git fetch 同步远程分支"></a>使用 git fetch 同步远程分支</h4><p>下面的示例介绍了本地版本库与中央版本库主分支同步的典型工作流程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure>
+
+<p>这将显示已下载的分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a1e8fb5..45e66a4 main -&gt; origin&#x2F;main</span><br><span class="line">a1e8fb5..9e8ab1c develop -&gt; origin&#x2F;develop</span><br><span class="line">* [new branch] some-feature -&gt; origin&#x2F;some-feature</span><br></pre></td></tr></table></figure>
+
+<p>这些新远程分支的提交在下图中显示为方形而不是圆形。正如你所看到的，<code>git fetch</code> 可以让你访问另一个仓库的整个分支结构。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-fetch-2x.png" style="zoom:50%;" />
+
+<p>要查看上游<code>main</code>分支添加了哪些提交，可以使用 <code>origin/main</code> 作为过滤器运行 git 日志：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline main..origin/main</span><br></pre></td></tr></table></figure>
+
+<p>要批准更改并将其合并到本地主分支，请使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git <span class="built_in">log</span> origin/main</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以使用 <code>git merge origin/main</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
+
+<p><code>origin/main</code> 分支和<code>main</code>分支现在指向同一个提交，你就能与上游开发同步了。</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p><code>git fetch</code> 与 <code>git remote</code>、<code>git branch</code>、<code>git checkout</code> 和 <code>git reset</code> 配合使用，可将本地仓库更新为远程仓库的状态。<code>git fetch</code> 命令是 git 协作工作流程中的一个重要部分。<code>git fetch</code> 的行为与 <code>git pull</code> 相似，但 <code>git fetch</code> 可被视为更安全的非破坏性版本。</p>
+<hr>
+<h2 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h2><p><code>git push</code>命令用于将本地仓库内容上传到远程仓库。<code>push</code>是将提交从本地仓库转移到远程仓库的方式。它与 <code>git fetch</code> 相对应，但 <code>fetch</code> 是将提交导入本地分支，而 <code>push</code> 则是将提交导出到远程分支。使用 <code>git remote</code> 命令可以配置远程分支。推送有可能会覆盖改动，因此在推送时应小心谨慎。下文将讨论这些问题。</p>
+<h3 id="git-push-用法"><a href="#git-push-用法" class="headerlink" title="git push 用法"></a>git push 用法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote&gt; &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将指定的分支连同所有必要的提交和内部对象推送到远程指定分支。这会在目标仓库创建一个本地分支。为了防止覆盖提交，Git 不会允许你在目标版本库中进行非快速合并的推送。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote&gt; --force</span><br></pre></td></tr></table></figure>
+
+<p>与上述命令相同，但即使结果是非快进合并，也会强制推送。除非你确信知道自己在做什么，否则不要使用 <code>--force</code> 标志。</p>
+<p>将所有本地分支推送到指定的远程分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote&gt; --tags</span><br></pre></td></tr></table></figure>
+
+<p>推送分支或使用 <code>--all</code> 选项时，标签不会自动推送。<code>--tags</code>标记会将所有本地标记发送到远程版本库。</p>
+<h3 id="git-push讨论"><a href="#git-push讨论" class="headerlink" title="git push讨论"></a>git push讨论</h3><p><code>git push</code> 最常用于发布本地修改并上传到中央仓库。本地版本库修改后，执行推送以与远程团队成员共享修改内容。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-before-push-2x.png" style="zoom:50%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-after-push-2x.png" style="zoom:50%;" />
+
+<p>上图显示的是当本地主仓库的进度超过中心仓库的主仓库时，您通过运行 <code>git push origin main</code> 发布改动的情况。请注意，<code>git push</code> 与在远程仓库中运行 <code>git merge main</code> 本质上是一样的。</p>
+<p><code>git push</code> 是整个 Git “同步 “过程中使用的众多命令之一。<code>git push</code> 可视为 “上传 “命令，而 <code>git fetch</code> 和 <code>git pull</code> 可视为 “下载 “命令。通过下载或上传移动变更集后，可在目的地执行 <code>git merge</code>以整合变更。</p>
+<h3 id="强制push"><a href="#强制push" class="headerlink" title="强制push"></a>强制push</h3><p>为了防止覆盖中央仓库的历史，Git 会在推送请求导致非快速合并时拒绝推送请求。因此，如果远程历史与本地历史有偏差，就需要拉取远程分支并将其合并到本地分支，然后再尝试推送。这类似于 SVN 让你在提交变更集之前通过 svn update 与中心版本库同步。</p>
+<p><code>--force</code>标志会覆盖这一行为，并使远程版本库的分支与本地分支相匹配，同时删除上次推送后可能发生的任何上游变更。唯一需要强制推送的情况是，当你意识到刚刚共享的提交并不完全正确，并用 <code>git commit --amend</code> 或交互式 <code>rebase</code> 进行了修正。不过，在使用 <code>--force</code> 选项之前，您必须绝对确定没有任何队友拉取过这些提交。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><strong>默认 git push</strong></p>
+<p>下面的示例描述了向中央版本库发布本地贡献的标准方法之一。首先，它通过获取中央版本库的副本并在其上重置你的改动，确保你的本地<code>main</code>分支是最新的。交互式变基也是在分享之前清理提交的好机会。然后，<code>git push</code> 命令会将本地主仓库的所有提交发送到中央仓库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git fetch origin main</span><br><span class="line">git rebase -i origin/main</span><br><span class="line"><span class="comment"># Squash commits, fix up commit messages etc.</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>由于我们已经确保了本地<code>main</code>分支是最新的，这应该会导致快进合并，而 <code>git push</code> 也不会抱怨上面讨论过的任何非快进问题。</p>
+<p><strong>修改后的强制推送</strong></p>
+<p><code>git commit</code> 命令接受一个 <code>--amend</code> 选项，它将更新之前的提交。修改提交通常是为了更新提交信息或添加新的改动。一旦提交被修改，git 推送就会失败，因为 Git 会把修改后的提交和远程提交视为不同的内容。要推送修改过的提交，必须使用 <code>--force</code> 选项。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># make changes to a repo and git add</span></span><br><span class="line">git commit --amend</span><br><span class="line"><span class="comment"># update the existing commit message</span></span><br><span class="line">git push --force origin main</span><br></pre></td></tr></table></figure>
+
+<p>上面的示例假定是在一个有提交历史的现有版本库中执行的。<code>git commit --amend</code> 用于更新之前的提交。然后使用   <code>--force</code> 选项强制推送修正后的提交。</p>
+<p><strong>删除远程分支或标签</strong></p>
+<p>有时，出于记账或组织目的，需要清理分支。要完全删除分支，必须在本地和远程删除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -D branch_name</span><br><span class="line">git push origin :branch_name</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令将删除名为 <code>branch_name</code> 的远程分支，向 <code>git push</code> 传递一个以冒号为前缀的分支名称将删除该远程分支。</p>
+<hr>
+<h2 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h2><p><code>git pull</code> 命令用于从远程仓库获取和下载内容，并立即更新本地仓库以匹配这些内容。在基于 Git 的协作工作流程中，将远程上游改动合并到本地仓库是一项常见任务。<code>git pull</code> 命令实际上是其他两个命令的组合，即 <code>git fetch</code> 和 <code>git merge</code>。在操作的第一阶段，<code>git pull</code> 会对 HEAD 指向的本地分支执行 <code>git fetch</code>。下载完成后，<code>git pull</code> 将进入合并工作流程。会创建一个新的合并提交，并更新 HEAD 以指向新的提交。</p>
+<h3 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works"></a>How it works</h3><p><code>git pull</code> 命令首先运行 <code>git fetch</code>，从指定的远程仓库下载内容。然后执行 <code>git merge</code>，将远程内容的引用和头部合并到一个新的本地合并提交中。为了更好地演示拉取和合并过程，让我们看看下面的例子。假设我们有一个包含主分支和远程起源的仓库。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-pull-usage-2x.png" style="zoom:50%;" />
+
+<p>在这种情况下，<code>git pul</code>l 会下载本地提交和主提交分歧点上的所有改动。在本例中，分歧点是 E。<code>git pull</code> 会获取分歧的远程提交，即 A-B-C。然后，拉取过程会创建一个新的本地合并提交，其中包含新的远程分歧提交的内容。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-fetch-and-merge-2x.png" style="zoom:50%;" />
+
+<p>在上图中，我们可以看到新的提交 H。该提交是一个新的合并提交，包含了远程 A-B-C 提交的内容，并有一条合并日志信息。这个例子是 <code>git pull</code> 合并策略中的一种。<code>git pull</code> 可以通过 <code>--rebase</code> 选项来使用 <code>rebase</code> 合并策略，而不是<code>merge</code>提交。下一个例子将演示 <code>rebase pull</code> 的工作原理。假设我们在第一个图的起点执行了 <code>git pull --rebase</code> 命令。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-pull-rebase-2x.png" style="zoom:50%;" />
+
+<p>从图中我们可以看到，<code>rebase</code> 拉取并没有创建新的 H 提交。相反，<code>rebase</code> 复制了远程提交 A–B–C，并改写了本地提交 E–F–G，使其出现在本地<code>origin/main</code>提交历史记录中。</p>
+<h3 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;remote&gt;</span><br></pre></td></tr></table></figure>
+
+<p>获取当前分支的指定远程副本，并立即将其合并到本地副本中。这等同于<code>git fetch ＜remote＞</code> 然后 <code>git merge origin/＜current-branch＞</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --no-commit &lt;remote&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与默认调用类似，获取远程内容，但不会创建新的合并提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase &lt;remote&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与上一次的拉取相同，并非使用 <code>git merge</code> 将远程分支与本地分支整合，而是使用 <code>git rebase</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --verbose</span><br></pre></td></tr></table></figure>
+
+<p>在拉取过程中提供详细输出，显示正在下载的内容和合并细节。</p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><p>你可以把 <code>git pull</code> 想象成 Git 版本的 <code>svn update</code>。它是同步本地仓库和上游改动的简便方法。下图解释了拉取过程的每一步。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-pull-step1-2x.png" style="zoom:50%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-pull-step2-2x.png" style="zoom: 33%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-pull-step3-2x.png" style="zoom: 33%;" />
+
+<p>您一开始以为您的版本库已经同步，但 <code>git fetch</code> 发现自从您上次检查之后，<code>origin</code> 的 <code>main</code> 版本有了新的进展。然后 <code>git merge</code> 立即将远程的 <code>main</code> 整合到本地的 <code>main</code> 中。</p>
+<p><code>git pull</code>是许多负责 “同步 “远程内容的命令之一。<code>git remote</code>命令用于指定同步命令将在哪些远程端点上运行。<code>git push</code>命令用于将内容上传到远程仓库。</p>
+<p><code>git fetch</code>命令可能会与 <code>git pull</code> 命令混淆。它们都用于下载远程内容。<code>git fetch</code>被视为 “安全 “选项，而<code>git pull</code>则被视为不安全选项。或者，<code>git pull</code>会下载远程内容，并立即尝试改变本地状态以匹配该内容。这可能会无意中导致本地仓库处于冲突状态。</p>
+<h3 id="Pulling-via-Rebase"><a href="#Pulling-via-Rebase" class="headerlink" title="Pulling via Rebase"></a>Pulling via Rebase</h3><p>使用 <code>--rebase</code> 选项可以防止不必要的合并提交，从而确保线性历史。相比合并，许多开发者更喜欢重定向，因为这就像在说：”我想把我的改动放在其他人的改动之上”。从这个意义上说，使用带有 <code>--rebase</code> 标志的 <code>git pull</code> 甚至比普通的 <code>git pull</code> 更像 svn update。</p>
+<p>事实上，使用 <code>--rebase</code> 拉取是一个很常见的工作流程，以至于有专门的配置选项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global branch.autosetuprebase always</span><br></pre></td></tr></table></figure>
+
+<p> 运行该命令后，所有 <code>git pull</code> 命令都将通过 <code>git rebase</code> 而不是 <code>git merge</code> 进行整合。</p>
+<h3 id="Git-Pull-Examples"><a href="#Git-Pull-Examples" class="headerlink" title="Git Pull Examples"></a>Git Pull Examples</h3><p>以下示例演示了如何在常见情况下使用 <code>git pull</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>git pull</code> 的默认调用相当于 <code>git fetch origin HEAD</code> 和 <code>git merge HEAD</code>，其中 <code>HEAD</code> 是指向当前分支的 ref。</p>
+<h4 id="Git-pull-on-remotes"><a href="#Git-pull-on-remotes" class="headerlink" title="Git pull on remotes"></a>Git pull on remotes</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout new_feature</span><br><span class="line">git pull &lt;remote repo&gt;</span><br></pre></td></tr></table></figure>
+
+<p>本例首先执行签出一个新分支并切换到分支。然后，通过传递执行 <code>git pull</code>。这将隐式地从 <code>&lt;remote repo&gt;</code> 下载完成后，将启动 <code>git merge</code>。</p>
+<h4 id="Git-pull-rebase-instead-of-merge"><a href="#Git-pull-rebase-instead-of-merge" class="headerlink" title="Git pull rebase instead of merge"></a>Git pull rebase instead of merge</h4><p>下面的示例演示了如何使用 <code>rebase</code> 与中央版本库的主分支同步：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git pull --rebase origin</span><br></pre></td></tr></table></figure>
+
+<p>这只是将你的本地修改移到其他人已经贡献的内容之上。</p>
+<hr>
+<h1 id="使用分支"><a href="#使用分支" class="headerlink" title="使用分支"></a>使用分支</h1><h2 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h2><p>本文将深入评述 git 分支命令，并讨论 Git 的整体分支模型。分支是大多数现代版本控制系统都具备的功能。在其他版本控制系统中，分支操作会耗费大量时间和磁盘空间。在 Git 中，分支是日常开发流程的一部分。</p>
+<p>Git 分支实际上就是您所做修改的快照指针。当你想添加一个新功能或修复一个错误时，无论大小，你都要创建一个新的分支来封装你的改动。这样一来，不稳定的代码就很难被合并到主代码库中，而且在合并到主分支之前，你还有机会清理未来的历史。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-branchs-2x.png" style="zoom:50%;" />
+
+<p>上图展示了一个包含两条独立开发线的版本库，一条用于开发一个小功能，另一条用于开发一个运行时间较长的功能。通过在分支中开发这两条线，不仅可以并行处理这两条线，还能保证主分支不被有问题的代码干扰。</p>
+<p>与其他版本控制系统模式相比，Git 分支的实现要轻便得多。Git 并不是把文件从一个目录复制到另一个目录，而是把分支作为提交的引用来存储。从这个意义上说，分支代表了一系列提交的顶端，而不是提交的容器。分支的历史是通过提交关系推断出来的。</p>
+<p>在阅读过程中，请记住 Git 分支与 SVN 分支不同。SVN 分支只在偶尔的大规模开发工作中使用，而 Git 分支则是日常工作流程中不可或缺的一部分。下面的内容将详细介绍 Git 分支的内部架构。</p>
+<h3 id="How-it-works-1"><a href="#How-it-works-1" class="headerlink" title="How it works"></a>How it works</h3><p>一个分支代表一条独立的开发线路。分支是<code>edit/stage/commit</code>流程的抽象。你可以把它们看作是申请全新工作目录、暂存区域和项目历史的一种方式。新的提交会被记录在当前分支的历史中，从而在项目历史中形成一个分叉。</p>
+<p>git 分支命令允许你创建、列出、重命名和删除分支。但它不能在分支间切换，也不能把分叉的历史记录重新组合起来。因此，<code>git branch</code> 与 <code>git checkout</code> 和 <code>git merge</code> 命令紧密结合。</p>
+<h3 id="Common-options"><a href="#Common-options" class="headerlink" title="Common options"></a>Common options</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>列出版本库中的所有分支。这与 <code>git branch --list</code> 同义。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个名为 <code>＜branch＞</code> 的新分支。这并不签出新分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除指定的分支。这是一个 “安全 “的操作，因为如果分支有未合并的更改，Git 会阻止你删除该分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>强制删除指定的分支，即使它还有未合并的改动。如果你想永久删除与某一行开发相关的所有提交，可以使用这条命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将当前分支重命名为 <code>＜branch＞</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<p>列出所有远程分支。</p>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p>要知道，分支只是提交的指针。创建分支时，Git 需要做的只是创建一个新指针，不会以任何其他方式改变版本库。如果你一开始创建的版本库是这样的</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-branch-state-2x.png" style="zoom:50%;" />
+
+<p>然后，使用以下命令创建一个分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch crazy-experiment</span><br></pre></td></tr></table></figure>
+
+<p>版本库历史保持不变。你得到的只是一个指向当前提交的新指针：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-branch-create-branch-2x.png" style="zoom:50%;" />
+
+<p>注意，这只会创建新分支。要开始向其添加提交，需要用 <code>git checkout</code> 选中它，然后使用标准的 <code>git add</code> 和 <code>git commit</code> 命令。</p>
+<h3 id="创建远程分支"><a href="#创建远程分支" class="headerlink" title="创建远程分支"></a>创建远程分支</h3><p>到目前为止，这些例子都演示了本地分支的操作。<code>git branch</code> 命令同样适用于远程分支。要在远程分支上运行，必须先配置远程 repo 并将其添加到本地 repo 配置中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add new-remote-repo https://bitbucket.com/user/repo.git</span><br><span class="line"><span class="comment"># Add remote repo to local repo config</span></span><br><span class="line">$ git push &lt;new-remote-repo&gt; crazy-experiment~</span><br><span class="line"><span class="comment"># pushes the crazy-experiment branch to new-remote-repo</span></span><br></pre></td></tr></table></figure>
+
+<p>这条命令会将本地分支 <code>crazy-experiment</code> 的副本推送到远程仓库 <code>＜remote＞</code>。</p>
+<h3 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h3><p>一旦你完成了某个分支的工作，并将其合并到主代码库中，你就可以自由删除该分支，而不会丢失任何历史记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d crazy-experiment</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果分支尚未合并，上述命令将输出错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: The branch &#39;crazy-experiment&#39; is not fully merged. If you are sure you want to delete it, run &#39;git branch -D crazy-experiment&#39;.</span><br></pre></td></tr></table></figure>
+
+<p>这样就不会失去对整个开发线的访问权限。如果你真的想删除该分支（例如，它是一个失败的实验），可以使用大写的 -D 标志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D crazy-experiment</span><br></pre></td></tr></table></figure>
+
+<p>该命令会删除分支，无论其状态如何，且不会发出警告，因此请谨慎使用。</p>
+<p>前面的命令将删除分支的本地副本。该分支可能仍然存在于远程版本库中。要删除远程分支，请执行以下命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete crazy-experiment</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :crazy-experiment</span><br></pre></td></tr></table></figure>
+
+<p>这将向远程源代码库推送一个删除信号，触发远程 <code>crazy-experiment</code> 分支的删除。</p>
+<h3 id="Summary-1"><a href="#Summary-1" class="headerlink" title="Summary"></a>Summary</h3><p>本文将讨论 Git 的分支行为和 git 分支命令。git 分支命令的主要功能是创建、列出、重命名和删除分支。为了进一步操作生成的分支，该命令通常与其他命令（如 <code>git checkout</code>）一起使用。有关 <code>git checkout</code> 分支操作的更多信息，如切换分支和合并分支，请参阅 <code>git checkout</code> 页面。</p>
+<p>与其他 VCS 相比，Git 的分支操作既便宜又常用。这种灵活性使得 Git 工作流程的定制功能非常强大。</p>
+<hr>
+<h2 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h2><p>本页将介绍 <code>git checkout</code> 命令。它将涵盖使用示例和边缘案例。在 Git 术语中，”checkout”是在目标实体的不同版本之间切换的行为。<code>git checkout</code> 命令针对三个不同的实体：文件、提交和分支。除了 “<code>checkout</code> “的定义，”checking out “也常用来表示执行 <code>git checkout</code> 命令的行为。在 “撤销修改 “主题中，我们看到了如何使用 git 签出查看旧提交。本文的大部分内容将集中在对分支的签出操作上。</p>
+<p>签出分支与签出旧提交和文件类似，工作目录会被更新以匹配所选的分支/修订版本；不过，新的改动会被保存到项目历史中，也就是说，这不是一个只读操作。</p>
+<h3 id="Checking-out-branches"><a href="#Checking-out-branches" class="headerlink" title="Checking out branches"></a>Checking out branches</h3><p>使用 <code>git checkout</code> 命令，你可以在 git 分支创建的各个分支之间切换。签出分支会更新工作目录中的文件，使之与该分支中的版本相匹配，并让 Git 记录该分支上的所有新提交。可以把它想象成一种选择开发方向的方式。</p>
+<p>为每个新功能建立一个专用分支，是对传统 SVN 工作流程的巨大转变。它让尝试新功能变得非常容易，而不必担心破坏现有功能，也让同时开发许多不相关的功能成为可能。此外，分支还为多个协作工作流程提供了便利。</p>
+<p><code>git checkout</code> 命令有时会与 <code>git clone</code> 混淆。这两个命令的区别在于，<code>clone</code> 的作用是从远程仓库获取代码，而 <code>checkout</code> 的作用则是在本地系统已经存在的代码版本之间切换。</p>
+<h3 id="使用已存在的分支"><a href="#使用已存在的分支" class="headerlink" title="使用已存在的分支"></a>使用已存在的分支</h3><p>如果您正在使用的软件仓库包含已有的分支，您可以使用 <code>git checkout</code> 在这些分支间切换。要了解有哪些可用分支以及当前分支的名称，请执行 <code>git branch</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$＞ git branch </span><br><span class="line">main </span><br><span class="line">another_branch </span><br><span class="line">feature_inprogress_branch </span><br><span class="line">$＞ git checkout feature_inprogress_branch</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子演示了如何通过执行 <code>git branch</code> 命令查看可用分支列表，并切换到指定分支，在本例中就是 <code>feature_inprogress_branch</code>。</p>
+<h3 id="新分支"><a href="#新分支" class="headerlink" title="新分支"></a>新分支</h3><p><code>git checkout</code>与 <code>git branch</code>是并行的。<code>git branch</code>命令可以用来创建一个新分支。当你想创建一个新功能时，可以用 <code>git branch new_branch</code>在主分支之外创建一个新分支。创建完成后，就可以使用 <code>git checkout new_branch</code> 切换到该分支。此外，<code>git checkout</code> 命令还接受一个 <code>-b</code> 参数，作为一种方便的方法，它会创建新的分支并立即切换到该分支。通过使用 <code>git checkout</code>，您可以在一个仓库中的多个特性之间进行切换。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b ＜new-branch＞</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子同时创建和签出了<code>＜new-branch＞</code>。<code>-b</code>选项是一个方便的标志，它告诉 Git 在运行<code>git checkout ＜new-branch＞</code> 之前先运行<code>git branch</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b ＜new-branch＞ ＜existing-branch＞</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，<code>git checkout -b</code> 会以当前 <code>HEAD</code> 为基础创建新分支。<code>git checkout</code> 可以传递一个可选的附加分支参数。在上面的例子中，传递了<code>＜existing-branch＞</code>，新分支就会基于现有分支，而不是当前的 <code>HEAD</code>。</p>
+<h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><p>切换分支是一个简单明了的操作。执行以下命令将把 <code>HEAD</code> 指向<code>＜branchname＞</code>的顶端。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout ＜branchname＞</span><br></pre></td></tr></table></figure>
+
+<p>Git 会在 reflog 中记录检出操作的历史。你可以执行<code>git reflog</code>查看历史记录。</p>
+<h3 id="git-checkout远程分支"><a href="#git-checkout远程分支" class="headerlink" title="git checkout远程分支"></a>git checkout远程分支</h3><p>与团队协作时，通常会使用远程资源库。这些版本库可能是托管和共享的，也可能是其他同事的本地副本。每个远程版本库都包含自己的分支集。要检出一个远程分支，必须先获取该分支的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br></pre></td></tr></table></figure>
+
+<p>在现代版本的 Git 中，你可以像签出本地分支一样签出远程分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout ＜remotebranch＞</span><br></pre></td></tr></table></figure>
+
+<p>旧版本的 Git 需要在远程分支的基础上创建一个新分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b ＜remotebranch＞ origin/＜remotebranch＞</span><br></pre></td></tr></table></figure>
+
+<p>此外，你还可以签出一个新的本地分支，并将其重置为远程分支的最后一次提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b ＜branchname＞</span><br><span class="line">git reset --hard origin/＜branchname＞</span><br></pre></td></tr></table></figure>
+
+<h3 id="分离的-HEAD"><a href="#分离的-HEAD" class="headerlink" title="分离的 HEAD"></a>分离的 HEAD</h3><p>既然我们已经了解了 <code>git checkout</code> 在分支上的三种主要用途，那么讨论一下 “分离的 HEAD “状态就很重要了。请记住，<code>HEAD</code> 是 Git 表示当前快照的方式。在内部，<code>git checkout</code> 命令只是更新 <code>HEAD</code>，使其指向指定的分支或提交。当它指向一个分支时，Git 不会抱怨，但当你签出一个提交时，它就会切换到 <code>“detached HEAD”</code>状态。</p>
+<p>这是一个警告，告诉你你正在做的一切都与项目的其他开发 “分离 “了。如果你在分离 HEAD 状态下开始开发某个功能，就不会有任何分支允许你返回到该功能。当你不可避免地签出另一个分支（例如，将你的功能合并到其中）时，你将无法引用你的功能：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/detached-head-2x.png" style="zoom:50%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/attached-head-2x.png" style="zoom:50%;" />
+
+<p>重点是，你的开发应该始终在分支上进行，而不是在分离的 HEAD 上。这样才能确保你的新提交始终有一个引用。不过，如果你只是在查看旧提交，那么是否处于分离的 HEAD 状态并不重要。</p>
+<h3 id="Summary-2"><a href="#Summary-2" class="headerlink" title="Summary"></a>Summary</h3><p>本页主要介绍 <code>git checkout</code> 命令在更改分支时的用法。总的来说，在分支上使用 <code>git checkout</code> 会改变 <code>HEAD ref</code> 的目标。它可以用来创建分支、切换分支和签出远程分支。<code>git checkout</code> 命令是标准 Git 操作的基本工具。它是 <code>git merge</code> 的对应命令。<code>git checkout</code> 和 <code>git merge</code> 命令是实现 Git 工作流程的关键工具。</p>
+<hr>
+<h2 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h2><p>合并是 Git 将已分叉的历史重新组合起来的一种方式。通过 <code>git merge</code> 命令，你可以将 <code>git branch</code>创建的独立开发分支整合到一个分支中。</p>
+<p>请注意，下面介绍的所有命令都会合并到当前分支。当前分支将被更新以反映合并，但目标分支将完全不受影响。这再次说明，<code>git merge</code> 经常与 <code>git checkout</code> 和 <code>git branch -d</code> 结合使用，前者用于选择当前分支，后者用于删除过时的目标分支。</p>
+<h3 id="How-it-works-2"><a href="#How-it-works-2" class="headerlink" title="How it works"></a>How it works</h3><p><code>git merge</code>会将多个提交序列合并成一个统一的历史。在最常见的使用案例中，<code>git merge</code> 被用来合并两个分支。本文档的以下示例将重点介绍这种分支合并模式。在这些情况下，git 合并会使用两个提交指针（通常是分支提示），并在它们之间找到一个共同的基本提交。一旦 Git 找到了共同的基本提交，它就会创建一个新的 “合并提交”，把每个排队合并的提交序列的改动合并在一起。</p>
+<p>假设我们有一个基于主分支的新特性分支。现在我们想把这个特性分支合并到主干分支中。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-merge-2x.png" style="zoom:50%;" />
+
+<p>调用该命令会将指定的分支特性合并到当前分支，我们假设是主分支。Git 会自动决定合并算法（下文将讨论）。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-merge-feature-2x.png" style="zoom:50%;" />
+
+<p>与其他提交相比，合并提交有两个父提交。在创建合并提交时，Git 会尝试自动神奇地合并两个不同的历史。如果 Git 遇到两个历史中都有改动的数据，它就无法自动合并它们。这种情况属于版本控制冲突，Git 需要用户干预才能继续。</p>
+<h3 id="准备合并"><a href="#准备合并" class="headerlink" title="准备合并"></a>准备合并</h3><p>在执行合并之前，有几个准备步骤要做，以确保合并顺利进行。</p>
+<h4 id="确认接收分支"><a href="#确认接收分支" class="headerlink" title="确认接收分支"></a>确认接收分支</h4><p>执行 <code>git status</code> 以确保 <code>HEAD</code> 指向正确的合并接收分支。如果需要，执行 <code>git checkout</code> 切换到接收分支。在我们的例子中，我们将执行 <code>git checkout main</code>。</p>
+<h4 id="获取最新的远程提交"><a href="#获取最新的远程提交" class="headerlink" title="获取最新的远程提交"></a>获取最新的远程提交</h4><p>确保接收分支和合并分支都有最新的远程变更。执行 <code>git fetch</code> 提取最新的远程提交。获取完成后，执行 <code>git pull</code> 确保主分支有最新更新。</p>
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>一旦完成了之前讨论过的 “准备合并 “步骤，就可以执行 <code>git merge</code> 开始合并了。</p>
+<h3 id="快进合并"><a href="#快进合并" class="headerlink" title="快进合并"></a>快进合并</h3><p>当从当前分支顶端到目标分支之间存在一条线性路径时，就会发生快进合并。Git 不需要 “实际 “合并分支，只需移动（即 “快进”）当前分支顶端到目标分支顶端，就能整合历史。这就有效地合并了历史，因为目标分支的所有提交现在都可以通过当前分支获得。例如，将 <code>some-feature</code> 快速合并到 <code>main</code> 分支的过程如下：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/before-merge-2x.png" style="zoom:50%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/after-merge-2x.png" style="zoom:50%;" />
+
+<p>不过，如果分支已经分叉，则无法进行快进合并。如果没有通往目标分支的线性路径，Git 只能通过三向合并来合并它们。三向合并使用专门的提交来连接两个历史分支。Git 使用三个提交来生成合并提交：两个分支的顶端和它们的共同祖先。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/three-way-merge-before.png" style="zoom:50%;" />
+
+<hr>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/three-way-merge-after.png" style="zoom:50%;" />
+
+<p>虽然您可以使用这两种合并策略中的任何一种，但许多开发人员喜欢使用快进合并（通过<code>rebase</code>来实现）来处理小功能或错误修复，而保留三向合并来整合运行时间较长的功能。在后一种情况下，合并提交的结果就是两个分支的象征性连接。</p>
+<p>我们的第一个例子演示了快进合并。下面的代码创建了一个新分支，向其添加了两次提交，然后通过快进合并将其整合到主线中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Start a new feature</span></span><br><span class="line">git checkout -b new-feature main</span><br><span class="line"><span class="comment"># Edit some files</span></span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Start a feature&quot;</span></span><br><span class="line"><span class="comment"># Edit some files</span></span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Finish a feature&quot;</span></span><br><span class="line"><span class="comment"># Merge in the new-feature branch</span></span><br><span class="line">git checkout main</span><br><span class="line">git merge new-feature</span><br><span class="line">git branch -d new-feature</span><br></pre></td></tr></table></figure>
+
+<p>这是短生命周期特性分支的常见工作流程，这些分支更多是作为独立开发使用，而不是作为长期运行特性的组织工具。</p>
+<p>另外要注意的是，由于 new-feature 现在可以从主分支访问，因此 Git 不会抱怨 <code>git branch -d</code> 的问题。</p>
+<p>如果在快进合并过程中需要合并提交以保存记录，可以使用 <code>--no-ff</code> 选项执行 <code>git merge</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>该命令将指定的分支合并到当前分支，但始终会生成合并提交（即使是快进合并）。这对记录版本库中发生的所有合并很有用。</p>
+<h3 id="3-向合并"><a href="#3-向合并" class="headerlink" title="3 向合并"></a>3 向合并</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Start a new feature</span><br><span class="line">git checkout -b new-feature main</span><br><span class="line"><span class="comment"># Edit some files</span></span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Start a feature&quot;</span></span><br><span class="line"><span class="comment"># Edit some files</span></span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Finish a feature&quot;</span></span><br><span class="line"><span class="comment"># Develop the main branch</span></span><br><span class="line">git checkout main</span><br><span class="line"><span class="comment"># Edit some files</span></span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m <span class="string">&quot;Make some super-stable changes to main&quot;</span></span><br><span class="line"><span class="comment"># Merge in the new-feature branch</span></span><br><span class="line">git merge new-feature</span><br><span class="line">git branch -d new-feature</span><br></pre></td></tr></table></figure>
+
+<p>请注意，Git 不可能执行快进合并，因为没有办法在不回溯的情况下将 main 上移到 new-feature。</p>
+<p>对于大多数工作流程来说，new-feature 会是一个更大的特性分支，需要很长时间才能开发完成，这也是新提交会同时出现在 main 上的原因。如果您的特性分支和上面例子中的分支一样小，您最好将其重定向到主分支，然后进行快进合并。这样可以防止多余的合并提交扰乱项目历史。</p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>如果要合并的两个分支都修改了同一个文件的相同部分，Git 就无法判断该使用哪个版本。这种情况下，Git 会在合并提交前停止，让你手动解决冲突。</p>
+<p>Git 合并流程的最大优点在于，它使用我们熟悉的编辑/阶段/提交工作流程来解决合并冲突。遇到合并冲突时，运行 <code>git status</code> 命令就会显示哪些文件需要解决。例如，如果两个分支都修改了 hello.py 的同一个部分，就会出现类似下面的情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">On branch main</span><br><span class="line">Unmerged paths:</span><br><span class="line">(use <span class="string">&quot;git add/rm ...&quot;</span> as appropriate to mark resolution)</span><br><span class="line">both modified: hello.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="冲突如何呈现"><a href="#冲突如何呈现" class="headerlink" title="冲突如何呈现"></a>冲突如何呈现</h3><p>当 Git 在合并过程中遇到冲突时，它会编辑受影响文件的内容，并在冲突内容的两侧标上可视化标记。这些视觉标记是 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>、<code>=======</code> 和 <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>。在合并过程中，搜索项目中的这些标记，有助于找到需要解决冲突的地方。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">here is some content not affected by the conflict</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="string">main</span></span><br><span class="line"><span class="string">this is conflicted text from main</span></span><br><span class="line">=======</span><br><span class="line">this is conflicted text from feature branch</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature branch;</span><br></pre></td></tr></table></figure>
+
+<p>一般来说，<code>=======</code> 标记之前的内容是接收分支，之后的部分是合并分支。</p>
+<p>一般来说，<code>=======</code> 标记之前的内容是接收分支，之后的部分是合并分支。</p>
+<p>一旦确定了有冲突的部分，就可以按照自己的喜好进行修改。准备完成合并时，只需在有冲突的文件上运行 <code>git add</code>，告诉 Git 它们已经解决了。然后，再运行正常的 <code>git commit</code>，生成合并提交。这与提交普通快照的过程完全相同，因此普通开发者也能轻松管理自己的合并。</p>
+<p>请注意，合并冲突只会发生在三方合并的情况下。快进合并中不可能出现冲突的变更。</p>
+<h3 id="Summary-3"><a href="#Summary-3" class="headerlink" title="Summary"></a>Summary</h3><p>本文档概述了<code>git merge</code>命令。在使用 Git 时，合并是一个必不可少的过程。我们讨论了合并背后的内部机制，以及快速合并和三方真正合并之间的区别。一些主要收获如下</p>
+<ol>
+<li><p>Git 合并将提交序列合并为一个统一的提交历史。</p>
+</li>
+<li><p>Git 有两种主要的合并方式： 快进和3向合并方式</p>
+</li>
+<li><p>Git 可以自动合并提交，除非两个提交序列中的改动有冲突。</p>
+</li>
+</ol>
+<hr>
+<h2 id="Git-merge-conflicts"><a href="#Git-merge-conflicts" class="headerlink" title="Git merge conflicts"></a>Git merge conflicts</h2><p>版本控制系统主要是管理多个分布式作者（通常是开发人员）之间的贡献。有时，多个开发人员可能会尝试编辑相同的内容。如果开发人员 A 试图编辑开发人员 B 正在编辑的代码，就可能发生冲突。为了减少冲突的发生，开发者会在独立的分支中工作。<code>git merge</code>命令的主要职责就是合并不同的分支，并解决任何冲突的编辑。</p>
+<h3 id="理解合并冲突"><a href="#理解合并冲突" class="headerlink" title="理解合并冲突"></a>理解合并冲突</h3><p>一般来说，当两个人在一个文件中修改了相同的行，或者一个开发者删除了一个文件，而另一个开发者正在修改该文件时，就会产生冲突。在这种情况下，Git 无法自动判断哪个是正确的。冲突只会影响到进行合并的开发者，团队的其他成员并不知晓。Git 会将文件标记为冲突文件，并停止合并进程。解决冲突是开发人员的责任。</p>
+<h3 id="合并冲突的类型"><a href="#合并冲突的类型" class="headerlink" title="合并冲突的类型"></a>合并冲突的类型</h3><p>合并可能在两个不同的时间点进入冲突状态。开始合并时和合并过程中。下面将讨论如何解决这些冲突情况。</p>
+<h4 id="Git-启动合并失败"><a href="#Git-启动合并失败" class="headerlink" title="Git 启动合并失败"></a>Git 启动合并失败</h4><p>当 Git 发现当前项目的工作目录或暂存区域有改动时，合并就会失败。Git 无法启动合并是因为这些待处理的改动可能会被正在合并的提交所覆盖。发生这种情况时，不是因为与其他开发者的提交冲突，而是与本地的待处理变更冲突。本地状态需要使用 <code>git stash</code>、<code>git checkout</code>、<code>git commit</code> 或 <code>git reset</code> 来稳定。启动时合并失败会输出以下错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Entry &#39;&lt;fileName&gt;&#39; not uptodate. Cannot merge. (Changes in working directory)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Git-在合并过程中失败"><a href="#Git-在合并过程中失败" class="headerlink" title="Git 在合并过程中失败"></a>Git 在合并过程中失败</h4><p>合并失败表示当前本地分支与正在合并的分支之间存在冲突。这表示与另一位开发者的代码有冲突。Git 会尽最大努力合并文件，但会把冲突文件中的问题留给你手动解决。中途合并失败会输出以下错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Entry &#39;&lt;fileName&gt;&#39; would be overwritten by merge. Cannot merge. (Changes in staging area)</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建合并冲突"><a href="#创建合并冲突" class="headerlink" title="创建合并冲突"></a>创建合并冲突</h3><p>为了真正熟悉合并冲突，下一节将模拟一个冲突，以便稍后检查和解决。本示例将使用类似 Unix 的 Git 命令行界面来执行模拟示例。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir git-merge-test</span><br><span class="line">$ <span class="built_in">cd</span> git-merge-test</span><br><span class="line">$ git init .</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;this is some content to mess with&quot;</span> &gt; merge.txt</span><br><span class="line">$ git add merge.txt</span><br><span class="line">$ git commit -am<span class="string">&quot;we are commiting the inital content&quot;</span></span><br><span class="line">[main (root-commit) d48e74c] we are commiting the inital content</span><br><span class="line">1 file changed, 1 insertion(+)</span><br><span class="line">create mode 100644 merge.txt</span><br></pre></td></tr></table></figure>
+
+<p>此代码示例将执行一系列命令，完成以下工作。</p>
+<ul>
+<li>新建一个名为 git-merge-test 的目录，并将其初始化为一个新的 Git 仓库。</li>
+<li>新建一个文本文件 merge.txt，并在其中添加一些内容。 </li>
+<li>将 merge.txt 添加到 repo 并提交。</li>
+</ul>
+<p>现在我们有了一个新的软件仓库，其中有一个主分支和一个包含内容的 merge.txt 文件。接下来，我们将创建一个新分支，作为冲突合并使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b new_branch_to_merge_later</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;totally different content to merge later&quot;</span> &gt; merge.txt</span><br><span class="line">$ git commit -am<span class="string">&quot;edited the content of merge.txt to cause a conflict&quot;</span></span><br><span class="line">[new_branch_to_merge_later 6282319] edited the content of merge.txt to cause a conflict</span><br><span class="line">1 file changed, 1 insertion(+), 1 deletion(-)</span><br></pre></td></tr></table></figure>
+
+<p>接下来的命令序列可实现以下功能：</p>
+<ul>
+<li>创建并签出名为 new_branch_ttoo_merge_later 的新分支</li>
+<li>覆盖 merge.txt 中的内容  </li>
+<li>提交新内容</li>
+</ul>
+<p>通过这个新分支：new_branch_to_merge_later，我们创建了一个覆盖 merge.txt 内容的提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">Switched to branch <span class="string">&#x27;main&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;content to append&quot;</span> &gt;&gt; merge.txt</span><br><span class="line">git commit -am<span class="string">&quot;appended content to merge.txt&quot;</span></span><br><span class="line">[main 24fbe3c] appended content to merge.tx</span><br><span class="line">1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>这一系列命令会检查主分支，将内容添加到 merge.txt 中，然后提交。这样，我们的示例仓库就有了 2 条新提交。一个在主分支，一个在 new_branch_too_merge_later 分支。现在让我们用 git 合并 new_branch_to_merge_later，看看会发生什么！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git merge new_branch_to_merge_later</span><br><span class="line">Auto-merging merge.txt</span><br><span class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> merge.txt</span><br><span class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</span><br></pre></td></tr></table></figure>
+
+<p>BOOM 💥. 冲突出现了。感谢 Git 让我们了解到这一点！</p>
+<h3 id="如何确定合并冲突"><a href="#如何确定合并冲突" class="headerlink" title="如何确定合并冲突"></a>如何确定合并冲突</h3><p>正如我们在下面的例子中所体验到的，Git 会产生一些描述性输出，让我们知道发生了冲突。我们可以通过运行 <code>git status</code> 命令进一步了解情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch main</span><br><span class="line">You have unmerged paths.</span><br><span class="line">(fix conflicts and run <span class="string">&quot;git commit&quot;</span>)</span><br><span class="line">(use <span class="string">&quot;git merge --abort&quot;</span> to abort the merge)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line">(use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to mark resolution)</span><br><span class="line"></span><br><span class="line">both modified:   merge.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>git status</code> 的输出显示，由于冲突，存在未合并的路径。现在，merge.text 文件处于修改状态。让我们检查一下文件，看看修改了什么。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cat merge.txt</span><br><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="string">HEAD</span></span><br><span class="line"><span class="string">this is some content to mess with</span></span><br><span class="line"><span class="string">content to append</span></span><br><span class="line"><span class="string">=======</span></span><br><span class="line"><span class="string">totally different content to merge later</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;&gt;&gt;&gt;&gt; new_branch_to_merge_later</span></span><br></pre></td></tr></table></figure>
+
+<p>在这里，我们使用 cat 命令输出了 merge.txt 文件的内容。我们可以看到一些奇怪的新内容</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code></li>
+<li><code>=======</code></li>
+<li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; new_branch_to_merge_later</code></li>
+</ul>
+<p>将这些新线视为 “冲突分界线”。======= 行是冲突的 “中心”。中心和 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD 行之间的所有内容都是 HEAD ref 指向的当前分支 main 中存在的内容。或者，中心线和 &gt;&gt;&gt;&gt;&gt;&gt;&gt; new_branch_too_merge_later 之间的所有内容都是合并分支中的内容。</p>
+<h3 id="如何使用命令行解决合并冲突"><a href="#如何使用命令行解决合并冲突" class="headerlink" title="如何使用命令行解决合并冲突"></a>如何使用命令行解决合并冲突</h3><p>解决合并冲突的最直接方法是编辑冲突文件。用你喜欢的编辑器打开 merge.txt 文件。在我们的例子中，让我们简单地删除所有冲突分隔符。修改后的 merge.txt 内容应如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this is some content to mess with</span><br><span class="line">content to append</span><br><span class="line">totally different content to merge later</span><br></pre></td></tr></table></figure>
+
+<p>文件编辑完成后，使用 <code>git add merge.txt</code> 将新合并的内容放入阶段。要最终完成合并，执行以下命令创建一个新提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;merged and resolved the conflict in merge.txt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Git 会发现冲突已被解决，并创建一个新的合并提交来最终完成合并。</p>
+<h3 id="有助于解决合并冲突的-Git-命令"><a href="#有助于解决合并冲突的-Git-命令" class="headerlink" title="有助于解决合并冲突的 Git 命令"></a>有助于解决合并冲突的 Git 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p>在使用 Git 时，<code>status</code> 命令经常被使用，在合并过程中，它可以帮助识别冲突文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --merge</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>git log</code>命令中传递 <code>--merge</code> 参数，会生成一个包含合并分支间冲突提交列表的日志。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
+<p><code>diff</code>可帮助查找版本库/文件状态之间的差异。这对预测和防止合并冲突非常有用。</p>
+<h3 id="当-git-启动合并失败时的工具"><a href="#当-git-启动合并失败时的工具" class="headerlink" title="当 git 启动合并失败时的工具"></a>当 git 启动合并失败时的工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout</span><br></pre></td></tr></table></figure>
+
+<p><code>checkout</code> 可用于撤销对文件的更改，或更改分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed</span><br></pre></td></tr></table></figure>
+
+<p><code>reset</code>可用于撤销对工作目录和暂存区域的更改。</p>
+<h3 id="合并过程中出现-git-冲突时的工具"><a href="#合并过程中出现-git-冲突时的工具" class="headerlink" title="合并过程中出现 git 冲突时的工具"></a>合并过程中出现 git 冲突时的工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --abort</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>--abort</code> 选项执行 <code>git merge</code> 会退出合并过程，并将分支恢复到合并开始前的状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset</span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code>可在合并冲突期间使用，将冲突文件重置为已知的良好状态</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>合并冲突是一种令人生畏的经历。幸运的是，Git 提供了功能强大的工具来帮助浏览和解决冲突。Git 具备自动合并功能，可以自行处理大部分合并工作。当两个不同的分支对文件的同一行进行了编辑，或者一个分支删除了文件，而另一个分支却编辑了文件时，就会产生冲突。在团队环境中工作时，冲突最有可能发生。</p>
+<p>有很多工具可以帮助解决合并冲突。我们在这里讨论的 Git 命令行工具就有很多。有关这些工具的详细信息，请访问 git log、git reset、git status、git checkout 和 git reset 的独立页面。除了 Git 之外，许多第三方工具也提供简化的合并冲突支持功能。</p>
+<hr>
+<h2 id="merge-strategy"><a href="#merge-strategy" class="headerlink" title="merge strategy"></a>merge strategy</h2><p>当一项工作完成、经过测试并准备并回开发主线时，你的团队需要做出一些策略选择。你有哪些合并策略选择？在本文中，我们将探讨各种可能性，然后提供一些有关 Atlassian 运行方式的说明。希望最后你能掌握一些工具来决定什么最适合你的团队。</p>
+<h3 id="Git-merge-strategies"><a href="#Git-merge-strategies" class="headerlink" title="Git merge strategies"></a>Git merge strategies</h3><p>合并两个分支时。Git 会获取两个（或更多）提交指针，并试图在它们之间找到一个共同的基础提交。Git 有几种不同的方法来寻找基础提交，这些方法被称为 “合并策略”。一旦 Git 找到了共同的基础提交，它就会创建一个新的 “合并提交”，把指定合并提交的改动合并在一起。从技术上讲，合并提交是一个普通提交，只是恰好有两个父提交。</p>
+<p>除非明确指定，否则<code>git merge</code>会自动选择合并策略。<code>git merge</code> 和 <code>git pull</code> 命令可以通过一个<code>-s</code>（策略）选项。<code>-s</code>选项可以附加所需的合并策略名称。如果没有明确指定，Git 会根据提供的分支选择最合适的合并策略。以下是可用的</p>
+<h4 id="Recursive"><a href="#Recursive" class="headerlink" title="Recursive"></a>Recursive</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge -s recursive branch1 branch2</span><br></pre></td></tr></table></figure>
+
+<p>这是在两个分支上进行的操作。在拉取或合并一个分支时，递归是默认的合并策略。此外，它还能检测并处理涉及重命名的合并，但目前还不能使用检测到的副本。在拉取或合并一个分支时，这是默认的合并策略。</p>
+<h4 id="Resolve"><a href="#Resolve" class="headerlink" title="Resolve"></a>Resolve</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge -s resolve branch1 branch2</span><br></pre></td></tr></table></figure>
+
+<p>这只能使用三向合并算法解决两个<code>head</code>的问题。它能仔细地检测出交叉合并的模糊之处，一般被认为是安全和快速的。</p>
+<h4 id="Octopus"><a href="#Octopus" class="headerlink" title="Octopus"></a>Octopus</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge -s octopus branch1 branch2 branch3 branchN</span><br></pre></td></tr></table></figure>
+
+<p>两个以上分支的默认合并策略。如果合并中出现需要手动解决的冲突，<code>octopus</code>将拒绝合并尝试。它主要用于将类似功能的分支头捆绑在一起。</p>
+<h4 id="Ours"><a href="#Ours" class="headerlink" title="Ours"></a>Ours</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge -s ours branch1 branch2 branchN</span><br></pre></td></tr></table></figure>
+
+<p>我们的策略在多个 N 个分支上运行。输出的合并结果总是当前分支 HEAD 的结果。我们的 “<code>Ours</code>“一词意味着优先选择当前分支而有效忽略所有其他分支的所有更改。它的目的是用于合并相似特性分支的历史记录。</p>
+<h4 id="Subtree"><a href="#Subtree" class="headerlink" title="Subtree"></a>Subtree</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge -s subtree branchA branchB</span><br></pre></td></tr></table></figure>
+
+<p>这是递归策略的扩展。在合并 A 和 B 时，如果 B 是 A 的子树，则首先更新 B 以反映 A 的树结构，同时也更新 A 和 B 共享的共同祖先树。</p>
+<h3 id="递归的-git-merge策略选项"><a href="#递归的-git-merge策略选项" class="headerlink" title="递归的 git merge策略选项"></a>递归的 git merge策略选项</h3><p>上文介绍的 “递归 “策略有自己的附加操作选项子集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ours</span><br></pre></td></tr></table></figure>
+
+<p>不要与 “<code>Ours</code>“合并策略混淆。该选项通过偏向’<code>our</code>‘版本来自动解决冲突。如果不冲突，’<code>theirs</code>‘一方的改动会自动合并。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theirs</span><br></pre></td></tr></table></figure>
+
+<p>与 “<code>Ours</code>“战略相反，”<code>theirs</code>“方案在解决冲突时更倾向于外部合并分支。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patience</span><br></pre></td></tr></table></figure>
+
+<p>此选项花费额外的时间来避免不重要的匹配行的错误合并。当要合并的分支极度分歧时，最好使用此选项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff-algorithim</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ignore-*</span><br><span class="line"></span><br><span class="line">    ignore-space-change</span><br><span class="line">    ignore-all-space</span><br><span class="line">    ignore-space-at-eol</span><br><span class="line">    ignore-cr-at-eol</span><br></pre></td></tr></table></figure>
+
+<p>一组针对空白字符的选项。任何与所传选项子集匹配的行都将被忽略。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">renormalize</span><br></pre></td></tr></table></figure>
+
+<p>该选项在解决三向合并的同时，对所有 git 树进行签出和签入。该选项适用于合并不同签入/签出状态的分支。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no-normalize</span><br></pre></td></tr></table></figure>
+
+<p>禁用<code>renormalize</code>一化选项。这将覆盖<code>merge.renormalize</code>配置变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no-renames</span><br></pre></td></tr></table></figure>
+
+<p>该选项将在合并过程中忽略重命名的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find-renames&#x3D;n</span><br></pre></td></tr></table></figure>
+
+<p>这是默认行为。递归合并将遵循文件重命名。该<code>n</code>参数可用于传递重命名相似性的阈值。默认<code>n</code>值为<code>100%.</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subtree</span><br></pre></td></tr></table></figure>
+
+<p>该选项借鉴了 <code>subtree</code> 策略。该策略对两棵树进行操作，并修改如何使它们在共享祖先上匹配，而该选项则对树的路径元数据进行操作，使它们匹配。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>强烈倾向于使用显式合并。原因很简单：显式合并可为被合并的特性提供很好的可追溯性和上下文。在共享特性分支供审核之前进行本地历史清理重置是绝对值得鼓励的，但这根本不会改变政策。它只是对政策的补充。</p>
+<h1 id="比较-Git-工作流程"><a href="#比较-Git-工作流程" class="headerlink" title="比较 Git 工作流程"></a>比较 Git 工作流程</h1><p>Git 是当今最常用的版本控制系统。Git 工作流程是如何使用 Git 以一致、高效的方式完成工作的秘诀或建议。Git 工作流程鼓励开发人员和 DevOps 团队有效、一致地使用 Git。Git 为用户管理变更提供了很大的灵活性。鉴于 Git 注重灵活性，因此在如何与 Git 互动方面并没有标准化的流程。在与团队合作开发 Git 管理的项目时，确保团队就如何应用变更流程达成一致非常重要。为确保团队意见一致，应制定或选择一个约定俗成的 Git 工作流程。有几种公开的 Git 工作流程可能很适合您的团队。在此，我们将讨论其中一些 Git 工作流程选项。</p>
+<p>在工作场所实施 Git 时，可能会因为工作流程繁多而不知从何下手。本页通过调查软件团队最常见的 Git 工作流程，为您提供一个起点。</p>
+<p>在阅读过程中，请记住这些工作流程只是指南，而非具体规则。我们希望向你展示各种可能，因此你可以根据自己的需求，混合搭配不同工作流程的各个环节。</p>
+<h2 id="什么是成功的-Git-工作流？"><a href="#什么是成功的-Git-工作流？" class="headerlink" title="什么是成功的 Git 工作流？"></a>什么是成功的 Git 工作流？</h2><p>在为团队评估工作流程时，最重要的是考虑团队文化。您希望工作流程能提高团队效率，而不是成为限制工作效率的负担。评估 Git 工作流程时需要考虑以下几点</p>
+<ul>
+<li>该工作流程是否可根据团队规模进行扩展？</li>
+<li>该工作流程是否容易撤销错误？</li>
+<li>该工作流程是否会给团队带来新的不必要的认知开销？</li>
+</ul>
+<h2 id="集中式工作流程"><a href="#集中式工作流程" class="headerlink" title="集中式工作流程"></a>集中式工作流程</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/git-centralized-workflow-2x.png" style="zoom:50%;" />
+
+<p>对于从 SVN 过渡而来的团队来说，集中式工作流是一个很好的 Git 工作流。与 Subversion 类似，集中式工作流使用一个中央仓库作为项目所有变更的单一入口。默认的开发分支不是<code>trunk</code>，而是<code>main</code>，所有变更都提交到该分支。除<code>main</code>外，该工作流程不需要其他分支。</p>
+<p>过渡到分布式版本控制系统看似是一项艰巨的任务，但你不必改变现有的工作流程，就能充分利用 Git 的优势。你的团队可以像使用 Subversion 一样开发项目。</p>
+<p>不过，与 SVN 相比，使用 Git 支持开发工作流程有一些优势。首先，它为每个开发人员提供了整个项目的本地副本。这种隔离的环境让每个开发人员都能独立工作，不受项目中所有其他改动的影响–他们可以将提交添加到本地存储库，并完全忘记上游开发，直到对他们来说方便为止。</p>
+<p>其次，它还能让你使用 Git 强大的分支和合并模型。与 SVN 不同，Git 分支的设计是一种安全可靠的机制，用于整合代码并在不同版本库之间共享变更。集中式工作流与其他工作流类似，都是利用远程服务器端托管的仓库，由开发人员推拉形成。与其他工作流相比，集中式工作流没有定义拉取请求或分叉模式。集中式工作流通常更适合从 SVN 迁移到 Git 的团队和规模较小的团队。</p>
+<h2 id="How-it-works-3"><a href="#How-it-works-3" class="headerlink" title="How it works"></a>How it works</h2><p>开发人员从克隆中央版本库开始。在他们自己的项目本地副本中，他们编辑文件并提交更改，就像使用 SVN 一样；不过，这些新提交的内容都存储在本地，与中心版本库完全隔离。这样，开发人员就可以推迟向上游同步，直到达到方便的中断点。</p>
+<p>要向正式项目发布变更，开发人员需要将本地主分支 “推送 “到中央版本库。这就相当于 <code>svn commit</code>，只不过它添加的是中心主分支中还没有的所有本地提交。</p>
+<h3 id="初始化中央存储库"><a href="#初始化中央存储库" class="headerlink" title="初始化中央存储库"></a>初始化中央存储库</h3><p>首先，需要有人在服务器上创建中央资源库。如果是新项目，可以初始化一个空仓库。否则，就需要导入现有的 Git 或 SVN 仓库。</p>
+<p>中心仓库应始终是裸仓库（不应有工作目录），创建方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@host git init --bare /path/to/repo.git</span><br></pre></td></tr></table></figure>
+
+<p>用户名请务必使用有效的 SSH 用户名，主机请使用服务器的域名或 IP 地址，<code>/path/to/repo.git</code> 请使用存储 <code>repo</code> 的位置。请注意，<code>.git</code> 扩展名通常会附加到版本库名称上，以表明这是一个裸版本库。</p>
+<h3 id="托管中央存储库"><a href="#托管中央存储库" class="headerlink" title="托管中央存储库"></a>托管中央存储库</h3><p>中心仓库通常是通过第三方 Git 托管服务（如 Bitbucket Cloud）创建的。托管服务会为你处理上述初始化裸仓库的过程。托管服务会为中央仓库提供一个地址，以便从本地仓库访问。</p>
+<h3 id="克隆中央存储库"><a href="#克隆中央存储库" class="headerlink" title="克隆中央存储库"></a>克隆中央存储库</h3><p>接下来，每个开发人员都要创建整个项目的本地副本。这是通过 <code>git clone</code> 命令完成的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> ssh://user@host/path/to/repo.git</span><br></pre></td></tr></table></figure>
+
+<p>当你克隆一个仓库时，Git 会自动添加一个名为 <code>origin</code> 的快捷方式，该快捷方式会指向 “父 “仓库，前提是你还想继续与它交互。</p>
+<h3 id="更改并提交"><a href="#更改并提交" class="headerlink" title="更改并提交"></a>更改并提交</h3><p>仓库克隆到本地后，开发人员就可以使用标准的 Git 提交流程进行修改：编辑、暂存和提交。如果你对暂存区还不熟悉，它是一种准备提交的方法，而不必包含工作目录中的所有改动。这样，即使本地改动很多，也能创建高度集中的提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="comment"># View the state of the repo</span></span><br><span class="line">git add &lt;some-file&gt; <span class="comment"># Stage a file</span></span><br><span class="line">git commit <span class="comment"># Commit a file&lt;/some-file&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>请记住，由于这些命令创建的是本地提交，所以 John 可以随意重复这个过程，而不必担心中央版本库中的情况。这对于需要分解成更简单、更原子化的大功能来说非常有用。</p>
+<h3 id="将新提交推送到中央版本库"><a href="#将新提交推送到中央版本库" class="headerlink" title="将新提交推送到中央版本库"></a>将新提交推送到中央版本库</h3><p>一旦本地版本库提交了新的变更。这些变更需要推送给项目中的其他开发人员共享。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>该命令将把新提交的变更推送到中央版本库。在向中央仓库推送变更时，可能会出现之前推送的其他开发者的更新包含的代码与计划推送的更新冲突的情况。Git 会输出一条信息来说明这种冲突。在这种情况下，首先需要执行 <code>git pull</code>。这种冲突情况将在下一节中详述。</p>
+<h3 id="管理冲突"><a href="#管理冲突" class="headerlink" title="管理冲突"></a>管理冲突</h3><p>中央仓库代表着正式项目，因此它的提交历史应该被视为神圣不可侵犯的。如果开发者的本地提交与中央仓库有出入，Git 会拒绝推送他们的改动，因为这会覆盖官方提交。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/manage-confilct-2x.png" style="zoom:50%;" />
+
+<p>开发人员在发布自己的功能之前，需要获取更新后的中央提交，并将自己的更改重新加载到中央提交之上。这就好比在说：”我想把我的改动添加到其他人已经完成的改动中”。结果就是一个完美的线性历史，就像传统的 SVN 工作流程一样。</p>
+<p>如果本地改动与上游提交直接冲突，Git 会暂停重定向过程，给你一个手动解决冲突的机会。Git 的好处在于，它使用相同的 <code>git status</code> 和 <code>git add</code> 命令来生成提交和解决合并冲突。这让新开发者可以轻松管理自己的合并。此外，如果他们遇到麻烦，Git 还能让他们很容易地中止整个重置过程，然后再试一次（或者去寻求帮助）。</p>
+<hr>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>让我们以一个典型的小型团队如何使用此工作流程进行协作为例。我们将看到两个开发人员，John和Mary，如何在不同的功能上工作，并通过一个集中的资源库共享他们的贡献。</p>
+<h3 id="John致力于他的特色功能"><a href="#John致力于他的特色功能" class="headerlink" title="John致力于他的特色功能"></a>John致力于他的特色功能</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/john-and-his-feature.png" style="zoom:50%;" />
+
+<p>在他的本地存储库中，John 可以使用标准 Git 提交流程来开发功能：编辑、暂存和提交。</p>
+<p>请记住，由于这些命令创建本地提交，John 可以根据需要多次重复此过程，而不必担心中央存储库中发生的情况。</p>
+<h3 id="Mary致力于她的特色功能"><a href="#Mary致力于她的特色功能" class="headerlink" title="Mary致力于她的特色功能"></a>Mary致力于她的特色功能</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/marry-and-his-feature.png" style="zoom:50%;" />
+
+<p>与此同时，玛丽正在自己的本地版本库中使用相同的编辑/阶段/提交流程开发自己的功能。和约翰一样，她并不关心中央版本库中发生了什么，她也真的不关心约翰在本地版本库中做了什么，因为所有的本地版本库都是私有的。</p>
+<h3 id="John推送他的工作内容"><a href="#John推送他的工作内容" class="headerlink" title="John推送他的工作内容"></a>John推送他的工作内容</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/john-push-feature-2x.png" style="zoom:50%;" />
+
+<p>一旦约翰完成了他的功能，他就应该把本地提交发布到中央仓库，这样其他团队成员就可以访问它了。他可以使用 <code>git push</code> 命令这样做：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>记住，<code>origin</code> 是约翰克隆中央仓库时 Git 创建的与中央仓库的远程连接。<code>main</code> 参数告诉 Git 尽量让 <code>origin</code> 的主分支看起来像他本地的主分支。由于中心仓库在约翰克隆后没有更新过，这不会导致任何冲突，推送也会如期进行。</p>
+<h3 id="Mary推送他的工作内容"><a href="#Mary推送他的工作内容" class="headerlink" title="Mary推送他的工作内容"></a>Mary推送他的工作内容</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/marry-push-fail-2x.png" style="zoom:50%;" />
+
+<p>让我们看看如果 Mary 在 John 成功将其更改发布到中心版本库后尝试推送她的功能会发生什么。她可以使用完全相同的推送命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>但是，由于她的本地历史已经偏离了中央仓库，Git 会拒绝该请求，并给出一条相当冗长的错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">error: failed to push some refs to <span class="string">&#x27;/path/to/repo.git&#x27;</span></span><br><span class="line">hint: Updates were rejected because the tip of your current branch is behind</span><br><span class="line">hint: its remote counterpart. Merge the remote changes (e.g. <span class="string">&#x27;git pull&#x27;</span>)</span><br><span class="line">hint: before pushing again.</span><br><span class="line">hint: See the <span class="string">&#x27;Note about fast-forwards&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;git push --help&#x27;</span> <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure>
+
+<p>这就防止了 Mary 覆盖官方提交。她需要将 John 的更新拉入自己的版本库，与本地变更整合，然后再试一次。</p>
+<h3 id="Mary在John提交的基础上进行Rebase"><a href="#Mary在John提交的基础上进行Rebase" class="headerlink" title="Mary在John提交的基础上进行Rebase"></a>Mary在John提交的基础上进行Rebase</h3><p>Mary 可以使用 <code>git pull</code> 将上游的改动整合到自己的版本库中。这个命令有点像 svn update–它会把整个上游提交历史拉入 Mary 的本地仓库，并尝试将其与本地提交整合在一起：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin main</span><br></pre></td></tr></table></figure>
+
+<p>如下所示，<code>--rebase</code> 选项会告诉 Git 将 Mary 的所有提交与中心仓库的改动同步后移到主分支的顶端：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-git-pull-rebase-2x.png" style="zoom:50%;" />
+
+<p>如果忘记了这个选项，<code>pull</code>仍然可以正常工作，但每次有人需要与中央版本库同步时，就会出现一个多余的“merge commit”。在这种工作流程中，最好是<code>rebase</code>而不是生成merge commit。</p>
+<h3 id="Mary解决了合并冲突"><a href="#Mary解决了合并冲突" class="headerlink" title="Mary解决了合并冲突"></a>Mary解决了合并冲突</h3><p><code>Rebasing</code>的工作原理是将每个本地提交逐一转移到更新后的主分支。这意味着你可以逐个提交地捕捉合并冲突，而不是在一次大规模的合并提交中解决所有冲突。这样就能让提交尽可能集中，使项目历史更加清晰。反过来，这也更容易找出引入错误的地方，并在必要时回滚更改，将对项目的影响降到最低。</p>
+<p>重置的工作原理是将每个本地提交逐一转移到更新后的主分支。这意味着你可以逐个提交地捕捉合并冲突，而不是在一次大规模的合并提交中解决所有冲突。这样就能让提交尽可能集中，使项目历史更加清晰。反过来，这也更容易找出引入错误的地方，并在必要时回滚更改，将对项目的影响降到最低。</p>
+<p>如果 Mary 和 John 正在开发不相关的功能，<code>Rebasing</code>过程不太可能产生冲突。但如果发生冲突，Git 会在当前提交处暂停重置，并输出以下信息和相关说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFLICT (content): Merge conflict in &lt;some-file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Git 的好处在于，任何人都可以解决自己的合并冲突。在我们的例子中，Mary 只需运行 <code>git status</code> 就能看到问题所在。有冲突的文件会出现在未合并路径部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Unmerged paths:</span></span><br><span class="line"><span class="comment"># (use &quot;git reset HEAD &lt;some-file&gt;...&quot; to unstage)</span></span><br><span class="line"><span class="comment"># (use &quot;git add/rm &lt;some-file&gt;...&quot; as appropriate to mark resolution)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># both modified: &lt;some-file&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，她会按照自己的喜好编辑文件。一旦她对结果感到满意，就可以按照通常的方式对文件进行暂存，然后让 <code>git rebase</code> 完成剩下的工作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;some-file&gt;</span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+
+<p>仅此而已。Git 会继续下一次提交，并对产生冲突的其他提交重复上述过程。</p>
+<p>如果到了这一步，你发现自己完全不知道发生了什么，也不用惊慌。只要执行以下命令，就能回到起点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --abort</span><br></pre></td></tr></table></figure>
+
+<h4 id="Mary成功推送他的特色功能"><a href="#Mary成功推送他的特色功能" class="headerlink" title="Mary成功推送他的特色功能"></a>Mary成功推送他的特色功能</h4><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-success-push-2x.png" style="zoom:50%;" />
+
+<p>完成与中央版本库的同步后，玛丽就能成功发布她的更改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<h2 id="何去何从？"><a href="#何去何从？" class="headerlink" title="何去何从？"></a>何去何从？</h2><p>如你所见，只需使用少量 Git 命令，就能复制传统的 Subversion 开发环境。这对于从 SVN 过渡到 Git 的团队来说是个不错的选择，但它并不能充分利用 Git 的分布式特性。</p>
+<p>集中式工作流程非常适合小型团队。上文详述的冲突解决流程会随着团队规模的扩大而形成瓶颈。如果你的团队对集中式工作流程感到满意，但又想简化协作流程，那就绝对值得探索特性分支工作流程的好处。通过为每个功能指定一个独立的分支，可以在将新添加功能整合到正式项目之前发起深入讨论。</p>
+<h2 id="其他常见工作流程"><a href="#其他常见工作流程" class="headerlink" title="其他常见工作流程"></a>其他常见工作流程</h2><p>集中式工作流本质上是其他 Git 工作流的构件。大多数流行的 Git 工作流程都会有某种集中式仓库，供开发人员推拉使用。下面我们将简要讨论一些其他流行的 Git 工作流程。这些扩展工作流在管理功能开发、热修复和最终发布的分支方面提供了更专业的模式。</p>
+<h3 id="功能分支"><a href="#功能分支" class="headerlink" title="功能分支"></a>功能分支</h3><p>功能分支是集中式工作流程的逻辑延伸。特性分支工作流背后的核心理念是，所有特性开发都应在专用分支而非主分支中进行。这种封装方式可以让多个开发人员在不影响主代码库的情况下，轻松完成某个特定功能的开发。这也意味着主分支永远不会包含损坏的代码，这对于持续集成环境来说是一个巨大的优势。</p>
+<h3 id="Gitflow-工作流程"><a href="#Gitflow-工作流程" class="headerlink" title="Gitflow 工作流程"></a>Gitflow 工作流程</h3><p>Gitflow 工作流最早发表于 nvie 的 Vincent Driessen 于 2010 年发表的一篇备受推崇的博文中。Gitflow 工作流定义了一种严格的分支模型，以项目发布为中心进行设计。除了特性分支工作流所需的内容外，该工作流没有添加任何新的概念或命令。相反，它为不同的分支分配了非常具体的角色，并定义了它们之间的交互方式和时间。</p>
+<h3 id="分叉工作流程"><a href="#分叉工作流程" class="headerlink" title="分叉工作流程"></a>分叉工作流程</h3><p>分叉工作流与本教程中讨论的其他工作流有本质区别。它不使用单一的服务器端仓库作为 “中心 “代码库，而是为每个开发者提供一个服务器端仓库。这意味着每个贡献者拥有的不是一个，而是两个 Git 仓库：一个私有的本地仓库和一个公共的服务器端仓库。</p>
+<h2 id="指南"><a href="#指南" class="headerlink" title="指南"></a>指南</h2><p>没有放之四海而皆准的 Git 工作流程。如前所述，开发一套能提高团队工作效率的 Git 工作流程非常重要。除了团队文化，工作流程还应该与企业文化相辅相成。分支和标签等 Git 功能应与企业的发布计划相辅相成。如果您的团队正在使用任务跟踪项目管理软件，您可能希望使用与进行中的任务相对应的分支。此外，在决定工作流程时还应考虑以下准则：</p>
+<h3 id="短期分支"><a href="#短期分支" class="headerlink" title="短期分支"></a>短期分支</h3><p>分支与生产分支分离的时间越长，合并冲突和部署挑战的风险就越高。生命周期较短的分支能促进更简洁的合并和部署。</p>
+<h3 id="最大限度减少和简化还原"><a href="#最大限度减少和简化还原" class="headerlink" title="最大限度减少和简化还原"></a>最大限度减少和简化还原</h3><p>重要的是要有一个工作流程，帮助主动防止合并后必须进行还原。在将分支合并到主分支之前对其进行测试的工作流程就是一个例子。然而，意外总会发生。尽管如此，拥有一个允许轻松还原且不会扰乱其他团队成员工作流程的工作流程还是很有好处的。</p>
+<h3 id="与发布时间计划相匹配"><a href="#与发布时间计划相匹配" class="headerlink" title="与发布时间计划相匹配"></a>与发布时间计划相匹配</h3><p>工作流程应与企业的软件开发发布周期相辅相成。如果您计划每天发布多次版本，就需要保持主分支的稳定。如果发布频率较低，则可以考虑使用 Git 标签将分支标记为版本。</p>
+<hr>
+<h1 id="Git-功能分支工作流"><a href="#Git-功能分支工作流" class="headerlink" title="Git 功能分支工作流"></a>Git 功能分支工作流</h1><p>特性分支工作流程的核心理念是，所有特性开发都应在专用分支而非main中进行。这种封装方式可以让多个开发人员在不影响主代码库的情况下，轻松完成某个特定功能的开发。这也意味着<code>main</code>永远不会包含损坏的代码，这对于持续集成环境来说是一个巨大的优势。</p>
+<p>封装功能开发还可以利用拉取请求，这是一种围绕分支发起讨论的方式。拉取请求是围绕分支发起讨论的一种方式，它让其他开发人员有机会在功能集成到正式项目之前对其进行签字确认。或者，如果你被某个功能卡住了，也可以打开拉取请求，征求同事的建议。关键是，拉取请求能让团队成员非常容易地对彼此的工作发表评论。</p>
+<p>Git 功能分支工作流是一个可组合的工作流，可被其他高级 Git 工作流利用。我们在 Git 工作流程概览页面讨论了其他 Git 工作流程。Git 特性分支工作流专注于分支模型，也就是说，它是一个管理和创建分支的指导框架。其他工作流程则更侧重于仓库。Git 特性分支工作流可以并入其他工作流。传统上，Gitflow 和 Git f分叉工作流都使用 Git 特性分支工作流作为分支模型。</p>
+<h2 id="How-it-works-4"><a href="#How-it-works-4" class="headerlink" title="How it works"></a>How it works</h2><p>功能分支工作流程假定有一个中央存储库，主分支代表正式的项目历史。开发人员每次开始开发新功能时，都会创建一个新的分支，而不是直接在本地主分支上提交。特性分支应有描述性的名称，如 animated-menu-items 或 issue-#1061。这样做的目的是让每个分支都有一个清晰、高度集中的目的。Git 在技术上不区分主分支和特性分支，因此开发者可以对特性分支进行编辑、阶段化和提交修改。</p>
+<p>此外，特性分支还可以（也应该）推送到中心仓库。这样，开发人员就可以在不接触任何正式代码的情况下与其他开发人员共享某个特性。由于主分支是唯一的 “特殊 “分支，因此在中心版本库中存储多个特性分支不会造成任何问题。当然，这也是备份每个人的本地提交的便捷方法。下面是一个特性分支的生命周期。</p>
+<h3 id="从主分支开始"><a href="#从主分支开始" class="headerlink" title="从主分支开始"></a>从主分支开始</h3><p>所有特性分支都是根据项目的最新代码状态创建的。本指南假定这是在主分支中维护和更新的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git fetch origin </span><br><span class="line">git reset --hard origin/main</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建存储库"><a href="#创建存储库" class="headerlink" title="创建存储库"></a>创建存储库</h3><p>这会将 repo 切换到主分支，提取最新提交，并重置 repo 的本地 main 副本以匹配最新版本。</p>
+<h3 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h3><p>为每个功能或问题创建一个单独的分支。创建分支后，在本地签出它，这样你所做的任何更改都会在该分支上进行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new-feature</span><br></pre></td></tr></table></figure>
+
+<p>这会基于 main 检查出一个名为 new-feature 的分支，而 <code>-b</code> 标志会告诉 Git 如果该分支还不存在，就创建它。</p>
+<h3 id="更新、添加、提交和推送更改"><a href="#更新、添加、提交和推送更改" class="headerlink" title="更新、添加、提交和推送更改"></a>更新、添加、提交和推送更改</h3><p>在该分支上，按常规方式编辑、暂存和提交修改，根据需要提交尽可能多的改动。像任何时候使用 Git 一样，对功能进行修改和提交。准备就绪后，推送您的提交，更新 Bitbucket 上的功能分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add &lt;some-file&gt;</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+
+<h3 id="向远程推送功能分支"><a href="#向远程推送功能分支" class="headerlink" title="向远程推送功能分支"></a>向远程推送功能分支</h3><p>将特性分支推送到中央版本库是个好主意。这可以作为一个方便的备份，在与其他开发人员协作时，可以让他们查看对新分支的提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin new-feature</span><br></pre></td></tr></table></figure>
+
+<p>该命令会将 new-feature 推送到远程中央仓库（<code>origin</code>），而 <code>-u</code> 标志会将其添加为远程跟踪分支。设置好跟踪分支后，就可以调用 <code>git push</code>，无需任何参数，自动将 new-feature 分支推送到中心仓库。要获得对新特性分支的反馈，可在 Bitbucket Cloud 或 Bitbucket Data Center 等版本库管理解决方案中创建一个拉取请求。在那里，你可以添加审核员，并在合并前确保一切顺利。</p>
+<h3 id="解决反馈"><a href="#解决反馈" class="headerlink" title="解决反馈"></a>解决反馈</h3><p>现在，队友们可以评论并批准推送的提交。在本地解决他们的意见，提交并将建议的修改推送到 Bitbucket。您的更新就会出现在拉取请求中。</p>
+<h3 id="合并您的拉取请求"><a href="#合并您的拉取请求" class="headerlink" title="合并您的拉取请求"></a>合并您的拉取请求</h3><p>在合并之前，如果其他人对 repo 进行了修改，你可能需要解决合并冲突。当你的拉取请求被批准且无冲突后，你就可以把代码添加到主分支中了。从 Bitbucket 中的拉取请求进行合并。</p>
+<p>除了隔离功能开发外，分支还能通过拉取请求讨论变更。一旦有人完成了一项功能，他们不会立即将其合并到主分支中。相反，他们会将功能分支推送到中心服务器，并提交拉取请求，要求将他们添加的内容合并到主分支中。这样，其他开发人员就有机会在修改成为主代码库的一部分之前对其进行审查。</p>
+<p>代码审查是拉取请求的一个主要优点，但实际上拉取请求的设计初衷是作为一种谈论代码的通用方式。你可以把拉取请求看作是专门针对某个分支的讨论。这意味着拉取请求也可以在开发过程的更早阶段使用。例如，如果开发人员在某个功能上需要帮助，他们只需提交拉取请求即可。相关人员会自动收到通知，并能在相关提交旁边看到问题。</p>
+<p>一旦拉取请求被接受，发布功能的实际操作与集中式工作流程中的操作大致相同。首先，你需要确保本地主目录与上游主目录同步。然后，将特性分支合并到主版本中，并将更新后的主版本推送回中央版本库。</p>
+<p>Bitbucket Cloud 或 Bitbucket Server 等产品仓库管理解决方案可为拉取请求提供便利。查看 Bitbucket Server 拉取请求文档，了解示例。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下面是一个使用功能分支工作流程的示例。该场景是一个团队围绕新功能拉取请求进行代码审查。这只是该模型多种用途中的一个例子。</p>
+<h3 id="玛丽开始了一项新功能"><a href="#玛丽开始了一项新功能" class="headerlink" title="玛丽开始了一项新功能"></a>玛丽开始了一项新功能</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-new-feature-2x.png" style="zoom:50%;" />
+
+<p>在开始开发功能之前，Mary 需要一个独立的分支来工作。她可以使用以下命令申请一个新分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b marys-feature main</span><br></pre></td></tr></table></figure>
+
+<p>这样就在 main 分支的基础上签出了一个名为 marys-feature 的分支，而 -b 标志则告诉 Git 如果该分支还不存在，就创建它。在这个分支上，Mary 按常规方式进行编辑、暂存和提交，并根据需要提交尽可能多的改动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add &lt;some-file&gt;</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+
+<h3 id="玛丽去吃午饭"><a href="#玛丽去吃午饭" class="headerlink" title="玛丽去吃午饭"></a>玛丽去吃午饭</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-go-to-lauch-2x.png" style="zoom:50%;" />
+
+<p>玛丽在一上午的时间里为她的功能添加了一些提交。在她离开去吃午饭之前，最好把她的功能分支推送到中央仓库。这可以作为方便的备份，但如果 Mary 与其他开发人员协作，这也会让他们访问她的初始提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin marys-feature</span><br></pre></td></tr></table></figure>
+
+<p>这条命令会将 marys-feature 推送到中心仓库（origin），而 <code>-u</code> 标志会将其添加为远程跟踪分支。设置好跟踪分支后，Mary 可以不加任何参数地调用 <code>git push</code> 来推送她的功能。</p>
+<h3 id="玛丽完成她的特色分支"><a href="#玛丽完成她的特色分支" class="headerlink" title="玛丽完成她的特色分支"></a>玛丽完成她的特色分支</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-finish-feature-2x.png" style="zoom:50%;" />
+
+<p>当 Mary 吃完午饭回来时，她完成了她的功能。在将其合并到主仓库之前，她需要提交一个拉取请求，让团队其他成员知道她已经完成了。但首先，她要确保中央仓库中有她的最新提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>然后，她在 Git GUI 中提交拉取请求，要求将 marys-feature 合并到 main 中，团队成员就会自动收到通知。拉取请求的好处在于，它们会在相关提交的旁边显示注释，因此很容易就能提出有关特定变更集的问题。</p>
+<h3 id="Bill收到拉取请求"><a href="#Bill收到拉取请求" class="headerlink" title="Bill收到拉取请求"></a>Bill收到拉取请求</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/bill-pull-request-2x.png" style="zoom:50%;" />
+
+<p>比尔收到<code>pull</code>请求并查看了 marys-feature。他决定在将其整合到正式项目之前做一些修改，于是他和玛丽通过<code>pull</code>请求进行了一些来回交流。</p>
+<h3 id="玛丽进行更改"><a href="#玛丽进行更改" class="headerlink" title="玛丽进行更改"></a>玛丽进行更改</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/mary-makes-changes-2x.png" style="zoom:50%;" />
+
+<p>为了进行更改，Mary 采用了与创建第一个功能迭代完全相同的流程。她进行编辑、暂存、提交，并将更新推送到中央版本库。她的所有活动都会显示在pull请求中，而Bill仍然可以在整个过程中发表评论。</p>
+<p>如果Bill愿意，他可以将 marys-feature 拉入他的本地版本库，然后自己继续工作。他添加的任何提交也会显示在pull请求中。</p>
+<h3 id="玛丽发布特色功能"><a href="#玛丽发布特色功能" class="headerlink" title="玛丽发布特色功能"></a>玛丽发布特色功能</h3><p>一旦Bill准备好接受<code>pull</code>请求，就需要有人将该功能合并到稳定项目中（这可以由Bill或Mary完成）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git pull</span><br><span class="line">git pull origin marys-feature</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>这一过程通常会导致合并提交。有些开发人员喜欢这样做，因为这就像是将特性与代码库的其他部分象征性地结合在一起。不过，如果你偏爱线性历史，也可以在执行合并之前将特性重置到 <code>main</code> 的顶端，从而实现快进合并。</p>
+<p>有些图形用户界面会自动执行拉取请求接受流程，只需点击 “<code>Accept</code> “按钮即可运行所有这些命令。如果你的 GUI 没有这样做，它至少能在特性分支合并到主分支时自动关闭拉取请求。</p>
+<p>与此同时，John也在做着同样的事情。</p>
+<p>当Mary和Bill在研究 marys-feature 并在她的拉取请求中进行讨论时，John正在他自己的特性分支中做着完全相同的事情。通过将特性功能隔离到不同的分支中，每个人都可以独立工作，但在必要时与其他开发人员共享变更仍是轻而易举的事。</p>
+<h2 id="Summary-4"><a href="#Summary-4" class="headerlink" title="Summary"></a>Summary</h2><p>在本文档中，我们讨论了 Git 功能分支工作流程。该工作流有助于组织和跟踪专注于业务领域功能集的分支。其他 Git 工作流，如 Git Forking 工作流和 Gitflow 工作流，都是以 repo 为中心的，可以利用 Git 功能分支工作流来管理它们的分支模型。本文档演示了用于实现 Git 功能分支工作流的高级代码示例和虚构示例。与功能分支工作流程建立的一些关键关联是：</p>
+<ul>
+<li> 专注于分支模式</li>
+<li>可被其他面向仓库的工作流程利用</li>
+<li>通过拉取请求和合并审查促进与团队成员的协作</li>
+</ul>
+<p>在功能分支的审核和合并阶段使用<code>git rebase</code>，可以创建一个有凝聚力的 Git 历史记录。功能分支模型是促进团队协作的绝佳工具。</p>
+<hr>
+<h1 id="Gitflow-工作流"><a href="#Gitflow-工作流" class="headerlink" title="Gitflow 工作流"></a>Gitflow 工作流</h1><p><code>Gitflow</code> 是一种传统的 Git 工作流程，最初是一种管理 Git 分支的颠覆性新策略。如今，<code>Gitflow</code> 已不再受欢迎，而基于主干的工作流程已被视为现代持续软件开发和 <code>DevOps</code> 实践的最佳实践。在 <code>CI/CD</code> 中使用 <code>Gitflow</code> 也很有挑战性。本文章将详细介绍 <code>Gitflow</code> 的历史。</p>
+<h2 id="什么是-Gitflow？"><a href="#什么是-Gitflow？" class="headerlink" title="什么是 Gitflow？"></a>什么是 Gitflow？</h2><p><code>Gitflow</code> 是另一种 Git 分支模式，包括使用特性分支和多个主分支。它由 nvie 网站的 Vincent Driessen 首次发布并流行开来。与基于主干的开发模式相比，<code>Gitflow</code> 的分支数量多、寿命长、提交量大。在这种模式下，开发人员创建一个特性分支，并推迟将其合并到主干分支，直到特性完成。这些生命周期较长的特性分支需要更多协作才能合并，偏离主干分支的风险也更高。它们还可能带来相互冲突的更新。</p>
+<p><code>Gitflow</code> 可用于有计划发布周期的项目和 <code>DevOps</code> 最佳实践–持续交付。除特性分支工作流程外，该工作流程不添加任何新概念或命令。相反，它为不同的分支分配了非常具体的角色，并定义了它们应该如何以及何时进行交互。除了功能分支，它还使用单个分支来准备、维护和记录发布。当然，您还可以利用特性分支工作流的所有优点：拉取请求、隔离实验和更高效的协作。</p>
+<h2 id="How-it-works-5"><a href="#How-it-works-5" class="headerlink" title="How it works"></a>How it works</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/gitflow-workflow-2x.png" style="zoom:50%;" />
+
+<h3 id="开发和主要分支"><a href="#开发和主要分支" class="headerlink" title="开发和主要分支"></a>开发和主要分支</h3><p>这种工作流程使用两个分支来记录项目的历史，而不是一个<code>main</code>分支。<code>main</code>分支存储正式发布的历史，而开发分支则作为功能的集成分支。在<code>main</code>分支中的所有提交都标上版本号也很方便。</p>
+<p>第一步是用 <code>develop</code> 分支来补充默认的 <code>main</code> 分支。一个简单的方法是由一名开发人员在本地创建一个空的 <code>develop</code> 分支，然后推送到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch develop</span><br><span class="line">git push -u origin develop</span><br></pre></td></tr></table></figure>
+
+<p>该分支将包含项目的完整历史，而主分支将包含简略版本。其他开发者现在应该克隆中央仓库，并为 <code>develop</code> 创建一个跟踪分支。</p>
+<p>使用 git-flow 扩展库时，在现有仓库上执行 <code>git flow init</code> 将创建 <code>develop</code> 分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ git flow init</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Initialized empty Git repository <span class="keyword">in</span> ~/project/.git/</span><br><span class="line">No branches exist yet. Base branches must be created now.</span><br><span class="line">Branch name <span class="keyword">for</span> production releases: [main]</span><br><span class="line">Branch name <span class="keyword">for</span> <span class="string">&quot;next release&quot;</span> development: [develop]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">How to name your supporting branch prefixes?</span><br><span class="line">Feature branches? [feature/]</span><br><span class="line">Release branches? [release/]</span><br><span class="line">Hotfix branches? [hotfix/]</span><br><span class="line">Support branches? [support/]</span><br><span class="line">Version tag prefix? []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ git branch</span><br><span class="line">* develop</span><br><span class="line"> main</span><br></pre></td></tr></table></figure>
+
+<h2 id="功能分支-1"><a href="#功能分支-1" class="headerlink" title="功能分支"></a>功能分支</h2><h3 id="步骤-1-创建存储库"><a href="#步骤-1-创建存储库" class="headerlink" title="步骤 1. 创建存储库"></a>步骤 1. 创建存储库</h3><p>每个新功能都应该有自己的分支，可以推送到中央仓库进行备份/协作。但是， <code>feature</code> 分支不是从<code>main</code>分支中分离出来，而是将 <code>develop</code> 分支作为其父分支。当特性完成后，它会被合并回<code>develop</code> 分支。功能分支绝不能直接与<code>main</code>分支交互。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/gitflow-feature-banch-2x.png" style="zoom:50%;" />
+
+<p>请注意， <code>feature</code> 分支与 <code>develop</code> 分支的结合，就是功能分支工作流程。但是，<code>Gitflow</code> 的工作流程并不止于此。</p>
+<p> <code>feature</code> 分支通常是根据最新的 <code>develop</code> 分支创建的。</p>
+<h3 id="创建功能分支"><a href="#创建功能分支" class="headerlink" title="创建功能分支"></a>创建功能分支</h3><p><strong>不使用 git-flow 扩展</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line">git checkout -b feature_branch</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 git-flow 扩展时</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature start feature_branch</span><br></pre></td></tr></table></figure>
+
+<p>继续工作，像平常一样使用 Git。</p>
+<h3 id="完成功能分支"><a href="#完成功能分支" class="headerlink" title="完成功能分支"></a>完成功能分支</h3><p>完成功能分支的开发工作后，下一步就是把 <code>feature_branch</code> 合并到 <code>develop</code> 中。</p>
+<p>不使用 git-flow 扩展</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line">git merge feature_branch</span><br></pre></td></tr></table></figure>
+
+<p>使用 git-flow 扩展</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature finish feature_branch</span><br></pre></td></tr></table></figure>
+
+<h3 id="发布分支"><a href="#发布分支" class="headerlink" title="发布分支"></a>发布分支</h3><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/release-banches.png" style="zoom:50%;" />
+
+<p>一旦<code>develop</code>分支完成了足够的功能等待发布（或者预定的发布日期即将到来），就从 <code>develop</code>分支中分叉出一个 <code>release</code> 分支。创建该分支会启动下一个发布周期，因此在此之后就不能再添加新功能了，只有错误修复、文档生成和其他面向发布的任务应放在该分支中。一旦准备好发布，<code>release</code>分支就会被合并<code>main</code> 分支并标注版本号。此外，还应将其合并回<code>develop</code>分支，因为<code>develop</code>分支在发布分支后可能已经取得了进展。</p>
+<p>使用专用分支来准备发布，可以让一个团队在完善当前发布的同时，让另一个团队继续为下一个发布开发功能。它还能创建定义明确的开发阶段（例如，可以轻松地说：”本周我们要准备 4.0 版”，并在版本库的结构中实际看到它）。</p>
+<p>创建<code>release</code>分支是另一种直接的分支操作。与 <code>feature</code> 分支一样，<code>release</code>分支也基于 <code>develop</code> 分支。可以使用以下方法创建新的<code>release</code>分支。</p>
+<p>不使用 git-flow 扩展：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout develop</span><br><span class="line">git checkout -b release/0.1.0</span><br></pre></td></tr></table></figure>
+
+<p>使用 git-flow 扩展时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release start 0.1.0</span><br><span class="line">Switched to a new branch <span class="string">&#x27;release/0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>一旦<code>release</code>版本准备就绪，就会将其合并到<code>main</code> 和<code>develop</code>分支中，然后删除<code>release</code>分支。合并回开发分支很重要，因为关键更新可能已添加到发布分支，它们需要能访问新功能。如果你的组织强调代码审查，这里将是拉取请求的理想位置。</p>
+<p>要完成分支发布，可使用以下方法：</p>
+<p>不使用 git-flow 扩展：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git merge release/0.1.0</span><br></pre></td></tr></table></figure>
+
+<p>或者使用 git-flow 扩展：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow release finish <span class="string">&#x27;0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="热修复分支"><a href="#热修复分支" class="headerlink" title="热修复分支"></a>热修复分支</h2><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2024/git/hotfix-banches-2x.png" style="zoom:50%;" />
+
+<p>维护或 “热修复 “分支用于快速修补生产版本。Hotfix 分支与 <code>release</code> 分支和 <code>feature</code> 分支很相似，只是它们基于 <code>main</code> 分支而不是 <code>develop</code>分支。这是唯一应该直接从<code>main</code>分支分叉出来的分支。修复完成后，应立即将其并入<code>main</code>分支和 <code>develop</code>分支（或当前的<code>release</code> 分支），并在<code>main</code>分支上标注更新的版本号。</p>
+<p>为错误修复设置专门的开发线，可以让团队在不影响其他工作流程或等待下一个发布周期的情况下解决问题。你可以把维护分支看作是直接与主分支协同工作的临时发布分支。可以使用以下方法创建热修复分支：</p>
+<p>不使用 git-flow 扩展：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git checkout -b hotfix_branch</span><br></pre></td></tr></table></figure>
+
+<p>使用 git-flow 扩展时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix start hotfix_branch</span><br></pre></td></tr></table></figure>
+
+<p>与完成<code>release</code>分支类似，<code>hotfix</code>分支会合并到<code>main</code> 分支和<code>develop</code>分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git merge hotfix_branch</span><br><span class="line">git checkout develop</span><br><span class="line">git merge hotfix_branch</span><br><span class="line">git branch -D hotfix_branch</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix finish hotfix_branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h2><p>演示功能分支流程的完整示例如下。假设我们有一个包含<code>main</code>分支的版本库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git checkout -b develop</span><br><span class="line">git checkout -b feature_branch</span><br><span class="line"><span class="comment"># work happens on feature branch</span></span><br><span class="line">git checkout develop</span><br><span class="line">git merge feature_branch</span><br><span class="line">git checkout main</span><br><span class="line">git merge develop</span><br><span class="line">git branch -d feature_branch</span><br></pre></td></tr></table></figure>
+
+<p>除功能分支和发布分支流程外，热修复示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git checkout -b hotfix_branch</span><br><span class="line"><span class="comment"># work is done commits are added to the hotfix_branch</span></span><br><span class="line">git checkout develop</span><br><span class="line">git merge hotfix_branch</span><br><span class="line">git checkout main</span><br><span class="line">git merge hotfix_branch</span><br></pre></td></tr></table></figure>
+
+<p>这里我们讨论的是 Gitflow 工作流。Gitflow 是您和您的团队可以使用的多种 Git 工作流程之一。</p>
+<p>了解 Gitflow 的一些要点如下:</p>
+<ul>
+<li>该工作流非常适合基于发布的软件工作流。</li>
+<li>Gitflow 为热修复到生产提供了专用通道。</li>
+</ul>
+<p>Gitflow 的整体流程是:</p>
+<ol>
+<li><p>从 <code>main</code>分支创建一个 <code>develop</code> 分支</p>
+</li>
+<li><p>从 <code>develop</code>分支创建 <code>release</code> 分支</p>
+</li>
+<li><p>从 <code>develop</code>分支创建 <code>Feature</code> 分支</p>
+</li>
+<li><p> <code>feature</code> 完成后，合并到 <code>develop</code> 分支中</p>
+</li>
+<li><p> <code>release</code> 分支完成后，合并到 <code>develop</code> 分支和 <code>main</code>分支中</p>
+</li>
+<li><p>如果在 <code>main</code>分支中发现问题，就会从 <code>main</code>分支创建 <code>hotfix</code> 分支</p>
+</li>
+<li><p>一旦完成热修复，它就会被合并到 <code>develop</code> 分支和 <code>main</code>分支中</p>
+</li>
+</ol>
+<hr>
+<h1 id="Forking工作流"><a href="#Forking工作流" class="headerlink" title="Forking工作流"></a>Forking工作流</h1><p><code>Forking</code>工作流与其他流行的 Git 工作流有本质区别。它不使用单一的服务器端仓库作为 “中央 “代码库，而是让每个开发者都拥有自己的服务器端仓库。这意味着每个贡献者拥有的不是一个，而是两个 Git 仓库：一个私有的本地仓库和一个公共的服务器端仓库。<code>Forking Workflow</code>最常见于公共开源项目。</p>
+<p> <code>Forking</code>工作流的主要优势在于，无需每个人都推送到一个中央仓库，就能整合贡献。开发人员推送到自己的服务器端版本库，只有项目维护者才能推送到官方版本库。这样，维护者就可以接受任何开发者的提交，而无需给予他们写入官方代码库的权限。</p>
+<p>Forking工作流程通常遵循基于 Gitflow 工作流程的分支模型。这意味着完整的功能分支将被合并到原始项目维护者的仓库中。这样就形成了一个分布式工作流程，为大型有机团队（包括不受信任的第三方）提供了一种灵活的安全协作方式。这也使其成为开源项目的理想工作流程。 </p>
+<h2 id="How-it-works-6"><a href="#How-it-works-6" class="headerlink" title="How it works"></a>How it works</h2><p>与其他 Git 工作流程一样，Forking Workflow也是从服务器上存储的官方公共仓库开始的。但当新的开发者想开始项目工作时，他们不会直接克隆官方仓库。</p>
+<p>相反，他们会分叉官方版本库，在服务器上创建一个副本。这个新副本将作为他们的个人公共仓库–其他开发者不得向其推送，但他们可以从中提取修改（稍后我们将了解这一点的重要性）。创建完服务器端副本后，开发人员会执行<code>git clone</code>将其复制到本地计算机上。就像其他工作流程一样，这也是他们的私人开发环境。</p>
+<p>当他们准备好发布本地提交时，就会把提交推送到自己的公共仓库–而不是官方仓库。然后，他们向主版本库提交拉取请求，让项目维护者知道更新已准备好集成。如果贡献的代码有问题，拉取请求还可以作为方便的讨论线程。下面是这一工作流程的分步示例。</p>
+<ol>
+<li>开发者 “forks”一个 “官方”服务器端版本库。这将创建他们自己的服务器端副本</li>
+<li>将新的服务器端副本克隆到他们的本地系统</li>
+<li>将 “官方 “仓库的 Git 远程路径添加到本地克隆中</li>
+<li>创建新的本地特性分支</li>
+<li>开发人员对新分支进行修改</li>
+<li>为更改创建新提交</li>
+<li> 分支会被推送到开发者自己的服务器端副本</li>
+<li>开发人员从新分支向 “官方 “版本库打开拉取请求</li>
+<li>拉取请求被批准合并，并被合并到原来的服务器端版本库中</li>
+</ol>
+<p>要将功能集成到正式代码库中，维护者会将贡献者的修改拉入本地版本库，检查确保不会破坏项目，将其合并到本地主分支，然后将主分支推送到服务器上的正式版本库。现在，该贡献已成为项目的一部分，其他开发人员应从官方版本库中提取，以同步他们的本地版本库。</p>
+<p>重要的是要明白，在Forking工作流程中，”官方 “版本库的概念只是一种约定。事实上，官方版本库之所以如此官方，是因为它是项目维护者的公共版本库。</p>
+<h2 id="Forking-vs-cloning"><a href="#Forking-vs-cloning" class="headerlink" title="Forking vs cloning"></a>Forking vs cloning</h2><p>需要注意的是，”forked”仓库和”forking”都不是特殊的操作。Forked仓库是使用标准的<code>git clone</code>命令创建的。分叉仓库一般是 “服务器端克隆”，通常由第三方 Git 服务（如 Bitbucket）管理和托管。创建分叉仓库没有唯一的 Git 命令。克隆操作本质上是复制一个仓库及其历史。</p>
+<h2 id="Forking-工作流程中的分支"><a href="#Forking-工作流程中的分支" class="headerlink" title="Forking 工作流程中的分支"></a>Forking 工作流程中的分支</h2><p>所有这些个人公共仓库实际上只是一种与其他开发者共享分支的便捷方式。就像特性分支工作流和 Gitflow 工作流一样，每个人都应该继续使用分支来隔离单个特性。唯一的区别在于如何共享这些分支。在Forking工作流中，它们会被拉入其他开发者的本地版本库，而在特性分支和 Gitflow 工作流中，它们会被推送到官方版本库。</p>
+<h2 id="Fork-a-repository"><a href="#Fork-a-repository" class="headerlink" title="Fork a repository"></a>Fork a repository</h2><p>所有加入 Forking Workflow 项目的新开发者都需要 fork 官方仓库。如前所述，fork只是一个标准的<code>git clone</code>操作。可以通过 SSH 登录服务器，然后运行<code>git clone</code>将其复制到服务器上的另一个位置。流行的 Git 托管服务（如 Bitbucket）提供的版本库fork功能可自动完成这一步骤。</p>
+<h2 id="Clone-your-fork"><a href="#Clone-your-fork" class="headerlink" title="Clone your fork"></a>Clone your fork</h2><p>假设使用 Bitbucket 托管这些版本库，项目中的开发人员就应该拥有自己的 Bitbucket 账户，并克隆他们fork的版本库副本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://user@bitbucket.org/user/repo.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="Adding-a-remote"><a href="#Adding-a-remote" class="headerlink" title="Adding a remote"></a>Adding a remote</h2><p>其他 Git 工作流使用一个指向中央仓库的 <code>origin</code> 远程地址，而分叉工作流则需要两个远程地址–一个指向官方仓库，另一个指向开发者的个人服务器端仓库。虽然你可以随心所欲地调用这些远程地址，但常见的惯例是使用 <code>origin</code> 作为分叉仓库的远程地址（运行 <code>git clone</code> 时会自动创建），而使用 <code>upstream</code> 作为官方仓库的远程地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream https://bitbucket.org/maintainer/repo</span><br></pre></td></tr></table></figure>
+
+<p>您需要使用上述命令自行创建<code>upstream</code>远程仓库。这样你就能轻松地随着官方项目的进展更新本地版本库。请注意，如果你的<code>upstream</code>版本库启用了身份验证（即它不是开源的），你就需要提供一个用户名，就像这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream https://user@bitbucket.org/maintainer/repo.git</span><br></pre></td></tr></table></figure>
+
+<p>这要求用户在克隆或拉取官方代码库之前提供有效的密码。</p>
+<h2 id="Working-in-a-branch-making-amp-pushing-changes"><a href="#Working-in-a-branch-making-amp-pushing-changes" class="headerlink" title="Working in a branch: making &amp; pushing changes"></a>Working in a branch: making &amp; pushing changes</h2><p>在开发人员的分叉存储库的本地副本中，他们可以编辑代码、提交更改并创建分支，就像在其他 Git 工作流程中一样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b some-feature <span class="comment"># Edit some code git commit -a -m &quot;Add first draft of some feature&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>他们的所有更改都将完全私有，直到他们将其推送到公共存储库为止。而且，如果官方项目已经向前推进，他们可以使用 <code>git pull</code> 访问新的提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull upstream main</span><br></pre></td></tr></table></figure>
+
+<p>由于开发人员应该在专用的功能分支中工作，因此这通常会导致快进合并。</p>
+<h2 id="Making-a-pull-request"><a href="#Making-a-pull-request" class="headerlink" title="Making a pull request"></a>Making a pull request</h2><p>一旦开发人员准备好分享他们的新功能，他们需要做两件事。首先，他们必须将自己的贡献推送到公共仓库，让其他开发者也能访问。他们的远程源应该已经设置好了，所以他们只需做以下几件事</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature-branch</span><br></pre></td></tr></table></figure>
+
+<p>这与其他工作流程的不同之处在于，origin remote指向开发者的个人服务器端版本库，而不是主代码库。</p>
+<p>其次，他们需要通知项目维护者，他们想把自己的功能合并到官方代码库中。Bitbucket 提供了一个 “pull request”按钮，点击后会弹出一个表单，要求你指定要将哪个分支合并到正式版本库中。通常情况下，你会希望将你的功能分支整合到上游远程的<code>main</code>分支中。</p>
+<h2 id="Summary-5"><a href="#Summary-5" class="headerlink" title="Summary"></a>Summary</h2><p>简而言之，<code>Forking</code>工作流程常用于公共开源项目。<code>Forking</code>是在项目 repo 的服务器副本上执行的<code>git clone</code>操作。<code>Forking</code>工作流程通常与 Bitbucket 等 Git 托管服务结合使用。<code>Forking</code>工作流程的一个高级示例是</p>
+<ol>
+<li><p>您想为一个托管在 bitbucket.org/userA/open-project 的开源库作出贡献</p>
+</li>
+<li><p>使用 Bitbucket 创建一个 repo 的 fork 到 bitbucket.org/YourName/open-project</p>
+</li>
+<li><p>在本地系统上执行 git clone on <a target="_blank" rel="noopener" href="https://bitbucket.org/YourName/open-project">https://bitbucket.org/YourName/open-project</a> 以获得该 repo 的本地副本</p>
+</li>
+<li><p>在本地仓库中创建一个新的 <code>feature</code> 分支</p>
+</li>
+<li><p>完成新功能的工作，并执行<code>git commit</code>保存更改</p>
+</li>
+<li><p>然后将新 <code>feature</code> 分支推送到远程forked仓库</p>
+</li>
+<li><p>使用 Bitbucket，在 bitbucket.org/userA/open-project 上针对原 repo 打开新分支的拉取请求。</p>
+</li>
+</ol>
+<p>Forking工作流能帮助项目维护者向任何开发者开放版本库，而无需手动管理每个贡献者的授权设置。这就为维护者提供了更多 “pull”式的工作流程。Forking工作流最常用于开源项目，也可用于私有业务工作流，以便对合并到发布版本中的内容进行更权威的控制。这对于有部署经理或严格发布周期的团队非常有用。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -5555,142 +6490,6 @@
 <h4 id="已知使用"><a href="#已知使用" class="headerlink" title="已知使用"></a>已知使用</h4><ul>
 <li><code>java.lang.reflect.Proxyopen in new window</code></li>
 <li><code>Apache Commons Proxy</code></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/21/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wotzc">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai">
-      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Cai">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/21/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">观察者模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-21 09:09:23" itemprop="dateCreated datePublished" datetime="2023-12-21T09:09:23+08:00">2023-12-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-22 16:02:53" itemprop="dateModified" datetime="2023-12-22T16:02:53+08:00">2023-12-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>观察者模式，也称为监听者、发布-订阅。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/observer-2x.png" style="zoom: 50%;" />
-
-<h4 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h4><p>定义对象之间的一对多依赖关系，以便当一个对象更改状态时，其所有依赖对象都会收到通知并自动更新。</p>
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>假如你有两种类型的对象：  <code>顾客</code>和 <code>商店</code> 。 顾客对某个特定品牌的产品非常感兴趣 （例如最新型号的 iPhone 手机）， 而该产品很快将会在商店里出售。</p>
-<p>顾客可以每天来商店看看产品是否到货。 但如果商品尚未到货时， 绝大多数来到商店的顾客都会空手而归。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/observer-comic-1-zh-2x.png" style="zoom:50%;" />
-
-<p>另一方面， 每次新产品到货时， 商店可以向所有顾客发送邮件 （可能会被视为垃圾邮件）。 这样， 部分顾客就无需反复前往商店了， 但也可能会惹恼对新产品没有兴趣的其他顾客。</p>
-<p>我们似乎遇到了一个矛盾： 要么让顾客浪费时间检查产品是否到货， 要么让商店浪费资源去通知没有需求的顾客。</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>拥有一些值得关注的状态的对象通常被称为<em>目标</em>， 由于它要将自身的状态改变通知给其他对象， 我们也将其称为<code>发布者</code>（publisher）。 所有希望关注发布者状态变化的其他对象被称为<code>订阅者</code> （subscribers）。</p>
-<p>观察者模式建议你为发布者类添加订阅机制， 让每个对象都能订阅或取消订阅发布者事件流。 不要害怕！ 这并不像听上去那么复杂。 实际上， 该机制包括 1） 一个用于存储订阅者对象引用的列表成员变量； 2） 几个用于添加或删除该列表中订阅者的公有方法。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/subscriber20231222.png" style="zoom:67%;" />
-
-<p>现在， 无论何时发生了重要的发布者事件， 它都要遍历订阅者并调用其对象的特定通知方法。</p>
-<p>实际应用中可能会有十几个不同的订阅者类跟踪着同一个发布者类的事件， 你不会希望发布者与所有这些类相耦合的。 此外如果他人会使用发布者类， 那么你甚至可能会对其中的一些类一无所知。</p>
-<p>因此， 所有订阅者都必须实现同样的接口， 发布者仅通过该接口与订阅者交互。 接口中必须声明通知方法及其参数， 这样发布者在发出通知时还能传递一些上下文数据。</p>
-<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/solution2-zh20231222-2x.png" style="zoom:50%;" />
-
-<p>如果你的应用中有多个不同类型的发布者， 且希望订阅者可兼容所有发布者， 那么你甚至可以进一步让所有发布者遵循同样的接口。 该接口仅需描述几个订阅方法即可。 这样订阅者就能在不与具体发布者类耦合的情况下通过接口观察发布者的状态。</p>
-<h4 id="观察者模式结构"><a href="#观察者模式结构" class="headerlink" title="观察者模式结构"></a>观察者模式结构</h4><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/2023/designpattern/structure-2x-20231222.png" style="zoom:67%;" />
-
-<h4 id="现实世界的例子"><a href="#现实世界的例子" class="headerlink" title="现实世界的例子"></a>现实世界的例子</h4><div class="note info no-icon"><p>在遥远的土地上居住着农夫们和动物们。他们大部分时间都在户外，所以他们密切关注天气变化。当天气晴朗时，农夫们会出去干活，动物们会出去觅食；当天空开始下雨时，农夫们会回家收衣服，动物们会找地方避雨；当天气开始起风了，农夫们会在家打麻将，动物们会睡大觉；当天气变冷时，农夫们都在家烤火，动物们会抱团取暖。可以说，他们一直在观察天气。</p>
-</div>
-
-<h4 id="程序化示例"><a href="#程序化示例" class="headerlink" title="程序化示例"></a>程序化示例</h4><p>我们首先介绍一下<code>WeatherObserver</code>接口和我们具体的观察者，<code>Farmer</code>以及<code>Animal</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WeatherObserver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(WeatherType weatherType)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Farmer</span> <span class="keyword">implements</span> <span class="title">WeatherObserver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(WeatherType weatherType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (weatherType) &#123;</span><br><span class="line">            <span class="keyword">case</span> SUNNY:</span><br><span class="line">                System.out.println(<span class="string">&quot;天气晴朗，农夫们出门干活了！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> RAINY:</span><br><span class="line">                System.out.println(<span class="string">&quot;下雨了，农夫们回家收衣服了！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> WINDY:</span><br><span class="line">                System.out.println(<span class="string">&quot;起风了，农夫们在家打麻将！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> COLD:</span><br><span class="line">                System.out.println(<span class="string">&quot;天冷了，农夫们在家烤火！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> <span class="keyword">implements</span> <span class="title">WeatherObserver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(WeatherType weatherType)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (weatherType) &#123;</span><br><span class="line">            <span class="keyword">case</span> SUNNY:</span><br><span class="line">                System.out.println(<span class="string">&quot;天气晴朗，动物们出去觅食了！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> RAINY:</span><br><span class="line">                System.out.println(<span class="string">&quot;下雨了，动物们找地方避雨了！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> WINDY:</span><br><span class="line">                System.out.println(<span class="string">&quot;起风了，动物们在睡大觉！&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> COLD:</span><br><span class="line">                System.out.println(<span class="string">&quot;天冷了，动物们抱团取暖！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后是我们被观察的主体天气<code>Weather</code>类，并且提供了不断变化的方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Weather</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WeatherType currentWeather;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;WeatherObserver&gt; observers;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(WeatherObserver observer)</span> </span>&#123;</span><br><span class="line">        observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(WeatherObserver observer)</span> </span>&#123;</span><br><span class="line">        observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Weather</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.currentWeather = WeatherType.COLD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (WeatherObserver observer : observers) &#123;</span><br><span class="line">            observer.update(currentWeather);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeatherType <span class="title">getCurrentWeather</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> currentWeather;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCurrentWeather</span><span class="params">(WeatherType currentWeather)</span> </span>&#123;</span><br><span class="line">        WeatherType preWeather = <span class="keyword">this</span>.currentWeather;</span><br><span class="line">        <span class="keyword">this</span>.currentWeather = currentWeather;</span><br><span class="line">        <span class="keyword">if</span> (preWeather != currentWeather) &#123;</span><br><span class="line">            notifyObservers();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">timePasses</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        WeatherType[] weatherEnums = WeatherType.values();</span><br><span class="line">        WeatherType nextWeather = weatherEnums[(currentWeather.ordinal() + <span class="number">1</span>) % weatherEnums.length];</span><br><span class="line">        System.out.println(<span class="string">&quot;CurrentWeather：&quot;</span> + nextWeather);</span><br><span class="line">        <span class="keyword">this</span>.setCurrentWeather(nextWeather);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们定义了天气的枚举类，其中定了4种天气。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">WeatherType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    SUNNY(<span class="string">&quot;Sunny&quot;</span>),</span><br><span class="line">    RAINY(<span class="string">&quot;Rainy&quot;</span>),</span><br><span class="line">    WINDY(<span class="string">&quot;Windy&quot;</span>),</span><br><span class="line">    COLD(<span class="string">&quot;Cold&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    WeatherType(String description) &#123;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name().toLowerCase();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后是完整的实际示例。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Weather weather = <span class="keyword">new</span> Weather();</span><br><span class="line">        Farmer farmer = <span class="keyword">new</span> Farmer();</span><br><span class="line">        Animal animal = <span class="keyword">new</span> Animal();</span><br><span class="line">        weather.addObserver(farmer);</span><br><span class="line">        weather.addObserver(animal);</span><br><span class="line"></span><br><span class="line">        weather.timePasses();</span><br><span class="line">        weather.timePasses();</span><br><span class="line">        weather.timePasses();</span><br><span class="line">        weather.timePasses();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CurrentWeather：sunny</span><br><span class="line">天气晴朗，农夫们出门干活了！</span><br><span class="line">天气晴朗，动物们出去觅食了！</span><br><span class="line">CurrentWeather：rainy</span><br><span class="line">下雨了，农夫们回家收衣服了！</span><br><span class="line">下雨了，动物们找地方避雨了！</span><br><span class="line">CurrentWeather：windy</span><br><span class="line">起风了，农夫们在家打麻将！</span><br><span class="line">起风了，动物们在睡大觉！</span><br><span class="line">CurrentWeather：cold</span><br><span class="line">天冷了，农夫们在家烤火！</span><br><span class="line">天冷了，动物们抱团取暖！</span><br></pre></td></tr></table></figure>
-
-<h4 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h4><p>在以下任一情况下使用观察者模式：</p>
-<ul>
-<li>当对一个对象的更改需要更改其他对象时，您不知道需要更改多少个对象。</li>
-<li>当一个对象应该能够通知其他对象而无需知道这些对象是谁时。换句话说，您不希望这些对象紧密耦合。</li>
-</ul>
-<p>已知使用：</p>
-<ul>
-<li><code>java.util.Observeropen in new window</code></li>
-<li><code>java.util.EventListeneropen in new window</code></li>
-<li><code>javax.servlet.http.HttpSessionBindingListeneropen in new window</code></li>
-<li><code>RxJavaopen in new window</code></li>
 </ul>
 
       
