@@ -151,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">70</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,6 +179,541 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wotzc">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai">
+      <meta itemprop="description" content="真正的大师永远都怀着一颗学徒的心">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Cai">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/16/IntelliJ-IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/" class="post-title-link" itemprop="url">IntelliJ-IDEA使用技巧二</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-16 09:38:46" itemprop="dateCreated datePublished" datetime="2021-08-16T09:38:46+08:00">2021-08-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-05 16:50:20" itemprop="dateModified" datetime="2023-09-05T16:50:20+08:00">2023-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index"><span itemprop="name">IDEA使用技巧</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="IDEA设置鼠标悬浮提示"><a href="#IDEA设置鼠标悬浮提示" class="headerlink" title="IDEA设置鼠标悬浮提示"></a>IDEA设置鼠标悬浮提示</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/mousemovepng.png"  />
+
+<p>效果如下：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/mousemoveshow.png"  />
+
+<hr>
+<h1 id="设置行号与方法的分隔符"><a href="#设置行号与方法的分隔符" class="headerlink" title="设置行号与方法的分隔符"></a>设置行号与方法的分隔符</h1><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/appearanceset.png"  />
+
+<p>效果如下：</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/appearancesetshow.png"  />
+
+<hr>
+<h1 id="设置自动编译"><a href="#设置自动编译" class="headerlink" title="设置自动编译"></a>设置自动编译</h1><p>Intellij Idea 默认状态为不自动编译状态，Eclipse 默认为自动编译。</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/compileauto.png"  />
+
+<hr>
+<h1 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h1><p>IDEA中代码代码模板所在的位置(Editor – Live Templates 和 Editor – General – Postfix Completion)</p>
+<p><strong>Live Templates(实时代码模板)功能介绍</strong></p>
+<p>它的原理就是配置一些常用代码字母缩写，在输入简写时可以出现你预定义的固定模式的代码，使得开发效率大大提高，同时也可以增加个性化。最简单的例子<br>就是在Java中输入<code>sout</code>会出现<code>System.out.println()</code>;</p>
+<p>已有的常用模板</p>
+<p><strong>Postfix Completion 默认如下</strong></p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/postfixCompletion.png"  />
+
+<p><strong>Live Templates默认如下</strong></p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/livetemplates.png"  />
+
+<p>二者的区别：<code>Live Templates</code>可以自定义，而<code>Postfix Completion</code>不可以。</p>
+<p><strong>常用模板</strong></p>
+<p><strong>psvm</strong> : 可生成<code>main</code>方法</p>
+<p><strong>sout</strong> : <code>System.out.println()</code>快捷输出</p>
+<p>类似的：<strong>soutp</strong></p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutp.png"  />
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutpshow.png"  />
+
+<p><strong>soutv</strong>=<code>System.out.println("变量名 = " + 变量);</code></p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutv.png"  />
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutvshow.png"  />
+
+<p><strong>soutm</strong>=<code>System.out.println("当前类名.当前方法");</code></p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutm.png"  />
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/soutmshow.png"  />
+
+<p><strong>“abc”.sout</strong> =&gt;<code> System.out.println("abc");</code></p>
+<p> <strong>list.for</strong> : 可生成集合 list 的 的 for 循环</p>
+<p>输入: <strong>list.for</strong> 即可输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String s:list)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>输入: <strong>list.for</strong> 即可输出</p>
+<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String s:list)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>又如：<strong>list.fori</strong> 或 <strong>list.forr</strong></p>
+<p><strong>ifn</strong> ：可生成 <code>if(xxx = null)</code><br>        类似的：<br>        <strong>inn</strong>：可生成<code>if(xxx != null)</code>或<code>xxx.nn</code>或<code>xxx.null</code></p>
+<p><strong>prsf</strong> ：可生成<code>private static final</code><br>类似的：<br><strong>psf</strong>：可生成<code>public static final</code><br><strong>psfi</strong>：可生成<code>public static final int</code><br><strong>psfs</strong>：可生成<code>public static final String</code></p>
+<hr>
+<p><strong>自定义模板</strong></p>
+<p>IDEA 提供了很多现成的 Templates。但你也可以根据自己的需要创建新的Template</p>
+<ol>
+<li><p>自定义模板组，并命名为CustomDefine</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newtemplateGroup1.png"  />
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newtemplateGroup2.png"  />
+</li>
+<li><p>在自定义的模板组里点“+”号新建自定义模板</p>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive1.png"  />
+
+</li>
+</ol>
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive2.png"  />
+
+<img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/newTemplateLive3.png"  />
+
+<ol>
+<li>Abbreviation:模板的缩略名称</li>
+<li>Description:模板的描述</li>
+<li>Template text:模板的代码片段</li>
+<li>应用范围。Define</li>
+</ol>
+<hr>
+<h1 id="生成-javadoc"><a href="#生成-javadoc" class="headerlink" title="生成 javadoc"></a>生成 javadoc</h1><p><strong>Tools</strong>—&gt;<strong>Generate JavaDoc…</strong></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/generatejavadoc1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/generatejavadoc2.png"></p>
+<p>输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Locale：输入语言类型：zh_CN</span><br><span class="line">Other command line arguments：-encoding UTF-8 -charset UTF-8</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="IDEA常用快捷键Windows版"><a href="#IDEA常用快捷键Windows版" class="headerlink" title="IDEA常用快捷键Windows版"></a>IDEA常用快捷键Windows版</h1><table>
+<thead>
+<tr>
+<th align="left"><strong>作用</strong></th>
+<th align="left"><strong>快捷键</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>返回上次编辑位置（Last Edit Location)</strong></td>
+<td align="left"><strong>Ctrl+Shift+Backspace</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Back返回上次光标所在位置</strong></td>
+<td align="left"><strong>Ctrl+Alt+向左箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Forward前进到下次光标所在位置</strong></td>
+<td align="left"><strong>Ctrl+Alt+向右箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索类Class</strong></td>
+<td align="left"><strong>Ctrl+N</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索文件File</strong></td>
+<td align="left"><strong>Ctrl+Shift+N</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索符号Symbol</strong></td>
+<td align="left"><strong>Ctrl+Alt+Shift+N</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>全局搜索</strong></td>
+<td align="left"><strong>Ctrl+Shift+F</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>当前文件搜索</strong></td>
+<td align="left"><strong>Ctrl+F</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>执行（run)</strong></td>
+<td align="left"><strong>Shift+F10</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>提示补全、导包、万能快捷键</strong></td>
+<td align="left"><strong>Alt+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>单行注释</strong></td>
+<td align="left"><strong>Ctrl+/</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>多行注释</strong></td>
+<td align="left"><strong>Ctrl+Shift+/</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下复制一行(Duplicate Entire Lines）</strong></td>
+<td align="left"><strong>Ctrl+D</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>删除一行或选中行</strong></td>
+<td align="left"><strong>Ctrl+Y</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下移动行（move statement down）</strong></td>
+<td align="left"><strong>Ctrl+Shift+向下箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向上移动行（move statement up）</strong></td>
+<td align="left"><strong>Ctrl+Shift+向上箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下开始新的一行</strong></td>
+<td align="left"><strong>Shift+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向上开始新的一行 (Start New Line before current)</strong></td>
+<td align="left"><strong>Ctrl+Alt+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看继承关系(type hierarchy)</strong></td>
+<td align="left"><strong>Ctrl+H</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>格式化代码(reformat code)</strong></td>
+<td align="left"><strong>Ctrl+Alt+L</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>提示方法参数类型(Parameter Info)</strong></td>
+<td align="left"><strong>Ctrl+P</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>反撤销</strong></td>
+<td align="left"><strong>Ctrl+Shift+Z</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选中数行，整体往后移动</strong></td>
+<td align="left"><strong>Tab</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选中数行，整体往前移动</strong></td>
+<td align="left"><strong>Shift+Tab</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看类的结构：类的方法与变量</strong></td>
+<td align="left"><strong>Alt+7</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>大写转小写/ 小写转大写(toggle case)</strong></td>
+<td align="left"><strong>Ctrl+Shift+U</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>生成构造 器/get/set/toString</strong></td>
+<td align="left"><strong>Alt+Insert</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>收起所有的方法(collapse all)</strong></td>
+<td align="left"><strong>Ctrl+Shift+减号</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开所有方法(expand all)</strong></td>
+<td align="left"><strong>Ctrl+Shift+加号</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开代码所在硬盘文件夹(show in explorer)</strong></td>
+<td align="left"><strong>Ctrl+Shift+X（需要自己设置）</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>生成 try-catch 等(surround with)</strong></td>
+<td align="left"><strong>Ctrl+Alt+T</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看方法的多层重写结构(method hierarchy)</strong></td>
+<td align="left"><strong>Ctrl+Shift+H</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>抽取方法(Extract Method)</strong></td>
+<td align="left"><strong>Ctrl+Alt+M</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开 最近 修改的文件(Recently Files)</strong></td>
+<td align="left"><strong>Ctrl+E</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>关闭当前打开的代码栏(close)</strong></td>
+<td align="left"><strong>Ctrl+F4</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>关闭其他所有代码栏(close others)</strong></td>
+<td align="left"><strong>Ctrl+Shift+O（需要自己设置）</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>快速搜索类中的错误(next highlighted error)</strong></td>
+<td align="left"><strong>F2</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选择要粘贴的内容(Show in Explorer)</strong></td>
+<td align="left"><strong>Ctrl+Shift+V</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查找方法在哪里被调用(Call Hierarchy)</strong></td>
+<td align="left"><strong>Ctrl+Alt+H</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="IDEA常用快捷键Mac版"><a href="#IDEA常用快捷键Mac版" class="headerlink" title="IDEA常用快捷键Mac版"></a>IDEA常用快捷键Mac版</h1><table>
+<thead>
+<tr>
+<th align="left"><strong>作用</strong></th>
+<th align="left"><strong>快捷键</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>返回上次编辑位置（Last Edit Location)</strong></td>
+<td align="left"><strong>command+Shift+Delete</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Back返回上次光标所在位置</strong></td>
+<td align="left"><strong>Command+[</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>Forward前进到下次光标所在位置</strong></td>
+<td align="left"><strong>Command+]</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索类Class</strong></td>
+<td align="left"><strong>Command+O</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索文件File</strong></td>
+<td align="left"><strong>Command+shift+O</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>搜索符号Symbol</strong></td>
+<td align="left"><strong>Command+option+O</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>全局搜索</strong></td>
+<td align="left"><strong>Command+option+F</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>当前文件搜索</strong></td>
+<td align="left"><strong>Command+F</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>执行（run)</strong></td>
+<td align="left"><strong>option+R</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>提示补全、导包、万能快捷键</strong></td>
+<td align="left"><strong>option+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>单行注释</strong></td>
+<td align="left"><strong>Command+/</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>多行注释</strong></td>
+<td align="left"><strong>Command+Option+/</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下复制一行(Duplicate Entire Lines）</strong></td>
+<td align="left"><strong>Command+D</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>删除一行或选中行</strong></td>
+<td align="left"><strong>Ctrl+Y</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下移动行（move statement down）</strong></td>
+<td align="left"><strong>Command+option+向下箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向上移动行（move statement up）</strong></td>
+<td align="left"><strong>command+option+向上箭头</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向下开始新的一行</strong></td>
+<td align="left"><strong>Shift+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>向上开始新的一行 (Start New Line before current)</strong></td>
+<td align="left"><strong>Command+option+Enter</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看继承关系(type hierarchy)</strong></td>
+<td align="left"><strong>Ctrl+H</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>格式化代码(reformat code)</strong></td>
+<td align="left"><strong>Command+option+L</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>提示方法参数类型(Parameter Info)</strong></td>
+<td align="left"><strong>Command+P</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>反撤销</strong></td>
+<td align="left"><strong>Command+Shift+Z</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选中数行，整体往后移动</strong></td>
+<td align="left"><strong>Tab</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选中数行，整体往前移动</strong></td>
+<td align="left"><strong>Shift+Tab</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看类的结构：类的方法与变量</strong></td>
+<td align="left"><strong>command+7</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>大写转小写/ 小写转大写(toggle case)</strong></td>
+<td align="left"><strong>Command+Shift+U</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>生成构造 器/get/set/toString</strong></td>
+<td align="left"><strong>Command+N</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>收起所有的方法(collapse all)</strong></td>
+<td align="left"><strong>Command+Shift+减号</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开所有方法(expand all)</strong></td>
+<td align="left"><strong>Command+Shift+加号</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开代码所在硬盘文件夹(show in explorer)</strong></td>
+<td align="left"><strong>Command+Shift+X（需要自己设置）</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>生成 try-catch 等(surround with)</strong></td>
+<td align="left"><strong>Command+option+T</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查看方法的多层重写结构(method hierarchy)</strong></td>
+<td align="left"><strong>Command+Shift+H</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>抽取方法(Extract Method)</strong></td>
+<td align="left"><strong>Command+option+M</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>打开 最近 修改的文件(Recently Files)</strong></td>
+<td align="left"><strong>Ctrl+E</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>关闭当前打开的代码栏(close)</strong></td>
+<td align="left"><strong>Command+W</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>关闭其他所有代码栏(close others)</strong></td>
+<td align="left"><strong>Ctrl+Shift+O（需要自己设置）</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>快速搜索类中的错误(next highlighted error)</strong></td>
+<td align="left"><strong>F2</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>选择要粘贴的内容(Show in Explorer)</strong></td>
+<td align="left"><strong>Ctrl+Shift+V</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>查找方法在哪里被调用(Call Hierarchy)</strong></td>
+<td align="left"><strong>Ctrl+Alt+H</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="Alt-Enter快捷键功能"><a href="#Alt-Enter快捷键功能" class="headerlink" title="Alt+Enter快捷键功能"></a>Alt+Enter快捷键功能</h1><h2 id="自动创建函数"><a href="#自动创建函数" class="headerlink" title="自动创建函数"></a>自动创建函数</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter2.png"></p>
+<hr>
+<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter3.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter4.png"></p>
+<hr>
+<h2 id="为接口创建实现类和方法"><a href="#为接口创建实现类和方法" class="headerlink" title="为接口创建实现类和方法"></a>为接口创建实现类和方法</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter5.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter6.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter7.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnter8.png"></p>
+<hr>
+<h2 id="单词拼写"><a href="#单词拼写" class="headerlink" title="单词拼写"></a>单词拼写</h2><p>如果idea检查到我们的单词拼错了会有下波浪线的提示，使用alt+enter的快捷键可以帮我们进行修正</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnterWord1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altEnterWord2.png"></p>
+<hr>
+<h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altenterImport1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/altenterImport2.png"></p>
+<hr>
+<h1 id="寻找代码修改轨迹"><a href="#寻找代码修改轨迹" class="headerlink" title="寻找代码修改轨迹"></a>寻找代码修改轨迹</h1><h2 id="annotate"><a href="#annotate" class="headerlink" title="annotate"></a>annotate</h2><p>使用annotate，可以在某个文件内部查看哪一行代码是谁提交的，而且还有提交时间、提交备注信息、提交人姓名、提交的版本号、第几次提交等</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/annotate1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/annotate2.png"></p>
+<hr>
+<h2 id="Revert-Changes撤销修改"><a href="#Revert-Changes撤销修改" class="headerlink" title="Revert  Changes撤销修改"></a>Revert  Changes撤销修改</h2><p>想撤销对当前文件的修改，在空白处使用快捷键<strong>Ctrl+alt+Z</strong></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/revert.png"></p>
+<hr>
+<h2 id="Local-History"><a href="#Local-History" class="headerlink" title="Local History"></a>Local History</h2><p>在IntelliJ IDEA中一不小心将你本地代码给覆盖了，或者忘记了修改某些地方，出现了一些无法修复的异常，这个时候可以通过历史记录回到以前未修改前，并且记录的机制是修改文件会触发记录的时间点，所以很多天以前的记录也能找到</p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory1.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory2.png"></p>
+<p><img src="https://myblob-pics.oss-cn-hangzhou.aliyuncs.com/IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BA%8C/localhistory3.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -3302,7 +3837,7 @@
 <h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。</p>
 <p>然后在本地的任意目录下，打开git bash：</p>
 <blockquote>
-<p>​    git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;">&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;</a>:wotzc/wotzc.github.io.git    </p>
+<p>​    git clone <a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:wotzc/wotzc.github.io.git    </p>
 </blockquote>
 <p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。</p>
 <p>接下来在克隆到本地的<code>wotzc.github.io</code>中，把除了.git 文件夹外的所有文件都删掉，把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
